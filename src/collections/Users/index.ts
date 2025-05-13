@@ -2,6 +2,8 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 
+import { logAuditAfterChange, logAuditAfterDelete } from '../logAudit';
+
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
@@ -16,6 +18,10 @@ export const Users: CollectionConfig = {
     useAsTitle: 'name',
   },
   auth: true,
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
+  },
   fields: [
     {
       name: 'name',

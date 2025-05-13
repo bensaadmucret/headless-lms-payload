@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
-const Assignments: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Assignments: CollectionConfig = {
   slug: 'assignments',
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {
@@ -37,4 +43,4 @@ const Assignments: CollectionConfig = {
   ],
 };
 
-export default Assignments;
+

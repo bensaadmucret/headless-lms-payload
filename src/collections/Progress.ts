@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
-const Progress: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Progress: CollectionConfig = {
   slug: 'progress',
   admin: {
     useAsTitle: 'user',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {
@@ -38,4 +44,4 @@ const Progress: CollectionConfig = {
   ],
 };
 
-export default Progress;
+

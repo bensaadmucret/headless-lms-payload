@@ -8,11 +8,13 @@ import {
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated'
+import { anyone } from '../access/anyone';
+import { authenticated } from '../access/authenticated';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -21,6 +23,10 @@ export const Media: CollectionConfig = {
     delete: authenticated,
     read: anyone,
     update: authenticated,
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {

@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
-const Courses: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Courses: CollectionConfig = {
   slug: 'courses',
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {
@@ -52,4 +58,4 @@ const Courses: CollectionConfig = {
   ],
 };
 
-export default Courses;
+

@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
-const Sections: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Sections: CollectionConfig = {
   slug: 'sections',
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {
@@ -26,4 +32,4 @@ const Sections: CollectionConfig = {
   ],
 };
 
-export default Sections;
+

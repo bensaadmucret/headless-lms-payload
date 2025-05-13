@@ -1,6 +1,8 @@
 import type { CollectionConfig } from 'payload';
 
-const Quizzes: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Quizzes: CollectionConfig = {
   slug: 'quizzes',
   admin: {
     useAsTitle: 'title',
@@ -37,4 +39,4 @@ const Quizzes: CollectionConfig = {
   ],
 };
 
-export default Quizzes;
+
