@@ -79,6 +79,7 @@ export interface Config {
     progress: Progress;
     sections: Section;
     assignments: Assignment;
+    badges: Badge;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -102,6 +103,7 @@ export interface Config {
     progress: ProgressSelect<false> | ProgressSelect<true>;
     sections: SectionsSelect<false> | SectionsSelect<true>;
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
+    badges: BadgesSelect<false> | BadgesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -388,6 +390,7 @@ export interface Category {
 export interface User {
   id: number;
   name?: string | null;
+  role: 'superadmin' | 'admin' | 'teacher' | 'student';
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -854,6 +857,49 @@ export interface Assignment {
   createdAt: string;
 }
 /**
+ * Badges attribuables aux utilisateurs (progression, réussite, etc.)
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "badges".
+ */
+export interface Badge {
+  id: number;
+  name: string;
+  description: string;
+  /**
+   * Icône ou image représentative du badge.
+   */
+  icon?: (number | null) | Media;
+  /**
+   * Décris comment obtenir ce badge.
+   */
+  criteria?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Définit quels rôles peuvent voir ou obtenir ce badge.
+   */
+  roleVisibility?: ('superadmin' | 'admin' | 'teacher' | 'student')[] | null;
+  /**
+   * Permet de désactiver un badge sans le supprimer.
+   */
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1072,6 +1118,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'assignments';
         value: number | Assignment;
+      } | null)
+    | ({
+        relationTo: 'badges';
+        value: number | Badge;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1420,6 +1470,7 @@ export interface CategoriesSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -1518,6 +1569,20 @@ export interface AssignmentsSelect<T extends boolean = true> {
   course?: T;
   dueDate?: T;
   submitted?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "badges_select".
+ */
+export interface BadgesSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  icon?: T;
+  criteria?: T;
+  roleVisibility?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }
