@@ -20,6 +20,7 @@ import { Progress } from './collections/Progress'
 import { Sections } from './collections/Sections'
 import { Badges } from './collections/Badges'
 import AuditLogs from './collections/AuditLogs'
+import { ColorSchemes } from './collections/ColorSchemes'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -73,7 +74,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments, Badges],
+  collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments, Badges, ColorSchemes],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [
