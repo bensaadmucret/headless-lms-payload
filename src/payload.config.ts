@@ -18,6 +18,7 @@ import Prerequisites from './collections/Prerequisites'
 import Quizzes from './collections/Quizzes'
 import Progress from './collections/Progress'
 import Sections from './collections/Sections'
+import Badges from './collections/Badges'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
@@ -71,7 +72,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments],
+  collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments, Badges],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer],
   plugins: [

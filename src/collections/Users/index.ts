@@ -12,7 +12,7 @@ export const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['name', 'email', 'role'],
     useAsTitle: 'name',
   },
   auth: true,
@@ -20,6 +20,25 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
+    },
+    {
+      name: 'role',
+      label: 'Rôle',
+      type: 'select',
+      required: true,
+      defaultValue: 'student',
+      options: [
+        { label: 'Super Admin', value: 'superadmin' },
+        { label: 'Admin', value: 'admin' },
+        { label: 'Enseignant', value: 'teacher' },
+        { label: 'Étudiant', value: 'student' },
+      ],
+      admin: {
+        position: 'sidebar',
+      },
+      access: {
+        update: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin',
+      },
     },
   ],
   timestamps: true,

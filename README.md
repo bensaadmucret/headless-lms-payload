@@ -19,6 +19,7 @@ Ce backoffice s’appuie sur Payload CMS et sert de cœur à la gestion d’un L
 | **Quizzes**     | Quiz d’évaluation associés à des leçons ou sections                               |
 | **Prerequisites**| Gestion des prérequis entre cours/sections/leçons                                |
 | **Progress**    | Suivi de la progression des apprenants                                            |
+| **Badges**      | Badges de progression, réussite ou participation attribuables aux utilisateurs     |
 
 ## Globals
 
