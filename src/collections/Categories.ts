@@ -4,6 +4,8 @@ import { anyone } from '../access/anyone'
 import { authenticated } from '../access/authenticated'
 import { slugField } from '@/fields/slug'
 
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
 export const Categories: CollectionConfig = {
   slug: 'categories',
   access: {
@@ -14,6 +16,10 @@ export const Categories: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {

@@ -1,9 +1,15 @@
 import type { CollectionConfig } from 'payload';
 
-const Prerequisites: CollectionConfig = {
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+export const Prerequisites: CollectionConfig = {
   slug: 'prerequisites',
   admin: {
     useAsTitle: 'name',
+  },
+  hooks: {
+    afterChange: [logAuditAfterChange],
+    afterDelete: [logAuditAfterDelete],
   },
   fields: [
     {
@@ -19,4 +25,4 @@ const Prerequisites: CollectionConfig = {
   ],
 };
 
-export default Prerequisites;
+
