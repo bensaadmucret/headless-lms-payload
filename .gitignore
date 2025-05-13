@@ -1,0 +1,14 @@
+build
+dist / media
+node_modules
+.DS_Store
+
+.next
+.vercel
+.vscode
+
+# Payload default media upload directory
+public/media/
+
+public/robots.txt
+public/sitemap*.xml
