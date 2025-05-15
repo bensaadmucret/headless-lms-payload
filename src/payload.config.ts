@@ -4,6 +4,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
+import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
 
 import { Categories } from './collections/Categories'
@@ -75,8 +76,11 @@ export default buildConfig({
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments, Badges, ColorSchemes],
-  cors: [getServerSideURL()].filter(Boolean),
-  globals: [Header, Footer],
+  globals: [CorsConfig, Header, Footer],
+  cors: {
+    origins: [getServerSideURL()].filter(Boolean),
+    headers: ['Content-Type', 'Authorization']
+  },
   plugins: [
     ...plugins,
     // storage-adapter-placeholder

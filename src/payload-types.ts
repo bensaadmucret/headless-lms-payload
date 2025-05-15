@@ -80,6 +80,7 @@ export interface Config {
     sections: Section;
     assignments: Assignment;
     badges: Badge;
+    'color-schemes': ColorScheme;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -104,6 +105,7 @@ export interface Config {
     sections: SectionsSelect<false> | SectionsSelect<true>;
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
     badges: BadgesSelect<false> | BadgesSelect<true>;
+    'color-schemes': ColorSchemesSelect<false> | ColorSchemesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -117,10 +119,12 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
+    'cors-config': CorsConfig;
     header: Header;
     footer: Footer;
   };
   globalsSelect: {
+    'cors-config': CorsConfigSelect<false> | CorsConfigSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
@@ -900,6 +904,27 @@ export interface Badge {
   createdAt: string;
 }
 /**
+ * Thèmes de couleurs pour les instances frontend
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "color-schemes".
+ */
+export interface ColorScheme {
+  id: number;
+  name: string;
+  isDefault?: boolean | null;
+  isActive?: boolean | null;
+  theme: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    background: string;
+    text: string;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -1122,6 +1147,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'badges';
         value: number | Badge;
+      } | null)
+    | ({
+        relationTo: 'color-schemes';
+        value: number | ColorScheme;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1588,6 +1617,26 @@ export interface BadgesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "color-schemes_select".
+ */
+export interface ColorSchemesSelect<T extends boolean = true> {
+  name?: T;
+  isDefault?: T;
+  isActive?: T;
+  theme?:
+    | T
+    | {
+        primary?: T;
+        secondary?: T;
+        accent?: T;
+        background?: T;
+        text?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -1841,6 +1890,57 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
+ * Configuration des accès CORS (Cross-Origin Resource Sharing)
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cors-config".
+ */
+export interface CorsConfig {
+  id: number;
+  /**
+   * Liste des URLs qui peuvent accéder à l'API
+   */
+  allowedOrigins?:
+    | {
+        /**
+         * URL complète (ex: https://monsite.com)
+         */
+        url: string;
+        /**
+         * Description pour identifier l'usage
+         */
+        description?: string | null;
+        /**
+         * Activer/désactiver cette origine
+         */
+        isActive?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * En-têtes HTTP supplémentaires à autoriser
+   */
+  customHeaders?:
+    | {
+        /**
+         * Nom de l'en-tête (ex: x-custom-header)
+         */
+        header: string;
+        /**
+         * Description de l'usage de cet en-tête
+         */
+        description?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Environnement actif
+   */
+  environment: 'development' | 'production';
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
@@ -1897,6 +1997,31 @@ export interface Footer {
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cors-config_select".
+ */
+export interface CorsConfigSelect<T extends boolean = true> {
+  allowedOrigins?:
+    | T
+    | {
+        url?: T;
+        description?: T;
+        isActive?: T;
+        id?: T;
+      };
+  customHeaders?:
+    | T
+    | {
+        header?: T;
+        description?: T;
+        id?: T;
+      };
+  environment?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
