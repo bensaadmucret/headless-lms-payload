@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>0/5</span>
             </div>
         
             
@@ -89,19 +89,12 @@
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L27'></a><a href='#L27'>27</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -110,16 +103,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import configPromise from '@payload-config'</span>
-<span class="cstat-no" title="statement not covered" >import { getPayload } from 'payload'</span>
-<span class="cstat-no" title="statement not covered" >import { unstable_cache } from 'next/cache'</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import configPromise from '@payload-config'
+import { getPayload } from 'payload'
+import { unstable_cache } from 'next/cache'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export a</span>sync function <span class="fstat-no" title="function not covered" >getRedirects(</span>depth = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span> {
+export async function <span class="fstat-no" title="function not covered" >getRedirects(</span>depth = <span class="branch-0 cbranch-no" title="branch not covered" >1)</span> {
   const payload = <span class="cstat-no" title="statement not covered" >await getPayload({ config: configPromise })</span>
 &nbsp;
   const { docs: redirects } = <span class="cstat-no" title="statement not covered" >await payload.find({</span>
@@ -137,8 +137,8 @@
  *
  * Cache all redirects together to avoid multiple fetches.
  */
-export const <span class="cstat-no" title="statement not covered" >getCachedRedirects = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>) =</span>&gt;</span>
-<span class="cstat-no" title="statement not covered" >  unstable_cache(<span class="fstat-no" title="function not covered" >async </span>() =&gt; <span class="cstat-no" title="statement not covered" >getRedirects(),</span> ['redirects'], {</span>
+export const getCachedRedirects = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt;</span>
+<span class="cstat-no" title="statement not covered" >  unstable_cache(<span class="fstat-no" title="function not covered" >as</span>ync () =&gt; <span class="cstat-no" title="statement not covered" >getRedirects(),</span> ['redirects'], {</span>
     tags: ['redirects'],
   })
 &nbsp;</pre></td></tr></table></pre>
@@ -148,7 +148,7 @@ export const <span class="cstat-no" title="statement not covered" >getCachedRedi
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

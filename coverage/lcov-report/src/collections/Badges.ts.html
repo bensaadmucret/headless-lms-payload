@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>2/6</span>
+                <span class='fraction'>1/5</span>
             </div>
         
             
@@ -154,12 +154,14 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -245,9 +247,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CollectionConfig } from 'payload'
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CollectionConfig } from 'payload';
 &nbsp;
-import { logAuditAfterChange, logAuditAfterDelete } from './logAudit'
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 &nbsp;
 export const Badges: CollectionConfig = {
   slug: 'badges',
@@ -264,7 +268,7 @@ export const Badges: CollectionConfig = {
     create: <span class="fstat-no" title="function not covered" >({</span> req }) =&gt; <span class="cstat-no" title="statement not covered" >req.user?.role === 'superadmin' || req.user?.role === 'admin',</span>
     update: <span class="fstat-no" title="function not covered" >({</span> req }) =&gt; <span class="cstat-no" title="statement not covered" >req.user?.role === 'superadmin' || req.user?.role === 'admin',</span>
     delete: <span class="fstat-no" title="function not covered" >({</span> req }) =&gt; <span class="cstat-no" title="statement not covered" >req.user?.role === 'superadmin' || req.user?.role === 'admin',</span>
-    read: <span class="fstat-no" title="function not covered" >() =</span>&gt; <span class="cstat-no" title="statement not covered" >true,</span>
+    read: <span class="fstat-no" title="function not covered" >()</span> =&gt; <span class="cstat-no" title="statement not covered" >true,</span>
   },
   hooks: {
     afterChange: [logAuditAfterChange],
@@ -287,8 +291,8 @@ export const Badges: CollectionConfig = {
       type: 'textarea',
       required: true,
       admin: {
-        placeholder: 'Explique la signification du badge.',
-      },
+        placeholder: 'Explique la signification du badge.'
+      }
     },
     {
       name: 'icon',
@@ -297,8 +301,8 @@ export const Badges: CollectionConfig = {
       relationTo: 'media',
       required: false,
       admin: {
-        description: 'Icône ou image représentative du badge.',
-      },
+        description: 'Icône ou image représentative du badge.'
+      }
     },
     {
       name: 'criteria',
@@ -306,8 +310,8 @@ export const Badges: CollectionConfig = {
       type: 'richText',
       required: false,
       admin: {
-        description: 'Décris comment obtenir ce badge.',
-      },
+        description: 'Décris comment obtenir ce badge.'
+      }
     },
     {
       name: 'roleVisibility',
@@ -322,8 +326,8 @@ export const Badges: CollectionConfig = {
         { label: 'Étudiant', value: 'student' },
       ],
       admin: {
-        description: 'Définit quels rôles peuvent voir ou obtenir ce badge.',
-      },
+        description: 'Définit quels rôles peuvent voir ou obtenir ce badge.'
+      }
     },
     {
       name: 'isActive',
@@ -331,11 +335,13 @@ export const Badges: CollectionConfig = {
       type: 'checkbox',
       defaultValue: true,
       admin: {
-        description: 'Permet de désactiver un badge sans le supprimer.',
-      },
-    },
-  ],
-}
+        description: 'Permet de désactiver un badge sans le supprimer.'
+      }
+    }
+  ]
+};
+&nbsp;
+&nbsp;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -343,7 +349,7 @@ export const Badges: CollectionConfig = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

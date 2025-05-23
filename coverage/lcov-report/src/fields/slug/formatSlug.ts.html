@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">27.27% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/13</span>
+                <span class='fraction'>3/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
-            </div>
-        
-            
-            <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
-                <span class="quiet">Lines</span>
                 <span class='fraction'>0/12</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">33.33% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>1/3</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">27.27% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>3/11</span>
             </div>
         
             
@@ -90,15 +90,15 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -115,23 +115,23 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { FieldHook } from 'payload'
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >formatSlug = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>v</span>al: string): string =&gt;</span>
+export const formatSlug = <span class="fstat-no" title="function not covered" >(v</span>al: string): string =&gt;
 <span class="cstat-no" title="statement not covered" >  val</span>
     .replace(/ /g, '-')
     .replace(/[^\w-]+/g, '')
     .toLowerCase()
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >formatSlugHook =</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  (f</span>allback: string): FieldHook =&gt;</span>
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  ({</span> data, operation, value }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof value === 'string') {</span>
+export const formatSlugHook =
+  (fallback: string): FieldHook =&gt;
+<span class="fstat-no" title="function not covered" >  ({</span> data, operation, value }) =&gt; {
+<span class="cstat-no" title="statement not covered" >    if (typeof value === 'string') {</span>
 <span class="cstat-no" title="statement not covered" >      return formatSlug(value)</span>
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (operation === 'create' || !data?.slug) {</span>
+<span class="cstat-no" title="statement not covered" >    if (operation === 'create' || !data?.slug) {</span>
       const fallbackData = <span class="cstat-no" title="statement not covered" >data?.[fallback] || data?.[fallback]</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (fallbackData &amp;&amp; typeof fallbackData === 'string') {</span>
+<span class="cstat-no" title="statement not covered" >      if (fallbackData &amp;&amp; typeof fallbackData === 'string') {</span>
 <span class="cstat-no" title="statement not covered" >        return formatSlug(fallbackData)</span>
       }
     }
@@ -145,7 +145,7 @@ export const <span class="cstat-no" title="statement not covered" >formatSlugHoo
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

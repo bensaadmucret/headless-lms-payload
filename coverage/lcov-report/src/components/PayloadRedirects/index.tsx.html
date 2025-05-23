@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/22</span>
+                <span class='fraction'>0/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/18</span>
+                <span class='fraction'>0/15</span>
             </div>
         
             
@@ -114,9 +114,9 @@
 <a name='L49'></a><a href='#L49'>49</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,9 +162,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type React from 'react'
 import type { Page, Post } from '@/payload-types'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { getCachedDocument } from '@/utilities/getDocument'</span>
-<span class="cstat-no" title="statement not covered" >import { getCachedRedirects } from '@/utilities/getRedirects'</span>
-<span class="cstat-no" title="statement not covered" >import { notFound, redirect } from 'next/navigation'</span>
+import { getCachedDocument } from '@/utilities/getDocument'
+import { getCachedRedirects } from '@/utilities/getRedirects'
+import { notFound, redirect } from 'next/navigation'
 &nbsp;
 interface Props {
   disableNotFound?: boolean
@@ -172,13 +172,13 @@ interface Props {
 }
 &nbsp;
 /* This component helps us with SSR based dynamic redirects */
-export const <span class="cstat-no" title="statement not covered" >PayloadRedirects: React.FC&lt;Props&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >a</span>sync </span>({ disableNotFound, url }) =&gt; {</span>
+export const PayloadRedirects: React.FC&lt;Props&gt; = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >as</span>ync ({ disableNotFound, url }) =&gt; {</span>
   const redirects = <span class="cstat-no" title="statement not covered" >await getCachedRedirects()()</span>
 &nbsp;
   const redirectItem = <span class="cstat-no" title="statement not covered" >redirects.find(<span class="fstat-no" title="function not covered" >(r</span>edirect) =&gt; <span class="cstat-no" title="statement not covered" >redirect.from === url)</span></span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (redirectItem) {</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (redirectItem.to?.url) {</span>
+<span class="cstat-no" title="statement not covered" >  if (redirectItem) {</span>
+<span class="cstat-no" title="statement not covered" >    if (redirectItem.to?.url) {</span>
 <span class="cstat-no" title="statement not covered" >      redirect(redirectItem.to.url)</span>
     }
 &nbsp;
@@ -188,7 +188,7 @@ export const <span class="cstat-no" title="statement not covered" >PayloadRedire
       const collection = <span class="cstat-no" title="statement not covered" >redirectItem.to?.reference?.relationTo</span>
       const id = <span class="cstat-no" title="statement not covered" >redirectItem.to?.reference?.value</span>
 &nbsp;
-      const document = (<span class="cstat-no" title="statement not covered" >await getCachedDocument(collection, id)())</span> as Page | Post
+      const document = <span class="cstat-no" title="statement not covered" >(await getCachedDocument(collection, id)()) as Page | Post</span>
 <span class="cstat-no" title="statement not covered" >      redirectUrl = `${redirectItem.to?.reference?.relationTo !== 'pages' ? `/${redirectItem.to?.reference?.relationTo}` : ''}/${</span>
         document?.slug
       }`
@@ -200,10 +200,10 @@ export const <span class="cstat-no" title="statement not covered" >PayloadRedire
       }`
     }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (redirectUrl) <span class="cstat-no" title="statement not covered" >redirect(redirectUrl)</span></span>
+<span class="cstat-no" title="statement not covered" >    if (redirectUrl) <span class="cstat-no" title="statement not covered" >redirect(redirectUrl)</span></span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (disableNotFound) <span class="cstat-no" title="statement not covered" >return null</span></span>
+<span class="cstat-no" title="statement not covered" >  if (disableNotFound) <span class="cstat-no" title="statement not covered" >return null</span></span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  notFound()</span>
 }
@@ -214,7 +214,7 @@ export const <span class="cstat-no" title="statement not covered" >PayloadRedire
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

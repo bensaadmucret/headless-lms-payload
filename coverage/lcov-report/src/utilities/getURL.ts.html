@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/19</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/10</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/16</span>
             </div>
         
             
@@ -94,7 +94,7 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -125,24 +125,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import canUseDOM from './canUseDOM'</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import canUseDOM from './canUseDOM'
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >getServerSideURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>) =</span>&gt; {</span>
+export const getServerSideURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
   let url = <span class="cstat-no" title="statement not covered" >process.env.NEXT_PUBLIC_SERVER_URL</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!url &amp;&amp; process.env.VERCEL_PROJECT_PRODUCTION_URL) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!url &amp;&amp; process.env.VERCEL_PROJECT_PRODUCTION_URL) {</span>
 <span class="cstat-no" title="statement not covered" >    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!url) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!url) {</span>
 <span class="cstat-no" title="statement not covered" >    url = 'http://localhost:3000'</span>
   }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return url</span>
 }
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >getClientSideURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>) =</span>&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (canUseDOM) {</span>
+export const getClientSideURL = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  if (canUseDOM) {</span>
     const protocol = <span class="cstat-no" title="statement not covered" >window.location.protocol</span>
     const domain = <span class="cstat-no" title="statement not covered" >window.location.hostname</span>
     const port = <span class="cstat-no" title="statement not covered" >window.location.port</span>
@@ -150,7 +150,7 @@ export const <span class="cstat-no" title="statement not covered" >getClientSide
 <span class="cstat-no" title="statement not covered" >    return `${protocol}//${domain}${port ? `:${port}` : ''}`</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {</span>
+<span class="cstat-no" title="statement not covered" >  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {</span>
 <span class="cstat-no" title="statement not covered" >    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`</span>
   }
 &nbsp;
@@ -163,7 +163,7 @@ export const <span class="cstat-no" title="statement not covered" >getClientSide
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

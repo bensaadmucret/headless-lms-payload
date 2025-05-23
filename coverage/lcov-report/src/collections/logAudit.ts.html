@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">29.16% </span>
+                <span class="strong">22.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/24</span>
+                <span class='fraction'>5/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>0/20</span>
             </div>
         
             
@@ -139,37 +139,16 @@
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a>
-<a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a>
-<a name='L82'></a><a href='#L82'>82</a>
-<a name='L83'></a><a href='#L83'>83</a>
-<a name='L84'></a><a href='#L84'>84</a>
-<a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a>
-<a name='L87'></a><a href='#L87'>87</a>
-<a name='L88'></a><a href='#L88'>88</a>
-<a name='L89'></a><a href='#L89'>89</a>
-<a name='L90'></a><a href='#L90'>90</a>
-<a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -189,13 +168,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -220,12 +193,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -247,51 +215,40 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
-  CollectionAfterChangeHook,
-  CollectionAfterDeleteHook,
-  CollectionConfig,
-  CollectionSlug,
-} from 'payload'
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig, CollectionSlug } from 'payload';
 &nbsp;
-const AUDIT_COLLECTION: CollectionConfig['slug'] = 'auditlogs' as const
+const AUDIT_COLLECTION: CollectionConfig['slug'] = 'auditlogs' as const;
 &nbsp;
 // Liste des slugs de collection valides
-const VALID_COLLECTIONS = ['users', 'media', 'auditlogs', 'color-schemes'] as const
-type ValidCollection = (typeof VALID_COLLECTIONS)[number]
+const VALID_COLLECTIONS = ['users', 'media', 'auditlogs', 'color-schemes'] as const;
+type ValidCollection = typeof VALID_COLLECTIONS[number];
 &nbsp;
 // Fonction utilitaire pour vérifier si un slug est valide
 const isValidCollectionSlug = <span class="fstat-no" title="function not covered" >(s</span>lug: string | undefined): slug is ValidCollection =&gt; {
-<span class="cstat-no" title="statement not covered" >  return slug !== undefined &amp;&amp; VALID_COLLECTIONS.includes(slug as ValidCollection)</span>
-}
+<span class="cstat-no" title="statement not covered" >  return slug !== undefined &amp;&amp; VALID_COLLECTIONS.includes(slug as ValidCollection);</span>
+};
 &nbsp;
 type AuditData = {
-  user: { relationTo: 'users'; value: number }
-  action: 'create' | 'update' | 'delete'
-  collection: ValidCollection
-  documentId: string | number
+  user: { relationTo: 'users'; value: number };
+  action: 'create' | 'update' | 'delete';
+  collection: ValidCollection;
+  documentId: string | number;
   diff?: {
-    before: Record&lt;string, any&gt;
-    after: Record&lt;string, any&gt; | null
-  }
-  timestamp: Date
-}
+    before: Record&lt;string, any&gt;;
+    after: Record&lt;string, any&gt; | null;
+  };
+  timestamp: Date;
+};
 &nbsp;
 /**
  * Hook générique pour journaliser toutes les actions importantes dans la collection AuditLogs.
  * Enregistre : user, action (create/update/delete), collection, documentId, diff, timestamp.
  */
-export const logAuditAfterChange: CollectionAfterChangeHook = <span class="fstat-no" title="function not covered" >async </span>({
-  req,
-  doc,
-  previousDoc,
-  operation,
-  collection,
-}) =&gt; {
+export const logAuditAfterChange: CollectionAfterChangeHook = <span class="fstat-no" title="function not covered" >as</span>ync ({ req, doc, previousDoc, operation, collection }) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
     // On ne log pas les logs eux-mêmes pour éviter la boucle
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) <span class="cstat-no" title="statement not covered" >return</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!collection?.slug || !isValidCollectionSlug(collection.slug)) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!collection?.slug || !isValidCollectionSlug(collection.slug)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
     const auditData: AuditData = <span class="cstat-no" title="statement not covered" >{</span>
       user: { relationTo: 'users', value: req.user.id },
@@ -299,28 +256,23 @@ export const logAuditAfterChange: CollectionAfterChangeHook = <span class="fstat
       collection: collection.slug,
       documentId: doc.id,
       diff: previousDoc ? { before: previousDoc, after: doc } : undefined,
-      timestamp: new Date(),
-    }
+      timestamp: new Date()
+    };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    await req.payload.create({</span>
       collection: AUDIT_COLLECTION as CollectionSlug,
-      data: auditData,
-    })
+      data: auditData
+    });
   } catch (e) {
     // Ne jamais bloquer l'opération principale si le log échoue
-<span class="cstat-no" title="statement not covered" >    console.error('Erreur logAuditAfterChange:', e)</span>
+<span class="cstat-no" title="statement not covered" >    console.error('Erreur logAuditAfterChange:', e);</span>
   }
-}
+};
 &nbsp;
-export const logAuditAfterDelete: CollectionAfterDeleteHook = <span class="fstat-no" title="function not covered" >async </span>({
-  req,
-  id,
-  doc,
-  collection,
-}) =&gt; {
+export const logAuditAfterDelete: CollectionAfterDeleteHook = <span class="fstat-no" title="function not covered" >as</span>ync ({ req, id, doc, collection }) =&gt; {
 <span class="cstat-no" title="statement not covered" >  try {</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) <span class="cstat-no" title="statement not covered" >return</span></span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!collection?.slug || !isValidCollectionSlug(collection.slug)) <span class="cstat-no" title="statement not covered" >return</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    if (!collection?.slug || !isValidCollectionSlug(collection.slug)) <span class="cstat-no" title="statement not covered" >return;</span></span>
 &nbsp;
     const auditData: AuditData = <span class="cstat-no" title="statement not covered" >{</span>
       user: { relationTo: 'users', value: req.user.id },
@@ -328,17 +280,17 @@ export const logAuditAfterDelete: CollectionAfterDeleteHook = <span class="fstat
       collection: collection.slug,
       documentId: id,
       diff: { before: doc, after: null },
-      timestamp: new Date(),
-    }
+      timestamp: new Date()
+    };
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    await req.payload.create({</span>
       collection: AUDIT_COLLECTION as CollectionSlug,
-      data: auditData,
-    })
+      data: auditData
+    });
   } catch (e) {
-<span class="cstat-no" title="statement not covered" >    console.error('Erreur logAuditAfterDelete:', e)</span>
+<span class="cstat-no" title="statement not covered" >    console.error('Erreur logAuditAfterDelete:', e);</span>
   }
-}
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -346,7 +298,7 @@ export const logAuditAfterDelete: CollectionAfterDeleteHook = <span class="fstat
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

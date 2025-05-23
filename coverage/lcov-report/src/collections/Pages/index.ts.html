@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
@@ -204,20 +204,20 @@
 <a name='L139'></a><a href='#L139'>139</a>
 <a name='L140'></a><a href='#L140'>140</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -343,20 +343,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CollectionConfig } from 'payload'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { authenticated } from '../../access/authenticated'</span>
-<span class="cstat-no" title="statement not covered" >import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'</span>
-<span class="cstat-no" title="statement not covered" >import { Archive } from '../../blocks/ArchiveBlock/config'</span>
-<span class="cstat-no" title="statement not covered" >import { CallToAction } from '../../blocks/CallToAction/config'</span>
-<span class="cstat-no" title="statement not covered" >import { Content } from '../../blocks/Content/config'</span>
-<span class="cstat-no" title="statement not covered" >import { FormBlock } from '../../blocks/Form/config'</span>
-<span class="cstat-no" title="statement not covered" >import { MediaBlock } from '../../blocks/MediaBlock/config'</span>
-<span class="cstat-no" title="statement not covered" >import { hero } from '@/heros/config'</span>
-<span class="cstat-no" title="statement not covered" >import { slugField } from '@/fields/slug'</span>
-<span class="cstat-no" title="statement not covered" >import { populatePublishedAt } from '../../hooks/populatePublishedAt'</span>
-<span class="cstat-no" title="statement not covered" >import { generatePreviewPath } from '../../utilities/generatePreviewPath'</span>
-<span class="cstat-no" title="statement not covered" >import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'</span>
+import { authenticated } from '../../access/authenticated'
+import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
+import { Archive } from '../../blocks/ArchiveBlock/config'
+import { CallToAction } from '../../blocks/CallToAction/config'
+import { Content } from '../../blocks/Content/config'
+import { FormBlock } from '../../blocks/Form/config'
+import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { hero } from '@/heros/config'
+import { slugField } from '@/fields/slug'
+import { populatePublishedAt } from '../../hooks/populatePublishedAt'
+import { generatePreviewPath } from '../../utilities/generatePreviewPath'
+import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import {</span>
+import {
   MetaDescriptionField,
   MetaImageField,
   MetaTitleField,
@@ -364,7 +364,7 @@
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >Pages: CollectionConfig&lt;'pages'&gt; = {</span>
+export const Pages: CollectionConfig&lt;'pages'&gt; = <span class="cstat-no" title="statement not covered" >{</span>
   slug: 'pages',
   access: {
     create: authenticated,
@@ -487,7 +487,7 @@ export const <span class="cstat-no" title="statement not covered" >Pages: Collec
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

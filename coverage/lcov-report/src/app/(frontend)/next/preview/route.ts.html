@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>0/11</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>0/22</span>
             </div>
         
             
@@ -127,14 +127,14 @@
 <a name='L62'></a><a href='#L62'>62</a>
 <a name='L63'></a><a href='#L63'>63</a>
 <a name='L64'></a><a href='#L64'>64</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -190,14 +190,14 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { CollectionSlug, PayloadRequest } from 'payload'
-<span class="cstat-no" title="statement not covered" >import { getPayload } from 'payload'</span>
+import { getPayload } from 'payload'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import { draftMode } from 'next/headers'</span>
-<span class="cstat-no" title="statement not covered" >import { redirect } from 'next/navigation'</span>
+import { draftMode } from 'next/headers'
+import { redirect } from 'next/navigation'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >import configPromise from '@payload-config'</span>
+import configPromise from '@payload-config'
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export a</span>sync function <span class="fstat-no" title="function not covered" >GET(</span>
+export async function <span class="fstat-no" title="function not covered" >GET(</span>
   req: {
     cookies: {
       get: (name: string) =&gt; {
@@ -215,15 +215,15 @@
   const slug = <span class="cstat-no" title="statement not covered" >searchParams.get('slug')</span>
   const previewSecret = <span class="cstat-no" title="statement not covered" >searchParams.get('previewSecret')</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (previewSecret !== process.env.PREVIEW_SECRET) {</span>
+<span class="cstat-no" title="statement not covered" >  if (previewSecret !== process.env.PREVIEW_SECRET) {</span>
 <span class="cstat-no" title="statement not covered" >    return new Response('You are not allowed to preview this page', { status: 403 })</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!path || !collection || !slug) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!path || !collection || !slug) {</span>
 <span class="cstat-no" title="statement not covered" >    return new Response('Insufficient search params', { status: 404 })</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!path.startsWith('/')) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!path.startsWith('/')) {</span>
 <span class="cstat-no" title="statement not covered" >    return new Response('This endpoint can only be used for relative previews', { status: 500 })</span>
   }
 &nbsp;
@@ -241,7 +241,7 @@
 &nbsp;
   const draft = <span class="cstat-no" title="statement not covered" >await draftMode()</span>
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!user) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!user) {</span>
 <span class="cstat-no" title="statement not covered" >    draft.disable()</span>
 <span class="cstat-no" title="statement not covered" >    return new Response('You are not allowed to preview this page', { status: 403 })</span>
   }
@@ -259,7 +259,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T16:12:30.711Z
+                at 2025-05-23T18:56:47.428Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

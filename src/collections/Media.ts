@@ -11,8 +11,11 @@ import { fileURLToPath } from 'url'
 import { anyone } from '../access/anyone';
 import { authenticated } from '../access/authenticated';
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+import { getMediaDirname } from './getMediaDirname';
+
+const dirname = process.env.NODE_ENV === 'test'
+  ? process.cwd() // Mock ou fallback pour Jest
+  : getMediaDirname();
 
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 

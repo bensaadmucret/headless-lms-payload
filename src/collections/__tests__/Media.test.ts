@@ -1,4 +1,13 @@
-import { Media } from '../Media';
+// Mock global de 'payload' pour éviter l'import ESM dans les tests
+jest.mock('payload', () => ({
+  // Ajouter ici les types/fonctions nécessaires si besoin
+}));
+// Mock du helper pour éviter import.meta.url sous Jest
+jest.mock('../getMediaDirname', () => ({
+  getMediaDirname: () => process.cwd(),
+}));
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Media = require('../Media').Media;
 import type { Field } from 'payload';
 import { expectFieldsToExist, expectHookExists } from './collectionTestHelper';
 
