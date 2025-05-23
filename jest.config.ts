@@ -1,11 +1,16 @@
 import type { Config } from 'jest'
 
 const config: Config = {
+  transformIgnorePatterns: [
+    '/node_modules/(?!payload|@payloadcms/richtext-lexical)',
+  ],
   rootDir: '.',
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^payload$': '<rootDir>/__mocks__/payload.js',
+    '^@payloadcms/richtext-lexical$': '<rootDir>/__mocks__/richtext-lexical.js',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testMatch: [
@@ -13,9 +18,7 @@ const config: Config = {
     '<rootDir>/src/**/__tests__/**/*.test.tsx',
   ],
   transform: {
-    '^.+\\.tsx?$': ['ts-jest', {
-      tsconfig: 'tsconfig.json',
-    }],
+    '^.+\\.(ts|tsx|js|jsx)$': 'babel-jest',
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverage: true,
