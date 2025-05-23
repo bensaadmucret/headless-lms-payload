@@ -6,6 +6,9 @@ on:
       - feat/tests-pipeline  # Branche de travail dédiée aux tests
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   lint-test-coverage:
     runs-on: ubuntu-latest
