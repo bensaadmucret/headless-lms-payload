@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1747264681352" clover="3.2.0">
-  <project timestamp="1747264681352" name="All files">
-    <metrics statements="792" coveredstatements="23" conditionals="287" coveredconditionals="14" methods="154" coveredmethods="3" elements="1233" coveredelements="40" complexity="0" loc="792" ncloc="792" packages="43" files="93" classes="93"/>
+<coverage generated="1748016053260" clover="3.2.0">
+  <project timestamp="1748016053261" name="All files">
+    <metrics statements="776" coveredstatements="7" conditionals="274" coveredconditionals="0" methods="150" coveredmethods="0" elements="1200" coveredelements="7" complexity="0" loc="776" ncloc="776" packages="43" files="94" classes="94"/>
     <package name="src">
       <metrics statements="31" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="payload.config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/payload.config.ts">
+      <file name="payload.config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/payload.config.ts">
         <metrics statements="31" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -24,7 +24,7 @@
         <line num="19" count="0" type="stmt"/>
         <line num="20" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="23" count="0" type="stmt"/>
+        <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
         <line num="26" count="0" type="stmt"/>
@@ -34,14 +34,14 @@
         <line num="31" count="0" type="stmt"/>
         <line num="32" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
-        <line num="94" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="99" count="0" type="stmt"/>
-        <line num="100" count="0" type="stmt"/>
+        <line num="112" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="118" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.Footer">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/Footer/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/Footer/config.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -51,7 +51,7 @@
     </package>
     <package name="src.Footer.hooks">
       <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="revalidateFooter.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/Footer/hooks/revalidateFooter.ts">
+      <file name="revalidateFooter.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/Footer/hooks/revalidateFooter.ts">
         <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -63,7 +63,7 @@
     </package>
     <package name="src.Header">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/Header/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/Header/config.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -73,7 +73,7 @@
     </package>
     <package name="src.Header.hooks">
       <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="revalidateHeader.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/Header/hooks/revalidateHeader.ts">
+      <file name="revalidateHeader.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/Header/hooks/revalidateHeader.ts">
         <metrics statements="6" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -85,16 +85,16 @@
     </package>
     <package name="src.access">
       <metrics statements="7" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
-      <file name="anyone.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/access/anyone.ts">
+      <file name="anyone.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/access/anyone.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="authenticated.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/access/authenticated.ts">
+      <file name="authenticated.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/access/authenticated.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
       </file>
-      <file name="authenticatedOrPublished.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/access/authenticatedOrPublished.ts">
+      <file name="authenticatedOrPublished.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/access/authenticatedOrPublished.ts">
         <metrics statements="4" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="cond" truecount="0" falsecount="1"/>
@@ -104,7 +104,7 @@
     </package>
     <package name="src.app.(frontend)">
       <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="page.tsx" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/page.tsx">
+      <file name="page.tsx" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/page.tsx">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -113,7 +113,7 @@
     </package>
     <package name="src.app.(frontend).(sitemaps).pages-sitemap.xml">
       <metrics statements="17" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/(sitemaps)/pages-sitemap.xml/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/(sitemaps)/pages-sitemap.xml/route.ts">
         <metrics statements="17" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -136,7 +136,7 @@
     </package>
     <package name="src.app.(frontend).(sitemaps).posts-sitemap.xml">
       <metrics statements="16" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/(sitemaps)/posts-sitemap.xml/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/(sitemaps)/posts-sitemap.xml/route.ts">
         <metrics statements="16" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -158,7 +158,7 @@
     </package>
     <package name="src.app.(frontend).next.exit-preview">
       <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/next/exit-preview/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/next/exit-preview/route.ts">
         <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -169,7 +169,7 @@
     </package>
     <package name="src.app.(frontend).next.preview">
       <metrics statements="27" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/next/preview/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/next/preview/route.ts">
         <metrics statements="27" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -202,7 +202,7 @@
     </package>
     <package name="src.app.(frontend).next.seed">
       <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(frontend)/next/seed/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(frontend)/next/seed/route.ts">
         <metrics statements="17" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -225,7 +225,7 @@
     </package>
     <package name="src.app.(payload).admin.[[...segments]]">
       <metrics statements="16" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="not-found.tsx" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(payload)/admin/[[...segments]]/not-found.tsx">
+      <file name="not-found.tsx" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(payload)/admin/[[...segments]]/not-found.tsx">
         <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -236,7 +236,7 @@
         <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="page.tsx" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(payload)/admin/[[...segments]]/page.tsx">
+      <file name="page.tsx" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(payload)/admin/[[...segments]]/page.tsx">
         <metrics statements="8" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -250,7 +250,7 @@
     </package>
     <package name="src.app.(payload).api.[...slug]">
       <metrics statements="9" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(payload)/api/[...slug]/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(payload)/api/[...slug]/route.ts">
         <metrics statements="9" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -265,7 +265,7 @@
     </package>
     <package name="src.app.(payload).api.graphql">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(payload)/api/graphql/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(payload)/api/graphql/route.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -275,7 +275,7 @@
     </package>
     <package name="src.app.(payload).api.graphql-playground">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="route.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/app/(payload)/api/graphql-playground/route.ts">
+      <file name="route.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/app/(payload)/api/graphql-playground/route.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -285,7 +285,7 @@
     </package>
     <package name="src.blocks.ArchiveBlock">
       <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/ArchiveBlock/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/ArchiveBlock/config.ts">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -298,7 +298,7 @@
     </package>
     <package name="src.blocks.Banner">
       <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Banner/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Banner/config.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -307,7 +307,7 @@
     </package>
     <package name="src.blocks.CallToAction">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/CallToAction/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/CallToAction/config.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -317,14 +317,14 @@
     </package>
     <package name="src.blocks.Code">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Code/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Code/config.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.blocks.Content">
       <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Content/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Content/config.ts">
         <metrics statements="6" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -336,14 +336,14 @@
     </package>
     <package name="src.blocks.Form">
       <metrics statements="14" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Form/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Form/config.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
         <line num="33" count="0" type="stmt"/>
       </file>
-      <file name="fields.tsx" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Form/fields.tsx">
+      <file name="fields.tsx" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Form/fields.tsx">
         <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -359,33 +359,33 @@
     </package>
     <package name="src.blocks.Form.Country">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="options.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Form/Country/options.ts">
+      <file name="options.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Form/Country/options.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.blocks.Form.State">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="options.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/Form/State/options.ts">
+      <file name="options.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/Form/State/options.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.blocks.MediaBlock">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/blocks/MediaBlock/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/blocks/MediaBlock/config.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.collections">
-      <metrics statements="61" coveredstatements="0" conditionals="22" coveredconditionals="0" methods="13" coveredmethods="0"/>
-      <file name="Assignments.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Assignments.ts">
-        <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
+      <metrics statements="61" coveredstatements="7" conditionals="22" coveredconditionals="0" methods="13" coveredmethods="0"/>
+      <file name="Assignments.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Assignments.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
       </file>
-      <file name="AuditLogs.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/AuditLogs.ts">
+      <file name="AuditLogs.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/AuditLogs.ts">
         <metrics statements="7" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
@@ -395,7 +395,7 @@
         <line num="56" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
       </file>
-      <file name="Badges.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Badges.ts">
+      <file name="Badges.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Badges.ts">
         <metrics statements="6" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -404,7 +404,7 @@
         <line num="19" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="20" count="0" type="stmt"/>
       </file>
-      <file name="Categories.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Categories.ts">
+      <file name="Categories.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Categories.ts">
         <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -412,22 +412,22 @@
         <line num="7" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
       </file>
-      <file name="ColorSchemes.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/ColorSchemes.ts">
+      <file name="ColorSchemes.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/ColorSchemes.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="60" count="0" type="stmt"/>
       </file>
-      <file name="Courses.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Courses.ts">
+      <file name="Courses.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Courses.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-      <file name="Lessons.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Lessons.ts">
+      <file name="Lessons.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Lessons.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="40" count="0" type="stmt"/>
       </file>
-      <file name="Media.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Media.ts">
+      <file name="Media.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Media.ts">
         <metrics statements="10" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
@@ -440,107 +440,50 @@
         <line num="19" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
       </file>
-      <file name="Prerequisites.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Prerequisites.ts">
+      <file name="Prerequisites.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Prerequisites.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-      <file name="Progress.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Progress.ts">
+      <file name="Progress.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Progress.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-      <file name="Quizzes.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Quizzes.ts">
+      <file name="Quizzes.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Quizzes.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-      <file name="Sections.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Sections.ts">
+      <file name="Sections.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Sections.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
       </file>
-      <file name="logAudit.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/logAudit.ts">
-        <metrics statements="18" coveredstatements="0" conditionals="16" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="3" count="0" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="11" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="31" count="0" type="stmt"/>
-        <line num="33" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="34" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="45" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="55" count="0" type="stmt"/>
-        <line num="56" count="0" type="stmt"/>
-        <line num="57" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="58" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="69" count="0" type="stmt"/>
-        <line num="74" count="0" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.collections.CorsSettings">
-      <metrics statements="51" coveredstatements="23" conditionals="33" coveredconditionals="14" methods="9" coveredmethods="3"/>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/CorsSettings/index.ts">
-        <metrics statements="51" coveredstatements="23" conditionals="33" coveredconditionals="14" methods="9" coveredmethods="3"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
-        <line num="28" count="1" type="stmt"/>
-        <line num="29" count="9" type="stmt"/>
-        <line num="30" count="9" type="cond" truecount="0" falsecount="1"/>
-        <line num="32" count="9" type="cond" truecount="1" falsecount="1"/>
-        <line num="34" count="0" type="stmt"/>
-        <line num="35" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="36" count="0" type="stmt"/>
-        <line num="38" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="39" count="0" type="stmt"/>
-        <line num="42" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="46" count="0" type="cond" truecount="0" falsecount="1"/>
+      <file name="logAudit.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/logAudit.ts">
+        <metrics statements="18" coveredstatements="5" conditionals="16" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="45" count="0" type="cond" truecount="0" falsecount="3"/>
         <line num="47" count="0" type="stmt"/>
-        <line num="51" count="0" type="stmt"/>
-        <line num="54" count="9" type="cond" truecount="0" falsecount="1"/>
-        <line num="55" count="9" type="stmt"/>
-        <line num="57" count="8" type="cond" truecount="2" falsecount="1"/>
-        <line num="58" count="0" type="stmt"/>
-        <line num="61" count="8" type="cond" truecount="0" falsecount="1"/>
-        <line num="62" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="65" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="66" count="0" type="stmt"/>
-        <line num="70" count="8" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="7" type="cond" truecount="1" falsecount="0"/>
-        <line num="80" count="6" type="stmt"/>
-        <line num="82" count="6" type="cond" truecount="3" falsecount="0"/>
-        <line num="85" count="5" type="cond" truecount="3" falsecount="0"/>
-        <line num="93" count="3" type="stmt"/>
-        <line num="96" count="6" type="cond" truecount="1" falsecount="1"/>
-        <line num="98" count="0" type="stmt"/>
-        <line num="99" count="0" type="cond" truecount="0" falsecount="3"/>
-        <line num="100" count="0" type="stmt"/>
-        <line num="103" count="0" type="stmt"/>
-        <line num="106" count="6" type="cond" truecount="3" falsecount="0"/>
-        <line num="107" count="3" type="stmt"/>
-        <line num="109" count="3" type="stmt"/>
-        <line num="113" count="1" type="stmt"/>
-        <line num="119" count="0" type="stmt"/>
-        <line num="122" count="0" type="stmt"/>
-        <line num="123" count="0" type="stmt"/>
-        <line num="124" count="0" type="stmt"/>
-        <line num="125" count="0" type="stmt"/>
-        <line num="199" count="0" type="cond" truecount="0" falsecount="1"/>
-        <line num="200" count="0" type="stmt"/>
-        <line num="211" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.collections.Pages">
       <metrics statements="17" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Pages/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Pages/index.ts">
         <metrics statements="17" coveredstatements="0" conditionals="4" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -563,7 +506,7 @@
     </package>
     <package name="src.collections.Pages.hooks">
       <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="revalidatePage.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Pages/hooks/revalidatePage.ts">
+      <file name="revalidatePage.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Pages/hooks/revalidatePage.ts">
         <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -589,7 +532,7 @@
     </package>
     <package name="src.collections.Posts">
       <metrics statements="21" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="6" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Posts/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Posts/index.ts">
         <metrics statements="21" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -616,7 +559,7 @@
     </package>
     <package name="src.collections.Posts.hooks">
       <metrics statements="31" coveredstatements="0" conditionals="13" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="populateAuthors.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Posts/hooks/populateAuthors.ts">
+      <file name="populateAuthors.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Posts/hooks/populateAuthors.ts">
         <metrics statements="11" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -630,7 +573,7 @@
         <line num="25" count="0" type="stmt"/>
         <line num="36" count="0" type="stmt"/>
       </file>
-      <file name="revalidatePost.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Posts/hooks/revalidatePost.ts">
+      <file name="revalidatePost.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Posts/hooks/revalidatePost.ts">
         <metrics statements="20" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -656,7 +599,7 @@
     </package>
     <package name="src.collections.Users">
       <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/collections/Users/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/collections/Users/index.ts">
         <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -666,7 +609,7 @@
     </package>
     <package name="src.components.PayloadRedirects">
       <metrics statements="18" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="index.tsx" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/components/PayloadRedirects/index.tsx">
+      <file name="index.tsx" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/components/PayloadRedirects/index.tsx">
         <metrics statements="18" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -690,41 +633,41 @@
     </package>
     <package name="src.endpoints.seed">
       <metrics statements="61" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="11" coveredmethods="0"/>
-      <file name="contact-form.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/contact-form.ts">
+      <file name="contact-form.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/contact-form.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="contact-page.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/contact-page.ts">
+      <file name="contact-page.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/contact-page.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
       </file>
-      <file name="home-static.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/home-static.ts">
+      <file name="home-static.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/home-static.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
       </file>
-      <file name="home.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/home.ts">
+      <file name="home.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/home.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
       </file>
-      <file name="image-1.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/image-1.ts">
+      <file name="image-1.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/image-1.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="image-2.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/image-2.ts">
+      <file name="image-2.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/image-2.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="image-3.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/image-3.ts">
+      <file name="image-3.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/image-3.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="image-hero-1.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/image-hero-1.ts">
+      <file name="image-hero-1.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/image-hero-1.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/index.ts">
         <metrics statements="45" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="6" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -772,17 +715,17 @@
         <line num="355" count="0" type="stmt"/>
         <line num="357" count="0" type="stmt"/>
       </file>
-      <file name="post-1.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/post-1.ts">
+      <file name="post-1.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/post-1.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="10" count="0" type="stmt"/>
         <line num="15" count="0" type="stmt"/>
       </file>
-      <file name="post-2.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/post-2.ts">
+      <file name="post-2.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/post-2.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
       </file>
-      <file name="post-3.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/endpoints/seed/post-3.ts">
+      <file name="post-3.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/endpoints/seed/post-3.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
@@ -790,7 +733,7 @@
     </package>
     <package name="src.fields">
       <metrics statements="33" coveredstatements="0" conditionals="15" coveredconditionals="0" methods="11" coveredmethods="0"/>
-      <file name="defaultLexical.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/fields/defaultLexical.ts">
+      <file name="defaultLexical.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/fields/defaultLexical.ts">
         <metrics statements="11" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
@@ -804,7 +747,7 @@
         <line num="38" count="0" type="stmt"/>
         <line num="40" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
-      <file name="link.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/fields/link.ts">
+      <file name="link.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/fields/link.ts">
         <metrics statements="17" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
@@ -824,7 +767,7 @@
         <line num="127" count="0" type="stmt"/>
         <line num="138" count="0" type="stmt"/>
       </file>
-      <file name="linkGroup.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/fields/linkGroup.ts">
+      <file name="linkGroup.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/fields/linkGroup.ts">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -835,7 +778,7 @@
     </package>
     <package name="src.fields.slug">
       <metrics statements="18" coveredstatements="0" conditionals="15" coveredconditionals="0" methods="4" coveredmethods="0"/>
-      <file name="formatSlug.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/fields/slug/formatSlug.ts">
+      <file name="formatSlug.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/fields/slug/formatSlug.ts">
         <metrics statements="12" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -850,7 +793,7 @@
         <line num="20" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/fields/slug/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/fields/slug/index.ts">
         <metrics statements="6" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="12" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -860,9 +803,35 @@
         <line num="52" count="0" type="stmt"/>
       </file>
     </package>
+    <package name="src.globals">
+      <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
+      <file name="CorsConfig.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/globals/CorsConfig.ts">
+        <metrics statements="20" coveredstatements="0" conditionals="12" coveredconditionals="0" methods="4" coveredmethods="0"/>
+        <line num="2" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="6" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="16" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="116" count="0" type="stmt"/>
+        <line num="122" count="0" type="stmt"/>
+        <line num="123" count="0" type="stmt"/>
+      </file>
+    </package>
     <package name="src.heros">
       <metrics statements="5" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="config.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/heros/config.ts">
+      <file name="config.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/heros/config.ts">
         <metrics statements="5" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
@@ -873,7 +842,7 @@
     </package>
     <package name="src.hooks">
       <metrics statements="23" coveredstatements="0" conditionals="13" coveredconditionals="0" methods="5" coveredmethods="0"/>
-      <file name="formatSlug.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/hooks/formatSlug.ts">
+      <file name="formatSlug.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/hooks/formatSlug.ts">
         <metrics statements="12" coveredstatements="0" conditionals="7" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -888,7 +857,7 @@
         <line num="24" count="0" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
       </file>
-      <file name="populatePublishedAt.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/hooks/populatePublishedAt.ts">
+      <file name="populatePublishedAt.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/hooks/populatePublishedAt.ts">
         <metrics statements="6" coveredstatements="0" conditionals="6" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="cond" truecount="0" falsecount="3"/>
@@ -897,7 +866,7 @@
         <line num="7" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
       </file>
-      <file name="revalidateRedirects.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/hooks/revalidateRedirects.ts">
+      <file name="revalidateRedirects.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/hooks/revalidateRedirects.ts">
         <metrics statements="5" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -908,7 +877,7 @@
     </package>
     <package name="src.plugins">
       <metrics statements="28" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="10" coveredmethods="0"/>
-      <file name="index.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/plugins/index.ts">
+      <file name="index.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/plugins/index.ts">
         <metrics statements="28" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="10" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -942,7 +911,7 @@
     </package>
     <package name="src.providers.Theme">
       <metrics statements="11" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="shared.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/providers/Theme/shared.ts">
+      <file name="shared.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/providers/Theme/shared.ts">
         <metrics statements="9" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -954,7 +923,7 @@
         <line num="13" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="16" count="0" type="stmt"/>
       </file>
-      <file name="types.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/providers/Theme/types.ts">
+      <file name="types.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/providers/Theme/types.ts">
         <metrics statements="2" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="8" count="0" type="stmt"/>
         <line num="9" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -962,7 +931,7 @@
     </package>
     <package name="src.providers.Theme.ThemeSelector">
       <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="types.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/providers/Theme/ThemeSelector/types.ts">
+      <file name="types.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/providers/Theme/ThemeSelector/types.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -970,7 +939,7 @@
     </package>
     <package name="src.search">
       <metrics statements="13" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="beforeSync.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/search/beforeSync.ts">
+      <file name="beforeSync.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/search/beforeSync.ts">
         <metrics statements="12" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -985,18 +954,18 @@
         <line num="37" count="0" type="stmt"/>
         <line num="43" count="0" type="stmt"/>
       </file>
-      <file name="fieldOverrides.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/search/fieldOverrides.ts">
+      <file name="fieldOverrides.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/search/fieldOverrides.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.utilities">
-      <metrics statements="161" coveredstatements="0" conditionals="82" coveredconditionals="0" methods="33" coveredmethods="0"/>
-      <file name="canUseDOM.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/canUseDOM.ts">
+      <metrics statements="176" coveredstatements="0" conditionals="90" coveredconditionals="0" methods="34" coveredmethods="0"/>
+      <file name="canUseDOM.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/canUseDOM.ts">
         <metrics statements="1" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="cond" truecount="0" falsecount="3"/>
       </file>
-      <file name="deepMerge.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/deepMerge.ts">
+      <file name="deepMerge.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/deepMerge.ts">
         <metrics statements="12" coveredstatements="0" conditionals="9" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="9" count="0" type="stmt"/>
         <line num="10" count="0" type="cond" truecount="0" falsecount="2"/>
@@ -1011,7 +980,7 @@
         <line num="29" count="0" type="stmt"/>
         <line num="34" count="0" type="stmt"/>
       </file>
-      <file name="formatAuthors.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/formatAuthors.ts">
+      <file name="formatAuthors.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/formatAuthors.ts">
         <metrics statements="6" coveredstatements="0" conditionals="3" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="13" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
@@ -1020,7 +989,7 @@
         <line num="21" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="23" count="0" type="stmt"/>
       </file>
-      <file name="formatDateTime.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/formatDateTime.ts">
+      <file name="formatDateTime.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/formatDateTime.ts">
         <metrics statements="10" coveredstatements="0" conditionals="5" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -1033,7 +1002,7 @@
         <line num="13" count="0" type="stmt"/>
         <line num="19" count="0" type="stmt"/>
       </file>
-      <file name="generateMeta.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/generateMeta.ts">
+      <file name="generateMeta.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/generateMeta.ts">
         <metrics statements="14" coveredstatements="0" conditionals="14" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="5" count="0" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
@@ -1050,7 +1019,7 @@
         <line num="29" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="33" count="0" type="stmt"/>
       </file>
-      <file name="generatePreviewPath.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/generatePreviewPath.ts">
+      <file name="generatePreviewPath.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/generatePreviewPath.ts">
         <metrics statements="5" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
@@ -1058,7 +1027,7 @@
         <line num="22" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="getDocument.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/getDocument.ts">
+      <file name="getDocument.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/getDocument.ts">
         <metrics statements="8" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1069,7 +1038,7 @@
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
       </file>
-      <file name="getGlobals.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/getGlobals.ts">
+      <file name="getGlobals.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/getGlobals.ts">
         <metrics statements="8" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="3" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
@@ -1080,7 +1049,7 @@
         <line num="23" count="0" type="cond" truecount="0" falsecount="1"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="getMeUser.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/getMeUser.ts">
+      <file name="getMeUser.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/getMeUser.ts">
         <metrics statements="14" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -1097,7 +1066,7 @@
         <line num="35" count="0" type="stmt"/>
         <line num="39" count="0" type="stmt"/>
       </file>
-      <file name="getRedirects.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/getRedirects.ts">
+      <file name="getRedirects.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/getRedirects.ts">
         <metrics statements="9" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="3" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -1109,7 +1078,7 @@
         <line num="23" count="0" type="stmt"/>
         <line num="24" count="0" type="stmt"/>
       </file>
-      <file name="getURL.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/getURL.ts">
+      <file name="getURL.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/getURL.ts">
         <metrics statements="17" coveredstatements="0" conditionals="10" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="stmt"/>
@@ -1129,26 +1098,26 @@
         <line num="27" count="0" type="stmt"/>
         <line num="30" count="0" type="cond" truecount="0" falsecount="2"/>
       </file>
-      <file name="mergeOpenGraph.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/mergeOpenGraph.ts">
+      <file name="mergeOpenGraph.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/mergeOpenGraph.ts">
         <metrics statements="4" coveredstatements="0" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="2" count="0" type="stmt"/>
         <line num="4" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
         <line num="17" count="0" type="stmt"/>
       </file>
-      <file name="toKebabCase.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/toKebabCase.ts">
+      <file name="toKebabCase.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/toKebabCase.ts">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
       </file>
-      <file name="ui.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/ui.ts">
+      <file name="ui.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/ui.ts">
         <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="7" count="0" type="stmt"/>
         <line num="8" count="0" type="stmt"/>
         <line num="10" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
       </file>
-      <file name="useClickableCard.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/useClickableCard.ts">
+      <file name="useClickableCard.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/useClickableCard.ts">
         <metrics statements="38" coveredstatements="0" conditionals="19" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="4" count="0" type="stmt"/>
         <line num="5" count="0" type="stmt"/>
@@ -1189,7 +1158,7 @@
         <line num="98" count="0" type="stmt"/>
         <line num="108" count="0" type="stmt"/>
       </file>
-      <file name="useDebounce.ts" path="/Users/bensaadmohammed/CascadeProjects/headless-lms-payload/src/utilities/useDebounce.ts">
+      <file name="useDebounce.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/useDebounce.ts">
         <metrics statements="9" coveredstatements="0" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="3" count="0" type="cond" truecount="0" falsecount="1"/>
@@ -1200,6 +1169,24 @@
         <line num="11" count="0" type="stmt"/>
         <line num="12" count="0" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
+      </file>
+      <file name="validateUrl.ts" path="/home/runner/work/headless-lms-payload/headless-lms-payload/src/utilities/validateUrl.ts">
+        <metrics statements="15" coveredstatements="0" conditionals="8" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="0" type="stmt"/>
+        <line num="3" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="29" count="0" type="stmt"/>
       </file>
     </package>
   </project>
