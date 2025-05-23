@@ -188,7 +188,9 @@
 <a name='L123'></a><a href='#L123'>123</a>
 <a name='L124'></a><a href='#L124'>124</a>
 <a name='L125'></a><a href='#L125'>125</a>
-<a name='L126'></a><a href='#L126'>126</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L126'></a><a href='#L126'>126</a>
+<a name='L127'></a><a href='#L127'>127</a>
+<a name='L128'></a><a href='#L128'>128</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -215,7 +217,9 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -322,26 +326,28 @@ const validateHeader: TextFieldSingleValidation = <span class="cstat-no" title="
 <span class="cstat-no" title="statement not covered" >    for (const header of value) {</span>
       const headerPattern = <span class="cstat-no" title="statement not covered" >/^[A-Za-z0-9-]+$/</span>
 <span class="cstat-no" title="statement not covered" >      if (!headerPattern.test(header)) {</span>
-<span class="cstat-no" title="statement not covered" >        return 'Format d\'en-tête invalide. Utilisez uniquement des lettres, chiffres et tirets.'</span>
+<span class="cstat-no" title="statement not covered" >        return "Format d'en-tête invalide. Utilisez uniquement des lettres, chiffres et tirets."</span>
       }
     }
 <span class="cstat-no" title="statement not covered" >    return true</span>
   } else <span class="cstat-no" title="statement not covered" >if (typeof value === 'string') {</span>
     const headerPattern = <span class="cstat-no" title="statement not covered" >/^[A-Za-z0-9-]+$/</span>
 <span class="cstat-no" title="statement not covered" >    if (!headerPattern.test(value)) {</span>
-<span class="cstat-no" title="statement not covered" >      return 'Format d\'en-tête invalide. Utilisez uniquement des lettres, chiffres et tirets.'</span>
+<span class="cstat-no" title="statement not covered" >      return "Format d'en-tête invalide. Utilisez uniquement des lettres, chiffres et tirets."</span>
     }
 <span class="cstat-no" title="statement not covered" >    return true</span>
   } else {
-<span class="cstat-no" title="statement not covered" >    return 'Valeur d\'en-tête invalide.'</span>
+<span class="cstat-no" title="statement not covered" >    return "Valeur d'en-tête invalide."</span>
   }
 }
 &nbsp;
 export const CorsConfig: GlobalConfig = <span class="cstat-no" title="statement not covered" >{</span>
   slug: 'cors-config',
   access: {
-    read: <span class="fstat-no" title="function not covered" >({</span> req: { user } }: { req: { user: User | null } }) =&gt; <span class="cstat-no" title="statement not covered" >Boolean(user?.role === 'superadmin' || user?.role === 'admin'),</span>
-    update: <span class="fstat-no" title="function not covered" >({</span> req: { user } }: { req: { user: User | null } }) =&gt; <span class="cstat-no" title="statement not covered" >Boolean(user?.role === 'superadmin' || user?.role === 'admin'),</span>
+    read: <span class="fstat-no" title="function not covered" >({</span> req: { user } }: { req: { user: User | null } }) =&gt;
+<span class="cstat-no" title="statement not covered" >      Boolean(user?.role === 'superadmin' || user?.role === 'admin'),</span>
+    update: <span class="fstat-no" title="function not covered" >({</span> req: { user } }: { req: { user: User | null } }) =&gt;
+<span class="cstat-no" title="statement not covered" >      Boolean(user?.role === 'superadmin' || user?.role === 'admin'),</span>
   },
   admin: {
     group: 'Système',
@@ -353,7 +359,7 @@ export const CorsConfig: GlobalConfig = <span class="cstat-no" title="statement 
       type: 'array',
       label: 'Origines autorisées',
       admin: {
-        description: 'Liste des URLs qui peuvent accéder à l\'API',
+        description: "Liste des URLs qui peuvent accéder à l'API",
       },
       fields: [
         {
@@ -369,7 +375,7 @@ export const CorsConfig: GlobalConfig = <span class="cstat-no" title="statement 
           name: 'description',
           type: 'text',
           admin: {
-            description: 'Description pour identifier l\'usage',
+            description: "Description pour identifier l'usage",
           },
         },
         {
@@ -396,14 +402,14 @@ export const CorsConfig: GlobalConfig = <span class="cstat-no" title="statement 
           required: true,
           validate: validateHeader,
           admin: {
-            description: 'Nom de l\'en-tête (ex: x-custom-header)',
+            description: "Nom de l'en-tête (ex: x-custom-header)",
           },
         },
         {
           name: 'description',
           type: 'text',
           admin: {
-            description: 'Description de l\'usage de cet en-tête',
+            description: "Description de l'usage de cet en-tête",
           },
         },
       ],
@@ -445,7 +451,7 @@ export const CorsConfig: GlobalConfig = <span class="cstat-no" title="statement 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-23T19:05:40.462Z
+                at 2025-05-23T19:08:16.738Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
