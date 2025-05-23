@@ -6,8 +6,11 @@ jest.mock('payload', () => ({
 jest.mock('../getMediaDirname', () => ({
   getMediaDirname: () => process.cwd(),
 }));
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const Media = require('../Media').Media;
+let Media: typeof import('../Media').Media;
+
+beforeAll(async () => {
+  ({ Media } = await import('../Media'));
+});
 import type { Field } from 'payload';
 import { expectFieldsToExist, expectHookExists } from './collectionTestHelper';
 
