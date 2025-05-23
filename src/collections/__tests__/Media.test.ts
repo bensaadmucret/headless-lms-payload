@@ -1,9 +1,9 @@
 // Mock global de 'payload' pour éviter l'import ESM dans les tests
-jest.mock('payload', () => ({
+vi.mock('payload', () => ({
   // Ajouter ici les types/fonctions nécessaires si besoin
 }));
-// Mock du helper pour éviter import.meta.url sous Jest
-jest.mock('../getMediaDirname', () => ({
+// Mock du helper pour éviter import.meta.url sous Vitest
+vi.mock('../getMediaDirname', () => ({
   getMediaDirname: () => process.cwd(),
 }));
 let Media: typeof import('../Media').Media;
