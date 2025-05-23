@@ -32,10 +32,10 @@ jobs:
       - name: Run formatter (check)
         run: npm run format:check || npm run format
 
-      - name: Run tests with coverage
-        run: npm run test -- --coverage
+      - name: Run tests with Vitest + coverage
+        run: npm run test:vitest -- --coverage
 
-      - name: Upload Jest coverage to Codecov
+      - name: Upload Vitest coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
