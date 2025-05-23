@@ -1,3 +1,4 @@
+import { vi, describe, it, expect } from 'vitest';
 // Mock global de 'payload' pour éviter l'import ESM dans les tests
 vi.mock('payload', () => ({
   // Ajouter ici les types/fonctions nécessaires si besoin
