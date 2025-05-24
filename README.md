@@ -1,8 +1,34 @@
 [![codecov](https://codecov.io/gh/bensaadmucret/headless-lms-payload/branch/main/graph/badge.svg)](https://codecov.io/gh/bensaadmucret/headless-lms-payload)
 
-# Backoffice LMS – Payload CMS
+# 🎓 Backoffice LMS – Payload CMS
 
-Ce backoffice s’appuie sur Payload CMS et sert de cœur à la gestion d’un LMS (Learning Management System) moderne, modulaire et évolutif. Il propose une interface d’administration UX-friendly, permettant de gérer l’ensemble des contenus pédagogiques, utilisateurs et progressions.
+> Plateforme de gestion pédagogique moderne, modulaire et extensible basée sur Payload CMS.
+
+---
+
+## 🚀 Installation & Démarrage rapide
+
+```bash
+# Installer les dépendances (npm uniquement)
+npm install
+
+# Lancer le serveur de développement
+npm run dev
+```
+
+## 🧪 Lancer les tests (Vitest)
+
+```bash
+# Exécuter tous les tests unitaires
+npm run test:vitest
+
+# Générer un rapport de couverture
+npm run test:vitest -- --coverage
+```
+
+---
+
+Ce backoffice propose une interface d’administration UX-friendly, permettant de gérer l’ensemble des contenus pédagogiques, utilisateurs et progressions.
 
 ## Collections principales
 
