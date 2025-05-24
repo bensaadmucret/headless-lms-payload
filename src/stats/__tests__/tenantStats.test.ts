@@ -1,71 +1,57 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as tenantStats from '../tenantStats';
-import { getPayload } from 'payload';
-
-vi.mock('payload', () => {
-  return {
-    getPayload: vi.fn(),
-  };
-});
+import payload from 'payload';
 
 describe('tenantStats module', () => {
-  let mockFind: ReturnType<typeof vi.fn>;
-  let mockFindByID: ReturnType<typeof vi.fn>;
-
   beforeEach(() => {
-    mockFind = vi.fn();
-    mockFindByID = vi.fn();
-    (getPayload as unknown as vi.Mock).mockResolvedValue({
-      find: mockFind,
-      findByID: mockFindByID,
-    });
+    vi.restoreAllMocks();
     vi.clearAllMocks();
   });
 
   it('getUserCountForTenant returns correct user count', async () => {
-    mockFind.mockResolvedValueOnce({ totalDocs: 5 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 5 });
     const count = await tenantStats.getUserCountForTenant('tenant1');
     expect(count).toBe(5);
   });
 
   it('getUserCountForTenant returns 0 on error', async () => {
-    mockFind.mockRejectedValueOnce(new Error('fail'));
+    vi.spyOn(payload, 'find').mockRejectedValueOnce(new Error('fail'));
     const count = await tenantStats.getUserCountForTenant('tenant1');
     expect(count).toBe(0);
   });
 
   it('getActiveUserCountForTenant returns correct count', async () => {
-    mockFind.mockResolvedValueOnce({ totalDocs: 2 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 2 });
     const count = await tenantStats.getActiveUserCountForTenant('tenant1');
     expect(count).toBe(2);
   });
 
   it('getCourseCountForTenant returns correct count', async () => {
-    mockFind.mockResolvedValueOnce({ totalDocs: 3 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 3 });
     const count = await tenantStats.getCourseCountForTenant('tenant1');
     expect(count).toBe(3);
   });
 
   it('getQuizCountForTenant returns correct count', async () => {
-    mockFind.mockResolvedValueOnce({ totalDocs: 4 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 4 });
     const count = await tenantStats.getQuizCountForTenant('tenant1');
     expect(count).toBe(4);
   });
 
   it('getMediaCountForTenant returns correct count', async () => {
-    mockFind.mockResolvedValueOnce({ totalDocs: 7 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 7 });
     const count = await tenantStats.getMediaCountForTenant('tenant1');
     expect(count).toBe(7);
   });
 
   it('getStorageUsedForTenant returns correct size', async () => {
-    mockFind.mockResolvedValueOnce({ docs: [{ size: 1048576 }, { size: 2097152 }] });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({ docs: [{ size: 1048576 }, { size: 2097152 }] });
     const size = await tenantStats.getStorageUsedForTenant('tenant1');
     expect(size).toBe(3); // 3 Mo
   });
 
   it('isQuotaExceededForTenant returns true if quota exceeded', async () => {
-    mockFindByID.mockResolvedValueOnce({ maxUsers: 1, maxStorageMB: 1 });
+    vi.spyOn(payload, 'findByID').mockResolvedValueOnce({ maxUsers: 1, maxStorageMB: 1 });
     vi.spyOn(tenantStats, 'getUserCountForTenant').mockResolvedValueOnce(2);
     vi.spyOn(tenantStats, 'getStorageUsedForTenant').mockResolvedValueOnce(2);
     const res = await tenantStats.isQuotaExceededForTenant('tenant1');
