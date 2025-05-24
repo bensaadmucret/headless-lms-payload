@@ -20,6 +20,6 @@ export const payloadIsAdminOrSuperAdmin = ({ req }: { req: { user?: { role?: str
 export const payloadIsAdminOrUser = ({ req }: { req: { user?: { role?: string } | null } }) =>
   req.user?.role === 'admin' || req.user?.role === 'teacher' || req.user?.role === 'student';
 
-export const payloadIsAnyone = (_args: any) => true;
+export const payloadIsAnyone = (_args: unknown) => true;
 
 // Pour Payload, tu peux ajouter et adapter d'autres helpers selon tes besoins métiers.

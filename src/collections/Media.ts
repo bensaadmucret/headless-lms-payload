@@ -1,10 +1,10 @@
 import type { CollectionConfig } from 'payload'
-import type { Access, AccessArgs } from 'payload';
+import type { _Access, _AccessArgs } from 'payload';
 
 type BeforeChangeArgs = {
-  req: any;
+  req: unknown;
   operation: 'create' | 'update';
-  data: any;
+  data: unknown;
 };
 
 import {
@@ -24,7 +24,7 @@ type User = {
   [key: string]: unknown;
 };
 
-type AccessArgsWithDoc = {
+type _AccessArgsWithDoc = {
   req: { user?: User | null };
   doc?: { user?: string | number };
 };
@@ -37,17 +37,17 @@ const dirname = process.env.NODE_ENV === 'test'
 
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 
-const isOwnerOrAdmin = ({ req, doc }: AccessArgsWithDoc) =>
+const isOwnerOrAdmin = ({ req, doc }: _AccessArgsWithDoc) =>
   isAdminOrSuperAdmin(req.user ?? undefined) ||
   (isUser(req.user ?? undefined) && doc?.user === req.user?.id);
 
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    create: ({ req }: any) => !!req.user, // Authentifié
+    create: ({ req }: unknown) => !!req.user, // Authentifié
     read: () => true,                // Public (mettre ({ req }) => !!req.user pour privé)
-    update: isOwnerOrAdmin as any,
-    delete: isOwnerOrAdmin as any,
+    update: isOwnerOrAdmin as unknown,
+    delete: isOwnerOrAdmin as unknown,
   },
   hooks: {
     beforeChange: [

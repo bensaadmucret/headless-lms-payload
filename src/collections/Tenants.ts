@@ -3,9 +3,9 @@ import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 import { payloadIsSuperAdmin } from '../access/payloadAccess';
 
 const SLUG: CollectionSlug['tenants'] = 'tenants';
-import type { CollectionSlugLiteral } from '../types/payload';
+import type { _CollectionSlugLiteral } from '../types/payload';
 
-const SUBSCRIPTION_PLANS_SLUG: CollectionSlug['subscription-plans'] = 'subscription-plans';
+const _SUBSCRIPTION_PLANS_SLUG: CollectionSlug['subscription-plans'] = 'subscription-plans';
 
 export const Tenants: CollectionConfig = {
   slug: SLUG,
@@ -50,7 +50,7 @@ export const Tenants: CollectionConfig = {
     {
       name: 'plan',
       type: 'relationship',
-      relationTo: ['subscription-plans'] as any,
+      relationTo: ['subscription-plans'] as unknown,
       required: true
     },
     {
@@ -95,7 +95,7 @@ export const Tenants: CollectionConfig = {
         {
           name: 'features',
           type: 'select',
-          hasMany: true,
+          hasMunknown: true,
           options: [
             { label: 'Advanced Analytics', value: 'analytics' },
             { label: 'API Access', value: 'api' },
