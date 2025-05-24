@@ -3,7 +3,7 @@ import { CollectionAfterChangeHook, CollectionAfterDeleteHook, CollectionConfig,
 const AUDIT_COLLECTION: CollectionConfig['slug'] = 'auditlogs' as const;
 
 // Liste des slugs de collection valides
-const VALID_COLLECTIONS = ['users', 'media', 'auditlogs', 'color-schemes'] as const;
+const VALID_COLLECTIONS = ['users', 'media', 'auditlogs', 'color-schemes', 'tenants', 'subscription-plans'] as const;
 type ValidCollection = typeof VALID_COLLECTIONS[number];
 
 // Fonction utilitaire pour vérifier si un slug est valide

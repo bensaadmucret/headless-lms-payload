@@ -6,7 +6,7 @@ import {
   isUser,
   isAdminOrSuperAdmin,
   isAdminOrUser,
-  isAnyone,
+
   Role,
 } from '../../access/roles';
 
@@ -71,12 +71,4 @@ describe('Helpers de rôles Payload', () => {
     expect(isAdminOrUser(noRole)).toBe(false);
   });
 
-  it('isAnyone', () => {
-    expect(isAnyone(admin)).toBe(true);
-    expect(isAnyone(teacher)).toBe(true);
-    expect(isAnyone(student)).toBe(true);
-    expect(isAnyone(superadmin)).toBe(true);
-    expect(isAnyone(noRole)).toBe(true);
-    expect(isAnyone(undefined)).toBe(true);
-  });
 });

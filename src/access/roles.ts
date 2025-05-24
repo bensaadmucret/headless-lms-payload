@@ -22,4 +22,3 @@ export const isAdminOrSuperAdmin = (user?: { role?: Role }) =>
 export const isAdminOrUser = (user?: { role?: Role }) =>
   isAdmin(user) || isUser(user);
 
-export const isAnyone = (_user?: { role?: Role }) => true;
