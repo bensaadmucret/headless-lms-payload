@@ -1,4 +1,11 @@
 import type { CollectionConfig } from 'payload'
+import type { Access, AccessArgs } from 'payload';
+
+type BeforeChangeArgs = {
+  req: any;
+  operation: 'create' | 'update';
+  data: any;
+};
 
 import {
   FixedToolbarFeature,
@@ -6,29 +13,62 @@ import {
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { fileURLToPath } from 'url'
 
-import { anyone } from '../access/anyone';
-import { authenticated } from '../access/authenticated';
+import { isAdminOrSuperAdmin, isUser } from '../access/roles';
 
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+import type { Role } from '../access/roles';
+
+type User = {
+  id: string | number;
+  role?: Role;
+  [key: string]: unknown;
+};
+
+type AccessArgsWithDoc = {
+  req: { user?: User | null };
+  doc?: { user?: string | number };
+};
+
+import { getMediaDirname } from './getMediaDirname';
+
+const dirname = process.env.NODE_ENV === 'test'
+  ? process.cwd() // Mock ou fallback pour Jest
+  : getMediaDirname();
 
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+
+const isOwnerOrAdmin = ({ req, doc }: AccessArgsWithDoc) =>
+  isAdminOrSuperAdmin(req.user ?? undefined) ||
+  (isUser(req.user ?? undefined) && doc?.user === req.user?.id);
 
 export const Media: CollectionConfig = {
   slug: 'media',
   access: {
-    create: authenticated,
-    delete: authenticated,
-    read: anyone,
-    update: authenticated,
+    create: ({ req }: any) => !!req.user, // Authentifié
+    read: () => true,                // Public (mettre ({ req }) => !!req.user pour privé)
+    update: isOwnerOrAdmin as any,
+    delete: isOwnerOrAdmin as any,
   },
   hooks: {
+    beforeChange: [
+      ({ req, operation, data }: BeforeChangeArgs) => {
+        if (operation === 'create' && req.user) {
+          return { ...data, user: req.user.id };
+        }
+        return data;
+      },
+    ],
     afterChange: [logAuditAfterChange],
     afterDelete: [logAuditAfterDelete],
   },
   fields: [
+    {
+      name: 'user',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      admin: { readOnly: true },
+    },
     {
       name: 'alt',
       type: 'text',

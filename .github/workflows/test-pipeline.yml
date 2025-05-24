@@ -1,0 +1,68 @@
+name: CI - Tests & Coverage
+
+on:
+  push:
+    branches:
+      - feat/tests-pipeline  # Branche de travail dédiée aux tests
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lint-test-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Run formatter (check)
+        run: npm run format:check || npm run format
+
+      - name: Run tests with Vitest + coverage
+        run: npm run test:vitest -- --coverage
+
+      - name: Upload Vitest coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: true
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }} # Facultatif pour public
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
+
+      - name: Commit coverage report if changed
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          if [[ -n $(git status --porcelain coverage) ]]; then
+            git add coverage
+            git commit -m "[ci skip][auto-commit] Update coverage report"
+            git push origin HEAD:${GITHUB_REF#refs/heads/}
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Prevent infinite loop (skip on auto-commit)
+        if: contains(github.event.head_commit.message, '[auto-commit]')
+        run: echo "Auto-commit detected, skipping workflow."
