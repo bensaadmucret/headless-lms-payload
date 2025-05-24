@@ -1,14 +1,24 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import * as tenantStats from '../tenantStats';
-import payload from 'payload';
+import { getPayload } from 'payload';
 
-vi.mock('payload');
-
-const mockFind = payload.find as unknown as jest.Mock;
-const mockFindByID = payload.findByID as unknown as jest.Mock;
+vi.mock('payload', () => {
+  return {
+    getPayload: vi.fn(),
+  };
+});
 
 describe('tenantStats module', () => {
+  let mockFind: ReturnType<typeof vi.fn>;
+  let mockFindByID: ReturnType<typeof vi.fn>;
+
   beforeEach(() => {
+    mockFind = vi.fn();
+    mockFindByID = vi.fn();
+    (getPayload as unknown as vi.Mock).mockResolvedValue({
+      find: mockFind,
+      findByID: mockFindByID,
+    });
     vi.clearAllMocks();
   });
 
