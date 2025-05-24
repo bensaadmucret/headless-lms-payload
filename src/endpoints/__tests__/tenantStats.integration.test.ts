@@ -1,6 +1,6 @@
 import request from 'supertest';
 import { vi } from 'vitest';
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import { tenantStatsEndpoint } from '../tenantStats';
 
 // Mock du module de stats
@@ -9,12 +9,23 @@ vi.mock('../../stats/tenantStats');
 
 const app = express();
 app.use(express.json());
-app.get('/api/tenants/:tenantId/stats', async (req: any, res) => {
-  // Simule l'authentification via un header custom
-  req.user = { role: req.headers['x-role'] };
+// Middleware pour injecter req.user à partir de l'en-tête x-role
+app.use((req: Request, res: Response, next: NextFunction) => {
+  // Compatible Web API Headers et IncomingHttpHeaders Node.js
+  // @ts-expect-error: Headers type (Web API) ou Node.js
+  const role = typeof req.headers.get === 'function' ? req.headers.get('x-role') : req.headers['x-role'];
+  if (typeof role === 'string') {
+    // @ts-expect-error: propriété custom pour test
+    req.user = { role };
+  }
+  next();
+});
+
+app.get('/api/tenants/:tenantId/stats', async (req: Request, res: Response) => {
   try {
-    await tenantStatsEndpoint(req, res);
-  } catch (err) {
+    // Cast pour satisfaire le typage custom de tenantStatsEndpoint
+    await tenantStatsEndpoint(req as any, res);
+  } catch (_err) {
     res.status(500).json({ error: 'Erreur serveur' });
   }
 });
