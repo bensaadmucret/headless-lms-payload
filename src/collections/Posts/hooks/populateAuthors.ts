@@ -5,13 +5,14 @@ import { User } from 'src/payload-types'
 // This means that we need to populate the authors manually here to protect user privacy
 // GraphQL will not return mutated user data that differs from the underlying schema
 // So we use an alternative `populatedAuthors` field to populate the user data, hidden from the admin UI
-export const populateAuthors: CollectionAfterReadHook = async ({ doc, _req, _req: { payload } }) => {
+import type { PayloadRequest } from 'payload';
+export const populateAuthors: CollectionAfterReadHook = async ({ doc, req }: { doc: any; req: PayloadRequest }) => {
   if (doc?.authors && doc?.authors?.length > 0) {
     const authorDocs: User[] = []
 
     for (const author of doc.authors) {
       try {
-        const authorDoc = await payload.findByID({
+        const authorDoc = await req.payload.findByID({
           id: typeof author === 'object' ? author?.id : author,
           collection: 'users',
           depth: 0,

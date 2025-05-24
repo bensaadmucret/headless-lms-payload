@@ -1,6 +1,6 @@
 import type { CollectionConfig } from 'payload';
 
-import { _logAuditAfterChange, _logAuditAfterDelete } from './logAudit';
+import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 
 export const Quizzes: CollectionConfig = {
   slug: 'quizzes',

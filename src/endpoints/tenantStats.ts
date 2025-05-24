@@ -2,12 +2,19 @@
 // Endpoint REST sécurisé pour exposer les stats d'un tenant
 import type { Request, Response } from 'express';
 import { getAllTenantStats } from '../stats/tenantStats';
-import { _payloadIsAdminOrSuperAdmin } from '../access/payloadAccess';
+
+// Typage strict pour req.user
+interface AuthenticatedRequest extends Request {
+  user?: {
+    role?: string;
+    [key: string]: any;
+  };
+}
 
 // Middleware de sécurité : accès réservé aux superadmin
-export async function tenantStatsEndpoint(req: Request, res: Response) {
+export async function tenantStatsEndpoint(req: AuthenticatedRequest, res: Response) {
   try {
-    const user = req.user;
+    const user = req.user; // user est maintenant typé
     if (!user || user.role !== 'superadmin') {
       return res.status(403).json({ error: 'Accès interdit' });
     }

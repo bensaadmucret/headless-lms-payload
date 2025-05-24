@@ -1,57 +1,53 @@
-import type { CollectionConfig } from 'payload'
-import type { _Access, _AccessArgs } from 'payload';
-
-type BeforeChangeArgs = {
-  req: unknown;
-  operation: 'create' | 'update';
-  data: unknown;
-};
-
+// Externes
+import path from 'path';
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import path from 'path'
+} from '@payloadcms/richtext-lexical';
 
+// Payload
+import type { CollectionConfig, Access, AccessArgs } from 'payload';
+
+// Internes
 import { isAdminOrSuperAdmin, isUser } from '../access/roles';
-
-import type { Role } from '../access/roles';
-
-type User = {
-  id: string | number;
-  role?: Role;
-  [key: string]: unknown;
-};
-
-type _AccessArgsWithDoc = {
-  req: { user?: User | null };
-  doc?: { user?: string | number };
-};
-
 import { getMediaDirname } from './getMediaDirname';
-
-const dirname = process.env.NODE_ENV === 'test'
-  ? process.cwd() // Mock ou fallback pour Jest
-  : getMediaDirname();
-
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 
-const isOwnerOrAdmin = ({ req, doc }: _AccessArgsWithDoc) =>
-  isAdminOrSuperAdmin(req.user ?? undefined) ||
-  (isUser(req.user ?? undefined) && doc?.user === req.user?.id);
+// Types générés Payload
+import type { Media } from 'src/payload-types';
 
-export const Media: CollectionConfig = {
+// Détermination dynamique du dossier media
+const dirname = process.env.NODE_ENV === 'test'
+  ? process.cwd()
+  : getMediaDirname();
+
+// Fonction d'accès conforme à Payload
+const isOwnerOrAdmin: Access = ({ req }, doc?: Media) => {
+  const userId = req.user?.id;
+  // doc?.user peut être : string | number | { id: string | number }
+  const docUser = doc?.user;
+  const docUserId = typeof docUser === 'object' && docUser !== null ? docUser.id : docUser;
+
+  return (
+    isAdminOrSuperAdmin(req.user ?? undefined) ||
+    (isUser(req.user ?? undefined) && docUserId === userId)
+  );
+};
+
+// Export d'alias pour compatibilité tests unitaires
+export { MediaCollection as Media };
+export const MediaCollection: CollectionConfig = {
   slug: 'media',
   access: {
-    create: ({ req }: unknown) => !!req.user, // Authentifié
-    read: () => true,                // Public (mettre ({ req }) => !!req.user pour privé)
-    update: isOwnerOrAdmin as unknown,
-    delete: isOwnerOrAdmin as unknown,
+    create: ({ req }: AccessArgs) => !!req.user,
+    read: ({ req }: AccessArgs) => !!req.user,
+    update: isOwnerOrAdmin,
+    delete: isOwnerOrAdmin,
   },
   hooks: {
     beforeChange: [
-      ({ req, operation, data }: BeforeChangeArgs) => {
+      ({ req, operation, data }: { req: any; operation: 'create' | 'update'; data: any }) => {
         if (operation === 'create' && req.user) {
           return { ...data, user: req.user.id };
         }
@@ -72,55 +68,31 @@ export const Media: CollectionConfig = {
     {
       name: 'alt',
       type: 'text',
-      //required: true,
     },
     {
       name: 'caption',
       type: 'richText',
       editor: lexicalEditor({
-        features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
-        },
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
       }),
     },
   ],
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
     staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
     focalPoint: true,
     imageSizes: [
-      {
-        name: 'thumbnail',
-        width: 300,
-      },
-      {
-        name: 'square',
-        width: 500,
-        height: 500,
-      },
-      {
-        name: 'small',
-        width: 600,
-      },
-      {
-        name: 'medium',
-        width: 900,
-      },
-      {
-        name: 'large',
-        width: 1400,
-      },
-      {
-        name: 'xlarge',
-        width: 1920,
-      },
-      {
-        name: 'og',
-        width: 1200,
-        height: 630,
-        crop: 'center',
-      },
+      { name: 'thumbnail', width: 300 },
+      { name: 'square', width: 500, height: 500 },
+      { name: 'small', width: 600 },
+      { name: 'medium', width: 900 },
+      { name: 'large', width: 1400 },
+      { name: 'xlarge', width: 1920 },
+      { name: 'og', width: 1200, height: 630, crop: 'center' },
     ],
   },
-}
+};

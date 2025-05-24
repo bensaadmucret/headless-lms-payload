@@ -3,8 +3,9 @@ import type { Field } from 'payload';
 /**
  * Retourne la liste des noms de champs nommés d'une collection Payload.
  */
-export function getFieldNames(fields: Field[]): string[] {
-  return fields.filter(f => typeof (f as unknown).name === 'string').map(f => (f as unknown).name);
+interface FieldWithName { name?: string }
+export function getFieldNames(fields: FieldWithName[]): string[] {
+  return fields.filter(f => typeof f.name === 'string').map(f => f.name).filter((name): name is string => typeof name === 'string');
 }
 
 /**
@@ -18,7 +19,7 @@ export function expectFieldsToExist(fields: Field[], expectedNames: string[]) {
 /**
  * Vérifie la présence d'un hook donné dans la collection.
  */
-export function expectHookExists(collection: unknown, hookName: string) {
+export function expectHookExists(collection: { hooks?: Record<string, unknown> }, hookName: string) {
   if (collection.hooks && collection.hooks[hookName]) {
     expect(Array.isArray(collection.hooks[hookName])).toBe(true);
   }
