@@ -9,7 +9,18 @@ describe('tenantStats module', () => {
   });
 
   it('getUserCountForTenant returns correct user count', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 5 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [],
+      totalDocs: 5,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const count = await tenantStats.getUserCountForTenant('tenant1');
     expect(count).toBe(5);
   });
@@ -21,44 +32,101 @@ describe('tenantStats module', () => {
   });
 
   it('getActiveUserCountForTenant returns correct count', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 2 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [],
+      totalDocs: 2,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const count = await tenantStats.getActiveUserCountForTenant('tenant1');
     expect(count).toBe(2);
   });
 
   it('getCourseCountForTenant returns correct count', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 3 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [],
+      totalDocs: 3,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const count = await tenantStats.getCourseCountForTenant('tenant1');
     expect(count).toBe(3);
   });
 
   it('getQuizCountForTenant returns correct count', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 4 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [],
+      totalDocs: 4,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const count = await tenantStats.getQuizCountForTenant('tenant1');
     expect(count).toBe(4);
   });
 
   it('getMediaCountForTenant returns correct count', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ totalDocs: 7 });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [],
+      totalDocs: 7,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const count = await tenantStats.getMediaCountForTenant('tenant1');
     expect(count).toBe(7);
   });
 
   it('getStorageUsedForTenant returns correct size', async () => {
-    vi.spyOn(payload, 'find').mockResolvedValueOnce({ docs: [{ size: 1048576 }, { size: 2097152 }] });
+    vi.spyOn(payload, 'find').mockResolvedValueOnce({
+      docs: [{ size: 1048576 } as any, { size: 2097152 } as any],
+      totalDocs: 2,
+      hasNextPage: false,
+      hasPrevPage: false,
+      limit: 0,
+      page: 1,
+      totalPages: 1,
+      pagingCounter: 1,
+      nextPage: null,
+      prevPage: null
+    });
     const size = await tenantStats.getStorageUsedForTenant('tenant1');
     expect(size).toBe(3); // 3 Mo
   });
 
   it('isQuotaExceededForTenant returns true if quota exceeded', async () => {
-    vi.spyOn(payload, 'findByID').mockResolvedValueOnce({ maxUsers: 1, maxStorageMB: 1 });
-    vi.spyOn(tenantStats, 'getUserCountForTenant').mockResolvedValueOnce(2);
-    vi.spyOn(tenantStats, 'getStorageUsedForTenant').mockResolvedValueOnce(2);
+    vi.restoreAllMocks();
+    vi.spyOn(payload, 'findByID').mockResolvedValueOnce({ maxUsers: 1, maxStorageMB: 1 } as any);
+    vi.spyOn(tenantStats, 'getUserCountForTenant').mockResolvedValueOnce(2); // > maxUsers
+    vi.spyOn(tenantStats, 'getStorageUsedForTenant').mockResolvedValueOnce(2); // > maxStorageMB
     const res = await tenantStats.isQuotaExceededForTenant('tenant1');
     expect(res).toBe(true);
   });
 
   it('getAllTenantStats returns aggregated stats', async () => {
+    vi.restoreAllMocks();
     vi.spyOn(tenantStats, 'getUserCountForTenant').mockResolvedValueOnce(1);
     vi.spyOn(tenantStats, 'getActiveUserCountForTenant').mockResolvedValueOnce(1);
     vi.spyOn(tenantStats, 'getCourseCountForTenant').mockResolvedValueOnce(1);
