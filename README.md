@@ -1,4 +1,5 @@
 [![codecov](https://codecov.io/gh/bensaadmucret/headless-lms-payload/branch/main/graph/badge.svg)](https://codecov.io/gh/bensaadmucret/headless-lms-payload)
+[![CI](https://github.com/bensaadmucret/headless-lms-payload/actions/workflows/test-pipeline.yml/badge.svg?branch=main)](https://github.com/bensaadmucret/headless-lms-payload/actions/workflows/test-pipeline.yml)
 
 # 🎓 Backoffice LMS – Payload CMS
 
