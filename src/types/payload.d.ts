@@ -1,8 +1,8 @@
 // Types globaux pour Payload CMS : centraliser ici tous les slugs de collection !
-import { CollectionSlug } from 'payload';
+import { _CollectionSlug } from 'payload';
 
 declare global {
-  interface CollectionSlug {
+  interface _CollectionSlug {
     tenants: string;
     'subscription-plans': string;
     courses: string;
@@ -18,7 +18,7 @@ declare global {
 }
 
 // Type strict pour les slugs utilisables dans la configuration Payload
-export type CollectionSlugLiteral =
+export type _CollectionSlugLiteral =
   | 'tenants'
   | 'subscription-plans'
   | 'courses'

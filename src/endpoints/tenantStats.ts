@@ -2,7 +2,7 @@
 // Endpoint REST sécurisé pour exposer les stats d'un tenant
 import type { Request, Response } from 'express';
 import { getAllTenantStats } from '../stats/tenantStats';
-import { payloadIsAdminOrSuperAdmin } from '../access/payloadAccess';
+import { _payloadIsAdminOrSuperAdmin } from '../access/payloadAccess';
 
 // Middleware de sécurité : accès réservé aux superadmin
 export async function tenantStatsEndpoint(req: Request, res: Response) {

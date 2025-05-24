@@ -109,7 +109,7 @@ export const CorsConfig: GlobalConfig = {
   ],
   hooks: {
     beforeChange: [
-      async ({ data, req }: { data: any; req: PayloadRequest }) => {
+      async ({ data, req }: { data: unknown; req: PayloadRequest }) => {
         // Log des modifications
         const audit = {
           user: req.user?.email || 'system',

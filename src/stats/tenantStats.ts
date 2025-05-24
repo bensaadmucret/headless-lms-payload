@@ -15,7 +15,7 @@ export async function getUserCountForTenant(tenantId: string): Promise<number> {
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -37,7 +37,7 @@ export async function getActiveUserCountForTenant(tenantId: string): Promise<num
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -53,7 +53,7 @@ export async function getCourseCountForTenant(tenantId: string): Promise<number>
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -69,7 +69,7 @@ export async function getQuizCountForTenant(tenantId: string): Promise<number> {
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -85,7 +85,7 @@ export async function getMediaCountForTenant(tenantId: string): Promise<number> 
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -103,7 +103,7 @@ export async function getStorageUsedForTenant(tenantId: string): Promise<number>
     });
     const totalBytes = result.docs.reduce((sum, media) => sum + (media.size || 0), 0);
     return Math.round(totalBytes / 1024 / 1024); // en Mo
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -125,7 +125,7 @@ export async function getLoginCountForTenant(tenantId: string): Promise<number> 
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -147,7 +147,7 @@ export async function getActionCountForTenant(tenantId: string, days: number = 3
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -166,7 +166,7 @@ export async function getActivePlansForTenant(tenantId: string): Promise<number>
       pagination: false,
     });
     return result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }
@@ -183,7 +183,7 @@ export async function isQuotaExceededForTenant(tenantId: string): Promise<boolea
     const userCount = await getUserCountForTenant(tenantId);
     const storageUsed = await getStorageUsedForTenant(tenantId);
     return userCount > (tenant.maxUsers || Infinity) || storageUsed > (tenant.maxStorageMB || Infinity);
-  } catch (e) {
+  } catch (_e) {
     return false;
   }
 }
@@ -204,7 +204,7 @@ export async function getAvgCourseCompletionForTenant(tenantId: string): Promise
     if (result.totalDocs === 0) return 0;
     const completed = result.docs.filter(doc => doc.completed === true).length;
     return completed / result.totalDocs;
-  } catch (e) {
+  } catch (_e) {
     return 0;
   }
 }

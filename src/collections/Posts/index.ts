@@ -27,7 +27,7 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '@/fields/slug'
 
-import { logAuditAfterChange, logAuditAfterDelete } from '../logAudit';
+import { _logAuditAfterChange, _logAuditAfterDelete } from '../logAudit';
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',

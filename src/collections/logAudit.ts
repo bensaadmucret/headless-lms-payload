@@ -17,8 +17,8 @@ type AuditData = {
   collection: ValidCollection;
   documentId: string | number;
   diff?: {
-    before: Record<string, any>;
-    after: Record<string, any> | null;
+    before: Record<string, unknown>;
+    after: Record<string, unknown> | null;
   };
   timestamp: Date;
 };

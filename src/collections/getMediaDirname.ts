@@ -3,6 +3,6 @@ import { fileURLToPath } from 'url';
 
 export function getMediaDirname() {
   // Utilisation ESM uniquement
-  // @ts-ignore
+  // @ts-expect-error
   return path.dirname(fileURLToPath(import.meta.url));
 }

@@ -12,8 +12,8 @@ describe('Assignments Collection', () => {
 
   it('should define all expected fields', () => {
     // On ne garde que les champs qui possèdent un name de type string
-    const fields = (Assignments.fields as Field[]).filter(f => typeof (f as any).name === 'string');
-    const fieldNames = fields.map(f => (f as any).name);
+    const fields = (Assignments.fields as Field[]).filter(f => typeof (f as unknown).name === 'string');
+    const fieldNames = fields.map(f => (f as unknown).name);
     expect(fieldNames).toEqual(
       expect.arrayContaining(['title', 'description', 'course', 'dueDate', 'submitted'])
     );
@@ -21,11 +21,11 @@ describe('Assignments Collection', () => {
 
   it('should set required and default properties correctly', () => {
     const fields = Assignments.fields as Field[];
-    const titleField = fields.find(f => (f as any).name === 'title');
-    expect(titleField && 'required' in titleField ? (titleField as any).required : undefined).toBe(true);
+    const titleField = fields.find(f => (f as unknown).name === 'title');
+    expect(titleField && 'required' in titleField ? (titleField as unknown).required : undefined).toBe(true);
 
-    const submittedField = fields.find(f => (f as any).name === 'submitted');
-    expect(submittedField && 'defaultValue' in submittedField ? (submittedField as any).defaultValue : undefined).toBe(false);
+    const submittedField = fields.find(f => (f as unknown).name === 'submitted');
+    expect(submittedField && 'defaultValue' in submittedField ? (submittedField as unknown).defaultValue : undefined).toBe(false);
   });
 
   it('should include afterChange and afterDelete hooks', () => {
