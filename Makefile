@@ -20,3 +20,6 @@ build:
 integration:
 	npx vitest run src/endpoints/__tests__/*.integration.test.ts
 
+# lance le server
+server:
+	npm run dev

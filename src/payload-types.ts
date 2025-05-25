@@ -81,6 +81,9 @@ export interface Config {
     assignments: Assignment;
     badges: Badge;
     'color-schemes': ColorScheme;
+    'subscription-plans': SubscriptionPlan;
+    tenants: Tenant;
+    'system-metrics': SystemMetric;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -106,6 +109,9 @@ export interface Config {
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
     badges: BadgesSelect<false> | BadgesSelect<true>;
     'color-schemes': ColorSchemesSelect<false> | ColorSchemesSelect<true>;
+    'subscription-plans': SubscriptionPlansSelect<false> | SubscriptionPlansSelect<true>;
+    tenants: TenantsSelect<false> | TenantsSelect<true>;
+    'system-metrics': SystemMetricsSelect<false> | SystemMetricsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -927,6 +933,112 @@ export interface ColorScheme {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscription-plans".
+ */
+export interface SubscriptionPlan {
+  id: number;
+  name: string;
+  price: number;
+  currency?: string | null;
+  billingPeriod: 'monthly' | 'yearly';
+  features?:
+    | {
+        feature?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  limits?: {
+    maxUsers?: number | null;
+    maxStorage?: number | null;
+    maxCourses?: number | null;
+  };
+  isActive: boolean;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenants".
+ */
+export interface Tenant {
+  id: number;
+  name: string;
+  /**
+   * URL slug for the tenant
+   */
+  slug: string;
+  status: 'active' | 'suspended' | 'inactive' | 'trial';
+  plan: number | SubscriptionPlan;
+  contact: {
+    name: string;
+    email: string;
+    phone?: string | null;
+  };
+  billing?: {
+    address?: string | null;
+    vatNumber?: string | null;
+    billingEmail?: string | null;
+  };
+  quotas?: {
+    maxUsers?: number | null;
+    /**
+     * Storage limit in GB
+     */
+    maxStorage?: number | null;
+    maxCourses?: number | null;
+  };
+  branding?: {
+    /**
+     * Hex color code
+     */
+    primaryColor?: string | null;
+    customDomain?: string | null;
+  };
+  settings?: {
+    features?: ('analytics' | 'api' | 'certificates' | 'white-label') | null;
+  };
+  usage?: {
+    usersCount?: number | null;
+    storageUsed?: number | null;
+    lastActivity?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "system-metrics".
+ */
+export interface SystemMetric {
+  id: number;
+  /**
+   * Date de la mesure
+   */
+  timestamp: string;
+  type: 'usage' | 'quota' | 'incident' | 'custom';
+  /**
+   * Valeur numérique de la métrique
+   */
+  value: number;
+  description?: string | null;
+  tenant?: (number | null) | Tenant;
+  /**
+   * Détails additionnels (objet JSON libre)
+   */
+  details?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1152,6 +1264,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'color-schemes';
         value: number | ColorScheme;
+      } | null)
+    | ({
+        relationTo: 'subscription-plans';
+        value: number | SubscriptionPlan;
+      } | null)
+    | ({
+        relationTo: 'tenants';
+        value: number | Tenant;
+      } | null)
+    | ({
+        relationTo: 'system-metrics';
+        value: number | SystemMetric;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1634,6 +1758,97 @@ export interface ColorSchemesSelect<T extends boolean = true> {
         background?: T;
         text?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscription-plans_select".
+ */
+export interface SubscriptionPlansSelect<T extends boolean = true> {
+  name?: T;
+  price?: T;
+  currency?: T;
+  billingPeriod?: T;
+  features?:
+    | T
+    | {
+        feature?: T;
+        id?: T;
+      };
+  limits?:
+    | T
+    | {
+        maxUsers?: T;
+        maxStorage?: T;
+        maxCourses?: T;
+      };
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tenants_select".
+ */
+export interface TenantsSelect<T extends boolean = true> {
+  name?: T;
+  slug?: T;
+  status?: T;
+  plan?: T;
+  contact?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+        phone?: T;
+      };
+  billing?:
+    | T
+    | {
+        address?: T;
+        vatNumber?: T;
+        billingEmail?: T;
+      };
+  quotas?:
+    | T
+    | {
+        maxUsers?: T;
+        maxStorage?: T;
+        maxCourses?: T;
+      };
+  branding?:
+    | T
+    | {
+        primaryColor?: T;
+        customDomain?: T;
+      };
+  settings?:
+    | T
+    | {
+        features?: T;
+      };
+  usage?:
+    | T
+    | {
+        usersCount?: T;
+        storageUsed?: T;
+        lastActivity?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "system-metrics_select".
+ */
+export interface SystemMetricsSelect<T extends boolean = true> {
+  timestamp?: T;
+  type?: T;
+  value?: T;
+  description?: T;
+  tenant?: T;
+  details?: T;
   updatedAt?: T;
   createdAt?: T;
 }

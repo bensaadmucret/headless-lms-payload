@@ -1,13 +1,10 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
-
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
-
-import { Categories } from './collections/Categories'
 import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
@@ -26,9 +23,14 @@ import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
 import { getServerSideURL } from './utilities/getURL'
+import { Categories } from './collections/Categories'
+import { SubscriptionPlans } from './collections/SubscriptionPlans'
+import { Tenants } from './collections/Tenants'
+import { SystemMetrics } from './collections/SystemMetrics'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
 
 export default buildConfig({
   admin: {
@@ -74,7 +76,26 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Media, Categories, Users, Courses, Lessons, Prerequisites, Quizzes, Progress, Sections, Assignments, Badges, ColorSchemes],
+  collections: [
+    // LMS & général
+    Pages, 
+    Posts, 
+    Media, 
+    Categories, 
+    Users, 
+    Courses, 
+    Lessons, 
+    Prerequisites, 
+    Quizzes, 
+    Progress, 
+    Sections, 
+    Assignments, 
+    Badges, 
+    ColorSchemes, 
+    SubscriptionPlans, 
+    Tenants,
+    SystemMetrics
+  ],
   globals: [CorsConfig, Header, Footer],
   cors: {
     origins: [getServerSideURL()].filter(Boolean),

@@ -80,3 +80,22 @@ Course
 - Le projet est pensé pour être facilement extensible (ajout de badges, forums, ressources, etc.).
 - L’architecture respecte les standards modernes, la séparation des responsabilités et la sécurité des données.
 
+---
+
+## 🆕 Nouvelles fonctionnalités SuperAdmin (mai 2025)
+
+- **Notification email intelligente lors d’un changement de statut de tenant**
+  - Envoi automatique d’un email (template Handlebars) aux admins et au contact principal du tenant lors d’un changement de statut (`active`, `suspended`, etc.)
+  - Template multilingue (français/anglais), logo personnalisable, variables dynamiques injectées (nom du tenant, ancien/nouveau statut, etc.)
+  - Gestion de la langue dynamique selon le contact du tenant
+- **Audit des notifications**
+  - Nouvelle collection `NotificationLogs` pour tracer chaque notification envoyée ou échouée (destinataire, statut, payload, erreur éventuelle)
+  - Logging automatique pour l’audit et la conformité RGPD
+- **CRUD avancé multi-tenant**
+  - Endpoints CRUD sécurisés pour la gestion des tenants, plans d’abonnement, métriques système, logs d’audit
+  - Gestion de la suspension/activation des tenants via un simple PUT sur le champ `status`
+- **Extensible & sécurisé**
+  - Architecture conçue pour supporter d’autres canaux de notification (Slack, webhook, etc.)
+  - Sécurité avancée : seuls les superadmins peuvent effectuer les actions critiques
+
+Pour plus de détails, voir la documentation technique dans le dossier `/src/collections` et `/src/emailTemplates`.

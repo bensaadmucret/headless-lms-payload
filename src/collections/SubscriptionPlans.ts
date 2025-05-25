@@ -74,6 +74,16 @@ export const SubscriptionPlans: CollectionConfig = {
           type: 'number',
         }
       ]
+    },
+    {
+      name: 'isActive',
+      type: 'checkbox',
+      label: 'Actif',
+      defaultValue: true,
+      required: true,
+      admin: {
+        position: 'sidebar'
+      }
     }
   ]
 };

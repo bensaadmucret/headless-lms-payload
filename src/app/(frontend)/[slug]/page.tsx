@@ -25,13 +25,12 @@ export async function generateStaticParams() {
     },
   })
 
-  const params = pages.docs
-    ?.filter((doc) => {
-      return doc.slug !== 'home'
-    })
-    .map(({ slug }) => {
-      return { slug }
-    })
+  // Correction défensive : s'assurer que pages.docs est bien un tableau pour éviter les erreurs de mapping
+  const params = Array.isArray(pages.docs)
+    ? pages.docs
+        .filter((doc) => doc && doc.slug !== 'home')
+        .map(({ slug }) => ({ slug }))
+    : []
 
   return params
 }

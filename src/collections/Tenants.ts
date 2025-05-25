@@ -5,7 +5,7 @@ import { payloadIsSuperAdmin } from '../access/payloadAccess';
 
 const SLUG: CollectionSlug['tenants'] = 'tenants';
 
-const _SUBSCRIPTION_PLANS_SLUG: CollectionSlug['subscription-plans'] = 'subscription-plans';
+const SUBSCRIPTION_PLANS_SLUG: CollectionSlug['subscription-plans'] = 'subscription-plans';
 
 export const Tenants: CollectionConfig = {
   slug: SLUG,
@@ -50,7 +50,8 @@ export const Tenants: CollectionConfig = {
     {
       name: 'plan',
       type: 'relationship',
-      relationTo: 'subscription-plans' as any,      required: true
+      relationTo: SUBSCRIPTION_PLANS_SLUG as any,
+      required: true
     },
     {
       name: 'contact',
