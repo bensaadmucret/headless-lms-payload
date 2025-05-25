@@ -25,7 +25,7 @@ export const validateUrl = (value: string | string[] | null | undefined): true |
     }
 
     return true
-  } catch (error) {
+  } catch (_error) {
     return 'URL invalide'
   }
 }
