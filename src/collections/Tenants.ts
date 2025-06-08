@@ -3,10 +3,9 @@ import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 import { payloadIsSuperAdmin } from '../access/payloadAccess';
 
 
-const SLUG: CollectionSlug['tenants'] = 'tenants';
+const SLUG = 'tenants' as const;
 
-const SUBSCRIPTION_PLANS_SLUG: CollectionSlug['subscription-plans'] = 'subscription-plans';
-
+const SUBSCRIPTION_PLANS_SLUG = 'subscription-plans' as const;
 export const Tenants: CollectionConfig = {
   slug: SLUG,
   admin: {
@@ -50,7 +49,7 @@ export const Tenants: CollectionConfig = {
     {
       name: 'plan',
       type: 'relationship',
-      relationTo: SUBSCRIPTION_PLANS_SLUG as any,
+      relationTo: SUBSCRIPTION_PLANS_SLUG,
       required: true
     },
     {

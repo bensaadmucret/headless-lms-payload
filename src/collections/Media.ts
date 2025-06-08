@@ -5,6 +5,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical';
+import { PayloadRequest } from 'payload';
 
 // Payload
 import type { CollectionConfig, Access, AccessArgs } from 'payload';
@@ -47,7 +48,7 @@ export const MediaCollection: CollectionConfig = {
   },
   hooks: {
     beforeChange: [
-      ({ req, operation, data }: { req: any; operation: 'create' | 'update'; data: any }) => {
+      ({ req, operation, data }: { req: PayloadRequest; operation: 'create' | 'update'; data: Partial<Media> }) => {
         if (operation === 'create' && req.user) {
           return { ...data, user: req.user.id };
         }

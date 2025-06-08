@@ -222,9 +222,9 @@ export const Posts: CollectionConfig<'posts'> = {
     ...slugField(),
   ],
   hooks: {
-    afterChange: [revalidatePost],
+    afterChange: [logAuditAfterChange, revalidatePost],
     afterRead: [populateAuthors],
-    afterDelete: [revalidateDelete],
+    afterDelete: [logAuditAfterDelete, revalidateDelete],
   },
   versions: {
     drafts: {
