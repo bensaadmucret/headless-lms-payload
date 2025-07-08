@@ -1,3 +1,4 @@
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 
 export const Questions: CollectionConfig = {
@@ -13,6 +14,7 @@ export const Questions: CollectionConfig = {
       label: 'Texte de la question',
       type: 'richText',
       required: true,
+      editor: lexicalEditor({}),
     },
     {
       name: 'questionType',
@@ -58,6 +60,7 @@ export const Questions: CollectionConfig = {
       label: 'Explication détaillée',
       type: 'richText',
       required: true,
+      editor: lexicalEditor({}),
       admin: {
         description: "Cette explication s'affichera à l'étudiant après qu'il ait répondu.",
       },

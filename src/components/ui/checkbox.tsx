@@ -2,7 +2,7 @@
 
 import { cn } from '@/utilities/ui'
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox'
-import { Check } from 'lucide-react'
+import { FaCheck as Check } from 'react-icons/fa'
 import * as React from 'react'
 
 const Checkbox: React.FC<
