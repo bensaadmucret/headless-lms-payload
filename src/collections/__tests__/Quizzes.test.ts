@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { getTestPayloadClient } from '../../__tests__/server';
 import type { Payload } from 'payload';
-import 'isomorphic-fetch';
+// Utiliser l'API fetch native de Node.js au lieu de isomorphic-fetch
+// qui peut causer des problèmes dans certains environnements CI
 
 describe('Quizzes API', () => {
   let payload: Payload;
