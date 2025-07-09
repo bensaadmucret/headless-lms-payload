@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { StudySessionService } from '../services/StudySessionService';
 import { authenticated } from '../access/authenticated';
 
 export const StudySessions: CollectionConfig = {
@@ -180,10 +181,19 @@ export const StudySessions: CollectionConfig = {
     beforeChange: [
       async ({ data, req, operation }) => {
         if (operation === 'create') {
-          return {
+          if (!req.user) {
+            // Cette vérification satisfait TypeScript et ajoute de la robustesse,
+            // même si la règle d'accès 'authenticated' devrait déjà nous protéger.
+            throw new Error('User must be authenticated to create a study session.');
+          }
+
+          const studySessionService = new StudySessionService(req.payload);
+          const populatedData = await studySessionService.populateSessionWithAI({
             ...data,
-            user: data.user || req.user?.id,
-          };
+            // À ce stade, req.user est garanti d'exister.
+            user: data.user || req.user.id,
+          });
+          return populatedData;
         }
         return data;
       },

@@ -37,3 +37,8 @@ export interface StudySessionOptions {
   courseName?: string;
   date?: Date;
 }
+
+export interface Message {
+  role: 'user' | 'assistant' | 'system';
+  content: string;
+}

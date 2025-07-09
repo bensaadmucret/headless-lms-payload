@@ -1,38 +1,35 @@
-import { InferenceClient } from '@huggingface/inference';
+import { GoogleGenerativeAI, Content, Part, GenerationConfig } from '@google/generative-ai';
+import { Message } from '../types/studySession';
 
-type Message = {
-  role: 'system' | 'user' | 'assistant';
-  content: string;
-};
-
-type AIConfig = {
+interface AIConfig {
   model: string;
-  provider: string;
-  maxTokens?: number;
-  temperature?: number;
-};
+  generationConfig: GenerationConfig;
+}
 
 export class AIService {
-  private client: InferenceClient;
+  private client: GoogleGenerativeAI;
   private config: AIConfig;
 
   constructor() {
-    if (!process.env.HF_TOKEN) {
-      throw new Error('HF_TOKEN is not defined in environment variables');
+    if (!process.env.GEMINI_API_KEY) {
+      throw new Error('GEMINI_API_KEY is not defined in environment variables');
     }
 
-    this.client = new InferenceClient(process.env.HF_TOKEN);
+    this.client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
     
     this.config = {
-      model: 'deepseek-ai/DeepSeek-R1-0528',
-      provider: 'huggingface',
-      maxTokens: 1000,
-      temperature: 0.7,
+      model: 'gemini-1.5-flash-latest',
+      generationConfig: {
+        maxOutputTokens: 1000,
+        temperature: 0.7,
+        topP: 0.9,
+        topK: 40,
+      },
     };
   }
 
   /**
-   * Génère une réponse à partir d'un message utilisateur
+   * Génère une réponse à partir d'un message utilisateur en utilisant l'API Google Gemini
    * @param messages Historique de la conversation
    * @param context Contexte supplémentaire pour la génération
    * @returns La réponse générée par l'IA
@@ -43,28 +40,48 @@ export class AIService {
       course?: string;
       difficulty?: 'beginner' | 'intermediate' | 'advanced';
     },
+    jsonMode: boolean = false,
   ): Promise<string> {
     try {
-      // Ajouter le contexte système si nécessaire
-      const systemMessage = this.generateSystemMessage(context);
-      const conversationHistory = systemMessage ? [systemMessage, ...messages] : messages;
+      const systemInstruction = this.generateSystemMessage(context);
+      const generationConfig = { ...this.config.generationConfig };
+      if (jsonMode) {
+        generationConfig.responseMimeType = 'application/json';
+      }
 
-      const response = await this.client.chatCompletion({
-        provider: this.config.provider as any, // Type assertion nécessaire car le type attendu est plus restrictif
+      const model = this.client.getGenerativeModel({
         model: this.config.model,
-        messages: conversationHistory.map(msg => ({
-          role: msg.role as 'system' | 'user' | 'assistant', // S'assure que le rôle est valide
-          content: msg.content,
-        })),
-        max_tokens: this.config.maxTokens,
-        temperature: this.config.temperature,
+        systemInstruction,
+        generationConfig,
       });
 
-      return response.choices[0]?.message?.content || 'Désolé, je n\'ai pas pu générer de réponse.';
+      const history = this.formatMessagesForGemini(messages);
+
+      const result = await model.generateContent({ contents: history });
+      const response = result.response;
+      const text = response.text();
+
+      return text || 'Désolé, je n\'ai pas pu générer de réponse.';
     } catch (error) {
-      console.error('Erreur lors de la génération de la réponse IA:', error);
+      console.error('Erreur lors de la génération de la réponse IA avec Gemini:', error);
       throw new Error('Une erreur est survenue lors de la génération de la réponse');
     }
+  }
+
+  /**
+   * Formate les messages pour l'API Gemini, en s'assurant que les rôles alternent correctement.
+   * @param messages L'historique des messages.
+   * @returns Un tableau de `Content` formaté pour Gemini.
+   */
+  private formatMessagesForGemini(messages: Message[]): Content[] {
+    // Gemini requiert une alternance stricte user/model.
+    // On filtre les messages système et on s'assure que le premier message est de l'utilisateur.
+    const relevantMessages = messages.filter(msg => msg.role === 'user' || msg.role === 'assistant');
+
+    return relevantMessages.map(msg => ({
+      role: msg.role === 'assistant' ? 'model' : 'user',
+      parts: [{ text: msg.content }],
+    }));
   }
 
   /**
@@ -73,47 +90,15 @@ export class AIService {
   private generateSystemMessage(context?: {
     course?: string;
     difficulty?: 'beginner' | 'intermediate' | 'advanced';
-  }): Message | null {
-    if (!context) return null;
+  }): string | undefined {
+    if (!context || !context.course) return undefined;
 
-    let systemMessage = 'Tu es un assistant pédagogique médical expérimenté. ';
-    
-    if (context.course) {
-      systemMessage += `Tu réponds dans le contexte du cours: ${context.course}. `;
-    }
-    
+    let systemPrompt = `Tu es un tuteur expert en ${context.course}. `;
     if (context.difficulty) {
-      const difficultyMap = {
-        beginner: 'débutant',
-        intermediate: 'intermédiaire',
-        advanced: 'avancé'
-      };
-      systemMessage += `Adapte tes réponses pour un niveau ${difficultyMap[context.difficulty]}. `;
+      systemPrompt += `Le niveau de l'étudiant est ${context.difficulty}. `;
     }
-    
-    systemMessage += 'Sois précis, concis et basé sur des preuves médicales. ';
-    systemMessage += 'Si tu ne connais pas la réponse, dis-le clairement.';
+    systemPrompt += 'Ton objectif est de guider l\'étudiant à travers une session d\'étude interactive et engageante. Fournis des explications claires, des exemples pertinents et des questions pour tester la compréhension. Adopte un ton encourageant et patient.';
 
-    return {
-      role: 'system',
-      content: systemMessage,
-    };
-  }
-
-  /**
-   * Met à jour la configuration de l'IA
-   */
-  setConfig(config: Partial<AIConfig>): void {
-    this.config = { ...this.config, ...config };
-  }
-
-  /**
-   * Récupère la configuration actuelle
-   */
-  getConfig(): AIConfig {
-    return { ...this.config };
+    return systemPrompt;
   }
 }
-
-// Export d'une instance unique du service
-export const aiService = new AIService();

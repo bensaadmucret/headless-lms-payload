@@ -22,7 +22,8 @@
     "format:check": "prettier --chƒeck \"src/**/*.{js,ts,tsx,json,md,css,scss}\""
   },
   "dependencies": {
-    "@huggingface/inference": "^4.4.0",
+    "@google/generative-ai": "^0.24.1",
+    "@huggingface/inference": "^4.3.0",
     "@payloadcms/admin-bar": "3.39.1",
     "@payloadcms/db-postgres": "3.39.1",
     "@payloadcms/live-preview-react": "3.39.1",

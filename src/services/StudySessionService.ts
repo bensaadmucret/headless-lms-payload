@@ -20,63 +20,22 @@ export class StudySessionService {
     context: {
       courseId?: string;
       difficulty?: 'beginner' | 'intermediate' | 'advanced';
-    } = {}
+    } = {},
   ): Promise<StudySession> {
     try {
-      const userRaw = await this.payload.findByID({
-        collection: 'users',
-        id: userId,
-        depth: 0,
-      });
-      const user = userRaw as User;
-      if (!user || (typeof user.id !== 'string' && typeof user.id !== 'number')) {
-        throw new Error('Utilisateur introuvable');
-      }
-      const userName = typeof user.email === 'string' ? user.email : 'Étudiant';
-
-      let course: Course | null = null;
-      if (context.courseId) {
-        try {
-          const courseRaw = await this.payload.findByID({
-            collection: 'courses',
-            id: context.courseId,
-            depth: 0,
-          });
-          course = courseRaw as Course;
-        } catch (error) {
-          console.warn(`Course ${context.courseId} not found`, error);
-        }
-      }
-
-      const title = this.generateSessionTitle({
-        userName,
-        courseName: course?.title,
-        date: new Date(),
-      });
-
-      const steps = await this.generateSessionSteps({
-        userId,
-        courseId: context.courseId,
-        difficulty: context.difficulty || 'beginner',
-        estimatedDuration: 60,
-      });
-
-      const sessionData = {
-        title,
-        user: user.id,
-        status: 'draft' as const,
-        estimatedDuration: steps.reduce((acc, step) => acc + (step.metadata?.duration || 15), 0),
-        currentStep: 0,
-        steps,
+      const initialData: Partial<StudySession> = {
+        user: userId as any, // L'ID utilisateur est une chaîne, nous le savons.
         context: {
-          course: course?.id,
-          difficulty: context.difficulty || 'beginner',
+          course: context.courseId as any, // L'ID du cours est une chaîne, nous le savons.
+          difficulty: context.difficulty,
         },
       };
 
-      const sessionRaw = await this.payload.create({ 
+      const populatedData = await this.populateSessionWithAI(initialData);
+
+      const sessionRaw = await this.payload.create({
         collection: 'study-sessions',
-        data: sessionData,
+        data: populatedData,
       });
 
       return sessionRaw as StudySession;
@@ -84,6 +43,81 @@ export class StudySessionService {
       console.error('Error creating study session:', error);
       throw new Error('Failed to create study session');
     }
+  }
+
+  async populateSessionWithAI(
+    data: Partial<StudySession>,
+  ): Promise<Omit<StudySession, 'id' | 'createdAt' | 'updatedAt'>> {
+    // Cette méthode prépare un objet complet pour la création, donc nous retournons un type plus spécifique.
+    let userId: string | number | undefined;
+    if (typeof data.user === 'object' && data.user !== null) {
+      userId = data.user.id;
+    } else {
+      userId = data.user;
+    }
+    if (!userId) {
+      throw new Error('User ID is required to populate session');
+    }
+
+    const userRaw = await this.payload.findByID({
+      collection: 'users',
+      id: userId,
+      depth: 0,
+    });
+    const user = userRaw as User;
+    const userName = user.email || 'Étudiant';
+
+    let courseId: string | number | null | undefined;
+    if (typeof data.context?.course === 'object' && data.context?.course !== null) {
+      courseId = data.context.course.id;
+    } else {
+      courseId = data.context?.course;
+    }
+    let course: Course | null = null;
+    if (courseId) {
+      try {
+        const courseRaw = await this.payload.findByID({
+          collection: 'courses',
+          id: courseId,
+          depth: 0,
+        });
+        course = courseRaw as Course;
+      } catch (error) {
+        console.warn(`Course ${courseId} not found`, error);
+      }
+    }
+
+    const title = this.generateSessionTitle({
+      userName,
+      courseName: course?.title,
+      date: new Date(),
+    });
+
+    const difficulty = data.context?.difficulty || 'beginner';
+    const steps = await this.generateSessionSteps({
+      userId,
+      courseId,
+      difficulty,
+      estimatedDuration: 60, // ou une valeur de data
+    });
+
+    const estimatedDuration = steps.reduce((acc, step) => acc + (step.metadata?.duration || 15), 0);
+
+    const result: Omit<StudySession, 'id' | 'createdAt' | 'updatedAt'> = {
+      ...data,
+      title,
+      status: 'draft',
+      estimatedDuration,
+      currentStep: 0,
+      steps,
+      context: {
+        course: course?.id as any,
+        difficulty,
+      },
+      user: user.id as any,
+    };
+
+    return result;
   }
 
   async getTodaysSession(userId: string): Promise<StudySession | null> {
@@ -184,15 +218,20 @@ export class StudySessionService {
   }
 
   private async generateSessionSteps(options: {
-    userId: string;
-    courseId?: string;
+    userId: string | number;
+    courseId?: string | number | null;
     difficulty: 'beginner' | 'intermediate' | 'advanced';
     estimatedDuration: number;
   }): Promise<StudySessionStep[]> {
     try {
       const prompt = this.buildAIPrompt(options);
 
-      const aiResponse = await this.aiService.generateResponse([{ role: 'user', content: prompt }]);
+      const courseIdString = options.courseId?.toString();
+      const aiResponse = await this.aiService.generateResponse(
+        [{ role: 'user', content: prompt }],
+        { course: courseIdString, difficulty: options.difficulty },
+        true,
+      );
       return this.parseAIResponse(aiResponse);
     } catch (error) {
       console.error('Erreur lors de la génération des étapes avec l\'IA:', error);
@@ -201,22 +240,41 @@ export class StudySessionService {
   }
 
   private buildAIPrompt(options: {
-    userId: string;
-    courseId?: string;
+    userId: string | number;
+    courseId?: string | number | null;
     difficulty: string;
     estimatedDuration: number;
   }): string {
-    return `Génère un plan d'étude de ${options.estimatedDuration} minutes ` +
-      `pour un étudiant de niveau ${options.difficulty}${options.courseId ? ` dans le cours ${options.courseId}` : ''}. ` +
-      'Le plan doit inclure des activités variées comme des quiz, des révisions. ' +
-      'Retourne la réponse au format JSON avec un tableau d\'étapes.';
+    const schema = `
+    {
+      "steps": [
+        {
+          "type": "'quiz' | 'review' | 'flashcards' | 'video' | 'reading'",
+          "title": "string",
+          "description": "string",
+          "metadata": {
+            "duration": "number (en minutes)"
+          }
+        }
+      ]
+    }
+    `;
+
+    return (
+      `Génère un plan d'étude de ${options.estimatedDuration} minutes pour un étudiant de niveau ${options.difficulty}${options.courseId ? ` dans le cours ${options.courseId}` : ''}. ` +
+      `Le plan doit inclure des activités variées. ` +
+      `Retourne UNIQUEMENT une réponse au format JSON valide respectant le schéma suivant. N'inclus aucun texte avant ou après le JSON. Voici le schéma:\n\n${schema}`
+    );
   }
 
   private parseAIResponse(aiResponse: string): StudySessionStep[] {
     try {
       const parsed = JSON.parse(aiResponse);
-      if (Array.isArray(parsed)) {
-        return parsed.map((step, index) => ({
+      // L'IA retourne maintenant un objet { steps: [...] }
+      const steps = parsed.steps;
+
+      if (Array.isArray(steps)) {
+        return steps.map((step: any, index: number) => ({
           stepId: index + 1,
           type: step.type || 'review',
           title: step.title || `Étape ${index + 1}`,
