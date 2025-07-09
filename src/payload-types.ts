@@ -70,22 +70,24 @@ export interface Config {
     pages: Page;
     posts: Post;
     media: Media;
-    categories: Category;
     users: User;
+    categories: Category;
     courses: Course;
     lessons: Lesson;
+    sections: Section;
+    assignments: Assignment;
     prerequisites: Prerequisite;
     quizzes: Quiz;
     questions: Question;
     'quiz-submissions': QuizSubmission;
     progress: Progress;
-    sections: Section;
-    assignments: Assignment;
+    'study-sessions': StudySession;
     badges: Badge;
     'color-schemes': ColorScheme;
     'subscription-plans': SubscriptionPlan;
     tenants: Tenant;
     'system-metrics': SystemMetric;
+    conversations: Conversation;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -100,22 +102,24 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
+    sections: SectionsSelect<false> | SectionsSelect<true>;
+    assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
     prerequisites: PrerequisitesSelect<false> | PrerequisitesSelect<true>;
     quizzes: QuizzesSelect<false> | QuizzesSelect<true>;
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
     'quiz-submissions': QuizSubmissionsSelect<false> | QuizSubmissionsSelect<true>;
     progress: ProgressSelect<false> | ProgressSelect<true>;
-    sections: SectionsSelect<false> | SectionsSelect<true>;
-    assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
+    'study-sessions': StudySessionsSelect<false> | StudySessionsSelect<true>;
     badges: BadgesSelect<false> | BadgesSelect<true>;
     'color-schemes': ColorSchemesSelect<false> | ColorSchemesSelect<true>;
     'subscription-plans': SubscriptionPlansSelect<false> | SubscriptionPlansSelect<true>;
     tenants: TenantsSelect<false> | TenantsSelect<true>;
     'system-metrics': SystemMetricsSelect<false> | SystemMetricsSelect<true>;
+    conversations: ConversationsSelect<false> | ConversationsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -829,6 +833,32 @@ export interface Lesson {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections".
+ */
+export interface Section {
+  id: number;
+  title: string;
+  course: number | Course;
+  order: number;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "assignments".
+ */
+export interface Assignment {
+  id: number;
+  title: string;
+  description?: string | null;
+  course: number | Course;
+  dueDate?: string | null;
+  submitted?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "prerequisites".
  */
 export interface Prerequisite {
@@ -943,28 +973,49 @@ export interface Progress {
   createdAt: string;
 }
 /**
+ * Sessions d'étude générées par le Coach IA
+ *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections".
+ * via the `definition` "study-sessions".
  */
-export interface Section {
+export interface StudySession {
   id: number;
   title: string;
-  course: number | Course;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "assignments".
- */
-export interface Assignment {
-  id: number;
-  title: string;
-  description?: string | null;
-  course: number | Course;
-  dueDate?: string | null;
-  submitted?: boolean | null;
+  user: number | User;
+  status?: ('draft' | 'in-progress' | 'completed' | 'paused') | null;
+  /**
+   * Durée estimée en minutes pour compléter cette session
+   */
+  estimatedDuration?: number | null;
+  currentStep?: number | null;
+  steps?:
+    | {
+        stepId: number;
+        type: 'quiz' | 'review' | 'flashcards' | 'video' | 'reading';
+        title: string;
+        description?: string | null;
+        status?: ('pending' | 'in-progress' | 'completed' | 'skipped') | null;
+        /**
+         * Données spécifiques au type d'étape
+         */
+        metadata?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        startedAt?: string | null;
+        completedAt?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  context?: {
+    course?: (number | null) | Course;
+    difficulty?: ('beginner' | 'intermediate' | 'advanced') | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1135,6 +1186,31 @@ export interface SystemMetric {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Historique des conversations avec le coach IA
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conversations".
+ */
+export interface Conversation {
+  id: number;
+  title: string;
+  user: number | User;
+  messages?:
+    | {
+        role: 'system' | 'user' | 'assistant';
+        content: string;
+        timestamp: string;
+        id?: string | null;
+      }[]
+    | null;
+  context?: {
+    course?: (number | null) | Course;
+    difficulty?: ('beginner' | 'intermediate' | 'advanced') | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1323,12 +1399,12 @@ export interface PayloadLockedDocument {
         value: number | Media;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: number | Category;
-      } | null)
-    | ({
         relationTo: 'users';
         value: number | User;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: number | Category;
       } | null)
     | ({
         relationTo: 'courses';
@@ -1337,6 +1413,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'lessons';
         value: number | Lesson;
+      } | null)
+    | ({
+        relationTo: 'sections';
+        value: number | Section;
+      } | null)
+    | ({
+        relationTo: 'assignments';
+        value: number | Assignment;
       } | null)
     | ({
         relationTo: 'prerequisites';
@@ -1359,12 +1443,8 @@ export interface PayloadLockedDocument {
         value: number | Progress;
       } | null)
     | ({
-        relationTo: 'sections';
-        value: number | Section;
-      } | null)
-    | ({
-        relationTo: 'assignments';
-        value: number | Assignment;
+        relationTo: 'study-sessions';
+        value: number | StudySession;
       } | null)
     | ({
         relationTo: 'badges';
@@ -1385,6 +1465,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'system-metrics';
         value: number | SystemMetric;
+      } | null)
+    | ({
+        relationTo: 'conversations';
+        value: number | Conversation;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1710,26 +1794,6 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  slugLock?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
@@ -1756,6 +1820,26 @@ export interface UsersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses_select".
  */
 export interface CoursesSelect<T extends boolean = true> {
@@ -1779,6 +1863,30 @@ export interface LessonsSelect<T extends boolean = true> {
   course?: T;
   order?: T;
   published?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sections_select".
+ */
+export interface SectionsSelect<T extends boolean = true> {
+  title?: T;
+  course?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "assignments_select".
+ */
+export interface AssignmentsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  course?: T;
+  dueDate?: T;
+  submitted?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1856,25 +1964,33 @@ export interface ProgressSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections_select".
+ * via the `definition` "study-sessions_select".
  */
-export interface SectionsSelect<T extends boolean = true> {
+export interface StudySessionsSelect<T extends boolean = true> {
   title?: T;
-  course?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "assignments_select".
- */
-export interface AssignmentsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  course?: T;
-  dueDate?: T;
-  submitted?: T;
+  user?: T;
+  status?: T;
+  estimatedDuration?: T;
+  currentStep?: T;
+  steps?:
+    | T
+    | {
+        stepId?: T;
+        type?: T;
+        title?: T;
+        description?: T;
+        status?: T;
+        metadata?: T;
+        startedAt?: T;
+        completedAt?: T;
+        id?: T;
+      };
+  context?:
+    | T
+    | {
+        course?: T;
+        difficulty?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2000,6 +2116,30 @@ export interface SystemMetricsSelect<T extends boolean = true> {
   description?: T;
   tenant?: T;
   details?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "conversations_select".
+ */
+export interface ConversationsSelect<T extends boolean = true> {
+  title?: T;
+  user?: T;
+  messages?:
+    | T
+    | {
+        role?: T;
+        content?: T;
+        timestamp?: T;
+        id?: T;
+      };
+  context?:
+    | T
+    | {
+        course?: T;
+        difficulty?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

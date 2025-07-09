@@ -18,6 +18,7 @@ import { Questions } from './collections/Questions'
 import { QuizSubmissions } from './collections/QuizSubmissions'
 import { Progress } from './collections/Progress'
 import { Sections } from './collections/Sections'
+import { StudySessions } from './collections/StudySessions'
 import { Badges } from './collections/Badges'
 import { ColorSchemes } from './collections/ColorSchemes'
 import { Footer } from './Footer/config'
@@ -28,6 +29,7 @@ import { getServerSideURL } from './utilities/getURL'
 import { Categories } from './collections/Categories'
 import { SubscriptionPlans } from './collections/SubscriptionPlans'
 import { Tenants } from './collections/Tenants'
+import Conversations from './collections/Conversations'
 import { SystemMetrics } from './collections/SystemMetrics'
 
 const filename = fileURLToPath(import.meta.url)
@@ -79,30 +81,31 @@ export default buildConfig({
     },
   }),
   collections: [
-    // LMS & général
-    Pages, 
-    Posts, 
-    Media, 
-    Categories, 
-    Users, 
-    Courses, 
-    Lessons, 
-    Prerequisites, 
+    Pages,
+    Posts,
+    Media,
+    Users,
+    Categories,
+    Courses,
+    Lessons,
+    Sections,
+    Assignments,
+    Prerequisites,
     Quizzes,
     Questions,
-    QuizSubmissions, 
-    Progress, 
-    Sections, 
-    Assignments, 
-    Badges, 
-    ColorSchemes, 
-    SubscriptionPlans, 
+    QuizSubmissions,
+    Progress,
+    StudySessions,
+    Badges,
+    ColorSchemes,
+    SubscriptionPlans,
     Tenants,
-    SystemMetrics
+    SystemMetrics,
+    Conversations
   ],
   globals: [CorsConfig, Header, Footer],
   cors: {
-    origins: [getServerSideURL()].filter(Boolean),
+    origins: [getServerSideURL(), 'http://localhost:8080', 'http://localhost:8081'].filter(Boolean),
     headers: ['Content-Type', 'Authorization']
   },
   plugins: [
@@ -116,14 +119,18 @@ export default buildConfig({
   },
   jobs: {
     access: {
-      run: ({ req }: { req: PayloadRequest }): boolean => {
+      run: ({ req }): boolean => {
         // Allow logged in users to execute this endpoint (default)
-        if (req.user) return true
+        // Utilisation d'une assertion de type pour accéder à user
+        const user = (req as any).user;
+        if (user) return true
 
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
-        const authHeader = req.headers.get('authorization')
+        // Utilisation d'une assertion de type pour accéder à headers
+        const headers = (req as any).headers;
+        const authHeader = headers && typeof headers.get === 'function' ? headers.get('authorization') : null;
         return authHeader === `Bearer ${process.env.CRON_SECRET}`
       },
     },

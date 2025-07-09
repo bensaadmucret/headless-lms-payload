@@ -1,11 +1,11 @@
-import type { PayloadRequest } from 'payload';
 import type { Response, NextFunction } from 'express';
 import type { Question, Quiz, QuizSubmission } from '../../payload-types';
+import type { ExtendedPayloadRequest } from '../../types/payload-types-extended';
 
 // Type helper pour un Quiz avec ses questions entièrement peuplées
 type PopulatedQuiz = Omit<Quiz, 'questions'> & { questions: Question[] };
 
-export const submitHandler = async (req: PayloadRequest, res: Response, next: NextFunction): Promise<Response | void> => {
+export const submitHandler = async (req: ExtendedPayloadRequest, res: Response, next: NextFunction): Promise<Response | void> => {
   if (!req.user) {
     return res.status(401).json({ error: 'Vous devez être connecté pour soumettre un quiz.' });
   }
@@ -46,17 +46,32 @@ export const submitHandler = async (req: PayloadRequest, res: Response, next: Ne
     quiz.questions.forEach(question => {
       const correctOption = question.options?.find(opt => opt.isCorrect);
       if (question.id && correctOption?.id) {
-        correctAnswersMap.set(question.id, correctOption.id);
+        // Conversion des IDs en nombres si nécessaire
+        const questionId = typeof question.id === 'string' ? parseInt(question.id, 10) : question.id;
+        const optionId = typeof correctOption.id === 'string' ? parseInt(correctOption.id, 10) : correctOption.id;
+        
+        // Vérifier que la conversion a réussi
+        if (!isNaN(questionId) && !isNaN(optionId)) {
+          correctAnswersMap.set(questionId, optionId);
+        }
       }
     });
 
     let score = 0;
     const processedAnswers = studentAnswers.map(ans => {
-      const isCorrect = correctAnswersMap.get(ans.question) === ans.answer;
+      // S'assurer que les IDs des questions et réponses sont des nombres
+      const questionId = typeof ans.question === 'string' ? parseInt(ans.question, 10) : ans.question;
+      const answerId = typeof ans.answer === 'string' ? parseInt(ans.answer, 10) : ans.answer;
+      
+      // Vérifier si la réponse est correcte
+      const correctAnswer = correctAnswersMap.get(questionId);
+      const isCorrect = correctAnswer === answerId;
+      
       if (isCorrect) {
         score++;
       }
-      return { question: ans.question, answer: ans.answer, isCorrect };
+      
+      return { question: questionId, answer: answerId, isCorrect };
     });
 
     const finalScore = (score / quiz.questions.length) * 100;
