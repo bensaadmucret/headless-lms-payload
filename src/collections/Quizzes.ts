@@ -24,6 +24,25 @@ export const Quizzes: CollectionConfig = {
   admin: {
     useAsTitle: 'title',
   },
+  access: {
+    read: ({ req }) => {
+      // Les administrateurs peuvent tout voir
+      if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
+      
+      // Les utilisateurs authentifiés peuvent voir les quiz publiés
+      if (req.user) {
+        return {
+          published: { equals: true }
+        };
+      }
+      
+      // Les utilisateurs non authentifiés ne peuvent rien voir
+      return false;
+    },
+    update: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    create: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    delete: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+  },
   fields: [
     {
       name: 'title',
@@ -42,6 +61,16 @@ export const Quizzes: CollectionConfig = {
       type: 'relationship',
       relationTo: 'courses',
       required: true,
+      hasMany: false,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'published',
+      type: 'checkbox',
+      label: 'Publié',
+      defaultValue: false,
     },
   ],
   endpoints: [

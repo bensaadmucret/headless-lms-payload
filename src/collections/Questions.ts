@@ -1,4 +1,4 @@
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { defaultEditorFeatures, lexicalEditor } from '@payloadcms/richtext-lexical'
 import type { CollectionConfig } from 'payload'
 
 export const Questions: CollectionConfig = {
@@ -14,7 +14,7 @@ export const Questions: CollectionConfig = {
       label: 'Texte de la question',
       type: 'richText',
       required: true,
-      editor: lexicalEditor({}),
+      editor: lexicalEditor({ features: defaultEditorFeatures }),
     },
     {
       name: 'questionType',
@@ -57,12 +57,11 @@ export const Questions: CollectionConfig = {
     },
     {
       name: 'explanation',
-      label: 'Explication détaillée',
-      type: 'richText',
+      label: 'Explication détaillée (Texte Simple)',
+      type: 'textarea',
       required: true,
-      editor: lexicalEditor({}),
       admin: {
-        description: "Cette explication s'affichera à l'étudiant après qu'il ait répondu.",
+        description: "Cette explication s'affichera à l'étudiant après qu'il ait répondu. Champ temporairement en texte simple pour débogage.",
       },
     },
     {

@@ -412,6 +412,10 @@ export interface User {
     | number
     | boolean
     | null;
+  /**
+   * Indique si l’étudiant a passé le quiz de positionnement
+   */
+  hasTakenPlacementQuiz?: boolean | null;
   role: 'superadmin' | 'admin' | 'teacher' | 'student';
   updatedAt: string;
   createdAt: string;
@@ -877,6 +881,7 @@ export interface Quiz {
   title: string;
   questions: (number | Question)[];
   course: number | Course;
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -915,23 +920,9 @@ export interface Question {
       }[]
     | null;
   /**
-   * Cette explication s'affichera à l'étudiant après qu'il ait répondu.
+   * Cette explication s'affichera à l'étudiant après qu'il ait répondu. Champ temporairement en texte simple pour débogage.
    */
-  explanation: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
+  explanation: string;
   course: number | Course;
   updatedAt: string;
   createdAt: string;
@@ -950,7 +941,7 @@ export interface QuizSubmission {
   answers?:
     | {
         question: number | Question;
-        answer?: number | null;
+        answer?: string | null;
         isCorrect: boolean;
         id?: string | null;
       }[]
@@ -1007,6 +998,7 @@ export interface StudySession {
           | number
           | boolean
           | null;
+        quiz?: (number | null) | Quiz;
         startedAt?: string | null;
         completedAt?: string | null;
         id?: string | null;
@@ -1807,6 +1799,7 @@ export interface UsersSelect<T extends boolean = true> {
         studyHoursPerWeek?: T;
       };
   competencyProfile?: T;
+  hasTakenPlacementQuiz?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -1908,6 +1901,7 @@ export interface QuizzesSelect<T extends boolean = true> {
   title?: T;
   questions?: T;
   course?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1981,6 +1975,7 @@ export interface StudySessionsSelect<T extends boolean = true> {
         description?: T;
         status?: T;
         metadata?: T;
+        quiz?: T;
         startedAt?: T;
         completedAt?: T;
         id?: T;

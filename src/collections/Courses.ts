@@ -11,7 +11,28 @@ export const Courses: CollectionConfig = {
     afterChange: [logAuditAfterChange],
     afterDelete: [logAuditAfterDelete],
   },
+  access: {
+    read: ({ req }) => {
+      // Les administrateurs peuvent tout voir
+      if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
+      
+      // Les utilisateurs authentifiés peuvent voir les cours publiés
+      if (req.user) {
+        return {
+          published: { equals: true }
+        };
+      }
+      
+      // Les utilisateurs non authentifiés ne peuvent rien voir
+      return false;
+    },
+    update: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    create: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    delete: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+  },
   fields: [
+    // La relation inverse sera gérée manuellement dans les requêtes GraphQL
+    // pour éviter les problèmes de boucle infinie et de performances
     {
       name: 'title',
       type: 'text',

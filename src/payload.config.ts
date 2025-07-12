@@ -3,6 +3,15 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
+import { diagnosticsEndpoint } from './endpoints/diagnostics'
+import { studentQuizzesEndpoint } from './endpoints/studentQuizzes'
+import { generateSessionStepsEndpoint } from './endpoints/generateSessionSteps'
+import { generateSessionStepsAltEndpoint } from './endpoints/generateSessionStepsAlt'
+import { dailySessionEndpoint } from './endpoints/dailySession'
+import { getDailySessionEndpoint } from './endpoints/getDailySession'
+import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
+import { meEndpoint } from './endpoints/me'
+import updateDailySessionHandler from './endpoints/updateDailySession'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
 import { Media } from './collections/Media'
@@ -37,6 +46,10 @@ const dirname = path.dirname(filename)
 
 
 export default buildConfig({
+  graphQL: {
+    schemaOutputFile: path.resolve(dirname, 'generated-schema.graphql'),
+  },
+
   admin: {
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
@@ -104,10 +117,18 @@ export default buildConfig({
     Conversations
   ],
   globals: [CorsConfig, Header, Footer],
-  cors: {
-    origins: [getServerSideURL(), 'http://localhost:8080', 'http://localhost:8081'].filter(Boolean),
-    headers: ['Content-Type', 'Authorization']
-  },
+  cors: [
+    getServerSideURL(),
+    'http://localhost:8080', // Vite dev server
+    'http://localhost:3001', // Possible other frontend
+    'http://localhost:3000', // Payload server
+  ].filter(Boolean),
+  csrf: [
+    getServerSideURL(),
+    'http://localhost:8080',
+    'http://localhost:3001',
+    'http://localhost:3000',
+  ].filter(Boolean),
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -117,6 +138,21 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
+  endpoints: [
+    diagnosticsEndpoint,
+    studentQuizzesEndpoint,
+    generateSessionStepsEndpoint,
+    generateSessionStepsAltEndpoint,
+    dailySessionEndpoint,
+    getDailySessionEndpoint,
+    simpleDailySessionEndpoint,
+    meEndpoint, // Endpoint personnalisé pour /api/users/me
+    {
+      path: '/study-sessions/:id/update-with-answers',
+      method: 'patch',
+      handler: updateDailySessionHandler,
+    },
+  ],
   jobs: {
     access: {
       run: ({ req }): boolean => {

@@ -132,6 +132,16 @@ export const StudySessions: CollectionConfig = {
           },
         },
         {
+          name: 'quiz',
+          type: 'relationship',
+          relationTo: 'quizzes',
+          label: 'Quiz associé',
+          // Condition pour n'afficher ce champ que si le type de l'étape est 'quiz'
+          admin: {
+            condition: (data, siblingData) => siblingData.type === 'quiz',
+          },
+        },
+        {
           name: 'startedAt',
           type: 'date',
           admin: {
@@ -178,24 +188,36 @@ export const StudySessions: CollectionConfig = {
     },
   ],
   hooks: {
-    beforeChange: [
-      async ({ data, req, operation }) => {
-        if (operation === 'create') {
+    afterChange: [
+      async ({ doc, req, operation }) => {
+        // S'exécute seulement à la création et si ce n'est pas un seed
+        if (operation === 'create' && !req.context?.isSeeding) {
           if (!req.user) {
-            // Cette vérification satisfait TypeScript et ajoute de la robustesse,
-            // même si la règle d'accès 'authenticated' devrait déjà nous protéger.
-            throw new Error('User must be authenticated to create a study session.');
+            req.payload.logger.error('User not authenticated in afterChange hook for StudySession.');
+            return;
           }
 
-          const studySessionService = new StudySessionService(req.payload);
-          const populatedData = await studySessionService.populateSessionWithAI({
-            ...data,
-            // À ce stade, req.user est garanti d'exister.
-            user: data.user || req.user.id,
-          });
-          return populatedData;
+          try {
+            const studySessionService = new StudySessionService(req.payload);
+            // Appeler le service pour enrichir la session
+            const populatedData = await studySessionService.populateSessionWithAI({
+              ...doc,
+              user: doc.user.id || req.user.id, // Assurer que l'ID utilisateur est passé
+            });
+
+            // Mettre à jour le document avec les données enrichies
+            // On ne déclenche pas les hooks pour éviter une boucle infinie
+            await req.payload.update({
+              collection: 'study-sessions',
+              id: doc.id,
+              data: populatedData,
+              overrideAccess: true,
+            });
+          } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            req.payload.logger.error(`Error populating study session ${doc.id} with AI: ${errorMessage}`);
+          }
         }
-        return data;
       },
     ],
   },

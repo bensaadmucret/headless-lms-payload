@@ -8,7 +8,7 @@ export const QuizSubmissions: CollectionConfig = {
     // La propriété 'readOnly' n'existe pas. Pour rendre la collection non-éditable, on utilise les contrôles d'accès.
   },
   access: {
-    create: () => false, // Personne ne peut créer de soumission depuis l'admin
+    create: ({ req }) => !!req.user, // Seuls les utilisateurs connectés peuvent créer une soumission
     read: () => true, // Tout le monde peut lire les soumissions
     update: () => false, // Personne ne peut modifier une soumission
     delete: () => false, // Personne ne peut supprimer une soumission
@@ -53,8 +53,8 @@ export const QuizSubmissions: CollectionConfig = {
         },
         {
           name: 'answer',
-          label: 'Réponse de l\'étudiant',
-          type: 'number', // Stocke l'ID de l'option choisie.
+          label: "Réponse de l'étudiant (ID de l'option)",
+          type: 'text',
         },
         {
           name: 'isCorrect',

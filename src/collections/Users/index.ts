@@ -7,10 +7,14 @@ import { logAuditAfterChange, logAuditAfterDelete } from '../logAudit';
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
+    // Permettre la lecture publique (nécessaire pour /me)
+    // La sécurité est assurée par l'endpoint personnalisé
+    read: () => true,
+    
+    // Protéger les opérations sensibles
     admin: authenticated,
     create: authenticated,
     delete: authenticated,
-    read: authenticated,
     update: authenticated,
   },
   admin: {
@@ -77,6 +81,18 @@ export const Users: CollectionConfig = {
       admin: {
         description: 'Stocke les scores de compétence par matière. Mis à jour par le coach IA.',
         readOnly: true,
+        condition: data => data.role === 'student',
+      },
+    },
+    {
+      name: 'hasTakenPlacementQuiz',
+      label: 'Quiz de positionnement effectué',
+      type: 'checkbox',
+      defaultValue: false,
+      required: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Indique si l’étudiant a passé le quiz de positionnement',
         condition: data => data.role === 'student',
       },
     },
