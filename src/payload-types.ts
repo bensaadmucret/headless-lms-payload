@@ -390,6 +390,14 @@ export interface User {
   firstName: string;
   lastName: string;
   /**
+   * Le cursus actuel de l’étudiant.
+   */
+  studyYear?: ('pass' | 'las') | null;
+  /**
+   * Indique si l’étudiant a terminé le parcours d’intégration.
+   */
+  onboardingComplete?: boolean | null;
+  /**
    * Permet au coach de calibrer le plan d'étude.
    */
   examDate?: string | null;
@@ -953,6 +961,10 @@ export interface Question {
   explanation: string;
   course: number | Course;
   category: number | Category;
+  /**
+   * Définit le niveau de cursus pour cette question.
+   */
+  difficultyLevel: 'pass' | 'las';
   updatedAt: string;
   createdAt: string;
 }
@@ -1820,6 +1832,8 @@ export interface MediaSelect<T extends boolean = true> {
 export interface UsersSelect<T extends boolean = true> {
   firstName?: T;
   lastName?: T;
+  studyYear?: T;
+  onboardingComplete?: T;
   examDate?: T;
   studyProfile?:
     | T
@@ -1961,6 +1975,7 @@ export interface QuestionsSelect<T extends boolean = true> {
   explanation?: T;
   course?: T;
   category?: T;
+  difficultyLevel?: T;
   updatedAt?: T;
   createdAt?: T;
 }

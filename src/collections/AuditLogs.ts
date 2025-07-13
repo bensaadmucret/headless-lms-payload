@@ -9,7 +9,7 @@ const AuditLogs: CollectionConfig = {
   },
   access: {
     read: ({ req }) => req.user?.role === 'superadmin',
-    create: () => false,
+    create: () => true, // Permettre au système (via les hooks) de créer des logs
     update: () => false,
     delete: () => false,
   },

@@ -71,9 +71,10 @@ async function importData() {
     
     const authData = await authResponse.json();
     const token = authData.token;
+    const adminId = authData.user?.id; // Récupération de l'ID de l'admin
     
-    if (!token) {
-      throw new Error('Jeton d\'authentification non reçu');
+    if (!token || !adminId) {
+      throw new Error('Jeton d\'authentification ou ID utilisateur non reçu');
     }
     
     console.log('✅ Authentification réussie');
@@ -114,6 +115,7 @@ async function importData() {
             title: course.title,
             description: course.description,
             level: validLevel,
+            author: adminId, // Assigner l'auteur
           }),
         });
         
@@ -123,7 +125,7 @@ async function importData() {
         
         const newCourse = await createResponse.json();
         console.log(`✅ Cours créé: ${course.title}`);
-        courseDocs.push(newCourse);
+        courseDocs.push(newCourse.doc); // On stocke l'objet 'doc'
       } catch (error) {
         console.error(`❌ Erreur lors de la création du cours "${course.title}":`, error.message);
       }
@@ -164,7 +166,7 @@ async function importData() {
         
         const newCategory = await createResponse.json();
         console.log(`✅ Catégorie créée: ${category.title}`);
-        categoryDocs.push(newCategory);
+        categoryDocs.push(newCategory.doc); // On stocke l'objet 'doc'
       } catch (error) {
         console.error(`❌ Erreur lors de la création de la catégorie "${category.title}":`, error.message);
       }
@@ -343,10 +345,8 @@ async function importData() {
               // Normalisation du texte de la question (suppression de la ponctuation, minuscules)
               const normalizedQuestionText = richTextContent.toLowerCase().replace(/[.,?!;:]/g, '').trim();
               
-              // Vérification si le texte normalisé de recherche est contenu dans le texte normalisé de la question
-              // ou si le texte normalisé de la question est contenu dans le texte normalisé de recherche
-              return normalizedQuestionText.includes(normalizedSearchText) || 
-                     normalizedSearchText.includes(normalizedQuestionText);
+              // On vérifie une correspondance exacte des textes normalisés
+              return normalizedQuestionText === normalizedSearchText;
             } catch (e) {
               return false;
             }

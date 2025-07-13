@@ -85,5 +85,20 @@ export const Questions: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'difficultyLevel',
+      label: 'Niveau de difficulté',
+      type: 'select',
+      required: true,
+      defaultValue: 'pass',
+      options: [
+        { label: "PASS (Parcours d'Accès Spécifique Santé)", value: 'pass' },
+        { label: "LAS (Licence avec option Accès Santé)", value: 'las' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Définit le niveau de cursus pour cette question.',
+      },
+    },
   ],
 }

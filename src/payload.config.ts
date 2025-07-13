@@ -13,6 +13,7 @@ import { getDailySessionEndpoint } from './endpoints/getDailySession'
 import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
+import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
 import updateDailySessionHandler from './endpoints/updateDailySession'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
@@ -138,7 +139,8 @@ export default buildConfig({
     dailySessionEndpoint,
     getDailySessionEndpoint,
     simpleDailySessionEndpoint,
-    performanceAnalysisEndpoint,
+        performanceAnalysisEndpoint,
+    generateAdaptiveQuizEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     {
       path: '/study-sessions/:id/update-with-answers',
