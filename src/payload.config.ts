@@ -1,4 +1,5 @@
 // storage-adapter-import-placeholder
+import 'dotenv/config'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
@@ -11,6 +12,7 @@ import { dailySessionEndpoint } from './endpoints/dailySession'
 import { getDailySessionEndpoint } from './endpoints/getDailySession'
 import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
+import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import updateDailySessionHandler from './endpoints/updateDailySession'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
@@ -117,18 +119,8 @@ export default buildConfig({
     Conversations
   ],
   globals: [CorsConfig, Header, Footer],
-  cors: [
-    getServerSideURL(),
-    'http://localhost:8080', // Vite dev server
-    'http://localhost:3001', // Possible other frontend
-    'http://localhost:3000', // Payload server
-  ].filter(Boolean),
-  csrf: [
-    getServerSideURL(),
-    'http://localhost:8080',
-    'http://localhost:3001',
-    'http://localhost:3000',
-  ].filter(Boolean),
+  cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
+  csrf: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -146,6 +138,7 @@ export default buildConfig({
     dailySessionEndpoint,
     getDailySessionEndpoint,
     simpleDailySessionEndpoint,
+    performanceAnalysisEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     {
       path: '/study-sessions/:id/update-with-answers',

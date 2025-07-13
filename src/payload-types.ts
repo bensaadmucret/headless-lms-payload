@@ -426,6 +426,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -879,9 +886,30 @@ export interface Prerequisite {
 export interface Quiz {
   id: number;
   title: string;
+  /**
+   * Description détaillée du quiz
+   */
+  description?: string | null;
+  /**
+   * Sélectionnez les questions à inclure dans ce quiz
+   */
   questions: (number | Question)[];
-  course: number | Course;
+  /**
+   * Cours auquel ce quiz est associé (optionnel)
+   */
+  course?: (number | null) | Course;
+  /**
+   * Définir si le quiz est visible pour les utilisateurs
+   */
   published?: boolean | null;
+  /**
+   * Durée estimée pour terminer le quiz (en minutes)
+   */
+  duration?: number | null;
+  /**
+   * Score minimum requis pour réussir le quiz (en pourcentage)
+   */
+  passingScore?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -924,6 +952,7 @@ export interface Question {
    */
   explanation: string;
   course: number | Course;
+  category: number | Category;
   updatedAt: string;
   createdAt: string;
 }
@@ -1810,6 +1839,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1899,9 +1935,12 @@ export interface PrerequisitesSelect<T extends boolean = true> {
  */
 export interface QuizzesSelect<T extends boolean = true> {
   title?: T;
+  description?: T;
   questions?: T;
   course?: T;
   published?: T;
+  duration?: T;
+  passingScore?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1921,6 +1960,7 @@ export interface QuestionsSelect<T extends boolean = true> {
       };
   explanation?: T;
   course?: T;
+  category?: T;
   updatedAt?: T;
   createdAt?: T;
 }

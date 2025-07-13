@@ -5,94 +5,100 @@ import type { ExtendedPayloadRequest } from '../../types/payload-types-extended'
 // Type helper pour un Quiz avec ses questions entièrement peuplées
 type PopulatedQuiz = Omit<Quiz, 'questions'> & { questions: Question[] };
 
-export const submitHandler = async (req: ExtendedPayloadRequest, res: Response, next: NextFunction): Promise<Response | void> => {
+// Type pour le corps de la requête de soumission, tel qu'envoyé par le front-end
+interface SubmitRequestBody {
+  answers: {
+    question: string; // ID de la question
+    answer: string;   // ID de l'option choisie
+  }[];
+}
+
+// Type pour un objet réponse traité, conforme au schéma de QuizSubmission
+type ProcessedAnswer = {
+  question: number;
+  answer: string;
+  isCorrect: boolean;
+};
+
+export const submitHandler = async (req: ExtendedPayloadRequest, res: Response, next: NextFunction) => {
+  // 1. Vérifier l'authentification de l'utilisateur
   if (!req.user) {
-    return res.status(401).json({ error: 'Vous devez être connecté pour soumettre un quiz.' });
+    return res.status(401).json({ message: 'Non autorisé. Vous devez être connecté.' });
   }
 
   try {
-    // La seule manière robuste de typer req.params et req.body est une assertion locale
-    const { params, body } = req as unknown as {
-      params: { id: string };
-      body: { answers: { question: number; answer: number }[] };
-    };
-
-    const { id: quizId } = params;
-    const { answers: studentAnswers } = body;
+    const { id: quizId } = req.params;
+    const { answers: studentAnswers } = req.body as SubmitRequestBody;
 
     if (!quizId || !studentAnswers || !Array.isArray(studentAnswers)) {
-      return res.status(400).json({ error: 'Requête invalide. ID du quiz et réponses sont requis.' });
+      return res.status(400).json({ message: 'Requête invalide. ID du quiz et réponses sont requis.' });
     }
 
-    // Récupérer le quiz et utiliser une assertion de type pour informer TS de la structure attendue
-    const numericQuizId = parseInt(quizId, 10);
-    if (isNaN(numericQuizId)) {
-      return res.status(400).json({ error: 'L\'ID du quiz est invalide.' });
-    }
-
-    // Récupérer le quiz et utiliser une assertion de type pour informer TS de la structure attendue
+    // 2. Récupérer le quiz complet avec ses questions et options
     const quiz = await req.payload.findByID({
       collection: 'quizzes',
-      id: numericQuizId,
-      depth: 2,
+      id: quizId,
+      depth: 2, // Indispensable pour peupler les relations
     }) as PopulatedQuiz;
 
     if (!quiz || !quiz.questions || quiz.questions.length === 0) {
-      return res.status(404).json({ error: 'Quiz non trouvé ou ne contenant aucune question.' });
+      return res.status(404).json({ message: 'Quiz introuvable ou ne contenant aucune question.' });
     }
 
-    // Créer une map des bonnes réponses : Map<questionId, correctOptionId>
-    const correctAnswersMap = new Map<number, number>();
-    quiz.questions.forEach(question => {
-      const correctOption = question.options?.find(opt => opt.isCorrect);
-      if (question.id && correctOption?.id) {
-        // Conversion des IDs en nombres si nécessaire
-        const questionId = typeof question.id === 'string' ? parseInt(question.id, 10) : question.id;
-        const optionId = typeof correctOption.id === 'string' ? parseInt(correctOption.id, 10) : correctOption.id;
-        
-        // Vérifier que la conversion a réussi
-        if (!isNaN(questionId) && !isNaN(optionId)) {
-          correctAnswersMap.set(questionId, optionId);
-        }
-      }
-    });
-
+    // 3. Traiter les réponses, calculer le score et préparer les données
     let score = 0;
-    const processedAnswers = studentAnswers.map(ans => {
-      // S'assurer que les IDs des questions et réponses sont des nombres
-      const questionId = typeof ans.question === 'string' ? parseInt(ans.question, 10) : ans.question;
-      const answerId = typeof ans.answer === 'string' ? parseInt(ans.answer, 10) : ans.answer;
-      
-      // Vérifier si la réponse est correcte
-      const correctAnswer = correctAnswersMap.get(questionId);
-      const isCorrect = correctAnswer === answerId;
-      
+    const processedAnswers = studentAnswers.map((userAnswer): ProcessedAnswer | null => {
+      const questionIdAsNumber = parseInt(userAnswer.question, 10);
+      const studentAnswerId = userAnswer.answer;
+
+      // `quiz.questions` peut contenir des `number` ou des `Question`
+      const question = quiz.questions?.find(q => typeof q === 'object' && q.id === questionIdAsNumber) as Question | undefined;
+
+      if (!question || !question.options) {
+        return null; // Ignorer si la question n'est pas trouvée ou n'a pas d'options
+      }
+
+      const correctOption = question.options.find(opt => opt.isCorrect);
+      // Comparaison de chaînes de caractères pour éviter les erreurs de type
+      const isCorrect = correctOption ? String(correctOption.id) === String(studentAnswerId) : false;
+
       if (isCorrect) {
         score++;
       }
-      
-      return { question: questionId, answer: answerId, isCorrect };
-    });
 
-    const finalScore = (score / quiz.questions.length) * 100;
+      return {
+        question: questionIdAsNumber,
+        answer: studentAnswerId,
+        isCorrect,
+      };
+    }).filter((answer): answer is ProcessedAnswer => answer !== null); // Type guard pour filtrer les nuls
 
+    // 4. Calculer le score final
+    const finalScore = quiz.questions.length > 0 ? (score / quiz.questions.length) * 100 : 0;
+
+    // 5. Créer l'enregistrement de la soumission avec un typage strict
     const submissionData: Omit<QuizSubmission, 'id' | 'createdAt' | 'updatedAt'> = {
       quiz: quiz.id,
       student: req.user.id,
       submissionDate: new Date().toISOString(),
-      answers: processedAnswers,
+      answers: processedAnswers, // Ce tableau est maintenant correctement typé
       finalScore: Math.round(finalScore),
     };
 
-    await req.payload.create({
+    const submission = await req.payload.create({
       collection: 'quiz-submissions',
       data: submissionData,
     });
 
-    return res.status(200).json({ message: 'Quiz soumis avec succès!', score: Math.round(finalScore) });
+    // 6. Renvoyer une réponse de succès
+    return res.status(200).json({
+      message: 'Quiz soumis avec succès !',
+      submissionId: submission.id,
+      score: Math.round(finalScore),
+    });
 
   } catch (error) {
-    console.error('Erreur lors de la soumission du quiz :', error);
-    return next(error);
+    console.error('Erreur détaillée lors de la soumission du quiz :', error);
+    return res.status(500).json({ message: 'Une erreur interne est survenue lors de la soumission.' });
   }
 };

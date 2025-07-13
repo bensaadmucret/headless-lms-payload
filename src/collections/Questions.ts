@@ -74,5 +74,16 @@ export const Questions: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'category',
+      label: 'Catégorie',
+      type: 'relationship',
+      relationTo: 'categories',
+      hasMany: false,
+      required: true,
+      admin: {
+        position: 'sidebar',
+      },
+    },
   ],
 }

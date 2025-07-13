@@ -11,7 +11,7 @@ export const QuizSubmissions: CollectionConfig = {
     create: ({ req }) => !!req.user, // Seuls les utilisateurs connectés peuvent créer une soumission
     read: () => true, // Tout le monde peut lire les soumissions
     update: () => false, // Personne ne peut modifier une soumission
-    delete: () => false, // Personne ne peut supprimer une soumission
+    delete: ({ req }) => !!req.user?.admin, // Seuls les administrateurs peuvent supprimer une soumission
   },
   fields: [
     {
@@ -20,6 +20,15 @@ export const QuizSubmissions: CollectionConfig = {
       relationTo: 'quizzes',
       required: true,
       index: true,
+      // Configuration pour permettre la suppression en cascade
+      admin: {
+        allowCreate: false,
+      },
+      hooks: {
+        beforeChange: [({ req, value }) => {
+          return value;
+        }],
+      },
     },
     {
       name: 'student',

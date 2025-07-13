@@ -1,13 +1,70 @@
-import { CollectionConfig } from 'payload';
-import type { Request, Response, NextFunction } from 'express';
-import type { Question, Quiz, QuizSubmission, User } from '../payload-types';
+import type { CollectionConfig, PayloadRequest, PayloadHandler } from 'payload';
+
+// Définition des types pour les validateurs
+type FieldValidateFunction = (
+  value: unknown,
+  options: {
+    data: Record<string, unknown>;
+    id?: string | number;
+    operation?: 'create' | 'update';
+    req: Request;
+    siblingData: Record<string, unknown>;
+    user?: {
+      id: string;
+      email: string;
+      role: 'admin' | 'user' | 'superadmin';
+    };
+  }
+) => Promise<string | true> | string | boolean;
+
+// Extension de l'interface Request d'Express
+declare module 'express' {
+  interface Request {
+    user?: {
+      id: string;
+      role: 'admin' | 'user' | 'superadmin';
+    };
+    payload?: any;
+  }
+}
+
+// Types personnalisés pour une meilleure gestion des données
+type Quiz = {
+  id: string;
+  title: string;
+  description?: string;
+  questions: string[] | Question[];
+  course: string | { id: string; title: string };
+  published: boolean;
+  duration?: number;
+  passingScore?: number;
+  updatedAt: string;
+  createdAt: string;
+};
+
+type Question = {
+  id: string;
+  questionText: any; // RichText field
+  questionType: 'multipleChoice' | 'trueFalse' | 'shortAnswer';
+  options: {
+    id: string;
+    optionText: string;
+    isCorrect: boolean;
+  }[];
+  explanation: string;
+  course: string | { id: string; title: string };
+  category: string | { id: string; title: string };
+  updatedAt: string;
+  createdAt: string;
+};
 
 // Interface pour la requête de soumission de quiz
-interface QuizRequest extends Request {
-  user?: {
+interface QuizRequest extends PayloadRequest {
+  user: {
     id: string;
+    role: 'admin' | 'user' | 'superadmin';
   };
-  payload?: any;
+  payload: any;
   body: {
     answers: Array<{
       question: string;
@@ -21,6 +78,14 @@ interface QuizRequest extends Request {
 
 export const Quizzes: CollectionConfig = {
   slug: 'quizzes',
+  
+  // Configuration GraphQL
+  graphQL: {
+    pluralName: 'Quizzes',
+    singularName: 'Quiz',
+  },
+
+  // Configuration de l'interface d'administration
   admin: {
     useAsTitle: 'title',
   },
@@ -29,10 +94,17 @@ export const Quizzes: CollectionConfig = {
       // Les administrateurs peuvent tout voir
       if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
       
-      // Les utilisateurs authentifiés peuvent voir les quiz publiés
+      // Les utilisateurs authentifiés ne peuvent voir que les quiz publiés
       if (req.user) {
+        // Utilisation d'une clause OR pour une meilleure compatibilité
         return {
-          published: { equals: true }
+          or: [
+            {
+              published: {
+                equals: true,
+              },
+            },
+          ],
         };
       }
       
@@ -48,6 +120,15 @@ export const Quizzes: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      index: true, // Améliore les performances de recherche
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      required: false,
+      admin: {
+        description: 'Description détaillée du quiz',
+      },
     },
     {
       name: 'questions',
@@ -55,15 +136,27 @@ export const Quizzes: CollectionConfig = {
       relationTo: 'questions',
       hasMany: true,
       required: true,
+      minRows: 1,
+      admin: {
+        description: 'Sélectionnez les questions à inclure dans ce quiz',
+      },
+      // Validation personnalisée pour s'assurer que les questions sont présentes
+      validate: (value: unknown, { data, req, operation, id, siblingData }) => {
+        if (!value || (Array.isArray(value) && value.length === 0)) {
+          return 'Au moins une question est requise';
+        }
+        return true;
+      },
     },
     {
       name: 'course',
       type: 'relationship',
       relationTo: 'courses',
-      required: true,
+      required: false,
       hasMany: false,
       admin: {
         position: 'sidebar',
+        description: 'Cours auquel ce quiz est associé (optionnel)',
       },
     },
     {
@@ -71,19 +164,48 @@ export const Quizzes: CollectionConfig = {
       type: 'checkbox',
       label: 'Publié',
       defaultValue: false,
+      admin: {
+        description: 'Définir si le quiz est visible pour les utilisateurs',
+      },
+    },
+    {
+      name: 'duration',
+      type: 'number',
+      label: 'Durée (en minutes)',
+      required: false,
+      admin: {
+        description: 'Durée estimée pour terminer le quiz (en minutes)',
+      },
+      min: 1,
+    },
+    {
+      name: 'passingScore',
+      type: 'number',
+      label: 'Score de réussite (%)',
+      required: false,
+      defaultValue: 70,
+      admin: {
+        description: 'Score minimum requis pour réussir le quiz (en pourcentage)',
+      },
+      min: 0,
+      max: 100,
     },
   ],
+  // Configuration des endpoints personnalisés
   endpoints: [
+    // Endpoint pour soumettre un quiz
     {
       path: '/:id/submit',
       method: 'post',
-      // @ts-ignore - Ignorer l'erreur de compatibilité avec PayloadHandler
-      handler: async (req, res, next) => {
-        // Cast explicite pour accéder aux propriétés
-        const typedReq = req as QuizRequest;
+      handler: async (req) => {
+        const typedReq = req as unknown as QuizRequest;
         
+        // Vérifier l'authentification
         if (!typedReq.user) {
-          return res.status(401).json({ message: 'Unauthorized' });
+          return new Response(
+            JSON.stringify({ message: 'Non autorisé' }),
+            { status: 401, headers: { 'Content-Type': 'application/json' } }
+          );
         }
 
         try {
@@ -91,64 +213,93 @@ export const Quizzes: CollectionConfig = {
           const quiz = await typedReq.payload.findByID({
             collection: 'quizzes',
             id: quizId,
-            depth: 2, // To populate questions
+            depth: 2, // Pour peupler les questions
           }) as Quiz;
 
           if (!quiz) {
-            return res.status(404).json({ message: 'Quiz not found' });
+            return new Response(
+              JSON.stringify({ message: 'Quiz non trouvé' }),
+              { status: 404, headers: { 'Content-Type': 'application/json' } }
+            );
           }
 
-          // Validate answers
+          // Valider les réponses
           let score = 0;
-          const totalQuestions = quiz.questions?.length || 0;
-          const results = [];
+          const totalQuestions = Array.isArray(quiz.questions) ? quiz.questions.length : 0;
+          const results: Array<{
+            question: string;
+            userAnswer: string;
+            correctAnswer?: string;
+            isCorrect: boolean;
+          }> = [];
 
-          for (const userAnswer of typedReq.body.answers) {
-            // Assurer la compatibilité des types lors de la comparaison
-            const question = (quiz.questions as Question[]).find(q => String(q.id) === String(userAnswer.question));
-            
-            if (!question) {
-              continue;
+          if (typedReq.body.answers && Array.isArray(typedReq.body.answers)) {
+            for (const userAnswer of typedReq.body.answers) {
+              if (!quiz.questions || !Array.isArray(quiz.questions)) continue;
+              
+              // Trouver la question correspondante
+              const question = quiz.questions.find(q => 
+                q && typeof q === 'object' && 'id' in q && String(q.id) === String(userAnswer.question)
+              ) as Question | undefined;
+              
+              if (!question) continue;
+
+              // Trouver l'option correcte
+              const correctOption = question.options?.find(opt => opt.isCorrect);
+              const isCorrect = correctOption && userAnswer.answer === String(correctOption.id);
+              
+              if (isCorrect) {
+                score++;
+              }
+
+              results.push({
+                question: typeof question === 'string' ? question : question.id,
+                userAnswer: userAnswer.answer,
+                correctAnswer: correctOption?.id,
+                isCorrect: Boolean(isCorrect),
+              });
             }
-
-            const correctOption = question.options?.find(opt => opt.isCorrect);
-            // Assurer la compatibilité des types lors de la comparaison
-            const isCorrect = correctOption && userAnswer.answer === String(correctOption.id);
-            
-            if (isCorrect) {
-              score++;
-            }
-
-            results.push({
-              question: question.id,
-              userAnswer: userAnswer.answer,
-              correctAnswer: correctOption?.id,
-              isCorrect,
-            });
           }
 
-          // Create quiz submission
+          // Calculer le score en pourcentage
+          const scorePercentage = totalQuestions > 0 ? Math.round((score / totalQuestions) * 100) : 0;
+
+          // Créer la soumission du quiz
           const submission = await typedReq.payload.create({
             collection: 'quiz-submissions',
             data: {
               quiz: quiz.id,
-              user: typedReq.user?.id,
-              score,
-              totalQuestions,
-              results,
+              student: typedReq.user.id,
+              submissionDate: new Date().toISOString(),
+              answers: results.map(r => ({
+                question: r.question,
+                answer: r.userAnswer,
+                isCorrect: r.isCorrect
+              })),
+              finalScore: scorePercentage,
             },
           });
 
-          return res.status(200).json({
-            message: 'Quiz submitted successfully',
-            score,
-            totalQuestions,
-            results,
-            submissionId: submission.id,
-          });
+          return new Response(
+            JSON.stringify({
+              message: 'Quiz soumis avec succès',
+              score,
+              totalQuestions,
+              scorePercentage,
+              results,
+              submissionId: submission.id,
+            }),
+            { status: 200, headers: { 'Content-Type': 'application/json' } }
+          );
         } catch (error) {
-          console.error('Error submitting quiz:', error);
-          return res.status(500).json({ message: 'Error submitting quiz' });
+          console.error('Erreur lors de la soumission du quiz :', error);
+          return new Response(
+            JSON.stringify({ 
+              message: 'Erreur lors de la soumission du quiz',
+              error: error instanceof Error ? error.message : 'Erreur inconnue'
+            }),
+            { status: 500, headers: { 'Content-Type': 'application/json' } }
+          );
         }
       },
     },
