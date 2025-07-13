@@ -12,7 +12,7 @@ describe('Quizzes API', () => {
     payload = await getTestPayloadClient();
     // Use the fixed base URL set in server.ts
     serverURL = process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000';
-  });
+  }, 30000);
 
   describe('Quiz Submission Endpoint', () => {
     it('should return 400 for an incorrect answer', async () => {
@@ -43,10 +43,21 @@ describe('Quizzes API', () => {
         },
       });
 
-      // 3. Create a Question
+      // 3. Create a Category for the question
+      const category = await payload.create({
+        collection: 'categories',
+        data: {
+          title: 'General Knowledge', // Correction: use 'title' instead of 'name'
+        },
+      });
+
+      // 4. Create a Question
       const question = await payload.create({
         collection: 'questions',
         data: {
+          // All required fields are now provided
+          category: category.id,
+          difficultyLevel: 'pass', // Added required field
           questionText: {
             root: {
               children: [
@@ -78,31 +89,8 @@ describe('Quizzes API', () => {
             { optionText: '4', isCorrect: true },
             { optionText: '5', isCorrect: false },
           ],
-          explanation: {
-            root: {
-              children: [
-                {
-                  children: [
-                    {
-                      text: 'Because 2+2 equals 4.',
-                      type: 'text',
-                      version: 1,
-                    },
-                  ],
-                  direction: 'ltr',
-                  format: '',
-                  indent: 0,
-                  type: 'paragraph',
-                  version: 1,
-                },
-              ],
-              direction: 'ltr',
-              format: '',
-              indent: 0,
-              type: 'root',
-              version: 1,
-            },
-          },
+          // Correction: 'explanation' is a 'textarea' (string), not a richText object
+          explanation: 'Because 2+2 equals 4.',
           course: course.id,
         },
       });

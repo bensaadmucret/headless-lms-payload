@@ -32,6 +32,31 @@ export const getTestPayloadClient = async () => {
 
 
 
+  // Connect to the database and clear all data
+  // This ensures that each test run starts with a clean slate
+  const pg = await import('pg');
+  const pool = new pg.Pool({
+    connectionString: process.env.PAYLOAD_TEST_DATABASE_URI,
+  });
+
+  const db = await pool.connect();
+  try {
+    const { rows: tables } = await db.query(`
+      SELECT tablename FROM pg_tables WHERE schemaname = 'public';
+    `);
+
+    // This is a critical step to prevent test failures due to schema mismatches or stale data.
+    // It iterates through all tables and truncates them, effectively resetting the database.
+    // The 'RESTART IDENTITY CASCADE' clause also resets auto-incrementing counters and cascades the truncation to related tables.
+    for (const { tablename } of tables) {
+      if (tablename.startsWith('_')) continue; // Skip Payload's internal tables
+      await db.query(`TRUNCATE TABLE \"${tablename}\" RESTART IDENTITY CASCADE;`);
+    }
+  } finally {
+    db.release();
+    await pool.end();
+  }
+
   const client = await payload.init({
     config: resolvedConfig,
   });
