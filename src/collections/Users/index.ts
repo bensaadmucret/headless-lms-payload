@@ -44,7 +44,8 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
   },
   auth: {
-    tokenExpiration: 7200, // 2 heures en secondes
+    tokenExpiration: 7200,
+    useAPIKey: true, // 2 heures en secondes
     // maxLoginAttempts: 5, // Désactivé pour le développement
     // lockTime: 600 * 1000, // Désactivé pour le développement
   },
