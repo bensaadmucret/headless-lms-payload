@@ -116,6 +116,26 @@ export const Quizzes: CollectionConfig = {
       index: true, // Améliore les performances de recherche
     },
     {
+      name: 'quizType',
+      label: 'Type de Quiz',
+      type: 'select',
+      defaultValue: 'standard',
+      options: [
+        {
+          label: 'Quiz Standard',
+          value: 'standard',
+        },
+        {
+          label: 'Quiz de Positionnement',
+          value: 'placement',
+        },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: "Définit le rôle de ce quiz dans le parcours de l'étudiant.",
+      },
+    },
+    {
       name: 'description',
       type: 'textarea',
       required: false,
