@@ -1,45 +1,12 @@
-import { PayloadRequest as BasePayloadRequest } from 'payload';
-import { Response as ExpressResponse } from 'express';
-import { StudySession } from '../payload-types';
+import payload from 'payload';
 
-// Types pour les endpoints Payload CMS
-type Endpoint = {
-  path: string;
-  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
-  handler: (req: PayloadRequest, res: Response, next: NextFunction) => Promise<void>;
-};
-
-// Extension du type PayloadRequest de Payload
-export interface PayloadRequest extends BasePayloadRequest {
-  headers: BasePayloadRequest['headers'];
+// Types locaux pour le handler, basés sur les conventions du projet
+type PayloadRequest = {
   user?: {
     id: string | number;
     email: string;
     collection: string;
     [key: string]: unknown;
-  };
-  payload: {
-    find: (args: {
-      collection: string;
-      where: Record<string, unknown>;
-      limit?: number;
-      depth?: number;
-      sort?: string;
-    }) => Promise<{ docs: StudySession[] }>;
-    create: (args: {
-      collection: string;
-      data: Record<string, unknown>;
-    }) => Promise<StudySession>;
-    update: (args: {
-      collection: string;
-      id: string | number;
-      data: Record<string, unknown>;
-    }) => Promise<StudySession>;
-    findByID: (args: {
-      collection: string;
-      id: string | number;
-      depth?: number;
-    }) => Promise<StudySession>;
   };
   params: Record<string, string>;
   query: {
@@ -47,25 +14,22 @@ export interface PayloadRequest extends BasePayloadRequest {
     [key: string]: unknown;
   };
   body: unknown;
-}
-
-// Types pour les réponses Express
-type Response = ExpressResponse & {
-  status: (code: number) => Response;
-  json: (data: unknown) => Response;
-  send: (data: unknown) => Response;
+  headers: any;
 };
 
-type NextFunction = (error?: Error) => void;
+type Response = {
+  status: (code: number) => Response;
+  json: (data: any) => void;
+};
 
 /**
  * Endpoint simplifié pour la session quotidienne
  * Cette version contourne la logique complexe et se concentre sur les opérations de base
  */
-export const simpleDailySessionEndpoint: Endpoint = {
+export const simpleDailySessionEndpoint = {
   path: '/api/study-sessions/simple-daily',
-  method: 'get',
-  handler: async (req: PayloadRequest, res: Response, next: NextFunction): Promise<void> => {
+  method: 'get' as const,
+  handler: async (req: PayloadRequest, res: Response) => {
     console.log('[simpleDailySession] --- Début du handler ---');
     try {
       // Vérification de l'authentification
@@ -139,7 +103,7 @@ export const simpleDailySessionEndpoint: Endpoint = {
       // Recherche d'une session active existante
       let response, session;
       try {
-        response = await req.payload.find({
+        response = await payload.find({
           collection: 'study-sessions',
           where: {
             user: {
@@ -184,13 +148,13 @@ export const simpleDailySessionEndpoint: Endpoint = {
           day: 'numeric',
         })}`;
         
-        const newSessionData = {
-          user: userIdSafe,
+        const newSessionData: any = {
+          user: typeof userIdSafe === 'string' ? parseInt(userIdSafe, 10) : userIdSafe,
           title,
-          status: 'active',
+          status: 'in-progress',
           context: {
             isDailySession: true,
-            difficulty: 'beginner',
+            difficulty: 'beginner' as const,
             date: today.toISOString(),
             expiresAt: new Date(today.getTime() + 24 * 60 * 60 * 1000).toISOString()
           },
@@ -206,7 +170,7 @@ export const simpleDailySessionEndpoint: Endpoint = {
         // Création de la session dans la base de données
         let newSession;
         try {
-          newSession = await req.payload.create({
+          newSession = await payload.create({
             collection: 'study-sessions',
             data: newSessionData
           });
@@ -265,6 +229,5 @@ export const simpleDailySessionEndpoint: Endpoint = {
         }
       });
     }
-    console.log('[simpleDailySession] --- Fin du handler ---');
   },
 };

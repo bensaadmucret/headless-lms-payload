@@ -14,6 +14,8 @@ import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
+import { onboardUserEndpoint } from './endpoints/onboardUser';
+import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
 import updateDailySessionHandler from './endpoints/updateDailySession'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
@@ -37,12 +39,12 @@ import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
 import { defaultLexical } from '@/fields/defaultLexical'
-import { getServerSideURL } from './utilities/getURL'
 import { Categories } from './collections/Categories'
 import { SubscriptionPlans } from './collections/SubscriptionPlans'
 import { Tenants } from './collections/Tenants'
 import Conversations from './collections/Conversations'
 import { SystemMetrics } from './collections/SystemMetrics'
+import { Subscriptions } from './collections/Subscriptions'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -101,6 +103,7 @@ export default buildConfig({
     Posts,
     Media,
     Users,
+    Subscriptions,
     Categories,
     Courses,
     Lessons,
@@ -142,6 +145,8 @@ export default buildConfig({
         performanceAnalysisEndpoint,
     generateAdaptiveQuizEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
+    onboardUserEndpoint,
+    getPlacementQuizEndpoint,
     {
       path: '/study-sessions/:id/update-with-answers',
       method: 'patch',

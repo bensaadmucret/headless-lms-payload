@@ -71,6 +71,7 @@ export interface Config {
     posts: Post;
     media: Media;
     users: User;
+    subscriptions: Subscription;
     categories: Category;
     courses: Course;
     lessons: Lesson;
@@ -103,6 +104,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
@@ -427,6 +429,9 @@ export interface User {
   role: 'superadmin' | 'admin' | 'teacher' | 'student';
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -807,6 +812,87 @@ export interface Form {
   createdAt: string;
 }
 /**
+ * Instances d’abonnements (Paddle) rattachées aux utilisateurs.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions".
+ */
+export interface Subscription {
+  id: number;
+  user: number | User;
+  provider: 'paddle';
+  /**
+   * Identifiant client Paddle (customer_id)
+   */
+  customerId?: string | null;
+  /**
+   * Identifiant d’abonnement (subscription_id) unique
+   */
+  subscriptionId: string;
+  productId?: string | null;
+  priceId?: string | null;
+  status: 'trialing' | 'active' | 'past_due' | 'canceled';
+  /**
+   * Fin de période d’essai
+   */
+  trialEnd?: string | null;
+  /**
+   * Fin de la période de facturation en cours
+   */
+  currentPeriodEnd?: string | null;
+  /**
+   * Annulation à la fin de la période en cours
+   */
+  cancelAtPeriodEnd?: boolean | null;
+  lastPaymentAt?: string | null;
+  /**
+   * Montant en plus petite unité (ex: centimes)
+   */
+  amount?: number | null;
+  currency?: string | null;
+  /**
+   * Historique des événements Paddle liés à cet abonnement
+   */
+  history?:
+    | {
+        type:
+          | 'subscription_created'
+          | 'payment_succeeded'
+          | 'subscription_updated'
+          | 'payment_failed'
+          | 'subscription_canceled';
+        occurredAt: string;
+        /**
+         * Payload d’événement (sanitisé/tronqué si nécessaire)
+         */
+        raw?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Clés/valeurs additionnelles (optionnel)
+   */
+  metadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "courses".
  */
@@ -894,6 +980,10 @@ export interface Prerequisite {
 export interface Quiz {
   id: number;
   title: string;
+  /**
+   * Définit le rôle de ce quiz dans le parcours de l'étudiant.
+   */
+  quizType?: ('standard' | 'placement') | null;
   /**
    * Description détaillée du quiz
    */
@@ -1436,6 +1526,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'subscriptions';
+        value: number | Subscription;
+      } | null)
+    | ({
         relationTo: 'categories';
         value: number | Category;
       } | null)
@@ -1846,6 +1940,9 @@ export interface UsersSelect<T extends boolean = true> {
   role?: T;
   updatedAt?: T;
   createdAt?: T;
+  enableAPIKey?: T;
+  apiKey?: T;
+  apiKeyIndex?: T;
   email?: T;
   resetPasswordToken?: T;
   resetPasswordExpiration?: T;
@@ -1860,6 +1957,36 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions_select".
+ */
+export interface SubscriptionsSelect<T extends boolean = true> {
+  user?: T;
+  provider?: T;
+  customerId?: T;
+  subscriptionId?: T;
+  productId?: T;
+  priceId?: T;
+  status?: T;
+  trialEnd?: T;
+  currentPeriodEnd?: T;
+  cancelAtPeriodEnd?: T;
+  lastPaymentAt?: T;
+  amount?: T;
+  currency?: T;
+  history?:
+    | T
+    | {
+        type?: T;
+        occurredAt?: T;
+        raw?: T;
+        id?: T;
+      };
+  metadata?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1949,6 +2076,7 @@ export interface PrerequisitesSelect<T extends boolean = true> {
  */
 export interface QuizzesSelect<T extends boolean = true> {
   title?: T;
+  quizType?: T;
   description?: T;
   questions?: T;
   course?: T;
