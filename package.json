@@ -27,7 +27,6 @@
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
     "docker:dev": "docker-compose up -d && npm run dev",
-    "test:redis": "cross-env TS_NODE_PROJECT=tsconfig.node.json NODE_OPTIONS=--no-deprecation node --loader ts-node/esm --experimental-specifier-resolution=node src/jobs/testRedis.ts",
     "seed:placement-quiz": "node scripts/seed-placement-quiz.cjs"
   },
   "dependencies": {

@@ -11,7 +11,7 @@
 
 import 'dotenv/config'
 import { startExtractionWorker } from '../jobs/workers/extractionWorker'
-import { getAllQueueStats, closeAllQueues, initQueueLifecycle } from '../jobs/queue'
+import { closeAllQueues, initQueueLifecycle } from '../jobs/queue'
 
 async function main() {
   console.log('🚀 Démarrage des workers de traitement de documents...')
@@ -50,7 +50,7 @@ async function main() {
         if (totalWaiting > 0 || totalActive > 0) {
           console.log(`\n📈 Stats queues: ${totalWaiting} en attente, ${totalActive} en traitement, ${totalCompleted} terminés`)
         }
-      } catch (error) {
+      } catch (_error) {
         // Silently ignore stats errors
       }
     }, 30000) // Toutes les 30 secondes

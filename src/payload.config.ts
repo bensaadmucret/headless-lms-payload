@@ -5,7 +5,7 @@ import 'dotenv/config'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
-import { buildConfig, PayloadRequest } from 'payload'
+import { buildConfig } from 'payload'
 import { diagnosticsEndpoint } from './endpoints/diagnostics'
 import { studentQuizzesEndpoint } from './endpoints/studentQuizzes'
 import { generateSessionStepsEndpoint } from './endpoints/generateSessionSteps'
@@ -22,10 +22,7 @@ import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz'
 import updateDailySessionHandler from './endpoints/updateDailySession'
 import { uploadDocumentEndpoint, getProcessingStatusEndpoint, reprocessDocumentEndpoint } from './endpoints/uploadDocument'
 import { extractNowEndpoint } from './endpoints/extractNow'
-// import { testKnowledgeBaseEndpoint } from './endpoints/testKnowledgeBase'
 import { uploadDocumentSimpleEndpoint } from './endpoints/uploadDocumentSimple'
-import { testSimpleEndpoint } from './endpoints/testSimple'
-import { uploadTestEndpoint } from './endpoints/uploadTest'
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
@@ -149,16 +146,6 @@ export default buildConfig({
   },
   endpoints: [
     // === ENDPOINTS KNOWLEDGE BASE ===
-    {
-      path: '/test-direct',
-      method: 'get',
-      handler: async (req) => {
-        return Response.json({ direct: true, time: new Date().toISOString() })
-      }
-    },
-    testSimpleEndpoint,
-    uploadTestEndpoint,
-    // testKnowledgeBaseEndpoint,
     uploadDocumentSimpleEndpoint,
     // Endpoints asynchrones pour le traitement de documents
     uploadDocumentEndpoint,

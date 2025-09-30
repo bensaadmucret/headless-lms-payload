@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, Content, Part, GenerationConfig } from '@google/generative-ai';
+import { GoogleGenerativeAI, Content, GenerationConfig } from '@google/generative-ai';
 import { Message } from '../types/studySession';
 
 interface AIConfig {

@@ -5,7 +5,7 @@
 import Queue from 'bull'
 import type { Queue as BullQueue } from 'bull'
 import IORedis from 'ioredis'
-import type { JobData, QueueConfig, JobOptions } from './types'
+import type { JobData, JobOptions } from './types'
 
 // Configuration Redis simplifiée (fix pour Bull 4.x)
 const redisUrl = process.env.REDIS_URL || 'redis://localhost:6379'

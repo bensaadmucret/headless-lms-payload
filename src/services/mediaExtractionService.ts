@@ -45,7 +45,7 @@ export async function triggerContentExtraction(
   req: PayloadRequest
 ): Promise<void> {
   try {
-    const { id, mimeType, filename, filesize } = mediaDocument
+    const { mimeType, filename, filesize } = mediaDocument
 
     // Vérifier si l'extraction est supportée
     if (!mimeType || !canExtractContent(mimeType)) {
@@ -58,7 +58,6 @@ export async function triggerContentExtraction(
     console.log(`🚀 [MediaExtraction] Starting extraction for ${filename} (${extractionType})`)
 
     // Construire l'URL du fichier
-    const fileUrl = `/api/media/file/${filename}`
     const fullFilePath = path.join(process.cwd(), 'public/media', filename || '')
 
     // Si c'est un PDF et qu'il est petit, on peut faire l'extraction en direct

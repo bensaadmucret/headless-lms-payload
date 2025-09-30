@@ -28,7 +28,7 @@ const WORKER_CONFIG = {
  * Processer l'extraction d'un document
  */
 export async function processExtractionJob(job: Job<ExtractionJob>): Promise<ExtractionResult> {
-  const { documentId, fileType, sourceFileId, sourceFileUrl, userId, collectionType = 'knowledge-base' } = job.data
+  const { documentId, fileType, sourceFileUrl, collectionType = 'knowledge-base' } = job.data
   
   console.log(`🔍 [Extraction] Starting extraction for document ${documentId} (${fileType})`)
   
@@ -250,7 +250,8 @@ export function startExtractionWorker() {
   
   // Event handlers spécifiques au worker
   extractionQueue.on('completed', (job) => {
-    console.log(`✅ [ExtractionWorker] Job ${job.id} completed in ${Date.now() - job.processedOn}ms`)
+    const duration = job.processedOn ? Date.now() - job.processedOn : 'unknown'
+    console.log(`✅ [ExtractionWorker] Job ${job.id} completed in ${duration}ms`)
   })
   
   extractionQueue.on('failed', (job, err) => {

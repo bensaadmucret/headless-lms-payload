@@ -1,5 +1,5 @@
 import { AIService } from './AIService';
-import type { StudySession, User, Course, Question } from '../payload-types';
+import type { StudySession, User, Course } from '../payload-types';
 import type {
   StudySessionStep,
   StudySessionOptions,
@@ -33,7 +33,6 @@ interface PayloadService {
 }
 
 // Types personnalisés pour une meilleure maintenabilité
-type SessionStatus = 'draft' | 'in-progress' | 'completed' | 'cancelled';
 type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced';
 
 // Interface pour les options de création de session
@@ -57,12 +56,6 @@ export interface StudySessionErrorOptions {
   [key: string]: any;
 }
 
-// Interface pour le contexte de la session
-type SessionContext = {
-  course?: number | Course | null;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced' | null;
-  estimatedDuration?: number | null;
-};
 
 // Classe d'erreur personnalisée pour les erreurs de session
 export class StudySessionError extends Error {

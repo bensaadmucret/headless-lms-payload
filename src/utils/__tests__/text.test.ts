@@ -4,9 +4,7 @@ import {
   countWords,
   detectLanguage,
   extractTitle,
-  extractChapters,
   cleanPdfText,
-  cleanDocxText,
   cleanEpubContent
 } from '../text'
 

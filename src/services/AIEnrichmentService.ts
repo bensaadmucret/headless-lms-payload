@@ -332,7 +332,7 @@ JSON:`
   /**
    * Crée un enrichissement de fallback
    */
-  private createFallbackEnrichment(content: string, title?: string): EnrichmentResult {
+  private createFallbackEnrichment(content: string, _title?: string): EnrichmentResult {
     console.log('🔄 Utilisation du fallback d\'enrichissement')
     
     return {

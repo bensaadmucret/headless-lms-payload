@@ -151,7 +151,7 @@ export class ContentExtractionService {
   /**
    * Divise le contenu en chapitres logiques
    */
-  async chunkContent(content: string, documentType: 'pdf' | 'epub' | 'docx'): Promise<Chapter[]> {
+  async chunkContent(content: string, _documentType: 'pdf' | 'epub' | 'docx'): Promise<Chapter[]> {
     try {
       console.log('🔪 Début découpage en chapitres...')
       

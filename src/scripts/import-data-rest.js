@@ -197,7 +197,7 @@ async function importData() {
         try {
           const qText = q.questionText?.root?.children[0]?.children[0]?.text || '';
           return qText.trim().toLowerCase().startsWith(question.questionText.trim().toLowerCase().substring(0, 30));
-        } catch (e) {
+        } catch (_e) {
           return false;
         }
       });
@@ -281,13 +281,12 @@ async function importData() {
         console.log(`✅ Question créée: "${question.questionText.substring(0, 30)}..."`);
         questionDocs.push(newQuestion);
       } catch (error) {
-        console.error(`❌ Erreur lors de la création de la question "${question.questionText.substring(0, 30)}...":`, error.message);
+        console.error(`❌ Erreur lors de la création de la question "${question.questionText.substring(0, 30)}...": ${error.message}`);
       }
     }
     
     // 4. Import des quizzes
     console.log('\n📝 ÉTAPE 4: Import des quizzes...');
-    
     for (const quiz of jsonData.quizzes) {
       // Recherche du cours correspondant
       const courseDoc = courseDocs.find(c => c?.title === quiz.courseTitle);
@@ -347,7 +346,7 @@ async function importData() {
               
               // On vérifie une correspondance exacte des textes normalisés
               return normalizedQuestionText === normalizedSearchText;
-            } catch (e) {
+            } catch (_e) {
               return false;
             }
           });
