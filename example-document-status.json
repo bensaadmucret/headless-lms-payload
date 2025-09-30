@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "data": {
+    "id": "67890abcd",
+    "title": "Anatomie du Coeur - Chapitre 5",
+    "fileName": "anatomie-coeur.pdf",
+    "documentType": "pdf",
+    
+    "processingStatus": "enriching",
+    "validationStatus": "pending",
+    "isActive": false,
+    "uploadedAt": "2025-01-27T10:30:00Z",
+    "lastProcessed": "2025-01-27T10:32:15Z",
+    
+    "extraction": {
+      "hasContent": true,
+      "textLength": 15420,
+      "chaptersCount": 3
+    },
+    
+    "enrichment": {
+      "hasKeywords": false,
+      "keywordsCount": 0,
+      "medicalDomain": "autre",
+      "hasSummary": false
+    },
+    
+    "queueStatus": {
+      "status": "enriching",
+      "progress": 65,
+      "queuePosition": null,
+      "jobId": "enrich-67890-1234567890",
+      "estimatedTimeRemaining": "3 minutes"
+    },
+    
+    "progress": 65
+  }
+}

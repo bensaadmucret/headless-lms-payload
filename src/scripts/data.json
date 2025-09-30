@@ -1,0 +1,807 @@
+{
+  "courses": [
+    {
+      "title": "Module de Base - Année 1",
+      "description": "Ce module couvre les fondamentaux de la première année de médecine.",
+      "level": "beginner"
+    }
+  ],
+  "categories": [
+    {
+      "title": "Cardiologie"
+    },
+    {
+      "title": "Pneumologie"
+    },
+    {
+      "title": "Neurologie"
+    },
+    {
+      "title": "Gastro-entérologie"
+    }
+  ],
+  "questions": [
+    {
+      "questionText": "Quelle est la cause la plus fréquente de l'infarctus du myocarde ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Une rupture de plaque d'athérome",
+          "isCorrect": true
+        },
+        {
+          "text": "Une embolie pulmonaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Une péricardite",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'infarctus est le plus souvent dû à la formation d'un thrombus sur une plaque d'athérome rompue dans une artère coronaire."
+    },
+    {
+      "questionText": "Quel est le principal symptôme de l'asthme ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Une toux sèche",
+          "isCorrect": false
+        },
+        {
+          "text": "Une dyspnée sifflante (wheezing)",
+          "isCorrect": true
+        },
+        {
+          "text": "Des douleurs thoraciques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La dyspnée sifflante est caractéristique de la bronchoconstriction observée dans l'asthme."
+    },
+    {
+      "questionText": "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "La dopamine",
+          "isCorrect": true
+        },
+        {
+          "text": "La sérotonine",
+          "isCorrect": false
+        },
+        {
+          "text": "L'acétylcholine",
+          "isCorrect": false
+        },
+        {
+          "text": "Le glutamate",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La maladie de Parkinson est caractérisée par une dégénérescence des neurones dopaminergiques de la substance noire, entraînant un déficit en dopamine."
+    },
+    {
+      "questionText": "Quelle est la principale fonction des valves cardiaques ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Empêcher le reflux sanguin",
+          "isCorrect": true
+        },
+        {
+          "text": "Oxygéner le sang",
+          "isCorrect": false
+        },
+        {
+          "text": "Réguler la fréquence cardiaque",
+          "isCorrect": false
+        },
+        {
+          "text": "Filtrer les impuretés du sang",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les valves cardiaques sont des structures qui s'ouvrent et se ferment pour permettre au sang de circuler dans une seule direction à travers le cœur."
+    },
+    {
+      "questionText": "Quel est le volume courant normal d'un adulte au repos ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "500 ml",
+          "isCorrect": true
+        },
+        {
+          "text": "100 ml",
+          "isCorrect": false
+        },
+        {
+          "text": "1500 ml",
+          "isCorrect": false
+        },
+        {
+          "text": "3000 ml",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le volume courant est le volume d'air inspiré ou expiré lors d'une respiration normale. Chez l'adulte, il est d'environ 500 ml."
+    },
+    {
+      "questionText": "Quelle structure cérébrale est principalement impliquée dans la formation de nouveaux souvenirs ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "L'hippocampe",
+          "isCorrect": true
+        },
+        {
+          "text": "Le cervelet",
+          "isCorrect": false
+        },
+        {
+          "text": "Le thalamus",
+          "isCorrect": false
+        },
+        {
+          "text": "Le corps calleux",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hippocampe joue un rôle crucial dans la formation de la mémoire à long terme et la consolidation des informations de la mémoire à court terme vers la mémoire à long terme."
+    },
+    {
+      "questionText": "Quel est le principal facteur de risque de l'athérosclérose coronarienne ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Hypertension artérielle",
+          "isCorrect": true
+        },
+        {
+          "text": "Anémie",
+          "isCorrect": false
+        },
+        {
+          "text": "Hypothyroïdie",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hypertension artérielle est un facteur majeur favorisant l'athérosclérose, qui peut aboutir à une maladie coronaire."
+    },
+    {
+      "questionText": "Quel mécanisme explique la douleur angineuse ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Ischémie myocardique relative",
+          "isCorrect": true
+        },
+        {
+          "text": "Péricardite aiguë",
+          "isCorrect": false
+        },
+        {
+          "text": "Insuffisance cardiaque droite",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La douleur angineuse survient lorsque la demande en oxygène du cœur dépasse sa perfusion coronarienne."
+    },
+    {
+      "questionText": "Quel est le signe clinique principal de l'insuffisance cardiaque gauche ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Tachycardie",
+          "isCorrect": false
+        },
+        {
+          "text": "Dyspnée d’effort",
+          "isCorrect": true
+        },
+        {
+          "text": "Oedèmes périphériques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La dyspnée d’effort est due à l'augmentation de la pression capillaire pulmonaire secondaire à une altération de la fonction ventriculaire gauche."
+    },
+    {
+      "questionText": "Quelle valve cardiaque est impliquée dans le souffle systolique de l'insuffisance mitrale ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Valve mitrale",
+          "isCorrect": true
+        },
+        {
+          "text": "Valve aortique",
+          "isCorrect": false
+        },
+        {
+          "text": "Valve tricuspide",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuffisance mitrale se traduit par un reflux sanguin au moment de la systole ventriculaire à travers la valve mitrale."
+    },
+    {
+      "questionText": "Quel est le traitement de choix en cas d'infarctus aigu du myocarde avec sus-décalage du segment ST (STEMI) ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Cardiologie",
+      "options": [
+        {
+          "text": "Fibrinolyse",
+          "isCorrect": false
+        },
+        {
+          "text": "Angioplastie primaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Beta-bloquant seul",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'angioplastie primaire est le traitement de référence en cas de STEMI, permettant une recanalisation rapide de l'artère responsable."
+    },
+    {
+      "questionText": "Quel est le principal gaz mesuré lors de la spirométrie ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Oxygène",
+          "isCorrect": false
+        },
+        {
+          "text": "Dioxyde de carbone",
+          "isCorrect": false
+        },
+        {
+          "text": "Volume expiratoire maximal",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "La spirométrie mesure les volumes expiratoires, notamment le VEMS (volume expiratoire maximal seconde)."
+    },
+    {
+      "questionText": "Quel type d’hypertension artérielle pulmonaire est le plus fréquent ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Primaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Secondaire à une BPCO",
+          "isCorrect": true
+        },
+        {
+          "text": "Idiopathique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hypertension pulmonaire liée à la BPCO est la forme la plus courante d'hypertension artérielle pulmonaire."
+    },
+    {
+      "questionText": "Quel est le signe radiologique typique d’un pneumothorax ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Opacité alvéolaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Disparition du dessin vasculaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Bourgeons de fleurs de tilleul",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Sur la radiographie thoracique, un pneumothorax se caractérise par une absence totale de dessin vasculaire dans la zone affectée."
+    },
+    {
+      "questionText": "Quel virus est le plus souvent responsable des bronchiolites chez le nourrisson ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Virus respiratoire syncytial (VRS)",
+          "isCorrect": true
+        },
+        {
+          "text": "Rhinovirus",
+          "isCorrect": false
+        },
+        {
+          "text": "Adénovirus",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le virus respiratoire syncytial (VRS) est la cause principale des bronchiolites aiguës du nourrisson."
+    },
+    {
+      "questionText": "Quel est le principal facteur déclenchant d’une crise d’asthme aiguë ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Pneumologie",
+      "options": [
+        {
+          "text": "Exercice physique intense",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection virale des voies respiratoires",
+          "isCorrect": true
+        },
+        {
+          "text": "Pollution atmosphérique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les infections virales des voies respiratoires supérieures sont la cause la plus fréquente des exacerbations asthmatiques."
+    },
+    {
+      "questionText": "Quel est le symptôme moteur principal de la sclérose en plaques ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "Céphalées pulsatile",
+          "isCorrect": false
+        },
+        {
+          "text": "Troubles sensitifs",
+          "isCorrect": false
+        },
+        {
+          "text": "Faiblesse musculaire",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "La faiblesse musculaire focale ou asymétrique est un symptôme moteur fréquent dans les poussées de sclérose en plaques."
+    },
+    {
+      "questionText": "Quel examen est essentiel pour le diagnostic de la sclérose en plaques ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "Électromyogramme",
+          "isCorrect": false
+        },
+        {
+          "text": "IRM cérébrale",
+          "isCorrect": true
+        },
+        {
+          "text": "Écho-Doppler carotidien",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'IRM cérébrale et médullaire est l'examen clé pour visualiser les lésions démyélinisantes multiples dans le temps et l'espace."
+    },
+    {
+      "questionText": "Quel est le médicament de premier choix dans le traitement précoce de la maladie de Parkinson ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "Lévodopa",
+          "isCorrect": true
+        },
+        {
+          "text": "Amantadine",
+          "isCorrect": false
+        },
+        {
+          "text": "Selegiline",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La lévodopa reste le traitement le plus efficace pour compenser le déficit en dopamine dans la maladie de Parkinson."
+    },
+    {
+      "questionText": "Quel est le principal marqueur clinique de la maladie d'Alzheimer ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "Troubles de la marche",
+          "isCorrect": false
+        },
+        {
+          "text": "Perte progressive de la mémoire",
+          "isCorrect": true
+        },
+        {
+          "text": "Hallucinations visuelles",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La perte progressive de la mémoire, particulièrement de la mémoire épisodique, est le signe cardinal de la maladie d'Alzheimer."
+    },
+    {
+      "questionText": "Quel nerf cranien est affecté dans la névralgie du trijumeau ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Neurologie",
+      "options": [
+        {
+          "text": "Nerf facial (VII)",
+          "isCorrect": false
+        },
+        {
+          "text": "Nerf trijumeau (V)",
+          "isCorrect": true
+        },
+        {
+          "text": "Nerf vague (X)",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La névralgie du trijumeau correspond à une douleur intense sur le territoire innervé par le nerf trijumeau (V paire)."
+    },
+    {
+      "questionText": "Quel est le principal symptôme de la gastrite aiguë ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Douleur épigastrique",
+          "isCorrect": true
+        },
+        {
+          "text": "Constipation",
+          "isCorrect": false
+        },
+        {
+          "text": "Diarrhée aqueuse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La douleur épigastrique, souvent associée à des nausées, est le symptôme principal de la gastrite aiguë."
+    },
+    {
+      "questionText": "Quel agent infectieux est le plus fréquemment responsable des gastro-entérites aiguës ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Escherichia coli",
+          "isCorrect": false
+        },
+        {
+          "text": "Rotavirus",
+          "isCorrect": true
+        },
+        {
+          "text": "Salmonella",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le rotavirus est la cause la plus fréquente des gastro-entérites virales aiguës, surtout chez les jeunes enfants."
+    },
+    {
+      "questionText": "Quel est le principal facteur de risque de l'ulcère gastroduodénal ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Consommation d'alcool",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection par Helicobacter pylori",
+          "isCorrect": true
+        },
+        {
+          "text": "Tabagisme",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'infection par Helicobacter pylori est le principal facteur de risque connu de l'ulcère gastroduodénal."
+    },
+    {
+      "questionText": "Quel examen est utilisé pour le diagnostic de la cirrhose hépatique ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Échographie abdominale",
+          "isCorrect": true
+        },
+        {
+          "text": "Scanner abdominal",
+          "isCorrect": false
+        },
+        {
+          "text": "Coloscopie",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L’échographie abdominale permet souvent de suspecter une cirrhose par l'aspect nodulaire du foie."
+    },
+    {
+      "questionText": "Quel est le principal symptôme de la maladie de Crohn ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Douleurs abdominales + diarrhée chronique",
+          "isCorrect": true
+        },
+        {
+          "text": "Saignements digestifs massifs",
+          "isCorrect": false
+        },
+        {
+          "text": "Ballonnements isolés",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La maladie de Crohn se manifeste classiquement par des douleurs abdominales et une diarrhée chronique, souvent avec des poussées."
+    },
+    {
+      "questionText": "Quel est le marqueur sérique spécifique de la maladie coeliaque ?",
+      "questionType": "multiple-choice",
+      "categoryTitle": "Gastro-entérologie",
+      "options": [
+        {
+          "text": "Anticorps anti-transglutaminase",
+          "isCorrect": true
+        },
+        {
+          "text": "Anticorps anti-nucléaires",
+          "isCorrect": false
+        },
+        {
+          "text": "Anticorps anti-mitochondries",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les anticorps anti-transglutaminase tissulaire sont très spécifiques pour le diagnostic de la maladie coeliaque."
+    }
+  ],
+  "quizzes": [
+    {
+      "title": "Quiz de Cardiologie - Niveau 1",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Introduction",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de l'asthme?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Fondamentaux",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?",
+        "Quelle structure cérébrale est principalement impliquée dans la formation de nouveaux souvenirs ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Anatomie",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la principale fonction des valves cardiaques ?",
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Physiologie",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le volume courant normal d'un adulte au repos ?",
+        "Quel est le principal symptôme de l'asthme?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Pathologies Fréquentes",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Physiopathologie",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la principale fonction des valves cardiaques ?",
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Exploration Fonctionnelle",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le volume courant normal d'un adulte au repos ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Mémoire et Apprentissage",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle structure cérébrale est principalement impliquée dans la formation de nouveaux souvenirs ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Généralités",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?",
+        "Quelle est la principale fonction des valves cardiaques ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Bases Respiratoires",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de l'asthme?",
+        "Quel est le volume courant normal d'un adulte au repos ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Neurotransmetteurs",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Rappels Cliniques",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?",
+        "Quelle est la principale fonction des valves cardiaques ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Symptômes Respiratoires",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de l'asthme?",
+        "Quel est le volume courant normal d'un adulte au repos ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Cerveau et Fonctions",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle structure cérébrale est principalement impliquée dans la formation de nouveaux souvenirs ?",
+        "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Complet",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?",
+        "Quelle est la principale fonction des valves cardiaques ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Approfondissement",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de l'asthme?",
+        "Quel est le volume courant normal d'un adulte au repos ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Synthèse",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle structure cérébrale est principalement impliquée dans la formation de nouveaux souvenirs ?",
+        "Quel est le principal neurotransmetteur impliqué dans la maladie de Parkinson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Évaluation",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quelle est la cause la plus fréquente de l'infarctus du myocarde?",
+        "Quelle est la principale fonction des valves cardiaques ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Test Pratique",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de l'asthme?",
+        "Quel est le volume courant normal d'un adulte au repos ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Facteurs de Risque",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal facteur de risque de l'athérosclérose coronarienne ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Pathologies Aiguës",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel virus est le plus souvent responsable des bronchiolites chez le nourrisson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Maladies Dégénératives",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal marqueur clinique de la maladie d'Alzheimer ?"
+      ]
+    },
+    {
+      "title": "Quiz de Gastro-entérologie - Introduction",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de la gastrite aiguë ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Physiopathologie Avancée",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel mécanisme explique la douleur angineuse ?"
+      ]
+    },
+    {
+      "title": "Quiz de Pneumologie - Exploration Respiratoire",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal gaz mesuré lors de la spirométrie ?"
+      ]
+    },
+    {
+      "title": "Quiz de Neurologie - Troubles du Mouvement",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le médicament de premier choix dans le traitement précoce de la maladie de Parkinson ?"
+      ]
+    },
+    {
+      "title": "Quiz de Gastro-entérologie - Infections Digestives",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel agent infectieux est le plus fréquemment responsable des gastro-entérites aiguës ?"
+      ]
+    },
+    {
+      "title": "Quiz de Cardiologie - Urgences Cardiovasculaires",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le traitement de choix en cas d'infarctus aigu du myocarde avec sus-décalage du segment ST (STEMI) ?"
+      ]
+    },
+    {
+      "title": "Quiz de Gastro-entérologie - Pathologies Chroniques",
+      "courseTitle": "Module de Base - Année 1",
+      "questionTexts": [
+        "Quel est le principal symptôme de la maladie de Crohn ?"
+      ]
+    }
+  ]
+}

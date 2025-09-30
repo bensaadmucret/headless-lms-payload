@@ -1,0 +1,21 @@
+{
+  "functions": {
+    "src/index.ts": {
+      "memory": 3072
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/admin"
+    },
+    {
+      "source": "/((?!api/|admin/|_next/|assets/|favicon.ico|sw.js|site.webmanifest).*)?",
+      "destination": "/api/serverless"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{subject}}</title>
+    <style>
+      .logo {
+        width: 120px;
+        margin-bottom: 24px;
+      }
+      .main {
+        font-family: Arial, sans-serif;
+        color: #222;
+        background: #f9f9f9;
+        padding: 32px;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <img src="{{logoUrl}}" alt="Logo" class="logo" />
+      <p>{{greeting}},</p>
+      <p>
+        {{#if isFr}}
+          Le statut du tenant <strong>{{tenantName}}</strong> est passé de
+          <strong>{{oldStatus}}</strong> à <strong>{{newStatus}}</strong>.
+        {{else}}
+          The status of tenant <strong>{{tenantName}}</strong> changed from
+          <strong>{{oldStatus}}</strong> to <strong>{{newStatus}}</strong>.
+        {{/if}}
+      </p>
+      <p>{{footer}}</p>
+    </div>
+  </body>
+</html>
