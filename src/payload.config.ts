@@ -18,6 +18,7 @@ import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
 import { onboardUserEndpoint } from './endpoints/onboardUser';
 import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
+import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz';
 import updateDailySessionHandler from './endpoints/updateDailySession'
 import { uploadDocumentEndpoint, getProcessingStatusEndpoint, reprocessDocumentEndpoint } from './endpoints/uploadDocument'
 import { extractNowEndpoint } from './endpoints/extractNow'
@@ -185,6 +186,7 @@ export default buildConfig({
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     onboardUserEndpoint,
     getPlacementQuizEndpoint,
+    completePlacementQuizEndpoint,
     {
       path: '/study-sessions/:id/update-with-answers',
       method: 'patch',

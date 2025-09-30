@@ -27,7 +27,8 @@
     "docker:down": "docker-compose down",
     "docker:logs": "docker-compose logs -f",
     "docker:dev": "docker-compose up -d && npm run dev",
-    "test:redis": "cross-env TS_NODE_PROJECT=tsconfig.node.json NODE_OPTIONS=--no-deprecation node --loader ts-node/esm --experimental-specifier-resolution=node src/jobs/testRedis.ts"
+    "test:redis": "cross-env TS_NODE_PROJECT=tsconfig.node.json NODE_OPTIONS=--no-deprecation node --loader ts-node/esm --experimental-specifier-resolution=node src/jobs/testRedis.ts",
+    "seed:placement-quiz": "node scripts/seed-placement-quiz.cjs"
   },
   "dependencies": {
     "@bull-board/express": "^6.13.0",
@@ -44,7 +45,7 @@
     "@payloadcms/plugin-nested-docs": "3.47.0",
     "@payloadcms/plugin-redirects": "3.47.0",
     "@payloadcms/plugin-search": "3.47.0",
-    "@payloadcms/plugin-seo": "3.47.0",
+    "@payloadcms/plugin-seo": "^3.47.0",
     "@payloadcms/richtext-lexical": "3.47.0",
     "@payloadcms/ui": "3.47.0",
     "@radix-ui/react-checkbox": "^1.0.4",
