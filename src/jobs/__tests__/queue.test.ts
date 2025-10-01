@@ -1,34 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
-// Mock Bull queues pour éviter les dépendances Redis
-vi.mock('bull', () => {
-  const mockQueue = {
-    add: vi.fn().mockResolvedValue({ id: 'job-123' }),
-    getWaiting: vi.fn().mockResolvedValue([]),
-    getActive: vi.fn().mockResolvedValue([]),
-    getCompleted: vi.fn().mockResolvedValue([]),
-    getFailed: vi.fn().mockResolvedValue([]),
-    getDelayed: vi.fn().mockResolvedValue([]),
-    isPaused: vi.fn().mockResolvedValue(false),
-    clean: vi.fn().mockResolvedValue(0),
-    pause: vi.fn().mockResolvedValue(),
-    resume: vi.fn().mockResolvedValue(),
-    close: vi.fn().mockResolvedValue(),
-    on: vi.fn(),
-    name: 'test-queue'
-  }
-  
-  return {
-    default: vi.fn(() => mockQueue)
-  }
-})
-
-// Mock IORedis
-vi.mock('ioredis', () => ({
-  default: vi.fn(() => ({
-    disconnect: vi.fn().mockResolvedValue()
-  }))
-}))
+// Note: Bull et IORedis sont mockés globalement dans vitest.setup.ts
 
 describe('Queue System', () => {
   beforeEach(() => {
@@ -74,9 +46,9 @@ describe('Queue System', () => {
       const jobData = {
         type: 'nlp-processing' as const,
         documentId: 'doc-123',
-        fileType: 'pdf' as const,
-        sourceFileId: 'file-123',
-        sourceFileUrl: '/path/to/file.pdf',
+        extractedText: 'Sample extracted text for NLP processing',
+        language: 'fr' as const,
+        features: ['keywords', 'summary'] as Array<'keywords' | 'summary' | 'sentiment' | 'entities'>,
         userId: 'user-123',
         priority: 'normal' as const
       }
@@ -93,9 +65,8 @@ describe('Queue System', () => {
       const jobData = {
         type: 'ai-enrichment' as const,
         documentId: 'doc-123',
-        fileType: 'pdf' as const,
-        sourceFileId: 'file-123',
-        sourceFileUrl: '/path/to/file.pdf',
+        contentType: 'medical' as const,
+        tasks: ['summary', 'quiz-generation'] as Array<'summary' | 'quiz-generation' | 'concept-extraction' | 'difficulty-assessment'>,
         userId: 'user-123',
         priority: 'normal' as const
       }
@@ -112,9 +83,16 @@ describe('Queue System', () => {
       const jobData = {
         type: 'validation-check' as const,
         documentId: 'doc-123',
-        fileType: 'pdf' as const,
-        sourceFileId: 'file-123',
-        sourceFileUrl: '/path/to/file.pdf',
+        validationType: 'quality' as const,
+        rules: [
+          {
+            id: 'rule-1',
+            name: 'Content Quality',
+            description: 'Check content quality',
+            category: 'quality' as const,
+            severity: 'warning' as const
+          }
+        ],
         userId: 'user-123',
         priority: 'low' as const
       }
