@@ -385,7 +385,7 @@ async function importData() {
           throw new Error(`Erreur HTTP: ${createResponse.status} ${createResponse.statusText}`);
         }
         
-        const newQuiz = await createResponse.json();
+        await createResponse.json();
         console.log(`✅ Quiz créé: ${quiz.title} avec ${quizQuestions.length} questions`);
       } catch (error) {
         console.error(`❌ Erreur lors de la création du quiz "${quiz.title}":`, error.message);

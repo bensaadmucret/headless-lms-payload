@@ -71,30 +71,129 @@ export const pdfProcessor = {
         ? path.join(process.cwd(), 'public/media', path.basename(sourceFileUrl))
         : sourceFileUrl
       
+      console.log(`📄 [PDF] Reading file from: ${filePath}`)
       const pdfBuffer = await fs.readFile(filePath)
+      const fileSizeMB = pdfBuffer.length / 1024 / 1024
+      console.log(`📄 [PDF] File size: ${fileSizeMB.toFixed(2)} MB`)
       
       // Import dynamique de pdfjs-dist (version legacy pour Node.js)
+      console.log(`📄 [PDF] Loading pdfjs-dist library...`)
       const pdfjsLib = await import('pdfjs-dist/legacy/build/pdf.mjs')
       
       // Convertir Buffer en Uint8Array pour pdfjs-dist
       const pdfData = new Uint8Array(pdfBuffer)
+      console.log(`📄 [PDF] Converted to Uint8Array, loading PDF document...`)
       
-      // Charger le document PDF
-      const loadingTask = pdfjsLib.getDocument({ data: pdfData })
+      // Charger le document PDF avec options optimisées pour les gros fichiers
+      const loadingTask = pdfjsLib.getDocument({
+        data: pdfData,
+        // Options pour optimiser la mémoire
+        disableFontFace: true, // Désactiver les polices pour économiser la mémoire
+        useSystemFonts: true,
+        standardFontDataUrl: undefined,
+      })
       const pdfDocument = await loadingTask.promise
+      console.log(`📄 [PDF] PDF document loaded successfully`)
+      
+      // Libérer le buffer original
+      pdfBuffer.fill(0)
+      console.log(`📄 [PDF] Original buffer cleared from memory`)
       
       // Extraire le texte de toutes les pages
       let fullText = ''
       const numPages = pdfDocument.numPages
       
-      for (let pageNum = 1; pageNum <= numPages; pageNum++) {
-        const page = await pdfDocument.getPage(pageNum)
-        const textContent = await page.getTextContent()
-        const pageText = textContent.items
-          .map((item: any) => item.str)
-          .join(' ')
-        fullText += pageText + '\n'
+      console.log(`📄 [PDF] Document has ${numPages} pages`)
+      
+      // Pour les gros PDFs, limiter le nombre de pages à traiter
+      const maxPages = numPages > 500 ? 500 : numPages
+      if (numPages > 500) {
+        console.log(`⚠️ [PDF] Large document detected (${numPages} pages), limiting to first ${maxPages} pages`)
       }
+      
+      // Traitement par batch pour optimiser la mémoire
+      const BATCH_SIZE = 50 // Traiter 50 pages à la fois
+      const batches = Math.ceil(maxPages / BATCH_SIZE)
+      
+      // Compteurs pour les pages avec/sans texte
+      let pagesWithText = 0
+      let pagesWithoutText = 0
+      
+      console.log(`📄 [PDF] Processing in ${batches} batches of ${BATCH_SIZE} pages`)
+      
+      for (let batchIndex = 0; batchIndex < batches; batchIndex++) {
+        const startPage = batchIndex * BATCH_SIZE + 1
+        const endPage = Math.min((batchIndex + 1) * BATCH_SIZE, maxPages)
+        
+        console.log(`📦 [PDF] Processing batch ${batchIndex + 1}/${batches} (pages ${startPage}-${endPage})`)
+        
+        for (let pageNum = startPage; pageNum <= endPage; pageNum++) {
+          try {
+            const page = await pdfDocument.getPage(pageNum)
+            const textContent = await page.getTextContent()
+            const pageText = textContent.items
+              .map((item: any) => item.str)
+              .join(' ')
+            
+            // Vérifier si la page contient du texte significatif
+            const trimmedText = pageText.trim()
+            if (trimmedText.length > 50) { // Au moins 50 caractères
+              pagesWithText++
+              fullText += pageText + '\n'
+            } else {
+              pagesWithoutText++
+              console.log(`⚠️ [PDF] Page ${pageNum} has no text (likely image or empty page)`)
+            }
+            
+            // Libérer la mémoire de la page immédiatement
+            page.cleanup()
+          } catch (pageError) {
+            console.warn(`⚠️ [PDF] Failed to extract page ${pageNum}: ${pageError instanceof Error ? pageError.message : 'Unknown error'}`)
+            pagesWithoutText++
+            // Continue avec la page suivante
+          }
+        }
+        
+        // Log après chaque batch
+        console.log(`✅ [PDF] Batch ${batchIndex + 1}/${batches} completed, total text: ${fullText.length} chars, pages with text: ${pagesWithText}/${endPage}`)
+        
+        // Forcer le garbage collector si disponible (Node avec --expose-gc)
+        if (global.gc && batchIndex < batches - 1) {
+          global.gc()
+          console.log(`🧹 [PDF] Garbage collection triggered after batch ${batchIndex + 1}`)
+        }
+      }
+      
+      console.log(`📄 [PDF] Total extracted text length: ${fullText.length} chars`)
+      console.log(`📊 [PDF] Pages with text: ${pagesWithText}/${maxPages} (${((pagesWithText / maxPages) * 100).toFixed(1)}%)`)
+      console.log(`📊 [PDF] Pages without text: ${pagesWithoutText}/${maxPages} (${((pagesWithoutText / maxPages) * 100).toFixed(1)}%)`)
+      
+      // Nettoyer le document PDF de la mémoire
+      await pdfDocument.cleanup()
+      await pdfDocument.destroy()
+      console.log(`🧹 [PDF] PDF document cleaned from memory`)
+      
+      // Vérifier si suffisamment de pages contiennent du texte
+      const textPageRatio = pagesWithText / maxPages
+      const MIN_TEXT_PAGE_RATIO = 0.2 // Au moins 20% des pages doivent contenir du texte
+      
+      if (textPageRatio < MIN_TEXT_PAGE_RATIO) {
+        console.error(`❌ [PDF] Only ${pagesWithText}/${maxPages} pages contain text (${(textPageRatio * 100).toFixed(1)}%)`)
+        console.error(`⚠️ [PDF] This PDF might be:`)
+        console.error(`   - A scanned document (images without OCR)`)
+        console.error(`   - A protected/encrypted PDF`)
+        console.error(`   - A document with mostly images`)
+        throw new ExtractionError(`Document majoritairement composé d'images (${pagesWithText}/${maxPages} pages avec texte - minimum ${(MIN_TEXT_PAGE_RATIO * 100)}% requis)`, 'pdf')
+      }
+      
+      if (!fullText || fullText.trim().length === 0) {
+        console.error(`❌ [PDF] No text content extracted despite ${pagesWithText} pages marked as having text`)
+        throw new ExtractionError('Aucun texte trouvé dans le PDF - Le document est peut-être scanné ou protégé', 'pdf')
+      }
+      
+      console.log(`✅ [PDF] Document accepted: ${pagesWithText}/${maxPages} pages with text (${(textPageRatio * 100).toFixed(1)}%)`)
+      
+      console.log(`📄 [PDF] Text preview (first 200 chars): ${fullText.substring(0, 200)}`)
       
       // Simuler la structure de pdf-parse pour compatibilité
       const pdfResult = {
@@ -106,10 +205,6 @@ export const pdfProcessor = {
         }
       }
       
-      if (!pdfResult.text || pdfResult.text.trim().length === 0) {
-        throw new ExtractionError('Aucun texte trouvé dans le PDF', 'pdf')
-      }
-      
       // Nettoyer le texte extrait
       const cleanContent = cleanPdfText(pdfResult.text)
       
@@ -117,7 +212,7 @@ export const pdfProcessor = {
       const language = detectLanguage(cleanContent)
       
       // Analyser la structure (chapitres)
-const chapters = extractChaptersWithPages(cleanContent)
+      const chapters = extractChaptersWithPages(cleanContent)
       
       // Extraire les métadonnées
       const metadata = {
@@ -152,12 +247,6 @@ const chapters = extractChaptersWithPages(cleanContent)
 }
 
 /**
-}
-
-/**
-}
-
-/**
  * Extraire les chapitres du PDF
  */
 function extractChaptersWithPages(text: string) {
@@ -184,11 +273,3 @@ function extractPageNumbers(content: string): string | null {
   
   return pages.length > 0 ? pages.join(', ') : null
 }
-
-/**
- * Extraire le titre du document PDF
- */
-
-/**
- * Compter les mots dans le texte
- */

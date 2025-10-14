@@ -2,10 +2,10 @@
  * Initialisation de Payload pour les workers (process indépendants de Next)
  */
 
-import { getPayload } from 'payload'
+import { getPayload, Payload } from 'payload'
 import config from '../payload.config'
 
-let payloadInstance: any = null
+let payloadInstance: Payload | null = null
 
 export async function getPayloadInstance() {
   if (!payloadInstance) {

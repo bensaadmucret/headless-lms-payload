@@ -23,7 +23,7 @@ export const KnowledgeBase: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'documentType', 'medicalDomain', 'validationStatus', 'createdAt'],
+    defaultColumns: ['title', 'documentType', 'medicalDomain', 'processingCompleted', 'processingStatus', 'validationStatus', 'createdAt'],
     group: 'Contenu Pédagogique',
   },
   fields: [
@@ -367,6 +367,27 @@ export const KnowledgeBase: CollectionConfig = {
       ],
       defaultValue: 'queued',
       required: true,
+    },
+    {
+      name: 'processingCompleted',
+      type: 'checkbox',
+      label: 'Traitement Terminé avec Succès',
+      defaultValue: false,
+      admin: {
+        description: 'Indique si le PDF a été complètement traité (extraction + NLP + IA + validation)',
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'processingCompletedAt',
+      type: 'date',
+      label: 'Date de Finalisation',
+      admin: {
+        description: 'Date et heure de la finalisation complète du traitement',
+        readOnly: true,
+        position: 'sidebar',
+      },
     },
     {
       name: 'processingLogs',

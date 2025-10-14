@@ -13,6 +13,17 @@ import { txtProcessor } from '../processors/txtProcessor'
 import { getPayloadInstance } from '../initPayload'
 import { textToLexical } from '../../utils/lexicalUtils'
 
+interface DocumentWithLogs {
+  processingLogs?: string
+  [key: string]: unknown
+}
+
+interface ChapterWithPages {
+  title: string
+  content?: string
+  pageNumbers?: number[]
+}
+
 /**
  * Configuration du worker d'extraction
  */
@@ -57,7 +68,7 @@ export async function processExtractionJob(job: Job<ExtractionJob>): Promise<Ext
     }
     
     if (!result.success) {
-      throw new ExtractionError(result.error || 'Échec de l\'extraction', fileType, result)
+      throw new ExtractionError(result.error || 'Échec de l\'extraction', fileType, result as any)
     }
     
     // Validation du contenu extrait
@@ -113,7 +124,7 @@ async function updateDocumentStatus(
     let existingLogs = ''
     try {
       const current = await payload.findByID({ collection: 'knowledge-base', id: documentId, depth: 0 })
-      existingLogs = (current as any)?.processingLogs || ''
+      existingLogs = (current as unknown as DocumentWithLogs)?.processingLogs || ''
     } catch {}
 
     const newLogs = `${existingLogs ? existingLogs + '\n' : ''}[${new Date().toISOString()}] ${status} ${progress}% - ${message}`.slice(0, 50000)
@@ -125,7 +136,7 @@ async function updateDocumentStatus(
         processingStatus: status,
         lastProcessed: new Date().toISOString(),
         processingLogs: newLogs,
-      },
+      } as any,
       overrideAccess: true,
     })
   } catch (error) {
@@ -173,7 +184,7 @@ async function updateDocumentWithExtraction(documentId: string, collectionType: 
         chapterTitle: ch.title,
         chapterNumber: idx + 1,
         content: textToLexical(ch.content || ''),
-        pageNumbers: (ch as any).pageNumbers,
+        pageNumbers: (ch as ChapterWithPages).pageNumbers,
       }))
 
       const searchableContent = (result.extractedText || '').slice(0, 50000)
@@ -187,7 +198,7 @@ async function updateDocumentWithExtraction(documentId: string, collectionType: 
           ...(chapters.length > 0 ? { chapters } : {}),
           lastProcessed: new Date().toISOString(),
           processingStatus: 'completed',
-        },
+        } as any,
         overrideAccess: true,
       })
     }

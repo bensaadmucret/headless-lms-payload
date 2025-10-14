@@ -59,7 +59,21 @@ export interface ValidationJob extends BaseJob {
   rules: ValidationRule[]
 }
 
-export type JobData = ExtractionJob | NLPJob | AIJob | ValidationJob
+export interface RAGJob extends BaseJob {
+  type: 'rag-processing'
+  extractedText: string
+  chunkingOptions?: {
+    chunkSize?: number
+    chunkOverlap?: number
+    strategy?: 'standard' | 'chapters' | 'fixed'
+  }
+  embeddingOptions?: {
+    provider?: 'openai' | 'huggingface' | 'local'
+    model?: string
+  }
+}
+
+export type JobData = ExtractionJob | NLPJob | AIJob | ValidationJob | RAGJob
 
 // ===== VALIDATION RULES =====
 
@@ -154,7 +168,7 @@ export interface ProcessingLog {
   step: ProcessingStatus
   progress: number        // 0-100%
   message: string
-  details?: Record<string, any>
+  details?: Record<string, unknown>
   error?: string
   duration?: number       // en ms
 }
@@ -223,7 +237,7 @@ export class JobError extends Error {
     message: string,
     public code: string,
     public retryable: boolean = true,
-    public details?: any
+    public details?: Record<string, unknown>
   ) {
     super(message)
     this.name = 'JobError'
@@ -231,21 +245,21 @@ export class JobError extends Error {
 }
 
 export class ExtractionError extends JobError {
-  constructor(message: string, fileType: FileType, details?: any) {
+  constructor(message: string, fileType: FileType, details?: Record<string, unknown>) {
     super(message, `EXTRACTION_${fileType.toUpperCase()}_ERROR`, true, details)
     this.name = 'ExtractionError'
   }
 }
 
 export class NLPError extends JobError {
-  constructor(message: string, details?: any) {
+  constructor(message: string, details?: Record<string, unknown>) {
     super(message, 'NLP_PROCESSING_ERROR', true, details)
     this.name = 'NLPError'
   }
 }
 
 export class AIError extends JobError {
-  constructor(message: string, retryable: boolean = false, details?: any) {
+  constructor(message: string, retryable: boolean = false, details?: Record<string, unknown>) {
     super(message, 'AI_SERVICE_ERROR', retryable, details)
     this.name = 'AIError'
   }

@@ -54,7 +54,7 @@ export async function triggerContentExtraction(
     }
 
     const extractionType = getExtractionType(mimeType)!
-    
+
     console.log(`🚀 [MediaExtraction] Starting extraction for ${filename} (${extractionType})`)
 
     // Construire l'URL du fichier
@@ -116,18 +116,13 @@ async function queueExtraction(
   try {
     await addExtractionJob({
       type: 'document-extraction',
-      documentId: mediaDocument.id,
+      documentId: mediaDocument.id.toString(),
       fileType: extractionType,
-      sourceFileId: mediaDocument.id,
+      sourceFileId: mediaDocument.id.toString(),
       sourceFileUrl: filePath,
-      userId: req.user?.id || 'anonymous',
+      userId: req.user?.id?.toString() || 'anonymous',
       priority: 'normal',
-      metadata: {
-        originalFilename: mediaDocument.filename || 'unknown',
-        mimeType: mediaDocument.mimeType || 'unknown',
-        fileSize: mediaDocument.filesize || 0,
-        uploadedAt: new Date().toISOString(),
-      }
+      collectionType: 'media'
     })
 
     console.log(`📋 [MediaExtraction] Extraction job queued for ${mediaDocument.filename}`)
@@ -142,7 +137,15 @@ async function queueExtraction(
  */
 async function updateMediaWithExtractedContent(
   mediaId: string | number,
-  extractionResult: any,
+  extractionResult: {
+    extractedText?: string;
+    chapters?: unknown[];
+    metadata?: {
+      wordCount?: number;
+      pageCount?: number;
+      language?: string;
+    }
+  },
   req: PayloadRequest
 ): Promise<void> {
   try {
@@ -153,13 +156,14 @@ async function updateMediaWithExtractedContent(
       id: mediaId,
       data: {
         extractedContent: extractionResult.extractedText?.substring(0, 10000), // Limiter pour éviter les problèmes de taille
-        extractionMetadata: {
-          wordCount: extractionResult.metadata.wordCount,
-          pageCount: extractionResult.metadata.pageCount,
-          language: extractionResult.metadata.language,
-          extractedAt: new Date().toISOString(),
-          success: true,
-        }
+        // Retirer extractionMetadata car il n'existe pas dans le schéma Media
+        // extractionMetadata: {
+        //   wordCount: extractionResult.metadata?.wordCount,
+        //   pageCount: extractionResult.metadata?.pageCount,
+        //   language: extractionResult.metadata?.language,
+        //   extractedAt: new Date().toISOString(),
+        //   success: true,
+        // }
       },
       user: req.user,
     })

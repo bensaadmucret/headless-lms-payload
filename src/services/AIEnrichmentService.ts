@@ -1,18 +1,20 @@
-// File removed: unused AI enrichment service
+import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai'
 
 export interface EnrichmentResult {
   keywords: string[]
   medicalDomain: string
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert'
+  difficulty: DifficultyLevel
   summary: string
   speciality?: string
   estimatedReadingTime?: number
   language: string
 }
 
+type DifficultyLevel = 'beginner' | 'intermediate' | 'advanced' | 'expert'
+
 export class AIEnrichmentService {
   private genAI: GoogleGenerativeAI
-  private model: any
+  private model: GenerativeModel
 
   constructor() {
     const apiKey = process.env.GEMINI_API_KEY
@@ -94,8 +96,8 @@ MOTS-CLÉS:`
       // Parser les mots-clés
       const keywords = text
         .split(',')
-        .map(kw => kw.trim())
-        .filter(kw => kw.length > 2 && kw.length < 50)
+        .map((kw: string) => kw.trim())
+        .filter((kw: string) => kw.length > 2 && kw.length < 50)
         .slice(0, 15)
       
       console.log(`🏷️ ${keywords.length} mots-clés extraits`)
@@ -207,11 +209,11 @@ NIVEAU:`
 
       const result = await this.model.generateContent(prompt)
       const response = await result.response
-      const difficulty = response.text().trim().toLowerCase() as any
+      const difficulty = response.text().trim().toLowerCase()
       
       // Validation du niveau
-      const validLevels = ['beginner', 'intermediate', 'advanced', 'expert']
-      const assessedLevel = validLevels.includes(difficulty) ? difficulty : 'intermediate'
+      const validLevels: DifficultyLevel[] = ['beginner', 'intermediate', 'advanced', 'expert']
+      const assessedLevel: DifficultyLevel = validLevels.includes(difficulty as DifficultyLevel) ? difficulty as DifficultyLevel : 'intermediate'
       
       console.log(`📊 Difficulté évaluée: ${assessedLevel}`)
       return assessedLevel

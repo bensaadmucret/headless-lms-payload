@@ -7,6 +7,10 @@ export const Questions: CollectionConfig = {
     useAsTitle: 'questionText',
     defaultColumns: ['questionText', 'questionType', 'course'],
     description: 'Notre banque centrale de questions pour tous les quiz et sessions d\'étude.',
+    // TODO: Ajouter le bouton de génération IA une fois la structure déterminée
+    // components: {
+    //   edit: ['@/components/admin/GenerateAIQuestionsButton'],
+    // },
   },
   fields: [
     {
@@ -86,19 +90,90 @@ export const Questions: CollectionConfig = {
       },
     },
     {
-      name: 'difficultyLevel',
+      name: 'difficulty',
       label: 'Niveau de difficulté',
       type: 'select',
       required: true,
-      defaultValue: 'pass',
+      defaultValue: 'medium',
       options: [
-        { label: "PASS (Parcours d'Accès Spécifique Santé)", value: 'pass' },
-        { label: "LAS (Licence avec option Accès Santé)", value: 'las' },
+        { label: 'Facile', value: 'easy' },
+        { label: 'Moyen', value: 'medium' },
+        { label: 'Difficile', value: 'hard' }
       ],
       admin: {
         position: 'sidebar',
-        description: 'Définit le niveau de cursus pour cette question.',
+        description: 'Niveau de difficulté pour la sélection adaptative'
+      }
+    },
+    {
+      name: 'studentLevel',
+      label: 'Niveau d\'études ciblé',
+      type: 'select',
+      required: true,
+      defaultValue: 'both',
+      options: [
+        { label: 'PASS uniquement', value: 'PASS' },
+        { label: 'LAS uniquement', value: 'LAS' },
+        { label: 'PASS et LAS', value: 'both' }
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Niveau d\'études ciblé par cette question'
+      }
+    },
+    {
+      name: 'tags',
+      label: 'Tags',
+      type: 'array',
+      admin: {
+        position: 'sidebar',
+        description: 'Tags pour filtrage et recherche avancée'
       },
+      fields: [
+        {
+          name: 'tag',
+          type: 'text',
+          required: true
+        }
+      ]
+    },
+    {
+      name: 'adaptiveMetadata',
+      label: 'Métadonnées adaptatives',
+      type: 'group',
+      admin: {
+        position: 'sidebar',
+        description: 'Métadonnées spécifiques aux quiz adaptatifs'
+      },
+      fields: [
+        {
+          name: 'averageTimeSeconds',
+          label: 'Temps moyen de réponse (secondes)',
+          type: 'number',
+          admin: {
+            description: 'Temps moyen de réponse en secondes'
+          }
+        },
+        {
+          name: 'successRate',
+          label: 'Taux de réussite',
+          type: 'number',
+          min: 0,
+          max: 1,
+          admin: {
+            description: 'Taux de réussite global (0-1)'
+          }
+        },
+        {
+          name: 'timesUsed',
+          label: 'Nombre d\'utilisations',
+          type: 'number',
+          defaultValue: 0,
+          admin: {
+            description: 'Nombre de fois utilisée dans des quiz adaptatifs'
+          }
+        }
+      ]
     },
     
     // === RELATION AVEC LA BASE DE CONNAISSANCES ===

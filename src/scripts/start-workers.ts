@@ -11,6 +11,9 @@
 
 import 'dotenv/config'
 import { startExtractionWorker } from '../jobs/workers/extractionWorker'
+import { startNLPWorker } from '../jobs/workers/nlpWorker'
+import { startAIWorker } from '../jobs/workers/aiWorker'
+import { startValidationWorker } from '../jobs/workers/validationWorker'
 import { closeAllQueues, initQueueLifecycle } from '../jobs/queue'
 
 async function main() {
@@ -20,13 +23,25 @@ async function main() {
   initQueueLifecycle()
 
   try {
-    // Démarrer le worker d'extraction
+    // Démarrer tous les workers
     console.log('🔧 Démarrage du worker d\'extraction...')
     startExtractionWorker()
     
-    console.log('\n✅ Workers démarrés et prêts à traiter les jobs!')
+    console.log('🧠 Démarrage du worker NLP...')
+    startNLPWorker()
+    
+    console.log('🤖 Démarrage du worker IA...')
+    startAIWorker()
+    
+    console.log('🔍 Démarrage du worker de validation...')
+    startValidationWorker()
+    
+    console.log('\n✅ Tous les workers démarrés et prêts à traiter les jobs!')
     console.log('\n📊 Workers en cours d\'exécution:')
-    console.log('   🔍 ExtractionWorker (3 concurrency)') 
+    console.log('   🔍 ExtractionWorker (3 concurrency)')
+    console.log('   🧠 NLPWorker (2 concurrency)') 
+    console.log('   🤖 AIWorker (1 concurrency)')
+    console.log('   🔍 ValidationWorker (3 concurrency)') 
     
     console.log('\n📋 Files d\'attente actives:')
     console.log('   • document-extraction')

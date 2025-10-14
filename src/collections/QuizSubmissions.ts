@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { PerformanceAnalyticsService } from '../services/PerformanceAnalyticsService'
 
 export const QuizSubmissions: CollectionConfig = {
   slug: 'quiz-submissions',
@@ -12,6 +13,85 @@ export const QuizSubmissions: CollectionConfig = {
     read: () => true, // Tout le monde peut lire les soumissions
     update: () => false, // Personne ne peut modifier une soumission
     delete: ({ req }) => !!req.user?.admin, // Seuls les administrateurs peuvent supprimer une soumission
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc, req, operation }) => {
+        // Mettre à jour les performances uniquement lors de la création d'une nouvelle soumission
+        if (operation === 'create' && doc.student && doc.finalScore !== undefined) {
+          try {
+            const studentId = typeof doc.student === 'object' ? doc.student.id : doc.student;
+            const analyticsService = new PerformanceAnalyticsService(req.payload);
+            
+            // Invalider le cache pour forcer un recalcul
+            await analyticsService.invalidateUserCache(String(studentId));
+            
+            // Recalculer les performances
+            const analytics = await analyticsService.analyzeUserPerformance(String(studentId));
+            
+            // Vérifier si un enregistrement existe déjà
+            const existingPerformance = await req.payload.find({
+              collection: 'user-performances',
+              where: {
+                user: { equals: String(studentId) }
+              },
+              limit: 1
+            });
+
+            // Préparer les données
+            const performanceData = {
+              user: String(studentId),
+              overallSuccessRate: analytics.overallSuccessRate,
+              totalQuizzesTaken: analytics.totalQuizzesTaken,
+              totalQuestionsAnswered: analytics.totalQuestionsAnswered,
+              categoryPerformances: analytics.categoryPerformances.map(cat => ({
+                categoryId: cat.categoryId,
+                categoryName: cat.categoryName,
+                totalQuestions: cat.totalQuestions,
+                correctAnswers: cat.correctAnswers,
+                successRate: cat.successRate,
+                lastAttemptDate: cat.lastAttemptDate,
+                questionsAttempted: cat.questionsAttempted,
+                averageTimePerQuestion: cat.averageTimePerQuestion
+              })),
+              weakestCategories: analytics.weakestCategories.map(cat => ({
+                categoryId: cat.categoryId,
+                categoryName: cat.categoryName,
+                successRate: cat.successRate
+              })),
+              strongestCategories: analytics.strongestCategories.map(cat => ({
+                categoryId: cat.categoryId,
+                categoryName: cat.categoryName,
+                successRate: cat.successRate
+              })),
+              lastUpdated: new Date().toISOString(),
+              analysisDate: analytics.analysisDate
+            };
+
+            // Créer ou mettre à jour
+            if (existingPerformance.totalDocs > 0) {
+              await req.payload.update({
+                collection: 'user-performances',
+                id: existingPerformance.docs[0].id,
+                data: performanceData
+              });
+              req.payload.logger.info(`Auto-updated performance for user: ${studentId}`);
+            } else {
+              await req.payload.create({
+                collection: 'user-performances',
+                data: performanceData
+              });
+              req.payload.logger.info(`Auto-created performance for user: ${studentId}`);
+            }
+          } catch (error) {
+            // Log l'erreur mais ne pas bloquer la création de la soumission
+            req.payload.logger.error(`Failed to auto-update performance: ${error instanceof Error ? error.message : 'Unknown error'}`);
+          }
+        }
+        
+        return doc;
+      }
+    ]
   },
   fields: [
     {

@@ -90,6 +90,9 @@ export interface Config {
     'system-metrics': SystemMetric;
     conversations: Conversation;
     'knowledge-base': KnowledgeBase;
+    adaptiveQuizSessions: AdaptiveQuizSession;
+    adaptiveQuizResults: AdaptiveQuizResult;
+    'user-performances': UserPerformance;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -124,6 +127,9 @@ export interface Config {
     'system-metrics': SystemMetricsSelect<false> | SystemMetricsSelect<true>;
     conversations: ConversationsSelect<false> | ConversationsSelect<true>;
     'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
+    adaptiveQuizSessions: AdaptiveQuizSessionsSelect<false> | AdaptiveQuizSessionsSelect<true>;
+    adaptiveQuizResults: AdaptiveQuizResultsSelect<false> | AdaptiveQuizResultsSelect<true>;
+    'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -460,6 +466,31 @@ export interface Category {
   title: string;
   slug?: string | null;
   slugLock?: boolean | null;
+  /**
+   * Catégorie parent pour hiérarchie
+   */
+  parentCategory?: (number | null) | Category;
+  /**
+   * Niveau d'études ciblé par cette catégorie
+   */
+  level: 'PASS' | 'LAS' | 'both';
+  /**
+   * Configuration pour les quiz adaptatifs
+   */
+  adaptiveSettings?: {
+    /**
+     * Inclure cette catégorie dans l'analyse adaptative
+     */
+    isActive?: boolean | null;
+    /**
+     * Nombre minimum de questions requises pour l'analyse
+     */
+    minimumQuestions?: number | null;
+    /**
+     * Poids dans l'algorithme de sélection (1 = normal)
+     */
+    weight?: number | null;
+  };
   parent?: (number | null) | Category;
   breadcrumbs?:
     | {
@@ -1055,9 +1086,39 @@ export interface Question {
   course: number | Course;
   category: number | Category;
   /**
-   * Définit le niveau de cursus pour cette question.
+   * Niveau de difficulté pour la sélection adaptative
    */
-  difficultyLevel: 'pass' | 'las';
+  difficulty: 'easy' | 'medium' | 'hard';
+  /**
+   * Niveau d'études ciblé par cette question
+   */
+  studentLevel: 'PASS' | 'LAS' | 'both';
+  /**
+   * Tags pour filtrage et recherche avancée
+   */
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Métadonnées spécifiques aux quiz adaptatifs
+   */
+  adaptiveMetadata?: {
+    /**
+     * Temps moyen de réponse en secondes
+     */
+    averageTimeSeconds?: number | null;
+    /**
+     * Taux de réussite global (0-1)
+     */
+    successRate?: number | null;
+    /**
+     * Nombre de fois utilisée dans des quiz adaptatifs
+     */
+    timesUsed?: number | null;
+  };
   /**
    * Référence précise dans le document source
    */
@@ -1490,6 +1551,14 @@ export interface KnowledgeBase {
   lastProcessed?: string | null;
   processingStatus: 'queued' | 'extracting' | 'enriching' | 'updating' | 'completed' | 'failed' | 'retrying';
   /**
+   * Indique si le PDF a été complètement traité (extraction + NLP + IA + validation)
+   */
+  processingCompleted?: boolean | null;
+  /**
+   * Date et heure de la finalisation complète du traitement
+   */
+  processingCompletedAt?: string | null;
+  /**
    * Logs techniques du traitement automatique
    */
   processingLogs?: string | null;
@@ -1501,6 +1570,314 @@ export interface KnowledgeBase {
     timesReferenced?: number | null;
     lastUsed?: string | null;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Sessions de quiz adaptatifs générées pour les étudiants
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adaptiveQuizSessions".
+ */
+export interface AdaptiveQuizSession {
+  id: number;
+  /**
+   * Identifiant unique généré automatiquement
+   */
+  sessionId: string;
+  user: number | User;
+  /**
+   * Questions sélectionnées pour ce quiz adaptatif
+   */
+  questions: (number | Question)[];
+  status: 'active' | 'completed' | 'abandoned' | 'expired';
+  /**
+   * Données d'analyse ayant servi à générer ce quiz
+   */
+  basedOnAnalytics: {
+    /**
+     * Catégories identifiées comme faibles
+     */
+    weakCategories?: (number | Category)[] | null;
+    /**
+     * Catégories identifiées comme fortes
+     */
+    strongCategories?: (number | Category)[] | null;
+    /**
+     * Date de l'analyse des performances
+     */
+    analysisDate: string;
+    /**
+     * Taux de réussite global de l'étudiant
+     */
+    overallSuccessRate?: number | null;
+    /**
+     * Nombre de quiz pris en compte dans l'analyse
+     */
+    totalQuizzesAnalyzed?: number | null;
+  };
+  /**
+   * Répartition des questions dans ce quiz
+   */
+  questionDistribution: {
+    /**
+     * Nombre de questions des catégories faibles
+     */
+    weakCategoryQuestions: number;
+    /**
+     * Nombre de questions des catégories fortes
+     */
+    strongCategoryQuestions: number;
+    /**
+     * Nombre total de questions
+     */
+    totalQuestions: number;
+  };
+  /**
+   * Configuration utilisée pour générer ce quiz
+   */
+  config?: {
+    /**
+     * Nombre cible de questions des catégories faibles
+     */
+    weakQuestionsCount?: number | null;
+    /**
+     * Nombre cible de questions des catégories fortes
+     */
+    strongQuestionsCount?: number | null;
+    /**
+     * Taux de réussite cible pour ce quiz
+     */
+    targetSuccessRate?: number | null;
+  };
+  /**
+   * Niveau d'études de l'étudiant
+   */
+  studentLevel: 'PASS' | 'LAS';
+  /**
+   * Date d'expiration de cette session
+   */
+  expiresAt?: string | null;
+  /**
+   * Nombre total de questions (calculé automatiquement)
+   */
+  questionsCount?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Résultats détaillés des quiz adaptatifs
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adaptiveQuizResults".
+ */
+export interface AdaptiveQuizResult {
+  id: number;
+  session: number | AdaptiveQuizSession;
+  user: number | User;
+  /**
+   * Score total obtenu
+   */
+  overallScore: number;
+  /**
+   * Score maximum possible
+   */
+  maxScore: number;
+  /**
+   * Taux de réussite (0-1)
+   */
+  successRate: number;
+  /**
+   * Temps total passé en secondes
+   */
+  timeSpent: number;
+  /**
+   * Date et heure de completion
+   */
+  completedAt: string;
+  /**
+   * Résultats détaillés par catégorie
+   */
+  categoryResults?:
+    | {
+        category: number | Category;
+        /**
+         * Nombre de questions dans cette catégorie
+         */
+        questionsCount: number;
+        /**
+         * Nombre de réponses correctes
+         */
+        correctAnswers: number;
+        /**
+         * Nombre de réponses incorrectes
+         */
+        incorrectAnswers: number;
+        /**
+         * Taux de réussite pour cette catégorie
+         */
+        successRate: number;
+        /**
+         * Amélioration par rapport aux performances précédentes
+         */
+        scoreImprovement?: number | null;
+        /**
+         * Taux de réussite précédent dans cette catégorie
+         */
+        previousSuccessRate?: number | null;
+        /**
+         * Temps moyen par question en secondes
+         */
+        averageTimePerQuestion?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Recommandations personnalisées générées
+   */
+  recommendations?:
+    | {
+        /**
+         * Identifiant unique de la recommandation
+         */
+        recommendationId: string;
+        type: 'study_more' | 'practice_quiz' | 'review_material' | 'focus_category' | 'maintain_strength';
+        category: number | Category;
+        /**
+         * Message de recommandation pour l'étudiant
+         */
+        message: string;
+        priority: 'high' | 'medium' | 'low';
+        /**
+         * URL vers l'action recommandée
+         */
+        actionUrl?: string | null;
+        /**
+         * Temps estimé pour suivre cette recommandation
+         */
+        estimatedTimeMinutes?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Comparaison avec les performances précédentes
+   */
+  progressComparison?: {
+    /**
+     * Score moyen des quiz précédents
+     */
+    previousAverageScore?: number | null;
+    /**
+     * Score de ce quiz
+     */
+    currentScore?: number | null;
+    /**
+     * Amélioration (peut être négative)
+     */
+    improvement?: number | null;
+    trend?: ('improving' | 'stable' | 'declining') | null;
+    /**
+     * Nombre de jours consécutifs de quiz
+     */
+    streakDays?: number | null;
+    /**
+     * Date du dernier quiz avant celui-ci
+     */
+    lastQuizDate?: string | null;
+  };
+  /**
+   * Prochaine disponibilité pour un quiz adaptatif (cooldown)
+   */
+  nextAdaptiveQuizAvailableAt?: string | null;
+  /**
+   * Domaines nécessitant une amélioration
+   */
+  improvementAreas?:
+    | {
+        categoryName: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Domaines de force de l'étudiant
+   */
+  strengthAreas?:
+    | {
+        categoryName: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Métriques de performance pré-calculées pour chaque utilisateur
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-performances".
+ */
+export interface UserPerformance {
+  id: number;
+  /**
+   * Utilisateur associé à ces métriques de performance
+   */
+  user: number | User;
+  /**
+   * Taux de réussite global (0-1)
+   */
+  overallSuccessRate: number;
+  /**
+   * Nombre total de quiz complétés par l'utilisateur
+   */
+  totalQuizzesTaken: number;
+  /**
+   * Nombre total de questions auxquelles l'utilisateur a répondu
+   */
+  totalQuestionsAnswered: number;
+  /**
+   * Détails des performances pour chaque catégorie
+   */
+  categoryPerformances: {
+    categoryId: string;
+    categoryName: string;
+    totalQuestions: number;
+    correctAnswers: number;
+    successRate: number;
+    lastAttemptDate: string;
+    questionsAttempted: number;
+    averageTimePerQuestion?: number | null;
+    id?: string | null;
+  }[];
+  /**
+   * Les 3 catégories avec les taux de réussite les plus bas
+   */
+  weakestCategories?:
+    | {
+        categoryId: string;
+        categoryName: string;
+        successRate: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Les 3 catégories avec les taux de réussite les plus élevés
+   */
+  strongestCategories?:
+    | {
+        categoryId: string;
+        categoryName: string;
+        successRate: number;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Date de la dernière mise à jour des métriques
+   */
+  lastUpdated: string;
+  /**
+   * Date à laquelle l'analyse a été effectuée
+   */
+  analysisDate: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -1767,6 +2144,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'knowledge-base';
         value: number | KnowledgeBase;
+      } | null)
+    | ({
+        relationTo: 'adaptiveQuizSessions';
+        value: number | AdaptiveQuizSession;
+      } | null)
+    | ({
+        relationTo: 'adaptiveQuizResults';
+        value: number | AdaptiveQuizResult;
+      } | null)
+    | ({
+        relationTo: 'user-performances';
+        value: number | UserPerformance;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2168,6 +2557,15 @@ export interface CategoriesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   slugLock?: T;
+  parentCategory?: T;
+  level?: T;
+  adaptiveSettings?:
+    | T
+    | {
+        isActive?: T;
+        minimumQuestions?: T;
+        weight?: T;
+      };
   parent?: T;
   breadcrumbs?:
     | T
@@ -2275,7 +2673,21 @@ export interface QuestionsSelect<T extends boolean = true> {
   explanation?: T;
   course?: T;
   category?: T;
-  difficultyLevel?: T;
+  difficulty?: T;
+  studentLevel?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  adaptiveMetadata?:
+    | T
+    | {
+        averageTimeSeconds?: T;
+        successRate?: T;
+        timesUsed?: T;
+      };
   sourcePageReference?: T;
   generatedByAI?: T;
   aiGenerationPrompt?: T;
@@ -2547,6 +2959,8 @@ export interface KnowledgeBaseSelect<T extends boolean = true> {
   uploadedBy?: T;
   lastProcessed?: T;
   processingStatus?: T;
+  processingCompleted?: T;
+  processingCompletedAt?: T;
   processingLogs?: T;
   usageStats?:
     | T
@@ -2555,6 +2969,150 @@ export interface KnowledgeBaseSelect<T extends boolean = true> {
         timesReferenced?: T;
         lastUsed?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adaptiveQuizSessions_select".
+ */
+export interface AdaptiveQuizSessionsSelect<T extends boolean = true> {
+  sessionId?: T;
+  user?: T;
+  questions?: T;
+  status?: T;
+  basedOnAnalytics?:
+    | T
+    | {
+        weakCategories?: T;
+        strongCategories?: T;
+        analysisDate?: T;
+        overallSuccessRate?: T;
+        totalQuizzesAnalyzed?: T;
+      };
+  questionDistribution?:
+    | T
+    | {
+        weakCategoryQuestions?: T;
+        strongCategoryQuestions?: T;
+        totalQuestions?: T;
+      };
+  config?:
+    | T
+    | {
+        weakQuestionsCount?: T;
+        strongQuestionsCount?: T;
+        targetSuccessRate?: T;
+      };
+  studentLevel?: T;
+  expiresAt?: T;
+  questionsCount?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "adaptiveQuizResults_select".
+ */
+export interface AdaptiveQuizResultsSelect<T extends boolean = true> {
+  session?: T;
+  user?: T;
+  overallScore?: T;
+  maxScore?: T;
+  successRate?: T;
+  timeSpent?: T;
+  completedAt?: T;
+  categoryResults?:
+    | T
+    | {
+        category?: T;
+        questionsCount?: T;
+        correctAnswers?: T;
+        incorrectAnswers?: T;
+        successRate?: T;
+        scoreImprovement?: T;
+        previousSuccessRate?: T;
+        averageTimePerQuestion?: T;
+        id?: T;
+      };
+  recommendations?:
+    | T
+    | {
+        recommendationId?: T;
+        type?: T;
+        category?: T;
+        message?: T;
+        priority?: T;
+        actionUrl?: T;
+        estimatedTimeMinutes?: T;
+        id?: T;
+      };
+  progressComparison?:
+    | T
+    | {
+        previousAverageScore?: T;
+        currentScore?: T;
+        improvement?: T;
+        trend?: T;
+        streakDays?: T;
+        lastQuizDate?: T;
+      };
+  nextAdaptiveQuizAvailableAt?: T;
+  improvementAreas?:
+    | T
+    | {
+        categoryName?: T;
+        id?: T;
+      };
+  strengthAreas?:
+    | T
+    | {
+        categoryName?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "user-performances_select".
+ */
+export interface UserPerformancesSelect<T extends boolean = true> {
+  user?: T;
+  overallSuccessRate?: T;
+  totalQuizzesTaken?: T;
+  totalQuestionsAnswered?: T;
+  categoryPerformances?:
+    | T
+    | {
+        categoryId?: T;
+        categoryName?: T;
+        totalQuestions?: T;
+        correctAnswers?: T;
+        successRate?: T;
+        lastAttemptDate?: T;
+        questionsAttempted?: T;
+        averageTimePerQuestion?: T;
+        id?: T;
+      };
+  weakestCategories?:
+    | T
+    | {
+        categoryId?: T;
+        categoryName?: T;
+        successRate?: T;
+        id?: T;
+      };
+  strongestCategories?:
+    | T
+    | {
+        categoryId?: T;
+        categoryName?: T;
+        successRate?: T;
+        id?: T;
+      };
+  lastUpdated?: T;
+  analysisDate?: T;
   updatedAt?: T;
   createdAt?: T;
 }

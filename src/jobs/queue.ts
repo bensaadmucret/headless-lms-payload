@@ -33,7 +33,7 @@ const defaultJobOptions: JobOptions = {
 export const extractionQueue = new Queue('document-extraction', redisUrl, {
   defaultJobOptions: {
     ...defaultJobOptions,
-    timeout: 10 * 60 * 1000, // 10 minutes pour l'extraction
+    timeout: 30 * 60 * 1000, // 30 minutes pour l'extraction (gros PDFs)
   },
   settings: {
     stalledInterval: 30 * 1000,
@@ -84,12 +84,27 @@ export const validationQueue = new Queue('validation-check', redisUrl, {
   },
 })
 
+/**
+ * Queue pour le traitement RAG (Chunking + Embeddings + Vector Store)
+ */
+export const ragQueue = new Queue('rag-processing', redisUrl, {
+  defaultJobOptions: {
+    ...defaultJobOptions,
+    timeout: 15 * 60 * 1000, // 15 minutes pour le RAG (embeddings peuvent être longs)
+  },
+  settings: {
+    stalledInterval: 60 * 1000,
+    maxStalledCount: 1,
+  },
+})
+
 // Array de toutes les queues pour faciliter la gestion
 export const allQueues = [
   extractionQueue,
   nlpQueue,
   aiQueue,
   validationQueue,
+  ragQueue,
 ]
 
 // ===== UTILITAIRES =====
@@ -210,6 +225,18 @@ export async function addValidationJob(data: Extract<JobData, { type: 'validatio
   return validationQueue.add('validate-document', data, {
     priority,
     delay: 3000, // Délai final pour la validation
+  })
+}
+
+/**
+ * Ajouter un job RAG
+ */
+export async function addRAGJob(data: Extract<JobData, { type: 'rag-processing' }>) {
+  const priority = getPriorityValue(data.priority)
+  
+  return ragQueue.add('process-rag', data, {
+    priority,
+    delay: 1500, // Délai après l'extraction
   })
 }
 

@@ -1,6 +1,3 @@
-console.log(`[DEBUG] La valeur de NODE_ENV est : '${process.env.NODE_ENV}'`);
-
-// storage-adapter-import-placeholder
 import 'dotenv/config'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
@@ -16,6 +13,11 @@ import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
+import { checkAdaptiveQuizEligibilityEndpoint } from './endpoints/checkAdaptiveQuizEligibility';
+import { eligibilityDetailsEndpoint } from './endpoints/eligibilityDetails';
+import { getAdaptiveQuizResultsEndpoint, saveAdaptiveQuizResultsEndpoint } from './endpoints/adaptiveQuizResults';
+import { rateLimitStatusEndpoint, usageStatsEndpoint } from './endpoints/rateLimitStatus';
+import { generateAIQuestionsEndpoint } from './endpoints/generateAIQuestions';
 import { onboardUserEndpoint } from './endpoints/onboardUser';
 import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
 import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz';
@@ -24,6 +26,29 @@ import { uploadDocumentEndpoint, getProcessingStatusEndpoint, reprocessDocumentE
 import { extractNowEndpoint } from './endpoints/extractNow'
 import { uploadDocumentSimpleEndpoint } from './endpoints/uploadDocumentSimple'
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
+// Nouveaux endpoints pour le quiz adaptatif
+import { 
+  performanceAnalyticsByUserEndpoint, 
+  performanceByCategoryEndpoint, 
+  performanceMinimumDataEndpoint, 
+  performanceValidateHistoryEndpoint,
+  performanceUpdateEndpoint 
+} from './endpoints/performanceByUser'
+import { 
+  getQuestionsByCategoryEndpoint, 
+  getQuestionCountEndpoint, 
+  getFallbackConfidenceQuestionsEndpoint,
+  getRelatedCategoryQuestionsEndpoint,
+  getAnyAvailableQuestionsEndpoint,
+  getRelaxedLevelQuestionsEndpoint
+} from './endpoints/questionsByCategory'
+import { 
+  saveAdaptiveQuizSessionEndpoint, 
+  getAdaptiveQuizSessionEndpoint,
+  saveAdaptiveQuizResultEndpoint,
+  getAdaptiveQuizResultBySessionEndpoint,
+  getUserAdaptiveQuizHistoryEndpoint
+} from './endpoints/adaptiveQuizSessionsEndpoints'
 import { CorsConfig } from './globals/CorsConfig'
 import { fileURLToPath } from 'url'
 import { Media } from './collections/Media'
@@ -53,6 +78,9 @@ import Conversations from './collections/Conversations'
 import { SystemMetrics } from './collections/SystemMetrics'
 import { Subscriptions } from './collections/Subscriptions'
 import { KnowledgeBase } from './collections/KnowledgeBase'
+import { AdaptiveQuizSessions } from './collections/AdaptiveQuizSessions'
+import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
+import { UserPerformances } from './collections/UserPerformances'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -130,7 +158,10 @@ export default buildConfig({
     Tenants,
     SystemMetrics,
     Conversations,
-    KnowledgeBase
+    KnowledgeBase,
+    AdaptiveQuizSessions,
+    AdaptiveQuizResults,
+    UserPerformances
   ],
   globals: [CorsConfig, Header, Footer],
   cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
@@ -159,7 +190,7 @@ export default buildConfig({
 
     // Extraction synchrone (fallback sans worker)
     extractNowEndpoint,
-    
+
     // === ENDPOINTS EXISTANTS ===
     diagnosticsEndpoint,
     studentQuizzesEndpoint,
@@ -168,8 +199,41 @@ export default buildConfig({
     dailySessionEndpoint,
     getDailySessionEndpoint,
     simpleDailySessionEndpoint,
-        performanceAnalysisEndpoint,
+    
+    // === ENDPOINTS PERFORMANCE ===
+    performanceAnalysisEndpoint,
+    performanceAnalyticsByUserEndpoint,
+    performanceByCategoryEndpoint,
+    performanceMinimumDataEndpoint,
+    performanceValidateHistoryEndpoint,
+    performanceUpdateEndpoint,
+    
+    // === ENDPOINTS QUIZ ADAPTATIF ===
     generateAdaptiveQuizEndpoint,
+    checkAdaptiveQuizEligibilityEndpoint,
+    eligibilityDetailsEndpoint,
+    getAdaptiveQuizResultsEndpoint,
+    saveAdaptiveQuizResultsEndpoint,
+    saveAdaptiveQuizSessionEndpoint,
+    getAdaptiveQuizSessionEndpoint,
+    saveAdaptiveQuizResultEndpoint,
+    getAdaptiveQuizResultBySessionEndpoint,
+    getUserAdaptiveQuizHistoryEndpoint,
+    
+    // === ENDPOINTS QUESTIONS ===
+    getQuestionsByCategoryEndpoint,
+    getQuestionCountEndpoint,
+    getFallbackConfidenceQuestionsEndpoint,
+    getRelatedCategoryQuestionsEndpoint,
+    getAnyAvailableQuestionsEndpoint,
+    getRelaxedLevelQuestionsEndpoint,
+    
+    // === ENDPOINTS RATE LIMITING ===
+    rateLimitStatusEndpoint,
+    usageStatsEndpoint,
+    
+    // === ENDPOINTS AUTRES ===
+    generateAIQuestionsEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     onboardUserEndpoint,
     getPlacementQuizEndpoint,
@@ -185,14 +249,14 @@ export default buildConfig({
       run: ({ req }): boolean => {
         // Allow logged in users to execute this endpoint (default)
         // Utilisation d'une assertion de type pour accéder à user
-        const user = (req as any).user;
+        const user = (req as { user?: unknown }).user;
         if (user) return true
 
         // If there is no logged in user, then check
         // for the Vercel Cron secret to be present as an
         // Authorization header:
         // Utilisation d'une assertion de type pour accéder à headers
-        const headers = (req as any).headers;
+        const headers = (req as { headers?: { get?: (key: string) => string | null } }).headers;
         const authHeader = headers && typeof headers.get === 'function' ? headers.get('authorization') : null;
         return authHeader === `Bearer ${process.env.CRON_SECRET}`
       },
