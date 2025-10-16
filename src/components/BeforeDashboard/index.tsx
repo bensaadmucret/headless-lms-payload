@@ -1,4 +1,7 @@
+'use client'
+
 import { Banner } from '@payloadcms/ui/elements/Banner'
+import { useAuth } from '@payloadcms/ui'
 import React from 'react'
 
 import { SeedButton } from './SeedButton'
@@ -7,11 +10,35 @@ import './index.scss'
 const baseClass = 'before-dashboard'
 
 const BeforeDashboard: React.FC = () => {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin' || user?.role === 'superadmin'
+
   return (
     <div className={baseClass}>
       <Banner className={`${baseClass}__banner`} type="success">
         <h4>Welcome to your dashboard!</h4>
       </Banner>
+      
+      {isAdmin && (
+        <div className={`${baseClass}__admin-section`} style={{ marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#f8f9fa', borderRadius: '4px', border: '1px solid #e9ecef' }}>
+          <h5 style={{ margin: '0 0 0.5rem 0', color: '#495057' }}>Administration IA</h5>
+          <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
+            <li>
+              <a href="/admin/generation-logs" style={{ color: '#007bff', textDecoration: 'none' }}>
+                📊 Consulter les logs de génération IA
+              </a>
+              {' - Visualisez les métriques et l\'historique des générations de quiz par IA'}
+            </li>
+            <li style={{ marginTop: '0.5rem' }}>
+              <a href="/admin/collections/generationlogs" style={{ color: '#007bff', textDecoration: 'none' }}>
+                📋 Gestion des logs (Collection)
+              </a>
+              {' - Accès direct à la collection des logs de génération'}
+            </li>
+          </ul>
+        </div>
+      )}
+
       Here&apos;s what to do next:
       <ul className={`${baseClass}__instructions`}>
         <li>

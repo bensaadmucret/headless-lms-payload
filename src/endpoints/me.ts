@@ -44,15 +44,15 @@ type MeResponse = {
 export const meEndpoint = {
   path: '/users/me',
   method: 'get' as const,
-  handler: async (req: PayloadRequest, res: Response) => {
+  handler: async (req: PayloadRequest) => {
     // Vérification robuste de la présence de l'utilisateur
     if (!req.user || !req.user.id) {
       // Si aucun utilisateur n'est authentifié, renvoyer une erreur 401
-      return res.status(401).json({
+      return Response.json({
         authenticated: false,
         message: 'Aucun utilisateur authentifié. Veuillez vous connecter.',
         code: 'UNAUTHENTICATED',
-      });
+      }, { status: 401 });
     }
 
     try {
@@ -74,7 +74,7 @@ export const meEndpoint = {
         examDate
       } = user;
 
-      return res.json({ 
+      return Response.json({ 
         authenticated: true,
         user: { 
           id, 
@@ -94,12 +94,12 @@ export const meEndpoint = {
         timestamp: new Date().toISOString()
       });
       
-      return res.status(500).json({ 
+      return Response.json({ 
         authenticated: false,
         error: 'Erreur lors de la récupération du profil',
         code: 'INTERNAL_SERVER_ERROR',
         message: 'Une erreur est survenue lors de la récupération de votre profil'
-      });
+      }, { status: 500 });
     }
   }
 };

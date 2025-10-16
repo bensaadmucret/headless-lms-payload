@@ -73,7 +73,7 @@ export const Questions: CollectionConfig = {
       label: 'Cours associé',
       type: 'relationship',
       relationTo: 'courses',
-      required: true,
+      required: false, // Made optional to allow AI-generated questions without specific course
       admin: {
         position: 'sidebar',
       },

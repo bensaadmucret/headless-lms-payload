@@ -183,40 +183,18 @@ export class EligibilityService {
     satisfied: boolean;
   }> {
     try {
-      console.log('🔍 DEBUG checkMinimumQuizzes - userId:', userId, 'type:', typeof userId);
-      
-      // Première approche : récupérer tous les documents et compter manuellement
-      const allUserSubmissions = await this.payload.find({
+      const submissions = await this.payload.find({
         collection: 'quiz-submissions',
         where: {
-          student: { equals: userId }
+          and: [
+            { student: { equals: userId } },
+            { finalScore: { exists: true } }
+          ]
         },
-        limit: 1000, // Limite élevée pour récupérer tous les documents
-        depth: 0 // Pas besoin de relations
+        limit: 1
       });
 
-      console.log('🔍 DEBUG - Total submissions for user:', allUserSubmissions.totalDocs);
-      console.log('🔍 DEBUG - Docs retrieved:', allUserSubmissions.docs.length);
-      
-      // Compter manuellement ceux avec finalScore
-      const completedSubmissions = allUserSubmissions.docs.filter(doc => 
-        doc.finalScore !== null && doc.finalScore !== undefined
-      );
-      
-      console.log('🔍 DEBUG - Completed submissions (manual count):', completedSubmissions.length);
-      
-      // Vérifier quelques exemples
-      console.log('🔍 DEBUG - Sample submissions:', allUserSubmissions.docs.slice(0, 3).map(doc => ({
-        id: doc.id,
-        student: doc.student,
-        finalScore: doc.finalScore,
-        hasScore: doc.finalScore !== null && doc.finalScore !== undefined
-      })));
-
-      // Utiliser le compte manuel au lieu de totalDocs
-      const current = completedSubmissions.length;
-      
-      console.log('🔍 DEBUG - Final count used:', current);
+      const current = submissions.totalDocs;
       
       return {
         required: this.MINIMUM_QUIZZES,

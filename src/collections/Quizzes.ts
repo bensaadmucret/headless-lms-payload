@@ -110,6 +110,16 @@ export const Quizzes: CollectionConfig = {
   },
   fields: [
     {
+      name: 'aiGeneration',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/GenerateAIQuizButton',
+        },
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       required: true,

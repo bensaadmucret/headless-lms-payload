@@ -395,7 +395,10 @@ export class AdaptiveQuizService {
                         continue;
                     }
 
-                    // Prepare AI generation request
+                    // Calculer la tendance récente pour cette catégorie
+                    const recentTrend = this.calculateTrend(weakCat);
+
+                    // Prepare AI generation request with enriched performance context
                     const generationRequest: QuestionGenerationRequest = {
                         categoryId: String(category.id),
                         categoryName: category.title,
@@ -404,7 +407,14 @@ export class AdaptiveQuizService {
                         difficultyLevel: studentLevel.toLowerCase() as 'pass' | 'las',
                         questionCount: Math.min(questionsPerCategory, 3), // Limit to 3 questions per category max
                         medicalDomain: category.title,
-                        sourceContent: `Questions ciblées pour améliorer les performances en ${category.title}. Taux de réussite actuel: ${(weakCat.successRate * 100).toFixed(1)}%`
+                        sourceContent: `Questions ciblées pour améliorer les performances en ${category.title}. Taux de réussite actuel: ${(weakCat.successRate * 100).toFixed(1)}%`,
+                        performanceContext: {
+                            successRate: weakCat.successRate,
+                            totalAttempts: weakCat.totalQuestions,
+                            averageTimePerQuestion: weakCat.averageTimePerQuestion,
+                            recentTrend: recentTrend,
+                            lastAttemptDate: weakCat.lastAttemptDate
+                        }
                     };
 
                     this.payload.logger.info(`Generating ${questionsPerCategory} questions for ${category.title}`);
@@ -1151,6 +1161,34 @@ export class AdaptiveQuizService {
         } catch (error) {
             console.error('Error calculating streak days:', error);
             return 0;
+        }
+    }
+
+    /**
+     * Calculates performance trend for a category
+     * Requirements: 1.1, 3.2
+     */
+    private calculateTrend(categoryPerformance: any): 'improving' | 'stable' | 'declining' {
+        try {
+            // Si pas d'amélioration de score disponible, considérer comme stable
+            if (categoryPerformance.scoreImprovement === undefined) {
+                return 'stable';
+            }
+
+            const improvement = categoryPerformance.scoreImprovement;
+
+            // Seuils pour déterminer la tendance
+            if (improvement > 0.1) {
+                return 'improving';
+            } else if (improvement < -0.1) {
+                return 'declining';
+            }
+
+            return 'stable';
+
+        } catch (error) {
+            console.error('Error calculating trend:', error);
+            return 'stable';
         }
     }
 

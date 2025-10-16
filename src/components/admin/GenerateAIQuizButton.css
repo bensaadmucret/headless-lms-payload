@@ -1,0 +1,63 @@
+/* Animations pour la modale de génération IA */
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Force la modale à être au-dessus de tous les éléments Payload CMS */
+.ai-quiz-modal-overlay {
+  z-index: 9999999 !important;
+  position: fixed !important;
+}
+
+/* S'assurer que les éléments Payload n'interfèrent pas */
+.doc-controls__divider {
+  z-index: 1 !important;
+}
+
+/* Forcer le style des Select pour éviter la transparence */
+[role="combobox"] {
+  background-color: var(--theme-elevation-50, #252525) !important;
+  border: 1px solid var(--theme-elevation-150, #3a3a3a) !important;
+  color: var(--theme-text, #e5e5e5) !important;
+}
+
+[role="listbox"] {
+  background-color: var(--theme-elevation-50, #252525) !important;
+  border: 1px solid var(--theme-elevation-150, #3a3a3a) !important;
+  color: var(--theme-text, #e5e5e5) !important;
+}
+
+[role="option"] {
+  background-color: var(--theme-elevation-50, #252525) !important;
+  color: var(--theme-text, #e5e5e5) !important;
+}
+
+[role="option"]:hover {
+  background-color: var(--theme-elevation-100, #2a2a2a) !important;
+}

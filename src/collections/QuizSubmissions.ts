@@ -24,23 +24,23 @@ export const QuizSubmissions: CollectionConfig = {
             const analyticsService = new PerformanceAnalyticsService(req.payload);
             
             // Invalider le cache pour forcer un recalcul
-            await analyticsService.invalidateUserCache(String(studentId));
+            await analyticsService.invalidateUserCache(studentId);
             
             // Recalculer les performances
-            const analytics = await analyticsService.analyzeUserPerformance(String(studentId));
+            const analytics = await analyticsService.analyzeUserPerformance(studentId);
             
             // Vérifier si un enregistrement existe déjà
             const existingPerformance = await req.payload.find({
               collection: 'user-performances',
               where: {
-                user: { equals: String(studentId) }
+                user: { equals: studentId }
               },
               limit: 1
             });
 
             // Préparer les données
             const performanceData = {
-              user: String(studentId),
+              user: studentId,
               overallSuccessRate: analytics.overallSuccessRate,
               totalQuizzesTaken: analytics.totalQuizzesTaken,
               totalQuestionsAnswered: analytics.totalQuestionsAnswered,

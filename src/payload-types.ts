@@ -93,6 +93,8 @@ export interface Config {
     adaptiveQuizSessions: AdaptiveQuizSession;
     adaptiveQuizResults: AdaptiveQuizResult;
     'user-performances': UserPerformance;
+    auditlogs: Auditlog;
+    generationlogs: Generationlog;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -130,6 +132,8 @@ export interface Config {
     adaptiveQuizSessions: AdaptiveQuizSessionsSelect<false> | AdaptiveQuizSessionsSelect<true>;
     adaptiveQuizResults: AdaptiveQuizResultsSelect<false> | AdaptiveQuizResultsSelect<true>;
     'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
+    auditlogs: AuditlogsSelect<false> | AuditlogsSelect<true>;
+    generationlogs: GenerationlogsSelect<false> | GenerationlogsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1083,7 +1087,7 @@ export interface Question {
    * Cette explication s'affichera à l'étudiant après qu'il ait répondu. Champ temporairement en texte simple pour débogage.
    */
   explanation: string;
-  course: number | Course;
+  course?: (number | null) | Course;
   category: number | Category;
   /**
    * Niveau de difficulté pour la sélection adaptative
@@ -1882,6 +1886,129 @@ export interface UserPerformance {
   createdAt: string;
 }
 /**
+ * Historique des modifications et actions importantes du système.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auditlogs".
+ */
+export interface Auditlog {
+  id: number;
+  user: number | User;
+  action: string;
+  collection: string;
+  documentId?: string | null;
+  /**
+   * Contient l’état avant/après si pertinent.
+   */
+  diff?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  timestamp: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Logs détaillés de toutes les générations de quiz par IA avec métriques de performance.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "generationlogs".
+ */
+export interface Generationlog {
+  id: number;
+  user: number | User;
+  action:
+    | 'ai_quiz_generation'
+    | 'ai_questions_generation'
+    | 'ai_content_validation'
+    | 'auto_quiz_creation'
+    | 'generation_retry'
+    | 'generation_failure';
+  status: 'started' | 'in_progress' | 'success' | 'failed' | 'cancelled' | 'timeout';
+  generationConfig?: {
+    subject?: string | null;
+    categoryId?: string | null;
+    categoryName?: string | null;
+    studentLevel?: ('PASS' | 'LAS' | 'both') | null;
+    questionCount?: number | null;
+    difficulty?: ('easy' | 'medium' | 'hard') | null;
+    medicalDomain?: string | null;
+    includeExplanations?: boolean | null;
+    customInstructions?: string | null;
+  };
+  result?: {
+    quizId?: string | null;
+    questionIds?:
+      | {
+          questionId?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    questionsCreated?: number | null;
+    /**
+     * Score de qualité du contenu généré (0-100)
+     */
+    validationScore?: number | null;
+    aiModel?: string | null;
+    tokensUsed?: number | null;
+  };
+  error?: {
+    type?:
+      | (
+          | 'ai_api_error'
+          | 'validation_failed'
+          | 'database_error'
+          | 'rate_limit_exceeded'
+          | 'invalid_config'
+          | 'timeout'
+          | 'unknown_error'
+        )
+      | null;
+    message?: string | null;
+    /**
+     * Détails techniques de l'erreur pour le débogage
+     */
+    details?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+    stackTrace?: string | null;
+  };
+  performance?: {
+    /**
+     * Durée totale de la génération en millisecondes
+     */
+    duration?: number | null;
+    aiResponseTime?: number | null;
+    validationTime?: number | null;
+    databaseTime?: number | null;
+    retryCount?: number | null;
+    promptLength?: number | null;
+    responseLength?: number | null;
+  };
+  metadata?: {
+    ipAddress?: string | null;
+    userAgent?: string | null;
+    sessionId?: string | null;
+    requestId?: string | null;
+    environment?: ('development' | 'test' | 'staging' | 'production') | null;
+    version?: string | null;
+  };
+  createdAt: string;
+  completedAt?: string | null;
+  updatedAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2156,6 +2283,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'user-performances';
         value: number | UserPerformance;
+      } | null)
+    | ({
+        relationTo: 'auditlogs';
+        value: number | Auditlog;
+      } | null)
+    | ({
+        relationTo: 'generationlogs';
+        value: number | Generationlog;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3115,6 +3250,89 @@ export interface UserPerformancesSelect<T extends boolean = true> {
   analysisDate?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "auditlogs_select".
+ */
+export interface AuditlogsSelect<T extends boolean = true> {
+  user?: T;
+  action?: T;
+  collection?: T;
+  documentId?: T;
+  diff?: T;
+  timestamp?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "generationlogs_select".
+ */
+export interface GenerationlogsSelect<T extends boolean = true> {
+  user?: T;
+  action?: T;
+  status?: T;
+  generationConfig?:
+    | T
+    | {
+        subject?: T;
+        categoryId?: T;
+        categoryName?: T;
+        studentLevel?: T;
+        questionCount?: T;
+        difficulty?: T;
+        medicalDomain?: T;
+        includeExplanations?: T;
+        customInstructions?: T;
+      };
+  result?:
+    | T
+    | {
+        quizId?: T;
+        questionIds?:
+          | T
+          | {
+              questionId?: T;
+              id?: T;
+            };
+        questionsCreated?: T;
+        validationScore?: T;
+        aiModel?: T;
+        tokensUsed?: T;
+      };
+  error?:
+    | T
+    | {
+        type?: T;
+        message?: T;
+        details?: T;
+        stackTrace?: T;
+      };
+  performance?:
+    | T
+    | {
+        duration?: T;
+        aiResponseTime?: T;
+        validationTime?: T;
+        databaseTime?: T;
+        retryCount?: T;
+        promptLength?: T;
+        responseLength?: T;
+      };
+  metadata?:
+    | T
+    | {
+        ipAddress?: T;
+        userAgent?: T;
+        sessionId?: T;
+        requestId?: T;
+        environment?: T;
+        version?: T;
+      };
+  createdAt?: T;
+  completedAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

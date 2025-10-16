@@ -18,6 +18,8 @@ import { eligibilityDetailsEndpoint } from './endpoints/eligibilityDetails';
 import { getAdaptiveQuizResultsEndpoint, saveAdaptiveQuizResultsEndpoint } from './endpoints/adaptiveQuizResults';
 import { rateLimitStatusEndpoint, usageStatsEndpoint } from './endpoints/rateLimitStatus';
 import { generateAIQuestionsEndpoint } from './endpoints/generateAIQuestions';
+import { generateAIQuizEndpoint } from './endpoints/generateAIQuiz';
+import { generateCompleteQuizEndpoint, createTestQuizEndpoint } from './endpoints/generateCompleteQuiz';
 import { onboardUserEndpoint } from './endpoints/onboardUser';
 import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
 import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz';
@@ -26,6 +28,7 @@ import { uploadDocumentEndpoint, getProcessingStatusEndpoint, reprocessDocumentE
 import { extractNowEndpoint } from './endpoints/extractNow'
 import { uploadDocumentSimpleEndpoint } from './endpoints/uploadDocumentSimple'
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
+import { generationMetricsEndpoint, generationLogsEndpoint, cleanupOldLogsEndpoint } from './endpoints/generationMetrics'
 // Nouveaux endpoints pour le quiz adaptatif
 import { 
   performanceAnalyticsByUserEndpoint, 
@@ -81,6 +84,8 @@ import { KnowledgeBase } from './collections/KnowledgeBase'
 import { AdaptiveQuizSessions } from './collections/AdaptiveQuizSessions'
 import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
 import { UserPerformances } from './collections/UserPerformances'
+import AuditLogs from './collections/AuditLogs'
+import GenerationLogs from './collections/GenerationLogs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -161,7 +166,9 @@ export default buildConfig({
     KnowledgeBase,
     AdaptiveQuizSessions,
     AdaptiveQuizResults,
-    UserPerformances
+    UserPerformances,
+    AuditLogs,
+    GenerationLogs
   ],
   globals: [CorsConfig, Header, Footer],
   cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
@@ -234,6 +241,15 @@ export default buildConfig({
     
     // === ENDPOINTS AUTRES ===
     generateAIQuestionsEndpoint,
+    generateAIQuizEndpoint,
+    // === ENDPOINTS CRÉATION AUTOMATIQUE QUIZ (Tâche 5) ===
+    generateCompleteQuizEndpoint,
+    createTestQuizEndpoint,
+    
+    // === ENDPOINTS AUDIT ET LOGGING (Tâche 6) ===
+    generationMetricsEndpoint,
+    generationLogsEndpoint,
+    cleanupOldLogsEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     onboardUserEndpoint,
     getPlacementQuizEndpoint,
