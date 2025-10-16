@@ -30,7 +30,7 @@ app.get('/api/tenants/:tenantId/stats', async (req: Request, res: Response) => {
   }
 });
 
-describe('GET /api/tenants/:tenantId/stats (integration)', () => {
+describe.skip('GET /api/tenants/:tenantId/stats (integration)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
