@@ -5,9 +5,7 @@
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
-// TODO: Ces tests nécessitent une refonte pour correspondre à l'implémentation actuelle
-// Temporairement skippés - Phase 2
-describe.skip('JSON Import Basic Security Tests', () => {
+describe('JSON Import Basic Security Tests', () => {
   describe('Access Control Validation', () => {
     it('should validate user role requirements', () => {
       const validRoles = ['admin', 'superadmin'];
