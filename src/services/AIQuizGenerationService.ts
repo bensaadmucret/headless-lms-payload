@@ -232,7 +232,7 @@ export class AIQuizGenerationService {
                 await this.auditService.failGenerationLog(
                   auditLogId,
                   {
-                    type: 'validation_warning',
+                    type: 'validation_failed',
                     message: `Question acceptée avec score faible: ${validation.score}`,
                     details: { validationIssues: validation.issues, questionIndex: i + 1 }
                   },
@@ -245,7 +245,7 @@ export class AIQuizGenerationService {
                 );
               }
               
-              throw error;
+              throw new Error('Max generation attempts reached');
             }
           }
         }

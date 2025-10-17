@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Invalid Answers",
+    "level": "PASS",
+    "description": "Questions avec des problèmes dans les options de réponse"
+  },
+  "questions": [
+    {
+      "questionText": "Question sans bonne réponse ?",
+      "options": [
+        {"text": "Option A", "isCorrect": false},
+        {"text": "Option B", "isCorrect": false},
+        {"text": "Option C", "isCorrect": false},
+        {"text": "Option D", "isCorrect": false}
+      ],
+      "explanation": "Aucune option n'est marquée comme correcte",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec plusieurs bonnes réponses ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": true},
+        {"text": "Option C", "isCorrect": false},
+        {"text": "Option D", "isCorrect": true}
+      ],
+      "explanation": "Trois options sont marquées comme correctes",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec une seule option ?",
+      "options": [
+        {"text": "Seule option", "isCorrect": true}
+      ],
+      "explanation": "Il n'y a qu'une seule option disponible",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec options identiques ?",
+      "options": [
+        {"text": "Même réponse", "isCorrect": true},
+        {"text": "Même réponse", "isCorrect": false},
+        {"text": "Autre réponse", "isCorrect": false},
+        {"text": "Même réponse", "isCorrect": false}
+      ],
+      "explanation": "Plusieurs options ont le même texte",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec options vides ?",
+      "options": [
+        {"text": "", "isCorrect": true},
+        {"text": "Option normale", "isCorrect": false},
+        {"text": "", "isCorrect": false},
+        {"text": "Autre option", "isCorrect": false}
+      ],
+      "explanation": "Certaines options ont un texte vide",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec trop d'options ?",
+      "options": [
+        {"text": "Option 1", "isCorrect": false},
+        {"text": "Option 2", "isCorrect": false},
+        {"text": "Option 3", "isCorrect": false},
+        {"text": "Option 4", "isCorrect": false},
+        {"text": "Option 5", "isCorrect": false},
+        {"text": "Option 6", "isCorrect": true},
+        {"text": "Option 7", "isCorrect": false},
+        {"text": "Option 8", "isCorrect": false}
+      ],
+      "explanation": "Cette question a trop d'options (8 au lieu de 4 maximum)",
+      "category": "Test",
+      "difficulty": "hard",
+      "level": "PASS"
+    }
+  ]
+}

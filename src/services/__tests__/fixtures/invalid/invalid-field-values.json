@@ -1,0 +1,78 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Invalid Values",
+    "level": "PASS",
+    "description": "Questions avec des valeurs de champs invalides"
+  },
+  "questions": [
+    {
+      "questionText": "Question avec difficulté invalide ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Cette question a une difficulté non autorisée",
+      "category": "Test",
+      "difficulty": "très-difficile",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec niveau invalide ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Cette question a un niveau non autorisé",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "MASTER"
+    },
+    {
+      "questionText": "Question avec types de données incorrects ?",
+      "options": [
+        {"text": 123, "isCorrect": "oui"},
+        {"text": true, "isCorrect": "non"}
+      ],
+      "explanation": 456,
+      "category": null,
+      "difficulty": ["easy"],
+      "level": {"niveau": "PASS"}
+    },
+    {
+      "questionText": "",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Question avec texte vide",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec tags invalides ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Tags avec types incorrects",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["tag-valide", 123, null, "", {"tag": "objet"}]
+    },
+    {
+      "questionText": "A",
+      "options": [
+        {"text": "A", "isCorrect": true},
+        {"text": "B", "isCorrect": false}
+      ],
+      "explanation": "X",
+      "category": "T",
+      "difficulty": "easy",
+      "level": "PASS"
+    }
+  ]
+}

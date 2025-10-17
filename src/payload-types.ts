@@ -1046,6 +1046,32 @@ export interface Quiz {
    * Score minimum requis pour réussir le quiz (en pourcentage)
    */
   passingScore?: number | null;
+  /**
+   * Statut de validation par les experts
+   */
+  validationStatus?: ('draft' | 'pending_review' | 'approved' | 'rejected') | null;
+  /**
+   * Commentaires et notes des experts lors de la validation
+   */
+  validationNotes?: string | null;
+  /**
+   * Expert qui a validé ce quiz
+   */
+  validatedBy?: string | null;
+  /**
+   * Date de validation par l'expert
+   */
+  validatedAt?: string | null;
+  /**
+   * Ce quiz a été généré automatiquement par l'IA
+   */
+  generatedByAI?: boolean | null;
+  aiGenerationMetadata?: {
+    generationTime?: number | null;
+    validationScore?: number | null;
+    aiModel?: string | null;
+    sourcePrompt?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1143,6 +1169,39 @@ export interface Question {
    * Expert médical qui a validé cette question
    */
   validatedBy?: (number | null) | User;
+  /**
+   * Statut de validation par les experts
+   */
+  validationStatus?: ('pending' | 'approved' | 'rejected' | 'needs_review') | null;
+  /**
+   * Commentaires et notes des experts lors de la validation
+   */
+  validationNotes?: string | null;
+  /**
+   * Date de validation par l'expert
+   */
+  validatedAt?: string | null;
+  /**
+   * Date de dernière régénération IA
+   */
+  regeneratedAt?: string | null;
+  /**
+   * Raison de la dernière régénération
+   */
+  regenerationReason?: string | null;
+  /**
+   * Score de qualité attribué par l'IA (0-100)
+   */
+  qualityScore?: number | null;
+  /**
+   * Problèmes détectés lors de la validation automatique
+   */
+  validationIssues?:
+    | {
+        issue: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2788,6 +2847,19 @@ export interface QuizzesSelect<T extends boolean = true> {
   published?: T;
   duration?: T;
   passingScore?: T;
+  validationStatus?: T;
+  validationNotes?: T;
+  validatedBy?: T;
+  validatedAt?: T;
+  generatedByAI?: T;
+  aiGenerationMetadata?:
+    | T
+    | {
+        generationTime?: T;
+        validationScore?: T;
+        aiModel?: T;
+        sourcePrompt?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -2828,6 +2900,18 @@ export interface QuestionsSelect<T extends boolean = true> {
   aiGenerationPrompt?: T;
   validatedByExpert?: T;
   validatedBy?: T;
+  validationStatus?: T;
+  validationNotes?: T;
+  validatedAt?: T;
+  regeneratedAt?: T;
+  regenerationReason?: T;
+  qualityScore?: T;
+  validationIssues?:
+    | T
+    | {
+        issue?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }

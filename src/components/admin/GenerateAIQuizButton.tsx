@@ -674,6 +674,7 @@ export const GenerateAIQuizButton: React.FC = () => {
           onClose={handlePreviewClose}
           onPublish={handleQuizPublish}
           onEdit={handleQuizEdit}
+          mode="preview"
         />
       )}
     </>

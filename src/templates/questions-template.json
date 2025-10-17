@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Votre établissement",
+    "created": "2025-01-15",
+    "level": "PASS",
+    "description": "Template pour l'import de questions médicales"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la fonction principale du ventricule gauche ?",
+      "options": [
+        {
+          "text": "Pomper le sang oxygéné vers l'aorte",
+          "isCorrect": true
+        },
+        {
+          "text": "Recevoir le sang veineux des organes",
+          "isCorrect": false
+        },
+        {
+          "text": "Filtrer le sang et éliminer les toxines",
+          "isCorrect": false
+        },
+        {
+          "text": "Réguler la pression artérielle",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le ventricule gauche est la chambre cardiaque la plus puissante. Il reçoit le sang oxygéné de l'oreillette gauche et le pompe vers l'aorte pour alimenter la circulation systémique.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["anatomie", "cœur", "circulation", "ventricule"],
+      "sourcePageReference": "Anatomie Gray, p. 234"
+    },
+    {
+      "questionText": "Quel est le rôle principal de l'hémoglobine ?",
+      "options": [
+        {
+          "text": "Transport de l'oxygène",
+          "isCorrect": true
+        },
+        {
+          "text": "Coagulation du sang",
+          "isCorrect": false
+        },
+        {
+          "text": "Défense immunitaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation du pH sanguin",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémoglobine est une protéine présente dans les globules rouges qui transporte l'oxygène des poumons vers les tissus et participe au transport du CO2 des tissus vers les poumons.",
+      "category": "Hématologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["hémoglobine", "transport", "oxygène", "globules rouges"]
+    }
+  ]
+}

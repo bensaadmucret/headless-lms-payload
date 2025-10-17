@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Faculté de Médecine Paris",
+    "created": "2025-01-15",
+    "level": "PASS",
+    "description": "Questions simples de cardiologie pour test de validation"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la fonction principale du ventricule gauche ?",
+      "options": [
+        {"text": "Pomper le sang oxygéné vers l'aorte", "isCorrect": true},
+        {"text": "Recevoir le sang veineux des poumons", "isCorrect": false},
+        {"text": "Filtrer le sang des impuretés", "isCorrect": false},
+        {"text": "Produire les globules rouges", "isCorrect": false}
+      ],
+      "explanation": "Le ventricule gauche est la chambre cardiaque la plus puissante qui pompe le sang oxygéné vers l'aorte pour alimenter la circulation systémique.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["anatomie", "cœur", "circulation"]
+    },
+    {
+      "questionText": "Où se situe la valve mitrale ?",
+      "options": [
+        {"text": "Entre l'oreillette gauche et le ventricule gauche", "isCorrect": true},
+        {"text": "Entre l'oreillette droite et le ventricule droit", "isCorrect": false},
+        {"text": "Entre le ventricule gauche et l'aorte", "isCorrect": false},
+        {"text": "Entre le ventricule droit et l'artère pulmonaire", "isCorrect": false}
+      ],
+      "explanation": "La valve mitrale (ou bicuspide) se trouve entre l'oreillette gauche et le ventricule gauche, permettant le passage du sang oxygéné.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["anatomie", "valve", "cœur"]
+    },
+    {
+      "questionText": "Quelle est la valeur normale de la pression artérielle systolique chez l'adulte ?",
+      "options": [
+        {"text": "120 mmHg", "isCorrect": true},
+        {"text": "80 mmHg", "isCorrect": false},
+        {"text": "140 mmHg", "isCorrect": false},
+        {"text": "100 mmHg", "isCorrect": false}
+      ],
+      "explanation": "La pression artérielle systolique normale chez l'adulte est d'environ 120 mmHg, correspondant à la contraction du ventricule gauche.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["physiologie", "pression", "normal"]
+    },
+    {
+      "questionText": "Quel est le rôle principal des artères coronaires ?",
+      "options": [
+        {"text": "Alimenter le muscle cardiaque en sang oxygéné", "isCorrect": true},
+        {"text": "Drainer le sang veineux du cœur", "isCorrect": false},
+        {"text": "Réguler la fréquence cardiaque", "isCorrect": false},
+        {"text": "Conduire l'influx électrique", "isCorrect": false}
+      ],
+      "explanation": "Les artères coronaires (droite et gauche) ont pour fonction d'irriguer le myocarde en lui apportant l'oxygène et les nutriments nécessaires.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["anatomie", "coronaires", "irrigation"]
+    },
+    {
+      "questionText": "Qu'est-ce que la bradycardie ?",
+      "options": [
+        {"text": "Une fréquence cardiaque inférieure à 60 bpm", "isCorrect": true},
+        {"text": "Une fréquence cardiaque supérieure à 100 bpm", "isCorrect": false},
+        {"text": "Un rythme cardiaque irrégulier", "isCorrect": false},
+        {"text": "Une contraction cardiaque faible", "isCorrect": false}
+      ],
+      "explanation": "La bradycardie se définit par une fréquence cardiaque au repos inférieure à 60 battements par minute chez l'adulte.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["rythme", "fréquence", "pathologie"]
+    },
+    {
+      "questionText": "Quelle structure initie normalement l'activité électrique cardiaque ?",
+      "options": [
+        {"text": "Le nœud sinusal", "isCorrect": true},
+        {"text": "Le nœud auriculo-ventriculaire", "isCorrect": false},
+        {"text": "Le faisceau de His", "isCorrect": false},
+        {"text": "Les fibres de Purkinje", "isCorrect": false}
+      ],
+      "explanation": "Le nœud sinusal, situé dans l'oreillette droite, est le pacemaker naturel du cœur qui initie chaque battement cardiaque.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["électrophysiologie", "conduction", "nœud"]
+    },
+    {
+      "questionText": "Que représente l'onde P sur un électrocardiogramme ?",
+      "options": [
+        {"text": "La dépolarisation auriculaire", "isCorrect": true},
+        {"text": "La dépolarisation ventriculaire", "isCorrect": false},
+        {"text": "La repolarisation auriculaire", "isCorrect": false},
+        {"text": "La repolarisation ventriculaire", "isCorrect": false}
+      ],
+      "explanation": "L'onde P correspond à la dépolarisation des oreillettes, marquant le début de l'activité électrique cardiaque sur l'ECG.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["ECG", "électrophysiologie", "onde"]
+    },
+    {
+      "questionText": "Quelle est la durée normale du complexe QRS ?",
+      "options": [
+        {"text": "Moins de 120 ms", "isCorrect": true},
+        {"text": "Plus de 200 ms", "isCorrect": false},
+        {"text": "Entre 200 et 300 ms", "isCorrect": false},
+        {"text": "Plus de 400 ms", "isCorrect": false}
+      ],
+      "explanation": "La durée normale du complexe QRS est inférieure à 120 millisecondes, reflétant une conduction ventriculaire normale.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": ["ECG", "QRS", "conduction"]
+    },
+    {
+      "questionText": "Quel est le débit cardiaque normal au repos chez l'adulte ?",
+      "options": [
+        {"text": "5 L/min", "isCorrect": true},
+        {"text": "2 L/min", "isCorrect": false},
+        {"text": "10 L/min", "isCorrect": false},
+        {"text": "15 L/min", "isCorrect": false}
+      ],
+      "explanation": "Le débit cardiaque normal au repos est d'environ 5 litres par minute, calculé par la fréquence cardiaque × volume d'éjection systolique.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["physiologie", "débit", "hémodynamique"]
+    },
+    {
+      "questionText": "Qu'est-ce que la fraction d'éjection ventriculaire gauche ?",
+      "options": [
+        {"text": "Le pourcentage de sang éjecté à chaque contraction", "isCorrect": true},
+        {"text": "La pression maximale dans le ventricule", "isCorrect": false},
+        {"text": "Le volume total du ventricule", "isCorrect": false},
+        {"text": "La fréquence de contraction ventriculaire", "isCorrect": false}
+      ],
+      "explanation": "La fraction d'éjection ventriculaire gauche (FEVG) représente le pourcentage du volume télédiastolique éjecté lors de la systole, normalement > 50%.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": ["fonction", "éjection", "évaluation"]
+    }
+  ]
+}

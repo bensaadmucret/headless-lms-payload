@@ -1,0 +1,51 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Missing Fields"
+    // Missing required "level" field
+  },
+  "questions": [
+    {
+      "questionText": "Question sans options requises ?",
+      // Missing "options" field
+      "explanation": "Cette question n'a pas d'options",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      // Missing "questionText" field
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Question sans texte",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question sans catégorie ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "Question sans catégorie",
+      // Missing "category" field
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question avec champs vides ?",
+      "options": [
+        {"text": "", "isCorrect": true}, // Empty text
+        {"text": "Option B", "isCorrect": false}
+      ],
+      "explanation": "", // Empty explanation
+      "category": "", // Empty category
+      "difficulty": "easy",
+      "level": "PASS"
+    }
+  ]
+}

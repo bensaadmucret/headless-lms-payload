@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "type": "flashcards",
+  "metadata": {
+    "deckName": "Anatomie Cardiaque PASS",
+    "level": "PASS",
+    "category": "Cardiologie",
+    "description": "Flashcards pour révision anatomie cardiaque",
+    "source": "Votre établissement",
+    "created": "2025-01-15"
+  },
+  "cards": [
+    {
+      "front": "Quelle est la fonction du ventricule gauche ?",
+      "back": "Pomper le sang oxygéné vers l'aorte et la circulation systémique. C'est la chambre cardiaque la plus puissante.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["anatomie", "cœur", "ventricule"]
+    },
+    {
+      "front": "Combien de valves cardiaques y a-t-il ?",
+      "back": "4 valves : tricuspide, pulmonaire, mitrale (bicuspide) et aortique. Elles empêchent le reflux sanguin.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["anatomie", "valves", "cœur"]
+    },
+    {
+      "front": "Qu'est-ce que la systole ?",
+      "back": "Phase de contraction du cœur pendant laquelle les ventricules se contractent et éjectent le sang vers les artères.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["physiologie", "cycle cardiaque", "systole"]
+    }
+  ]
+}

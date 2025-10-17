@@ -1,0 +1,70 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Terminologie Médicale Spécialisée",
+    "level": "both",
+    "description": "Questions avec terminologie médicale complexe et termes techniques spécialisés"
+  },
+  "questions": [
+    {
+      "questionText": "Qu'est-ce que la tétralogie de Fallot ?",
+      "options": [
+        {"text": "Cardiopathie congénitale cyanogène avec 4 anomalies", "isCorrect": true},
+        {"text": "Maladie pulmonaire obstructive", "isCorrect": false},
+        {"text": "Syndrome neurologique", "isCorrect": false},
+        {"text": "Pathologie rénale", "isCorrect": false}
+      ],
+      "explanation": "La tétralogie de Fallot associe : sténose pulmonaire, CIV, dextroposition aortique, hypertrophie VD.",
+      "category": "Cardiologie Pédiatrique",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["congénital", "cyanogène", "tétralogie"]
+    }
+  ]
+}    }
+,
+    {
+      "questionText": "Définir la pneumoultramicroscopicsilicovolcanoconiosе ?",
+      "options": [
+        {"text": "Pneumoconiose due à l'inhalation de poussières de silice volcanique", "isCorrect": true},
+        {"text": "Maladie cardiaque rare", "isCorrect": false},
+        {"text": "Infection pulmonaire virale", "isCorrect": false},
+        {"text": "Allergie respiratoire", "isCorrect": false}
+      ],
+      "explanation": "Terme médical le plus long, désignant une pneumoconiose spécifique aux poussières volcaniques.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["pneumoconiose", "terminologie", "rare"]
+    },
+    {
+      "questionText": "Que signifie 'pseudohypoparathyroïdisme' ?",
+      "options": [
+        {"text": "Résistance périphérique à la PTH", "isCorrect": true},
+        {"text": "Déficit en parathormone", "isCorrect": false},
+        {"text": "Excès de parathormone", "isCorrect": false},
+        {"text": "Tumeur parathyroïdienne", "isCorrect": false}
+      ],
+      "explanation": "Syndrome de résistance aux actions de la PTH malgré des taux normaux ou élevés.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["parathyroïde", "résistance", "hormonal"]
+    },
+    {
+      "questionText": "Qu'est-ce que l'hippopotomonstrosesquippedaliophobie ?",
+      "options": [
+        {"text": "Peur des mots longs", "isCorrect": true},
+        {"text": "Peur des hippopotames", "isCorrect": false},
+        {"text": "Peur de l'eau", "isCorrect": false},
+        {"text": "Peur des monstres", "isCorrect": false}
+      ],
+      "explanation": "Terme ironique désignant la peur des mots longs, utilisé en psychiatrie pour illustrer les phobies spécifiques.",
+      "category": "Psychiatrie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": ["phobie", "psychiatrie", "ironique"]
+    }
+  ]
+}

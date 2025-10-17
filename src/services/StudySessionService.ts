@@ -1,5 +1,5 @@
 import { AIService } from './AIService';
-import type { StudySession, User, Course } from '../payload-types';
+import type { StudySession, User, Course, Quiz, Question } from '../payload-types';
 import type {
   StudySessionStep,
   StudySessionOptions,
@@ -7,29 +7,29 @@ import type {
 
 // Interface pour le payload minimum requis par le service
 interface PayloadService {
-  find: (args: {
+  find: <T = unknown>(args: {
     collection: string;
     where: Record<string, unknown>;
     depth?: number;
     limit?: number;
     sort?: string;
-  }) => Promise<{ docs: StudySession[] }>;
+  }) => Promise<{ docs: T[]; totalDocs?: number }>;
 
-  create: (args: {
+  create: <T = unknown>(args: {
     collection: string;
     data: Record<string, unknown>;
-  }) => Promise<StudySession>;
+  }) => Promise<T>;
 
-  update: (args: {
+  update: <T = unknown>(args: {
     collection: string;
     id: string | number;
     data: Record<string, unknown>;
-  }) => Promise<StudySession>;
+  }) => Promise<T>;
 
-  findByID: (args: {
+  findByID: <T = unknown>(args: {
     collection: string;
     id: string | number;
-  }) => Promise<StudySession>;
+  }) => Promise<T>;
 }
 
 // Types personnalisés pour une meilleure maintenabilité
@@ -186,13 +186,13 @@ export class StudySessionService {
 
       const populatedData = await this.populateSessionWithAI(initialData);
 
-      const sessionRaw = await this.payload.create({
+      const sessionRaw = await this.payload.create<StudySession>({
         collection: 'study-sessions',
         data: populatedData,
       });
 
       console.log('Study session created successfully:', sessionRaw.id);
-      return sessionRaw as StudySession;
+      return sessionRaw;
 
     } catch (error) {
       const errorMessage = error instanceof Error
@@ -399,7 +399,7 @@ export class StudySessionService {
    */
   private async getTodaysSession(userId: string | number): Promise<StudySession | null> {
     try {
-      console.log(`[getTodaysSession] Recherche de session pour userId=${userId} (type: ${typeof userId})`);
+      console.log(`[getTodaysSession] Recherche de session (type: ${typeof userId})`);
 
       // Validation stricte de l'ID utilisateur
       if (userId === undefined || userId === null || (typeof userId === 'number' && isNaN(userId))) {
@@ -580,7 +580,7 @@ export class StudySessionService {
 
     try {
       // Récupération des quiz associés au cours
-      const quizResponse = await this.payload.find({
+      const quizResponse = await this.payload.find<Quiz>({
         collection: 'quizzes',
         where: { course: { equals: safeCourseId } },
         depth: 2, // Demander à Payload de peupler les questions et leurs options
@@ -593,12 +593,13 @@ export class StudySessionService {
       }
 
       // Log détaillé des quiz trouvés pour le débogage
-      quizResponse.docs.forEach((quiz: any, index: number) => {
+      (quizResponse.docs as Quiz[]).forEach((quiz, index: number) => {
         console.log(`Quiz #${index + 1}: ID=${quiz.id}, Titre="${quiz.title}", Publié=${quiz.published}`);
         console.log(`  - Questions: ${quiz.questions ? Array.isArray(quiz.questions) ? quiz.questions.length : 'Non tableau' : 'Aucune'}`);
 
         if (quiz.questions && Array.isArray(quiz.questions)) {
-          quiz.questions.forEach((q: any, qIndex: number) => {
+          quiz.questions.forEach((q: Question | string | number, qIndex: number) => {
+            if (typeof q === 'string' || typeof q === 'number') return;
             console.log(`    Question #${qIndex + 1}: ID=${q.id}, Type=${q.questionType || 'Non spécifié'}`);
             if (q.options) {
               console.log(`      Options: ${Array.isArray(q.options) ? q.options.length : 'Non tableau'}`);
@@ -610,11 +611,12 @@ export class StudySessionService {
       });
 
       // Filtrer les quiz qui ont des questions de type 'multipleChoice'
-      const validQuizzes = quizResponse.docs.filter((quiz: any) => {
+      // Les questions sont déjà peuplées grâce à depth: 2
+      const validQuizzes = (quizResponse.docs as Quiz[]).filter((quiz) => {
         if (!quiz.questions || !Array.isArray(quiz.questions)) return false;
 
         // Vérifier que le quiz a au moins une question de type 'multipleChoice'
-        return quiz.questions.some((question: any) => {
+        return quiz.questions.some((question: Question | string | number) => {
           return typeof question === 'object' &&
             question !== null &&
             'questionType' in question &&
@@ -632,39 +634,33 @@ export class StudySessionService {
 
       let stepCounter = 0;
 
-      // Traitement des questions et création des étapes
+      // Traitement des questions et création des étapes (optimisé - pas de requêtes N+1)
       for (const quiz of validQuizzes) {
-        // Cast temporaire pour éviter les erreurs de type
-        const quizWithQuestions = quiz as any;
+        const quizWithQuestions = quiz as Quiz;
 
         if (!quizWithQuestions.questions || !Array.isArray(quizWithQuestions.questions)) {
           continue;
         }
 
-        // Traitement de chaque question du quiz
-        for (const partialQuestion of quizWithQuestions.questions) {
+        // Traitement de chaque question du quiz (déjà peuplées par depth: 2)
+        for (const questionData of quizWithQuestions.questions) {
           // Vérification de la validité de la question
-          if (!partialQuestion || typeof partialQuestion !== 'object' || !partialQuestion.id) {
+          if (!questionData || typeof questionData !== 'object' || !questionData.id) {
             continue;
           }
 
           // Ignorer les questions qui ne sont pas de type multipleChoice
-          if (!('questionType' in partialQuestion) || partialQuestion.questionType !== 'multipleChoice') {
+          if (!('questionType' in questionData) || questionData.questionType !== 'multipleChoice') {
             continue;
           }
 
           try {
-            // Récupérer la question complète avec ses options
-            const questionRaw = await this.safeFindByID('questions', partialQuestion.id);
-
-            if (!questionRaw) {
-              console.log(`⚠️ Impossible de charger la question ID=${partialQuestion.id}`);
-              continue;
-            }
+            // La question est déjà complète grâce à depth: 2, pas besoin de findByID
+            const questionRaw = questionData as any;
 
             // Normaliser les options si elles existent
             if (questionRaw.options && Array.isArray(questionRaw.options)) {
-              const normalizedOptions = questionRaw.options.map((option: any) => ({
+              const normalizedOptions = (questionRaw.options as Array<{ id?: string; text?: string; isCorrect?: boolean }>).map((option) => ({
                 id: option.id || `option-${Math.random().toString(36).substring(2, 9)}`,
                 text: option.text || 'Option sans texte',
                 isCorrect: Boolean(option.isCorrect),
@@ -677,13 +673,13 @@ export class StudySessionService {
 
             // Créer un objet question avec les données nécessaires
             const question = {
-              questionText: (questionRaw as any).questionText || 'Question de quiz',
+              questionText: questionRaw.questionText || 'Question de quiz',
               options: [] as Array<{ id: string; text: string; isCorrect: boolean }>
             };
 
             // Ajouter les options à la question
             if (questionRaw.options && Array.isArray(questionRaw.options)) {
-              question.options = questionRaw.options.map((option: any) => ({
+              question.options = (questionRaw.options as Array<{ id: string; text: string; isCorrect: boolean }>).map((option) => ({
                 id: option.id,
                 text: option.text,
                 isCorrect: option.isCorrect,
@@ -704,7 +700,7 @@ export class StudySessionService {
             });
             console.log(`✅ Étape de quiz créée avec succès pour la question ID=${questionRaw.id}`);
           } catch (error) {
-            console.log(`⚠️ Erreur lors du traitement de la question ID=${partialQuestion.id}:`, error);
+            console.log(`⚠️ Erreur lors du traitement de la question ID=${questionData.id}:`, error);
           }
         }
       }

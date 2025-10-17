@@ -1,0 +1,8 @@
+questionText,optionA,optionB,correctAnswer,explanation,category
+"Question sans assez d'options","Option A","Option B","C","Réponse C n'existe pas","Test"
+"Question avec réponse invalide","Option A","Option B","Z","Réponse Z n'existe pas","Test"
+"","Option A","Option B","A","Question vide","Test"
+"Question normale","Option A","Option B","A","Explication normale","Test"
+"Question avec virgules non échappées, problématiques",Option A avec, virgule,Option B,"A","Problème de parsing","Test"
+Question sans guillemets avec espaces,Option A,Option B,A,Explication,Test
+"Question avec caractères spéciaux non échappés "quotes"","Option A","Option B","A","Problème de guillemets","Test"

@@ -1,13 +1,13 @@
-import { Endpoint } from 'payload/config';
+import { Endpoint, PayloadRequest } from 'payload';
 import payload from 'payload';
 
 export const diagnosticsEndpoint: Endpoint = {
   path: '/diagnostics',
   method: 'get',
-  handler: async (req, res) => {
+  handler: async (req: PayloadRequest) => {
     try {
       console.log('🔍 Exécution du diagnostic...');
-      console.log(`👤 Utilisateur connecté: ${req.user ? req.user.email : 'Non authentifié'}`);
+      console.log(`👤 Utilisateur connecté: ${req.user ? 'Authentifié' : 'Non authentifié'}`);
       
       // Vérifier les cours disponibles
       console.log('📚 Récupération des cours...');
@@ -62,7 +62,7 @@ export const diagnosticsEndpoint: Endpoint = {
       
       // Vérifier les permissions de l'utilisateur
       if (req.user) {
-        console.log(`👤 Rôle de l'utilisateur: ${req.user.role}`);
+        console.log('👤 Rôle de l\'utilisateur vérifié');
         
         // Simuler la requête que ferait la modale de création de session
         console.log('🔍 Simulation de la requête pour la modale de création de session...');
@@ -81,7 +81,7 @@ export const diagnosticsEndpoint: Endpoint = {
       }
       
       // Renvoyer les résultats du diagnostic
-      return res.status(200).json({
+      return Response.json({
         success: true,
         coursesTotal: coursesResult.totalDocs,
         coursesPublished: coursesResult.docs.filter(course => course.published).length,
@@ -92,11 +92,11 @@ export const diagnosticsEndpoint: Endpoint = {
       });
     } catch (error) {
       console.error('❌ Erreur lors du diagnostic:', error);
-      return res.status(500).json({
+      return Response.json({
         success: false,
         message: 'Une erreur est survenue lors du diagnostic',
-        error: error.message,
-      });
+        error: error instanceof Error ? error.message : String(error),
+      }, { status: 500 });
     }
   }
 };

@@ -1,0 +1,65 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Textes Très Longs",
+    "level": "PASS",
+    "description": "Questions avec des textes extrêmement longs pour tester les limites du système"
+  },
+  "questions": [
+    {
+      "questionText": "Dans le contexte de la physiopathologie cardiovasculaire complexe, en considérant les mécanismes moléculaires et cellulaires impliqués dans la régulation de la contractilité myocardique, les interactions entre les systèmes sympathique et parasympathique, l'influence des facteurs hormonaux incluant le système rénine-angiotensine-aldostérone, les prostaglandines, l'oxyde nitrique et l'endothéline, ainsi que les modifications hémodynamiques résultant des variations de précharge, postcharge et contractilité intrinsèque du myocarde, quelle est la séquence d'événements la plus probable lors d'un épisode d'insuffisance cardiaque aiguë décompensée chez un patient présentant une cardiomyopathie dilatée d'origine ischémique avec fraction d'éjection ventriculaire gauche altérée, en tenant compte des mécanismes compensateurs neuro-hormonaux et de leur épuisement progressif ?",
+      "options": [
+        {"text": "Activation initiale du système sympathique avec augmentation de la fréquence cardiaque et de la contractilité, suivie d'une activation du système rénine-angiotensine-aldostérone entraînant une rétention hydrosodée et une augmentation de la précharge, puis épuisement des mécanismes compensateurs avec diminution progressive de la réserve contractile myocardique et développement d'un cercle vicieux de décompensation hémodynamique", "isCorrect": true},
+        {"text": "Diminution immédiate de la contractilité myocardique sans activation des systèmes compensateurs", "isCorrect": false},
+        {"text": "Activation exclusive du système parasympathique avec bradycardie", "isCorrect": false},
+        {"text": "Augmentation isolée de la postcharge sans autres modifications", "isCorrect": false}
+      ],
+      "explanation": "L'insuffisance cardiaque aiguë décompensée implique une cascade complexe d'événements physiopathologiques. Initialement, la diminution du débit cardiaque active les barorécepteurs qui stimulent le système nerveux sympathique, entraînant une tachycardie et une augmentation de la contractilité résiduelle. Parallèlement, l'activation du système rénine-angiotensine-aldostérone (SRAA) provoque une vasoconstriction périphérique et une rétention hydrosodée pour maintenir la pression artérielle et le volume circulant. Cependant, ces mécanismes compensateurs, bénéfiques à court terme, deviennent délétères à long terme : l'augmentation de la précharge et de la postcharge aggrave le travail cardiaque, l'activation sympathique chronique entraîne une désensibilisation des récepteurs β-adrénergiques et une toxicité myocardique, tandis que l'activation du SRAA favorise le remodelage ventriculaire et la fibrose. L'épuisement progressif de ces mécanismes compensateurs conduit à un cercle vicieux où la diminution de la fonction cardiaque active davantage les systèmes neuro-hormonaux, aggravant encore la dysfonction myocardique.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["physiopathologie", "insuffisance-cardiaque", "mécanismes-compensateurs", "neuro-hormonal", "complexe"]
+    },
+    {
+      "questionText": "A",
+      "options": [
+        {"text": "B", "isCorrect": true},
+        {"text": "C", "isCorrect": false}
+      ],
+      "explanation": "D",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["minimal"]
+    },
+    {
+      "questionText": "Question avec texte de longueur moyenne pour contraste ?",
+      "options": [
+        {"text": "Option de longueur normale", "isCorrect": true},
+        {"text": "Autre option standard", "isCorrect": false},
+        {"text": "Troisième option classique", "isCorrect": false},
+        {"text": "Quatrième option habituelle", "isCorrect": false}
+      ],
+      "explanation": "Explication de longueur standard pour servir de référence par rapport aux textes extrêmement longs.",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["contrôle", "longueur-moyenne"]
+    },
+    {
+      "questionText": "Question avec options très longues pour tester la gestion des textes étendus dans les choix de réponse ?",
+      "options": [
+        {"text": "Cette option contient un texte particulièrement long qui décrit en détail les mécanismes physiopathologiques complexes impliqués dans la régulation cardiovasculaire, incluant les interactions entre les systèmes nerveux autonome, endocrinien et paracrine, ainsi que les modifications hémodynamiques résultant des variations de précharge, postcharge et contractilité intrinsèque du myocarde dans le contexte de diverses pathologies cardiovasculaires", "isCorrect": true},
+        {"text": "Option courte", "isCorrect": false},
+        {"text": "Cette deuxième option longue explore les aspects moléculaires et cellulaires de la contraction myocardique, détaillant les mécanismes de couplage excitation-contraction, le rôle du calcium intracellulaire, les interactions actine-myosine, et les facteurs modulant la sensibilité au calcium des protéines contractiles", "isCorrect": false},
+        {"text": "Option normale", "isCorrect": false}
+      ],
+      "explanation": "Cette explication particulièrement détaillée vise à tester la capacité du système à gérer des textes explicatifs très longs, incluant des descriptions approfondies des mécanismes physiopathologiques, des références à la littérature scientifique, des exemples cliniques détaillés, et des corrélations entre les aspects théoriques et pratiques de la médecine cardiovasculaire, tout en maintenant la clarté pédagogique nécessaire à la compréhension des concepts complexes par les étudiants en médecine.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["texte-long", "options-étendues", "détaillé", "physiopathologie", "complexe"]
+    }
+  ]
+}

@@ -28,3 +28,6 @@ export * from './QuizValidationUtils';
 
 // Point d'entrée centralisé pour la validation
 export * from './validation';
+
+// Services d'import JSON
+export * from './JSONValidationService';

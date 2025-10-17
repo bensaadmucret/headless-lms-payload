@@ -16,7 +16,26 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     coverage: {
-      reporter: ['text', 'lcov'],
+      provider: 'v8',
+      reporter: ['text', 'lcov', 'html', 'json'],
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: [
+        'src/**/*.test.ts',
+        'src/**/*.spec.ts',
+        'src/**/__tests__/**',
+        'src/**/__mocks__/**',
+        'src/app/**', // Next.js routes (tested separately)
+        'src/**/types.ts',
+        'src/**/*.d.ts',
+        'node_modules/**',
+      ],
+      thresholds: {
+        lines: 30,
+        functions: 30,
+        branches: 30,
+        statements: 30,
+      },
+      all: true,
     },
     // Load test environment variables
     env: {

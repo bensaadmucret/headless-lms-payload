@@ -1,0 +1,175 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Faculté de Médecine Lyon Est",
+    "created": "2025-01-20",
+    "level": "LAS",
+    "description": "Questions fondamentales de neurologie pour LAS semestre 2",
+    "author": "Dr. Jean-Pierre Martin",
+    "estimatedDuration": 60,
+    "difficulty": "medium"
+  },
+  "questions": [
+    {
+      "questionText": "Quel nerf crânien est responsable de l'innervation motrice des muscles de la mastication ?",
+      "options": [
+        {
+          "text": "Le nerf trijumeau (V)",
+          "isCorrect": true
+        },
+        {
+          "text": "Le nerf facial (VII)",
+          "isCorrect": false
+        },
+        {
+          "text": "Le nerf glosso-pharyngien (IX)",
+          "isCorrect": false
+        },
+        {
+          "text": "Le nerf vague (X)",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le nerf trijumeau (V) assure l'innervation motrice des muscles masticateurs (temporal, masséter, ptérygoïdiens) ainsi que l'innervation sensitive de la face. Sa branche motrice naît du noyau moteur du trijumeau dans le tronc cérébral.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "nerfs-crâniens",
+        "trijumeau",
+        "mastication",
+        "tronc-cérébral",
+        "anatomie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Dans le réflexe rotulien, quel est le rôle du fuseau neuromusculaire ?",
+      "options": [
+        {
+          "text": "Rôcepteur sensoriel primaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Effecteur moteur",
+          "isCorrect": false
+        },
+        {
+          "text": "Centre d'intégration",
+          "isCorrect": false
+        },
+        {
+          "text": "Voie sensitive ascendante",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le fuseau neuromusculaire est un récepteur sensoriel proprioceptif sensible à l'étirement du muscle. Il contient des fibres intrafusales innervées par les fibres Ia qui transmettent l'information sensitive au système nerveux central pour maintenir le tonus musculaire.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "réflexes",
+        "fuseau-neuromusculaire",
+        "proprioception",
+        "moelle-épinière",
+        "physiologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Quel est le neurotransmetteur principal des synapses cholinergiques nicotiniques du système nerveux autonome ?",
+      "options": [
+        {
+          "text": "L'acétylcholine",
+          "isCorrect": true
+        },
+        {
+          "text": "La noradrénaline",
+          "isCorrect": false
+        },
+        {
+          "text": "Le glutamate",
+          "isCorrect": false
+        },
+        {
+          "text": "Le GABA",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'acétylcholine est le neurotransmetteur principal des synapses nicotiniques du système nerveux autonome (ganglions sympathiques et parasympathiques) et de la jonction neuromusculaire. Elle agit sur deux types de récepteurs : nicotiniques et muscariniques.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "neurotransmetteurs",
+        "acétylcholine",
+        "système-nerveux-autonome",
+        "synapses",
+        "pharmacologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Dans l'examen neurologique, le signe de Babinski pathologique indique une lésion :",
+      "options": [
+        {
+          "text": "Des voies corticospinales",
+          "isCorrect": true
+        },
+        {
+          "text": "Des voies cérébelleuses",
+          "isCorrect": false
+        },
+        {
+          "text": "Des nerfs périphériques",
+          "isCorrect": false
+        },
+        {
+          "text": "Du système extrapyramidal",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le signe de Babinski pathologique (extension du gros orteil avec éventail des autres orteils) indique une lésion des voies corticospinales (pyramidales) au-dessus de la moelle cervicale. C'est un signe de libération des réflexes archaïques normalement inhibés.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "examen-neurologique",
+        "signe-de-babinski",
+        "voies-corticospinales",
+        "réflexes-pathologiques",
+        "sémiologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Quel lobe cérébral est principalement impliqué dans la reconnaissance des visages (prosopagnosie) ?",
+      "options": [
+        {
+          "text": "Le lobe temporal",
+          "isCorrect": true
+        },
+        {
+          "text": "Le lobe occipital",
+          "isCorrect": false
+        },
+        {
+          "text": "Le lobe pariétal",
+          "isCorrect": false
+        },
+        {
+          "text": "Le lobe frontal",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La prosopagnosie (incapacité à reconnaître les visages) est principalement liée aux lésions du gyrus fusiforme dans le lobe temporal inférieur. Cette région fait partie du système de reconnaissance visuelle ventral (voie du 'quoi').",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "LAS",
+      "tags": [
+        "lobes-cérébraux",
+        "prosopagnosie",
+        "lobe-temporal",
+        "reconnaissance-visuelle",
+        "neuropsychologie"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test d'erreur",
+    "created": "2025-01-01",
+    "level": "INVALID_LEVEL"
+  },
+  "questions": [
+    {
+      "questionText": "Question sans options",
+      "explanation": "Cette question n'a pas d'options définies",
+      "category": "",
+      "difficulty": "invalid",
+      "level": "INVALID"
+    },
+    {
+      "questionText": "Question avec une seule option correcte",
+      "options": [
+        {
+          "text": "Seule option disponible",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "Question avec moins de 2 options",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    },
+    {
+      "questionText": "",
+
+      "options": [
+        {
+          "text": "Option A",
+          "isCorrect": true
+        },
+        {
+          "text": "Option B",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Question avec texte vide",
+      "category": "Test",
+      "difficulty": "medium"
+    },
+    {
+      "options": [
+        {
+          "text": "Option sans texte de question",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "Question complètement manquante",
+      "category": "Test"
+    },
+    {
+      "questionText": "Question avec plusieurs réponses correctes",
+      "options": [
+        {
+          "text": "Option A",
+          "isCorrect": true
+        },
+        {
+          "text": "Option B",
+          "isCorrect": true
+        },
+        {
+          "text": "Option C",
+          "isCorrect": true
+        },
+        {
+          "text": "Option D",
+          "isCorrect": true
+        }
+      ],
+      "explanation": "Toutes les options sont marquées comme correctes",
+      "category": "Test",
+      "difficulty": "hard",
+      "level": "BOTH"
+    },
+    {
+      "questionText": "Question avec catégorie inexistante dans le système",
+      "options": [
+        {
+          "text": "Option A",
+          "isCorrect": true
+        },
+        {
+          "text": "Option B",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Référence à une catégorie qui n'existe pas",
+      "category": "Catégorie_Inexistante_123456789",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["test", "erreur"]
+    }
+  ]
+}

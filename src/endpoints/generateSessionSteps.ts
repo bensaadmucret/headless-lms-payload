@@ -121,7 +121,7 @@ export const generateSessionStepsEndpoint: Endpoint = {
 
       // Vérifier que la session appartient à l'utilisateur connecté
       if (session.user && typeof session.user === 'object' && session.user.id !== req.user.id) {
-        console.log(`⛔ Accès non autorisé à la session ${sessionId} pour l'utilisateur ${req.user.id}`);
+        console.log(`⛔ Accès non autorisé à la session ${sessionId}`);
         return res.status(403).json({
           success: false,
           message: 'Vous n\'êtes pas autorisé à accéder à cette session'

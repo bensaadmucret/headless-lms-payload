@@ -68,7 +68,7 @@ export const studentQuizzesEndpoint: Endpoint = {
         });
       }
 
-      console.log(`👤 Étudiant connecté: ${req.user.email}`);
+      console.log('👤 Étudiant connecté');
 
       // Récupérer l'utilisateur avec ses cours
       const user = await req.payload.findByID({

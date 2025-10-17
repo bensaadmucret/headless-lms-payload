@@ -9,22 +9,58 @@
 
 ## 🚀 Installation & Démarrage rapide
 
+### Prérequis
+- Node.js 18+ 
+- PostgreSQL 14+
+- npm (pas de yarn/pnpm)
+
+### Installation
+
 ```bash
-# Installer les dépendances (npm uniquement)
+# 1. Cloner le projet
+git clone <repository-url>
+cd payload-cms
+
+# 2. Installer les dépendances
 npm install
 
-# Lancer le serveur de développement
+# 3. Configurer les variables d'environnement
+cp .env.example .env
+# Éditer .env avec vos paramètres (DATABASE_URI, PAYLOAD_SECRET, etc.)
+
+# 4. Initialiser la base de données
+npm run payload migrate
+
+# 5. Créer un utilisateur admin
+npm run payload seed
+
+# 6. Lancer le serveur de développement
 npm run dev
 ```
 
-## 🧪 Lancer les tests (Vitest)
+Le serveur démarre sur `http://localhost:3000`  
+Admin: `http://localhost:3000/admin`
+
+### 🧪 Tests
 
 ```bash
-# Exécuter tous les tests unitaires
+# Tests unitaires
 npm run test:vitest
 
-# Générer un rapport de couverture
+# Tests avec couverture
 npm run test:vitest -- --coverage
+
+# Tests en mode watch
+npm run test:vitest:ui
+
+# Linter
+npm run lint
+
+# Vérifier les duplications
+npm run ci:dup
+
+# Détecter le code mort
+npm run ci:prune
 ```
 
 ---
@@ -98,4 +134,16 @@ Course
   - Architecture conçue pour supporter d’autres canaux de notification (Slack, webhook, etc.)
   - Sécurité avancée : seuls les superadmins peuvent effectuer les actions critiques
 
-Pour plus de détails, voir la documentation technique dans le dossier `/src/collections` et `/src/emailTemplates`.
+## 📚 Documentation
+
+- **[Architecture](./docs/ARCHITECTURE.md)** - Diagrammes et structure du projet
+- **[API Documentation](./docs/API.md)** - Endpoints et exemples d'utilisation
+- **[Rapport Qualité](./RAPPORT_QUALITE_CODE.md)** - Analyse de qualité du code
+- Collections techniques: `/src/collections`
+- Templates email: `/src/emailTemplates`
+
+## 🔗 Liens Utiles
+
+- [Payload CMS Documentation](https://payloadcms.com/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
+- [PostgreSQL Documentation](https://www.postgresql.org/docs/)

@@ -1,0 +1,407 @@
+{
+  "complexMedicalPath": {
+    "version": "1.0",
+    "type": "learning-path",
+    "metadata": {
+      "title": "Complex Medical Learning Path - Multi-level Dependencies",
+      "level": "PASS",
+      "estimatedDuration": 480,
+      "description": "Comprehensive medical learning path with complex prerequisite chains"
+    },
+    "path": {
+      "steps": [
+        {
+          "id": "medical-foundations",
+          "title": "Medical Foundations",
+          "prerequisites": [],
+          "questions": [
+            {
+              "questionText": "What are the basic principles of medical ethics?",
+              "options": [
+                {"text": "Autonomy, beneficence, non-maleficence, justice", "isCorrect": true},
+                {"text": "Only beneficence and non-maleficence", "isCorrect": false},
+                {"text": "Only autonomy and justice", "isCorrect": false},
+                {"text": "Only non-maleficence", "isCorrect": false}
+              ],
+              "explanation": "The four fundamental principles of medical ethics are autonomy, beneficence, non-maleficence, and justice.",
+              "category": "Medical Ethics",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "basic-anatomy",
+          "title": "Basic Human Anatomy",
+          "prerequisites": ["medical-foundations"],
+          "questions": [
+            {
+              "questionText": "How many systems are there in the human body?",
+              "options": [
+                {"text": "11 major systems", "isCorrect": true},
+                {"text": "8 major systems", "isCorrect": false},
+                {"text": "15 major systems", "isCorrect": false},
+                {"text": "5 major systems", "isCorrect": false}
+              ],
+              "explanation": "The human body has 11 major organ systems including circulatory, respiratory, digestive, etc.",
+              "category": "Anatomy",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "basic-physiology",
+          "title": "Basic Human Physiology",
+          "prerequisites": ["basic-anatomy"],
+          "questions": [
+            {
+              "questionText": "What is homeostasis?",
+              "options": [
+                {"text": "The body's ability to maintain stable internal conditions", "isCorrect": true},
+                {"text": "The process of cell division", "isCorrect": false},
+                {"text": "The breakdown of nutrients", "isCorrect": false},
+                {"text": "The formation of blood cells", "isCorrect": false}
+              ],
+              "explanation": "Homeostasis is the body's ability to maintain stable internal conditions despite external changes.",
+              "category": "Physiology",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "cardiovascular-anatomy",
+          "title": "Cardiovascular System Anatomy",
+          "prerequisites": ["basic-anatomy", "basic-physiology"],
+          "questions": [
+            {
+              "questionText": "What are the main components of the cardiovascular system?",
+              "options": [
+                {"text": "Heart, blood vessels, and blood", "isCorrect": true},
+                {"text": "Only heart and blood", "isCorrect": false},
+                {"text": "Heart, lungs, and blood", "isCorrect": false},
+                {"text": "Only blood vessels", "isCorrect": false}
+              ],
+              "explanation": "The cardiovascular system consists of the heart, blood vessels (arteries, veins, capillaries), and blood.",
+              "category": "Cardiologie",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "cardiovascular-physiology",
+          "title": "Cardiovascular System Physiology",
+          "prerequisites": ["cardiovascular-anatomy"],
+          "questions": [
+            {
+              "questionText": "What is the cardiac cycle?",
+              "options": [
+                {"text": "The sequence of events in one heartbeat", "isCorrect": true},
+                {"text": "The formation of blood cells", "isCorrect": false},
+                {"text": "The process of blood clotting", "isCorrect": false},
+                {"text": "The exchange of gases in lungs", "isCorrect": false}
+              ],
+              "explanation": "The cardiac cycle is the sequence of events that occurs during one complete heartbeat, including systole and diastole.",
+              "category": "Cardiologie",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "respiratory-anatomy",
+          "title": "Respiratory System Anatomy",
+          "prerequisites": ["basic-anatomy", "basic-physiology"],
+          "questions": [
+            {
+              "questionText": "What is the main function of alveoli?",
+              "options": [
+                {"text": "Gas exchange between air and blood", "isCorrect": true},
+                {"text": "Air filtration", "isCorrect": false},
+                {"text": "Sound production", "isCorrect": false},
+                {"text": "Temperature regulation", "isCorrect": false}
+              ],
+              "explanation": "Alveoli are tiny air sacs in the lungs where gas exchange occurs between air and blood.",
+              "category": "Pneumologie",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "cardiopulmonary-integration",
+          "title": "Cardiopulmonary System Integration",
+          "prerequisites": ["cardiovascular-physiology", "respiratory-anatomy"],
+          "questions": [
+            {
+              "questionText": "How do the cardiovascular and respiratory systems work together?",
+              "options": [
+                {"text": "The heart pumps blood to lungs for oxygenation", "isCorrect": true},
+                {"text": "They work independently", "isCorrect": false},
+                {"text": "Only during exercise", "isCorrect": false},
+                {"text": "Only the respiratory system works", "isCorrect": false}
+              ],
+              "explanation": "The cardiovascular and respiratory systems work together to deliver oxygen to tissues and remove carbon dioxide.",
+              "category": "Physiologie Intégrée",
+              "difficulty": "hard",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "pathophysiology-basics",
+          "title": "Basic Pathophysiology",
+          "prerequisites": ["cardiopulmonary-integration"],
+          "questions": [
+            {
+              "questionText": "What is pathophysiology?",
+              "options": [
+                {"text": "The study of functional changes in disease", "isCorrect": true},
+                {"text": "The study of normal body functions", "isCorrect": false},
+                {"text": "The study of anatomy only", "isCorrect": false},
+                {"text": "The study of medications", "isCorrect": false}
+              ],
+              "explanation": "Pathophysiology is the study of the functional changes that occur in the body as a result of disease or injury.",
+              "category": "Pathophysiologie",
+              "difficulty": "hard",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "clinical-applications",
+          "title": "Clinical Applications",
+          "prerequisites": ["pathophysiology-basics", "cardiopulmonary-integration"],
+          "questions": [
+            {
+              "questionText": "What is the first step in clinical diagnosis?",
+              "options": [
+                {"text": "Taking a detailed patient history", "isCorrect": true},
+                {"text": "Ordering laboratory tests", "isCorrect": false},
+                {"text": "Performing surgery", "isCorrect": false},
+                {"text": "Prescribing medication", "isCorrect": false}
+              ],
+              "explanation": "Taking a detailed patient history is typically the first and most important step in clinical diagnosis.",
+              "category": "Médecine Clinique",
+              "difficulty": "hard",
+              "level": "PASS"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "circularDependencyExample": {
+    "version": "1.0",
+    "type": "learning-path",
+    "metadata": {
+      "title": "Circular Dependency Test Path",
+      "level": "PASS",
+      "estimatedDuration": 120
+    },
+    "path": {
+      "steps": [
+        {
+          "id": "step-alpha",
+          "title": "Step Alpha",
+          "prerequisites": ["step-gamma"],
+          "questions": [
+            {
+              "questionText": "Alpha question?",
+              "options": [
+                {"text": "Alpha answer", "isCorrect": true},
+                {"text": "Beta answer", "isCorrect": false}
+              ],
+              "explanation": "Alpha explanation",
+              "category": "Test",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "step-beta",
+          "title": "Step Beta",
+          "prerequisites": ["step-alpha"],
+          "questions": [
+            {
+              "questionText": "Beta question?",
+              "options": [
+                {"text": "Beta answer", "isCorrect": true},
+                {"text": "Alpha answer", "isCorrect": false}
+              ],
+              "explanation": "Beta explanation",
+              "category": "Test",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "step-gamma",
+          "title": "Step Gamma",
+          "prerequisites": ["step-beta"],
+          "questions": [
+            {
+              "questionText": "Gamma question?",
+              "options": [
+                {"text": "Gamma answer", "isCorrect": true},
+                {"text": "Alpha answer", "isCorrect": false}
+              ],
+              "explanation": "Gamma explanation",
+              "category": "Test",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "branchingPath": {
+    "version": "1.0",
+    "type": "learning-path",
+    "metadata": {
+      "title": "Branching Learning Path - Diamond Pattern",
+      "level": "PASS",
+      "estimatedDuration": 180
+    },
+    "path": {
+      "steps": [
+        {
+          "id": "root-concept",
+          "title": "Root Medical Concept",
+          "prerequisites": [],
+          "questions": [
+            {
+              "questionText": "What is the basic unit of life?",
+              "options": [
+                {"text": "Cell", "isCorrect": true},
+                {"text": "Tissue", "isCorrect": false},
+                {"text": "Organ", "isCorrect": false},
+                {"text": "System", "isCorrect": false}
+              ],
+              "explanation": "The cell is the basic structural and functional unit of all living organisms.",
+              "category": "Biology",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "structural-branch",
+          "title": "Structural Biology Branch",
+          "prerequisites": ["root-concept"],
+          "questions": [
+            {
+              "questionText": "What gives cells their shape?",
+              "options": [
+                {"text": "Cytoskeleton", "isCorrect": true},
+                {"text": "Nucleus", "isCorrect": false},
+                {"text": "Mitochondria", "isCorrect": false},
+                {"text": "Ribosomes", "isCorrect": false}
+              ],
+              "explanation": "The cytoskeleton is a network of protein filaments that gives cells their shape and structure.",
+              "category": "Cell Biology",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "functional-branch",
+          "title": "Functional Biology Branch",
+          "prerequisites": ["root-concept"],
+          "questions": [
+            {
+              "questionText": "What is the powerhouse of the cell?",
+              "options": [
+                {"text": "Mitochondria", "isCorrect": true},
+                {"text": "Nucleus", "isCorrect": false},
+                {"text": "Ribosome", "isCorrect": false},
+                {"text": "Golgi apparatus", "isCorrect": false}
+              ],
+              "explanation": "Mitochondria are called the powerhouse of the cell because they produce ATP, the cell's energy currency.",
+              "category": "Cell Biology",
+              "difficulty": "medium",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "integration-point",
+          "title": "Structure-Function Integration",
+          "prerequisites": ["structural-branch", "functional-branch"],
+          "questions": [
+            {
+              "questionText": "How do structure and function relate in cells?",
+              "options": [
+                {"text": "Structure determines function", "isCorrect": true},
+                {"text": "They are unrelated", "isCorrect": false},
+                {"text": "Function determines structure", "isCorrect": false},
+                {"text": "They change independently", "isCorrect": false}
+              ],
+              "explanation": "In biology, structure and function are closely related - the structure of a biological component determines its function.",
+              "category": "Cell Biology",
+              "difficulty": "hard",
+              "level": "PASS"
+            }
+          ]
+        },
+        {
+          "id": "advanced-applications",
+          "title": "Advanced Cellular Applications",
+          "prerequisites": ["integration-point"],
+          "questions": [
+            {
+              "questionText": "What happens when cellular structure is damaged?",
+              "options": [
+                {"text": "Function is impaired", "isCorrect": true},
+                {"text": "Nothing changes", "isCorrect": false},
+                {"text": "Function improves", "isCorrect": false},
+                {"text": "Structure repairs itself instantly", "isCorrect": false}
+              ],
+              "explanation": "When cellular structure is damaged, the function of the cell is typically impaired, which can lead to disease.",
+              "category": "Pathology",
+              "difficulty": "hard",
+              "level": "PASS"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "performanceTestPath": {
+    "version": "1.0",
+    "type": "learning-path",
+    "metadata": {
+      "title": "Performance Test - Large Linear Path",
+      "level": "PASS",
+      "estimatedDuration": 1200
+    },
+    "path": {
+      "steps": [
+        {
+          "id": "step-0",
+          "title": "Foundation Step",
+          "prerequisites": [],
+          "questions": [
+            {
+              "questionText": "Foundation question 0?",
+              "options": [
+                {"text": "Answer 0", "isCorrect": true},
+                {"text": "Wrong 0", "isCorrect": false}
+              ],
+              "explanation": "Foundation explanation 0",
+              "category": "Performance",
+              "difficulty": "easy",
+              "level": "PASS"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

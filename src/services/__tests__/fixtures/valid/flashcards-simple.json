@@ -1,0 +1,82 @@
+{
+  "version": "1.0",
+  "type": "flashcards",
+  "metadata": {
+    "deckName": "Anatomie Cardiaque PASS",
+    "level": "PASS",
+    "category": "Cardiologie",
+    "description": "Flashcards pour révision de l'anatomie cardiaque de base"
+  },
+  "cards": [
+    {
+      "front": "Quelle est la fonction du ventricule gauche ?",
+      "back": "Pomper le sang oxygéné vers l'aorte et la circulation systémique",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["anatomie", "ventricule", "fonction"]
+    },
+    {
+      "front": "Où se trouve la valve mitrale ?",
+      "back": "Entre l'oreillette gauche et le ventricule gauche",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["anatomie", "valve", "localisation"]
+    },
+    {
+      "front": "Qu'est-ce que le nœud sinusal ?",
+      "back": "Le pacemaker naturel du cœur situé dans l'oreillette droite qui initie l'activité électrique cardiaque",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["électrophysiologie", "nœud", "pacemaker"]
+    },
+    {
+      "front": "Quelle est la différence entre systole et diastole ?",
+      "back": "Systole = contraction cardiaque (éjection du sang), Diastole = relaxation cardiaque (remplissage des cavités)",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["physiologie", "cycle", "contraction"]
+    },
+    {
+      "front": "Que sont les artères coronaires ?",
+      "back": "Vaisseaux qui irriguent le muscle cardiaque (myocarde) en sang oxygéné. Principales : coronaire droite et gauche",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["anatomie", "coronaires", "irrigation"]
+    },
+    {
+      "front": "Qu'est-ce que la fraction d'éjection ?",
+      "back": "Pourcentage du volume sanguin éjecté par le ventricule gauche à chaque contraction (normale > 50%)",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "tags": ["fonction", "éjection", "évaluation"]
+    },
+    {
+      "front": "Définir la bradycardie",
+      "back": "Fréquence cardiaque au repos inférieure à 60 battements par minute",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["rythme", "fréquence", "définition"]
+    },
+    {
+      "front": "Que représente l'onde P sur un ECG ?",
+      "back": "La dépolarisation des oreillettes (contraction auriculaire)",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["ECG", "onde", "auriculaire"]
+    },
+    {
+      "front": "Valeurs normales de la pression artérielle",
+      "back": "Systolique : 120 mmHg, Diastolique : 80 mmHg (soit 120/80 mmHg)",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["pression", "normal", "valeurs"]
+    },
+    {
+      "front": "Qu'est-ce que l'insuffisance cardiaque ?",
+      "back": "Incapacité du cœur à assurer un débit sanguin suffisant pour répondre aux besoins de l'organisme",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "tags": ["pathologie", "insuffisance", "définition"]
+    }
+  ]
+}

@@ -3,13 +3,13 @@ import type { Payload } from 'payload'
 export interface AuditLogEntry {
   action: string
   resource: string
-  resourceId: string
-  userId?: string
+  resourceId: string | number
+  userId?: string | number
   userEmail?: string
   userRole?: string
-  details?: Record<string, any>
+  details?: Record<string, unknown>
   ipAddress?: string
-  userAgent?: string
+  userAgent?: string | string[]
   timestamp: Date
   success: boolean
   errorMessage?: string
@@ -32,8 +32,8 @@ interface ExistingAuditLog {
   user: { relationTo: 'users'; value: number } | null
   action: string
   collection: string
-  documentId: string
-  diff?: Record<string, any>
+  documentId: string | number
+  diff?: Record<string, unknown>
   timestamp: Date
 }
 
@@ -68,7 +68,7 @@ export class AuditLogService {
         user: auditEntry.userId ? { relationTo: 'users', value: Number(auditEntry.userId) } : null,
         action: `${auditEntry.action}${auditEntry.success ? '' : '_failed'}`,
         collection: auditEntry.resource,
-        documentId: auditEntry.resourceId,
+        documentId: typeof auditEntry.resourceId === 'number' ? String(auditEntry.resourceId) : auditEntry.resourceId,
         diff: {
           details: auditEntry.details,
           ipAddress: auditEntry.ipAddress,

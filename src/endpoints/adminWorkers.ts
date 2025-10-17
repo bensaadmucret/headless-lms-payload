@@ -1,5 +1,18 @@
-import type { Endpoint } from 'payload'
 import { getAllQueueStats, cleanAllQueues } from '../jobs/queue'
+import type { PayloadRequest } from 'payload'
+import type { Response, NextFunction } from 'express'
+
+// Extension du type PayloadRequest pour inclure les params Express
+interface PayloadRequestWithParams<P = any> extends PayloadRequest {
+  params: P
+}
+
+// Types pour les endpoints Payload CMS
+type Endpoint = {
+  path: string;
+  method: 'get' | 'post' | 'put' | 'delete' | 'patch';
+  handler: (req: PayloadRequest | PayloadRequestWithParams, res: Response, next: NextFunction) => Promise<void> | void;
+};
 
 /**
  * Endpoint pour obtenir le statut des workers et des queues
@@ -7,10 +20,11 @@ import { getAllQueueStats, cleanAllQueues } from '../jobs/queue'
 export const getWorkersStatusEndpoint: Endpoint = {
   path: '/admin/workers/status',
   method: 'get',
-  handler: async (req, res) => {
+  handler: async (req, res, next) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ error: 'Authentification requise' })
+        res.status(401).json({ error: 'Authentification requise' })
+        return
       }
 
       // Statut des queues Bull
@@ -21,7 +35,7 @@ export const getWorkersStatusEndpoint: Endpoint = {
       const totalCompleted = queueStats.reduce((sum, q) => sum + q.completed, 0)
       const totalFailed = queueStats.reduce((sum, q) => sum + q.failed, 0)
 
-      return res.json({
+      res.json({
         success: true,
         data: {
           workers: {
@@ -52,7 +66,7 @@ export const getWorkersStatusEndpoint: Endpoint = {
 
     } catch (error) {
       console.error('Erreur récupération statut workers:', error)
-      return res.status(500).json({
+      res.status(500).json({
         error: 'Erreur interne',
         details: error instanceof Error ? error.message : 'Erreur inconnue'
       })
@@ -66,15 +80,16 @@ export const getWorkersStatusEndpoint: Endpoint = {
 export const restartWorkersEndpoint: Endpoint = {
   path: '/admin/workers/restart',
   method: 'post',
-  handler: async (req, res) => {
+  handler: async (req, res, next) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ error: 'Authentification requise' })
+        res.status(401).json({ error: 'Authentification requise' })
+        return
       }
 
-      console.log(`🔄 Redémarrage simulé par ${req.user.email}`)
+      console.log('🔄 Redémarrage simulé par un administrateur')
       
-      return res.json({
+      res.json({
         success: true,
         message: 'Fonctionnalité de redémarrage temporairement désactivée',
         data: {
@@ -85,7 +100,7 @@ export const restartWorkersEndpoint: Endpoint = {
 
     } catch (error) {
       console.error('Erreur redémarrage workers:', error)
-      return res.status(500).json({
+      res.status(500).json({
         error: 'Erreur lors du redémarrage',
         details: error instanceof Error ? error.message : 'Erreur inconnue'
       })
@@ -99,19 +114,20 @@ export const restartWorkersEndpoint: Endpoint = {
 export const cleanOldJobsEndpoint: Endpoint = {
   path: '/admin/workers/cleanup',
   method: 'post',
-  handler: async (req, res) => {
+  handler: async (req, res, next) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ error: 'Authentification requise' })
+        res.status(401).json({ error: 'Authentification requise' })
+        return
       }
 
       // Use the imported cleanAllQueues function directly
       
-      console.log(`🧹 Nettoyage des jobs initié par ${req.user.email}`)
+      console.log('🧹 Nettoyage des jobs initié par un administrateur')
       
       await cleanAllQueues()
 
-      return res.json({
+      res.json({
         success: true,
         message: 'Nettoyage des anciennes jobs terminé',
         data: {
@@ -122,7 +138,7 @@ export const cleanOldJobsEndpoint: Endpoint = {
 
     } catch (error) {
       console.error('Erreur nettoyage jobs:', error)
-      return res.status(500).json({
+      res.status(500).json({
         error: 'Erreur lors du nettoyage',
         details: error instanceof Error ? error.message : 'Erreur inconnue'
       })
@@ -136,10 +152,17 @@ export const cleanOldJobsEndpoint: Endpoint = {
 export const getQueueDetailsEndpoint: Endpoint = {
   path: '/admin/queues/:queueName',
   method: 'get',
-  handler: async (req, res) => {
+  handler: async (req, res, next) => {
     try {
       if (!req.user) {
-        return res.status(401).json({ error: 'Authentification requise' })
+        res.status(401).json({ error: 'Authentification requise' })
+        return
+      }
+
+      // Vérifier que params existe (type guard)
+      if (!('params' in req) || !req.params?.queueName) {
+        res.status(400).json({ error: 'Paramètre queueName manquant' })
+        return
       }
 
       const { queueName } = req.params
@@ -147,13 +170,14 @@ export const getQueueDetailsEndpoint: Endpoint = {
       // Simplifié pour l'instant
       const validQueues = ['document-extraction', 'nlp-processing', 'ai-enrichment', 'validation-check']
       if (!validQueues.includes(queueName)) {
-        return res.status(404).json({ 
+        res.status(404).json({ 
           error: `Queue '${queueName}' non trouvée`,
           availableQueues: validQueues
         })
+        return
       }
 
-      return res.json({
+      res.json({
         success: true,
         message: 'Détails des queues temporairement simplifiés',
         data: {
@@ -164,8 +188,11 @@ export const getQueueDetailsEndpoint: Endpoint = {
       })
 
     } catch (error) {
-      console.error(`Erreur récupération détails queue ${req.params.queueName}:`, error)
-      return res.status(500).json({
+      const queueNameForLog = ('params' in req && (req as PayloadRequestWithParams<{ queueName: string }>).params?.queueName) 
+        ? (req as PayloadRequestWithParams<{ queueName: string }>).params.queueName 
+        : 'unknown'
+      console.error(`Erreur récupération détails queue ${queueNameForLog}:`, error)
+      res.status(500).json({
         error: 'Erreur interne',
         details: error instanceof Error ? error.message : 'Erreur inconnue'
       })

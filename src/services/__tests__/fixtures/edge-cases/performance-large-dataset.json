@@ -1,0 +1,3011 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Performance - Large Dataset",
+    "level": "both",
+    "description": "Dataset de 100 questions pour test de performance et limites système"
+  },
+  "questions": [
+    {
+      "questionText": "Question de performance numéro 1 en Pneumologie - Quel est le concept médical 1 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 1 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 1A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 1B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 1C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 1 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-1",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 2 en Neurologie - Quel est le concept médical 2 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 2 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 2A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 2B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 2C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 2 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-2",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 3 en Endocrinologie - Quel est le concept médical 3 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 3 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 3A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 3B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 3C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 3 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-3",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 4 en Gastroentérologie - Quel est le concept médical 4 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 4 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 4A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 4B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 4C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 4 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-4",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 5 en Cardiologie - Quel est le concept médical 5 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 5 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 5A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 5B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 5C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 5 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-5",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 6 en Pneumologie - Quel est le concept médical 6 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 6 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 6A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 6B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 6C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 6 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-6",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 7 en Neurologie - Quel est le concept médical 7 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 7 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 7A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 7B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 7C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 7 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-7",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 8 en Endocrinologie - Quel est le concept médical 8 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 8 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 8A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 8B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 8C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 8 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-8",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 9 en Gastroentérologie - Quel est le concept médical 9 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 9 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 9A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 9B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 9C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 9 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-9",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 10 en Cardiologie - Quel est le concept médical 10 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 10 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 10A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 10B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 10C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 10 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-10",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 11 en Pneumologie - Quel est le concept médical 11 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 11 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 11A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 11B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 11C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 11 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-11",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 12 en Neurologie - Quel est le concept médical 12 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 12 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 12A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 12B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 12C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 12 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-12",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 13 en Endocrinologie - Quel est le concept médical 13 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 13 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 13A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 13B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 13C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 13 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-13",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 14 en Gastroentérologie - Quel est le concept médical 14 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 14 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 14A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 14B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 14C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 14 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-14",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 15 en Cardiologie - Quel est le concept médical 15 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 15 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 15A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 15B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 15C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 15 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-15",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 16 en Pneumologie - Quel est le concept médical 16 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 16 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 16A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 16B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 16C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 16 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-16",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 17 en Neurologie - Quel est le concept médical 17 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 17 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 17A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 17B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 17C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 17 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-17",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 18 en Endocrinologie - Quel est le concept médical 18 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 18 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 18A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 18B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 18C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 18 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-18",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 19 en Gastroentérologie - Quel est le concept médical 19 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 19 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 19A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 19B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 19C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 19 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-19",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 20 en Cardiologie - Quel est le concept médical 20 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 20 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 20A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 20B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 20C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 20 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-20",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 21 en Pneumologie - Quel est le concept médical 21 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 21 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 21A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 21B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 21C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 21 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-21",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 22 en Neurologie - Quel est le concept médical 22 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 22 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 22A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 22B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 22C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 22 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-22",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 23 en Endocrinologie - Quel est le concept médical 23 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 23 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 23A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 23B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 23C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 23 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-23",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 24 en Gastroentérologie - Quel est le concept médical 24 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 24 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 24A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 24B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 24C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 24 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-24",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 25 en Cardiologie - Quel est le concept médical 25 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 25 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 25A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 25B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 25C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 25 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-25",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 26 en Pneumologie - Quel est le concept médical 26 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 26 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 26A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 26B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 26C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 26 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-26",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 27 en Neurologie - Quel est le concept médical 27 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 27 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 27A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 27B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 27C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 27 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-27",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 28 en Endocrinologie - Quel est le concept médical 28 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 28 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 28A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 28B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 28C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 28 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-28",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 29 en Gastroentérologie - Quel est le concept médical 29 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 29 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 29A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 29B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 29C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 29 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-29",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 30 en Cardiologie - Quel est le concept médical 30 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 30 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 30A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 30B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 30C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 30 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-30",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 31 en Pneumologie - Quel est le concept médical 31 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 31 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 31A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 31B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 31C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 31 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-31",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 32 en Neurologie - Quel est le concept médical 32 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 32 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 32A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 32B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 32C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 32 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-32",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 33 en Endocrinologie - Quel est le concept médical 33 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 33 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 33A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 33B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 33C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 33 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-33",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 34 en Gastroentérologie - Quel est le concept médical 34 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 34 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 34A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 34B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 34C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 34 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-34",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 35 en Cardiologie - Quel est le concept médical 35 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 35 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 35A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 35B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 35C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 35 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-35",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 36 en Pneumologie - Quel est le concept médical 36 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 36 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 36A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 36B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 36C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 36 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-36",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 37 en Neurologie - Quel est le concept médical 37 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 37 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 37A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 37B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 37C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 37 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-37",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 38 en Endocrinologie - Quel est le concept médical 38 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 38 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 38A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 38B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 38C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 38 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-38",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 39 en Gastroentérologie - Quel est le concept médical 39 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 39 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 39A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 39B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 39C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 39 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-39",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 40 en Cardiologie - Quel est le concept médical 40 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 40 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 40A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 40B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 40C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 40 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-40",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 41 en Pneumologie - Quel est le concept médical 41 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 41 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 41A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 41B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 41C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 41 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-41",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 42 en Neurologie - Quel est le concept médical 42 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 42 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 42A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 42B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 42C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 42 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-42",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 43 en Endocrinologie - Quel est le concept médical 43 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 43 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 43A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 43B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 43C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 43 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-43",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 44 en Gastroentérologie - Quel est le concept médical 44 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 44 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 44A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 44B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 44C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 44 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-44",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 45 en Cardiologie - Quel est le concept médical 45 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 45 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 45A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 45B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 45C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 45 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-45",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 46 en Pneumologie - Quel est le concept médical 46 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 46 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 46A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 46B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 46C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 46 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-46",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 47 en Neurologie - Quel est le concept médical 47 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 47 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 47A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 47B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 47C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 47 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-47",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 48 en Endocrinologie - Quel est le concept médical 48 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 48 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 48A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 48B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 48C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 48 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-48",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 49 en Gastroentérologie - Quel est le concept médical 49 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 49 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 49A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 49B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 49C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 49 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-49",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 50 en Cardiologie - Quel est le concept médical 50 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 50 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 50A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 50B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 50C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 50 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-50",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 51 en Pneumologie - Quel est le concept médical 51 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 51 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 51A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 51B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 51C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 51 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-51",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 52 en Neurologie - Quel est le concept médical 52 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 52 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 52A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 52B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 52C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 52 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-52",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 53 en Endocrinologie - Quel est le concept médical 53 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 53 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 53A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 53B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 53C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 53 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-53",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 54 en Gastroentérologie - Quel est le concept médical 54 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 54 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 54A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 54B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 54C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 54 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-54",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 55 en Cardiologie - Quel est le concept médical 55 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 55 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 55A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 55B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 55C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 55 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-55",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 56 en Pneumologie - Quel est le concept médical 56 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 56 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 56A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 56B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 56C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 56 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-56",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 57 en Neurologie - Quel est le concept médical 57 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 57 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 57A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 57B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 57C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 57 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-57",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 58 en Endocrinologie - Quel est le concept médical 58 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 58 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 58A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 58B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 58C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 58 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-58",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 59 en Gastroentérologie - Quel est le concept médical 59 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 59 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 59A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 59B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 59C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 59 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-59",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 60 en Cardiologie - Quel est le concept médical 60 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 60 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 60A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 60B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 60C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 60 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-60",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 61 en Pneumologie - Quel est le concept médical 61 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 61 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 61A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 61B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 61C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 61 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-61",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 62 en Neurologie - Quel est le concept médical 62 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 62 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 62A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 62B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 62C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 62 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-62",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 63 en Endocrinologie - Quel est le concept médical 63 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 63 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 63A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 63B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 63C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 63 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-63",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 64 en Gastroentérologie - Quel est le concept médical 64 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 64 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 64A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 64B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 64C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 64 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-64",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 65 en Cardiologie - Quel est le concept médical 65 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 65 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 65A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 65B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 65C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 65 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-65",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 66 en Pneumologie - Quel est le concept médical 66 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 66 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 66A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 66B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 66C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 66 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-66",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 67 en Neurologie - Quel est le concept médical 67 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 67 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 67A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 67B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 67C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 67 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-67",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 68 en Endocrinologie - Quel est le concept médical 68 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 68 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 68A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 68B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 68C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 68 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-68",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 69 en Gastroentérologie - Quel est le concept médical 69 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 69 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 69A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 69B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 69C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 69 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-69",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 70 en Cardiologie - Quel est le concept médical 70 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 70 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 70A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 70B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 70C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 70 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-70",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 71 en Pneumologie - Quel est le concept médical 71 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 71 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 71A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 71B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 71C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 71 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-71",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 72 en Neurologie - Quel est le concept médical 72 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 72 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 72A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 72B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 72C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 72 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-72",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 73 en Endocrinologie - Quel est le concept médical 73 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 73 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 73A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 73B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 73C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 73 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-73",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 74 en Gastroentérologie - Quel est le concept médical 74 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 74 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 74A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 74B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 74C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 74 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-74",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 75 en Cardiologie - Quel est le concept médical 75 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 75 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 75A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 75B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 75C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 75 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-75",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 76 en Pneumologie - Quel est le concept médical 76 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 76 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 76A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 76B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 76C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 76 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-76",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 77 en Neurologie - Quel est le concept médical 77 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 77 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 77A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 77B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 77C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 77 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-77",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 78 en Endocrinologie - Quel est le concept médical 78 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 78 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 78A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 78B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 78C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 78 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-78",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 79 en Gastroentérologie - Quel est le concept médical 79 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 79 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 79A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 79B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 79C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 79 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-79",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 80 en Cardiologie - Quel est le concept médical 80 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 80 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 80A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 80B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 80C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 80 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-80",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 81 en Pneumologie - Quel est le concept médical 81 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 81 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 81A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 81B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 81C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 81 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-81",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 82 en Neurologie - Quel est le concept médical 82 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 82 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 82A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 82B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 82C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 82 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-82",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 83 en Endocrinologie - Quel est le concept médical 83 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 83 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 83A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 83B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 83C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 83 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-83",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 84 en Gastroentérologie - Quel est le concept médical 84 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 84 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 84A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 84B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 84C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 84 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-84",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 85 en Cardiologie - Quel est le concept médical 85 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 85 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 85A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 85B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 85C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 85 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-85",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 86 en Pneumologie - Quel est le concept médical 86 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 86 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 86A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 86B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 86C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 86 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-86",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 87 en Neurologie - Quel est le concept médical 87 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 87 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 87A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 87B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 87C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 87 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-87",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 88 en Endocrinologie - Quel est le concept médical 88 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 88 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 88A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 88B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 88C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 88 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-88",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 89 en Gastroentérologie - Quel est le concept médical 89 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 89 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 89A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 89B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 89C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 89 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-89",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 90 en Cardiologie - Quel est le concept médical 90 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 90 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 90A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 90B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 90C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 90 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-90",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 91 en Pneumologie - Quel est le concept médical 91 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 91 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 91A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 91B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 91C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 91 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-91",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 92 en Neurologie - Quel est le concept médical 92 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 92 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 92A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 92B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 92C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 92 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-92",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 93 en Endocrinologie - Quel est le concept médical 93 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 93 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 93A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 93B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 93C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 93 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-93",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 94 en Gastroentérologie - Quel est le concept médical 94 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 94 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 94A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 94B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 94C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 94 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-94",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 95 en Cardiologie - Quel est le concept médical 95 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 95 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 95A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 95B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 95C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 95 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-95",
+        "cardiologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 96 en Pneumologie - Quel est le concept médical 96 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 96 pour Pneumologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 96A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 96B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 96C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 96 en Pneumologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-96",
+        "pneumologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 97 en Neurologie - Quel est le concept médical 97 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 97 pour Neurologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 97A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 97B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 97C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 97 en Neurologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-97",
+        "neurologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 98 en Endocrinologie - Quel est le concept médical 98 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 98 pour Endocrinologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 98A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 98B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 98C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 98 en Endocrinologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "performance",
+        "test-98",
+        "endocrinologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 99 en Gastroentérologie - Quel est le concept médical 99 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 99 pour Gastroentérologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 99A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 99B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 99C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 99 en Gastroentérologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Gastroentérologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "performance",
+        "test-99",
+        "gastroentérologie"
+      ]
+    },
+    {
+      "questionText": "Question de performance numéro 100 en Cardiologie - Quel est le concept médical 100 ?",
+      "options": [
+        {
+          "text": "Réponse correcte 100 pour Cardiologie",
+          "isCorrect": true
+        },
+        {
+          "text": "Réponse incorrecte 100A",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 100B",
+          "isCorrect": false
+        },
+        {
+          "text": "Réponse incorrecte 100C",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Explication détaillée pour la question 100 en Cardiologie. Cette explication contient suffisamment de détails pour être pédagogiquement utile.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "performance",
+        "test-100",
+        "cardiologie"
+      ]
+    }
+  ]
+}

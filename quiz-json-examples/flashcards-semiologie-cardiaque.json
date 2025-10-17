@@ -1,0 +1,125 @@
+{
+  "version": "1.0",
+  "type": "flashcards",
+  "metadata": {
+    "deckName": "Sémiologie Cardiaque - Signes Cliniques",
+    "description": "Flashcards pour réviser les signes cliniques en cardiologie",
+    "level": "both",
+    "category": "Cardiologie",
+    "difficulty": "medium",
+    "estimatedCards": 25,
+    "author": "Dr. Antoine Moreau",
+    "created": "2025-01-30",
+    "source": "Service de Cardiologie CHU Toulouse"
+  },
+  "cards": [
+    {
+      "front": "Quel signe clinique évoque une insuffisance cardiaque droite ?",
+      "back": "Œdèmes des membres inférieurs déclives, turgescence jugulaire, hépatomégalie congestive, reflux hépato-jugulaire positif",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": [
+        "insuffisance-cardiaque",
+        "signe-clinique",
+        "cœur-droit",
+        "sémiologie"
+      ],
+      "hints": [
+        "Pensez aux signes de rétention hydrosodée",
+        "Examen clinique des veines du cou"
+      ]
+    },
+    {
+      "front": "À quoi correspond le troisième bruit cardiaque (B3) ?",
+      "back": "Galop ventriculaire physiologique chez l'enfant et l'adulte jeune, ou signe de défaillance ventriculaire (insuffisance cardiaque, surcharge volumique)",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": [
+        "bruits-du-cœur",
+        "auscultation",
+        "insuffisance-cardiaque",
+        "sémiologie-cardiaque"
+      ]
+    },
+    {
+      "front": "Quel signe auscultatoire évoque une sténose mitrale ?",
+      "back": "Roulement diastolique mitral précoce avec claquement d'ouverture mitral, B1 augmenté, souffle diastolique",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "valvulopathies",
+        "sténose-mitrale",
+        "auscultation",
+        "souffles-cardiaques"
+      ]
+    },
+    {
+      "front": "Comment évaluer cliniquement la précharge cardiaque ?",
+      "back": "Par l'examen des veines jugulaires (turgescence, reflux hépato-jugulaire), recherche d'œdèmes, auscultation pulmonaire, signes de bas débit",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": [
+        "hémodynamique",
+        "précharge",
+        "examen-clinique",
+        "insuffisance-cardiaque"
+      ]
+    },
+    {
+      "front": "Quel signe clinique oriente vers une hypertension artérielle maligne ?",
+      "back": "Encéphalopathie hypertensive, hémorragies rétiniennes, œdème papillaire (stade IV de Keith-Wagener), insuffisance cardiaque aiguë",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "hypertension-artérielle",
+        "urgence-hypertensive",
+        "fond-d'œil",
+        "complications"
+      ]
+    },
+    {
+      "front": "À quoi correspondent les pouls paradoxal et pulsus alternans ?",
+      "back": "Pouls paradoxal > 10 mmHg : péricardite constrictive, tamponnade. Pulsus alternans : insuffisance cardiaque grave, alternance électrique",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": [
+        "pouls",
+        "signes-cliniques",
+        "insuffisance-cardiaque",
+        "péricardite"
+      ]
+    },
+    {
+      "front": "Quel examen clinique recherchez-vous en cas de suspicion d'embolie pulmonaire ?",
+      "back": "Signes de cœur pulmonaire aigu : tachycardie, dyspnée, douleur thoracique, signes de TVP (mollet chaud, douloureux, œdématié)",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": [
+        "embolie-pulmonaire",
+        "cœur-pulmonaire",
+        "thrombose-veineuse",
+        "dyspnée-aiguë"
+      ]
+    },
+    {
+      "front": "Comment différencier cliniquement une dyspnée cardiaque d'une dyspnée respiratoire ?",
+      "back": "Dyspnée cardiaque : orthopnée, BNP élevé, œdèmes, turgescence jugulaire. Dyspnée respiratoire : sibilants, expectoration, fièvre",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": [
+        "dyspnée",
+        "insuffisance-cardiaque",
+        "pathologie-respiratoire",
+        "diagnostic-différentiel"
+      ]
+    }
+  ]
+}

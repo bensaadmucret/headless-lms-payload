@@ -1,0 +1,94 @@
+{
+  "version": "1.0",
+  "type": "learning-path",
+  "metadata": {
+    "title": "Parcours avec dépendances circulaires",
+    "level": "PASS",
+    "estimatedDuration": 120,
+    "description": "Parcours d'apprentissage avec des prérequis circulaires pour test d'erreur"
+  },
+  "path": {
+    "steps": [
+      {
+        "id": "step-alpha",
+        "title": "Étape Alpha",
+        "description": "Première étape qui dépend de Gamma",
+        "prerequisites": ["step-gamma"],
+        "estimatedTime": 30,
+        "questions": [
+          {
+            "questionText": "Question Alpha ?",
+            "options": [
+              {"text": "Réponse Alpha", "isCorrect": true},
+              {"text": "Autre réponse", "isCorrect": false}
+            ],
+            "explanation": "Explication Alpha",
+            "category": "Test",
+            "difficulty": "easy",
+            "level": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "step-beta",
+        "title": "Étape Beta",
+        "description": "Deuxième étape qui dépend d'Alpha",
+        "prerequisites": ["step-alpha"],
+        "estimatedTime": 40,
+        "questions": [
+          {
+            "questionText": "Question Beta ?",
+            "options": [
+              {"text": "Réponse Beta", "isCorrect": true},
+              {"text": "Autre réponse", "isCorrect": false}
+            ],
+            "explanation": "Explication Beta",
+            "category": "Test",
+            "difficulty": "medium",
+            "level": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "step-gamma",
+        "title": "Étape Gamma",
+        "description": "Troisième étape qui dépend de Beta - crée une dépendance circulaire",
+        "prerequisites": ["step-beta"],
+        "estimatedTime": 50,
+        "questions": [
+          {
+            "questionText": "Question Gamma ?",
+            "options": [
+              {"text": "Réponse Gamma", "isCorrect": true},
+              {"text": "Autre réponse", "isCorrect": false}
+            ],
+            "explanation": "Explication Gamma",
+            "category": "Test",
+            "difficulty": "hard",
+            "level": "PASS"
+          }
+        ]
+      },
+      {
+        "id": "step-delta",
+        "title": "Étape Delta",
+        "description": "Étape avec prérequis inexistant",
+        "prerequisites": ["step-inexistant"],
+        "estimatedTime": 25,
+        "questions": [
+          {
+            "questionText": "Question Delta ?",
+            "options": [
+              {"text": "Réponse Delta", "isCorrect": true},
+              {"text": "Autre réponse", "isCorrect": false}
+            ],
+            "explanation": "Explication Delta",
+            "category": "Test",
+            "difficulty": "easy",
+            "level": "PASS"
+          }
+        ]
+      }
+    ]
+  }
+}

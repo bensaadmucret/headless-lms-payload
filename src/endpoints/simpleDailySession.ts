@@ -52,9 +52,7 @@ export const simpleDailySessionEndpoint = {
       // Récupération de l'ID utilisateur
       const userId = req.user.id;
       console.log('[simpleDailySession] Utilisateur authentifié:', { 
-        userId, 
-        type: typeof userId,
-        userObj: req.user
+        type: typeof userId
       });
       
       // Validation stricte de l'ID utilisateur

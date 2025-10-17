@@ -1,0 +1,125 @@
+{
+  "version": "1.0",
+  "type": "learning-path",
+  "metadata": {
+    "title": "Introduction à la Cardiologie PASS",
+    "level": "PASS",
+    "estimatedDuration": 180,
+    "description": "Parcours d'apprentissage progressif en cardiologie pour étudiants PASS"
+  },
+  "path": {
+    "steps": [
+      {
+        "id": "anatomie-coeur-base",
+        "title": "Anatomie cardiaque de base",
+        "description": "Découverte des structures anatomiques fondamentales du cœur",
+        "prerequisites": [],
+        "estimatedTime": 45,
+        "questions": [
+          {
+            "questionText": "Combien de cavités possède le cœur humain ?",
+            "options": [
+              {"text": "4 cavités", "isCorrect": true},
+              {"text": "2 cavités", "isCorrect": false},
+              {"text": "6 cavités", "isCorrect": false},
+              {"text": "3 cavités", "isCorrect": false}
+            ],
+            "explanation": "Le cœur humain possède 4 cavités : 2 oreillettes (droite et gauche) et 2 ventricules (droit et gauche).",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": ["anatomie", "cavités", "structure"]
+          },
+          {
+            "questionText": "Quelle cavité cardiaque a la paroi la plus épaisse ?",
+            "options": [
+              {"text": "Ventricule gauche", "isCorrect": true},
+              {"text": "Ventricule droit", "isCorrect": false},
+              {"text": "Oreillette gauche", "isCorrect": false},
+              {"text": "Oreillette droite", "isCorrect": false}
+            ],
+            "explanation": "Le ventricule gauche a la paroi la plus épaisse car il doit générer une pression élevée pour la circulation systémique.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["anatomie", "ventricule", "myocarde"]
+          }
+        ]
+      },
+      {
+        "id": "circulation-sanguine",
+        "title": "Circulation sanguine",
+        "description": "Compréhension des circuits de circulation pulmonaire et systémique",
+        "prerequisites": ["anatomie-coeur-base"],
+        "estimatedTime": 60,
+        "questions": [
+          {
+            "questionText": "Quel circuit commence au ventricule droit ?",
+            "options": [
+              {"text": "Circulation pulmonaire", "isCorrect": true},
+              {"text": "Circulation systémique", "isCorrect": false},
+              {"text": "Circulation coronaire", "isCorrect": false},
+              {"text": "Circulation portale", "isCorrect": false}
+            ],
+            "explanation": "La circulation pulmonaire débute au ventricule droit qui éjecte le sang désoxygéné vers les poumons via l'artère pulmonaire.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["circulation", "pulmonaire", "physiologie"]
+          },
+          {
+            "questionText": "Où le sang se charge-t-il en oxygène ?",
+            "options": [
+              {"text": "Dans les alvéoles pulmonaires", "isCorrect": true},
+              {"text": "Dans le ventricule gauche", "isCorrect": false},
+              {"text": "Dans l'aorte", "isCorrect": false},
+              {"text": "Dans les artères coronaires", "isCorrect": false}
+            ],
+            "explanation": "L'oxygénation du sang se fait au niveau des alvéoles pulmonaires par échange gazeux avec l'air inspiré.",
+            "category": "Pneumologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": ["oxygénation", "alvéoles", "échanges"]
+          }
+        ]
+      },
+      {
+        "id": "activite-electrique",
+        "title": "Activité électrique cardiaque",
+        "description": "Introduction au système de conduction et à l'électrocardiographie",
+        "prerequisites": ["circulation-sanguine"],
+        "estimatedTime": 75,
+        "questions": [
+          {
+            "questionText": "Quel est le pacemaker naturel du cœur ?",
+            "options": [
+              {"text": "Nœud sinusal", "isCorrect": true},
+              {"text": "Nœud auriculo-ventriculaire", "isCorrect": false},
+              {"text": "Faisceau de His", "isCorrect": false},
+              {"text": "Fibres de Purkinje", "isCorrect": false}
+            ],
+            "explanation": "Le nœud sinusal, situé dans l'oreillette droite, génère spontanément les impulsions électriques qui déclenchent chaque battement.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["électrophysiologie", "nœud", "pacemaker"]
+          },
+          {
+            "questionText": "Que représente le complexe QRS sur un ECG ?",
+            "options": [
+              {"text": "Dépolarisation ventriculaire", "isCorrect": true},
+              {"text": "Dépolarisation auriculaire", "isCorrect": false},
+              {"text": "Repolarisation ventriculaire", "isCorrect": false},
+              {"text": "Repolarisation auriculaire", "isCorrect": false}
+            ],
+            "explanation": "Le complexe QRS correspond à la dépolarisation des ventricules, déclenchant leur contraction systolique.",
+            "category": "Cardiologie",
+            "difficulty": "hard",
+            "level": "PASS",
+            "tags": ["ECG", "QRS", "dépolarisation"]
+          }
+        ]
+      }
+    ]
+  }
+}

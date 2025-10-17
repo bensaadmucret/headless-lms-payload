@@ -240,5 +240,105 @@ export const Questions: CollectionConfig = {
         condition: (data) => data.validatedByExpert === true,
       },
     },
+    // Nouveaux champs pour la tâche 9: Prévisualisation et modification
+    {
+      name: 'validationStatus',
+      label: 'Statut de validation',
+      type: 'select',
+      defaultValue: 'pending',
+      options: [
+        { label: '⏳ En attente', value: 'pending' },
+        { label: '✅ Approuvée', value: 'approved' },
+        { label: '❌ Rejetée', value: 'rejected' },
+        { label: '⚠️ À revoir', value: 'needs_review' }
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Statut de validation par les experts'
+      }
+    },
+    {
+      name: 'validationNotes',
+      label: 'Notes de validation',
+      type: 'textarea',
+      admin: {
+        position: 'sidebar',
+        description: 'Commentaires et notes des experts lors de la validation'
+      }
+    },
+    {
+      name: 'validatedAt',
+      label: 'Validée le',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Date de validation par l\'expert'
+      }
+    },
+    {
+      name: 'regeneratedAt',
+      label: 'Régénérée le',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Date de dernière régénération IA',
+        condition: (data) => data.generatedByAI === true
+      }
+    },
+    {
+      name: 'regenerationReason',
+      label: 'Raison de régénération',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Raison de la dernière régénération',
+        condition: (data) => data.generatedByAI === true && data.regeneratedAt
+      }
+    },
+    {
+      name: 'qualityScore',
+      label: 'Score de qualité IA',
+      type: 'number',
+      min: 0,
+      max: 100,
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Score de qualité attribué par l\'IA (0-100)',
+        condition: (data) => data.generatedByAI === true
+      }
+    },
+    {
+      name: 'validationIssues',
+      label: 'Problèmes de validation',
+      type: 'array',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Problèmes détectés lors de la validation automatique',
+        condition: (data) => data.generatedByAI === true
+      },
+      fields: [
+        {
+          name: 'issue',
+          type: 'text',
+          required: true
+        }
+      ]
+    }
   ],
+  // Nouveaux endpoints pour la tâche 9
+  endpoints: [
+    {
+      path: '/:id/validate',
+      method: 'post',
+      handler: async (req) => {
+        const { validateQuestion } = await import('../endpoints/validateQuestion')
+        return validateQuestion(req)
+      }
+    }
+  ]
 }

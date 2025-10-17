@@ -42,21 +42,21 @@
   - Ajouter les métriques de succès/échec et performance
   - _Exigences: 8.1, 8.2, 8.3, 8.4_
 
-- [-] 7. Créer le système de filtrage et découverte frontend
+- [x] 7. Créer le système de filtrage et découverte frontend
   - Implémenter le filtrage des quiz par catégorie dans le frontend
   - Développer l'interface de navigation par catégories
   - Ajouter les indicateurs visuels pour les quiz générés par IA
   - Créer le système de recherche et tri avancé
   - _Exigences: 7.1, 7.2, 7.3, 7.4_
 
-- [ ] 8. Implémenter la gestion des erreurs et la robustesse
+- [x] 8. Implémenter la gestion des erreurs et la robustesse
   - Développer la gestion des erreurs API IA (rate limiting, indisponibilité)
   - Implémenter les stratégies de retry et fallback
   - Ajouter la validation côté serveur de tous les paramètres
   - Créer les messages d'erreur informatifs pour les utilisateurs
   - _Exigences: 10.1, 10.2, 10.3, 10.4_
 
-- [ ] 9. Développer les fonctionnalités de prévisualisation et modification
+- [x] 9. Développer les fonctionnalités de prévisualisation et modification
   - Créer l'interface de prévisualisation des quiz avant publication
   - Implémenter l'édition des questions générées
   - Développer le système de validation manuelle par les experts

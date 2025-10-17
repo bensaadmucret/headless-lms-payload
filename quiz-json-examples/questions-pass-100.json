@@ -1,0 +1,2959 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Faculté de Médecine - Collection complète PASS",
+    "created": "2025-01-15",
+    "level": "PASS",
+    "description": "100 questions médicales complètes pour le niveau PASS couvrant tous les domaines fondamentaux",
+    "author": "Équipe pédagogique médicale",
+    "estimatedDuration": 200,
+    "difficulty": "mixed"
+  },
+  "questions": [
+    {
+      "questionText": "Quel est le principal mécanisme de l'absorption intestinale du glucose ?",
+      "options": [
+        {
+          "text": "Transport actif secondaire sodium-glucose (SGLT1)",
+          "isCorrect": true
+        },
+        {
+          "text": "Diffusion facilitée par GLUT2",
+          "isCorrect": false
+        },
+        {
+          "text": "Transport actif primaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Osmose passive",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le glucose intestinal est absorbé principalement par transport actif secondaire utilisant le gradient sodique créé par la pompe Na+/K+ ATPase. Le transporteur SGLT1 (Sodium-Glucose Linked Transporter 1) couple le transport du glucose à celui du sodium.",
+      "category": "Gastro-entérologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "absorption",
+        "glucose",
+        "transport-actif",
+        "intestin-grêle",
+        "sodium"
+      ]
+    },
+    {
+      "questionText": "Dans le cycle de Krebs, quel est le produit final de la décarboxylation oxydative du pyruvate ?",
+      "options": [
+        {
+          "text": "Acétyl-CoA",
+          "isCorrect": true
+        },
+        {
+          "text": "Lactate",
+          "isCorrect": false
+        },
+        {
+          "text": "Acétate",
+          "isCorrect": false
+        },
+        {
+          "text": "Formate",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le pyruvate issu de la glycolyse subit une décarboxylation oxydative dans la matrice mitochondriale pour former l'acétyl-CoA, qui entre dans le cycle de Krebs. Cette réaction est irréversible et régulée.",
+      "category": "Biochimie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "cycle-de-krebs",
+        "acétyl-coa",
+        "pyruvate",
+        "mitochondrie",
+        "métabolisme-énergétique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action principal des bêtabloquants ?",
+      "options": [
+        {
+          "text": "Blocage compétitif des récepteurs bêta-adrénergiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation des récepteurs alpha",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'enzyme de conversion",
+          "isCorrect": false
+        },
+        {
+          "text": "Blocage des canaux calciques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les bêtabloquants agissent par blocage compétitif des récepteurs bêta-adrénergiques, empêchant l'action de l'adrénaline et de la noradrénaline. Ils sont utilisés dans l'hypertension, l'angor et les arythmies.",
+      "category": "Pharmacologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "bêtabloquants",
+        "récepteurs-adrénergiques",
+        "système-cardiovasculaire",
+        "anti-hypertenseurs",
+        "pharmacologie-cardiaque"
+      ]
+    },
+    {
+      "questionText": "Quelle bactérie est principalement responsable de la méningite à pneumocoque chez l'adulte ?",
+      "options": [
+        {
+          "text": "Streptococcus pneumoniae",
+          "isCorrect": true
+        },
+        {
+          "text": "Neisseria meningitidis",
+          "isCorrect": false
+        },
+        {
+          "text": "Haemophilus influenzae",
+          "isCorrect": false
+        },
+        {
+          "text": "Listeria monocytogenes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Streptococcus pneumoniae est la principale cause de méningite bactérienne communautaire chez l'adulte. Il représente environ 70% des cas et touche particulièrement les sujets âgés et immunodéprimés.",
+      "category": "Maladies infectieuses",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "méningite",
+        "streptococcus-pneumoniae",
+        "bactéries",
+        "neurologie",
+        "urgences-infectieuses"
+      ]
+    },
+    {
+      "questionText": "Quel est le chromosome sexuel normal chez l'homme ?",
+      "options": [
+        {
+          "text": "46, XY",
+          "isCorrect": true
+        },
+        {
+          "text": "46, XX",
+          "isCorrect": false
+        },
+        {
+          "text": "47, XXY",
+          "isCorrect": false
+        },
+        {
+          "text": "45, XO",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le caryotype normal de l'homme est 46, XY avec 22 paires d'autosomes + 1 paire de chromosomes sexuels (X et Y). La femme a un caryotype 46, XX.",
+      "category": "Génétique",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "chromosomes",
+        "caryotype",
+        "chromosomes-sexuels",
+        "génétique-humaine",
+        "biologie-cellulaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le principal mécanisme de résistance bactérienne aux bêtalactamines ?",
+      "options": [
+        {
+          "text": "Production de bêtalactamases",
+          "isCorrect": true
+        },
+        {
+          "text": "Modification de la cible PBP",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de la perméabilité membranaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Efflux actif",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les bêtalactamases hydrolysent le cycle bêtalactame des pénicillines et céphalosporines, les rendant inactives. C'est le mécanisme de résistance le plus fréquent chez les bactéries Gram négatif.",
+      "category": "Maladies infectieuses",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "résistance-antibiotique",
+        "bêtalactamines",
+        "bêtalactamases",
+        "antibiotiques",
+        "microbiologie-médicale"
+      ]
+    },
+    {
+      "questionText": "Dans l'hémostase primaire, quel est le rôle principal des plaquettes ?",
+      "options": [
+        {
+          "text": "Formation du clou plaquettaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de thrombine",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation du fibrinogène",
+          "isCorrect": false
+        },
+        {
+          "text": "Dissolution du caillot",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémostase primaire consiste en la formation d'un clou plaquettaire qui colmate temporairement la brèche vasculaire. Les plaquettes s'agrègent sous l'action de diverses substances comme le collagène, l'ADP et le thromboxane A2.",
+      "category": "Hématologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hémostase",
+        "plaquettes",
+        "coagulation",
+        "hémostase-primaire",
+        "agrégation-plaquettaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'insuline sur le métabolisme glucidique ?",
+      "options": [
+        {
+          "text": "Augmentation de l'entrée du glucose dans les cellules",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation de la néoglucogenèse",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la glycolyse",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la production de glucagon",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuline favorise l'entrée du glucose dans les cellules cibles (muscle, foie, tissu adipeux) en augmentant le nombre de transporteurs GLUT4 à la membrane plasmique.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "insuline",
+        "métabolisme-glucides",
+        "glucose",
+        "transporteurs-glut",
+        "diabète"
+      ]
+    },
+    {
+      "questionText": "Quelle structure anatomique sépare les cavités thoracique et abdominale ?",
+      "options": [
+        {
+          "text": "Le diaphragme",
+          "isCorrect": true
+        },
+        {
+          "text": "Le péritoine",
+          "isCorrect": false
+        },
+        {
+          "text": "La plèvre",
+          "isCorrect": false
+        },
+        {
+          "text": "Le péricarde",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le diaphragme est le muscle principal de la respiration qui sépare la cavité thoracique de la cavité abdominale. Il s'insère sur les côtes, les vertèbres lombaires et le sternum.",
+      "category": "Anatomie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "diaphragme",
+        "cavités-corporelles",
+        "respiration",
+        "anatomie-thoracique",
+        "muscles-respiratoires"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique principal de l'œdème pulmonaire cardiogénique ?",
+      "options": [
+        {
+          "text": "Augmentation de la pression capillaire pulmonaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Diminution de la pression oncotique",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la perméabilité alvéolo-capillaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Obstruction lymphatique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'œdème pulmonaire cardiogénique résulte d'une élévation de la pression hydrostatique dans les capillaires pulmonaires due à une défaillance cardiaque gauche, dépassant la pression oncotique plasmatique.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "œdème-pulmonaire",
+        "insuffisance-cardiaque",
+        "hémodynamique-pulmonaire",
+        "physiopathologie",
+        "urgences-cardiaques"
+      ]
+    },
+    {
+      "questionText": "Quelle hormone hypophysaire stimule la production de cortisol par les surrénales ?",
+      "options": [
+        {
+          "text": "L'ACTH (corticotrophine)",
+          "isCorrect": true
+        },
+        {
+          "text": "La TSH",
+          "isCorrect": false
+        },
+        {
+          "text": "La FSH",
+          "isCorrect": false
+        },
+        {
+          "text": "La prolactine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'ACTH (AdrenoCorticoTrophic Hormone) produite par l'adénohypophyse stimule la zone fasciculée du cortex surrénalien pour produire du cortisol. Cette régulation est essentielle au stress.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "hormones-hypophysaires",
+        "ACTH",
+        "cortisol",
+        "surrénales",
+        "axe-hypothalamo-hypophysaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des diurétiques de l'anse ?",
+      "options": [
+        {
+          "text": "Inhibition du cotransporteur Na+/K+/2Cl- dans l'anse de Henlé",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs aldostérone",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'anhydrase carbonique",
+          "isCorrect": false
+        },
+        {
+          "text": "Blocage des canaux sodiques épithéliaux",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les diurétiques de l'anse (furosémide) inhibent le cotransporteur Na+/K+/2Cl- dans la branche ascendante de l'anse de Henlé, entraînant une natriurèse et une diurèse importantes.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "diurétiques",
+        "anse-de-henlé",
+        "furosémide",
+        "néphrologie",
+        "pharmacologie-rénale"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale du système HLA ?",
+      "options": [
+        {
+          "text": "Présentation des antigènes aux lymphocytes T",
+          "isCorrect": true
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Phagocytose des pathogènes",
+          "isCorrect": false
+        },
+        {
+          "text": "Sécrétion de cytokines",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le système HLA (Human Leukocyte Antigen) présente les peptides antigéniques aux lymphocytes T CD4+ et CD8+. Il est crucial pour la reconnaissance immune et la greffe d'organes.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "HLA",
+        "complexe-majeur-histocompatibilité",
+        "présentation-antigénique",
+        "lymphocytes-T",
+        "immunité-adaptative"
+      ]
+    },
+    {
+      "questionText": "Quel est le principal mécanisme de transmission du VIH ?",
+      "options": [
+        {
+          "text": "Contact sexuel non protégé",
+          "isCorrect": true
+        },
+        {
+          "text": "Transmission verticale mère-enfant",
+          "isCorrect": false
+        },
+        {
+          "text": "Contact sanguin",
+          "isCorrect": false
+        },
+        {
+          "text": "Voie respiratoire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La transmission sexuelle représente environ 80% des nouvelles infections par le VIH. Les autres modes incluent la transmission sanguine, verticale et par partage de matériel injectable.",
+      "category": "Maladies infectieuses",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "VIH",
+        "transmission-sexuelle",
+        "MST",
+        "prévention",
+        "santé-publique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'acide acétylsalicylique (aspirine) à faible dose ?",
+      "options": [
+        {
+          "text": "Inhibition irréversible de la cyclo-oxygénase 1 plaquettaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs ADP",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la vitamine K",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la fibrinolyse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'aspirine à faible dose (75-160 mg/j) inhibe irréversiblement la COX-1 plaquettaire, empêchant la production de thromboxane A2 et donc l'agrégation plaquettaire. Cet effet dure toute la vie de la plaquette (7-10 jours).",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "aspirine",
+        "antiagrégants-plaquettaires",
+        "cyclo-oxygénase",
+        "thrombose",
+        "pharmacologie-cardiovasculaire"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale complication de la varicelle chez l'adulte immunocompétent ?",
+      "options": [
+        {
+          "text": "Pneumopathie varicelleuse",
+          "isCorrect": true
+        },
+        {
+          "text": "Encéphalite varicelleuse",
+          "isCorrect": false
+        },
+        {
+          "text": "Kératite",
+          "isCorrect": false
+        },
+        {
+          "text": "Myocardite",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La pneumopathie varicelleuse touche 5-10% des adultes atteints de varicelle et se manifeste par une toux, dyspnée et infiltrats radiologiques. Elle peut être grave nécessitant une ventilation mécanique.",
+      "category": "Maladies infectieuses",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "varicelle",
+        "complications",
+        "pneumopathie",
+        "adulte",
+        "virologie"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme moléculaire de l'hémophilie A ?",
+      "options": [
+        {
+          "text": "Déficit en facteur VIII de coagulation",
+          "isCorrect": true
+        },
+        {
+          "text": "Mutation du facteur IX",
+          "isCorrect": false
+        },
+        {
+          "text": "Déficit en facteur von Willebrand",
+          "isCorrect": false
+        },
+        {
+          "text": "Mutation du gène F8 sur le chromosome X",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémophilie A est causée par un déficit quantitatif ou qualitatif du facteur VIII de coagulation, lié à des mutations du gène F8 sur le chromosome X. Elle touche principalement les hommes.",
+      "category": "Hématologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hémophilie",
+        "facteur-viii",
+        "coagulation",
+        "maladies-héréditaires",
+        "chromosome-x"
+      ]
+    },
+    {
+      "questionText": "Quel est le principal déterminant génétique de la réponse immune adaptative ?",
+      "options": [
+        {
+          "text": "Diversité des récepteurs antigéniques",
+          "isCorrect": true
+        },
+        {
+          "text": "Nombre de lymphocytes T",
+          "isCorrect": false
+        },
+        {
+          "text": "Concentration en anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Activité des macrophages",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La diversité des récepteurs antigéniques (TCR et BCR) générée par les mécanismes de recombinaison V(D)J et de diversité jonctionnelle permet au système immunitaire de reconnaître une multitude d'antigènes différents.",
+      "category": "Immunologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "réponse-immune",
+        "récepteurs-antigéniques",
+        "diversité-immunitaire",
+        "lymphocytes",
+        "génétique-immunitaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs de l'enzyme de conversion de l'angiotensine (IEC) ?",
+      "options": [
+        {
+          "text": "Inhibition de la conversion angiotensine I en angiotensine II",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation de la sécrétion de rénine",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la production d'aldostérone",
+          "isCorrect": false
+        },
+        {
+          "text": "Blocage des récepteurs AT1",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les IEC inhibent l'enzyme de conversion qui transforme l'angiotensine I en angiotensine II vasoconstrictrice. Ils diminuent ainsi la pression artérielle et réduisent la charge cardiaque.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "IEC",
+        "système-rénine-angiotensine",
+        "hypertension",
+        "insuffisance-cardiaque",
+        "néphrologie"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale du surfactant pulmonaire ?",
+      "options": [
+        {
+          "text": "Diminuer la tension superficielle alvéolaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Faciliter les échanges gazeux",
+          "isCorrect": false
+        },
+        {
+          "text": "Défendre contre les infections",
+          "isCorrect": false
+        },
+        {
+          "text": "Réguler le pH alvéolaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le surfactant, composé principalement de phospholipides, diminue la tension superficielle à l'interface air-liquide alvéolaire, empêchant l'effondrement alvéolaire à l'expiration et facilitant l'ouverture alvéolaire à l'inspiration.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "surfactant",
+        "alvéoles-pulmonaires",
+        "tension-superficielle",
+        "respiration",
+        "physiologie-respiratoire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de la maladie d'Alzheimer ?",
+      "options": [
+        {
+          "text": "Accumulation de plaques amyloïdes et dégénérescence neurofibrillaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Inflammation chronique du cerveau",
+          "isCorrect": false
+        },
+        {
+          "text": "Ischémie cérébrale diffuse",
+          "isCorrect": false
+        },
+        {
+          "text": "Toxoplasmose cérébrale",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La maladie d'Alzheimer est caractérisée par l'accumulation extracellulaire de peptide bêta-amyloïde (plaques séniles) et la formation intraneuronale d'enchevêtrements neurofibrillaires composés de protéines tau hyperphosphorylées.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "maladie-d-alzheimer",
+        "peptide-amyloïde",
+        "protéine-tau",
+        "démences",
+        "neurologie-gériatrique"
+      ]
+    },
+    {
+      "questionText": "Quel est le principal mécanisme de résistance aux glycopeptides (vancomycine) ?",
+      "options": [
+        {
+          "text": "Modification de la cible peptidoglycane",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de bêtalactamases",
+          "isCorrect": false
+        },
+        {
+          "text": "Efflux actif",
+          "isCorrect": false
+        },
+        {
+          "text": "Perméabilité membranaire réduite",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les entérocoques résistants à la vancomycine (ERV) modifient leur cible (D-alanine terminale du peptidoglycane) en D-lactate, réduisant l'affinité pour la vancomycine. Cette résistance peut être plasmidique.",
+      "category": "Maladies infectieuses",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "résistance-antibiotique",
+        "vancomycine",
+        "entérocoques",
+        "glycopeptides",
+        "microbiologie-hospitalière"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des statines ?",
+      "options": [
+        {
+          "text": "Inhibition compétitive de l'HMG-CoA réductase",
+          "isCorrect": true
+        },
+        {
+          "text": "Séqustration des acides biliaires",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'absorption intestinale du cholestérol",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la synthèse de HDL",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les statines inhibent compétitivement l'HMG-CoA réductase, enzyme clé de la synthèse du cholestérol hépatique. Cette inhibition entraîne une augmentation des récepteurs LDL hépatiques et une diminution de la cholestérolémie.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "statines",
+        "cholestérol",
+        "HMG-CoA-réductase",
+        "dyslipidémie",
+        "pharmacologie-métabolique"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction du système nerveux parasympathique ?",
+      "options": [
+        {
+          "text": "Conservation et restauration de l'énergie",
+          "isCorrect": true
+        },
+        {
+          "text": "Préparation à l'action et à la fuite",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation thermique",
+          "isCorrect": false
+        },
+        {
+          "text": "Contrôle moteur volontaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le système parasympathique est le système de 'repos et digestion' qui conserve l'énergie et favorise les fonctions végétatives (digestion, excrétion, reproduction). Il agit principalement via l'acétylcholine.",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "système-nerveux-autonome",
+        "parasympathique",
+        "acétylcholine",
+        "physiologie-neurologique",
+        "réponse-au-stress"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'asthme allergique ?",
+      "options": [
+        {
+          "text": "Inflammation bronchique à éosinophiles avec hyperréactivité bronchique",
+          "isCorrect": true
+        },
+        {
+          "text": "Fibrose pulmonaire progressive",
+          "isCorrect": false
+        },
+        {
+          "text": "Destruction alvéolaire emphysémateuse",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection bactérienne chronique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'asthme allergique est une maladie inflammatoire chronique des voies aériennes caractérisée par une infiltration éosinophilique, une hyperréactivité bronchique et une obstruction réversible des voies aériennes.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "asthme",
+        "allergie",
+        "inflammation",
+        "éosinophiles",
+        "hyperréactivité-bronchique"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction biologique principale de la vitamine D ?",
+      "options": [
+        {
+          "text": "Régulation du métabolisme phospho-calcique",
+          "isCorrect": true
+        },
+        {
+          "text": "Coagulation sanguine",
+          "isCorrect": false
+        },
+        {
+          "text": "Vision nocturne",
+          "isCorrect": false
+        },
+        {
+          "text": "Antioxydation cellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La vitamine D (cholécalciférol) régule l'absorption intestinale du calcium et du phosphore, la minéralisation osseuse et la fonction parathyroïdienne. Elle agit comme une hormone stéroïde.",
+      "category": "Nutrition",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "vitamine-D",
+        "calcium",
+        "phosphore",
+        "métabolisme-osseux",
+        "parathyroïde"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la warfarine ?",
+      "options": [
+        {
+          "text": "Antagonisme compétitif de la vitamine K",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition directe de la thrombine",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation de la fibrinolyse",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'agrégation plaquettaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La warfarine inhibe compétitivement la vitamine K époxyde réductase, empêchant la régénération de la vitamine K réduite nécessaire à la gamma-carboxylation des facteurs II, VII, IX et X de coagulation.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "antivitamine-K",
+        "warfarine",
+        "vitamine-K",
+        "facteurs-coagulation",
+        "pharmacologie-hémostase"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de transmission génétique de la mucoviscidose ?",
+      "options": [
+        {
+          "text": "Autosomique récessif",
+          "isCorrect": true
+        },
+        {
+          "text": "Autosomique dominant",
+          "isCorrect": false
+        },
+        {
+          "text": "Lié à l'X récessif",
+          "isCorrect": false
+        },
+        {
+          "text": "Lié à l'X dominant",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La mucoviscidose est une maladie autosomique récessive liée à des mutations du gène CFTR sur le chromosome 7. Les deux parents doivent être porteurs hétérozygotes pour que l'enfant soit atteint.",
+      "category": "Génétique",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "mucoviscidose",
+        "gène-CFTR",
+        "transmission-récessive",
+        "maladies-génétiques",
+        "chromosome-7"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs de la pompe à protons (IPP) ?",
+      "options": [
+        {
+          "text": "Inhibition irréversible de la H+/K+ ATPase pariétale",
+          "isCorrect": true
+        },
+        {
+          "text": "Neutralisation des acides gastriques",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition compétitive de l'histamine",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la sécrétion de mucus",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les IPP (oméprazole, ésoméprazole) inhibent irréversiblement la H+/K+ ATPase (pompe à protons) des cellules pariétales gastriques, bloquant la sécrétion acide chlorhydrique finale.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "IPP",
+        "pompe-protons",
+        "sécrétion-acide",
+        "gastro-entérologie",
+        "pharmacologie-digestive"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale complication de la drépanocytose ?",
+      "options": [
+        {
+          "text": "Crises vaso-occlusives douloureuses",
+          "isCorrect": true
+        },
+        {
+          "text": "Hémorragie cérébrale",
+          "isCorrect": false
+        },
+        {
+          "text": "Insuffisance rénale chronique",
+          "isCorrect": false
+        },
+        {
+          "text": "Cardiomyopathie dilatée",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les crises vaso-occlusives sont la complication la plus fréquente de la drépanocytose, dues à l'obstruction des vaisseaux par les hématies falciformes. Elles touchent principalement les os, la rate et les poumons.",
+      "category": "Hématologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "drépanocytose",
+        "hématies-falciformes",
+        "crises-douloureuses",
+        "complications",
+        "anémie-hémolytique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action du paracétamol ?",
+      "options": [
+        {
+          "text": "Inhibition centrale des cyclo-oxygénases",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition périphérique sélective de COX-2",
+          "isCorrect": false
+        },
+        {
+          "text": "Antagonisme des récepteurs NMDA",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation des récepteurs opioïdes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le paracétamol inhibe principalement les cyclo-oxygénases dans le système nerveux central, expliquant son effet antalgique et antipyrétique avec peu d'effets périphériques sur la coagulation et l'estomac.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "paracétamol",
+        "analgésiques",
+        "cyclo-oxygénases",
+        "antipyrétiques",
+        "pharmacologie-douleur"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'hypersensibilité immédiate (type I) ?",
+      "options": [
+        {
+          "text": "Réaction IgE-dépendante avec dégranulation mastocytaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Activation du complément par complexes immuns",
+          "isCorrect": false
+        },
+        {
+          "text": "Cytotoxicité cellulaire dépendante des anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Réaction retardée à médiation cellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hypersensibilité immédiate de type I implique la fixation d'IgE spécifiques sur les mastocytes et basophiles, entraînant leur dégranulation et la libération de médiateurs (histamine, leucotriènes) lors d'une nouvelle exposition à l'allergène.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hypersensibilité",
+        "allergie",
+        "IgE",
+        "mastocytes",
+        "anaphylaxie"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique du diabète de type 2 ?",
+      "options": [
+        {
+          "text": "Résistance à l'insuline et déficit relatif en insuline",
+          "isCorrect": true
+        },
+        {
+          "text": "Destruction auto-immune des cellules bêta",
+          "isCorrect": false
+        },
+        {
+          "text": "Mutation du gène de l'insuline",
+          "isCorrect": false
+        },
+        {
+          "text": "Résistance aux récepteurs GLUT4",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le diabète de type 2 associe une résistance périphérique à l'insuline (foie, muscle, tissu adipeux) et un déficit relatif en insuline par épuisement des cellules bêta pancréatiques. L'obésité et la sédentarité sont des facteurs majeurs.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "diabète-type-2",
+        "résistance-insuline",
+        "cellules-bêta",
+        "obésité",
+        "métabolisme-glucides"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des corticoïdes ?",
+      "options": [
+        {
+          "text": "Fixation sur des récepteurs cytosoliques avec régulation génique",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition directe des cyclo-oxygénases",
+          "isCorrect": false
+        },
+        {
+          "text": "Antagonisme des récepteurs des leucotriènes",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la libération d'histamine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les corticoïdes pénètrent dans la cellule et se fixent sur des récepteurs cytosoliques. Le complexe hormone-récepteur migre dans le noyau où il régule positivement ou négativement l'expression de gènes cibles impliqués dans l'inflammation.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "corticoïdes",
+        "récepteurs-stéroïdiens",
+        "anti-inflammatoires",
+        "régulation-génique",
+        "pharmacologie-endocrinienne"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction des lymphocytes NK (Natural Killer) ?",
+      "options": [
+        {
+          "text": "Cytotoxicité naturelle contre les cellules infectées et tumorales",
+          "isCorrect": true
+        },
+        {
+          "text": "Présentation antigénique aux lymphocytes T",
+          "isCorrect": false
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Phagocytose des pathogènes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les lymphocytes NK reconnaissent et détruisent les cellules infectées par des virus ou transformées en cellules tumorales sans activation préalable. Ils font partie de l'immunité innée et utilisent des récepteurs activateurs et inhibiteurs.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "lymphocytes-NK",
+        "cytotoxicité",
+        "immunité-innée",
+        "cellules-tumorales",
+        "virus"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des antidépresseurs ISRS ?",
+      "options": [
+        {
+          "text": "Inhibition sélective de la recapture de la sérotonine",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la monoamine-oxydase",
+          "isCorrect": false
+        },
+        {
+          "text": "Antagonisme des récepteurs 5-HT2",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la libération de noradrénaline",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les inhibiteurs sélectifs de la recapture de la sérotonine (ISRS) comme la fluoxétine bloquent spécifiquement le transporteur SERT, augmentant la concentration synaptique de sérotonine disponible pour la neurotransmission.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "ISRS",
+        "sérotonine",
+        "antidépresseurs",
+        "recapture",
+        "psychopharmacologie"
+      ]
+    },
+    {
+      "questionText": "Quelle est la complication principale de la maladie de Crohn ?",
+      "options": [
+        {
+          "text": "Sténoses intestinales et fistules",
+          "isCorrect": true
+        },
+        {
+          "text": "Cancer colorectal",
+          "isCorrect": false
+        },
+        {
+          "text": "Mégacôlon toxique",
+          "isCorrect": false
+        },
+        {
+          "text": "Hémorragie digestive haute",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La maladie de Crohn peut entraîner des sténoses (rétrécissements) inflammatoires ou fibreuses de l'intestin, et des fistules (communications anormales) entre l'intestin et d'autres organes ou la peau.",
+      "category": "Gastro-entérologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "maladie-de-crohn",
+        "MICI",
+        "sténoses",
+        "fistules",
+        "complications-chirurgicales"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'héparine ?",
+      "options": [
+        {
+          "text": "Activation de l'antithrombine III",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition directe du facteur Xa",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la fibrinolyse",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la synthèse de thrombine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'héparine accélère l'action inhibitrice de l'antithrombine III sur les facteurs activés de coagulation (IIa, Xa, IXa, XIa, XIIa). L'héparine non fractionnée agit sur la thrombine et le facteur Xa.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "héparine",
+        "antithrombine-III",
+        "anticoagulants",
+        "thrombose",
+        "pharmacologie-hémostase"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de transmission de la tuberculose ?",
+      "options": [
+        {
+          "text": "Voie aérienne par aérosols",
+          "isCorrect": true
+        },
+        {
+          "text": "Contact cutané direct",
+          "isCorrect": false
+        },
+        {
+          "text": "Transmission alimentaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Piqûre d'insecte",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Mycobacterium tuberculosis se transmet principalement par voie aérienne via des aérosols contenant des bacilles expectorés par les sujets contagieux. La transmission nécessite un contact prolongé rapproché.",
+      "category": "Maladies infectieuses",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "tuberculose",
+        "mycobacterium-tuberculosis",
+        "transmission-aérienne",
+        "contagion",
+        "prévention"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action du clopidogrel ?",
+      "options": [
+        {
+          "text": "Antagonisme irréversible des récepteurs P2Y12 plaquettaires",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la cyclo-oxygénase",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation de l'adénylate cyclase",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la fibrinolyse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le clopidogrel est un inhibiteur irréversible des récepteurs P2Y12 (ADP) plaquettaires, empêchant l'activation et l'agrégation plaquettaire induite par l'ADP. Il nécessite une activation métabolique hépatique.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "clopidogrel",
+        "antiagrégants-plaquettaires",
+        "récepteurs-ADP",
+        "thrombose",
+        "syndrome-coronarien"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale de l'hémoglobine ?",
+      "options": [
+        {
+          "text": "Transport de l'oxygène et du dioxyde de carbone",
+          "isCorrect": true
+        },
+        {
+          "text": "Défense immunitaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Coagulation sanguine",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation du pH",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémoglobine tétramérique contenue dans les hématies transporte l'oxygène des poumons vers les tissus et le dioxyde de carbone en sens inverse. Elle représente 97% du fer plasmatique.",
+      "category": "Hématologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "hémoglobine",
+        "transport-gaz-sanguins",
+        "oxygène",
+        "dioxyde-carbone",
+        "hématies"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'infarctus du myocarde avec sus-décalage ST ?",
+      "options": [
+        {
+          "text": "Occlusion complète d'une artère coronaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Spasme coronaire réversible",
+          "isCorrect": false
+        },
+        {
+          "text": "Embolie coronaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Dissection coronaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'infarctus ST+ résulte typiquement d'une occlusion thrombotique complète d'une artère coronaire sur une plaque athéromateuse rompue, entraînant une nécrose myocardique transmurale.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "infarctus-myocarde",
+        "artères-coronaires",
+        "thrombose",
+        "athérosclérose",
+        "urgences-cardiaques"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des benzodiazépines ?",
+      "options": [
+        {
+          "text": "Potentialisation de l'action du GABA sur les récepteurs GABAA",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs NMDA",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la recapture de sérotonine",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation des récepteurs dopaminergiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les benzodiazépines se fixent sur un site allostérique du récepteur GABAA, augmentant la fréquence d'ouverture des canaux chlore et potentialisant l'action inhibitrice du GABA.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "benzodiazépines",
+        "GABA",
+        "anxiolytiques",
+        "système-nerveux-central",
+        "psychopharmacologie"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale cause de mortalité dans la BPCO ?",
+      "options": [
+        {
+          "text": "Insuffisance respiratoire chronique",
+          "isCorrect": true
+        },
+        {
+          "text": "Cancer bronchopulmonaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Embolie pulmonaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection respiratoire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuffisance respiratoire chronique obstructive est la principale cause de décès dans la BPCO, résultant de l'hypercapnie et de l'hypoxémie chroniques avec retentissement cardiaque droit.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "BPCO",
+        "insuffisance-respiratoire",
+        "mortalité",
+        "complications",
+        "cœur-pulmonaire-chronique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la digoxine ?",
+      "options": [
+        {
+          "text": "Inhibition de la Na+/K+ ATPase cardiaque",
+          "isCorrect": true
+        },
+        {
+          "text": "Blocage des canaux calciques",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation des récepteurs bêta-adrénergiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Ouverture des canaux potassiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La digoxine inhibe la Na+/K+ ATPase, entraînant une augmentation intracellulaire du sodium qui favorise l'entrée de calcium via l'échangeur Na+/Ca2+, augmentant ainsi la contractilité myocardique.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "digitaliques",
+        "digoxine",
+        "insuffisance-cardiaque",
+        "contractilité",
+        "pharmacologie-cardiaque"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de résistance bactérienne le plus fréquent aux fluoroquinolones ?",
+      "options": [
+        {
+          "text": "Mutations des gènes de la topo-isomérase IV et gyrase",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de bêtalactamases",
+          "isCorrect": false
+        },
+        {
+          "text": "Efflux actif",
+          "isCorrect": false
+        },
+        {
+          "text": "Modification de la paroi bactérienne",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les fluoroquinolones inhibent les topo-isomérases bactériennes (gyrase et topo-IV). Les mutations dans les gènes gyrA et parC confèrent une résistance croisée à plusieurs fluoroquinolones.",
+      "category": "Maladies infectieuses",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "fluoroquinolones",
+        "résistance-antibiotique",
+        "topo-isomérases",
+        "mutations-génétiques",
+        "antibiotiques"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'insuline sur le foie ?",
+      "options": [
+        {
+          "text": "Inhibition de la néoglucogenèse et stimulation de la glycogénogenèse",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation de la néoglucogenèse",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la glycolyse",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la cétogenèse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuline inhibe la néoglucogenèse hépatique (production de glucose) et stimule la glycogénogenèse (stockage du glucose sous forme de glycogène) et la lipogenèse dans le foie.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "insuline",
+        "foie",
+        "néoglucogenèse",
+        "glycogène",
+        "métabolisme-glucides"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction des lymphocytes T CD8+ ?",
+      "options": [
+        {
+          "text": "Cytotoxicité contre les cellules infectées",
+          "isCorrect": true
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Présentation antigénique",
+          "isCorrect": false
+        },
+        {
+          "text": "Sécrétion de cytokines",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les lymphocytes T cytotoxiques (CD8+) détruisent les cellules infectées par des virus ou transformées en cellules tumorales via les molécules perforine et granzyme, ainsi que par apoptose induite par Fas.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "lymphocytes-T-CD8",
+        "cytotoxicité",
+        "virus",
+        "cellules-tumorales",
+        "immunité-cellulaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'aciclovir ?",
+      "options": [
+        {
+          "text": "Inhibition de l'ADN polymérase virale après phosphorylation",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la transcriptase inverse",
+          "isCorrect": false
+        },
+        {
+          "text": "Blocage de la libération virale",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de l'immunité cellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'aciclovir est phosphorylé par la thymidine kinase virale en aciclovir-monophosphate, puis par les kinases cellulaires en aciclovir-triphosphate qui inhibe compétitivement l'ADN polymérase virale.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "aciclovir",
+        "antiviraux",
+        "HSV",
+        "ADN-polymérase",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'asthme ?",
+      "options": [
+        {
+          "text": "Inflammation bronchique chronique avec hyperréactivité",
+          "isCorrect": true
+        },
+        {
+          "text": "Fibrose pulmonaire progressive",
+          "isCorrect": false
+        },
+        {
+          "text": "Destruction alvéolaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection bactérienne chronique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'asthme associe une inflammation bronchique chronique à prédominance éosinophilique et une hyperréactivité bronchique entraînant une obstruction réversible des voies aériennes.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "asthme",
+        "inflammation",
+        "bronches",
+        "éosinophiles",
+        "hyperréactivité"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la morphine ?",
+      "options": [
+        {
+          "text": "Agonisme des récepteurs opioïdes μ",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs NMDA",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la recapture de sérotonine",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation des récepteurs GABA",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La morphine se fixe sur les récepteurs opioïdes μ centraux et périphériques, activant les voies de signalisation inhibitrices qui diminuent la transmission nociceptive et produisent l'analgésie.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "morphine",
+        "opioïdes",
+        "analgésie",
+        "récepteurs-mu",
+        "pharmacologie-douleur"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction du système complément ?",
+      "options": [
+        {
+          "text": "Défense innée par opsonisation et lyse cellulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Présentation antigénique",
+          "isCorrect": false
+        },
+        {
+          "text": "Cytotoxicité cellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le système complément amplifie la réponse immunitaire par trois voies (classique, alterne, lectine) aboutissant à l'opsonisation, la chimiotaxie, la lyse cellulaire et l'inflammation.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "système-complément",
+        "immunité-innée",
+        "opsonisation",
+        "lyse-cellulaire",
+        "inflammation"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'amoxicilline ?",
+      "options": [
+        {
+          "text": "Inhibition de la synthèse du peptidoglycane bactérien",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération de la membrane cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la réplication de l'ADN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'amoxicilline inhibe la transpeptidation finale du peptidoglycane bactérien en se liant aux protéines liant la pénicilline (PLP), empêchant la formation des liens croisés de la paroi bactérienne.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "amoxicilline",
+        "pénicillines",
+        "peptidoglycane",
+        "antibiotiques",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'hypertension artérielle essentielle ?",
+      "options": [
+        {
+          "text": "Augmentation des résistances vasculaires périphériques",
+          "isCorrect": true
+        },
+        {
+          "text": "Augmentation du volume d'éjection systolique",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de la volémie",
+          "isCorrect": false
+        },
+        {
+          "text": "Hypofonctionnement du système rénine-angiotensine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hypertension essentielle (90% des cas) résulte principalement d'une augmentation des résistances vasculaires périphériques liée à des anomalies de la régulation vasculaire, génétique et environnementale.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hypertension-artérielle",
+        "résistances-périphériques",
+        "physiopathologie",
+        "facteurs-génétiques",
+        "cardiovasculaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action du métoprolol ?",
+      "options": [
+        {
+          "text": "Antagonisme sélectif des récepteurs bêta1-adrénergiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs alpha1",
+          "isCorrect": false
+        },
+        {
+          "text": "Agonisme partiel des récepteurs bêta2",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'enzyme de conversion",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le métoprolol est un bêtabloquant cardioselectif qui bloque préférentiellement les récepteurs bêta1 myocardiques et juxtaglomérulaires, réduisant la fréquence cardiaque, la contractilité et la sécrétion de rénine.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "métoprolol",
+        "bêtabloquants",
+        "cardioselectif",
+        "récepteurs-bêta1",
+        "pharmacologie-cardiaque"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de transmission génétique de l'hémophilie A ?",
+      "options": [
+        {
+          "text": "Lié à l'X récessif",
+          "isCorrect": true
+        },
+        {
+          "text": "Autosomique dominant",
+          "isCorrect": false
+        },
+        {
+          "text": "Autosomique récessif",
+          "isCorrect": false
+        },
+        {
+          "text": "Lié à l'X dominant",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémophilie A est liée à l'X récessive, liée à des mutations du gène F8 sur le chromosome X. Les hommes hémizygotes expriment la maladie, les femmes sont conductrices hétérozygotes.",
+      "category": "Génétique",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hémophilie-A",
+        "transmission-liée-X",
+        "facteur-VIII",
+        "maladies-génétiques",
+        "chromosome-X"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs calciques ?",
+      "options": [
+        {
+          "text": "Blocage des canaux calciques voltage-dépendants",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation de la libération de calcium sarcoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la Na+/K+ ATPase",
+          "isCorrect": false
+        },
+        {
+          "text": "Ouverture des canaux potassiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les inhibiteurs calciques bloquent les canaux calciques L voltage-dépendants des cellules musculaires lisses vasculaires et cardiaques, entraînant une vasodilatation et une diminution de la contractilité myocardique.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "inhibiteurs-calciques",
+        "canaux-calciques",
+        "vasodilatateurs",
+        "anti-hypertenseurs",
+        "pharmacologie-cardiovasculaire"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale des polynucléaires neutrophiles ?",
+      "options": [
+        {
+          "text": "Phagocytose des bactéries et débris cellulaires",
+          "isCorrect": true
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Présentation antigénique",
+          "isCorrect": false
+        },
+        {
+          "text": "Sécrétion d'histamine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les polynucléaires neutrophiles sont les phagocytes professionnels de l'immunité innée, représentant 60-70% des leucocytes circulants. Ils détruisent les bactéries par phagocytose et libération d'enzymes lysosomiales.",
+      "category": "Immunologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "neutrophiles",
+        "phagocytose",
+        "immunité-innée",
+        "bactéries",
+        "inflammation"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'ibuprofène ?",
+      "options": [
+        {
+          "text": "Inhibition réversible des cyclo-oxygénases",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs opioïdes",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la lipo-oxygénase",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation des récepteurs cannabinoïdes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'ibuprofène inhibe réversiblement les cyclo-oxygénases (COX-1 et COX-2), réduisant la production de prostaglandines responsables de la douleur, la fièvre et l'inflammation.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "ibuprofène",
+        "AINS",
+        "cyclo-oxygénases",
+        "anti-inflammatoires",
+        "analgésiques"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de la maladie de Parkinson ?",
+      "options": [
+        {
+          "text": "Dégénérescence des neurones dopaminergiques nigrostriés",
+          "isCorrect": true
+        },
+        {
+          "text": "Accumulation de plaques amyloïdes",
+          "isCorrect": false
+        },
+        {
+          "text": "Démence à corps de Lewy",
+          "isCorrect": false
+        },
+        {
+          "text": "Atrophie cérébelleuse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La maladie de Parkinson résulte de la dégénérescence progressive des neurones dopaminergiques de la substance noire (pars compacta) avec formation d'inclusions cytoplasmiques éosinophiles (corps de Lewy).",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "maladie-de-parkinson",
+        "dopamine",
+        "substance-noire",
+        "corps-de-lewy",
+        "neurologie-gériatrique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la rifampicine ?",
+      "options": [
+        {
+          "text": "Inhibition de l'ARN polymérase bactérienne",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération de la membrane cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la réplication de l'ADN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La rifampicine se lie à la sous-unité bêta de l'ARN polymérase bactérienne, empêchant l'initiation de la transcription de l'ADN en ARN. Elle est bactéricide contre les mycobactéries.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "rifampicine",
+        "antituberculeux",
+        "ARN-polymérase",
+        "mycobactéries",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale complication de la cirrhose hépatique ?",
+      "options": [
+        {
+          "text": "Hypertension portale et ascite",
+          "isCorrect": true
+        },
+        {
+          "text": "Hémorragie digestive",
+          "isCorrect": false
+        },
+        {
+          "text": "Encéphalopathie hépatique",
+          "isCorrect": false
+        },
+        {
+          "text": "Carcinome hépatocellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hypertension portale, complication majeure de la cirrhose, entraîne ascite, varices œsophagiennes et splénomégalie. Elle résulte de l'augmentation des résistances vasculaires intrahépatiques.",
+      "category": "Gastro-entérologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "cirrhose",
+        "hypertension-portale",
+        "ascite",
+        "complications-hépatiques",
+        "physiopathologie"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la metformine ?",
+      "options": [
+        {
+          "text": "Activation de l'AMPK et réduction de la néoglucogenèse hépatique",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation de la sécrétion d'insuline",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'absorption intestinale du glucose",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la sensibilité des récepteurs GLUT4",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La metformine active l'AMPK (AMP-activated protein kinase) qui inhibe la néoglucogenèse hépatique et améliore la sensibilité à l'insuline périphérique sans stimuler directement la sécrétion d'insuline.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "metformine",
+        "antidiabétiques",
+        "AMPK",
+        "néoglucogenèse",
+        "diabète-type-2"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme de transmission de l'hépatite B ?",
+      "options": [
+        {
+          "text": "Contact sanguin et sexuel",
+          "isCorrect": true
+        },
+        {
+          "text": "Voie fécale-orale",
+          "isCorrect": false
+        },
+        {
+          "text": "Gouttelettes respiratoires",
+          "isCorrect": false
+        },
+        {
+          "text": "Transmission verticale exclusive",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le virus de l'hépatite B se transmet par contact avec du sang contaminé, rapports sexuels non protégés, partage de matériel injectable et transmission verticale mère-enfant pendant l'accouchement.",
+      "category": "Maladies infectieuses",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "hépatite-B",
+        "VHB",
+        "transmission-sanguine",
+        "MST",
+        "prévention-vaccination"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'oméprazole ?",
+      "options": [
+        {
+          "text": "Inhibition irréversible de la H+/K+ ATPase gastrique",
+          "isCorrect": true
+        },
+        {
+          "text": "Neutralisation des acides gastriques",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition compétitive des récepteurs H2",
+          "isCorrect": false
+        },
+        {
+          "text": "Formation d'un complexe insoluble avec les ions H+",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'oméprazole s'accumule dans les canalicules sécrétoires des cellules pariétales et inhibe irréversiblement la H+/K+ ATPase (pompe à protons), bloquant la sécrétion acide chlorhydrique finale.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "oméprazole",
+        "IPP",
+        "pompe-protons",
+        "sécrétion-acide",
+        "gastro-entérologie"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale du système nerveux sympathique ?",
+      "options": [
+        {
+          "text": "Préparation à l'action et à la fuite",
+          "isCorrect": true
+        },
+        {
+          "text": "Conservation et restauration de l'énergie",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation thermique",
+          "isCorrect": false
+        },
+        {
+          "text": "Contrôle moteur volontaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le système sympathique est le système de 'lutte ou fuite' qui mobilise les ressources énergétiques pour faire face au stress (augmentation FC, vasoconstriction, libération de glucose).",
+      "category": "Neurologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "système-nerveux-autonome",
+        "sympathique",
+        "noradrénaline",
+        "réponse-au-stress",
+        "physiologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'héparine de bas poids moléculaire ?",
+      "options": [
+        {
+          "text": "Inhibition catalytique du facteur Xa",
+          "isCorrect": true
+        },
+        {
+          "text": "Activation de l'antithrombine III",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition directe de la thrombine",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la fibrinolyse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les HBPM inhibent principalement le facteur Xa activé en potentialisant l'antithrombine III, avec une activité antithrombine plus faible que l'héparine non fractionnée.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "HBPM",
+        "héparine",
+        "facteur-Xa",
+        "anticoagulants",
+        "pharmacologie-hémostase"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'infarctus cérébral ?",
+      "options": [
+        {
+          "text": "Occlusion ou rupture d'une artère cérébrale",
+          "isCorrect": true
+        },
+        {
+          "text": "Inflammation méningée",
+          "isCorrect": false
+        },
+        {
+          "text": "Compression tumorale",
+          "isCorrect": false
+        },
+        {
+          "text": "Hydrocéphalie hypertensive",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'infarctus cérébral résulte de l'occlusion d'une artère cérébrale par un thrombus, une embolie ou une sténose athéromateuse, entraînant une ischémie neuronale irréversible au-delà de 4-6 minutes.",
+      "category": "Neurologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "AVC-ischémique",
+        "artères-cérébrales",
+        "ischémie",
+        "thrombose",
+        "urgences-neurologiques"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'insuline glargine ?",
+      "options": [
+        {
+          "text": "Formation de microprécipités sous-cutanés à libération prolongée",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation directe des cellules bêta",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la glucagonémie",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la néoglucogenèse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuline glargine forme des microprécipités dans le tissu sous-cutané à pH physiologique, permettant une libération lente et prolongée de l'insuline active sur 24 heures.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "insuline-glargine",
+        "insulines-lentes",
+        "analogues-insuline",
+        "diabète",
+        "pharmacologie-endocrinienne"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction des lymphocytes B ?",
+      "options": [
+        {
+          "text": "Production d'anticorps spécifiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Cytotoxicité cellulaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Présentation antigénique",
+          "isCorrect": false
+        },
+        {
+          "text": "Phagocytose des pathogènes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les lymphocytes B se différencient en plasmocytes qui produisent des anticorps spécifiques contre les antigènes reconnus. Ils assurent l'immunité humorale adaptative.",
+      "category": "Immunologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "lymphocytes-B",
+        "anticorps",
+        "plasmocytes",
+        "immunité-humorale",
+        "immunité-adaptative"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'énalapril ?",
+      "options": [
+        {
+          "text": "Inhibition de l'enzyme de conversion de l'angiotensine",
+          "isCorrect": true
+        },
+        {
+          "text": "Blocage des récepteurs AT1",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la libération de rénine",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la sécrétion d'aldostérone",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'énalapril inhibe l'enzyme de conversion qui transforme l'angiotensine I en angiotensine II vasoconstrictrice, réduisant ainsi la pression artérielle et la charge cardiaque.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "énalapril",
+        "IEC",
+        "système-rénine-angiotensine",
+        "hypertension",
+        "insuffisance-cardiaque"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de la polyarthrite rhumatoïde ?",
+      "options": [
+        {
+          "text": "Inflammation synoviale chronique autoimmune",
+          "isCorrect": true
+        },
+        {
+          "text": "Dégénérescence cartilagineuse mécanique",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection articulaire bactérienne",
+          "isCorrect": false
+        },
+        {
+          "text": "Dépôt de cristaux d'urate",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La PR est une maladie autoimmune systémique caractérisée par une inflammation synoviale chronique avec prolifération synoviale, destruction cartilagineuse et osseuse, et présence de facteurs rhumatoïdes.",
+      "category": "Rhumatologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "polyarthrite-rhumatoïde",
+        "inflammation-synoviale",
+        "autoimmune",
+        "facteurs-rhumatoïdes",
+        "rhumatismes-inflammatoires"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la pénicilline G ?",
+      "options": [
+        {
+          "text": "Inhibition de la transpeptidation du peptidoglycane",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération de la membrane cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la réplication de l'ADN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La pénicilline G se lie aux protéines liant la pénicilline (PLP) impliquées dans la transpeptidation finale du peptidoglycane, empêchant la formation des liens croisés de la paroi bactérienne.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "pénicilline-G",
+        "bêtalactamines",
+        "peptidoglycane",
+        "antibiotiques",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale complication de la grossesse extra-utérine ?",
+      "options": [
+        {
+          "text": "Rupture tubaire avec hémorragie intra-abdominale",
+          "isCorrect": true
+        },
+        {
+          "text": "Prééclampsie",
+          "isCorrect": false
+        },
+        {
+          "text": "Diabète gestationnel",
+          "isCorrect": false
+        },
+        {
+          "text": "Rupture utérine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La GEU se complique le plus fréquemment de rupture tubaire entraînant une hémorragie intra-abdominale massive nécessitant une prise en charge chirurgicale en urgence.",
+      "category": "Gynécologie-obstétrique",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "grossesse-extra-utérine",
+        "rupture-tubaire",
+        "hémorragie",
+        "urgence-gynécologique",
+        "trompes-de-fallope"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action du fentanyl ?",
+      "options": [
+        {
+          "text": "Agonisme des récepteurs opioïdes μ",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs NMDA",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la recapture de noradrénaline",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation des récepteurs GABA",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le fentanyl est un agoniste pur des récepteurs opioïdes μ, 80 fois plus puissant que la morphine, utilisé pour l'analgésie intense en périopératoire et les douleurs chroniques.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "fentanyl",
+        "opioïdes",
+        "analgésie",
+        "récepteurs-mu",
+        "pharmacologie-douleur"
+      ]
+    },
+    {
+      "questionText": "Quelle est la fonction principale du complexe majeur d'histocompatibilité de classe I ?",
+      "options": [
+        {
+          "text": "Présentation des peptides intracellulaires aux lymphocytes T CD8+",
+          "isCorrect": true
+        },
+        {
+          "text": "Présentation des antigènes extracellulaires aux lymphocytes B",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation du complément",
+          "isCorrect": false
+        },
+        {
+          "text": "Sécrétion de cytokines",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le CMH classe I présente les peptides cytosoliques (auto ou viraux) aux lymphocytes T CD8+ cytotoxiques. Il est exprimé sur toutes les cellules nucléées et crucial pour la réponse antivirale.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "CMH-classe-I",
+        "lymphocytes-T-CD8",
+        "présentation-antigénique",
+        "virus",
+        "immunité-cellulaire"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'insuffisance rénale aiguë ?",
+      "options": [
+        {
+          "text": "Diminution brutale du débit de filtration glomérulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Obstruction des voies urinaires",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de la production d'urine",
+          "isCorrect": false
+        },
+        {
+          "text": "Acidose métabolique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'IRA se définit par une diminution brutale (< 7 jours) du DFG < 60 ml/min/1,73m² avec augmentation de la créatininémie. Elle peut être prérénale, rénale ou postrénale.",
+      "category": "Néphrologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "insuffisance-rénale-aiguë",
+        "débit-filtration-glomérulaire",
+        "créatininémie",
+        "néphrologie",
+        "urgences-médicales"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la ciclosporine ?",
+      "options": [
+        {
+          "text": "Inhibition de la calcineurine et de l'activation lymphocytaire T",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la réponse immune",
+          "isCorrect": false
+        },
+        {
+          "text": "Induction de tolérance immune",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La ciclosporine inhibe la calcineurine, empêchant la déphosphorylation du NFAT et son entrée dans le noyau, bloquant ainsi la transcription des cytokines IL-2 et l'activation des lymphocytes T.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "ciclosporine",
+        "immunosuppresseurs",
+        "calcineurine",
+        "lymphocytes-T",
+        "transplantation"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale cause d'anémie ferriprive chez l'adulte ?",
+      "options": [
+        {
+          "text": "Saignements gastro-intestinaux chroniques",
+          "isCorrect": true
+        },
+        {
+          "text": "Apports alimentaires insuffisants",
+          "isCorrect": false
+        },
+        {
+          "text": "Malabsorption intestinale",
+          "isCorrect": false
+        },
+        {
+          "text": "Hémolyse intravasculaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les saignements GI chroniques (ulcère, cancer colorectal, angiodysplasies) sont la principale cause d'anémie ferriprive chez l'homme de >50 ans et la femme ménopausée.",
+      "category": "Hématologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "anémie-ferriprive",
+        "saignements-digestifs",
+        "fer",
+        "hémorragie-chronique",
+        "gastro-entérologie"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'azithromycine ?",
+      "options": [
+        {
+          "text": "Inhibition de la synthèse des protéines bactériennes",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse de l'ADN",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération de la membrane cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la réplication de l'ARN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'azithromycine inhibe la synthèse des protéines bactériennes en se liant à la sous-unité 50S du ribosome, empêchant la translocation peptidique. Elle a une demi-vie longue permettant une prise uniquotidienne.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "azithromycine",
+        "macrolides",
+        "ribosomes",
+        "antibiotiques",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'embolie pulmonaire ?",
+      "options": [
+        {
+          "text": "Obstruction d'une artère pulmonaire par un thrombus",
+          "isCorrect": true
+        },
+        {
+          "text": "Spasme bronchique généralisé",
+          "isCorrect": false
+        },
+        {
+          "text": "Inflammation alvéolaire diffuse",
+          "isCorrect": false
+        },
+        {
+          "text": "Œdème pulmonaire cardiogénique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'EP résulte de la migration d'un thrombus (généralement des membres inférieurs) dans la circulation pulmonaire, obstruant une artère pulmonaire et entraînant hypoxémie et hypertension artérielle pulmonaire.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "embolie-pulmonaire",
+        "thrombose-veineuse",
+        "artères-pulmonaires",
+        "hypoxémie",
+        "urgences-pulmonaires"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la prednisone ?",
+      "options": [
+        {
+          "text": "Fixation sur des récepteurs cytosoliques avec régulation génique",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition directe des prostaglandines",
+          "isCorrect": false
+        },
+        {
+          "text": "Antagonisme des récepteurs des leucotriènes",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la libération d'histamine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La prednisone est métabolisée en prednisolone active qui se fixe sur les récepteurs glucocorticoïdes cytosoliques, régulant positivement ou négativement l'expression de gènes impliqués dans l'inflammation et l'immunité.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "prednisone",
+        "corticoïdes",
+        "récepteurs-glucocorticoïdes",
+        "anti-inflammatoires",
+        "pharmacologie-endocrinienne"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction des lymphocytes T helper (CD4+) ?",
+      "options": [
+        {
+          "text": "Coordination de la réponse immune adaptative",
+          "isCorrect": true
+        },
+        {
+          "text": "Cytotoxicité directe contre les cellules infectées",
+          "isCorrect": false
+        },
+        {
+          "text": "Production d'anticorps",
+          "isCorrect": false
+        },
+        {
+          "text": "Phagocytose des pathogènes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les lymphocytes T helper (CD4+) orchestrent la réponse immune en sécrétant des cytokines qui activent les lymphocytes B (production d'anticorps), les lymphocytes T cytotoxiques et les macrophages.",
+      "category": "Immunologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "lymphocytes-T-CD4",
+        "cytokines",
+        "réponse-immune",
+        "lymphocytes-B",
+        "immunité-adaptative"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la vancomycine ?",
+      "options": [
+        {
+          "text": "Inhibition de la synthèse du peptidoglycane",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la synthèse des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération de la membrane cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la réplication de l'ADN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La vancomycine inhibe la transpeptidation et la translocation du peptidoglycane en se liant au terminal D-alanyl-D-alanine des précurseurs du peptidoglycane, empêchant la polymérisation de la paroi bactérienne.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "vancomycine",
+        "glycopeptides",
+        "peptidoglycane",
+        "antibiotiques",
+        "pharmacologie-anti-infectieuse"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de la pancréatite aiguë ?",
+      "options": [
+        {
+          "text": "Activation inappropriée des enzymes pancréatiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Obstruction du canal pancréatique",
+          "isCorrect": false
+        },
+        {
+          "text": "Ischémie pancréatique",
+          "isCorrect": false
+        },
+        {
+          "text": "Infection bactérienne du pancréas",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La pancréatite aiguë résulte de l'activation intracellulaire des enzymes pancréatiques (trypsine, phospholipase) qui digèrent le parenchyme pancréatique, entraînant inflammation et nécrose.",
+      "category": "Gastro-entérologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "pancréatite-aiguë",
+        "enzymes-pancréatiques",
+        "autodigestion",
+        "trypsine",
+        "urgences-abdominales"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'atropine ?",
+      "options": [
+        {
+          "text": "Antagonisme compétitif des récepteurs muscariniques",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation des récepteurs nicotiniques",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'acétylcholinestérase",
+          "isCorrect": false
+        },
+        {
+          "text": "Agonisme des récepteurs adrénergiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'atropine bloque compétitivement les récepteurs muscariniques de l'acétylcholine, inhibant les effets parasympathiques (sécheresse buccale, tachycardie, mydriase, rétention urinaire).",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "atropine",
+        "antimuscariniques",
+        "parasympathique",
+        "acétylcholine",
+        "pharmacologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale fonction des plaquettes dans l'hémostase ?",
+      "options": [
+        {
+          "text": "Formation du clou plaquettaire primaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de thrombine",
+          "isCorrect": false
+        },
+        {
+          "text": "Activation du fibrinogène",
+          "isCorrect": false
+        },
+        {
+          "text": "Dissolution du caillot",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les plaquettes s'agrègent pour former le clou plaquettaire primaire qui colmate temporairement la brèche vasculaire. L'agrégation est amplifiée par le thromboxane A2, l'ADP et le collagène.",
+      "category": "Hématologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "plaquettes",
+        "hémostase-primaire",
+        "agrégation-plaquettaire",
+        "clou-plaquettaire",
+        "coagulation"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la cimétidine ?",
+      "options": [
+        {
+          "text": "Antagonisme compétitif des récepteurs H2 de l'histamine",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la pompe à protons",
+          "isCorrect": false
+        },
+        {
+          "text": "Neutralisation des acides gastriques",
+          "isCorrect": false
+        },
+        {
+          "text": "Formation d'un complexe avec la pepsine",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La cimétidine bloque compétitivement les récepteurs H2 de l'histamine sur les cellules pariétales gastriques, réduisant la sécrétion acide chlorhydrique stimulée par l'histamine.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "cimétidine",
+        "anti-H2",
+        "sécrétion-acide",
+        "histamine",
+        "gastro-entérologie"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme physiopathologique de l'infarctus du myocarde ?",
+      "options": [
+        {
+          "text": "Occlusion thrombotique d'une artère coronaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Spasme coronaire prolongé",
+          "isCorrect": false
+        },
+        {
+          "text": "Dissection coronaire spontanée",
+          "isCorrect": false
+        },
+        {
+          "text": "Embolie coronaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'IDM résulte typiquement d'une rupture de plaque athéromateuse avec thrombose occlusive complète d'une artère coronaire, entraînant une ischémie myocardique irréversible.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "infarctus-myocarde",
+        "thrombose-coronaire",
+        "athérosclérose",
+        "ischémie-myocardique",
+        "urgences-cardiaques"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action du diazépam ?",
+      "options": [
+        {
+          "text": "Potentialisation de l'action du GABA sur les récepteurs GABAA",
+          "isCorrect": true
+        },
+        {
+          "text": "Antagonisme des récepteurs NMDA",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la recapture de sérotonine",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation des récepteurs dopaminergiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le diazépam se fixe sur un site allostérique du récepteur GABAA, augmentant la fréquence d'ouverture des canaux chlore et potentialisant l'action inhibitrice du GABA central.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "diazépam",
+        "benzodiazépines",
+        "GABA",
+        "anxiolytiques",
+        "psychopharmacologie"
+      ]
+    },
+    {
+      "questionText": "Quelle est la principale complication de l'ulcère gastroduodénal ?",
+      "options": [
+        {
+          "text": "Hémorragie digestive",
+          "isCorrect": true
+        },
+        {
+          "text": "Perforation gastrique",
+          "isCorrect": false
+        },
+        {
+          "text": "Sténose pylorique",
+          "isCorrect": false
+        },
+        {
+          "text": "Dégénérescence maligne",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémorragie digestive haute est la complication la plus fréquente de l'UGD, représentant 50-70% des complications. Elle peut être aiguë massive ou chronique occulte.",
+      "category": "Gastro-entérologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "ulcère-gastroduodénal",
+        "hémorragie-digestive",
+        "complications",
+        "Helicobacter-pylori",
+        "AINS"
+      ]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de l'amiodarone ?",
+      "options": [
+        {
+          "text": "Blocage des canaux potassiques et modification des canaux sodiques et calciques",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimulation des récepteurs bêta-adrénergiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de l'enzyme de conversion",
+          "isCorrect": false
+        },
+        {
+          "text": "Antagonisme des récepteurs de l'angiotensine II",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'amiodarone bloque principalement les canaux potassiques (effet classe III), mais possède aussi des effets sur les canaux sodiques (classe I) et calciques (classe IV), expliquant ses propriétés antiarythmiques étendues.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "amiodarone",
+        "antiarythmiques",
+        "canaux-ioniques",
+        "arythmies",
+        "pharmacologie-cardiaque"
+      ]
+    }
+  ]
+}

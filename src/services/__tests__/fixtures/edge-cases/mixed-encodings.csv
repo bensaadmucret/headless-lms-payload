@@ -1,0 +1,6 @@
+questionText,optionA,optionB,optionC,optionD,correctAnswer,explanation,category,difficulty,level,tags
+"Question avec accents français : àéèùç, œ, ñ ?","Réponse avec é","Réponse avec è","Réponse avec ç","Réponse avec ù","A","Explication avec caractères accentués français","Test Encodage","easy","PASS","français,accents"
+"Question with English characters and symbols: £$€¥?","Answer with £","Answer with $","Answer with €","Answer with ¥","A","Explanation with currency symbols","Test Encoding","medium","PASS","english,symbols"
+"Pregunta con caracteres españoles: ¿Qué es ñ?","Respuesta con ñ","Respuesta con á","Respuesta con ü","Respuesta con ¡","A","Explicación con caracteres españoles","Test Codificación","medium","PASS","español,caracteres"
+"Question avec émojis médicaux 🫀💊🩺?","Réponse avec 🫀","Réponse avec 💊","Réponse avec 🩺","Réponse avec 🏥","A","Explication avec émojis médicaux","Test Emoji","hard","LAS","emoji,médical"
+"Question avec symboles mathématiques: α, β, γ, Δ?","Réponse avec α","Réponse avec β","Réponse avec γ","Réponse avec Δ","A","Explication avec lettres grecques","Test Grec","hard","LAS","grec,mathématiques"

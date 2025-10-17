@@ -120,6 +120,16 @@ export const Quizzes: CollectionConfig = {
       },
     },
     {
+      name: 'quizValidation',
+      type: 'ui',
+      admin: {
+        components: {
+          Field: '@/components/admin/QuizValidationButton',
+        },
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'title',
       type: 'text',
       required: true,
@@ -213,9 +223,119 @@ export const Quizzes: CollectionConfig = {
       min: 0,
       max: 100,
     },
+    // Nouveaux champs pour la tâche 9: Prévisualisation et modification
+    {
+      name: 'validationStatus',
+      label: 'Statut de validation',
+      type: 'select',
+      defaultValue: 'draft',
+      options: [
+        { label: '📝 Brouillon', value: 'draft' },
+        { label: '⏳ En attente de révision', value: 'pending_review' },
+        { label: '✅ Approuvé', value: 'approved' },
+        { label: '❌ Rejeté', value: 'rejected' }
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Statut de validation par les experts'
+      }
+    },
+    {
+      name: 'validationNotes',
+      label: 'Notes de validation',
+      type: 'textarea',
+      admin: {
+        position: 'sidebar',
+        description: 'Commentaires et notes des experts lors de la validation'
+      }
+    },
+    {
+      name: 'validatedBy',
+      label: 'Validé par',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Expert qui a validé ce quiz'
+      }
+    },
+    {
+      name: 'validatedAt',
+      label: 'Validé le',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Date de validation par l\'expert'
+      }
+    },
+    {
+      name: 'generatedByAI',
+      label: 'Généré par IA',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Ce quiz a été généré automatiquement par l\'IA'
+      }
+    },
+    {
+      name: 'aiGenerationMetadata',
+      label: 'Métadonnées de génération IA',
+      type: 'group',
+      admin: {
+        position: 'sidebar',
+        condition: (data) => data.generatedByAI === true
+      },
+      fields: [
+        {
+          name: 'generationTime',
+          label: 'Temps de génération (ms)',
+          type: 'number',
+          admin: {
+            readOnly: true
+          }
+        },
+        {
+          name: 'validationScore',
+          label: 'Score de validation',
+          type: 'number',
+          min: 0,
+          max: 100,
+          admin: {
+            readOnly: true
+          }
+        },
+        {
+          name: 'aiModel',
+          label: 'Modèle IA utilisé',
+          type: 'text',
+          admin: {
+            readOnly: true
+          }
+        },
+        {
+          name: 'sourcePrompt',
+          label: 'Prompt source',
+          type: 'text',
+          admin: {
+            readOnly: true
+          }
+        }
+      ]
+    }
   ],
   // Configuration des endpoints personnalisés
   endpoints: [
+    {
+      path: '/:id/validate',
+      method: 'post',
+      handler: async (req) => {
+        const { validateQuiz } = await import('../endpoints/validateQuiz')
+        return validateQuiz(req)
+      }
+    },
     {
       path: '/:id/submit',
       method: 'post',

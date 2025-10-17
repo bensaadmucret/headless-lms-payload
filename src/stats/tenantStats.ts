@@ -140,7 +140,7 @@ export async function getActionCountForTenant(tenantId: string, days: number = 3
     const since = new Date();
     since.setDate(since.getDate() - days);
     const result = await payload.find({
-      collection: 'auditLog' as any, // TODO: Slug non reconnu, à aligner avec la config Payload
+      collection: 'auditlogs',
       where: {
         tenant: { equals: tenantId },
         createdAt: { greater_than: since.toISOString() }
@@ -159,7 +159,7 @@ export async function getActionCountForTenant(tenantId: string, days: number = 3
 export async function getActivePlansForTenant(tenantId: string): Promise<number> {
   try {
     const result = await payload.find({
-      collection: 'subscriptionPlan' as any, // TODO: Slug non reconnu, à aligner avec la config Payload
+      collection: 'subscription-plans',
       where: {
         tenant: { equals: tenantId },
         status: { equals: 'active' }

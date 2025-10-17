@@ -58,7 +58,7 @@ export class EligibilityService {
    */
   async checkEligibility(userId: string): Promise<EligibilityResult> {
     try {
-      console.log('🔍 EligibilityService: Début checkEligibility pour userId:', userId);
+      console.log('🔍 EligibilityService: Début checkEligibility');
       
       // Get user information
       console.log('📋 EligibilityService: Récupération utilisateur...');
@@ -75,7 +75,7 @@ export class EligibilityService {
         };
       }
       
-      console.log('✅ EligibilityService: Utilisateur trouvé:', user.email);
+      console.log('✅ EligibilityService: Utilisateur trouvé');
 
       // Check all requirements
       console.log('🔍 EligibilityService: Vérification des exigences...');

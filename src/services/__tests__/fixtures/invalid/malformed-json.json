@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Malformed",
+    "level": "PASS"
+    // Missing comma here
+    "description": "JSON with syntax errors"
+  },
+  "questions": [
+    {
+      "questionText": "Question with malformed JSON ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false}
+        // Missing comma
+        {"text": "Option C", "isCorrect": false}
+      ],
+      "explanation": "This JSON has syntax errors",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS"
+    }
+  ]
+  // Missing closing brace

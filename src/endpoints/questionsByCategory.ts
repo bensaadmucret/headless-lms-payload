@@ -40,42 +40,37 @@ export const getQuestionsByCategoryEndpoint: Endpoint = {
         where.difficulty = { equals: difficulty };
       }
 
-      // 4. Récupérer les questions
+      // 4. Récupérer les questions avec les catégories peuplées (évite N+1)
       const questions = await req.payload.find({
         collection: 'questions',
         where,
         limit: parseInt(limit) || 10,
-        sort: '-createdAt'
+        sort: '-createdAt',
+        depth: 1 // Peuple automatiquement les relations
       });
 
-      // 5. Enrichir les questions avec les informations de catégorie
-      const enrichedQuestions = await Promise.all(
-        questions.docs.map(async (question) => {
-          let categoryName = 'Unknown';
-          
-          if (question.category) {
-            try {
-              const category = await req.payload.findByID({
-                collection: 'categories',
-                id: typeof question.category === 'string' ? question.category : (question.category as any).id
-              });
-              categoryName = (category as any).name || 'Unknown';
-            } catch (error) {
-              req.payload.logger.warn(`Could not fetch category for question ${question.id}`);
-            }
-          }
+      // 5. Enrichir les questions avec les informations de catégorie (déjà peuplées)
+      const enrichedQuestions = questions.docs.map((question) => {
+        const category = typeof question.category === 'object' && question.category !== null
+          ? question.category
+          : null;
+        
+        const categoryId = typeof question.category === 'string'
+          ? question.category
+          : typeof question.category === 'number'
+          ? question.category
+          : (category as any)?.id;
+        
+        const categoryName = (category as any)?.title || 'Unknown';
 
-          const categoryId = typeof question.category === 'string' ? question.category : (question.category as any)?.id;
-
-          return {
-            ...question,
-            categoryId,
-            categoryName,
-            difficulty: question.difficulty || 'medium',
-            studentLevel: question.studentLevel || 'both'
-          };
-        })
-      );
+        return {
+          ...question,
+          categoryId,
+          categoryName,
+          difficulty: question.difficulty || 'medium',
+          studentLevel: question.studentLevel || 'both'
+        };
+      });
 
       // 6. Retourner les questions
       return Response.json({
@@ -198,42 +193,37 @@ export const getFallbackConfidenceQuestionsEndpoint: Endpoint = {
         };
       }
 
-      // 4. Récupérer les questions
+      // 4. Récupérer les questions avec les catégories peuplées (évite N+1)
       const questions = await req.payload.find({
         collection: 'questions',
         where,
         limit: parseInt(limit) || 5,
-        sort: '-createdAt'
+        sort: '-createdAt',
+        depth: 1
       });
 
-      // 5. Enrichir les questions
-      const enrichedQuestions = await Promise.all(
-        questions.docs.map(async (question) => {
-          let categoryName = 'General';
-          
-          if (question.category) {
-            try {
-              const category = await req.payload.findByID({
-                collection: 'categories',
-                id: typeof question.category === 'string' ? question.category : question.category.id
-              });
-              categoryName = category.name || 'General';
-            } catch (error) {
-              // Ignore error, use default
-            }
-          }
+      // 5. Enrichir les questions (catégories déjà peuplées)
+      const enrichedQuestions = questions.docs.map((question) => {
+        const category = typeof question.category === 'object' && question.category !== null
+          ? question.category
+          : null;
+        
+        const categoryId = typeof question.category === 'string'
+          ? question.category
+          : typeof question.category === 'number'
+          ? question.category
+          : (category as any)?.id;
+        
+        const categoryName = (category as any)?.title || 'General';
 
-          const categoryId = typeof question.category === 'string' ? question.category : (question.category as any)?.id;
-
-          return {
-            ...question,
-            categoryId,
-            categoryName,
-            difficulty: 'easy',
-            studentLevel: question.studentLevel || 'both'
-          };
-        })
-      );
+        return {
+          ...question,
+          categoryId,
+          categoryName,
+          difficulty: 'easy',
+          studentLevel: question.studentLevel || 'both'
+        };
+      });
 
       // 6. Retourner les questions
       return Response.json({
@@ -292,42 +282,37 @@ export const getRelatedCategoryQuestionsEndpoint: Endpoint = {
         };
       }
 
-      // 4. Récupérer les questions
+      // 4. Récupérer les questions avec les catégories peuplées (évite N+1)
       const questions = await req.payload.find({
         collection: 'questions',
         where,
         limit: parseInt(limit) || 5,
-        sort: '-createdAt'
+        sort: '-createdAt',
+        depth: 1
       });
 
-      // 5. Enrichir les questions
-      const enrichedQuestions = await Promise.all(
-        questions.docs.map(async (question) => {
-          let categoryName = 'General';
-          
-          if (question.category) {
-            try {
-              const category = await req.payload.findByID({
-                collection: 'categories',
-                id: typeof question.category === 'string' ? question.category : question.category.id
-              });
-              categoryName = category.name || 'General';
-            } catch (error) {
-              // Ignore error
-            }
-          }
+      // 5. Enrichir les questions (catégories déjà peuplées)
+      const enrichedQuestions = questions.docs.map((question) => {
+        const category = typeof question.category === 'object' && question.category !== null
+          ? question.category
+          : null;
+        
+        const categoryId = typeof question.category === 'string'
+          ? question.category
+          : typeof question.category === 'number'
+          ? question.category
+          : (category as any)?.id;
+        
+        const categoryName = (category as any)?.title || 'General';
 
-          const categoryId = typeof question.category === 'string' ? question.category : (question.category as any)?.id;
-
-          return {
-            ...question,
-            categoryId,
-            categoryName,
-            difficulty: question.difficulty || 'medium',
-            studentLevel: question.studentLevel || 'both'
-          };
-        })
-      );
+        return {
+          ...question,
+          categoryId,
+          categoryName,
+          difficulty: question.difficulty || 'medium',
+          studentLevel: question.studentLevel || 'both'
+        };
+      });
 
       // 6. Retourner les questions
       return Response.json({
@@ -380,42 +365,37 @@ export const getAnyAvailableQuestionsEndpoint: Endpoint = {
         };
       }
 
-      // 4. Récupérer les questions
+      // 4. Récupérer les questions avec les catégories peuplées (évite N+1)
       const questions = await req.payload.find({
         collection: 'questions',
         where,
         limit: parseInt(limit) || 5,
-        sort: '-createdAt'
+        sort: '-createdAt',
+        depth: 1
       });
 
-      // 5. Enrichir les questions
-      const enrichedQuestions = await Promise.all(
-        questions.docs.map(async (question) => {
-          let categoryName = 'General';
-          
-          if (question.category) {
-            try {
-              const category = await req.payload.findByID({
-                collection: 'categories',
-                id: typeof question.category === 'string' ? question.category : question.category.id
-              });
-              categoryName = category.name || 'General';
-            } catch (error) {
-              // Ignore error
-            }
-          }
+      // 5. Enrichir les questions (catégories déjà peuplées)
+      const enrichedQuestions = questions.docs.map((question) => {
+        const category = typeof question.category === 'object' && question.category !== null
+          ? question.category
+          : null;
+        
+        const categoryId = typeof question.category === 'string'
+          ? question.category
+          : typeof question.category === 'number'
+          ? question.category
+          : (category as any)?.id;
+        
+        const categoryName = (category as any)?.title || 'General';
 
-          const categoryId = typeof question.category === 'string' ? question.category : (question.category as any)?.id;
-
-          return {
-            ...question,
-            categoryId,
-            categoryName,
-            difficulty: question.difficulty || 'medium',
-            studentLevel: question.studentLevel || 'both'
-          };
-        })
-      );
+        return {
+          ...question,
+          categoryId,
+          categoryName,
+          difficulty: question.difficulty || 'medium',
+          studentLevel: question.studentLevel || 'both'
+        };
+      });
 
       // 6. Retourner les questions
       return Response.json({
@@ -465,42 +445,37 @@ export const getRelaxedLevelQuestionsEndpoint: Endpoint = {
         where.category = { equals: categoryId };
       }
 
-      // 4. Récupérer les questions
+      // 4. Récupérer les questions avec les catégories peuplées (évite N+1)
       const questions = await req.payload.find({
         collection: 'questions',
         where,
         limit: parseInt(limit) || 5,
-        sort: '-createdAt'
+        sort: '-createdAt',
+        depth: 1
       });
 
-      // 5. Enrichir les questions
-      const enrichedQuestions = await Promise.all(
-        questions.docs.map(async (question) => {
-          let categoryName = 'General';
-          
-          if (question.category) {
-            try {
-              const category = await req.payload.findByID({
-                collection: 'categories',
-                id: typeof question.category === 'string' ? question.category : question.category.id
-              });
-              categoryName = category.name || 'General';
-            } catch (error) {
-              // Ignore error
-            }
-          }
+      // 5. Enrichir les questions (catégories déjà peuplées)
+      const enrichedQuestions = questions.docs.map((question) => {
+        const category = typeof question.category === 'object' && question.category !== null
+          ? question.category
+          : null;
+        
+        const categoryId = typeof question.category === 'string'
+          ? question.category
+          : typeof question.category === 'number'
+          ? question.category
+          : (category as any)?.id;
+        
+        const categoryName = (category as any)?.title || 'General';
 
-          const categoryId = typeof question.category === 'string' ? question.category : (question.category as any)?.id;
-
-          return {
-            ...question,
-            categoryId,
-            categoryName,
-            difficulty: question.difficulty || 'medium',
-            studentLevel: question.studentLevel || 'both'
-          };
-        })
-      );
+        return {
+          ...question,
+          categoryId,
+          categoryName,
+          difficulty: question.difficulty || 'medium',
+          studentLevel: question.studentLevel || 'both'
+        };
+      });
 
       // 6. Retourner les questions
       return Response.json({

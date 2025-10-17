@@ -1,0 +1,121 @@
+{
+  "version": "1.0",
+  "type": "learning-path",
+  "metadata": {
+    "title": "Cardiologie PASS - Semestre 1",
+    "level": "PASS",
+    "estimatedDuration": 120,
+    "description": "Parcours progressif en cardiologie pour étudiants PASS",
+    "source": "Votre établissement",
+    "created": "2025-01-15"
+  },
+  "path": {
+    "steps": [
+      {
+        "id": "anatomie-coeur-bases",
+        "title": "Anatomie du cœur - Bases",
+        "description": "Structures anatomiques fondamentales du système cardiovasculaire",
+        "prerequisites": [],
+        "estimatedTime": 30,
+        "questions": [
+          {
+            "questionText": "Combien de chambres possède le cœur humain ?",
+            "options": [
+              {
+                "text": "4 chambres (2 oreillettes, 2 ventricules)",
+                "isCorrect": true
+              },
+              {
+                "text": "3 chambres",
+                "isCorrect": false
+              },
+              {
+                "text": "2 chambres",
+                "isCorrect": false
+              },
+              {
+                "text": "6 chambres",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "Le cœur humain possède 4 chambres : 2 oreillettes (droite et gauche) qui reçoivent le sang, et 2 ventricules (droit et gauche) qui éjectent le sang.",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": ["anatomie", "cœur", "chambres"]
+          }
+        ]
+      },
+      {
+        "id": "physiologie-cardiaque",
+        "title": "Physiologie cardiaque",
+        "description": "Fonctionnement du système cardiovasculaire",
+        "prerequisites": ["anatomie-coeur-bases"],
+        "estimatedTime": 45,
+        "questions": [
+          {
+            "questionText": "Que se passe-t-il pendant la systole ventriculaire ?",
+            "options": [
+              {
+                "text": "Les ventricules se contractent et éjectent le sang",
+                "isCorrect": true
+              },
+              {
+                "text": "Les ventricules se relâchent et se remplissent",
+                "isCorrect": false
+              },
+              {
+                "text": "Les oreillettes se contractent",
+                "isCorrect": false
+              },
+              {
+                "text": "Le cœur s'arrête momentanément",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "Pendant la systole ventriculaire, les ventricules se contractent simultanément, fermant les valves auriculo-ventriculaires et ouvrant les valves sigmoïdes pour éjecter le sang vers les artères.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["physiologie", "systole", "cycle cardiaque"]
+          }
+        ]
+      },
+      {
+        "id": "pathologies-cardiaques",
+        "title": "Pathologies cardiaques courantes",
+        "description": "Introduction aux principales pathologies cardiovasculaires",
+        "prerequisites": ["anatomie-coeur-bases", "physiologie-cardiaque"],
+        "estimatedTime": 45,
+        "questions": [
+          {
+            "questionText": "Qu'est-ce que l'insuffisance cardiaque ?",
+            "options": [
+              {
+                "text": "Incapacité du cœur à pomper suffisamment de sang",
+                "isCorrect": true
+              },
+              {
+                "text": "Arrêt complet du cœur",
+                "isCorrect": false
+              },
+              {
+                "text": "Rythme cardiaque trop rapide",
+                "isCorrect": false
+              },
+              {
+                "text": "Inflammation du péricarde",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "L'insuffisance cardiaque est l'incapacité du cœur à assurer un débit sanguin suffisant pour répondre aux besoins métaboliques de l'organisme au repos ou à l'effort.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["pathologie", "insuffisance cardiaque", "débit"]
+          }
+        ]
+      }
+    ]
+  }
+}

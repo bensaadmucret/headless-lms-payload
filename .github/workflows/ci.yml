@@ -37,8 +37,36 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests
-        run: npm run test:vitest
+      - name: Run tests with coverage
+        run: npm run test:vitest -- --coverage --run
         env:
           PAYLOAD_TEST_DATABASE_URI: postgresql://payload:payload@localhost:5432/payload-test-db
           GEMINI_API_KEY: test-key-for-ci
+          NODE_ENV: test
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage/lcov.info
+          flags: unittests
+          name: codecov-payload-cms
+          fail_ci_if_error: false
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 30
+
+      - name: Check coverage thresholds
+        run: |
+          echo "📊 Coverage Summary:"
+          if [ -f coverage/coverage-summary.json ]; then
+            cat coverage/coverage-summary.json | jq '.total'
+          else
+            echo "⚠️  Coverage summary not found"
+          fi

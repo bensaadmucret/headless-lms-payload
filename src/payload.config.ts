@@ -20,6 +20,7 @@ import { rateLimitStatusEndpoint, usageStatsEndpoint } from './endpoints/rateLim
 import { generateAIQuestionsEndpoint } from './endpoints/generateAIQuestions';
 import { generateAIQuizEndpoint } from './endpoints/generateAIQuiz';
 import { generateCompleteQuizEndpoint, createTestQuizEndpoint } from './endpoints/generateCompleteQuiz';
+import { regenerateQuestionEndpoint } from './endpoints/aiQuizRegenerateEndpoint';
 import { onboardUserEndpoint } from './endpoints/onboardUser';
 import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
 import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz';
@@ -29,6 +30,24 @@ import { extractNowEndpoint } from './endpoints/extractNow'
 import { uploadDocumentSimpleEndpoint } from './endpoints/uploadDocumentSimple'
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
 import { generationMetricsEndpoint, generationLogsEndpoint, cleanupOldLogsEndpoint } from './endpoints/generationMetrics'
+import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
+// Endpoints pour l'import JSON
+import { 
+  jsonImportUploadEndpoint,
+  jsonImportControlEndpoint,
+  jsonImportValidateEndpoint,
+  jsonImportStatusEndpoint,
+  jsonImportHistoryEndpoint,
+  jsonImportTemplatesEndpoint,
+  jsonImportReportEndpoint
+} from './endpoints/jsonImport'
+// Endpoints pour la répétition espacée
+import {
+  generateReviewSession,
+  submitReviewResults,
+  getProgressStats,
+  createSchedule
+} from './endpoints/spacedRepetitionEndpoints'
 // Nouveaux endpoints pour le quiz adaptatif
 import { 
   performanceAnalyticsByUserEndpoint, 
@@ -183,6 +202,37 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   endpoints: [
+    // === ENDPOINTS JSON IMPORT ===
+    jsonImportUploadEndpoint,
+    jsonImportControlEndpoint,
+    jsonImportValidateEndpoint,
+    jsonImportStatusEndpoint,
+    jsonImportHistoryEndpoint,
+    jsonImportTemplatesEndpoint,
+    jsonImportReportEndpoint,
+
+    // === ENDPOINTS RÉPÉTITION ESPACÉE ===
+    {
+      path: '/spaced-repetition/review-session',
+      method: 'get',
+      handler: generateReviewSession.handler
+    },
+    {
+      path: '/spaced-repetition/submit-review',
+      method: 'post',
+      handler: submitReviewResults.handler
+    },
+    {
+      path: '/spaced-repetition/progress-stats',
+      method: 'get',
+      handler: getProgressStats.handler
+    },
+    {
+      path: '/spaced-repetition/create-schedule',
+      method: 'post',
+      handler: createSchedule.handler
+    },
+
     // === ENDPOINTS KNOWLEDGE BASE ===
     uploadDocumentSimpleEndpoint,
     // Endpoints asynchrones pour le traitement de documents
@@ -245,11 +295,14 @@ export default buildConfig({
     // === ENDPOINTS CRÉATION AUTOMATIQUE QUIZ (Tâche 5) ===
     generateCompleteQuizEndpoint,
     createTestQuizEndpoint,
+    // === ENDPOINTS PRÉVISUALISATION ET MODIFICATION (Tâche 9) ===
+    regenerateQuestionEndpoint,
     
     // === ENDPOINTS AUDIT ET LOGGING (Tâche 6) ===
     generationMetricsEndpoint,
     generationLogsEndpoint,
     cleanupOldLogsEndpoint,
+    exportGenerationLogsEndpoint,
     meEndpoint, // Endpoint personnalisé pour /api/users/me
     onboardUserEndpoint,
     getPlacementQuizEndpoint,

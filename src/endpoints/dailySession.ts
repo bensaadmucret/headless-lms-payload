@@ -69,7 +69,7 @@ export const dailySessionEndpoint: Endpoint = {
   method: 'get',
   handler: async (req: PayloadRequest, res: Response, next: NextFunction): Promise<void> => {
     try {
-      console.log('Requête reçue sur /study-sessions/daily', { query: req.query, userId: req.user?.id });
+      console.log('Requête reçue sur /study-sessions/daily', { query: req.query });
       
       // Vérification de l'authentification
       if (!req.user || !req.user.id) {
@@ -95,7 +95,7 @@ export const dailySessionEndpoint: Endpoint = {
       }
       
       // Log pour débogage
-      console.log(`[dailySession] Utilisation de l'ID utilisateur authentifié: ${userId} (type: ${typeof userId})`);
+      console.log(`[dailySession] Utilisation de l'ID utilisateur authentifié (type: ${typeof userId})`);
       
       // Ignorer tout userId passé en paramètre d'URL pour des raisons de sécurité
       if (req.query.userId) {
@@ -170,12 +170,12 @@ export const dailySessionEndpoint: Endpoint = {
       }
       
       // Création du service avec le payload de la requête
-      console.log(`[dailySession] Initialisation du StudySessionService pour l'utilisateur ${userId}`);
+      console.log('[dailySession] Initialisation du StudySessionService');
       const studySessionService = new StudySessionService(req.payload as any);
       
       try {
         // Utiliser directement getOrCreateDailySession qui gère la logique de récupération/création
-        console.log(`[dailySession] Appel à getOrCreateDailySession pour l'utilisateur ${userId}`);
+        console.log('[dailySession] Appel à getOrCreateDailySession');
         
         // Préparation des options pour la méthode getOrCreateDailySession
         const options: { targetDate?: Date } = {};

@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "CHU Médecine Interne",
+    "created": "2025-01-15",
+    "level": "both",
+    "description": "Large dataset de questions médicales pour test de performance - 50 questions multispécialités"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la cause la plus fréquente d'insuffisance cardiaque chez le sujet âgé ?",
+      "options": [
+        {"text": "Cardiopathie ischémique", "isCorrect": true},
+        {"text": "Cardiomyopathie dilatée", "isCorrect": false},
+        {"text": "Valvulopathie mitrale", "isCorrect": false},
+        {"text": "Hypertension pulmonaire", "isCorrect": false}
+      ],
+      "explanation": "La cardiopathie ischémique est la première cause d'insuffisance cardiaque chez le sujet âgé, liée à l'athérosclérose coronaire.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": ["insuffisance-cardiaque", "étiologie", "gériatrie"]
+    },
+    {
+      "questionText": "Quel est le signe clinique pathognomonique de l'embolie pulmonaire ?",
+      "options": [
+        {"text": "Aucun signe n'est pathognomonique", "isCorrect": true},
+        {"text": "Douleur thoracique pleurétique", "isCorrect": false},
+        {"text": "Dyspnée d'effort", "isCorrect": false},
+        {"text": "Hémoptysie", "isCorrect": false}
+      ],
+      "explanation": "Il n'existe aucun signe clinique pathognomonique de l'embolie pulmonaire, d'où la nécessité d'examens complémentaires.",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["embolie", "diagnostic", "sémiologie"]
+    },
+    {
+      "questionText": "Quelle est la définition de l'hypertension artérielle selon les recommandations ESC/ESH 2018 ?",
+      "options": [
+        {"text": "PAS ≥ 140 mmHg et/ou PAD ≥ 90 mmHg", "isCorrect": true},
+        {"text": "PAS ≥ 130 mmHg et/ou PAD ≥ 80 mmHg", "isCorrect": false},
+        {"text": "PAS ≥ 160 mmHg et/ou PAD ≥ 100 mmHg", "isCorrect": false},
+        {"text": "PAS ≥ 120 mmHg et/ou PAD ≥ 80 mmHg", "isCorrect": false}
+      ],
+      "explanation": "L'HTA est définie par une PAS ≥ 140 mmHg et/ou une PAD ≥ 90 mmHg selon les recommandations européennes 2018.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["hypertension", "définition", "recommandations"]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs de l'enzyme de conversion ?",
+      "options": [
+        {"text": "Inhibition de la conversion angiotensine I → angiotensine II", "isCorrect": true},
+        {"text": "Blocage des récepteurs à l'angiotensine II", "isCorrect": false},
+        {"text": "Inhibition de la rénine", "isCorrect": false},
+        {"text": "Blocage des canaux calciques", "isCorrect": false}
+      ],
+      "explanation": "Les IEC inhibent l'enzyme de conversion qui transforme l'angiotensine I en angiotensine II, réduisant la vasoconstriction.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["IEC", "mécanisme", "SRAA"]
+    },
+    {
+      "questionText": "Quelle est la complication la plus redoutable de l'infarctus du myocarde en phase aiguë ?",
+      "options": [
+        {"text": "Fibrillation ventriculaire", "isCorrect": true},
+        {"text": "Bloc auriculo-ventriculaire", "isCorrect": false},
+        {"text": "Péricardite", "isCorrect": false},
+        {"text": "Insuffisance mitrale", "isCorrect": false}
+      ],
+      "explanation": "La fibrillation ventriculaire est la complication la plus grave de l'IDM aigu, pouvant entraîner un arrêt cardiaque.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["infarctus", "complications", "urgence"]
+    },
+    {
+      "questionText": "Quel est le traitement de première intention de l'asthme persistant léger ?",
+      "options": [
+        {"text": "Corticoïdes inhalés à faible dose", "isCorrect": true},
+        {"text": "Bronchodilatateurs de longue durée d'action", "isCorrect": false},
+        {"text": "Antileucotriènes", "isCorrect": false},
+        {"text": "Corticoïdes oraux", "isCorrect": false}
+      ],
+      "explanation": "Les corticoïdes inhalés à faible dose constituent le traitement de fond de première intention de l'asthme persistant léger.",
+      "category": "Pneumologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["asthme", "traitement", "corticoïdes"]
+    },
+    {
+      "questionText": "Quelle est la cause la plus fréquente de pneumonie communautaire chez l'adulte jeune ?",
+      "options": [
+        {"text": "Streptococcus pneumoniae", "isCorrect": true},
+        {"text": "Haemophilus influenzae", "isCorrect": false},
+        {"text": "Mycoplasma pneumoniae", "isCorrect": false},
+        {"text": "Legionella pneumophila", "isCorrect": false}
+      ],
+      "explanation": "Streptococcus pneumoniae (pneumocoque) reste la première cause de pneumonie communautaire chez l'adulte.",
+      "category": "Pneumologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["pneumonie", "bactériologie", "épidémiologie"]
+    },
+    {
+      "questionText": "Quel est le critère diagnostique principal du diabète de type 2 ?",
+      "options": [
+        {"text": "Glycémie à jeun ≥ 1,26 g/L (7 mmol/L)", "isCorrect": true},
+        {"text": "Glycémie à jeun ≥ 1,10 g/L (6,1 mmol/L)", "isCorrect": false},
+        {"text": "HbA1c ≥ 6%", "isCorrect": false},
+        {"text": "Glycémie post-prandiale ≥ 1,40 g/L", "isCorrect": false}
+      ],
+      "explanation": "Le diagnostic de diabète est posé si la glycémie à jeun est ≥ 1,26 g/L (7 mmol/L) à deux reprises.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["diabète", "diagnostic", "glycémie"]
+    },
+    {
+      "questionText": "Quelle est la cible thérapeutique d'HbA1c chez un diabétique de type 2 sans comorbidité ?",
+      "options": [
+        {"text": "< 7%", "isCorrect": true},
+        {"text": "< 6%", "isCorrect": false},
+        {"text": "< 8%", "isCorrect": false},
+        {"text": "< 9%", "isCorrect": false}
+      ],
+      "explanation": "L'objectif d'HbA1c est < 7% chez un diabétique de type 2 sans comorbidité majeure selon les recommandations.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["diabète", "HbA1c", "objectifs"]
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action de la metformine ?",
+      "options": [
+        {"text": "Diminution de la production hépatique de glucose", "isCorrect": true},
+        {"text": "Stimulation de la sécrétion d'insuline", "isCorrect": false},
+        {"text": "Inhibition de l'absorption intestinale du glucose", "isCorrect": false},
+        {"text": "Augmentation de la sensibilité périphérique à l'insuline uniquement", "isCorrect": false}
+      ],
+      "explanation": "La metformine agit principalement en diminuant la néoglucogenèse hépatique et en améliorant la sensibilité à l'insuline.",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["metformine", "mécanisme", "diabète"]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Duplicates",
+    "level": "PASS",
+    "description": "Fichier contenant des questions dupliquées pour test de détection"
+  },
+  "questions": [
+    {
+      "questionText": "Question identique numéro 1 ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false},
+        {"text": "Option C", "isCorrect": false}
+      ],
+      "explanation": "Première occurrence de cette question",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["duplicate", "test"]
+    },
+    {
+      "questionText": "Question différente ?",
+      "options": [
+        {"text": "Option unique A", "isCorrect": true},
+        {"text": "Option unique B", "isCorrect": false}
+      ],
+      "explanation": "Cette question est unique",
+      "category": "Test",
+      "difficulty": "medium",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question identique numéro 1 ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false},
+        {"text": "Option C", "isCorrect": false}
+      ],
+      "explanation": "Première occurrence de cette question",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["duplicate", "test"]
+    },
+    {
+      "questionText": "Autre question dupliquée ?",
+      "options": [
+        {"text": "Réponse X", "isCorrect": true},
+        {"text": "Réponse Y", "isCorrect": false}
+      ],
+      "explanation": "Première version",
+      "category": "Test",
+      "difficulty": "hard",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Autre question dupliquée ?",
+      "options": [
+        {"text": "Réponse X", "isCorrect": true},
+        {"text": "Réponse Y", "isCorrect": false}
+      ],
+      "explanation": "Deuxième version identique",
+      "category": "Test",
+      "difficulty": "hard",
+      "level": "PASS"
+    },
+    {
+      "questionText": "Question identique numéro 1 ?",
+      "options": [
+        {"text": "Option A", "isCorrect": true},
+        {"text": "Option B", "isCorrect": false},
+        {"text": "Option C", "isCorrect": false}
+      ],
+      "explanation": "Troisième occurrence de cette question",
+      "category": "Test",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["duplicate", "test"]
+    }
+  ]
+}

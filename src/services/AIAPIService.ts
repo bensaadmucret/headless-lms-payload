@@ -227,19 +227,30 @@ export class AIAPIService {
     // Analyse de l'erreur pour déterminer le type
     const message = error.message || 'Erreur inconnue';
     
-    if (message.includes('network') || message.includes('timeout')) {
-      return { type: 'network_error', message: 'Erreur réseau' };
+    if (message.includes('network') || message.includes('timeout') || message.includes('ECONNRESET')) {
+      return { type: 'network_error', message: 'Erreur réseau ou timeout', retryAfter: 5 };
     }
     
-    if (message.includes('rate limit') || message.includes('quota')) {
-      return { type: 'rate_limit', message: 'Limite de taux atteinte', retryAfter: 60 };
+    if (message.includes('rate limit') || message.includes('quota') || message.includes('429')) {
+      // Extraire le temps d'attente si disponible
+      const retryMatch = message.match(/retry.*?(\d+)/i);
+      const retryAfter = retryMatch ? parseInt(retryMatch[1]) : 60;
+      return { type: 'rate_limit', message: 'Limite de taux atteinte', retryAfter };
     }
     
-    if (message.includes('authentication') || message.includes('unauthorized')) {
+    if (message.includes('authentication') || message.includes('unauthorized') || message.includes('401')) {
       return { type: 'auth_error', message: 'Erreur d\'authentification' };
     }
     
-    return { type: 'api_error', message };
+    if (message.includes('502') || message.includes('503') || message.includes('504')) {
+      return { type: 'api_error', message: 'Service temporairement indisponible', retryAfter: 30 };
+    }
+    
+    if (message.includes('500')) {
+      return { type: 'api_error', message: 'Erreur serveur interne', retryAfter: 10 };
+    }
+    
+    return { type: 'api_error', message, details: error };
   }
 
   /**
@@ -252,6 +263,14 @@ export class AIAPIService {
     if (error.type === 'rate_limit' && error.retryAfter) {
       baseDelay = error.retryAfter * 1000;
     }
+    
+    // Délai spécial pour les erreurs réseau
+    if (error.type === 'network_error' && error.retryAfter) {
+      baseDelay = error.retryAfter * 1000;
+    }
+    
+    // Limiter le délai maximum
+    baseDelay = Math.min(baseDelay, 60000); // Max 1 minute
     
     // Ajouter un peu de jitter pour éviter les thundering herds
     const jitter = Math.random() * 0.1 * baseDelay;

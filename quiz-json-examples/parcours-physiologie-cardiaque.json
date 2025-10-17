@@ -1,0 +1,311 @@
+{
+  "version": "1.0",
+  "type": "learning-path",
+  "metadata": {
+    "title": "Physiologie Cardiaque - Parcours PASS",
+    "description": "Parcours progressif pour comprendre le fonctionnement du cœur et du système cardiovasculaire",
+    "level": "PASS",
+    "estimatedDuration": 180,
+    "difficulty": "medium",
+    "prerequisites": [
+      "Connaissances de base en anatomie",
+      "Notions de physiologie générale"
+    ],
+    "objectives": [
+      "Comprendre le cycle cardiaque",
+      "Maîtriser les notions d'hémodynamique",
+      "Savoir interpréter un ECG basique",
+      "Connaître les adaptations à l'effort"
+    ],
+    "author": "Dr. Sophie Bernard",
+    "created": "2025-01-25",
+    "source": "Faculté de Médecine Montpellier"
+  },
+  "path": {
+    "steps": [
+      {
+        "id": "anatomie-cardiaque",
+        "title": "Anatomie cardiaque fondamentale",
+        "description": "Structure anatomique du cœur et des gros vaisseaux",
+        "estimatedTime": 45,
+        "difficulty": "easy",
+        "prerequisites": [],
+        "objectives": [
+          "Identifier les principales structures cardiaques",
+          "Comprendre l'organisation générale du cœur",
+          "Connaître la vascularisation coronaire"
+        ],
+        "questions": [
+          {
+            "questionText": "Combien de cavités possède le cœur humain ?",
+            "options": [
+              {
+                "text": "4 cavités",
+                "isCorrect": true
+              },
+              {
+                "text": "2 cavités",
+                "isCorrect": false
+              },
+              {
+                "text": "6 cavités",
+                "isCorrect": false
+              },
+              {
+                "text": "8 cavités",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "Le cœur humain possède 4 cavités : 2 oreillettes (gauche et droite) et 2 ventricules (gauche et droit), séparées par le septum interventriculaire et interauriculaire.",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": [
+              "anatomie-cardiaque",
+              "cavités",
+              "structures-fondamentales"
+            ]
+          },
+          {
+            "questionText": "Quelle artère vascularise principalement le muscle cardiaque ?",
+            "options": [
+              {
+                "text": "Les artères coronaires",
+                "isCorrect": true
+              },
+              {
+                "text": "L'aorte",
+                "isCorrect": false
+              },
+              {
+                "text": "L'artère pulmonaire",
+                "isCorrect": false
+              },
+              {
+                "text": "Les artères bronchiques",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "Les artères coronaires (droite et gauche) vascularisent exclusivement le muscle cardiaque (myocarde). Elles naissent de la partie initiale de l'aorte, juste après la valve aortique.",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": [
+              "vascularisation",
+              "artères-coronaires",
+              "myocarde"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "cycle-cardiaque",
+        "title": "Le cycle cardiaque",
+        "description": "Étude détaillée de la systole et de la diastole",
+        "estimatedTime": 60,
+        "difficulty": "medium",
+        "prerequisites": [
+          "anatomie-cardiaque"
+        ],
+        "objectives": [
+          "Comprendre les phases du cycle cardiaque",
+          "Connaître les bruits du cœur",
+          "Savoir lire un schéma de pression cardiaque"
+        ],
+        "questions": [
+          {
+            "questionText": "Quelle valve se ferme en premier lors de la systole ventriculaire ?",
+            "options": [
+              {
+                "text": "La valve mitrale",
+                "isCorrect": true
+              },
+              {
+                "text": "La valve aortique",
+                "isCorrect": false
+              },
+              {
+                "text": "La valve tricuspide",
+                "isCorrect": false
+              },
+              {
+                "text": "La valve pulmonaire",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "Au début de la systole ventriculaire, la valve mitrale (bicuspide) se ferme en premier (B1), puis la valve aortique s'ouvre. La fermeture de la valve aortique marque la fin de la systole (B2).",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": [
+              "cycle-cardiaque",
+              "valves-cardiaques",
+              "bruits-du-cœur",
+              "systole"
+            ]
+          },
+          {
+            "questionText": "Pendant quelle phase du cycle cardiaque le volume ventriculaire est-il constant ?",
+            "options": [
+              {
+                "text": "Diastole isovolumétrique",
+                "isCorrect": false
+              },
+              {
+                "text": "Systole isovolumétrique",
+                "isCorrect": true
+              },
+              {
+                "text": "Remplissage rapide",
+                "isCorrect": false
+              },
+              {
+                "text": "Contraction auriculaire",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "La systole isovolumétrique correspond à la phase de contraction isométrique où les valves auriculo-ventriculaires sont fermées et les sigmoïdes encore fermées. Le volume ventriculaire reste constant pendant cette phase.",
+            "category": "Cardiologie",
+            "difficulty": "hard",
+            "level": "PASS",
+            "tags": [
+              "cycle-cardiaque",
+              "phases-cardiaques",
+              "hémodynamique",
+              "pression-ventriculaire"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "hemodynamique",
+        "title": "Hémodynamique cardiovasculaire",
+        "description": "Principes fondamentaux de la circulation sanguine",
+        "estimatedTime": 45,
+        "difficulty": "hard",
+        "prerequisites": [
+          "cycle-cardiaque"
+        ],
+        "objectives": [
+          "Comprendre la loi de Poiseuille",
+          "Maîtriser les notions de précharge et postcharge",
+          "Savoir calculer les résistances vasculaires"
+        ],
+        "questions": [
+          {
+            "questionText": "Selon la loi de Poiseuille, quel facteur influence le plus la résistance vasculaire périphérique ?",
+            "options": [
+              {
+                "text": "Le rayon du vaisseau (r⁴)",
+                "isCorrect": true
+              },
+              {
+                "text": "La longueur du vaisseau (L)",
+                "isCorrect": false
+              },
+              {
+                "text": "La viscosité sanguine (η)",
+                "isCorrect": false
+              },
+              {
+                "text": "La pression différentielle (ΔP)",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "La loi de Poiseuille stipule que R = (8ηL)/(πr⁴). Le rayon influence la résistance à la puissance 4, c'est pourquoi les petites variations de diamètre vasculaire ont un impact majeur sur la résistance périphérique totale.",
+            "category": "Cardiologie",
+            "difficulty": "hard",
+            "level": "PASS",
+            "tags": [
+              "hémodynamique",
+              "loi-de-poiseuille",
+              "résistance-vasculaire",
+              "physiologie-vasculaire"
+            ]
+          },
+          {
+            "questionText": "Quel mécanisme explique principalement l'augmentation de la pression artérielle lors d'une stimulation sympathique ?",
+            "options": [
+              {
+                "text": "Vasoconstriction artériolaire",
+                "isCorrect": true
+              },
+              {
+                "text": "Augmentation du volume d'éjection systolique",
+                "isCorrect": false
+              },
+              {
+                "text": "Rétention hydrosodée",
+                "isCorrect": false
+              },
+              {
+                "text": "Diminution de la fréquence cardiaque",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "La stimulation sympathique entraîne une vasoconstriction artériolaire qui augmente la résistance vasculaire périphérique (RVP), principale déterminant de la pression artérielle diastolique. La formule est PAD = DC × RVP.",
+            "category": "Cardiologie",
+            "difficulty": "hard",
+            "level": "PASS",
+            "tags": [
+              "système-nerveux-autonome",
+              "sympathique",
+              "vasoconstriction",
+              "pression-artérielle",
+              "résistance-périphérique"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "ecg-interpretation",
+        "title": "Interprétation ECG de base",
+        "description": "Lecture et analyse des électrocardiogrammes",
+        "estimatedTime": 30,
+        "difficulty": "medium",
+        "prerequisites": [
+          "hemodynamique"
+        ],
+        "objectives": [
+          "Identifier les ondes et intervalles ECG",
+          "Connaître les valeurs normales",
+          "Repérer les anomalies courantes"
+        ],
+        "questions": [
+          {
+            "questionText": "Quelle onde de l'ECG correspond à la dépolarisation ventriculaire ?",
+            "options": [
+              {
+                "text": "L'onde QRS",
+                "isCorrect": true
+              },
+              {
+                "text": "L'onde P",
+                "isCorrect": false
+              },
+              {
+                "text": "L'onde T",
+                "isCorrect": false
+              },
+              {
+                "text": "Le segment ST",
+                "isCorrect": false
+              }
+            ],
+            "explanation": "L'onde QRS représente la dépolarisation ventriculaire rapide. Elle est normalement inférieure à 0,12 seconde chez l'adulte et correspond au début de la systole ventriculaire mécanique.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": [
+              "ECG",
+              "électrocardiogramme",
+              "dépolarisation",
+              "ventricules",
+              "interprétation-cardiaque"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

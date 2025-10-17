@@ -1,0 +1,123 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Test Unicode & Caractères Spéciaux",
+    "level": "PASS",
+    "description": "Questions avec caractères Unicode, émojis et symboles médicaux"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la signification du symbole ♥ en cardiologie ?",
+      "options": [
+        {"text": "Représentation symbolique du cœur 💖", "isCorrect": true},
+        {"text": "Symbole de l'amour uniquement", "isCorrect": false},
+        {"text": "Aucune signification médicale", "isCorrect": false},
+        {"text": "Symbole de la circulation sanguine", "isCorrect": false}
+      ],
+      "explanation": "Le symbole ♥ est universellement reconnu comme représentation du cœur, utilisé en cardiologie 🫀",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["symboles", "cœur", "représentation"]
+    },
+    {
+      "questionText": "Comment interpréter la notation ≥ 140 mmHg en médecine ?",
+      "options": [
+        {"text": "Supérieur ou égal à 140 mmHg", "isCorrect": true},
+        {"text": "Strictement supérieur à 140 mmHg", "isCorrect": false},
+        {"text": "Approximativement 140 mmHg", "isCorrect": false},
+        {"text": "Inférieur à 140 mmHg", "isCorrect": false}
+      ],
+      "explanation": "Le symbole ≥ signifie 'supérieur ou égal à', couramment utilisé pour les seuils diagnostiques",
+      "category": "Sémiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["symboles", "mathématiques", "seuils"]
+    },
+    {
+      "questionText": "Que signifie une température de 38,5°C (101,3°F) ?",
+      "options": [
+        {"text": "Fièvre modérée", "isCorrect": true},
+        {"text": "Température normale", "isCorrect": false},
+        {"text": "Hypothermie", "isCorrect": false},
+        {"text": "Hyperthermie sévère", "isCorrect": false}
+      ],
+      "explanation": "38,5°C correspond à une fièvre modérée (normal < 37,5°C). Conversion : °F = (°C × 9/5) + 32",
+      "category": "Sémiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["température", "fièvre", "conversion"]
+    },
+    {
+      "questionText": "Comment interpréter une concentration de 2,5×10⁻³ mol/L ?",
+      "options": [
+        {"text": "0,0025 mol/L", "isCorrect": true},
+        {"text": "2500 mol/L", "isCorrect": false},
+        {"text": "25 mol/L", "isCorrect": false},
+        {"text": "0,25 mol/L", "isCorrect": false}
+      ],
+      "explanation": "2,5×10⁻³ = 2,5 ÷ 1000 = 0,0025 mol/L. Notation scientifique courante en biochimie",
+      "category": "Biochimie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": ["notation", "scientifique", "concentration"]
+    },
+    {
+      "questionText": "Que représente le symbole α (alpha) en pharmacologie ?",
+      "options": [
+        {"text": "Récepteurs alpha-adrénergiques", "isCorrect": true},
+        {"text": "Angle de liaison moléculaire", "isCorrect": false},
+        {"text": "Coefficient d'absorption", "isCorrect": false},
+        {"text": "Première phase d'un essai clinique", "isCorrect": false}
+      ],
+      "explanation": "α désigne les récepteurs alpha-adrénergiques (α1, α2), cibles de nombreux médicaments cardiovasculaires",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["récepteurs", "grec", "adrénergique"]
+    },
+    {
+      "questionText": "Comment lire la posologie 'μg/kg/min' ?",
+      "options": [
+        {"text": "Microgrammes par kilogramme par minute", "isCorrect": true},
+        {"text": "Milligrammes par kilogramme par minute", "isCorrect": false},
+        {"text": "Micromoles par kilogramme par minute", "isCorrect": false},
+        {"text": "Unités par kilogramme par minute", "isCorrect": false}
+      ],
+      "explanation": "μ (mu) = micro = 10⁻⁶. Donc μg = microgramme. Posologie courante en réanimation",
+      "category": "Pharmacologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["posologie", "unités", "micro"]
+    },
+    {
+      "questionText": "Texte avec caractères arabes: ما هو القلب؟ et chinois: 心脏是什么？",
+      "options": [
+        {"text": "Ces textes signifient 'Qu'est-ce que le cœur ?'", "isCorrect": true},
+        {"text": "Ces textes parlent de poumons", "isCorrect": false},
+        {"text": "Ces textes n'ont pas de sens médical", "isCorrect": false},
+        {"text": "Ces textes parlent de circulation", "isCorrect": false}
+      ],
+      "explanation": "Textes multilingues posant la même question sur le cœur. Important pour la médecine internationale 🌍",
+      "category": "Médecine Internationale",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["multilingue", "international", "cœur"]
+    },
+    {
+      "questionText": "Que signifie ∞ en mathématiques médicales ?",
+      "options": [
+        {"text": "Infini - valeur sans limite", "isCorrect": true},
+        {"text": "Zéro absolu", "isCorrect": false},
+        {"text": "Valeur normale", "isCorrect": false},
+        {"text": "Valeur pathologique", "isCorrect": false}
+      ],
+      "explanation": "∞ (infini) utilisé en pharmacocinétique pour les demi-vies très longues ou les clairances nulles",
+      "category": "Pharmacocinétique",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": ["mathématiques", "infini", "pharmacocinétique"]
+    }
+  ]
+}
