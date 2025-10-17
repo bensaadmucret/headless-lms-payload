@@ -244,7 +244,7 @@ export const ImportJobs: CollectionConfig = {
     },
     read: ({ req: { user } }) => {
       if (!user) return false
-      if (user?.role === 'admin') return true
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
       // Les utilisateurs normaux voient seulement leurs propres imports
       return {
         importedBy: {
@@ -254,7 +254,7 @@ export const ImportJobs: CollectionConfig = {
     },
     update: ({ req: { user } }) => {
       if (!user) return false
-      if (user?.role === 'admin') return true
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
       // Les utilisateurs peuvent modifier leurs propres imports
       return {
         importedBy: {
@@ -263,8 +263,14 @@ export const ImportJobs: CollectionConfig = {
       }
     },
     delete: ({ req: { user } }) => {
-      // Seuls les admins peuvent supprimer
-      return user?.role === 'admin'
+      if (!user) return false
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
+      // Les utilisateurs peuvent supprimer leurs propres imports
+      return {
+        importedBy: {
+          equals: user?.id
+        }
+      }
     }
   },
   // Hooks Payload natifs
@@ -347,7 +353,8 @@ export const ImportJobs: CollectionConfig = {
               console.error('Erreur déclenchement traitement:', await response.text())
             }
           } catch (error) {
-            console.error('Erreur déclenchement traitement:', error?.message || String(error))
+            const errorMessage = error instanceof Error ? error.message : String(error)
+            console.error('Erreur déclenchement traitement:', errorMessage)
           }
         }
       }
