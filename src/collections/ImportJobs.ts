@@ -8,8 +8,8 @@ export const ImportJobs: CollectionConfig = {
   },
   admin: {
     description: '📥 Importez vos contenus éducatifs en masse (JSON/CSV). Cliquez sur "Create New" pour commencer un nouvel import.',
-    defaultColumns: ['fileName', 'importType', 'status', 'createdAt'],
-    useAsTitle: 'fileName',
+    defaultColumns: ['title', 'fileName', 'importType', 'status', 'createdAt'],
+    useAsTitle: 'title',
     group: 'Outils',
     // Interface 100% native Payload - pas de composants custom
     listSearchableFields: ['fileName', 'importType'],
@@ -22,13 +22,24 @@ export const ImportJobs: CollectionConfig = {
   // Champs natifs Payload pour tracker les imports
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      label: '📝 Titre de l\'import',
+      required: false, // Optionnel pour éviter les erreurs DB
+      admin: {
+        description: 'Donnez un nom à votre import pour le retrouver facilement (ex: "Questions Cardiologie Janvier 2025")'
+      }
+    },
+    {
       name: 'originalFile',
       type: 'upload',
       relationTo: 'media',
       label: '📁 Fichier à importer',
       required: false, // Optionnel pour permettre la création manuelle
       admin: {
-        description: 'Sélectionnez votre fichier JSON ou CSV à importer'
+        description: 'Sélectionnez votre fichier JSON ou CSV à importer. Vous pouvez modifier ou supprimer le fichier même après création.',
+        // Permettre la modification même après création
+        readOnly: false
       }
     },
     {
@@ -260,11 +271,14 @@ export const ImportJobs: CollectionConfig = {
   hooks: {
     beforeChange: [
       async ({ data, req, operation }) => {
-        if (operation === 'create' && req.user) {
-          data.importedBy = req.user.id
+        if ((operation === 'create' || operation === 'update') && req.user) {
+          // Définir l'utilisateur seulement à la création
+          if (operation === 'create') {
+            data.importedBy = req.user.id
+          }
           
-          // Extraire le nom du fichier depuis l'upload
-          if (data.originalFile && !data.fileName) {
+          // Extraire le nom du fichier depuis l'upload (toujours mettre à jour)
+          if (data.originalFile) {
             try {
               // Si originalFile est un ID, récupérer le document media
               if (typeof data.originalFile === 'string') {
@@ -282,6 +296,13 @@ export const ImportJobs: CollectionConfig = {
             } catch (error) {
               console.error('Erreur lors de la récupération du nom de fichier:', error)
             }
+          }
+          
+          // Générer un titre par défaut si pas fourni
+          if (data.fileName && !data.title) {
+            const baseName = data.fileName.replace(/\.[^/.]+$/, '') // Enlever l'extension
+            const date = new Date().toLocaleDateString('fr-FR')
+            data.title = `Import ${baseName} - ${date}`
           }
           
           // Auto-détecter le type d'import depuis le nom de fichier

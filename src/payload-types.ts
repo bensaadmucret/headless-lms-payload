@@ -2078,7 +2078,11 @@ export interface Generationlog {
 export interface ImportJob {
   id: number;
   /**
-   * Sélectionnez votre fichier JSON ou CSV à importer
+   * Donnez un nom à votre import pour le retrouver facilement (ex: "Questions Cardiologie Janvier 2025")
+   */
+  title?: string | null;
+  /**
+   * Sélectionnez votre fichier JSON ou CSV à importer. Vous pouvez modifier ou supprimer le fichier même après création.
    */
   originalFile?: (number | null) | Media;
   /**
@@ -3504,6 +3508,7 @@ export interface GenerationlogsSelect<T extends boolean = true> {
  * via the `definition` "import-jobs_select".
  */
 export interface ImportJobsSelect<T extends boolean = true> {
+  title?: T;
   originalFile?: T;
   fileName?: T;
   importType?: T;
