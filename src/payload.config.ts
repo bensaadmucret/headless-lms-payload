@@ -32,15 +32,11 @@ import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint,
 import { generationMetricsEndpoint, generationLogsEndpoint, cleanupOldLogsEndpoint } from './endpoints/generationMetrics'
 import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
 // Endpoints pour l'import JSON
-import { 
-  jsonImportUploadEndpoint,
-  jsonImportControlEndpoint,
-  jsonImportValidateEndpoint,
-  jsonImportStatusEndpoint,
-  jsonImportHistoryEndpoint,
-  jsonImportTemplatesEndpoint,
-  jsonImportReportEndpoint
-} from './endpoints/jsonImport'
+import { downloadTemplate, listTemplates } from './endpoints/jsonImportTemplates'
+import { validateImportFile, getImportJobStatus, getImportHistory, exportImportHistory } from './endpoints/jsonImportValidation'
+import { uploadImportFile } from './endpoints/jsonImportUpload'
+import { jsonImportProcessEndpoint } from './endpoints/jsonImportProcess'
+import { testImport } from './endpoints/testImport'
 // Endpoints pour la répétition espacée
 import {
   generateReviewSession,
@@ -105,6 +101,7 @@ import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
 import { UserPerformances } from './collections/UserPerformances'
 import AuditLogs from './collections/AuditLogs'
 import GenerationLogs from './collections/GenerationLogs'
+import { ImportJobs } from './collections/ImportJobs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -124,6 +121,10 @@ export default buildConfig({
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
+
+    },
+    meta: {
+      titleSuffix: '- MedCoach Admin',
     },
     importMap: {
       baseDir: path.resolve(dirname),
@@ -187,7 +188,8 @@ export default buildConfig({
     AdaptiveQuizResults,
     UserPerformances,
     AuditLogs,
-    GenerationLogs
+    GenerationLogs,
+    ImportJobs
   ],
   globals: [CorsConfig, Header, Footer],
   cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
@@ -203,13 +205,51 @@ export default buildConfig({
   },
   endpoints: [
     // === ENDPOINTS JSON IMPORT ===
-    jsonImportUploadEndpoint,
-    jsonImportControlEndpoint,
-    jsonImportValidateEndpoint,
-    jsonImportStatusEndpoint,
-    jsonImportHistoryEndpoint,
-    jsonImportTemplatesEndpoint,
-    jsonImportReportEndpoint,
+    {
+      path: '/json-import/templates',
+      method: 'get',
+      handler: listTemplates
+    },
+    {
+      path: '/json-import/templates/:filename',
+      method: 'get',
+      handler: downloadTemplate
+    },
+    {
+      path: '/json-import/validate',
+      method: 'post',
+      handler: validateImportFile
+    },
+    {
+      path: '/json-import/upload',
+      method: 'post',
+      handler: uploadImportFile
+    },
+    {
+      path: '/json-import/status/:jobId',
+      method: 'get',
+      handler: getImportJobStatus
+    },
+    {
+      path: '/json-import/history',
+      method: 'get',
+      handler: getImportHistory
+    },
+    {
+      path: '/json-import/export-history',
+      method: 'get',
+      handler: exportImportHistory
+    },
+    {
+      path: '/json-import/process/:jobId',
+      method: 'post',
+      handler: jsonImportProcessEndpoint
+    },
+    {
+      path: '/test-import',
+      method: 'get',
+      handler: testImport
+    },
 
     // === ENDPOINTS RÉPÉTITION ESPACÉE ===
     {

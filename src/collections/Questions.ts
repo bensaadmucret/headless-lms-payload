@@ -7,10 +7,6 @@ export const Questions: CollectionConfig = {
     useAsTitle: 'questionText',
     defaultColumns: ['questionText', 'questionType', 'course'],
     description: 'Notre banque centrale de questions pour tous les quiz et sessions d\'étude.',
-    // TODO: Ajouter le bouton de génération IA une fois la structure déterminée
-    // components: {
-    //   edit: ['@/components/admin/GenerateAIQuestionsButton'],
-    // },
   },
   fields: [
     {
@@ -175,7 +171,7 @@ export const Questions: CollectionConfig = {
         }
       ]
     },
-    
+
     // === RELATION AVEC LA BASE DE CONNAISSANCES ===
     // {
     //   name: 'sourceKnowledge',

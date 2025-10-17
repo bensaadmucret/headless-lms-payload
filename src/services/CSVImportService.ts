@@ -47,6 +47,49 @@ export class CSVImportService {
   private readonly MAX_ROWS = 1000;
 
   /**
+   * Valide un fichier CSV pour l'interface d'import
+   */
+  async validateCSV(content: string, options: Record<string, unknown> = {}): Promise<{
+    isValid: boolean
+    errors: Array<{ type: string; severity: string; message: string }>
+    warnings: Array<{ type: string; severity: string; message: string }>
+    previewData: Array<{ id: string; type: string; originalData: unknown; processedData: unknown; status: string }>
+    categoryMappings: unknown[]
+  }> {
+    try {
+      const result = await this.parseCSVFile(content, options)
+      
+      return {
+        isValid: result.success,
+        errors: result.errors || [],
+        warnings: result.warnings || [],
+        previewData: result.data ? [
+          {
+            id: 'csv-preview',
+            type: 'questions',
+            originalData: result.data,
+            processedData: result.data,
+            status: result.success ? 'valid' : 'error'
+          }
+        ] : [],
+        categoryMappings: []
+      }
+    } catch (error) {
+      return {
+        isValid: false,
+        errors: [{
+          type: 'system',
+          severity: 'critical',
+          message: `Erreur validation CSV: ${error.message}`
+        }],
+        warnings: [],
+        previewData: [],
+        categoryMappings: []
+      }
+    }
+  }
+
+  /**
    * Parse un fichier CSV et le convertit en données d'import JSON
    */
   async parseCSVFile(

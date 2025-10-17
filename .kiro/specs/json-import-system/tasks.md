@@ -165,7 +165,7 @@
   - _Exigences: 7.5, 8.5, 9.5_
 
 - [x] 10. Interface utilisateur Payload-native
-- [x] 10.1 Créer les 5 écrans clés avec composants Payload natifs
+- [ ] 10.1 Créer les 5 écrans clés avec composants Payload natifs
   - Écran Upload : Drag & drop avec composant Upload Payload
   - Écran Validation : Table Payload pour rapport d'erreurs avec Alert components
   - Écran Preview : DataTable avec Tabs, Badge et Modal pour édition en ligne

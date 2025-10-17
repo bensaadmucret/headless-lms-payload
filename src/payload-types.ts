@@ -95,6 +95,7 @@ export interface Config {
     'user-performances': UserPerformance;
     auditlogs: Auditlog;
     generationlogs: Generationlog;
+    'import-jobs': ImportJob;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -134,6 +135,7 @@ export interface Config {
     'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
     auditlogs: AuditlogsSelect<false> | AuditlogsSelect<true>;
     generationlogs: GenerationlogsSelect<false> | GenerationlogsSelect<true>;
+    'import-jobs': ImportJobsSelect<false> | ImportJobsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -2068,6 +2070,81 @@ export interface Generationlog {
   updatedAt: string;
 }
 /**
+ * 📥 Importez vos contenus éducatifs en masse (JSON/CSV). Cliquez sur "Create New" pour commencer un nouvel import.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "import-jobs".
+ */
+export interface ImportJob {
+  id: number;
+  /**
+   * Sélectionnez votre fichier JSON ou CSV à importer
+   */
+  originalFile?: (number | null) | Media;
+  /**
+   * Nom du fichier (rempli automatiquement depuis le fichier uploadé)
+   */
+  fileName?: string | null;
+  /**
+   * Type de contenu à importer (détecté automatiquement ou sélectionné manuellement)
+   */
+  importType: 'questions' | 'flashcards' | 'learning-paths' | 'csv';
+  status?: ('queued' | 'processing' | 'validating' | 'preview' | 'completed' | 'failed') | null;
+  progress?: {
+    total?: number | null;
+    processed?: number | null;
+    successful?: number | null;
+    failed?: number | null;
+  };
+  validationResult?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  errors?:
+    | {
+        type?: ('validation' | 'database' | 'mapping' | 'reference' | 'system') | null;
+        severity?: ('critical' | 'major' | 'minor' | 'warning') | null;
+        message?: string | null;
+        suggestion?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Configurez les paramètres d'import selon vos besoins
+   */
+  importOptions?: {
+    /**
+     * Valider le fichier sans effectuer l'import réel
+     */
+    dryRun?: boolean | null;
+    /**
+     * Nombre d'éléments traités par lot (1-1000)
+     */
+    batchSize?: number | null;
+    /**
+     * Remplacer les éléments existants en cas de conflit
+     */
+    overwriteExisting?: boolean | null;
+    /**
+     * Créer automatiquement des options incorrectes pour les flashcards
+     */
+    generateDistractors?: boolean | null;
+    /**
+     * Nécessite une validation manuelle avant l'import final
+     */
+    requireHumanValidation?: boolean | null;
+  };
+  importedBy?: (number | null) | User;
+  completedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2350,6 +2427,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'generationlogs';
         value: number | Generationlog;
+      } | null)
+    | ({
+        relationTo: 'import-jobs';
+        value: number | ImportJob;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3417,6 +3498,47 @@ export interface GenerationlogsSelect<T extends boolean = true> {
   createdAt?: T;
   completedAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "import-jobs_select".
+ */
+export interface ImportJobsSelect<T extends boolean = true> {
+  originalFile?: T;
+  fileName?: T;
+  importType?: T;
+  status?: T;
+  progress?:
+    | T
+    | {
+        total?: T;
+        processed?: T;
+        successful?: T;
+        failed?: T;
+      };
+  validationResult?: T;
+  errors?:
+    | T
+    | {
+        type?: T;
+        severity?: T;
+        message?: T;
+        suggestion?: T;
+        id?: T;
+      };
+  importOptions?:
+    | T
+    | {
+        dryRun?: T;
+        batchSize?: T;
+        overwriteExisting?: T;
+        generateDistractors?: T;
+        requireHumanValidation?: T;
+      };
+  importedBy?: T;
+  completedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

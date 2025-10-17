@@ -1,11 +1,11 @@
 "use client"
 import React, { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
+
 import { Checkbox } from '@/components/ui/checkbox'
 import JSONImportValidationScreen from './JSONImportValidationScreen'
 import JSONImportPreviewScreen from './JSONImportPreviewScreen'
@@ -75,7 +75,6 @@ export const JSONImportInterface: React.FC = () => {
   })
   const [validationResult, setValidationResult] = useState<ValidationResult | null>(null)
   const [currentJob, setCurrentJob] = useState<ImportJob | null>(null)
-  const [importHistory, setImportHistory] = useState<ImportJob[]>([])
   const [loading, setLoading] = useState(false)
   const [dragActive, setDragActive] = useState(false)
 
@@ -184,12 +183,30 @@ export const JSONImportInterface: React.FC = () => {
         body: formData
       })
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const result = await response.json()
-      setCurrentJob(result.job)
-      setCurrentStep('progress')
+      console.log('Upload response:', result) // Debug log
       
-      // Start polling for progress
-      pollJobProgress(result.job.id)
+      // Vérifier si la réponse contient un job
+      if (result.job && result.job.id) {
+        setCurrentJob(result.job)
+        setCurrentStep('progress')
+        // Start polling for progress
+        pollJobProgress(result.job.id)
+      } else {
+        // Si pas de job, traiter comme un import direct
+        console.log('Import result:', result)
+        if (result.success) {
+          setCurrentStep('history')
+          loadImportHistory()
+        } else {
+          console.error('Import failed:', result.error || 'Unknown error')
+          alert(`Erreur d'import: ${result.error || 'Erreur inconnue'}`)
+        }
+      }
     } catch (error) {
       console.error('Import error:', error)
     } finally {
@@ -226,7 +243,8 @@ export const JSONImportInterface: React.FC = () => {
         credentials: 'include'
       })
       const history = await response.json()
-      setImportHistory(history.jobs || [])
+      // History will be handled by the history screen component
+      console.log('History loaded:', history)
     } catch (error) {
       console.error('History loading error:', error)
     }
@@ -240,23 +258,7 @@ export const JSONImportInterface: React.FC = () => {
     setCurrentJob(null)
   }
 
-  const getStatusBadge = (status: string) => {
-    const statusConfig = {
-      queued: { color: 'bg-yellow-500', text: 'En attente' },
-      processing: { color: 'bg-blue-500', text: 'Traitement' },
-      validating: { color: 'bg-purple-500', text: 'Validation' },
-      preview: { color: 'bg-orange-500', text: 'Aperçu' },
-      completed: { color: 'bg-green-500', text: 'Terminé' },
-      failed: { color: 'bg-red-500', text: 'Échec' }
-    }
-    
-    const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.queued
-    return (
-      <Badge className={`${config.color} text-white`}>
-        {config.text}
-      </Badge>
-    )
-  }
+
 
   // Load history on component mount
   useEffect(() => {
@@ -286,12 +288,12 @@ export const JSONImportInterface: React.FC = () => {
         {/* Navigation Tabs */}
         <div style={{ display: 'flex', gap: '8px', marginBottom: '24px' }}>
           {[
-            { key: 'upload', label: '📤 Upload', icon: '📤' },
-            { key: 'validation', label: '✅ Validation', icon: '✅' },
-            { key: 'preview', label: '👁️ Aperçu', icon: '👁️' },
-            { key: 'progress', label: '⏳ Progression', icon: '⏳' },
-            { key: 'history', label: '📋 Historique', icon: '📋' },
-            { key: 'templates', label: '📁 Templates', icon: '📁' }
+            { key: 'upload', label: '📤 Upload' },
+            { key: 'validation', label: '✅ Validation' },
+            { key: 'preview', label: '👁️ Aperçu' },
+            { key: 'progress', label: '⏳ Progression' },
+            { key: 'history', label: '📋 Historique' },
+            { key: 'templates', label: '📁 Templates' }
           ].map(tab => (
             <Button
               key={tab.key}
@@ -309,7 +311,7 @@ export const JSONImportInterface: React.FC = () => {
                 borderRadius: '8px'
               }}
             >
-              {tab.icon} {tab.label}
+              {tab.label}
             </Button>
           ))}
         </div>
@@ -362,21 +364,30 @@ export const JSONImportInterface: React.FC = () => {
                 style={{ display: 'none' }}
                 id="file-input"
               />
-              <Label htmlFor="file-input">
-                <Button
-                  type="button"
-                  style={{
-                    backgroundColor: '#667eea',
-                    color: 'white',
-                    border: 'none',
-                    padding: '12px 24px',
-                    borderRadius: '8px',
-                    cursor: 'pointer'
-                  }}
-                >
-                  📂 Parcourir les fichiers
-                </Button>
-              </Label>
+              <label 
+                htmlFor="file-input"
+                style={{
+                  display: 'inline-block',
+                  backgroundColor: '#667eea',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  fontSize: '14px',
+                  fontWeight: '500',
+                  textAlign: 'center',
+                  transition: 'background-color 0.2s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#5a67d8'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#667eea'
+                }}
+              >
+                📂 Parcourir les fichiers
+              </label>
             </div>
 
             {/* Selected File Info */}
