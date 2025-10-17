@@ -164,20 +164,20 @@
   - Implémenter les tests de validation avec fixtures complètes
   - _Exigences: 7.5, 8.5, 9.5_
 
-- [ ] 10. Interface utilisateur Payload-native
-- [ ] 10.1 Créer les 5 écrans clés avec composants Payload natifs
+- [x] 10. Interface utilisateur Payload-native
+- [x] 10.1 Créer les 5 écrans clés avec composants Payload natifs
   - Écran Upload : Drag & drop avec composant Upload Payload
   - Écran Validation : Table Payload pour rapport d'erreurs avec Alert components
   - Écran Preview : DataTable avec Tabs, Badge et Modal pour édition en ligne
   - _Exigences: 1.1, 2.2, 8.1, 8.2_
 
-- [ ] 10.2 Implémenter les écrans de progression et historique
+- [x] 10.2 Implémenter les écrans de progression et historique
   - Écran Progression : ProgressBar natif avec LivePreview pour logs temps réel
   - Écran Historique : ListView avec filtres natifs et StatusField
   - Utiliser uniquement les classes CSS Payload existantes
   - _Exigences: 3.2, 5.2, 8.4_
 
-- [ ] 10.3 Développer les templates et documentation MVP
+- [x] 10.3 Développer les templates et documentation MVP
   - Créer les templates JSON et CSV simplifiés
   - Rédiger la documentation avec focus sur workflow de validation
   - Ajouter le guide "Anki → CSV → MedCoach" comme alternative pragmatique

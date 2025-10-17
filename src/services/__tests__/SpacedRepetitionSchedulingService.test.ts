@@ -234,6 +234,7 @@ describe('SpacedRepetitionSchedulingService', () => {
   });
 
   describe('generateReviewSession', () => {
+    // TODO: Mock payload.find ne retourne pas les bonnes données
     it.skip('devrait générer une session avec les cartes dues', async () => {
       const userId = 'user123';
       const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
@@ -325,6 +326,7 @@ describe('SpacedRepetitionSchedulingService', () => {
   });
 
   describe('getUserProgressStats', () => {
+    // TODO: Mock payload.find ne retourne pas les bonnes données
     it.skip('devrait calculer les statistiques correctement', async () => {
       const userId = 'user123';
       const now = new Date();

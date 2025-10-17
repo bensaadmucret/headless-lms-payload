@@ -1,0 +1,4 @@
+questionText,optionA,optionB,optionC,optionD,correctAnswer,explanation,category,difficulty,level,tags
+"Quelle est la fonction principale du ventricule gauche ?","Pomper le sang oxygéné vers l'aorte","Recevoir le sang veineux","Filtrer le sang","Produire les globules rouges","A","Le ventricule gauche pompe le sang oxygéné vers l'aorte et la circulation systémique","Cardiologie","medium","PASS","anatomie,cœur,circulation"
+"Quel est le rôle principal de l'hémoglobine ?","Transporter l'oxygène et le CO2","Coaguler le sang","Défendre contre les infections","Réguler la pression artérielle","A","L'hémoglobine transporte l'oxygène des poumons vers les tissus et récupère le CO2","Hématologie","easy","PASS","sang,transport,oxygène"
+"Combien de cavités possède le cœur humain ?","4 cavités","3 cavités","2 cavités","6 cavités","A","Le cœur possède 4 cavités : 2 oreillettes et 2 ventricules","Cardiologie","easy","PASS","anatomie,cavités,structure"

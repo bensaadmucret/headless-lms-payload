@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Votre établissement",
+    "created": "2025-01-17",
+    "level": "PASS",
+    "description": "Template pour l'import de questions QCM simples"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la fonction principale du ventricule gauche ?",
+      "options": [
+        {
+          "text": "Pomper le sang oxygéné vers l'aorte et la circulation systémique",
+          "isCorrect": true
+        },
+        {
+          "text": "Recevoir le sang veineux des veines caves",
+          "isCorrect": false
+        },
+        {
+          "text": "Filtrer le sang et éliminer les toxines",
+          "isCorrect": false
+        },
+        {
+          "text": "Produire les globules rouges et les plaquettes",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le ventricule gauche est la chambre cardiaque la plus puissante. Il reçoit le sang oxygéné de l'oreillette gauche et le propulse vers l'aorte pour alimenter la circulation systémique.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["anatomie", "cœur", "circulation", "physiologie"]
+    },
+    {
+      "questionText": "Quel est le rôle principal de l'hémoglobine ?",
+      "options": [
+        {
+          "text": "Transporter l'oxygène et le dioxyde de carbone",
+          "isCorrect": true
+        },
+        {
+          "text": "Coaguler le sang en cas de blessure",
+          "isCorrect": false
+        },
+        {
+          "text": "Défendre l'organisme contre les infections",
+          "isCorrect": false
+        },
+        {
+          "text": "Réguler la pression artérielle",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémoglobine est une protéine présente dans les globules rouges qui fixe l'oxygène dans les poumons et le transporte vers les tissus, puis récupère le CO2 pour l'éliminer.",
+      "category": "Hématologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["sang", "transport", "oxygène", "globules rouges"]
+    },
+    {
+      "questionText": "Quelle structure anatomique sépare les cavités droites et gauches du cœur ?",
+      "options": [
+        {
+          "text": "Le septum interventriculaire et interauriculaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Les valves auriculo-ventriculaires",
+          "isCorrect": false
+        },
+        {
+          "text": "Le péricarde et l'endocarde",
+          "isCorrect": false
+        },
+        {
+          "text": "Les artères coronaires",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le septum cardiaque est une cloison musculaire qui sépare complètement les cavités droites (circulation pulmonaire) des cavités gauches (circulation systémique).",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["anatomie", "cœur", "septum", "structure"]
+    }
+  ]
+}

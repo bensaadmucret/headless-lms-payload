@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "type": "learning-path",
+  "metadata": {
+    "title": "Cardiologie PASS - Semestre 1",
+    "level": "PASS",
+    "estimatedDuration": 120,
+    "description": "Parcours progressif en cardiologie pour étudiants PASS - Template d'exemple"
+  },
+  "path": {
+    "steps": [
+      {
+        "id": "anatomie-coeur-bases",
+        "title": "Anatomie du cœur - Structures de base",
+        "description": "Découverte des structures anatomiques fondamentales du cœur",
+        "prerequisites": [],
+        "estimatedTime": 30,
+        "questions": [
+          {
+            "questionText": "Combien de cavités possède le cœur humain ?",
+            "options": [
+              {"text": "4 cavités (2 oreillettes + 2 ventricules)", "isCorrect": true},
+              {"text": "3 cavités (2 oreillettes + 1 ventricule)", "isCorrect": false},
+              {"text": "2 cavités (1 oreillette + 1 ventricule)", "isCorrect": false},
+              {"text": "6 cavités (3 oreillettes + 3 ventricules)", "isCorrect": false}
+            ],
+            "explanation": "Le cœur humain possède 4 cavités : 2 oreillettes (droite et gauche) qui reçoivent le sang, et 2 ventricules (droit et gauche) qui l'éjectent.",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": ["anatomie", "cavités", "structure"]
+          }
+        ]
+      },
+      {
+        "id": "circulation-sanguine",
+        "title": "Circulation sanguine - Circuits",
+        "description": "Compréhension des circuits de circulation pulmonaire et systémique",
+        "prerequisites": ["anatomie-coeur-bases"],
+        "estimatedTime": 45,
+        "questions": [
+          {
+            "questionText": "Quel circuit de circulation part du ventricule droit ?",
+            "options": [
+              {"text": "La circulation pulmonaire (petite circulation)", "isCorrect": true},
+              {"text": "La circulation systémique (grande circulation)", "isCorrect": false},
+              {"text": "La circulation coronaire", "isCorrect": false},
+              {"text": "La circulation portale", "isCorrect": false}
+            ],
+            "explanation": "Le ventricule droit propulse le sang désoxygéné vers les poumons via l'artère pulmonaire. C'est la circulation pulmonaire ou petite circulation.",
+            "category": "Cardiologie",
+            "difficulty": "medium",
+            "level": "PASS",
+            "tags": ["circulation", "poumons", "ventricule droit"]
+          }
+        ]
+      },
+      {
+        "id": "physiologie-cardiaque",
+        "title": "Physiologie cardiaque - Cycle et rythme",
+        "description": "Étude du cycle cardiaque, de la conduction et du rythme",
+        "prerequisites": ["anatomie-coeur-bases", "circulation-sanguine"],
+        "estimatedTime": 45,
+        "questions": [
+          {
+            "questionText": "Quelle est la fréquence cardiaque normale au repos chez l'adulte ?",
+            "options": [
+              {"text": "60 à 100 battements par minute", "isCorrect": true},
+              {"text": "40 à 60 battements par minute", "isCorrect": false},
+              {"text": "100 à 120 battements par minute", "isCorrect": false},
+              {"text": "120 à 140 battements par minute", "isCorrect": false}
+            ],
+            "explanation": "La fréquence cardiaque normale au repos chez l'adulte se situe entre 60 et 100 battements par minute. En dessous de 60, on parle de bradycardie, au-dessus de 100, de tachycardie.",
+            "category": "Cardiologie",
+            "difficulty": "easy",
+            "level": "PASS",
+            "tags": ["physiologie", "fréquence", "rythme"]
+          }
+        ]
+      }
+    ]
+  }
+}

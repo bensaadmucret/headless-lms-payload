@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "type": "flashcards",
+  "metadata": {
+    "deckName": "Anatomie Cardiaque PASS",
+    "level": "PASS",
+    "category": "Cardiologie",
+    "description": "Flashcards pour révision anatomie cardiaque - Template d'exemple"
+  },
+  "cards": [
+    {
+      "front": "Quelle est la fonction du ventricule gauche ?",
+      "back": "Pomper le sang oxygéné vers l'aorte et la circulation systémique. C'est la chambre cardiaque la plus puissante avec une paroi musculaire épaisse.",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "tags": ["anatomie", "cœur", "ventricule", "fonction"],
+      "imageUrl": null
+    },
+    {
+      "front": "Citez les 4 valves cardiaques",
+      "back": "1. Valve tricuspide (entre OD et VD)\n2. Valve pulmonaire (sortie VD)\n3. Valve mitrale/bicuspide (entre OG et VG)\n4. Valve aortique (sortie VG)",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["anatomie", "valves", "cœur", "circulation"],
+      "imageUrl": null
+    },
+    {
+      "front": "Qu'est-ce que la systole ?",
+      "back": "Phase de contraction du myocarde pendant laquelle les ventricules se contractent et éjectent le sang vers les artères (aorte et artère pulmonaire).",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["physiologie", "cycle cardiaque", "contraction"],
+      "imageUrl": null
+    },
+    {
+      "front": "Définir la diastole",
+      "back": "Phase de relaxation du myocarde pendant laquelle les ventricules se remplissent de sang provenant des oreillettes. C'est la phase de repos du cœur.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "tags": ["physiologie", "cycle cardiaque", "relaxation"],
+      "imageUrl": null
+    },
+    {
+      "front": "Quel est le débit cardiaque normal au repos ?",
+      "back": "Environ 5 litres par minute chez l'adulte au repos.\nCalcul : Débit cardiaque = Volume d'éjection systolique × Fréquence cardiaque",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "tags": ["physiologie", "débit", "calcul", "hémodynamique"],
+      "imageUrl": null
+    }
+  ]
+}
