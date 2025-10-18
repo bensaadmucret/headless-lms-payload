@@ -36,6 +36,7 @@ import { downloadTemplate, listTemplates } from './endpoints/jsonImportTemplates
 import { validateImportFile, getImportJobStatus, getImportHistory, exportImportHistory } from './endpoints/jsonImportValidation'
 import { uploadImportFile } from './endpoints/jsonImportUpload'
 import { jsonImportProcessEndpoint } from './endpoints/jsonImportProcess'
+import { triggerImportProcessing } from './endpoints/triggerImportProcessing'
 // Endpoints pour la répétition espacée
 import {
   generateReviewSession,
@@ -243,6 +244,11 @@ export default buildConfig({
       path: '/json-import/process/:jobId',
       method: 'post',
       handler: jsonImportProcessEndpoint
+    },
+    {
+      path: '/json-import/trigger/:jobId',
+      method: 'post',
+      handler: triggerImportProcessing
     },
 
     // === ENDPOINTS RÉPÉTITION ESPACÉE ===

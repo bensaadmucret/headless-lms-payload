@@ -35,11 +35,9 @@ export const ImportJobs: CollectionConfig = {
       type: 'upload',
       relationTo: 'media',
       label: '📁 Fichier à importer',
-      required: false, // Optionnel pour permettre la création manuelle
+      required: true,
       admin: {
-        description: 'Sélectionnez votre fichier JSON ou CSV à importer. Vous pouvez modifier ou supprimer le fichier même après création.',
-        // Permettre la modification même après création
-        readOnly: false
+        description: 'Uploadez votre fichier JSON ou CSV à importer. Formats acceptés: .json, .csv'
       }
     },
     {
@@ -80,7 +78,8 @@ export const ImportJobs: CollectionConfig = {
       ],
       defaultValue: 'queued',
       admin: {
-        readOnly: true
+        readOnly: true,
+        description: 'Le statut change automatiquement pendant le traitement. Pour relancer un import échoué, changez le statut en "En attente" et sauvegardez.'
       }
     },
     {
@@ -286,22 +285,48 @@ export const ImportJobs: CollectionConfig = {
           // Extraire le nom du fichier depuis l'upload (toujours mettre à jour)
           if (data.originalFile) {
             try {
-              // Si originalFile est un ID, récupérer le document media
+              console.log('📄 Type de originalFile:', typeof data.originalFile, data.originalFile)
+              
+              // Si originalFile est un ID string
               if (typeof data.originalFile === 'string') {
+                console.log('🔍 Récupération du media avec ID:', data.originalFile)
                 const mediaDoc = await req.payload.findByID({
                   collection: 'media',
                   id: data.originalFile
                 })
+                console.log('📦 Media trouvé:', mediaDoc?.filename)
                 if (mediaDoc?.filename) {
                   data.fileName = mediaDoc.filename
                 }
-              } else if (data.originalFile?.filename) {
-                // Si c'est déjà un objet avec filename
-                data.fileName = data.originalFile.filename
+              } 
+              // Si c'est un objet avec un ID
+              else if (typeof data.originalFile === 'object' && data.originalFile !== null) {
+                const fileId = (data.originalFile as any).id
+                if (fileId) {
+                  console.log('🔍 Récupération du media avec ID depuis objet:', fileId)
+                  const mediaDoc = await req.payload.findByID({
+                    collection: 'media',
+                    id: fileId
+                  })
+                  console.log('📦 Media trouvé:', mediaDoc?.filename)
+                  if (mediaDoc?.filename) {
+                    data.fileName = mediaDoc.filename
+                  }
+                } else if ((data.originalFile as any).filename) {
+                  // Si c'est déjà un objet avec filename
+                  data.fileName = (data.originalFile as any).filename
+                  console.log('📦 Filename depuis objet:', data.fileName)
+                }
+              }
+              
+              if (!data.fileName) {
+                console.warn('⚠️ Impossible de récupérer le nom du fichier depuis originalFile')
               }
             } catch (error) {
-              console.error('Erreur lors de la récupération du nom de fichier:', error)
+              console.error('❌ Erreur lors de la récupération du nom de fichier:', error)
             }
+          } else {
+            console.log('ℹ️ Pas de fichier uploadé (originalFile vide)')
           }
           
           // Générer un titre par défaut si pas fourni
@@ -334,28 +359,69 @@ export const ImportJobs: CollectionConfig = {
       }
     ],
     afterChange: [
-      async ({ doc, req, operation }) => {
-        // Déclencher le traitement automatique après création
-        if (operation === 'create' && doc.originalFile && doc.status === 'queued') {
-          console.log(`Import job créé: ${doc.id} - ${doc.fileName}`)
+      async ({ doc, req, operation, previousDoc }) => {
+        // Déclencher le traitement automatique après création ou mise à jour
+        const shouldProcess = (
+          doc.originalFile && 
+          doc.status === 'queued' && 
+          (
+            operation === 'create' || 
+            (operation === 'update' && previousDoc?.originalFile !== doc.originalFile)
+          )
+        )
+        
+        if (shouldProcess) {
+          console.log(`🚀 Ajout job d'import à la queue: ${doc.id} - ${doc.fileName}`)
+          console.log(`   Type: ${doc.importType}, Statut: ${doc.status}`)
           
-          // Déclencher le traitement asynchrone
           try {
-            // Appeler l'endpoint de traitement
-            const response = await fetch(`${process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000'}/api/json-import/process/${doc.id}`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              }
+            // Importer la queue dynamiquement pour éviter les problèmes de circular dependency
+            const { importQueue } = await import('../jobs/queue')
+            
+            // Extraire l'ID du fichier
+            const fileId = typeof doc.originalFile === 'string' 
+              ? doc.originalFile 
+              : (doc.originalFile as any)?.id
+            
+            if (!fileId) {
+              throw new Error('ID du fichier introuvable')
+            }
+            
+            // Ajouter le job à la queue
+            const job = await importQueue.add({
+              importJobId: doc.id,
+              fileId,
+              importType: doc.importType as any,
+              options: doc.importOptions || {},
+              userId: req.user?.id || ''
+            }, {
+              jobId: `import-${doc.id}`, // ID unique pour éviter les doublons
+              removeOnComplete: 100,
+              removeOnFail: 50
             })
             
-            if (!response.ok) {
-              console.error('Erreur déclenchement traitement:', await response.text())
-            }
+            console.log(`✅ Job ajouté à la queue: ${job.id}`)
           } catch (error) {
             const errorMessage = error instanceof Error ? error.message : String(error)
-            console.error('Erreur déclenchement traitement:', errorMessage)
+            console.error('❌ Erreur ajout job à la queue:', errorMessage)
+            
+            // Mettre à jour le statut en cas d'erreur
+            await req.payload.update({
+              collection: 'import-jobs',
+              id: doc.id,
+              data: {
+                status: 'failed',
+                errors: [{
+                  type: 'system',
+                  severity: 'critical',
+                  message: `Erreur lors de l'ajout à la queue: ${errorMessage}`,
+                  suggestion: 'Vérifiez que Redis est démarré et que les workers tournent'
+                }]
+              }
+            })
           }
+        } else if (doc.originalFile && doc.status !== 'queued') {
+          console.log(`ℹ️ Import job ${doc.id} non traité - Statut: ${doc.status}`)
         }
       }
     ]

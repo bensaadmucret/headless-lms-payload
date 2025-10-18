@@ -98,6 +98,20 @@ export const ragQueue = new Queue('rag-processing', redisUrl, {
   },
 })
 
+/**
+ * Queue pour l'import de fichiers JSON/CSV
+ */
+export const importQueue = new Queue('json-csv-import', redisUrl, {
+  defaultJobOptions: {
+    ...defaultJobOptions,
+    timeout: 20 * 60 * 1000, // 20 minutes pour les gros imports
+  },
+  settings: {
+    stalledInterval: 60 * 1000,
+    maxStalledCount: 2, // Retry 2 fois si le worker plante
+  },
+})
+
 // Array de toutes les queues pour faciliter la gestion
 export const allQueues = [
   extractionQueue,
@@ -105,6 +119,7 @@ export const allQueues = [
   aiQueue,
   validationQueue,
   ragQueue,
+  importQueue,
 ]
 
 // ===== UTILITAIRES =====

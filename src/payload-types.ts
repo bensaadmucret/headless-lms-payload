@@ -2082,9 +2082,9 @@ export interface ImportJob {
    */
   title?: string | null;
   /**
-   * Sélectionnez votre fichier JSON ou CSV à importer. Vous pouvez modifier ou supprimer le fichier même après création.
+   * Uploadez votre fichier JSON ou CSV à importer. Formats acceptés: .json, .csv
    */
-  originalFile?: (number | null) | Media;
+  originalFile: number | Media;
   /**
    * Nom du fichier (rempli automatiquement depuis le fichier uploadé)
    */
@@ -2093,6 +2093,9 @@ export interface ImportJob {
    * Type de contenu à importer (détecté automatiquement ou sélectionné manuellement)
    */
   importType: 'questions' | 'flashcards' | 'learning-paths' | 'csv';
+  /**
+   * Le statut change automatiquement pendant le traitement. Pour relancer un import échoué, changez le statut en "En attente" et sauvegardez.
+   */
   status?: ('queued' | 'processing' | 'validating' | 'preview' | 'completed' | 'failed') | null;
   progress?: {
     total?: number | null;
