@@ -101,7 +101,6 @@ import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
 import { UserPerformances } from './collections/UserPerformances'
 import AuditLogs from './collections/AuditLogs'
 import GenerationLogs from './collections/GenerationLogs'
-import { ImportJobs } from './collections/ImportJobs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -188,8 +187,7 @@ export default buildConfig({
     AdaptiveQuizResults,
     UserPerformances,
     AuditLogs,
-    GenerationLogs,
-    ImportJobs
+    GenerationLogs
   ],
   globals: [CorsConfig, Header, Footer],
   cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),

@@ -1,468 +1,413 @@
 import type { CollectionConfig } from 'payload'
-import {
-  FixedToolbarFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
-import { authenticated } from '@/access/authenticated'
-import { processDocumentAfterChange, validateDocumentBeforeChange } from '../hooks/processDocumentAfterChange'
-// Temporairement désactivé le composant qui cause des erreurs
-// import ExtractNowButton from '@/components/admin/ExtractNowButton'
 
 export const KnowledgeBase: CollectionConfig = {
   slug: 'knowledge-base',
   labels: {
     singular: 'Document de Connaissance',
-    plural: 'Base de Connaissances',
-  },
-  access: {
-    read: authenticated,
-    create: authenticated,
-    update: authenticated,
-    delete: authenticated,
+    plural: 'Base de Connaissances'
   },
   admin: {
-    useAsTitle: 'title',
-    defaultColumns: ['title', 'documentType', 'medicalDomain', 'processingCompleted', 'processingStatus', 'validationStatus', 'createdAt'],
+    description: '📚 Importez vos contenus éducatifs (JSON/CSV) pour alimenter la base de connaissances.',
+    defaultColumns: ['fileName', 'importType', 'status', 'createdAt'],
+    useAsTitle: 'fileName',
     group: 'Contenu Pédagogique',
+    // Interface 100% native Payload - pas de composants custom
+    listSearchableFields: ['fileName', 'importType'],
+    pagination: {
+      defaultLimit: 25
+    },
+    // S'assurer que le bouton Create est visible
+    enableRichTextRelationship: false
   },
+  // Champs natifs Payload pour tracker les imports
   fields: [
-    // === MÉTADONNÉES DU DOCUMENT ===
     {
-      name: 'title',
-      type: 'text',
-      label: 'Titre du Document',
-      required: true,
-      admin: {
-        placeholder: 'Ex: Anatomie du Coeur - Chapitre 5',
-      },
-    },
-    {
-      name: 'originalFileName',
-      type: 'text',
-      label: 'Nom du Fichier Original',
-      admin: {
-        readOnly: true,
-      },
-    },
-    {
-      name: 'documentType',
-      type: 'select',
-      label: 'Type de Document',
-      required: true,
-      options: [
-        { label: 'PDF', value: 'pdf' },
-        { label: 'EPUB', value: 'epub' },
-        { label: 'MOBI', value: 'mobi' },
-        { label: 'DOCX', value: 'docx' },
-        { label: 'TXT', value: 'txt' },
-      ],
-      defaultValue: 'pdf',
-    },
-    
-    // === FICHIER SOURCE ===
-    {
-      name: 'sourceFile',
+      name: 'originalFile',
       type: 'upload',
-      label: 'Fichier Source',
       relationTo: 'media',
+      label: '📁 Fichier à importer',
       required: true,
       admin: {
-        description: 'Le fichier original (PDF, eBook, etc.)',
-      },
+        description: 'Uploadez votre fichier JSON ou CSV à importer. Formats acceptés: .json, .csv'
+      }
     },
-    // Temporairement désactivé - cause des erreurs d'import
-    /*
     {
-      name: 'extractNow',
-      type: 'ui',
-      label: false,
+      name: 'fileName',
+      type: 'text',
+      label: 'Nom du fichier',
       admin: {
-        components: {
-          Field: ExtractNowButton,
-        },
-        description: 'Exécuter une extraction immédiate sans worker',
-      },
-    },
-    */
-    
-    // === CONTENU EXTRAIT ET STRUCTURÉ ===
-    {
-      name: 'extractedContent',
-      type: 'textarea', // Temporairement en textarea pour debug
-      maxLength: 200000, // 🎯 Comme Media
-      label: 'Contenu Extrait',
-      admin: {
-        description: 'Contenu textuel extrait automatiquement du document',
-        readOnly: true,
-        rows: 10,
-        // Pas de condition - toujours visible
-      },
+        description: 'Nom du fichier (rempli automatiquement depuis le fichier uploadé)',
+        readOnly: true
+      }
     },
     {
-      name: 'chapters',
-      type: 'array',
-      label: 'Chapitres',
-      admin: {
-        description: 'Structure en chapitres du document',
-      },
-      fields: [
-        {
-          name: 'chapterTitle',
-          type: 'text',
-          label: 'Titre du Chapitre',
-          required: true,
-        },
-        {
-          name: 'chapterNumber',
-          type: 'number',
-          label: 'Numéro de Chapitre',
-        },
-        {
-          name: 'content',
-          type: 'richText',
-          label: 'Contenu du Chapitre',
-          editor: lexicalEditor({
-            features: ({ rootFeatures }) => [
-              ...rootFeatures,
-              FixedToolbarFeature(),
-              InlineToolbarFeature(),
-            ],
-          }),
-        },
-        {
-          name: 'pageNumbers',
-          type: 'text',
-          label: 'Pages de Référence',
-          admin: {
-            placeholder: 'Ex: p. 45-67',
-          },
-        },
-      ],
-    },
-    
-    // === CLASSIFICATION MÉDICALE ===
-    {
-      name: 'medicalDomain',
+      name: 'importType',
       type: 'select',
-      label: 'Domaine Médical',
+      label: 'Type d\'import',
+      options: [
+        { label: '❓ Questions QCM', value: 'questions' },
+        { label: '🃏 Flashcards', value: 'flashcards' },
+        { label: '🛤️ Parcours d\'apprentissage', value: 'learning-paths' },
+        { label: '📊 Fichier CSV', value: 'csv' }
+      ],
       required: true,
-      options: [
-        { label: 'Anatomie', value: 'anatomie' },
-        { label: 'Physiologie', value: 'physiologie' },
-        { label: 'Cardiologie', value: 'cardiologie' },
-        { label: 'Neurologie', value: 'neurologie' },
-        { label: 'Pneumologie', value: 'pneumologie' },
-        { label: 'Gastroentérologie', value: 'gastroenterologie' },
-        { label: 'Endocrinologie', value: 'endocrinologie' },
-        { label: 'Hématologie', value: 'hematologie' },
-        { label: 'Immunologie', value: 'immunologie' },
-        { label: 'Pharmacologie', value: 'pharmacologie' },
-        { label: 'Pathologie', value: 'pathologie' },
-        { label: 'Radiologie', value: 'radiologie' },
-        { label: 'Chirurgie', value: 'chirurgie' },
-        { label: 'Médecine Générale', value: 'medecine_generale' },
-        { label: 'Pédiatrie', value: 'pediatrie' },
-        { label: 'Gynécologie', value: 'gynecologie' },
-        { label: 'Psychiatrie', value: 'psychiatrie' },
-        { label: 'Dermatologie', value: 'dermatologie' },
-        { label: 'Ophtalmologie', value: 'ophtalmologie' },
-        { label: 'ORL', value: 'orl' },
-        { label: 'Autre', value: 'autre' },
-      ],
-    },
-    {
-      name: 'speciality',
-      type: 'text',
-      label: 'Spécialité Précise',
       admin: {
-        placeholder: 'Ex: Cardiologie interventionnelle',
-      },
+        description: 'Type de contenu à importer (détecté automatiquement ou sélectionné manuellement)'
+      }
     },
     {
-      name: 'difficulty',
+      name: 'status',
       type: 'select',
-      label: 'Niveau de Difficulté',
-      required: true,
+      label: 'Statut',
       options: [
-        { label: 'Débutant (L1-L2)', value: 'beginner' },
-        { label: 'Intermédiaire (L3-M1)', value: 'intermediate' },
-        { label: 'Avancé (M2-Interne)', value: 'advanced' },
-        { label: 'Expert (PH-Spécialiste)', value: 'expert' },
-      ],
-      defaultValue: 'intermediate',
-    },
-    
-    // === MÉTADONNÉES ACADÉMIQUES ===
-    {
-      name: 'authors',
-      type: 'array',
-      label: 'Auteurs',
-      fields: [
-        {
-          name: 'authorName',
-          type: 'text',
-          label: 'Nom de l\'Auteur',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'publisher',
-      type: 'text',
-      label: 'Éditeur',
-      admin: {
-        placeholder: 'Ex: Masson, Elsevier, etc.',
-      },
-    },
-    {
-      name: 'publicationYear',
-      type: 'number',
-      label: 'Année de Publication',
-      min: 1900,
-      max: new Date().getFullYear() + 5,
-    },
-    {
-      name: 'isbn',
-      type: 'text',
-      label: 'ISBN',
-      admin: {
-        placeholder: 'Ex: 978-2-294-12345-6',
-      },
-    },
-    {
-      name: 'edition',
-      type: 'text',
-      label: 'Édition',
-      admin: {
-        placeholder: 'Ex: 3ème édition',
-      },
-    },
-    
-    // === VALIDATION ET QUALITÉ ===
-    {
-      name: 'validationStatus',
-      type: 'select',
-      label: 'Statut de Validation',
-      required: true,
-      options: [
-        { label: '⏳ En Attente', value: 'pending' },
-        { label: '✅ Approuvé', value: 'approved' },
-        { label: '❌ Rejeté', value: 'rejected' },
-        { label: '🔍 Nécessite Révision', value: 'needs_review' },
-      ],
-      defaultValue: 'pending',
-    },
-    {
-      name: 'validatedBy',
-      type: 'relationship',
-      label: 'Validé par',
-      relationTo: 'users',
-      admin: {
-        description: 'Expert médical qui a validé ce contenu',
-      },
-    },
-    {
-      name: 'validationDate',
-      type: 'date',
-      label: 'Date de Validation',
-    },
-    {
-      name: 'validationNotes',
-      type: 'textarea',
-      label: 'Notes de Validation',
-      admin: {
-        placeholder: 'Commentaires de l\'expert validateur...',
-      },
-    },
-    {
-      name: 'qualityScore',
-      type: 'number',
-      label: 'Score de Qualité',
-      min: 1,
-      max: 5,
-      admin: {
-        description: 'Score de 1 à 5 étoiles',
-        step: 0.1,
-      },
-    },
-    {
-      name: 'isActive',
-      type: 'checkbox',
-      label: 'Document Actif',
-      defaultValue: false,
-      admin: {
-        description: 'Disponible pour la génération de questions par l\'IA',
-      },
-    },
-    
-    // === RECHERCHE ET INDEXATION ===
-    {
-      name: 'keywords',
-      type: 'array',
-      label: 'Mots-clés',
-      admin: {
-        description: 'Mots-clés extraits automatiquement par l\'IA',
-      },
-      fields: [
-        {
-          name: 'keyword',
-          type: 'text',
-          label: 'Mot-clé',
-          required: true,
-        },
-      ],
-    },
-    {
-      name: 'searchableContent',
-      type: 'textarea',
-      label: 'Contenu Indexé pour Recherche',
-      admin: {
-        description: 'Version optimisée pour la recherche full-text',
-        readOnly: true,
-      },
-    },
-    {
-      name: 'aiSummary',
-      type: 'richText',
-      label: 'Résumé IA',
-      admin: {
-        description: 'Résumé automatique généré par l\'IA',
-        readOnly: true,
-      },
-    },
-    
-    // === TRAÇABILITÉ ===
-    {
-      name: 'uploadedBy',
-      type: 'relationship',
-      label: 'Téléversé par',
-      relationTo: 'users',
-      required: false,
-      admin: {
-        readOnly: true,
-      },
-    },
-    {
-      name: 'lastProcessed',
-      type: 'date',
-      label: 'Dernière Extraction',
-      admin: {
-        description: 'Date du dernier traitement automatique',
-        readOnly: true,
-      },
-    },
-    {
-      name: 'processingStatus',
-      type: 'select',
-      label: 'Statut de Traitement',
-      options: [
-        { label: '⏳ En File d\'Attente', value: 'queued' },
-        { label: '🔍 Extraction en Cours', value: 'extracting' },
-        { label: '🧠 Enrichissement IA', value: 'enriching' },
-        { label: '💾 Finalisation', value: 'updating' },
+        { label: '⏳ En attente', value: 'queued' },
+        { label: '🔄 Traitement', value: 'processing' },
+        { label: '✅ Validation', value: 'validating' },
+        { label: '👁️ Aperçu', value: 'preview' },
         { label: '✅ Terminé', value: 'completed' },
-        { label: '❌ Échec', value: 'failed' },
-        { label: '🔄 Nouvelle Tentative', value: 'retrying' },
+        { label: '❌ Échec', value: 'failed' }
       ],
       defaultValue: 'queued',
-      required: true,
-    },
-    {
-      name: 'processingCompleted',
-      type: 'checkbox',
-      label: 'Traitement Terminé avec Succès',
-      defaultValue: false,
       admin: {
-        description: 'Indique si le PDF a été complètement traité (extraction + NLP + IA + validation)',
         readOnly: true,
-        position: 'sidebar',
-      },
+        description: 'Le statut change automatiquement pendant le traitement. Pour relancer un import échoué, changez le statut en "En attente" et sauvegardez.'
+      }
     },
     {
-      name: 'processingCompletedAt',
-      type: 'date',
-      label: 'Date de Finalisation',
-      admin: {
-        description: 'Date et heure de la finalisation complète du traitement',
-        readOnly: true,
-        position: 'sidebar',
-      },
-    },
-    {
-      name: 'processingLogs',
-      type: 'textarea',
-      label: 'Logs de Traitement',
-      admin: {
-        description: 'Logs techniques du traitement automatique',
-        readOnly: true,
-      },
-    },
-    
-    // === STATISTIQUES D'UTILISATION ===
-    {
-      name: 'usageStats',
+      name: 'progress',
       type: 'group',
-      label: 'Statistiques d\'Utilisation',
+      label: 'Progression',
       admin: {
-        description: 'Métriques d\'utilisation de ce document',
+        condition: (data) => data.status && data.status !== 'queued'
       },
       fields: [
         {
-          name: 'questionsGenerated',
+          name: 'total',
           type: 'number',
-          label: 'Questions Générées',
+          label: 'Total d\'éléments',
           defaultValue: 0,
-          admin: {
-            readOnly: true,
-          },
+          admin: { readOnly: true }
         },
         {
-          name: 'timesReferenced',
+          name: 'processed',
           type: 'number',
-          label: 'Fois Référencé',
+          label: 'Traités',
           defaultValue: 0,
-          admin: {
-            readOnly: true,
-          },
+          admin: { readOnly: true }
         },
         {
-          name: 'lastUsed',
-          type: 'date',
-          label: 'Dernière Utilisation',
-          admin: {
-            readOnly: true,
-          },
+          name: 'successful',
+          type: 'number',
+          label: 'Réussis',
+          defaultValue: 0,
+          admin: { readOnly: true }
         },
-      ],
+        {
+          name: 'failed',
+          type: 'number',
+          label: 'Échecs',
+          defaultValue: 0,
+          admin: { readOnly: true }
+        }
+      ]
     },
+    {
+      name: 'validationResult',
+      type: 'json',
+      label: 'Résultat de validation',
+      admin: {
+        readOnly: true,
+        condition: (data) => !!data.validationResult
+      }
+    },
+    {
+      name: 'errors',
+      type: 'array',
+      label: 'Erreurs',
+      admin: {
+        readOnly: true,
+        condition: (data) => data.errors && data.errors.length > 0
+      },
+      fields: [
+        {
+          name: 'type',
+          type: 'select',
+          options: ['validation', 'database', 'mapping', 'reference', 'system']
+        },
+        {
+          name: 'severity',
+          type: 'select',
+          options: ['critical', 'major', 'minor', 'warning']
+        },
+        {
+          name: 'message',
+          type: 'textarea'
+        },
+        {
+          name: 'suggestion',
+          type: 'textarea'
+        }
+      ]
+    },
+    {
+      name: 'importOptions',
+      type: 'group',
+      label: '⚙️ Options d\'import',
+      admin: {
+        description: 'Configurez les paramètres d\'import selon vos besoins'
+      },
+      fields: [
+        {
+          name: 'dryRun',
+          type: 'checkbox',
+          label: '🧪 Mode test (aperçu sans import)',
+          defaultValue: false,
+          admin: {
+            description: 'Valider le fichier sans effectuer l\'import réel'
+          }
+        },
+        {
+          name: 'batchSize',
+          type: 'number',
+          label: 'Taille des lots',
+          defaultValue: 100,
+          min: 1,
+          max: 1000,
+          admin: {
+            description: 'Nombre d\'éléments traités par lot (1-1000)'
+          }
+        },
+        {
+          name: 'overwriteExisting',
+          type: 'checkbox',
+          label: '🔄 Écraser les éléments existants',
+          defaultValue: false,
+          admin: {
+            description: 'Remplacer les éléments existants en cas de conflit'
+          }
+        },
+        {
+          name: 'generateDistractors',
+          type: 'checkbox',
+          label: '🤖 Générer des distracteurs automatiquement',
+          defaultValue: true,
+          admin: {
+            condition: (data) => data.importType === 'flashcards',
+            description: 'Créer automatiquement des options incorrectes pour les flashcards'
+          }
+        },
+        {
+          name: 'requireHumanValidation',
+          type: 'checkbox',
+          label: '👤 Validation humaine obligatoire',
+          defaultValue: true,
+          admin: {
+            description: 'Nécessite une validation manuelle avant l\'import final'
+          }
+        }
+      ]
+    },
+    {
+      name: 'importedBy',
+      type: 'relationship',
+      relationTo: 'users',
+      label: 'Importé par',
+      admin: {
+        readOnly: true
+      }
+    },
+    {
+      name: 'completedAt',
+      type: 'date',
+      label: 'Terminé le',
+      admin: {
+        readOnly: true,
+        condition: (data) => data.status === 'completed' || data.status === 'failed'
+      }
+    }
   ],
+  // Permissions Payload natives
+  access: {
+    create: ({ req: { user } }) => {
+      // Permettre à tous les utilisateurs connectés de créer des imports
+      return !!user
+    },
+    read: ({ req: { user } }) => {
+      if (!user) return false
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
+      // Les utilisateurs normaux voient seulement leurs propres imports
+      return {
+        importedBy: {
+          equals: user?.id
+        }
+      }
+    },
+    update: ({ req: { user } }) => {
+      if (!user) return false
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
+      // Les utilisateurs peuvent modifier leurs propres imports
+      return {
+        importedBy: {
+          equals: user?.id
+        }
+      }
+    },
+    delete: ({ req: { user } }) => {
+      if (!user) return false
+      if (user?.role === 'admin' || user?.role === 'superadmin') return true
+      // Les utilisateurs peuvent supprimer leurs propres imports
+      return {
+        importedBy: {
+          equals: user?.id
+        }
+      }
+    }
+  },
+  // Hooks Payload natifs
   hooks: {
     beforeChange: [
-      // Hook de validation et préparation des données
-      validateDocumentBeforeChange,
-      ({ req, data }) => {
-        // Auto-définir uploadedBy lors de la création
-        if (req.user && !data.uploadedBy) {
-          data.uploadedBy = req.user.id
+      async ({ data, req, operation }) => {
+        if ((operation === 'create' || operation === 'update') && req.user) {
+          // Définir l'utilisateur seulement à la création
+          if (operation === 'create') {
+            data.importedBy = req.user.id
+          }
+          
+          // Extraire le nom du fichier depuis l'upload (toujours mettre à jour)
+          if (data.originalFile) {
+            try {
+              console.log('📄 Type de originalFile:', typeof data.originalFile, data.originalFile)
+              
+              // Si originalFile est un ID string
+              if (typeof data.originalFile === 'string') {
+                console.log('🔍 Récupération du media avec ID:', data.originalFile)
+                const mediaDoc = await req.payload.findByID({
+                  collection: 'media',
+                  id: data.originalFile
+                })
+                console.log('📦 Media trouvé:', mediaDoc?.filename)
+                if (mediaDoc?.filename) {
+                  data.fileName = mediaDoc.filename
+                }
+              } 
+              // Si c'est un objet avec un ID
+              else if (typeof data.originalFile === 'object' && data.originalFile !== null) {
+                const fileId = (data.originalFile as any).id
+                if (fileId) {
+                  console.log('🔍 Récupération du media avec ID depuis objet:', fileId)
+                  const mediaDoc = await req.payload.findByID({
+                    collection: 'media',
+                    id: fileId
+                  })
+                  console.log('📦 Media trouvé:', mediaDoc?.filename)
+                  if (mediaDoc?.filename) {
+                    data.fileName = mediaDoc.filename
+                  }
+                } else if ((data.originalFile as any).filename) {
+                  // Si c'est déjà un objet avec filename
+                  data.fileName = (data.originalFile as any).filename
+                  console.log('📦 Filename depuis objet:', data.fileName)
+                }
+              }
+              
+              if (!data.fileName) {
+                console.warn('⚠️ Impossible de récupérer le nom du fichier depuis originalFile')
+              }
+            } catch (error) {
+              console.error('❌ Erreur lors de la récupération du nom de fichier:', error)
+            }
+          } else {
+            console.log('ℹ️ Pas de fichier uploadé (originalFile vide)')
+          }
+          
+          // Auto-détecter le type d'import depuis le nom de fichier
+          if (data.fileName && !data.importType) {
+            const fileName = data.fileName.toLowerCase()
+            if (fileName.endsWith('.csv')) {
+              data.importType = 'csv'
+            } else if (fileName.includes('flashcard')) {
+              data.importType = 'flashcards'
+            } else if (fileName.includes('path') || fileName.includes('parcours')) {
+              data.importType = 'learning-paths'
+            } else {
+              data.importType = 'questions'
+            }
+          }
+          
+          // Initialiser le statut
+          if (!data.status) {
+            data.status = 'queued'
+          }
         }
-        
-        // Mettre à jour lastProcessed si le contenu change
-        if (data.extractedContent) {
-          data.lastProcessed = new Date()
-        }
-        
         return data
-      },
+      }
     ],
     afterChange: [
-      // Hook principal pour le traitement asynchrone
-      processDocumentAfterChange,
-      ({ req, doc }) => {
-        // Log de l'activité
-        req.payload.logger.info(`Document de connaissance modifié: ${doc.title} (ID: ${doc.id})`)
-      },
-    ],
-  },
-  timestamps: true,
+      async ({ doc, req, operation, previousDoc }) => {
+        // Déclencher le traitement automatique après création ou mise à jour
+        const shouldProcess = (
+          doc.originalFile && 
+          doc.status === 'queued' && 
+          (
+            operation === 'create' || 
+            (operation === 'update' && previousDoc?.originalFile !== doc.originalFile)
+          )
+        )
+        
+        if (shouldProcess) {
+          console.log(`🚀 Ajout job d'import à la queue: ${doc.id} - ${doc.fileName}`)
+          console.log(`   Type: ${doc.importType}, Statut: ${doc.status}`)
+          
+          try {
+            // Importer la queue dynamiquement pour éviter les problèmes de circular dependency
+            const { importQueue } = await import('../jobs/queue')
+            
+            // Extraire l'ID du fichier
+            const fileId = typeof doc.originalFile === 'string' 
+              ? doc.originalFile 
+              : (doc.originalFile as any)?.id
+            
+            if (!fileId) {
+              throw new Error('ID du fichier introuvable')
+            }
+            
+            // Ajouter le job à la queue
+            const job = await importQueue.add({
+              importJobId: doc.id,
+              fileId,
+              importType: doc.importType as any,
+              options: doc.importOptions || {},
+              userId: req.user?.id || ''
+            }, {
+              jobId: `import-${doc.id}`, // ID unique pour éviter les doublons
+              removeOnComplete: 100,
+              removeOnFail: 50
+            })
+            
+            console.log(`✅ Job ajouté à la queue: ${job.id}`)
+          } catch (error) {
+            const errorMessage = error instanceof Error ? error.message : String(error)
+            console.error('❌ Erreur ajout job à la queue:', errorMessage)
+            
+            // Mettre à jour le statut en cas d'erreur
+            await req.payload.update({
+              collection: 'knowledge-base',
+              id: doc.id,
+              data: {
+                status: 'failed',
+                errors: [{
+                  type: 'system',
+                  severity: 'critical',
+                  message: `Erreur lors de l'ajout à la queue: ${errorMessage}`,
+                  suggestion: 'Vérifiez que Redis est démarré et que les workers tournent'
+                }]
+              }
+            })
+          }
+        } else if (doc.originalFile && doc.status !== 'queued') {
+          console.log(`ℹ️ Import job ${doc.id} non traité - Statut: ${doc.status}`)
+        }
+      }
+    ]
+  }
 }

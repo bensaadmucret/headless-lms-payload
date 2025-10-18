@@ -46,7 +46,7 @@ export class ImportJobProcessingService {
     try {
       // Récupérer le job
       const job = await payload.findByID({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId
       })
 
@@ -61,7 +61,7 @@ export class ImportJobProcessingService {
 
       // Mettre à jour le statut à "processing"
       await payload.update({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId,
         data: { status: 'processing' }
       })
@@ -108,7 +108,7 @@ export class ImportJobProcessingService {
 
       // Mettre à jour le statut final
       await payload.update({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId,
         data: {
           status: result.success ? 'completed' : 'failed',
@@ -132,7 +132,7 @@ export class ImportJobProcessingService {
 
       // Mettre à jour le statut à "failed"
       await payload.update({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId,
         data: {
           status: 'failed',
@@ -181,7 +181,7 @@ export class ImportJobProcessingService {
   ): Promise<ImportProcessingResult> {
     // Validation
     await payload.update({
-      collection: 'import-jobs',
+      collection: 'knowledge-base',
       id: jobId,
       data: { status: 'validating' }
     })
@@ -259,7 +259,7 @@ export class ImportJobProcessingService {
 
     // Validation
     await payload.update({
-      collection: 'import-jobs',
+      collection: 'knowledge-base',
       id: jobId,
       data: { status: 'validating' }
     })
@@ -293,7 +293,7 @@ export class ImportJobProcessingService {
                        jsonData.paths?.length || 0
 
       await payload.update({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId,
         data: { status: 'preview' }
       })
