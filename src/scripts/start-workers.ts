@@ -14,6 +14,7 @@ import { startExtractionWorker } from '../jobs/workers/extractionWorker'
 import { startNLPWorker } from '../jobs/workers/nlpWorker'
 import { startAIWorker } from '../jobs/workers/aiWorker'
 import { startValidationWorker } from '../jobs/workers/validationWorker'
+import { startImportWorker } from '../jobs/workers/importWorker'
 import { closeAllQueues, initQueueLifecycle } from '../jobs/queue'
 
 async function main() {
@@ -36,18 +37,23 @@ async function main() {
     console.log('🔍 Démarrage du worker de validation...')
     startValidationWorker()
     
+    console.log('📥 Démarrage du worker d\'import JSON/CSV...')
+    startImportWorker()
+    
     console.log('\n✅ Tous les workers démarrés et prêts à traiter les jobs!')
     console.log('\n📊 Workers en cours d\'exécution:')
     console.log('   🔍 ExtractionWorker (3 concurrency)')
     console.log('   🧠 NLPWorker (2 concurrency)') 
     console.log('   🤖 AIWorker (1 concurrency)')
-    console.log('   🔍 ValidationWorker (3 concurrency)') 
+    console.log('   🔍 ValidationWorker (3 concurrency)')
+    console.log('   📥 ImportWorker (2 concurrency)') 
     
     console.log('\n📋 Files d\'attente actives:')
     console.log('   • document-extraction')
     console.log('   • nlp-processing')
     console.log('   • ai-enrichment')
     console.log('   • validation-check')
+    console.log('   • json-csv-import')
     
     console.log('\n💡 Les workers traiteront automatiquement les documents uploadés')
     console.log('🛑 Pour arrêter: Ctrl+C')
