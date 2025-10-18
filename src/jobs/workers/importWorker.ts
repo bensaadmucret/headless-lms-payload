@@ -6,7 +6,7 @@
 import type { Job } from 'bull'
 import { importQueue } from '../queue'
 import { getPayloadInstance } from '../initPayload'
-import { jsonImportProcessEndpoint } from '../../endpoints/jsonImportProcess'
+import { ImportJobProcessingService } from '../../services/ImportJobProcessingService'
 
 /**
  * Type de données du job d'import
@@ -54,73 +54,28 @@ const WORKER_CONFIG = {
 }
 
 /**
- * Traiter un job d'import en appelant l'endpoint existant
+ * Traiter un job d'import avec le service dédié
  */
 export async function processImportJob(job: Job<ImportJobData>): Promise<ImportJobResult> {
-  const { importJobId } = job.data
+  const { importJobId, userId } = job.data
 
   console.log(`📥 [Import] Starting import job ${importJobId}`)
 
   const payload = await getPayloadInstance()
+  const importService = new ImportJobProcessingService()
 
   try {
-    // Créer une fausse requête pour l'endpoint
-    const mockReq = {
-      payload,
-      routeParams: { jobId: importJobId },
-      user: { id: job.data.userId }
-    } as any
+    // Appeler le service de traitement
+    const result = await importService.processImportJob(payload, importJobId, userId)
 
-    // Appeler directement l'endpoint de traitement
-    const response = await jsonImportProcessEndpoint(mockReq)
-    
-    // Parser la réponse
-    const result = await response.json()
+    console.log(`✅ [Import] Job ${importJobId} completed: ${result.successfulItems}/${result.totalItems}`)
 
-    if (result.success) {
-      console.log(`✅ [Import] Job ${importJobId} completed`)
-      return {
-        success: true,
-        totalItems: result.result?.totalItems || 0,
-        processedItems: result.result?.processedItems || 0,
-        successfulItems: result.result?.successfulItems || 0,
-        failedItems: result.result?.failedItems || 0
-      }
-    } else {
-      console.error(`❌ [Import] Job ${importJobId} failed:`, result.error)
-      return {
-        success: false,
-        totalItems: 0,
-        processedItems: 0,
-        successfulItems: 0,
-        failedItems: 0,
-        errors: [{
-          type: 'system' as const,
-          severity: 'critical' as const,
-          message: result.error || 'Erreur inconnue'
-        }]
-      }
-    }
+    return result
 
   } catch (error) {
     console.error(`❌ [Import] Job ${importJobId} failed:`, error)
 
-    // Mettre à jour le statut à "failed"
-    await payload.update({
-      collection: 'import-jobs',
-      id: importJobId,
-      data: {
-        status: 'failed',
-        errors: [{
-          type: 'system' as const,
-          severity: 'critical' as const,
-          message: error instanceof Error ? error.message : String(error),
-          suggestion: 'Vérifiez le fichier et réessayez'
-        }],
-        completedAt: new Date().toISOString()
-      }
-    })
-
+    // Le service a déjà mis à jour le statut, on propage juste l'erreur
     throw error
   }
 }

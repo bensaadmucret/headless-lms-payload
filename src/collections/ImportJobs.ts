@@ -8,8 +8,8 @@ export const ImportJobs: CollectionConfig = {
   },
   admin: {
     description: '📥 Importez vos contenus éducatifs en masse (JSON/CSV). Cliquez sur "Create New" pour commencer un nouvel import.',
-    defaultColumns: ['title', 'fileName', 'importType', 'status', 'createdAt'],
-    useAsTitle: 'title',
+    defaultColumns: ['fileName', 'importType', 'status', 'createdAt'],
+    useAsTitle: 'fileName',
     group: 'Outils',
     // Interface 100% native Payload - pas de composants custom
     listSearchableFields: ['fileName', 'importType'],
@@ -21,15 +21,6 @@ export const ImportJobs: CollectionConfig = {
   },
   // Champs natifs Payload pour tracker les imports
   fields: [
-    {
-      name: 'title',
-      type: 'text',
-      label: '📝 Titre de l\'import',
-      required: false, // Optionnel pour éviter les erreurs DB
-      admin: {
-        description: 'Donnez un nom à votre import pour le retrouver facilement (ex: "Questions Cardiologie Janvier 2025")'
-      }
-    },
     {
       name: 'originalFile',
       type: 'upload',
@@ -46,7 +37,7 @@ export const ImportJobs: CollectionConfig = {
       label: 'Nom du fichier',
       admin: {
         description: 'Nom du fichier (rempli automatiquement depuis le fichier uploadé)',
-        condition: (data) => !!data.fileName // Afficher seulement si rempli
+        readOnly: true
       }
     },
     {
@@ -327,13 +318,6 @@ export const ImportJobs: CollectionConfig = {
             }
           } else {
             console.log('ℹ️ Pas de fichier uploadé (originalFile vide)')
-          }
-          
-          // Générer un titre par défaut si pas fourni
-          if (data.fileName && !data.title) {
-            const baseName = data.fileName.replace(/\.[^/.]+$/, '') // Enlever l'extension
-            const date = new Date().toLocaleDateString('fr-FR')
-            data.title = `Import ${baseName} - ${date}`
           }
           
           // Auto-détecter le type d'import depuis le nom de fichier
