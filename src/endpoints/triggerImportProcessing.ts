@@ -28,7 +28,7 @@ export const triggerImportProcessing: PayloadHandler = async (req) => {
   try {
     // Récupérer le job
     const job = await payload.findByID({
-      collection: 'import-jobs',
+      collection: 'knowledge-base',
       id: jobId as string
     })
 
@@ -58,7 +58,7 @@ export const triggerImportProcessing: PayloadHandler = async (req) => {
     // Réinitialiser le statut à "queued" si nécessaire
     if (job.status !== 'queued') {
       await payload.update({
-        collection: 'import-jobs',
+        collection: 'knowledge-base',
         id: jobId as string,
         data: {
           status: 'queued',
