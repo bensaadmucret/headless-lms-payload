@@ -1,5 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -21,7 +22,7 @@ interface GenerationConfig {
 }
 
 interface GenerationProgress {
-  step: 'configuring' | 'generating' | 'validating' | 'creating' | 'completed' | 'error'
+  step: 'configuring' | 'generating' | 'creating' | 'completed' | 'error'
   progress: number
   message: string
   error?: string
@@ -45,7 +46,7 @@ export const GenerateAIQuizButton: React.FC = () => {
     progress: 0,
     message: 'Configuration en cours...'
   })
-  
+
   const [config, setConfig] = useState<GenerationConfig>({
     subject: '',
     categoryId: '',
@@ -84,7 +85,7 @@ export const GenerateAIQuizButton: React.FC = () => {
   const handleGenerate = async () => {
     console.log('🚀 Début de la génération du quiz')
     console.log('📋 Configuration:', config)
-    
+
     setLoading(true)
     setProgress({
       step: 'generating',
@@ -102,7 +103,7 @@ export const GenerateAIQuizButton: React.FC = () => {
         credentials: 'include',
         body: JSON.stringify(config)
       })
-      
+
       console.log('📥 Réponse reçue:', response.status, response.statusText)
 
       if (!response.ok) {
@@ -114,21 +115,12 @@ export const GenerateAIQuizButton: React.FC = () => {
       console.log('✅ Données reçues:', data)
 
       setProgress({
-        step: 'validating',
-        progress: 60,
-        message: 'Validation du contenu généré...'
+        step: 'creating',
+        progress: 70,
+        message: 'Création du quiz et des questions...'
       })
 
-      // Simuler la progression de validation
-      setTimeout(() => {
-        setProgress({
-          step: 'creating',
-          progress: 80,
-          message: 'Création du quiz et des questions...'
-        })
-      }, 1000)
-
-      // Simuler la finalisation
+      // Finaliser rapidement
       setTimeout(() => {
         setProgress({
           step: 'completed',
@@ -136,13 +128,13 @@ export const GenerateAIQuizButton: React.FC = () => {
           message: `Quiz "${data.quiz.title}" créé avec succès!`
         })
 
-        // Afficher la prévisualisation après 2 secondes
+        // Afficher la prévisualisation après 1 seconde
         setTimeout(() => {
           console.log('🎉 Quiz créé avec ID:', data.quiz.id)
           setGeneratedQuizId(data.quiz.id)
           setShowPreview(true)
           setIsModalOpen(false)
-        }, 2000)
+        }, 1000)
       }, 2000)
 
     } catch (error: any) {
@@ -165,11 +157,11 @@ export const GenerateAIQuizButton: React.FC = () => {
   }
 
   const isConfigValid = () => {
-    return config.subject.length >= 10 && 
-           config.subject.length <= 200 && 
-           config.categoryId && 
-           config.questionCount >= 5 && 
-           config.questionCount <= 20
+    return config.subject.length >= 10 &&
+      config.subject.length <= 200 &&
+      config.categoryId &&
+      config.questionCount >= 5 &&
+      config.questionCount <= 20
   }
 
   const resetModal = () => {
@@ -207,7 +199,7 @@ export const GenerateAIQuizButton: React.FC = () => {
         <Button
           type="button"
           onClick={() => setIsModalOpen(true)}
-          style={{ 
+          style={{
             backgroundColor: '#6366f1',
             color: '#ffffff',
             border: 'none',
@@ -234,8 +226,8 @@ export const GenerateAIQuizButton: React.FC = () => {
         </Button>
       </div>
 
-      {isModalOpen && (
-        <div 
+      {isModalOpen && createPortal(
+        <div
           className="ai-quiz-modal-overlay"
           style={{
             position: 'fixed',
@@ -266,7 +258,7 @@ export const GenerateAIQuizButton: React.FC = () => {
             margin: 'auto'
           }}>
             <Card style={{ border: 'none', boxShadow: 'none', backgroundColor: 'transparent' }}>
-              <CardHeader style={{ 
+              <CardHeader style={{
                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                 borderRadius: '12px 12px 0 0',
                 display: 'flex',
@@ -287,8 +279,8 @@ export const GenerateAIQuizButton: React.FC = () => {
                   type="button"
                   onClick={resetModal}
                   disabled={loading}
-                  style={{ 
-                    padding: '8px 12px', 
+                  style={{
+                    padding: '8px 12px',
                     fontSize: '20px',
                     backgroundColor: 'rgba(255, 255, 255, 0.2)',
                     border: '1px solid rgba(255, 255, 255, 0.4)',
@@ -302,7 +294,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                   ✕
                 </Button>
               </CardHeader>
-              
+
               <CardContent style={{ padding: '32px', backgroundColor: 'transparent' }}>
                 {loading ? (
                   <div style={{ textAlign: 'center', padding: '20px 0' }}>
@@ -315,7 +307,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                       borderRadius: '50%',
                       animation: 'spin 1s linear infinite'
                     }} />
-                    
+
                     <div style={{
                       width: '100%',
                       backgroundColor: '#e5e7eb',
@@ -326,7 +318,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                     }}>
                       <div style={{
                         width: `${progress.progress}%`,
-                        background: progress.step === 'error' 
+                        background: progress.step === 'error'
                           ? 'linear-gradient(90deg, #ef4444 0%, #dc2626 100%)'
                           : 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
                         height: '100%',
@@ -334,8 +326,8 @@ export const GenerateAIQuizButton: React.FC = () => {
                         transition: 'width 0.5s ease'
                       }} />
                     </div>
-                    
-                    <p style={{ 
+
+                    <p style={{
                       fontSize: '18px',
                       fontWeight: '600',
                       color: progress.step === 'error' ? '#ef4444' : 'var(--theme-text, #e5e5e5)',
@@ -343,21 +335,21 @@ export const GenerateAIQuizButton: React.FC = () => {
                     }}>
                       {progress.message}
                     </p>
-                    
-                    <p style={{ 
+
+                    <p style={{
                       fontSize: '14px',
                       color: '#6b7280',
                       marginBottom: '0'
                     }}>
                       {progress.progress}% complété
                     </p>
-                    
+
                     {progress.error && (
                       <p style={{ fontSize: '12px', color: '#ef4444' }}>
                         {progress.error}
                       </p>
                     )}
-                    
+
                     {progress.step === 'error' && (
                       <Button
                         type="button"
@@ -388,7 +380,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                         placeholder="Ex: Anatomie cardiovasculaire - Physiologie cardiaque"
                         value={config.subject}
                         onChange={(e) => updateConfig('subject', e.target.value)}
-                        style={{ 
+                        style={{
                           width: '100%',
                           padding: '12px',
                           fontSize: '14px',
@@ -398,13 +390,13 @@ export const GenerateAIQuizButton: React.FC = () => {
                           borderRadius: '8px'
                         }}
                       />
-                      <p style={{ 
-                        fontSize: '12px', 
+                      <p style={{
+                        fontSize: '12px',
                         color: config.subject.length < 10 || config.subject.length > 200 ? '#ef4444' : '#10b981',
                         marginTop: '6px',
                         fontWeight: '500'
                       }}>
-                        {config.subject.length < 10 
+                        {config.subject.length < 10
                           ? `⚠️ Minimum 10 caractères (${config.subject.length}/200)`
                           : `✓ ${config.subject.length}/200 caractères`
                         }
@@ -425,21 +417,21 @@ export const GenerateAIQuizButton: React.FC = () => {
                           }}
                           disabled={loadingCategories}
                         >
-                          <SelectTrigger style={{ 
+                          <SelectTrigger style={{
                             marginTop: '4px',
                             backgroundColor: 'var(--theme-elevation-50, #252525)',
                             border: '1px solid var(--theme-elevation-150, #3a3a3a)',
                             color: 'var(--theme-text, #e5e5e5)'
                           }}>
                             <SelectValue placeholder={
-                              loadingCategories 
-                                ? "Chargement des catégories..." 
+                              loadingCategories
+                                ? "Chargement des catégories..."
                                 : categories.length === 0
                                   ? "Aucune catégorie disponible"
                                   : "Sélectionner une catégorie"
                             } />
                           </SelectTrigger>
-                          <SelectContent 
+                          <SelectContent
                             position="popper"
                             sideOffset={5}
                             style={{
@@ -457,8 +449,8 @@ export const GenerateAIQuizButton: React.FC = () => {
                               </div>
                             ) : (
                               categories.map((category) => (
-                                <SelectItem 
-                                  key={category.id} 
+                                <SelectItem
+                                  key={category.id}
                                   value={String(category.id)}
                                   style={{
                                     padding: '8px 12px',
@@ -486,7 +478,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                           value={config.studentLevel}
                           onValueChange={(value: 'PASS' | 'LAS' | 'both') => updateConfig('studentLevel', value)}
                         >
-                          <SelectTrigger style={{ 
+                          <SelectTrigger style={{
                             marginTop: '4px',
                             backgroundColor: 'var(--theme-elevation-50, #252525)',
                             border: '1px solid var(--theme-elevation-150, #3a3a3a)',
@@ -494,7 +486,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                           }}>
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent 
+                          <SelectContent
                             position="popper"
                             sideOffset={5}
                             style={{
@@ -525,7 +517,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                           max="20"
                           value={config.questionCount}
                           onChange={(e) => updateConfig('questionCount', parseInt(e.target.value) || 5)}
-                          style={{ 
+                          style={{
                             width: '100%',
                             padding: '12px',
                             fontSize: '14px',
@@ -548,7 +540,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                           value={config.difficulty}
                           onValueChange={(value: 'easy' | 'medium' | 'hard') => updateConfig('difficulty', value)}
                         >
-                          <SelectTrigger style={{ 
+                          <SelectTrigger style={{
                             marginTop: '4px',
                             backgroundColor: 'var(--theme-elevation-50, #252525)',
                             border: '1px solid var(--theme-elevation-150, #3a3a3a)',
@@ -556,7 +548,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                           }}>
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent 
+                          <SelectContent
                             position="popper"
                             sideOffset={5}
                             style={{
@@ -575,7 +567,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                     </div>
 
                     {/* Options */}
-                    <div style={{ 
+                    <div style={{
                       padding: '16px',
                       backgroundColor: 'var(--theme-elevation-50, #252525)',
                       borderRadius: '8px',
@@ -604,7 +596,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                         value={config.customInstructions}
                         onChange={(e) => updateConfig('customInstructions', e.target.value)}
                         rows={3}
-                        style={{ 
+                        style={{
                           width: '100%',
                           padding: '12px',
                           fontSize: '14px',
@@ -618,9 +610,9 @@ export const GenerateAIQuizButton: React.FC = () => {
                     </div>
 
                     {/* Boutons d'action */}
-                    <div style={{ 
-                      display: 'flex', 
-                      justifyContent: 'flex-end', 
+                    <div style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
                       gap: '12px',
                       paddingTop: '16px',
                       borderTop: '1px solid var(--theme-elevation-150, #3a3a3a)'
@@ -645,7 +637,7 @@ export const GenerateAIQuizButton: React.FC = () => {
                         type="button"
                         onClick={handleGenerate}
                         disabled={!isConfigValid()}
-                        style={{ 
+                        style={{
                           padding: '10px 24px',
                           fontSize: '14px',
                           fontWeight: '600',
@@ -665,7 +657,8 @@ export const GenerateAIQuizButton: React.FC = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {showPreview && generatedQuizId && (

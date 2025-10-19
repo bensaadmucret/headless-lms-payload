@@ -89,13 +89,11 @@ export interface Config {
     tenants: Tenant;
     'system-metrics': SystemMetric;
     conversations: Conversation;
-    'knowledge-base': KnowledgeBase;
     adaptiveQuizSessions: AdaptiveQuizSession;
     adaptiveQuizResults: AdaptiveQuizResult;
     'user-performances': UserPerformance;
     auditlogs: Auditlog;
     generationlogs: Generationlog;
-    'import-jobs': ImportJob;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -129,13 +127,11 @@ export interface Config {
     tenants: TenantsSelect<false> | TenantsSelect<true>;
     'system-metrics': SystemMetricsSelect<false> | SystemMetricsSelect<true>;
     conversations: ConversationsSelect<false> | ConversationsSelect<true>;
-    'knowledge-base': KnowledgeBaseSelect<false> | KnowledgeBaseSelect<true>;
     adaptiveQuizSessions: AdaptiveQuizSessionsSelect<false> | AdaptiveQuizSessionsSelect<true>;
     adaptiveQuizResults: AdaptiveQuizResultsSelect<false> | AdaptiveQuizResultsSelect<true>;
     'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
     auditlogs: AuditlogsSelect<false> | AuditlogsSelect<true>;
     generationlogs: GenerationlogsSelect<false> | GenerationlogsSelect<true>;
-    'import-jobs': ImportJobsSelect<false> | ImportJobsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1487,158 +1483,6 @@ export interface Conversation {
   createdAt: string;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "knowledge-base".
- */
-export interface KnowledgeBase {
-  id: number;
-  title: string;
-  originalFileName?: string | null;
-  documentType: 'pdf' | 'epub' | 'mobi' | 'docx' | 'txt';
-  /**
-   * Le fichier original (PDF, eBook, etc.)
-   */
-  sourceFile: number | Media;
-  /**
-   * Contenu textuel extrait automatiquement du document
-   */
-  extractedContent?: string | null;
-  /**
-   * Structure en chapitres du document
-   */
-  chapters?:
-    | {
-        chapterTitle: string;
-        chapterNumber?: number | null;
-        content?: {
-          root: {
-            type: string;
-            children: {
-              type: string;
-              version: number;
-              [k: string]: unknown;
-            }[];
-            direction: ('ltr' | 'rtl') | null;
-            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-            indent: number;
-            version: number;
-          };
-          [k: string]: unknown;
-        } | null;
-        pageNumbers?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  medicalDomain:
-    | 'anatomie'
-    | 'physiologie'
-    | 'cardiologie'
-    | 'neurologie'
-    | 'pneumologie'
-    | 'gastroenterologie'
-    | 'endocrinologie'
-    | 'hematologie'
-    | 'immunologie'
-    | 'pharmacologie'
-    | 'pathologie'
-    | 'radiologie'
-    | 'chirurgie'
-    | 'medecine_generale'
-    | 'pediatrie'
-    | 'gynecologie'
-    | 'psychiatrie'
-    | 'dermatologie'
-    | 'ophtalmologie'
-    | 'orl'
-    | 'autre';
-  speciality?: string | null;
-  difficulty: 'beginner' | 'intermediate' | 'advanced' | 'expert';
-  authors?:
-    | {
-        authorName: string;
-        id?: string | null;
-      }[]
-    | null;
-  publisher?: string | null;
-  publicationYear?: number | null;
-  isbn?: string | null;
-  edition?: string | null;
-  validationStatus: 'pending' | 'approved' | 'rejected' | 'needs_review';
-  /**
-   * Expert médical qui a validé ce contenu
-   */
-  validatedBy?: (number | null) | User;
-  validationDate?: string | null;
-  validationNotes?: string | null;
-  /**
-   * Score de 1 à 5 étoiles
-   */
-  qualityScore?: number | null;
-  /**
-   * Disponible pour la génération de questions par l'IA
-   */
-  isActive?: boolean | null;
-  /**
-   * Mots-clés extraits automatiquement par l'IA
-   */
-  keywords?:
-    | {
-        keyword: string;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Version optimisée pour la recherche full-text
-   */
-  searchableContent?: string | null;
-  /**
-   * Résumé automatique généré par l'IA
-   */
-  aiSummary?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  uploadedBy?: (number | null) | User;
-  /**
-   * Date du dernier traitement automatique
-   */
-  lastProcessed?: string | null;
-  processingStatus: 'queued' | 'extracting' | 'enriching' | 'updating' | 'completed' | 'failed' | 'retrying';
-  /**
-   * Indique si le PDF a été complètement traité (extraction + NLP + IA + validation)
-   */
-  processingCompleted?: boolean | null;
-  /**
-   * Date et heure de la finalisation complète du traitement
-   */
-  processingCompletedAt?: string | null;
-  /**
-   * Logs techniques du traitement automatique
-   */
-  processingLogs?: string | null;
-  /**
-   * Métriques d'utilisation de ce document
-   */
-  usageStats?: {
-    questionsGenerated?: number | null;
-    timesReferenced?: number | null;
-    lastUsed?: string | null;
-  };
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Sessions de quiz adaptatifs générées pour les étudiants
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2070,84 +1914,6 @@ export interface Generationlog {
   updatedAt: string;
 }
 /**
- * 📥 Importez vos contenus éducatifs en masse (JSON/CSV). Cliquez sur "Create New" pour commencer un nouvel import.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "import-jobs".
- */
-export interface ImportJob {
-  id: number;
-  /**
-   * Uploadez votre fichier JSON ou CSV à importer. Formats acceptés: .json, .csv
-   */
-  originalFile: number | Media;
-  /**
-   * Nom du fichier (rempli automatiquement depuis le fichier uploadé)
-   */
-  fileName?: string | null;
-  /**
-   * Type de contenu à importer (détecté automatiquement ou sélectionné manuellement)
-   */
-  importType: 'questions' | 'flashcards' | 'learning-paths' | 'csv';
-  /**
-   * Le statut change automatiquement pendant le traitement. Pour relancer un import échoué, changez le statut en "En attente" et sauvegardez.
-   */
-  status?: ('queued' | 'processing' | 'validating' | 'preview' | 'completed' | 'failed') | null;
-  progress?: {
-    total?: number | null;
-    processed?: number | null;
-    successful?: number | null;
-    failed?: number | null;
-  };
-  validationResult?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  errors?:
-    | {
-        type?: ('validation' | 'database' | 'mapping' | 'reference' | 'system') | null;
-        severity?: ('critical' | 'major' | 'minor' | 'warning') | null;
-        message?: string | null;
-        suggestion?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Configurez les paramètres d'import selon vos besoins
-   */
-  importOptions?: {
-    /**
-     * Valider le fichier sans effectuer l'import réel
-     */
-    dryRun?: boolean | null;
-    /**
-     * Nombre d'éléments traités par lot (1-1000)
-     */
-    batchSize?: number | null;
-    /**
-     * Remplacer les éléments existants en cas de conflit
-     */
-    overwriteExisting?: boolean | null;
-    /**
-     * Créer automatiquement des options incorrectes pour les flashcards
-     */
-    generateDistractors?: boolean | null;
-    /**
-     * Nécessite une validation manuelle avant l'import final
-     */
-    requireHumanValidation?: boolean | null;
-  };
-  importedBy?: (number | null) | User;
-  completedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2408,10 +2174,6 @@ export interface PayloadLockedDocument {
         value: number | Conversation;
       } | null)
     | ({
-        relationTo: 'knowledge-base';
-        value: number | KnowledgeBase;
-      } | null)
-    | ({
         relationTo: 'adaptiveQuizSessions';
         value: number | AdaptiveQuizSession;
       } | null)
@@ -2430,10 +2192,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'generationlogs';
         value: number | Generationlog;
-      } | null)
-    | ({
-        relationTo: 'import-jobs';
-        value: number | ImportJob;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3215,68 +2973,6 @@ export interface ConversationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "knowledge-base_select".
- */
-export interface KnowledgeBaseSelect<T extends boolean = true> {
-  title?: T;
-  originalFileName?: T;
-  documentType?: T;
-  sourceFile?: T;
-  extractedContent?: T;
-  chapters?:
-    | T
-    | {
-        chapterTitle?: T;
-        chapterNumber?: T;
-        content?: T;
-        pageNumbers?: T;
-        id?: T;
-      };
-  medicalDomain?: T;
-  speciality?: T;
-  difficulty?: T;
-  authors?:
-    | T
-    | {
-        authorName?: T;
-        id?: T;
-      };
-  publisher?: T;
-  publicationYear?: T;
-  isbn?: T;
-  edition?: T;
-  validationStatus?: T;
-  validatedBy?: T;
-  validationDate?: T;
-  validationNotes?: T;
-  qualityScore?: T;
-  isActive?: T;
-  keywords?:
-    | T
-    | {
-        keyword?: T;
-        id?: T;
-      };
-  searchableContent?: T;
-  aiSummary?: T;
-  uploadedBy?: T;
-  lastProcessed?: T;
-  processingStatus?: T;
-  processingCompleted?: T;
-  processingCompletedAt?: T;
-  processingLogs?: T;
-  usageStats?:
-    | T
-    | {
-        questionsGenerated?: T;
-        timesReferenced?: T;
-        lastUsed?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "adaptiveQuizSessions_select".
  */
 export interface AdaptiveQuizSessionsSelect<T extends boolean = true> {
@@ -3501,47 +3197,6 @@ export interface GenerationlogsSelect<T extends boolean = true> {
   createdAt?: T;
   completedAt?: T;
   updatedAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "import-jobs_select".
- */
-export interface ImportJobsSelect<T extends boolean = true> {
-  originalFile?: T;
-  fileName?: T;
-  importType?: T;
-  status?: T;
-  progress?:
-    | T
-    | {
-        total?: T;
-        processed?: T;
-        successful?: T;
-        failed?: T;
-      };
-  validationResult?: T;
-  errors?:
-    | T
-    | {
-        type?: T;
-        severity?: T;
-        message?: T;
-        suggestion?: T;
-        id?: T;
-      };
-  importOptions?:
-    | T
-    | {
-        dryRun?: T;
-        batchSize?: T;
-        overwriteExisting?: T;
-        generateDistractors?: T;
-        requireHumanValidation?: T;
-      };
-  importedBy?: T;
-  completedAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

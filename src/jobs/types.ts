@@ -33,7 +33,7 @@ export interface ExtractionJob extends BaseJob {
   fileType: FileType
   sourceFileId: string
   sourceFileUrl: string
-  collectionType?: 'media' | 'knowledge-base' // Type de collection à mettre à jour
+  collectionType?: 'media' // Type de collection à mettre à jour
 }
 
 export interface NLPJob extends BaseJob {

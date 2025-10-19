@@ -34,7 +34,7 @@ const JSONImportDashboardWidget: React.FC = () => {
         </div>
         
         <Link 
-          href="/admin/collections/knowledge-base"
+          href="/admin/collections/questions"
           style={{
             display: 'inline-flex',
             alignItems: 'center',

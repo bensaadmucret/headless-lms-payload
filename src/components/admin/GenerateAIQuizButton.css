@@ -29,15 +29,10 @@
   }
 }
 
-/* Force la modale à être au-dessus de tous les éléments Payload CMS */
+/* Modale rendue via portal dans le body */
 .ai-quiz-modal-overlay {
-  z-index: 9999999 !important;
+  z-index: 10000 !important;
   position: fixed !important;
-}
-
-/* S'assurer que les éléments Payload n'interfèrent pas */
-.doc-controls__divider {
-  z-index: 1 !important;
 }
 
 /* Forcer le style des Select pour éviter la transparence */

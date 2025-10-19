@@ -14,7 +14,7 @@ import type { CollectionConfig, Access, AccessArgs } from 'payload';
 import { isAdminOrSuperAdmin, isUser } from '../access/roles';
 import { getMediaDirname } from './getMediaDirname';
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
-import { processMediaAfterChange } from '../hooks/processMediaAfterChange';
+
 
 // Types générés Payload
 import type { Media } from '../payload-types';
@@ -57,7 +57,7 @@ export const MediaCollection: CollectionConfig = {
       },
     ],
     afterChange: [
-      processMediaAfterChange, // 🎯 Hook pour extraction automatique des PDFs
+      // processMediaAfterChange supprimé (knowledge-base supprimée)
       // logAuditAfterChange, // Désactivé temporairement (collection auditlogs manquante)
     ],
     afterDelete: [logAuditAfterDelete],

@@ -39,7 +39,7 @@ const WORKER_CONFIG = {
  * Processer l'extraction d'un document
  */
 export async function processExtractionJob(job: Job<ExtractionJob>): Promise<ExtractionResult> {
-  const { documentId, fileType, sourceFileUrl, collectionType = 'knowledge-base' } = job.data
+  const { documentId, fileType, sourceFileUrl, collectionType = 'media' } = job.data
   
   console.log(`🔍 [Extraction] Starting extraction for document ${documentId} (${fileType})`)
   
@@ -103,7 +103,7 @@ export async function processExtractionJob(job: Job<ExtractionJob>): Promise<Ext
  */
 async function updateDocumentStatus(
   documentId: string,
-  collectionType: 'media' | 'knowledge-base',
+  collectionType: 'media',
   status: ProcessingLog['step'],
   progress: number,
   message: string
@@ -114,31 +114,8 @@ async function updateDocumentStatus(
     const payload = await getPayloadInstance()
 
     // Pour Media, on ne fait que logger (pas de champs processingStatus)
-    if (collectionType === 'media') {
-      console.log(`📝 [Status] Media document ${documentId} - pas de mise à jour de statut`)
-      return
-    }
-
-    // Pour Knowledge-base, on garde la logique existante
-    // Récupérer le document pour concaténer les logs
-    let existingLogs = ''
-    try {
-      const current = await payload.findByID({ collection: 'knowledge-base', id: documentId, depth: 0 })
-      existingLogs = (current as unknown as DocumentWithLogs)?.processingLogs || ''
-    } catch {}
-
-    const newLogs = `${existingLogs ? existingLogs + '\n' : ''}[${new Date().toISOString()}] ${status} ${progress}% - ${message}`.slice(0, 50000)
-
-    await payload.update({
-      collection: 'knowledge-base',
-      id: documentId,
-      data: {
-        processingStatus: status,
-        lastProcessed: new Date().toISOString(),
-        processingLogs: newLogs,
-      } as any,
-      overrideAccess: true,
-    })
+    console.log(`📝 [Status] Media document ${documentId} - pas de mise à jour de statut`)
+    return
   } catch (error) {
     console.error(`❌ [Status] Failed to update document ${documentId}:`, error)
   }
@@ -147,7 +124,7 @@ async function updateDocumentStatus(
 /**
  * Mettre à jour le document avec les résultats d'extraction
  */
-async function updateDocumentWithExtraction(documentId: string, collectionType: 'media' | 'knowledge-base', result: ExtractionResult) {
+async function updateDocumentWithExtraction(documentId: string, collectionType: 'media', result: ExtractionResult) {
   try {
     console.log(`📝 [Update] Document ${documentId} extraction completed:`)
     console.log(`   - Text length: ${result.extractedText.length} characters`)
@@ -172,35 +149,6 @@ async function updateDocumentWithExtraction(documentId: string, collectionType: 
         overrideAccess: true,
       })
       
-    } else {
-      // Pour Knowledge-base : utiliser texte brut comme Media (temporairement)
-      console.log(`📝 [Update] Mise à jour Knowledge-base ${documentId} avec texte brut`)
-      
-      // Utiliser le même format que Media
-      const extractedContent = result.extractedText || ''
-
-      // Convertir les chapitres si présents
-      const chapters = (result.chapters || []).map((ch, idx) => ({
-        chapterTitle: ch.title,
-        chapterNumber: idx + 1,
-        content: textToLexical(ch.content || ''),
-        pageNumbers: (ch as ChapterWithPages).pageNumbers,
-      }))
-
-      const searchableContent = (result.extractedText || '').slice(0, 50000)
-
-      await payload.update({
-        collection: 'knowledge-base',
-        id: documentId,
-        data: {
-          extractedContent, // 🎯 Texte brut au lieu de Lexical
-          searchableContent,
-          ...(chapters.length > 0 ? { chapters } : {}),
-          lastProcessed: new Date().toISOString(),
-          processingStatus: 'completed',
-        } as any,
-        overrideAccess: true,
-      })
     }
   } catch (error) {
     console.error(`❌ [Update] Failed to update document ${documentId} extraction:`, error)

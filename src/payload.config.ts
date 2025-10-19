@@ -25,9 +25,7 @@ import { onboardUserEndpoint } from './endpoints/onboardUser';
 import { getPlacementQuizEndpoint } from './endpoints/getPlacementQuiz';
 import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz';
 import updateDailySessionHandler from './endpoints/updateDailySession'
-import { uploadDocumentEndpoint, getProcessingStatusEndpoint, reprocessDocumentEndpoint } from './endpoints/uploadDocument'
-import { extractNowEndpoint } from './endpoints/extractNow'
-import { uploadDocumentSimpleEndpoint } from './endpoints/uploadDocumentSimple'
+
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
 import { generationMetricsEndpoint, generationLogsEndpoint, cleanupOldLogsEndpoint } from './endpoints/generationMetrics'
 import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
@@ -35,8 +33,8 @@ import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
 import { downloadTemplate, listTemplates } from './endpoints/jsonImportTemplates'
 import { validateImportFile, getImportJobStatus, getImportHistory, exportImportHistory } from './endpoints/jsonImportValidation'
 import { uploadImportFile } from './endpoints/jsonImportUpload'
-import { jsonImportProcessEndpoint } from './endpoints/jsonImportProcess'
-import { triggerImportProcessing } from './endpoints/triggerImportProcessing'
+
+
 // Endpoints pour la répétition espacée
 import {
   generateReviewSession,
@@ -95,7 +93,7 @@ import { Tenants } from './collections/Tenants'
 import Conversations from './collections/Conversations'
 import { SystemMetrics } from './collections/SystemMetrics'
 import { Subscriptions } from './collections/Subscriptions'
-import { KnowledgeBase } from './collections/KnowledgeBase'
+
 import { AdaptiveQuizSessions } from './collections/AdaptiveQuizSessions'
 import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
 import { UserPerformances } from './collections/UserPerformances'
@@ -182,7 +180,6 @@ export default buildConfig({
     Tenants,
     SystemMetrics,
     Conversations,
-    KnowledgeBase,
     AdaptiveQuizSessions,
     AdaptiveQuizResults,
     UserPerformances,
@@ -238,16 +235,8 @@ export default buildConfig({
       method: 'get',
       handler: exportImportHistory
     },
-    {
-      path: '/json-import/process/:jobId',
-      method: 'post',
-      handler: jsonImportProcessEndpoint
-    },
-    {
-      path: '/json-import/trigger/:jobId',
-      method: 'post',
-      handler: triggerImportProcessing
-    },
+
+
 
     // === ENDPOINTS RÉPÉTITION ESPACÉE ===
     {
@@ -271,20 +260,11 @@ export default buildConfig({
       handler: createSchedule.handler
     },
 
-    // === ENDPOINTS KNOWLEDGE BASE ===
-    uploadDocumentSimpleEndpoint,
-    // Endpoints asynchrones pour le traitement de documents
-    uploadDocumentEndpoint,
-    getProcessingStatusEndpoint,
-    reprocessDocumentEndpoint,
     // Endpoints d'administration pour les workers
     getWorkersStatusEndpoint,
     restartWorkersEndpoint,
     cleanOldJobsEndpoint,
     getQueueDetailsEndpoint,
-
-    // Extraction synchrone (fallback sans worker)
-    extractNowEndpoint,
 
     // === ENDPOINTS EXISTANTS ===
     diagnosticsEndpoint,

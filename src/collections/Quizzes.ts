@@ -117,18 +117,10 @@ export const Quizzes: CollectionConfig = {
           Field: '@/components/admin/GenerateAIQuizButton',
         },
         position: 'sidebar',
+        condition: (data, siblingData, { operation }) => operation === 'create',
       },
     },
-    {
-      name: 'quizValidation',
-      type: 'ui',
-      admin: {
-        components: {
-          Field: '@/components/admin/QuizValidationButton',
-        },
-        position: 'sidebar',
-      },
-    },
+
     {
       name: 'title',
       type: 'text',
