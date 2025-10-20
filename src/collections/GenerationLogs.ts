@@ -180,6 +180,21 @@ const GenerationLogs: CollectionConfig = {
           required: false,
         },
         {
+          name: 'aiProvider',
+          label: 'Provider IA',
+          type: 'select',
+          options: [
+            { label: 'code-supernova', value: 'code-supernova' },
+            { label: 'Google Gemini', value: 'google-gemini' },
+            { label: 'OpenAI GPT', value: 'openai-gpt' },
+            { label: 'Local/Other', value: 'local' },
+          ],
+          required: false,
+          admin: {
+            description: 'Fournisseur d\'IA qui a traité la requête',
+          },
+        },
+        {
           name: 'tokensUsed',
           label: 'Tokens Utilisés',
           type: 'number',

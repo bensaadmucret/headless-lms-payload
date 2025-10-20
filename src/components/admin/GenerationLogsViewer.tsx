@@ -21,6 +21,9 @@ interface GenerationLog {
     quizId?: string;
     questionsCreated?: number;
     validationScore?: number;
+    aiModel?: string;
+    aiProvider?: string;
+    tokensUsed?: number;
   };
   error?: {
     type?: string;
@@ -448,7 +451,10 @@ const GenerationLogsViewer: React.FC = () => {
                   Configuration
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Résultat
+                  IA Utilisée
+                </th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  Tokens
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                   Durée
@@ -518,7 +524,26 @@ const GenerationLogsViewer: React.FC = () => {
                       </div>
                     )}
                   </td>
-                  
+
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {log.result?.aiProvider && log.result?.aiModel ? (
+                      <div className="space-y-1">
+                        <div className="font-medium text-blue-600">{log.result.aiProvider}</div>
+                        <div className="text-xs text-gray-500">{log.result.aiModel}</div>
+                      </div>
+                    ) : (
+                      <span className="text-gray-400">N/A</span>
+                    )}
+                  </td>
+
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    {log.result?.tokensUsed ? (
+                      <span className="font-mono text-purple-600">{log.result.tokensUsed.toLocaleString()}</span>
+                    ) : (
+                      <span className="text-gray-400">N/A</span>
+                    )}
+                  </td>
+
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                     <div>
                       {formatDuration(log.performance?.duration)}

@@ -1870,6 +1870,10 @@ export interface Generationlog {
      */
     validationScore?: number | null;
     aiModel?: string | null;
+    /**
+     * Fournisseur d'IA qui a traité la requête
+     */
+    aiProvider?: ('code-supernova' | 'google-gemini' | 'openai-gpt' | 'local') | null;
     tokensUsed?: number | null;
   };
   error?: {
@@ -3436,6 +3440,7 @@ export interface GenerationlogsSelect<T extends boolean = true> {
         questionsCreated?: T;
         validationScore?: T;
         aiModel?: T;
+        aiProvider?: T;
         tokensUsed?: T;
       };
   error?:

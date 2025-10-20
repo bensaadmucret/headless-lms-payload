@@ -241,7 +241,7 @@ export class AIQuizGenerationService {
           {
             questionsCreated: questions.length,
             validationScore: Math.round(averageValidationScore),
-            aiModel: 'supernova-default', // Modèle utilisé par le système unifié
+            aiModel: 'gemini-2.0-flash', // Modèle Gemini utilisé
           },
           {
             duration: totalDuration,
@@ -601,7 +601,8 @@ QUESTION ${questionNumber}:`;
         customMetadata: {
           generationTime: generationResult.generationTime,
           validationScore: generationResult.validationResult?.score,
-          aiModel: this.config.model,
+          aiModel: 'supernova-default',
+          aiProvider: 'code-supernova',
           promptVersion: '1.0'
         }
       };
@@ -629,7 +630,8 @@ QUESTION ${questionNumber}:`;
             questionIds: creationResult.questionIds,
             questionsCreated: creationResult.questionsCreated,
             validationScore: generationResult.validationResult?.score,
-            aiModel: this.config.model,
+            aiModel: 'supernova-default',
+            aiProvider: 'code-supernova',
             tokensUsed: (generationResult.validationResult as any)?.tokensUsed,
           }, {
             duration: Date.now() - startTime,
@@ -860,7 +862,7 @@ QUESTION ${questionNumber}:`;
         if (success) {
           await this.auditService.completeGenerationLog(auditLogId, {
             validationScore: validationResult.score,
-            aiModel: this.config.model,
+            aiModel: 'supernova-default',
           }, {
             duration: Date.now() - startTime,
             aiResponseTime: Date.now() - startTime, // Approximation
@@ -1305,7 +1307,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
       // Métadonnées de génération
       generatedByAI: true,
       generationDate: new Date().toISOString(),
-      aiModel: this.config.model,
+      aiModel: 'supernova-default',
       
       // Métadonnées de contenu
       questionCount: aiContent.questions.length,
