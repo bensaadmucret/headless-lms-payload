@@ -1,5 +1,4 @@
-import { GoogleGenerativeAI, GenerationConfig } from '@google/generative-ai';
-import type { Payload } from 'payload';
+import { Payload } from 'payload';
 
 // Services intégrés pour la tâche 4
 import { PromptEngineeringService, GenerationConfig as PromptConfig } from './PromptEngineeringService';
@@ -70,21 +69,14 @@ export interface GeneratedQuestion {
   validationIssues?: string[];
 }
 
-interface AIConfig {
-  model: string;
-  generationConfig: GenerationConfig;
-}
-
 export class AIQuizGenerationService {
-  private client: GoogleGenerativeAI;
-  private config: AIConfig;
+  private apiService: AIAPIService;
   private cache: Map<string, { data: GeneratedQuestion[]; timestamp: number }>;
   private rateLimiter: Map<string, { count: number; resetTime: number }>;
-  
+
   // Services intégrés - maintenant activés pour la tâche 4
   private promptService: PromptEngineeringService;
   private validatorService: ContentValidatorService;
-  private apiService: AIAPIService;
   // Service de création automatique - tâche 5
   private quizCreationService?: QuizCreationService;
   // Service d'audit - tâche 6
@@ -97,31 +89,11 @@ export class AIQuizGenerationService {
   private readonly MAX_GENERATION_ATTEMPTS = 3;
 
   constructor(private payload?: Payload) {
-    if (!process.env.GEMINI_API_KEY) {
-      throw new Error('GEMINI_API_KEY is not defined in environment variables');
-    }
-
-    this.client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-
-    this.config = {
-      model: 'gemini-2.0-flash', // Using Gemini 2.0 Flash - fast and efficient
-      generationConfig: {
-        maxOutputTokens: 2000,
-        temperature: 0.7,
-        topP: 0.95,
-        topK: 64,
-      },
-    };
-
-    // Initialiser le cache et le rate limiter
-    this.cache = new Map();
-    this.rateLimiter = new Map();
-    
-    // Services intégrés - maintenant activés pour la tâche 4
+    // Initialiser les services intégrés - maintenant activés pour la tâche 4
     try {
       this.promptService = new PromptEngineeringService();
       this.validatorService = new ContentValidatorService();
-      this.apiService = new AIAPIService();
+      this.apiService = new AIAPIService(); // Utilise maintenant le système avec Supernova
       // Service de création automatique - tâche 5
       if (this.payload) {
         this.quizCreationService = new QuizCreationService(this.payload);
@@ -133,6 +105,10 @@ export class AIQuizGenerationService {
       console.error('❌ Erreur initialisation services IA:', error);
       throw new Error('Impossible d\'initialiser les services IA requis');
     }
+
+    // Initialiser le cache et le rate limiter
+    this.cache = new Map();
+    this.rateLimiter = new Map();
   }
 
   // NOTE: Fonctionnalités avancées (generateCompleteQuiz, createQuizInDatabase) 
@@ -265,7 +241,7 @@ export class AIQuizGenerationService {
           {
             questionsCreated: questions.length,
             validationScore: Math.round(averageValidationScore),
-            aiModel: this.config.model,
+            aiModel: 'supernova-default', // Modèle utilisé par le système unifié
           },
           {
             duration: totalDuration,
@@ -302,24 +278,24 @@ export class AIQuizGenerationService {
   }
 
   /**
-   * Génère une seule question
+   * Génère une seule question via le système IA unifié
    */
   private async generateSingleQuestion(prompt: string, request: QuestionGenerationRequest): Promise<GeneratedQuestion> {
-    const generationConfig = {
-      ...this.config.generationConfig,
-      responseMimeType: 'application/json',
+    const aiRequest: AIRequest = {
+      prompt,
+      maxTokens: 2000,
+      temperature: 0.7,
+      jsonMode: true,
+      retryCount: 3
     };
 
-    const model = this.client.getGenerativeModel({
-      model: this.config.model,
-      generationConfig,
-    });
-
-    const result = await model.generateContent(prompt);
-    const response = result.response;
-    const text = response.text();
-
-    return this.parseQuestionResponse(text, prompt, request);
+    try {
+      const response = await this.apiService.generateContentWithSmartRetry(aiRequest);
+      return this.parseQuestionResponse(response.content, prompt, request);
+    } catch (error: any) {
+      console.error('❌ Erreur génération question via API unifiée:', error);
+      throw new Error(`Échec génération question: ${error.message}`);
+    }
   }
 
   /**

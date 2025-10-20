@@ -36,7 +36,7 @@ export class SupernovaService {
     this.config = {
       apiKey: process.env.SUPERNOVA_API_KEY,
       baseUrl: process.env.SUPERNOVA_BASE_URL || 'https://api.supernova.io/v1',
-      model: process.env.SUPERNOVA_MODEL || 'code-supernova-default',
+      model: process.env.SUPERNOVA_MODEL || 'supernova-default', // Modèle plus générique
       maxTokens: 2000,
       temperature: 0.7
     };
