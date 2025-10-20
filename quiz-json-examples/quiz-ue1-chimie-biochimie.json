@@ -1,0 +1,100 @@
+{
+  "title": "UE1 - Chimie, Biochimie et Biologie moléculaire",
+  "description": "Quiz sur les fondamentaux de chimie, biochimie et biologie moléculaire pour PASS/LAS",
+  "category": "Chimie générale et organique",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle est la formule chimique de l'eau ?",
+      "questionType": "multipleChoice",
+      "options": ["H2O", "CO2", "O2", "H2O2"],
+      "correctAnswer": "H2O",
+      "explanation": "L'eau a pour formule chimique H2O, soit deux atomes d'hydrogène et un atome d'oxygène.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce qu'un acide aminé ?",
+      "questionType": "multipleChoice",
+      "options": ["Un sucre simple", "Un lipide", "Un monomère des protéines", "Un nucléotide"],
+      "correctAnswer": "Un monomère des protéines",
+      "explanation": "Les acides aminés sont les unités de base qui forment les protéines par liaison peptidique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle liaison chimique maintient les deux brins d'ADN ensemble ?",
+      "questionType": "multipleChoice",
+      "options": ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Liaison métallique"],
+      "correctAnswer": "Liaison hydrogène",
+      "explanation": "Les deux brins d'ADN sont maintenus par des liaisons hydrogène entre les bases complémentaires.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le pH du sang humain normal ?",
+      "questionType": "multipleChoice",
+      "options": ["7,0", "7,4", "8,0", "6,8"],
+      "correctAnswer": "7,4",
+      "explanation": "Le pH sanguin normal est légèrement alcalin, autour de 7,4.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle enzyme catalyse la première étape de la glycolyse ?",
+      "questionType": "multipleChoice",
+      "options": ["Hexokinase", "Phosphofructokinase", "Pyruvate kinase", "Aldolase"],
+      "correctAnswer": "Hexokinase",
+      "explanation": "L'hexokinase catalyse la phosphorylation du glucose en glucose-6-phosphate, première étape irréversible de la glycolyse.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 90
+    },
+    {
+      "questionText": "Quelle est la fonction principale de l'ATP ?",
+      "questionType": "multipleChoice",
+      "options": ["Stockage d'énergie", "Transport d'oxygène", "Catalyse des réactions", "Structure cellulaire"],
+      "correctAnswer": "Stockage d'énergie",
+      "explanation": "L'ATP (adénosine triphosphate) est la principale molécule de stockage d'énergie dans les cellules.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la dénaturation des protéines ?",
+      "questionType": "multipleChoice",
+      "options": ["La synthèse de nouvelles protéines", "La dégradation des protéines", "La perte de structure tertiaire", "La phosphorylation"],
+      "correctAnswer": "La perte de structure tertiaire",
+      "explanation": "La dénaturation correspond à la perte de la structure spatiale (tertiaire et quaternaire) des protéines.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle base azotée est complémentaire à la thymine en ADN ?",
+      "questionType": "multipleChoice",
+      "options": ["Adénine", "Guanine", "Cytosine", "Uracile"],
+      "correctAnswer": "Adénine",
+      "explanation": "En ADN, l'adénine (A) se lie à la thymine (T) par deux liaisons hydrogène.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le produit final de la respiration cellulaire aérobie ?",
+      "questionType": "multipleChoice",
+      "options": ["Lactate", "Éthanol", "Pyruvate", "Eau et CO2"],
+      "correctAnswer": "Eau et CO2",
+      "explanation": "La respiration cellulaire aérobie produit de l'eau et du dioxyde de carbone comme produits finaux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la formule chimique du glucose ?",
+      "questionType": "multipleChoice",
+      "options": ["C6H12O6", "C12H22O11", "C6H6O6", "C5H10O5"],
+      "correctAnswer": "C6H12O6",
+      "explanation": "Le glucose est un hexose avec la formule C6H12O6.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

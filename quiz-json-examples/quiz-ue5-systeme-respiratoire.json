@@ -1,0 +1,52 @@
+{
+  "title": "UE5 - Système respiratoire",
+  "description": "Quiz sur l'anatomie et physiologie de l'appareil respiratoire",
+  "category": "Système respiratoire",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quelle est la fonction principale des alvéoles pulmonaires ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Échange gazeux",
+        "Filtration de l'air",
+        "Production de mucus",
+        "Réchauffement de l'air"
+      ],
+      "correctAnswer": "Échange gazeux",
+      "explanation": "Les alvéoles permettent les échanges gazeux entre l'air alvéolaire et le sang capillaire.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel muscle principal assure l'inspiration ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Diaphragme",
+        "Intercostaux externes",
+        "Intercostaux internes",
+        "Abdominaux"
+      ],
+      "correctAnswer": "Diaphragme",
+      "explanation": "Le diaphragme est le muscle principal de l'inspiration qui augmente le volume thoracique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la capacité vitale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Volume d'air inspiré en respiration normale",
+        "Volume maximal d'air mobilisable",
+        "Volume d'air restant après expiration forcée",
+        "Volume d'air des espaces morts"
+      ],
+      "correctAnswer": "Volume maximal d'air mobilisable",
+      "explanation": "La capacité vitale est le volume maximal d'air qu'un sujet peut mobiliser lors d'une manœuvre respiratoire forcée.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

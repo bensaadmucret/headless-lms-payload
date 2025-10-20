@@ -1,0 +1,94 @@
+{
+  "title": "UE5 - Système nerveux",
+  "description": "Quiz sur l'anatomie et physiologie du système nerveux central et périphérique",
+  "category": "Système nerveux",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle est la cellule principale du système nerveux ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Le neurone",
+        "L'astrocyte",
+        "L'oligodendrocyte",
+        "La microglie"
+      ],
+      "correctAnswer": "Le neurone",
+      "explanation": "Le neurone est l'unité fonctionnelle principale du système nerveux, responsable de la transmission de l'influx nerveux.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la fonction principale des astrocytes ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Transmission de l'influx nerveux",
+        "Support métabolique et structural",
+        "Production de myéline",
+        "Défense immunitaire"
+      ],
+      "correctAnswer": "Support métabolique et structural",
+      "explanation": "Les astrocytes fournissent un support métabolique aux neurones et maintiennent l'homéostasie ionique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle partie du cerveau contrôle les fonctions vitales ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Cortex cérébral",
+        "Tronc cérébral",
+        "Cervelet",
+        "Hypothalamus"
+      ],
+      "correctAnswer": "Tronc cérébral",
+      "explanation": "Le tronc cérébral contrôle les fonctions vitales comme la respiration, la fréquence cardiaque et la vigilance.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la substance blanche ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Corps cellulaires des neurones",
+        "Axones myélinisés",
+        "Dendrites",
+        "Synapses"
+      ],
+      "correctAnswer": "Axones myélinisés",
+      "explanation": "La substance blanche est constituée principalement d'axones myélinisés qui assurent la conduction rapide des influx.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel neurotransmetteur est inhibiteur dans le SNC ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Glutamate",
+        "Acétylcholine",
+        "GABA",
+        "Dopamine"
+      ],
+      "correctAnswer": "GABA",
+      "explanation": "Le GABA (acide gamma-aminobutyrique) est le principal neurotransmetteur inhibiteur du système nerveux central.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la barrière hémato-encéphalique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Séparation anatomique cerveau/sang",
+        "Production de liquide céphalorachidien",
+        "Régulation de la température cérébrale",
+        "Protection mécanique du cerveau"
+      ],
+      "correctAnswer": "Séparation anatomique cerveau/sang",
+      "explanation": "La barrière hémato-encéphalique contrôle sélectivement le passage des substances du sang vers le cerveau.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

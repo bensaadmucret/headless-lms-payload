@@ -272,6 +272,8 @@ export class PerformanceAnalyticsService {
    * Requirements: 1.1, 8.1
    */
   async hasMinimumData(userId: string): Promise<boolean> {
+    console.log('🔍 Checking minimum data for userId:', userId);
+    
     const allSubmissions = await this.payload.find({
       collection: 'quiz-submissions',
       where: {
@@ -280,14 +282,21 @@ export class PerformanceAnalyticsService {
       limit: 100
     });
 
+    console.log('📊 Total submissions found:', allSubmissions.totalDocs);
+    console.log('📋 Submissions docs:', allSubmissions.docs.length);
+
     // Count submissions with valid finalScore
     const validCount = allSubmissions.docs.filter((sub: any) => {
-      return sub.finalScore !== null && 
+      const isValid = sub.finalScore !== null && 
              sub.finalScore !== undefined && 
              typeof sub.finalScore === 'number' &&
              sub.finalScore >= 0;
+      
+      console.log(`  - Submission ${sub.id}: finalScore=${sub.finalScore}, valid=${isValid}`);
+      return isValid;
     }).length;
 
+    console.log(`✅ User ${userId} has ${validCount} valid quiz submissions (minimum required: 3)`);
     this.payload.logger.info(`User ${userId} has ${validCount} valid quiz submissions (minimum required: 3)`);
 
     return validCount >= 3;

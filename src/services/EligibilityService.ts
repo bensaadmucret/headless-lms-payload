@@ -49,7 +49,7 @@ export class EligibilityService {
   private readonly DAILY_LIMIT = 10; // Augmenté de 5 à 10 pour permettre plus de tests
   private readonly COOLDOWN_MINUTES = 0; // Désactivé pour le développement (mettre 5-10 en production)
 
-  constructor(private payload: Payload) {}
+  constructor(private payload: Payload) { }
 
   /**
    * Checks complete eligibility for adaptive quiz generation
@@ -59,7 +59,7 @@ export class EligibilityService {
   async checkEligibility(userId: string): Promise<EligibilityResult> {
     try {
       console.log('🔍 EligibilityService: Début checkEligibility');
-      
+
       // Get user information
       console.log('📋 EligibilityService: Récupération utilisateur...');
       const user = await this.payload.findByID({
@@ -74,34 +74,34 @@ export class EligibilityService {
           reason: 'Utilisateur non trouvé'
         };
       }
-      
+
       console.log('✅ EligibilityService: Utilisateur trouvé');
 
       // Check all requirements
       console.log('🔍 EligibilityService: Vérification des exigences...');
-      
+
       console.log('📊 EligibilityService: Vérification quiz minimum...');
       const quizRequirement = await this.checkMinimumQuizzes(userId);
       console.log('✅ Quiz requirement:', quizRequirement);
-      
+
       console.log('🎓 EligibilityService: Vérification niveau étudiant...');
       const levelRequirement = this.checkStudentLevel(user);
       console.log('✅ Level requirement:', levelRequirement);
-      
+
       console.log('📅 EligibilityService: Vérification limite quotidienne...');
       const dailyLimitCheck = await this.checkDailyLimit(userId);
       console.log('✅ Daily limit check:', dailyLimitCheck);
-      
+
       console.log('⏰ EligibilityService: Vérification cooldown...');
       const cooldownCheck = await this.checkCooldown(userId);
       console.log('✅ Cooldown check:', cooldownCheck);
 
       // Determine overall eligibility
-      const canGenerate = quizRequirement.satisfied && 
-                         levelRequirement.satisfied && 
-                         dailyLimitCheck.satisfied && 
-                         cooldownCheck.satisfied;
-      
+      const canGenerate = quizRequirement.satisfied &&
+        levelRequirement.satisfied &&
+        dailyLimitCheck.satisfied &&
+        cooldownCheck.satisfied;
+
       console.log('🎯 EligibilityService: Résultat final canGenerate:', canGenerate, {
         quiz: quizRequirement.satisfied,
         level: levelRequirement.satisfied,
@@ -191,11 +191,13 @@ export class EligibilityService {
             { finalScore: { exists: true } }
           ]
         },
-        limit: 1
+        limit: 0 // Pas de limite pour compter tous les quiz
       });
 
       const current = submissions.totalDocs;
-      
+
+      console.log(`📊 EligibilityService: Quiz count for user ${userId}: ${current}/${this.MINIMUM_QUIZZES}`);
+
       return {
         required: this.MINIMUM_QUIZZES,
         current,
@@ -221,7 +223,7 @@ export class EligibilityService {
     satisfied: boolean;
   } {
     const studyYear = (user as any).studyYear;
-    
+
     return {
       required: true,
       current: studyYear || null,
@@ -251,11 +253,13 @@ export class EligibilityService {
             { createdAt: { greater_than: today.toISOString() } }
           ]
         },
-        limit: 1
+        limit: 0 // Pas de limite pour compter toutes les sessions
       });
 
       const used = todaySessions.totalDocs;
       const remaining = Math.max(0, this.DAILY_LIMIT - used);
+
+      console.log(`📅 EligibilityService: Daily sessions for user ${userId}: ${used}/${this.DAILY_LIMIT}`);
 
       return {
         limit: this.DAILY_LIMIT,

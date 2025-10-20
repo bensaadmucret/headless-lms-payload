@@ -1,0 +1,52 @@
+{
+  "title": "Quiz de révision générale",
+  "description": "Quiz de synthèse couvrant l'ensemble des connaissances médicales fondamentales",
+  "category": "Quiz de révision générale",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la cellule fondamentale du système nerveux ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Le neurone",
+        "L'astrocyte",
+        "L'oligodendrocyte",
+        "La microglie"
+      ],
+      "correctAnswer": "Le neurone",
+      "explanation": "Le neurone est l'unité fonctionnelle du système nerveux responsable de la transmission de l'influx nerveux.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel système régule la pression artérielle ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Système nerveux autonome",
+        "Système endocrinien",
+        "Système immunitaire",
+        "Système digestif"
+      ],
+      "correctAnswer": "Système nerveux autonome",
+      "explanation": "Le système nerveux autonome régule automatiquement la pression artérielle via les barorécepteurs.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle vitamine est synthétisée par la peau sous l'action des UV ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vitamine A",
+        "Vitamine C",
+        "Vitamine D",
+        "Vitamine K"
+      ],
+      "correctAnswer": "Vitamine D",
+      "explanation": "La vitamine D est synthétisée dans la peau sous l'action des rayons ultraviolets B.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

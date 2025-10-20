@@ -1,0 +1,52 @@
+{
+  "title": "UE6 - Classes thérapeutiques",
+  "description": "Quiz sur les principales classes de médicaments et leurs indications",
+  "category": "Classes thérapeutiques",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle classe thérapeutique traite l'hypertension artérielle ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Diurétiques",
+        "Anticoagulants",
+        "Antidiabétiques",
+        "Antibiotiques"
+      ],
+      "correctAnswer": "Diurétiques",
+      "explanation": "Les diurétiques réduisent le volume sanguin et sont utilisés dans le traitement de l'hypertension.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs de l'enzyme de conversion ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Bloquer la formation d'angiotensine II",
+        "Stimuler les récepteurs bêta",
+        "Inhiber l'agrégation plaquettaire",
+        "Neutraliser l'acide gastrique"
+      ],
+      "correctAnswer": "Bloquer la formation d'angiotensine II",
+      "explanation": "Les IECA inhibent l'enzyme de conversion de l'angiotensine I en angiotensine II, réduisant ainsi la vasoconstriction.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quelle classe traite les infections bactériennes ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Antiviraux",
+        "Antifongiques",
+        "Antibiotiques",
+        "Antiparasitaires"
+      ],
+      "correctAnswer": "Antibiotiques",
+      "explanation": "Les antibiotiques sont utilisés pour traiter les infections bactériennes en inhibant leur croissance ou en les tuant.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

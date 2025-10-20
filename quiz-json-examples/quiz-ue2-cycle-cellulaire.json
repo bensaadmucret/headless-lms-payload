@@ -1,0 +1,108 @@
+{
+  "title": "UE2 - Cycle cellulaire et division",
+  "description": "Quiz sur les phases du cycle cellulaire, mitose et méiose",
+  "category": "Cycle cellulaire et division",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle est la durée approximative du cycle cellulaire chez l'humain ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "12 heures",
+        "24 heures",
+        "1 semaine",
+        "1 mois"
+      ],
+      "correctAnswer": "24 heures",
+      "explanation": "Le cycle cellulaire dure environ 24 heures chez les cellules humaines en division.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle phase du cycle cellulaire précède la mitose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Phase G1",
+        "Phase S",
+        "Phase G2",
+        "Phase G0"
+      ],
+      "correctAnswer": "Phase G2",
+      "explanation": "La phase G2 suit la phase S et précède la mitose (phase M).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la phase G0 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Phase de repos cellulaire",
+        "Phase de croissance",
+        "Phase de synthèse d'ADN",
+        "Phase de division"
+      ],
+      "correctAnswer": "Phase de repos cellulaire",
+      "explanation": "La phase G0 est un état de quiescence où les cellules ne se divisent pas mais restent métaboliquement actives.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Combien de chromosomes y a-t-il dans une cellule humaine normale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "23",
+        "46",
+        "92",
+        "184"
+      ],
+      "correctAnswer": "46",
+      "explanation": "Les cellules humaines somatiques contiennent 46 chromosomes (23 paires).",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la différence principale entre mitose et méiose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "La mitose produit 2 cellules identiques, la méiose 4 cellules différentes",
+        "La méiose se produit chez les bactéries",
+        "La mitose réduit le nombre de chromosomes",
+        "La méiose ne se produit que chez les plantes"
+      ],
+      "correctAnswer": "La mitose produit 2 cellules identiques, la méiose 4 cellules différentes",
+      "explanation": "La mitose produit deux cellules génétiquement identiques à la cellule mère, tandis que la méiose produit quatre cellules haploïdes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le rôle des centromères pendant la mitose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Lier les chromosomes homologues",
+        "Attacher les microtubules du fuseau",
+        "Transcrire l'ADN",
+        "Former l'enveloppe nucléaire"
+      ],
+      "correctAnswer": "Attacher les microtubules du fuseau",
+      "explanation": "Les centromères permettent l'attachement des microtubules du fuseau mitotique aux chromosomes.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quand se produit la séparation des chromatides sœurs ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Prophase",
+        "Métaphase",
+        "Anaphase",
+        "Télophase"
+      ],
+      "correctAnswer": "Anaphase",
+      "explanation": "Les chromatides sœurs se séparent lors de l'anaphase de la mitose.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

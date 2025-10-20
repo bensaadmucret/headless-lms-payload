@@ -1,5 +1,6 @@
 import type { PayloadHandler } from 'payload'
 import type { ImportType } from '../types/jsonImport'
+import { importQueue } from '../jobs/queue'
 
 // Endpoint pour déclencher un import de questions/quiz depuis un fichier JSON
 export const triggerImport = async (req, res) => {
@@ -34,7 +35,7 @@ export const triggerImport = async (req, res) => {
       })
     }
 
-    // Créer le job d'import
+    // Créer le job d'import dans la base de données
     const importJob = await payload.create({
       collection: 'import-jobs',
       data: {
@@ -53,11 +54,29 @@ export const triggerImport = async (req, res) => {
       },
     })
 
+    // CORRECTION: Ajouter le job à la queue Bull pour traitement par le worker
+    const bullJob = await importQueue.add('process-import', {
+      jobId: String(importJob.id),
+      userId: String(user.id),
+      importType,
+      fileName,
+    }, {
+      priority: 10, // Priorité normale
+      attempts: 3,
+      backoff: {
+        type: 'exponential',
+        delay: 5000,
+      },
+    })
+
+    console.log(`✅ Import job ${importJob.id} créé et ajouté à la queue Bull (Job ID: ${bullJob.id})`)
+
     return res.json({
       success: true,
       message: 'Import déclenché avec succès',
       data: {
         importJobId: importJob.id,
+        bullJobId: bullJob.id,
         status: importJob.status,
         fileName: importJob.fileName,
         importType: importJob.importType,

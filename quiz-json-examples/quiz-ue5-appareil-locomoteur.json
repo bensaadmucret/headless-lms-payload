@@ -1,0 +1,38 @@
+{
+  "title": "UE5 - Appareil locomoteur",
+  "description": "Quiz sur les os, muscles et articulations du système locomoteur",
+  "category": "Appareil locomoteur",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quel type de tissu forme les os ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tissu conjonctif",
+        "Tissu épithélial",
+        "Tissu musculaire",
+        "Tissu nerveux"
+      ],
+      "correctAnswer": "Tissu conjonctif",
+      "explanation": "Les os sont constitués de tissu osseux, un type de tissu conjonctif spécialisé.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le rôle du périoste ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Membrane qui recouvre l'os",
+        "Cavité médullaire",
+        "Substance osseuse compacte",
+        "Cartilage articulaire"
+      ],
+      "correctAnswer": "Membrane qui recouvre l'os",
+      "explanation": "Le périoste est une membrane fibreuse qui recouvre la surface externe des os.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

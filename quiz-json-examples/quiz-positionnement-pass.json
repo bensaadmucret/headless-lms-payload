@@ -1,0 +1,52 @@
+{
+  "title": "Quiz de Positionnement PASS",
+  "description": "Quiz d'évaluation initial pour les étudiants en Première Année commune aux études de Santé",
+  "category": "Positionnement Pass",
+  "studentLevel": "PASS",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la durée du Parcours Accès Spécifique Santé ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "1 an",
+        "2 ans",
+        "3 ans",
+        "4 ans"
+      ],
+      "correctAnswer": "2 ans",
+      "explanation": "Le PASS dure 2 ans avec une sélection à la fin de la première année.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelles études sont accessibles après PASS ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Médecine uniquement",
+        "Médecine, Dentaire, Pharmacie, Sage-femme",
+        "Toutes les filières de santé",
+        "Médecine et Pharmacie seulement"
+      ],
+      "correctAnswer": "Médecine, Dentaire, Pharmacie, Sage-femme",
+      "explanation": "Le PASS donne accès aux études de médecine, odontologie, pharmacie et maïeutique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le numerus clausus en PASS ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Nombre fixe d'étudiants admis",
+        "Sélection par tirage au sort",
+        "Accès libre à tous",
+        "Sélection par entretien"
+      ],
+      "correctAnswer": "Nombre fixe d'étudiants admis",
+      "explanation": "Le numerus clausus fixe le nombre maximum d'étudiants admis en deuxième année.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

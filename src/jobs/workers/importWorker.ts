@@ -560,7 +560,9 @@ async function validateImportData(
  * Lire le contenu d'un fichier média
  */
 async function readMediaFile(filename: string): Promise<string> {
+  // Payload stocke les fichiers dans le dossier media à la racine
   const mediaPath = path.join(process.cwd(), 'media', filename)
+  console.log(`📂 Reading file from: ${mediaPath}`)
   return await fs.readFile(mediaPath, 'utf-8')
 }
 

@@ -1,0 +1,94 @@
+{
+  "title": "UE3 - Électricité et magnétisme",
+  "description": "Quiz sur les principes électriques appliqués à la biologie et la médecine",
+  "category": "Électricité et magnétisme",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quel est le potentiel de membrane au repos d'un neurone ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "-70 mV",
+        "+70 mV",
+        "0 mV",
+        "-90 mV"
+      ],
+      "correctAnswer": "-70 mV",
+      "explanation": "Le potentiel de membrane au repos des neurones est d'environ -70 mV.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que le potentiel d'action ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Variation brève et localisée du potentiel de membrane",
+        "Potentiel permanent de la cellule",
+        "Résistance électrique de la membrane",
+        "Capacité membranaire"
+      ],
+      "correctAnswer": "Variation brève et localisée du potentiel de membrane",
+      "explanation": "Le potentiel d'action est une dépolarisation rapide et propagée de la membrane plasmique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel ion est principalement responsable de la dépolarisation ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Sodium (Na+)",
+        "Potassium (K+)",
+        "Chlorure (Cl-)",
+        "Calcium (Ca2+)"
+      ],
+      "correctAnswer": "Sodium (Na+)",
+      "explanation": "L'entrée massive d'ions sodium à travers les canaux voltage-dépendants provoque la dépolarisation.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la loi d'Ohm en biophysique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "I = V/R",
+        "V = I × R",
+        "R = V/I",
+        "P = V × I"
+      ],
+      "correctAnswer": "I = V/R",
+      "explanation": "La loi d'Ohm stipule que l'intensité du courant est égale à la tension divisée par la résistance.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la vitesse de propagation du potentiel d'action ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "1 m/s",
+        "10 m/s",
+        "100 m/s",
+        "1000 m/s"
+      ],
+      "correctAnswer": "100 m/s",
+      "explanation": "Le potentiel d'action se propage à une vitesse d'environ 100 m/s dans les fibres nerveuses myélinisées.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la capacitance membranaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Capacité à stocker des charges électriques",
+        "Résistance au passage du courant",
+        "Conductance ionique",
+        "Potentiel d'équilibre"
+      ],
+      "correctAnswer": "Capacité à stocker des charges électriques",
+      "explanation": "La capacitance membranaire représente la capacité de la membrane à stocker des charges électriques.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    }
+  ]
+}

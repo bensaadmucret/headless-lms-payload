@@ -78,6 +78,31 @@ const ImportJobs: CollectionConfig = {
   },
 
   hooks: {
+    beforeChange: [
+      async ({ data, req, operation }) => {
+        // Auto-remplir uploadedBy lors de la création
+        if (operation === 'create' && req.user) {
+          data.uploadedBy = req.user.id;
+        }
+
+        // Auto-remplir fileName depuis le fichier uploadé si vide
+        if (operation === 'create' && data.uploadedFile && !data.fileName) {
+          try {
+            const file = await req.payload.findByID({
+              collection: 'media',
+              id: data.uploadedFile,
+            });
+            if (file && file.filename) {
+              data.fileName = file.filename;
+            }
+          } catch (error) {
+            req.payload.logger.warn('Could not auto-fill fileName:', error);
+          }
+        }
+
+        return data;
+      },
+    ],
     afterChange: [triggerImportProcessing],
   },
 
@@ -101,10 +126,9 @@ const ImportJobs: CollectionConfig = {
       name: 'fileName',
       label: 'Nom du fichier',
       type: 'text',
-      required: true,
+      required: false,
       admin: {
-        readOnly: true,
-        description: 'Nom original du fichier uploadé',
+        description: 'Nom original du fichier uploadé (auto-rempli si vide)',
       },
     },
     {

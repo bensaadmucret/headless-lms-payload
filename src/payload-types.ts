@@ -1936,9 +1936,9 @@ export interface ImportJob {
    */
   uploadedFile: number | Media;
   /**
-   * Nom original du fichier uploadé
+   * Nom original du fichier uploadé (auto-rempli si vide)
    */
-  fileName: string;
+  fileName?: string | null;
   /**
    * Type de contenu à importer
    */

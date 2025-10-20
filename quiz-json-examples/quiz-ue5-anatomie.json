@@ -1,0 +1,82 @@
+{
+  "title": "UE5 - Anatomie",
+  "description": "Quiz sur l'anatomie générale et les différents systèmes du corps humain",
+  "category": "Anatomie générale",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quel est le plus gros organe du corps humain ?",
+      "questionType": "multipleChoice",
+      "options": ["Le foie", "Le cerveau", "La peau", "Les poumons"],
+      "correctAnswer": "La peau",
+      "explanation": "La peau est le plus grand organe du corps humain avec une superficie moyenne de 2 m².",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Combien de vertèbres compte la colonne vertébrale humaine ?",
+      "questionType": "multipleChoice",
+      "options": ["24", "26", "33", "35"],
+      "correctAnswer": "33",
+      "explanation": "La colonne vertébrale humaine compte 33 vertèbres : 7 cervicales, 12 thoraciques, 5 lombaires, 5 sacrées et 4 coccygiennes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Où se trouve le nerf optique ?",
+      "questionType": "multipleChoice",
+      "options": ["Dans l'oreille", "Dans l'œil", "Dans le nez", "Dans la bouche"],
+      "correctAnswer": "Dans l'œil",
+      "explanation": "Le nerf optique transmet les informations visuelles de la rétine vers le cerveau.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel muscle est responsable de la respiration ?",
+      "questionType": "multipleChoice",
+      "options": ["Le diaphragme", "Le cœur", "L'estomac", "Le foie"],
+      "correctAnswer": "Le diaphragme",
+      "explanation": "Le diaphragme est le principal muscle de la respiration qui sépare le thorax de l'abdomen.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que l'artère pulmonaire ?",
+      "questionType": "multipleChoice",
+      "options": ["Elle transporte le sang oxygéné vers les poumons", "Elle transporte le sang désoxygéné vers les poumons", "Elle transporte le sang oxygéné vers le cœur", "Elle transporte le sang désoxygéné vers le cœur"],
+      "correctAnswer": "Elle transporte le sang désoxygéné vers les poumons",
+      "explanation": "L'artère pulmonaire transporte le sang désoxygéné du cœur droit vers les poumons pour l'oxygénation.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Où se trouve le pancréas ?",
+      "questionType": "multipleChoice",
+      "options": ["Derrière l'estomac", "Devant l'estomac", "Sous le foie", "Derrière les reins"],
+      "correctAnswer": "Derrière l'estomac",
+      "explanation": "Le pancréas est situé derrière l'estomac, dans la partie supérieure de l'abdomen.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le rôle du système lymphatique ?",
+      "questionType": "multipleChoice",
+      "options": ["Transport de l'oxygène", "Défense immunitaire et drainage", "Digestion", "Excrétion"],
+      "correctAnswer": "Défense immunitaire et drainage",
+      "explanation": "Le système lymphatique assure la défense immunitaire et le drainage des tissus.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Combien de chambres compte le cœur humain ?",
+      "questionType": "multipleChoice",
+      "options": ["2", "3", "4", "5"],
+      "correctAnswer": "4",
+      "explanation": "Le cœur humain compte 4 chambres : 2 oreillettes et 2 ventricules.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

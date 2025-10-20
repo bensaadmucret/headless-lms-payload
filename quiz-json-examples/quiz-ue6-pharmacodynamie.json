@@ -1,0 +1,52 @@
+{
+  "title": "UE6 - Pharmacodynamie",
+  "description": "Quiz sur les mécanismes d'action des médicaments et interactions récepteurs",
+  "category": "Pharmacodynamie",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Qu'est-ce qu'un agoniste pharmacologique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Substance qui active le récepteur",
+        "Substance qui bloque le récepteur",
+        "Substance qui dégrade le récepteur",
+        "Substance qui synthétise le récepteur"
+      ],
+      "correctAnswer": "Substance qui active le récepteur",
+      "explanation": "Un agoniste se lie au récepteur et produit une réponse biologique similaire au ligand endogène.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce qu'un antagoniste pharmacologique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Substance qui active le récepteur",
+        "Substance qui bloque le récepteur",
+        "Substance qui potentialise l'effet",
+        "Substance qui inverse l'effet"
+      ],
+      "correctAnswer": "Substance qui bloque le récepteur",
+      "explanation": "Un antagoniste se lie au récepteur mais ne produit pas de réponse et bloque l'action du ligand endogène.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que l'affinité d'un médicament ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tendance à se lier au récepteur",
+        "Capacité à activer le récepteur",
+        "Vitesse d'élimination",
+        "Volume de distribution"
+      ],
+      "correctAnswer": "Tendance à se lier au récepteur",
+      "explanation": "L'affinité mesure la force de liaison entre le médicament et son récepteur.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

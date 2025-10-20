@@ -1,0 +1,80 @@
+{
+  "title": "UE5 - Système cardiovasculaire",
+  "description": "Quiz sur l'anatomie et physiologie du cœur et des vaisseaux",
+  "category": "Système cardiovasculaire",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quel est le circuit de circulation pulmonaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Cœur droit → poumons → cœur gauche",
+        "Cœur gauche → poumons → cœur droit",
+        "Cœur → artères → veines → cœur",
+        "Poumons → cœur → poumons"
+      ],
+      "correctAnswer": "Cœur droit → poumons → cœur gauche",
+      "explanation": "La petite circulation transporte le sang désoxygéné du cœur droit vers les poumons puis vers le cœur gauche.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle valve sépare l'oreillette droite du ventricule droit ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Valve mitrale",
+        "Valve aortique",
+        "Valve tricuspide",
+        "Valve pulmonaire"
+      ],
+      "correctAnswer": "Valve tricuspide",
+      "explanation": "La valve tricuspide (atrioventriculaire droite) sépare l'oreillette droite du ventricule droit.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le rôle du système de conduction cardiaque ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Coordonner les contractions cardiaques",
+        "Transporter l'oxygène",
+        "Réguler la pression artérielle",
+        "Produire les hormones"
+      ],
+      "correctAnswer": "Coordonner les contractions cardiaques",
+      "explanation": "Le système de conduction (nœud sino-auriculaire, nœud atrioventriculaire, faisceau de His) coordonne les contractions cardiaques.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la pression artérielle systolique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pression pendant la contraction ventriculaire",
+        "Pression pendant le remplissage",
+        "Pression différentielle",
+        "Pression moyenne"
+      ],
+      "correctAnswer": "Pression pendant la contraction ventriculaire",
+      "explanation": "La pression systolique correspond à la pression maximale atteinte lors de la contraction ventriculaire.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle artère principale vascularise le cœur ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Artère coronaire",
+        "Artère pulmonaire",
+        "Aorte",
+        "Artère carotide"
+      ],
+      "correctAnswer": "Artère coronaire",
+      "explanation": "Les artères coronaires vascularisent le muscle cardiaque (myocarde).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

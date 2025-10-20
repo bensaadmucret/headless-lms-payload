@@ -1,0 +1,94 @@
+{
+  "title": "UE3 - Biophysique des radiations",
+  "description": "Quiz sur les rayonnements ionisants, dosimétrie et effets biologiques",
+  "category": "Biophysique des radiations",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quelle est l'unité de dose absorbée en radioprotection ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Gray (Gy)",
+        "Sievert (Sv)",
+        "Becquerel (Bq)",
+        "Coulomb (C)"
+      ],
+      "correctAnswer": "Gray (Gy)",
+      "explanation": "Le gray mesure la dose absorbée d'énergie par unité de masse de tissu.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est l'unité de dose équivalente ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Gray (Gy)",
+        "Sievert (Sv)",
+        "Becquerel (Bq)",
+        "Roentgen (R)"
+      ],
+      "correctAnswer": "Sievert (Sv)",
+      "explanation": "Le sievert mesure les effets biologiques des rayonnements en tenant compte du type de radiation.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel type de rayonnement est le plus ionisant ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Rayons X",
+        "Rayons gamma",
+        "Particules alpha",
+        "Électrons"
+      ],
+      "correctAnswer": "Particules alpha",
+      "explanation": "Les particules alpha ont un pouvoir ionisant élevé mais une faible pénétration tissulaire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que l'effet biologique des rayonnements ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Dommages directs à l'ADN",
+        "Production de radicaux libres",
+        "Les deux réponses",
+        "Aucun effet"
+      ],
+      "correctAnswer": "Les deux réponses",
+      "explanation": "Les rayonnements causent des dommages directs à l'ADN et indirects via la production de radicaux libres.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quelle est la dose létale aiguë approximative pour l'humain ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "1 Gy",
+        "5 Gy",
+        "10 Gy",
+        "50 Gy"
+      ],
+      "correctAnswer": "5 Gy",
+      "explanation": "Une dose aiguë de 5 Gy est généralement létale sans traitement médical approprié.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quel organe est le plus radiosensible ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Foie",
+        "Cœur",
+        "Moelle osseuse",
+        "Poumons"
+      ],
+      "correctAnswer": "Moelle osseuse",
+      "explanation": "La moelle osseuse hématopoïétique est particulièrement sensible aux rayonnements ionisants.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

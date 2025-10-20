@@ -1,0 +1,82 @@
+{
+  "title": "UE3 - Physique et Biophysique",
+  "description": "Quiz sur les principes physiques appliqués à la biologie et à la médecine",
+  "category": "Physique des fluides",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quelle loi physique explique la circulation sanguine ?",
+      "questionType": "multipleChoice",
+      "options": ["Loi de Newton", "Loi de Bernoulli", "Loi d'Ohm", "Loi de Boyle"],
+      "correctAnswer": "Loi de Bernoulli",
+      "explanation": "La loi de Bernoulli explique comment la vitesse du sang influence la pression dans les vaisseaux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la pression osmotique ?",
+      "questionType": "multipleChoice",
+      "options": ["Pression exercée par les gaz dissous", "Pression nécessaire pour empêcher la diffusion", "Pression hydrostatique dans les vaisseaux", "Pression atmosphérique"],
+      "correctAnswer": "Pression nécessaire pour empêcher la diffusion",
+      "explanation": "La pression osmotique est la pression qu'il faut appliquer pour arrêter le mouvement d'eau à travers une membrane semi-perméable.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est l'unité de mesure de la pression artérielle ?",
+      "questionType": "multipleChoice",
+      "options": ["Pascal (Pa)", "Millimètre de mercure (mmHg)", "Newton (N)", "Joule (J)"],
+      "correctAnswer": "Millimètre de mercure (mmHg)",
+      "explanation": "La pression artérielle est mesurée en millimètres de mercure (mmHg).",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la viscosité sanguine ?",
+      "questionType": "multipleChoice",
+      "options": ["Résistance à l'écoulement", "Capacité à transporter l'oxygène", "Teneur en globules rouges", "pH du sang"],
+      "correctAnswer": "Résistance à l'écoulement",
+      "explanation": "La viscosité sanguine mesure la résistance du sang à l'écoulement dans les vaisseaux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle grandeur physique caractérise l'énergie des rayons X ?",
+      "questionType": "multipleChoice",
+      "options": ["Fréquence", "Longueur d'onde", "Amplitude", "Vitesse"],
+      "correctAnswer": "Longueur d'onde",
+      "explanation": "Les rayons X sont caractérisés par leur longueur d'onde très courte dans le domaine électromagnétique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la loi de Laplace en physiologie ?",
+      "questionType": "multipleChoice",
+      "options": ["Pression = Tension / Rayon", "Pression = 2 × Tension / Rayon", "Pression = Tension × Rayon", "Pression = Tension / (2 × Rayon)"],
+      "correctAnswer": "Pression = 2 × Tension / Rayon",
+      "explanation": "La loi de Laplace stipule que la pression à l'intérieur d'une bulle ou alvéole est égale à 2 fois la tension superficielle divisée par le rayon.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 90
+    },
+    {
+      "questionText": "Quelle est la vitesse du son dans les tissus mous ?",
+      "questionType": "multipleChoice",
+      "options": ["330 m/s", "1500 m/s", "340 m/s", "3000 m/s"],
+      "correctAnswer": "1500 m/s",
+      "explanation": "La vitesse du son dans les tissus mous est approximativement de 1500 m/s.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que l'effet Doppler en échographie ?",
+      "questionType": "multipleChoice",
+      "options": ["Changement de fréquence du son", "Réflexion des ultrasons", "Atténuation du signal", "Formation d'images"],
+      "correctAnswer": "Changement de fréquence du son",
+      "explanation": "L'effet Doppler décrit le changement de fréquence perçu quand la source sonore se rapproche ou s'éloigne de l'observateur.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

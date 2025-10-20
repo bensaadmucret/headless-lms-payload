@@ -1,0 +1,94 @@
+{
+  "title": "UE4 - Épidémiologie",
+  "description": "Quiz sur les études épidémiologiques, biais et mesures d'association",
+  "category": "Épidémiologie",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Qu'est-ce qu'une étude de cohorte ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Étude suivant des sujets exposés et non exposés",
+        "Étude comparant malades et non malades",
+        "Étude transversale à un moment donné",
+        "Étude expérimentale randomisée"
+      ],
+      "correctAnswer": "Étude suivant des sujets exposés et non exposés",
+      "explanation": "Une étude de cohorte suit dans le temps des groupes exposés et non exposés pour comparer l'incidence de la maladie.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce qu'une étude cas-témoins ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Compare l'exposition entre malades et non malades",
+        "Suit des sujets dans le temps",
+        "Étudie la prévalence",
+        "Teste l'efficacité d'un traitement"
+      ],
+      "correctAnswer": "Compare l'exposition entre malades et non malades",
+      "explanation": "Une étude cas-témoins compare rétrospectivement l'exposition entre des sujets malades et des sujets témoins non malades.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que le biais de sélection ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Erreur dans la mesure de l'exposition",
+        "Erreur dans le choix des sujets",
+        "Erreur dans l'analyse des données",
+        "Erreur dans l'interprétation"
+      ],
+      "correctAnswer": "Erreur dans le choix des sujets",
+      "explanation": "Le biais de sélection survient quand les sujets inclus dans l'étude ne sont pas représentatifs de la population cible.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que le biais de classement ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Erreur différentielle dans la mesure",
+        "Erreur non différentielle",
+        "Erreur de sélection",
+        "Erreur de confusion"
+      ],
+      "correctAnswer": "Erreur différentielle dans la mesure",
+      "explanation": "Le biais de classement est une erreur systématique dans la mesure de l'exposition ou de la maladie.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Qu'est-ce que le risque relatif ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Rapport d'incidences",
+        "Rapport de prévalences",
+        "Différence d'incidences",
+        "Rapport des odds"
+      ],
+      "correctAnswer": "Rapport d'incidences",
+      "explanation": "Le risque relatif compare l'incidence de la maladie chez les exposés à celle des non-exposés.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que le facteur de confusion ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Variable qui influence à la fois exposition et maladie",
+        "Erreur de mesure",
+        "Biais de sélection",
+        "Hasard"
+      ],
+      "correctAnswer": "Variable qui influence à la fois exposition et maladie",
+      "explanation": "Un facteur de confusion est une variable qui est associée à la fois à l'exposition et au risque de maladie.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

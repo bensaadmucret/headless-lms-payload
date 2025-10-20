@@ -27,6 +27,8 @@ import { completePlacementQuizEndpoint } from './endpoints/completePlaymentQuiz'
 import updateDailySessionHandler from './endpoints/updateDailySession'
 
 import { getWorkersStatusEndpoint, restartWorkersEndpoint, cleanOldJobsEndpoint, getQueueDetailsEndpoint } from './endpoints/adminWorkers'
+// import { testWorkerStatusEndpoint } from './endpoints/testWorkerStatus'
+import { simpleImportStatusEndpoint } from './endpoints/simpleImportStatus'
 import { generationMetricsEndpoint, generationLogsEndpoint, cleanupOldLogsEndpoint } from './endpoints/generationMetrics'
 import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
 // Endpoints pour l'import JSON
@@ -282,6 +284,8 @@ export default buildConfig({
     },
 
     // Endpoints d'administration pour les workers
+    // testWorkerStatusEndpoint,
+    simpleImportStatusEndpoint,
     getWorkersStatusEndpoint,
     restartWorkersEndpoint,
     cleanOldJobsEndpoint,

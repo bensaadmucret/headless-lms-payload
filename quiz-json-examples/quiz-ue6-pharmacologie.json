@@ -1,0 +1,73 @@
+{
+  "title": "UE6 - Pharmacologie",
+  "description": "Quiz sur les principes de pharmacocinétique, pharmacodynamie et classes thérapeutiques",
+  "category": "Pharmacocinétique",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 7,
+  "questions": [
+    {
+      "questionText": "Qu'est-ce que la biodisponibilité d'un médicament ?",
+      "questionType": "multipleChoice",
+      "options": ["Fraction du médicament qui atteint la circulation systémique", "Vitesse d'élimination du médicament", "Volume de distribution du médicament", "Affinité du médicament pour son récepteur"],
+      "correctAnswer": "Fraction du médicament qui atteint la circulation systémique",
+      "explanation": "La biodisponibilité mesure la fraction du médicament administré qui atteint la circulation sanguine sous forme active.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la principale voie d'élimination rénale des médicaments ?",
+      "questionType": "multipleChoice",
+      "options": ["Filtration glomérulaire", "Sécrétion tubulaire", "Réabsorption tubulaire", "Excrétion biliaire"],
+      "correctAnswer": "Filtration glomérulaire",
+      "explanation": "La filtration glomérulaire est la principale voie d'élimination rénale des médicaments hydrosolubles.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la demi-vie d'élimination d'un médicament ?",
+      "questionType": "multipleChoice",
+      "options": ["Temps nécessaire pour absorber la moitié du médicament", "Temps nécessaire pour éliminer la moitié du médicament", "Temps nécessaire pour métaboliser le médicament", "Temps nécessaire pour distribuer le médicament"],
+      "correctAnswer": "Temps nécessaire pour éliminer la moitié du médicament",
+      "explanation": "La demi-vie d'élimination est le temps nécessaire pour que la concentration plasmatique diminue de moitié.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme d'action des bêtabloquants ?",
+      "questionType": "multipleChoice",
+      "options": ["Bloquer les récepteurs bêta-adrénergiques", "Stimuler les récepteurs alpha", "Inhiber l'enzyme de conversion", "Bloquer les canaux calciques"],
+      "correctAnswer": "Bloquer les récepteurs bêta-adrénergiques",
+      "explanation": "Les bêtabloquants antagonisent les récepteurs bêta-adrénergiques, réduisant la fréquence cardiaque et la contractilité.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Qu'est-ce que l'effet de premier passage hépatique ?",
+      "questionType": "multipleChoice",
+      "options": ["Métabolisme du médicament par le foie avant d'atteindre la circulation", "Absorption intestinale du médicament", "Distribution tissulaire du médicament", "Excrétion rénale du médicament"],
+      "correctAnswer": "Métabolisme du médicament par le foie avant d'atteindre la circulation",
+      "explanation": "L'effet de premier passage désigne le métabolisme pré-systémique du médicament par le foie après absorption orale.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 90
+    },
+    {
+      "questionText": "Quelle classe thérapeutique utilise-t-on pour traiter l'hypertension artérielle ?",
+      "questionType": "multipleChoice",
+      "options": ["Antibiotiques", "Antihypertenseurs", "Antidiabétiques", "Anticoagulants"],
+      "correctAnswer": "Antihypertenseurs",
+      "explanation": "Les antihypertenseurs sont utilisés pour traiter l'hypertension artérielle.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la posologie d'un médicament ?",
+      "questionType": "multipleChoice",
+      "options": ["La quantité de médicament à administrer", "La fréquence d'administration", "La voie d'administration", "La durée du traitement"],
+      "correctAnswer": "La quantité de médicament à administrer",
+      "explanation": "La posologie désigne la quantité de médicament à administrer par prise et par jour.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "title": "UE5 - Système digestif",
+  "description": "Quiz sur l'anatomie et physiologie du tube digestif",
+  "category": "Système digestif",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quelle enzyme débute la digestion des protéines ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pepsine",
+        "Trypsine",
+        "Amylase",
+        "Lipase"
+      ],
+      "correctAnswer": "Pepsine",
+      "explanation": "La pepsine, sécrétée par l'estomac, débute la digestion des protéines en milieu acide.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Où se produit l'absorption principale des nutriments ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Estomac",
+        "Intestin grêle",
+        "Gros intestin",
+        "Œsophage"
+      ],
+      "correctAnswer": "Intestin grêle",
+      "explanation": "L'intestin grêle est le principal site d'absorption des nutriments grâce à sa grande surface.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

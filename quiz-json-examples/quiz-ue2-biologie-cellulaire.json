@@ -1,0 +1,100 @@
+{
+  "title": "UE2 - Biologie cellulaire",
+  "description": "Quiz sur la structure et fonction cellulaires, cycle cellulaire et communication intercellulaire",
+  "category": "Structure et fonction cellulaire",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle est la principale fonction du noyau cellulaire ?",
+      "questionType": "multipleChoice",
+      "options": ["Synthèse des protéines", "Stockage des informations génétiques", "Respiration cellulaire", "Photosynthèse"],
+      "correctAnswer": "Stockage des informations génétiques",
+      "explanation": "Le noyau contient l'ADN qui porte les informations génétiques nécessaires au fonctionnement de la cellule.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelles sont les phases du cycle cellulaire ?",
+      "questionType": "multipleChoice",
+      "options": ["G1, S, G2, M", "G0, G1, S, M", "Interphase, Mitose, Cytokinèse", "Prophase, Métaphase, Anaphase, Télophase"],
+      "correctAnswer": "G1, S, G2, M",
+      "explanation": "Le cycle cellulaire comprend les phases G1 (croissance), S (réplication ADN), G2 (préparation) et M (mitose).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel organite est responsable de la synthèse des protéines ?",
+      "questionType": "multipleChoice",
+      "options": ["Ribosome", "Lysosome", "Peroxysome", "Centriole"],
+      "correctAnswer": "Ribosome",
+      "explanation": "Les ribosomes sont responsables de la traduction de l'ARN messager en protéines.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que l'endocytose ?",
+      "questionType": "multipleChoice",
+      "options": ["Export de molécules hors de la cellule", "Import de molécules dans la cellule", "Division cellulaire", "Mort cellulaire programmée"],
+      "correctAnswer": "Import de molécules dans la cellule",
+      "explanation": "L'endocytose désigne les mécanismes par lesquels la cellule internalise des molécules externes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle molécule sert de monnaie énergétique universelle dans la cellule ?",
+      "questionType": "multipleChoice",
+      "options": ["ATP", "ADP", "AMP", "Glucose"],
+      "correctAnswer": "ATP",
+      "explanation": "L'ATP (adénosine triphosphate) fournit l'énergie nécessaire à la plupart des réactions cellulaires.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la mitose ?",
+      "questionType": "multipleChoice",
+      "options": ["Division du matériel génétique", "Croissance cellulaire", "Mort cellulaire", "Spécialisation cellulaire"],
+      "correctAnswer": "Division du matériel génétique",
+      "explanation": "La mitose est le processus de division cellulaire qui répartit équitablement le matériel génétique entre les cellules filles.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le rôle des jonctions serrées (tight junctions) ?",
+      "questionType": "multipleChoice",
+      "options": ["Communication intercellulaire", "Adhérence cellulaire", "Perméabilité sélective", "Motilité cellulaire"],
+      "correctAnswer": "Perméabilité sélective",
+      "explanation": "Les jonctions serrées contrôlent le passage des molécules entre les cellules épithéliales.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Où se déroule la glycolyse ?",
+      "questionType": "multipleChoice",
+      "options": ["Noyau", "Cytoplasme", "Mitochondries", "Reticulum endoplasmique"],
+      "correctAnswer": "Cytoplasme",
+      "explanation": "La glycolyse, première étape de la dégradation du glucose, se déroule dans le cytoplasme.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la fonction du centrosome ?",
+      "questionType": "multipleChoice",
+      "options": ["Organisation du cytosquelette", "Synthèse des lipides", "Dégradation des déchets", "Stockage du calcium"],
+      "correctAnswer": "Organisation du cytosquelette",
+      "explanation": "Le centrosome organise les microtubules du cytosquelette et participe à la division cellulaire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que l'apoptose ?",
+      "questionType": "multipleChoice",
+      "options": ["Croissance incontrôlée", "Mort cellulaire programmée", "Division cellulaire rapide", "Invasion tissulaire"],
+      "correctAnswer": "Mort cellulaire programmée",
+      "explanation": "L'apoptose est un mécanisme de mort cellulaire régulée, essentiel au développement et à l'homéostasie.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

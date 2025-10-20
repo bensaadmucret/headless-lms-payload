@@ -1,0 +1,108 @@
+{
+  "title": "UE2 - Communication cellulaire",
+  "description": "Quiz sur les récepteurs, seconds messagers et voies de signalisation",
+  "category": "Communication cellulaire",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Qu'est-ce qu'un récepteur membranaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Protéine qui traverse la membrane plasmique",
+        "Molécule intracellulaire",
+        "Enzyme cytoplasmique",
+        "Structure du cytosquelette"
+      ],
+      "correctAnswer": "Protéine qui traverse la membrane plasmique",
+      "explanation": "Les récepteurs membranaires sont des protéines transmembranaires qui détectent les signaux extracellulaires.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est un exemple de second messager ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Insuline",
+        "Adrénaline",
+        "AMP cyclique",
+        "Acétylcholine"
+      ],
+      "correctAnswer": "AMP cyclique",
+      "explanation": "L'AMP cyclique (AMPc) est un second messager intracellulaire qui relaie les signaux hormonaux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle voie de signalisation implique les protéines G ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Voie des stéroïdes",
+        "Voie adrénergique",
+        "Voie des canaux ioniques",
+        "Voie des récepteurs tyrosine kinase"
+      ],
+      "correctAnswer": "Voie adrénergique",
+      "explanation": "Les récepteurs couplés aux protéines G (RCPG) sont impliqués dans la voie adrénergique et de nombreux autres systèmes hormonaux.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Qu'est-ce que la phosphorylation en cascade ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Activation séquentielle de kinases",
+        "Dégradation des protéines",
+        "Transport membranaire",
+        "Synthèse d'ARN"
+      ],
+      "correctAnswer": "Activation séquentielle de kinases",
+      "explanation": "La phosphorylation en cascade implique l'activation séquentielle de kinases qui amplifient le signal cellulaire.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quel est le rôle du calcium comme second messager ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Régulation de la contraction musculaire",
+        "Synthèse des protéines",
+        "Réplication de l'ADN",
+        "Respiration cellulaire"
+      ],
+      "correctAnswer": "Régulation de la contraction musculaire",
+      "explanation": "Le calcium intracellulaire régule la contraction musculaire et de nombreux autres processus cellulaires.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la transduction du signal ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Conversion d'un signal extracellulaire en réponse intracellulaire",
+        "Transport de molécules",
+        "Dégradation des messagers",
+        "Synthèse de nouveaux récepteurs"
+      ],
+      "correctAnswer": "Conversion d'un signal extracellulaire en réponse intracellulaire",
+      "explanation": "La transduction du signal convertit les signaux extracellulaires en réponses intracellulaires spécifiques.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel récepteur est activé par l'insuline ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Récepteur tyrosine kinase",
+        "Récepteur couplé aux protéines G",
+        "Récepteur nucléaire",
+        "Canal ionique"
+      ],
+      "correctAnswer": "Récepteur tyrosine kinase",
+      "explanation": "Le récepteur de l'insuline est un récepteur tyrosine kinase qui autophosphoryle lors de la fixation de l'hormone.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    }
+  ]
+}

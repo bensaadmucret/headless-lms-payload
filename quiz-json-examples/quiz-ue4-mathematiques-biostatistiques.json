@@ -1,0 +1,82 @@
+{
+  "title": "UE4 - Mathématiques et Biostatistiques",
+  "description": "Quiz sur les probabilités, statistiques et épidémiologie appliquées à la médecine",
+  "category": "Probabilités et statistiques",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Qu'est-ce qu'une variable aléatoire ?",
+      "questionType": "multipleChoice",
+      "options": ["Une variable dont la valeur est inconnue", "Une variable qui prend des valeurs numériques", "Une fonction qui associe un nombre à chaque issue", "Une mesure expérimentale"],
+      "correctAnswer": "Une fonction qui associe un nombre à chaque issue",
+      "explanation": "Une variable aléatoire est une fonction qui associe un nombre réel à chaque issue d'une expérience aléatoire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la formule de la sensibilité d'un test diagnostic ?",
+      "questionType": "multipleChoice",
+      "options": ["Vrais positifs / (Vrais positifs + Faux négatifs)", "Vrais positifs / (Vrais positifs + Faux positifs)", "Vrais négatifs / (Vrais négatifs + Faux positifs)", "Vrais négatifs / (Vrais négatifs + Faux négatifs)"],
+      "correctAnswer": "Vrais positifs / (Vrais positifs + Faux négatifs)",
+      "explanation": "La sensibilité mesure la capacité du test à détecter correctement les malades (vrais positifs).",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Qu'est-ce qu'une distribution normale ?",
+      "questionType": "multipleChoice",
+      "options": ["Distribution symétrique en cloche", "Distribution asymétrique", "Distribution uniforme", "Distribution exponentielle"],
+      "correctAnswer": "Distribution symétrique en cloche",
+      "explanation": "La distribution normale (gaussienne) est symétrique et en forme de cloche, très utilisée en statistiques médicales.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que l'intervalle de confiance ?",
+      "questionType": "multipleChoice",
+      "options": ["Intervalle où se trouve la vraie valeur avec une certaine probabilité", "Intervalle entre deux mesures", "Intervalle de temps entre deux événements", "Intervalle de référence clinique"],
+      "correctAnswer": "Intervalle où se trouve la vraie valeur avec une certaine probabilité",
+      "explanation": "L'intervalle de confiance indique la plage de valeurs probables pour un paramètre estimé.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la médiane d'un ensemble de données ?",
+      "questionType": "multipleChoice",
+      "options": ["La valeur moyenne", "La valeur centrale", "La valeur la plus fréquente", "La valeur maximale"],
+      "correctAnswer": "La valeur centrale",
+      "explanation": "La médiane est la valeur qui sépare la distribution en deux parties égales.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que la valeur p en statistique ?",
+      "questionType": "multipleChoice",
+      "options": ["Probabilité d'observer les données sous l'hypothèse nulle", "Probabilité d'erreur", "Probabilité de succès", "Probabilité a priori"],
+      "correctAnswer": "Probabilité d'observer les données sous l'hypothèse nulle",
+      "explanation": "La valeur p mesure la probabilité d'obtenir des résultats aussi extrêmes sous l'hypothèse nulle.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que l'odds ratio ?",
+      "questionType": "multipleChoice",
+      "options": ["Rapport des risques relatifs", "Rapport des cotes d'exposition", "Rapport des taux d'incidence", "Rapport des prévalences"],
+      "correctAnswer": "Rapport des cotes d'exposition",
+      "explanation": "L'odds ratio compare les cotes d'exposition entre les groupes cas et témoins.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quelle est la formule de la variance ?",
+      "questionType": "multipleChoice",
+      "options": ["∑(xi - μ)² / n", "∑(xi - μ) / n", "∑(xi - μ)² / (n-1)", "∑|xi - μ| / n"],
+      "correctAnswer": "∑(xi - μ)² / n",
+      "explanation": "La variance mesure la dispersion des données autour de la moyenne.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

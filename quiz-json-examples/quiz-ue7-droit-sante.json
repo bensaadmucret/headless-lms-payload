@@ -1,0 +1,38 @@
+{
+  "title": "UE7 - Droit de la santé",
+  "description": "Quiz sur la législation médicale et droits des patients",
+  "category": "Droit de la santé",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 8,
+  "questions": [
+    {
+      "questionText": "Quel est le principe du secret médical ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Obligation de confidentialité",
+        "Droit à l'information",
+        "Consentement aux soins",
+        "Accès au dossier médical"
+      ],
+      "correctAnswer": "Obligation de confidentialité",
+      "explanation": "Le secret médical impose au professionnel de santé de ne pas divulguer les informations concernant le patient.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Qu'est-ce que la loi Kouchner de 2002 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Droit des malades",
+        "Réforme hospitalière",
+        "Sécurité sanitaire",
+        "Bioéthique"
+      ],
+      "correctAnswer": "Droit des malades",
+      "explanation": "La loi du 4 mars 2002 relative aux droits des malades et à la qualité du système de santé renforce les droits des patients.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    }
+  ]
+}

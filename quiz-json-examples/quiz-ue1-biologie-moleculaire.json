@@ -1,0 +1,108 @@
+{
+  "title": "UE1 - Biologie moléculaire",
+  "description": "Quiz sur la réplication de l'ADN, la transcription et la traduction",
+  "category": "Biologie moléculaire",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle enzyme catalyse la réplication de l'ADN ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "ADN polymérase",
+        "ARN polymérase",
+        "Ribosome",
+        "Reverse transcriptase"
+      ],
+      "correctAnswer": "ADN polymérase",
+      "explanation": "L'ADN polymérase catalyse l'assemblage des nucléotides complémentaires lors de la réplication.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la direction de la réplication de l'ADN ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "5' vers 3' seulement",
+        "3' vers 5' seulement",
+        "Bidirectionnelle",
+        "Circulaire"
+      ],
+      "correctAnswer": "5' vers 3' seulement",
+      "explanation": "La réplication de l'ADN se fait toujours dans le sens 5' vers 3' sur le brin néosynthétisé.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Qu'est-ce que la fourche de réplication ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Structure en Y formée lors de la réplication",
+        "Enzyme de réparation",
+        "Site d'initiation de la transcription",
+        "Complexe de traduction"
+      ],
+      "correctAnswer": "Structure en Y formée lors de la réplication",
+      "explanation": "La fourche de réplication est la structure en Y où les deux brins d'ADN sont séparés pendant la réplication.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle molécule transporte l'information génétique de l'ADN vers le ribosome ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "ARN messager",
+        "ARN de transfert",
+        "ARN ribosomique",
+        "ADN polymérase"
+      ],
+      "correctAnswer": "ARN messager",
+      "explanation": "L'ARN messager (ARNm) transporte l'information génétique de l'ADN vers les ribosomes pour la synthèse protéique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Qu'est-ce que le code génétique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Séquence d'ADN",
+        "Correspondance codons-acides aminés",
+        "Structure des chromosomes",
+        "Processus de méiose"
+      ],
+      "correctAnswer": "Correspondance codons-acides aminés",
+      "explanation": "Le code génétique définit la correspondance entre les triplets de nucléotides (codons) et les acides aminés.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Combien de codons codent pour des acides aminés ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "20",
+        "61",
+        "64",
+        "3"
+      ],
+      "correctAnswer": "61",
+      "explanation": "Il y a 61 codons qui codent pour les 20 acides aminés, plus 3 codons stop.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le rôle de l'ARN de transfert ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Transporter les acides aminés",
+        "Lire l'ARN messager",
+        "Catalyser la réaction",
+        "Former la structure du ribosome"
+      ],
+      "correctAnswer": "Transporter les acides aminés",
+      "explanation": "L'ARN de transfert (ARNt) transporte les acides aminés spécifiques vers le ribosome pendant la traduction.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

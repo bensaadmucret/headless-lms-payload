@@ -1,0 +1,108 @@
+{
+  "title": "UE1 - Biochimie métabolique",
+  "description": "Quiz sur les voies métaboliques, cycle de Krebs et chaîne respiratoire",
+  "category": "Biochimie métabolique",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 10,
+  "questions": [
+    {
+      "questionText": "Quelle est la première étape de la glycolyse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Phosphorylation du glucose",
+        "Décarboxylation du pyruvate",
+        "Oxydation du NADH",
+        "Formation d'acétyl-CoA"
+      ],
+      "correctAnswer": "Phosphorylation du glucose",
+      "explanation": "La glycolyse débute par la phosphorylation du glucose en glucose-6-phosphate par l'hexokinase.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Combien de molécules d'ATP sont produites par molécule de glucose en glycolyse aérobie ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "2",
+        "4",
+        "36",
+        "38"
+      ],
+      "correctAnswer": "36",
+      "explanation": "La glycolyse produit 2 ATP nets, le cycle de Krebs 2 ATP, et la chaîne respiratoire 34 ATP, soit 36 ATP au total.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quel est le produit final de la glycolyse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pyruvate",
+        "Acétyl-CoA",
+        "Citrate",
+        "Glucose-6-phosphate"
+      ],
+      "correctAnswer": "Pyruvate",
+      "explanation": "La glycolyse transforme le glucose en deux molécules de pyruvate.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Où se déroule le cycle de Krebs ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Cytoplasme",
+        "Matrice mitochondriale",
+        "Membrane mitochondriale interne",
+        "Espace intermembranaire"
+      ],
+      "correctAnswer": "Matrice mitochondriale",
+      "explanation": "Le cycle de Krebs se déroule dans la matrice mitochondriale.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le rôle du NADH dans la respiration cellulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Transporteur d'électrons",
+        "Transporteur de protons",
+        "Catalyseur enzymatique",
+        "Régulateur du pH"
+      ],
+      "correctAnswer": "Transporteur d'électrons",
+      "explanation": "Le NADH transporte des électrons vers la chaîne respiratoire mitochondriale.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle enzyme catalyse la réaction irréversible de la pyruvate déshydrogénase ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pyruvate kinase",
+        "Lactate déshydrogénase",
+        "Pyruvate déshydrogénase",
+        "Phosphoénolpyruvate carboxykinase"
+      ],
+      "correctAnswer": "Pyruvate déshydrogénase",
+      "explanation": "La pyruvate déshydrogénase catalyse la décarboxylation irréversible du pyruvate en acétyl-CoA.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 90
+    },
+    {
+      "questionText": "Quel est le bilan énergétique du cycle de Krebs ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "2 ATP par acétyl-CoA",
+        "3 NADH et 1 FADH2 par acétyl-CoA",
+        "4 ATP par acétyl-CoA",
+        "1 ATP et 2 NADH par acétyl-CoA"
+      ],
+      "correctAnswer": "3 NADH et 1 FADH2 par acétyl-CoA",
+      "explanation": "Le cycle de Krebs produit 3 NADH, 1 FADH2 et 1 GTP (équivalent ATP) par acétyl-CoA.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    }
+  ]
+}
