@@ -1,14 +1,20 @@
 /**
  * Service d'interface avec les APIs IA externes
- * Gère la communication avec différents fournisseurs d'IA (OpenAI, Google Gemini, etc.)
+ * Gère la communication avec différents fournisseurs d'IA (Supernova, Gemini, etc.)
+ * Utilise une stratégie de priorité : code-supernova → Gemini (fallback)
  */
 
 import { GoogleGenerativeAI, GenerationConfig } from '@google/generative-ai';
+
+// Import des services dédiés
+import { SupernovaService } from './SupernovaService';
+import { GeminiService } from './GeminiService';
 
 export interface AIProvider {
   name: string;
   model: string;
   available: boolean;
+  priority: number; // Priorité pour la sélection automatique
 }
 
 export interface AIRequest {
@@ -17,6 +23,7 @@ export interface AIRequest {
   temperature?: number;
   jsonMode?: boolean;
   retryCount?: number;
+  preferredProvider?: 'supernova' | 'gemini' | 'auto';
 }
 
 export interface AIResponse {
@@ -29,17 +36,19 @@ export interface AIResponse {
 }
 
 export interface AIError {
-  type: 'rate_limit' | 'api_error' | 'invalid_response' | 'network_error' | 'auth_error';
+  type: 'rate_limit' | 'api_error' | 'invalid_response' | 'network_error' | 'auth_error' | 'provider_unavailable';
   message: string;
+  provider?: string;
   retryAfter?: number;
   details?: any;
 }
 
 export class AIAPIService {
-  private geminiClient: GoogleGenerativeAI | null = null;
+  private supernovaService?: SupernovaService;
+  private geminiService?: GeminiService;
   private cache: Map<string, { response: AIResponse; timestamp: number }> = new Map();
   private rateLimiter: Map<string, { count: number; resetTime: number }> = new Map();
-  
+
   // Configuration
   private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
   private readonly RATE_LIMIT_REQUESTS = 10;
@@ -52,33 +61,61 @@ export class AIAPIService {
   }
 
   /**
-   * Initialise les fournisseurs d'IA disponibles
+   * Initialise les fournisseurs d'IA disponibles avec leurs priorités
    */
   private initializeProviders(): void {
-    // Initialisation de Google Gemini
+    console.log('🔧 Initialisation des services IA...');
+
+    // Initialisation de code-supernova (priorité haute)
+    if (process.env.SUPERNOVA_API_KEY) {
+      try {
+        this.supernovaService = new SupernovaService();
+        console.log('✅ code-supernova initialisé (priorité haute)');
+      } catch (error) {
+        console.error('❌ Erreur initialisation code-supernova:', error);
+      }
+    } else {
+      console.warn('⚠️ SUPERNOVA_API_KEY non configurée');
+    }
+
+    // Initialisation de Gemini (fallback)
     if (process.env.GEMINI_API_KEY) {
       try {
-        this.geminiClient = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-        console.log('✅ Google Gemini initialisé');
+        this.geminiService = new GeminiService();
+        console.log('✅ Gemini initialisé (fallback)');
       } catch (error) {
         console.error('❌ Erreur initialisation Gemini:', error);
       }
     } else {
       console.warn('⚠️ GEMINI_API_KEY non configurée');
     }
+
+    if (!this.supernovaService && !this.geminiService) {
+      console.error('❌ Aucun fournisseur IA disponible');
+    }
   }
 
   /**
-   * Obtient la liste des fournisseurs disponibles
+   * Obtient la liste des fournisseurs disponibles avec leurs priorités
    */
   getAvailableProviders(): AIProvider[] {
     const providers: AIProvider[] = [];
 
-    if (this.geminiClient) {
+    if (this.supernovaService) {
+      providers.push({
+        name: 'code-supernova',
+        model: 'default',
+        available: true,
+        priority: 1 // Priorité la plus haute
+      });
+    }
+
+    if (this.geminiService) {
       providers.push({
         name: 'Google Gemini',
         model: 'gemini-2.0-flash',
-        available: true
+        available: true,
+        priority: 2 // Fallback
       });
     }
 
@@ -87,10 +124,11 @@ export class AIAPIService {
 
   /**
    * Génère du contenu via l'API IA avec gestion des erreurs et retry
+   * Stratégie : code-supernova d'abord, puis Gemini si échec
    */
   async generateContent(request: AIRequest): Promise<AIResponse> {
     const cacheKey = this.generateCacheKey(request);
-    
+
     // Vérification du cache
     const cached = this.getFromCache(cacheKey);
     if (cached) {
@@ -101,156 +139,182 @@ export class AIAPIService {
     // Vérification du rate limiting
     this.checkRateLimit();
 
+    // Sélection du provider selon la préférence ou automatiquement
+    const provider = this.selectProvider(request.preferredProvider);
+
     let lastError: AIError | null = null;
     const maxRetries = request.retryCount ?? this.MAX_RETRIES;
 
-    console.log(`🚀 Début génération IA (max ${maxRetries + 1} tentatives)`);
+    console.log(`🚀 Début génération IA avec ${provider} (max ${maxRetries + 1} tentatives)`);
 
     for (let attempt = 0; attempt <= maxRetries; attempt++) {
       try {
-        console.log(`📡 Tentative ${attempt + 1}/${maxRetries + 1}`);
-        const response = await this.makeAPIRequest(request);
-        
+        console.log(`📡 Tentative ${attempt + 1}/${maxRetries + 1} avec ${provider}`);
+        const response = await this.callProvider(provider, request);
+
         // Validation de la réponse
         if (!this.validateResponse(response, request.jsonMode ? 'json' : 'text')) {
-          throw { type: 'invalid_response', message: 'Réponse invalide de l\'API' };
+          throw { type: 'invalid_response', message: 'Réponse invalide de l\'API', provider };
         }
-        
+
         // Mise en cache de la réponse
         this.setCache(cacheKey, response);
-        
-        console.log(`✅ Génération réussie (tentative ${attempt + 1})`);
+
+        console.log(`✅ Génération réussie avec ${provider} (tentative ${attempt + 1})`);
         return response;
+
       } catch (error) {
-        lastError = this.handleAPIError(error);
-        console.warn(`⚠️ Tentative ${attempt + 1} échouée:`, lastError.message);
-        
-        // Ne pas retry pour certains types d'erreurs
-        if (lastError.type === 'auth_error') {
-          console.error('❌ Erreur d\'authentification - arrêt des tentatives');
+        lastError = this.handleAPIError(error, provider);
+        console.warn(`⚠️ Tentative ${attempt + 1} échouée avec ${provider}:`, lastError.message);
+
+        // Si c'est le dernier provider disponible, arrêter
+        if (attempt >= maxRetries) {
           break;
         }
 
-        // Attendre avant le retry
-        if (attempt < maxRetries) {
-          const delay = this.calculateRetryDelay(attempt, lastError);
-          console.log(`⏳ Attente ${Math.round(delay / 1000)}s avant nouvelle tentative`);
-          await this.sleep(delay);
+        // Essayer le prochain provider
+        const nextProvider = this.getNextProvider(provider);
+        if (nextProvider) {
+          console.log(`🔄 Changement de provider: ${provider} → ${nextProvider}`);
+          provider = nextProvider;
         }
+
+        // Attendre avant le retry
+        const delay = this.calculateRetryDelay(attempt, lastError);
+        console.log(`⏳ Attente ${Math.round(delay / 1000)}s avant nouvelle tentative`);
+        await this.sleep(delay);
       }
     }
 
-    const errorMessage = `Échec de génération après ${maxRetries + 1} tentatives: ${lastError?.message}`;
+    const errorMessage = `Échec de génération après ${maxRetries + 1} tentatives avec tous les providers: ${lastError?.message}`;
     console.error('❌', errorMessage);
     throw new Error(errorMessage);
   }
 
   /**
-   * Effectue la requête API vers le fournisseur approprié
+   * Sélectionne le provider à utiliser selon la préférence
    */
-  private async makeAPIRequest(request: AIRequest): Promise<AIResponse> {
-    // Pour l'instant, utilise uniquement Gemini
-    if (!this.geminiClient) {
-      throw new Error('Aucun fournisseur IA disponible');
+  private selectProvider(preferredProvider?: 'supernova' | 'gemini' | 'auto'): string {
+    const availableProviders = this.getAvailableProviders();
+
+    if (preferredProvider === 'supernova' && this.supernovaService) {
+      return 'supernova';
     }
 
-    return this.callGeminiAPI(request);
+    if (preferredProvider === 'gemini' && this.geminiService) {
+      return 'gemini';
+    }
+
+    // Sélection automatique : provider avec la plus haute priorité disponible
+    if (preferredProvider === 'auto' || !preferredProvider) {
+      const sortedProviders = availableProviders.sort((a, b) => a.priority - b.priority);
+      return sortedProviders.length > 0 ? sortedProviders[0].name.toLowerCase() : 'gemini';
+    }
+
+    // Provider par défaut si disponible
+    return availableProviders.length > 0 ? availableProviders[0].name.toLowerCase() : 'gemini';
   }
 
   /**
-   * Appelle l'API Google Gemini
+   * Obtient le prochain provider disponible pour le fallback
    */
-  private async callGeminiAPI(request: AIRequest): Promise<AIResponse> {
-    if (!this.geminiClient) {
-      throw new Error('Client Gemini non initialisé');
+  private getNextProvider(currentProvider: string): string | null {
+    const providers = this.getAvailableProviders();
+    const currentIndex = providers.findIndex(p => p.name.toLowerCase() === currentProvider.toLowerCase());
+
+    if (currentIndex !== -1 && currentIndex < providers.length - 1) {
+      return providers[currentIndex + 1].name.toLowerCase();
     }
 
-    const generationConfig: GenerationConfig = {
-      maxOutputTokens: request.maxTokens || 2000,
-      temperature: request.temperature || 0.7,
-      topP: 0.95,
-      topK: 64,
-    };
+    return null;
+  }
 
-    if (request.jsonMode) {
-      generationConfig.responseMimeType = 'application/json';
-    }
-
-    const model = this.geminiClient.getGenerativeModel({
-      model: 'gemini-2.0-flash',
-      generationConfig,
-    });
-
-    try {
-      const result = await model.generateContent(request.prompt);
-      const response = result.response;
-      
-      if (!response) {
-        throw new Error('Réponse vide de l\'API Gemini');
-      }
-
-      const content = response.text();
-      if (!content) {
-        throw new Error('Contenu vide dans la réponse Gemini');
-      }
+  /**
+   * Appelle le provider approprié
+   */
+  private async callProvider(provider: string, request: AIRequest): Promise<AIResponse> {
+    if (provider === 'supernova' && this.supernovaService) {
+      const response = await this.supernovaService.generateContentWithRetry({
+        prompt: request.prompt,
+        maxTokens: request.maxTokens,
+        temperature: request.temperature,
+        jsonMode: request.jsonMode
+      });
 
       return {
-        content,
-        provider: 'Google Gemini',
-        model: 'gemini-2.0-flash',
-        finishReason: 'completed'
+        content: response.content,
+        provider: 'code-supernova',
+        model: response.model,
+        tokensUsed: response.tokensUsed,
+        finishReason: response.finishReason
       };
-    } catch (error: any) {
-      console.error('❌ Erreur API Gemini:', error);
-      
-      // Analyse de l'erreur pour déterminer le type
-      if (error.message?.includes('quota') || error.message?.includes('rate limit')) {
-        throw { type: 'rate_limit', message: 'Limite de taux atteinte', details: error };
-      }
-      
-      if (error.message?.includes('authentication') || error.message?.includes('API key')) {
-        throw { type: 'auth_error', message: 'Erreur d\'authentification', details: error };
-      }
-      
-      throw { type: 'api_error', message: error.message || 'Erreur API inconnue', details: error };
     }
+
+    if (provider === 'gemini' && this.geminiService) {
+      const response = await this.geminiService.generateContentWithRetry({
+        prompt: request.prompt,
+        maxTokens: request.maxTokens,
+        temperature: request.temperature,
+        jsonMode: request.jsonMode
+      });
+
+      return {
+        content: response.content,
+        provider: 'Google Gemini',
+        model: response.model,
+        tokensUsed: response.tokensUsed,
+        finishReason: response.finishReason
+      };
+    }
+
+    throw new Error(`Provider ${provider} non disponible`);
   }
 
   /**
    * Gère les erreurs d'API et les convertit en format standardisé
    */
-  private handleAPIError(error: any): AIError {
+  private handleAPIError(error: any, provider?: string): AIError {
     if (error.type) {
-      return error as AIError;
+      return { ...error, provider };
     }
 
-    // Analyse de l'erreur pour déterminer le type
     const message = error.message || 'Erreur inconnue';
-    
-    if (message.includes('network') || message.includes('timeout') || message.includes('ECONNRESET')) {
-      return { type: 'network_error', message: 'Erreur réseau ou timeout', retryAfter: 5 };
+
+    if (message.includes('SUPERNOVA_') || message.includes('GEMINI_')) {
+      if (message.includes('_RATE_LIMIT')) {
+        return { type: 'rate_limit', message: message.replace('SUPERNOVA_', '').replace('GEMINI_', ''), provider, retryAfter: 60 };
+      }
+      if (message.includes('_AUTH_ERROR')) {
+        return { type: 'auth_error', message: message.replace('SUPERNOVA_', '').replace('GEMINI_', ''), provider };
+      }
+      if (message.includes('_SERVER_ERROR')) {
+        return { type: 'api_error', message: message.replace('SUPERNOVA_', '').replace('GEMINI_', ''), provider, retryAfter: 30 };
+      }
     }
-    
+
+    if (message.includes('network') || message.includes('timeout') || message.includes('ECONNRESET')) {
+      return { type: 'network_error', message: 'Erreur réseau ou timeout', provider, retryAfter: 5 };
+    }
+
     if (message.includes('rate limit') || message.includes('quota') || message.includes('429')) {
-      // Extraire le temps d'attente si disponible
       const retryMatch = message.match(/retry.*?(\d+)/i);
       const retryAfter = retryMatch ? parseInt(retryMatch[1]) : 60;
-      return { type: 'rate_limit', message: 'Limite de taux atteinte', retryAfter };
+      return { type: 'rate_limit', message: 'Limite de taux atteinte', provider, retryAfter };
     }
-    
+
     if (message.includes('authentication') || message.includes('unauthorized') || message.includes('401')) {
-      return { type: 'auth_error', message: 'Erreur d\'authentification' };
+      return { type: 'auth_error', message: 'Erreur d\'authentification', provider };
     }
-    
+
     if (message.includes('502') || message.includes('503') || message.includes('504')) {
-      return { type: 'api_error', message: 'Service temporairement indisponible', retryAfter: 30 };
+      return { type: 'api_error', message: 'Service temporairement indisponible', provider, retryAfter: 30 };
     }
-    
+
     if (message.includes('500')) {
-      return { type: 'api_error', message: 'Erreur serveur interne', retryAfter: 10 };
+      return { type: 'api_error', message: 'Erreur serveur interne', provider, retryAfter: 10 };
     }
-    
-    return { type: 'api_error', message, details: error };
+
+    return { type: 'api_error', message, provider, details: error };
   }
 
   /**
