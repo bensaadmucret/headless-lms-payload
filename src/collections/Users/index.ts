@@ -50,6 +50,15 @@ export const Users: CollectionConfig = {
     // lockTime: 600 * 1000, // Désactivé pour le développement
   },
   hooks: {
+    beforeValidate: [
+      ({ data }) => {
+        // Normaliser studyYear en minuscules pour accepter PASS/LAS ou pass/las
+        if (data?.studyYear && typeof data.studyYear === 'string') {
+          data.studyYear = data.studyYear.toLowerCase();
+        }
+        return data;
+      },
+    ],
     afterChange: [
       // logAuditAfterChange,
     ],

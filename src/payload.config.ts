@@ -33,6 +33,8 @@ import { exportGenerationLogsEndpoint } from './endpoints/exportGenerationLogs'
 import { downloadTemplate, listTemplates } from './endpoints/jsonImportTemplates'
 import { validateImportFile, getImportJobStatus, getImportHistory, exportImportHistory } from './endpoints/jsonImportValidation'
 import { uploadImportFile } from './endpoints/jsonImportUpload'
+import { triggerImport } from './endpoints/triggerImport'
+import { getImportStatus } from './endpoints/importStatus'
 
 
 // Endpoints pour la répétition espacée
@@ -95,10 +97,15 @@ import { SystemMetrics } from './collections/SystemMetrics'
 import { Subscriptions } from './collections/Subscriptions'
 
 import { AdaptiveQuizSessions } from './collections/AdaptiveQuizSessions'
+import Flashcards from './collections/Flashcards'
+import FlashcardDecks from './collections/FlashcardDecks'
+import LearningPaths from './collections/LearningPaths'
+import LearningPathSteps from './collections/LearningPathSteps'
 import { AdaptiveQuizResults } from './collections/AdaptiveQuizResults'
 import { UserPerformances } from './collections/UserPerformances'
 import AuditLogs from './collections/AuditLogs'
 import GenerationLogs from './collections/GenerationLogs'
+import ImportJobs from './collections/ImportJobs'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -184,11 +191,17 @@ export default buildConfig({
     AdaptiveQuizResults,
     UserPerformances,
     AuditLogs,
-    GenerationLogs
+    GenerationLogs,
+    ImportJobs,
+    Flashcards,
+    FlashcardDecks,
+    LearningPaths,
+    LearningPathSteps
   ],
   globals: [CorsConfig, Header, Footer],
   cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
   csrf: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
+  cookiePrefix: 'payload-admin',
   plugins: [
     ...plugins,
     // storage-adapter-placeholder
@@ -235,8 +248,16 @@ export default buildConfig({
       method: 'get',
       handler: exportImportHistory
     },
-
-
+    {
+      path: '/trigger-import',
+      method: 'post',
+      handler: triggerImport
+    },
+    {
+      path: '/import-status/:jobId',
+      method: 'get',
+      handler: getImportStatus
+    },
 
     // === ENDPOINTS RÉPÉTITION ESPACÉE ===
     {

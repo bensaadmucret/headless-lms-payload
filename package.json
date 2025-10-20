@@ -28,6 +28,7 @@
     "workers:restart": "pm2 restart workers",
     "workers:logs": "pm2 logs workers",
     "workers:status": "pm2 status workers",
+    "seed:categories": "cross-env NODE_OPTIONS=--no-deprecation tsx seed-categories.mjs",
     "workers:delete": "pm2 delete workers",
     "workers:monit": "pm2 monit",
     "docker:up": "docker-compose up -d",

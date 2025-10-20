@@ -1,8 +1,8 @@
-import type { PayloadRequest } from 'payload'
+import type { PayloadRequest, Endpoint } from 'payload'
 
-export const getPlacementQuizEndpoint = {
+export const getPlacementQuizEndpoint: Endpoint = {
   path: '/placement-quiz',
-  method: 'get' as const,
+  method: 'get',
   handler: async (req: PayloadRequest): Promise<Response> => {
     try {
       // Récupérer le quiz de positionnement (type: 'placement')

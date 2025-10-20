@@ -53,7 +53,9 @@ export interface ImportFlashcard {
   back: string;
   category: string;
   difficulty: 'easy' | 'medium' | 'hard';
+  level?: 'PASS' | 'LAS' | 'both';
   tags?: string[];
+  hints?: string[];
   imageUrl?: string;
 }
 
@@ -63,6 +65,9 @@ export interface FlashcardImportData extends BaseImportData {
   metadata: ImportMetadata & {
     deckName: string;
     category: string;
+    difficulty?: 'easy' | 'medium' | 'hard';
+    author?: string;
+    source?: string;
   };
   cards: ImportFlashcard[];
 }
@@ -74,6 +79,8 @@ export interface ImportLearningStep {
   description?: string;
   prerequisites: string[];
   estimatedTime?: number;
+  difficulty?: 'easy' | 'medium' | 'hard';
+  objectives?: string[];
   questions: ImportQuestion[];
 }
 
@@ -83,6 +90,11 @@ export interface LearningPathImportData extends BaseImportData {
   metadata: ImportMetadata & {
     title: string;
     estimatedDuration: number;
+    difficulty?: 'easy' | 'medium' | 'hard';
+    prerequisites?: string[];
+    objectives?: string[];
+    author?: string;
+    source?: string;
   };
   path: {
     steps: ImportLearningStep[];

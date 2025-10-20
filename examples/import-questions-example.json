@@ -1,0 +1,147 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Exemple d'import MedCoach",
+    "created": "2025-01-20",
+    "level": "PASS",
+    "description": "Questions d'exemple pour tester le système d'import"
+  },
+  "questions": [
+    {
+      "questionText": "Quel est le rôle principal de l'hémoglobine dans le sang ?",
+      "options": [
+        {
+          "text": "Transport de l'oxygène",
+          "isCorrect": true
+        },
+        {
+          "text": "Coagulation sanguine",
+          "isCorrect": false
+        },
+        {
+          "text": "Défense immunitaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation de la température",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hémoglobine est une protéine présente dans les globules rouges qui a pour fonction principale de transporter l'oxygène des poumons vers les tissus et de ramener le dioxyde de carbone vers les poumons.",
+      "category": "Hématologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": ["hémoglobine", "sang", "transport"],
+      "sourcePageReference": "p. 145-147, Chapitre 8"
+    },
+    {
+      "questionText": "Quelle est la valeur normale de la glycémie à jeun ?",
+      "options": [
+        {
+          "text": "0.5 - 0.7 g/L",
+          "isCorrect": false
+        },
+        {
+          "text": "0.7 - 1.1 g/L",
+          "isCorrect": true
+        },
+        {
+          "text": "1.2 - 1.5 g/L",
+          "isCorrect": false
+        },
+        {
+          "text": "1.5 - 2.0 g/L",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La glycémie à jeun normale se situe entre 0.7 et 1.1 g/L (ou 3.9 à 6.1 mmol/L). Une valeur supérieure à 1.26 g/L à deux reprises définit le diabète.",
+      "category": "Endocrinologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["glycémie", "diabète", "métabolisme"],
+      "sourcePageReference": "p. 234, Chapitre 12"
+    },
+    {
+      "questionText": "Quel organe produit l'insuline ?",
+      "options": [
+        {
+          "text": "Le foie",
+          "isCorrect": false
+        },
+        {
+          "text": "Le pancréas",
+          "isCorrect": true
+        },
+        {
+          "text": "La rate",
+          "isCorrect": false
+        },
+        {
+          "text": "Les reins",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuline est une hormone produite par les cellules bêta des îlots de Langerhans dans le pancréas. Elle régule le métabolisme du glucose.",
+      "category": "Endocrinologie",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["insuline", "pancréas", "hormone"],
+      "sourcePageReference": "p. 228-230, Chapitre 12"
+    },
+    {
+      "questionText": "Quelle est la durée moyenne du cycle cardiaque au repos ?",
+      "options": [
+        {
+          "text": "0.4 seconde",
+          "isCorrect": false
+        },
+        {
+          "text": "0.8 seconde",
+          "isCorrect": true
+        },
+        {
+          "text": "1.2 seconde",
+          "isCorrect": false
+        },
+        {
+          "text": "1.6 seconde",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Au repos, le cycle cardiaque dure environ 0.8 seconde, correspondant à une fréquence cardiaque d'environ 75 battements par minute (60/0.8 = 75).",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": ["cœur", "cycle cardiaque", "physiologie"],
+      "sourcePageReference": "p. 89-92, Chapitre 5"
+    },
+    {
+      "questionText": "Quelle structure anatomique sépare les deux ventricules du cœur ?",
+      "options": [
+        {
+          "text": "Le septum interventriculaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Le septum interauriculaire",
+          "isCorrect": false
+        },
+        {
+          "text": "La valve mitrale",
+          "isCorrect": false
+        },
+        {
+          "text": "Le péricarde",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le septum interventriculaire est la paroi musculaire qui sépare le ventricule droit du ventricule gauche. Le septum interauriculaire sépare quant à lui les deux oreillettes.",
+      "category": "Anatomie",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["cœur", "anatomie", "septum"],
+      "sourcePageReference": "p. 78-80, Chapitre 4"
+    }
+  ]
+}

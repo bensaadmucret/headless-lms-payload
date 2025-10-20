@@ -94,6 +94,11 @@ export interface Config {
     'user-performances': UserPerformance;
     auditlogs: Auditlog;
     generationlogs: Generationlog;
+    'import-jobs': ImportJob;
+    flashcards: Flashcard;
+    'flashcard-decks': FlashcardDeck;
+    'learning-paths': LearningPath;
+    'learning-path-steps': LearningPathStep;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -132,6 +137,11 @@ export interface Config {
     'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
     auditlogs: AuditlogsSelect<false> | AuditlogsSelect<true>;
     generationlogs: GenerationlogsSelect<false> | GenerationlogsSelect<true>;
+    'import-jobs': ImportJobsSelect<false> | ImportJobsSelect<true>;
+    flashcards: FlashcardsSelect<false> | FlashcardsSelect<true>;
+    'flashcard-decks': FlashcardDecksSelect<false> | FlashcardDecksSelect<true>;
+    'learning-paths': LearningPathsSelect<false> | LearningPathsSelect<true>;
+    'learning-path-steps': LearningPathStepsSelect<false> | LearningPathStepsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -1914,6 +1924,249 @@ export interface Generationlog {
   updatedAt: string;
 }
 /**
+ * Gestion des imports massifs de quiz, questions et flashcards depuis fichiers JSON/CSV
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "import-jobs".
+ */
+export interface ImportJob {
+  id: number;
+  /**
+   * Fichier JSON ou CSV contenant les données à importer
+   */
+  uploadedFile: number | Media;
+  /**
+   * Nom original du fichier uploadé
+   */
+  fileName: string;
+  /**
+   * Type de contenu à importer
+   */
+  importType: 'questions' | 'quizzes' | 'flashcards' | 'learning-path';
+  status: 'pending' | 'validating' | 'validated' | 'processing' | 'completed' | 'failed' | 'validation_failed';
+  /**
+   * Progression du traitement (0-100%)
+   */
+  progress?: number | null;
+  uploadedBy: number | User;
+  /**
+   * Pour les questions isolées : créer automatiquement un quiz qui les regroupe
+   */
+  createQuizContainer?: boolean | null;
+  quizMetadata?: {
+    title?: string | null;
+    description?: string | null;
+    category?: (number | null) | Category;
+  };
+  /**
+   * Erreurs et avertissements détectés lors de la validation
+   */
+  validationResults?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Détails des entités créées (questions, quiz, etc.)
+   */
+  processingResults?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  errors?:
+    | {
+        type?: ('validation' | 'database' | 'mapping' | 'reference' | 'system') | null;
+        severity?: ('critical' | 'major' | 'minor' | 'warning') | null;
+        message?: string | null;
+        itemIndex?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  completedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Cartes de révision pour l'apprentissage actif et la mémorisation
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "flashcards".
+ */
+export interface Flashcard {
+  id: number;
+  /**
+   * Question ou concept clé à mémoriser
+   */
+  front: string;
+  /**
+   * Explication détaillée ou réponse complète
+   */
+  back: string;
+  /**
+   * Indices optionnels pour faciliter la mémorisation
+   */
+  hints?:
+    | {
+        hint: string;
+        id?: string | null;
+      }[]
+    | null;
+  category: number | Category;
+  difficulty: 'easy' | 'medium' | 'hard';
+  level: 'PASS' | 'LAS' | 'both';
+  /**
+   * Tags pour filtrage et recherche
+   */
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Deck auquel appartient cette flashcard
+   */
+  deck?: (number | null) | FlashcardDeck;
+  /**
+   * URL d'une image illustrative (optionnel)
+   */
+  imageUrl?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Decks de flashcards pour organiser les cartes de révision
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "flashcard-decks".
+ */
+export interface FlashcardDeck {
+  id: number;
+  deckName: string;
+  /**
+   * Description du contenu du deck
+   */
+  description?: string | null;
+  category: number | Category;
+  level: 'PASS' | 'LAS' | 'both';
+  difficulty?: ('easy' | 'medium' | 'hard') | null;
+  /**
+   * Calculé automatiquement
+   */
+  cardCount?: number | null;
+  author?: string | null;
+  /**
+   * Source du contenu (faculté, livre, etc.)
+   */
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Parcours d'apprentissage structurés avec étapes progressives
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "learning-paths".
+ */
+export interface LearningPath {
+  id: number;
+  title: string;
+  /**
+   * Description générale du parcours d'apprentissage
+   */
+  description: string;
+  level: 'PASS' | 'LAS' | 'both';
+  difficulty: 'easy' | 'medium' | 'hard';
+  /**
+   * Durée totale estimée en minutes
+   */
+  estimatedDuration: number;
+  stepCount?: number | null;
+  /**
+   * Connaissances requises avant de commencer
+   */
+  prerequisites?:
+    | {
+        prerequisite: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Objectifs à atteindre à la fin du parcours
+   */
+  objectives?:
+    | {
+        objective: string;
+        id?: string | null;
+      }[]
+    | null;
+  author?: string | null;
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Étapes individuelles des parcours d'apprentissage
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "learning-path-steps".
+ */
+export interface LearningPathStep {
+  id: number;
+  learningPath: number | LearningPath;
+  /**
+   * Identifiant unique de l'étape dans le parcours
+   */
+  stepId: string;
+  title: string;
+  /**
+   * Description détaillée de l'étape
+   */
+  description?: string | null;
+  /**
+   * Position de l'étape dans le parcours (commence à 1)
+   */
+  order: number;
+  /**
+   * Durée estimée pour compléter cette étape
+   */
+  estimatedTime: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  /**
+   * IDs des étapes qui doivent être complétées avant celle-ci
+   */
+  prerequisites?:
+    | {
+        stepId: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Objectifs spécifiques à cette étape
+   */
+  objectives?:
+    | {
+        objective: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Questions pour valider les connaissances de cette étape
+   */
+  questions?: (number | Question)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2192,6 +2445,26 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'generationlogs';
         value: number | Generationlog;
+      } | null)
+    | ({
+        relationTo: 'import-jobs';
+        value: number | ImportJob;
+      } | null)
+    | ({
+        relationTo: 'flashcards';
+        value: number | Flashcard;
+      } | null)
+    | ({
+        relationTo: 'flashcard-decks';
+        value: number | FlashcardDeck;
+      } | null)
+    | ({
+        relationTo: 'learning-paths';
+        value: number | LearningPath;
+      } | null)
+    | ({
+        relationTo: 'learning-path-steps';
+        value: number | LearningPathStep;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3197,6 +3470,139 @@ export interface GenerationlogsSelect<T extends boolean = true> {
   createdAt?: T;
   completedAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "import-jobs_select".
+ */
+export interface ImportJobsSelect<T extends boolean = true> {
+  uploadedFile?: T;
+  fileName?: T;
+  importType?: T;
+  status?: T;
+  progress?: T;
+  uploadedBy?: T;
+  createQuizContainer?: T;
+  quizMetadata?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        category?: T;
+      };
+  validationResults?: T;
+  processingResults?: T;
+  errors?:
+    | T
+    | {
+        type?: T;
+        severity?: T;
+        message?: T;
+        itemIndex?: T;
+        id?: T;
+      };
+  completedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "flashcards_select".
+ */
+export interface FlashcardsSelect<T extends boolean = true> {
+  front?: T;
+  back?: T;
+  hints?:
+    | T
+    | {
+        hint?: T;
+        id?: T;
+      };
+  category?: T;
+  difficulty?: T;
+  level?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  deck?: T;
+  imageUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "flashcard-decks_select".
+ */
+export interface FlashcardDecksSelect<T extends boolean = true> {
+  deckName?: T;
+  description?: T;
+  category?: T;
+  level?: T;
+  difficulty?: T;
+  cardCount?: T;
+  author?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "learning-paths_select".
+ */
+export interface LearningPathsSelect<T extends boolean = true> {
+  title?: T;
+  description?: T;
+  level?: T;
+  difficulty?: T;
+  estimatedDuration?: T;
+  stepCount?: T;
+  prerequisites?:
+    | T
+    | {
+        prerequisite?: T;
+        id?: T;
+      };
+  objectives?:
+    | T
+    | {
+        objective?: T;
+        id?: T;
+      };
+  author?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "learning-path-steps_select".
+ */
+export interface LearningPathStepsSelect<T extends boolean = true> {
+  learningPath?: T;
+  stepId?: T;
+  title?: T;
+  description?: T;
+  order?: T;
+  estimatedTime?: T;
+  difficulty?: T;
+  prerequisites?:
+    | T
+    | {
+        stepId?: T;
+        id?: T;
+      };
+  objectives?:
+    | T
+    | {
+        objective?: T;
+        id?: T;
+      };
+  questions?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

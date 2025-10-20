@@ -8,6 +8,7 @@ interface QuizGenerationConfig {
   questionCount: number;
   difficulty: 'easy' | 'medium' | 'hard';
   includeExplanations: boolean;
+  quizType?: 'standard' | 'placement';
   customInstructions?: string;
 }
 
@@ -36,20 +37,31 @@ export const generateAIQuizEndpoint: Endpoint = {
     const startTime = Date.now();
 
     // Vérifier l'authentification et les permissions admin
-    if (!req.user || (req.user.role !== 'admin' && req.user.role !== 'superadmin')) {
-      console.log('❌ Permissions insuffisantes');
-      return Response.json({ error: 'Admin permissions required.' }, { status: 403 });
+    const allowedRoles = ['admin', 'superadmin', 'super-admin', 'super_admin'];
+    
+    if (!req.user || !allowedRoles.includes(req.user.role)) {
+      console.log('❌ Permissions insuffisantes - Rôle actuel:', req.user?.role);
+      return Response.json({ 
+        error: 'Admin permissions required.',
+        currentRole: req.user?.role,
+        requiredRoles: allowedRoles
+      }, { status: 403 });
     }
+    
+    console.log('✅ Permissions validées - Rôle:', req.user.role);
 
+    let config: QuizGenerationConfig | null = null;
+    
     try {
       const body = await req.json?.() || {};
-      const config: QuizGenerationConfig = {
+      config = {
         subject: body.subject,
         categoryId: body.categoryId,
         studentLevel: body.studentLevel || 'PASS',
         questionCount: Math.min(body.questionCount || 10, 20), // Max 20 questions
         difficulty: body.difficulty || 'medium',
         includeExplanations: body.includeExplanations !== false,
+        quizType: body.quizType || 'standard',
         customInstructions: body.customInstructions,
       };
 
@@ -188,7 +200,7 @@ export const generateAIQuizEndpoint: Endpoint = {
           published: true, // Publier automatiquement les quiz générés par IA
           duration: estimateQuizDuration(config.questionCount),
           passingScore: 70,
-          quizType: 'standard',
+          quizType: config.quizType || 'standard',
         },
       });
 
@@ -202,6 +214,48 @@ export const generateAIQuizEndpoint: Endpoint = {
         validationScore,
         generationTime,
       });
+
+      // Créer un log dans la collection GenerationLogs
+      try {
+        await req.payload.create({
+          collection: 'generationlogs',
+          data: {
+            user: req.user.id,
+            action: 'ai_quiz_generation',
+            status: 'success',
+            generationConfig: {
+              subject: config.subject,
+              categoryId: config.categoryId,
+              categoryName: category.title,
+              studentLevel: config.studentLevel,
+              questionCount: config.questionCount,
+              difficulty: config.difficulty,
+              includeExplanations: config.includeExplanations,
+              customInstructions: config.customInstructions,
+            },
+            result: {
+              quizId: String(createdQuiz.id),
+              questionIds: createdQuestions.map(q => ({ questionId: String(q.id) })),
+              questionsCreated: createdQuestions.length,
+              validationScore,
+              aiModel: 'gemini-2.0-flash',
+            },
+            performance: {
+              duration: generationTime,
+              retryCount: 1,
+            },
+            metadata: {
+              environment: process.env.NODE_ENV || 'development',
+              version: '1.0.0',
+            },
+            createdAt: new Date().toISOString(),
+            completedAt: new Date().toISOString(),
+          },
+        });
+      } catch (logError) {
+        // Ne pas faire échouer la génération si le log échoue
+        req.payload.logger.error('Erreur lors de la création du log:', logError);
+      }
 
       const result: QuizGenerationResult = {
         success: true,
@@ -221,7 +275,45 @@ export const generateAIQuizEndpoint: Endpoint = {
 
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+      const generationTime = Date.now() - startTime;
+      
       req.payload.logger.error(`Error in generateAIQuizEndpoint: ${errorMessage}`);
+
+      // Créer un log d'erreur dans la collection GenerationLogs
+      try {
+        await req.payload.create({
+          collection: 'generationlogs',
+          data: {
+            user: req.user.id,
+            action: 'ai_quiz_generation',
+            status: 'failed',
+            generationConfig: config ? {
+              subject: config.subject,
+              categoryId: config.categoryId,
+              studentLevel: config.studentLevel,
+              questionCount: config.questionCount,
+              difficulty: config.difficulty,
+            } : undefined,
+            error: {
+              type: 'unknown_error',
+              message: errorMessage,
+              details: error instanceof Error ? { stack: error.stack } : {},
+            },
+            performance: {
+              duration: generationTime,
+              retryCount: 1,
+            },
+            metadata: {
+              environment: process.env.NODE_ENV || 'development',
+              version: '1.0.0',
+            },
+            createdAt: new Date().toISOString(),
+            completedAt: new Date().toISOString(),
+          },
+        });
+      } catch (logError) {
+        req.payload.logger.error('Erreur lors de la création du log d\'erreur:', logError);
+      }
 
       return Response.json({
         error: 'Erreur lors de la génération du quiz IA.',

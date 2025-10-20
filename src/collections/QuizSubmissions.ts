@@ -12,7 +12,7 @@ export const QuizSubmissions: CollectionConfig = {
     create: ({ req }) => !!req.user, // Seuls les utilisateurs connectés peuvent créer une soumission
     read: () => true, // Tout le monde peut lire les soumissions
     update: () => false, // Personne ne peut modifier une soumission
-    delete: ({ req }) => !!req.user?.admin, // Seuls les administrateurs peuvent supprimer une soumission
+    delete: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin', // Seuls les administrateurs peuvent supprimer une soumission
   },
   hooks: {
     afterChange: [
@@ -69,7 +69,7 @@ export const QuizSubmissions: CollectionConfig = {
             };
 
             // Créer ou mettre à jour
-            if (existingPerformance.totalDocs > 0) {
+            if (existingPerformance.totalDocs > 0 && existingPerformance.docs[0]) {
               await req.payload.update({
                 collection: 'user-performances',
                 id: existingPerformance.docs[0].id,

@@ -18,6 +18,7 @@ interface GenerationConfig {
   questionCount: number
   difficulty: 'easy' | 'medium' | 'hard'
   includeExplanations: boolean
+  quizType: 'standard' | 'placement'
   customInstructions?: string
 }
 
@@ -54,6 +55,7 @@ export const GenerateAIQuizButton: React.FC = () => {
     questionCount: 10,
     difficulty: 'medium',
     includeExplanations: true,
+    quizType: 'standard',
     customInstructions: ''
   })
 
@@ -502,6 +504,39 @@ export const GenerateAIQuizButton: React.FC = () => {
                           </SelectContent>
                         </Select>
                       </div>
+                    </div>
+
+                    {/* Type de Quiz */}
+                    <div>
+                      <Label htmlFor="quizType" style={{ fontSize: '14px', fontWeight: '600', color: 'var(--theme-text, #e5e5e5)', display: 'block', marginBottom: '8px' }}>
+                        📋 Type de Quiz *
+                      </Label>
+                      <Select
+                        value={config.quizType}
+                        onValueChange={(value: 'standard' | 'placement') => updateConfig('quizType', value)}
+                      >
+                        <SelectTrigger style={{
+                          marginTop: '4px',
+                          backgroundColor: 'var(--theme-elevation-50, #252525)',
+                          border: '1px solid var(--theme-elevation-150, #3a3a3a)',
+                          color: 'var(--theme-text, #e5e5e5)'
+                        }}>
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent
+                          position="popper"
+                          sideOffset={5}
+                          style={{
+                            backgroundColor: 'var(--theme-elevation-50, #252525)',
+                            border: '1px solid var(--theme-elevation-150, #3a3a3a)',
+                            color: 'var(--theme-text, #e5e5e5)',
+                            zIndex: 99999999
+                          }}
+                        >
+                          <SelectItem value="standard">Quiz Standard</SelectItem>
+                          <SelectItem value="placement">Quiz de Positionnement</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     {/* Nombre de questions et Difficulté */}
