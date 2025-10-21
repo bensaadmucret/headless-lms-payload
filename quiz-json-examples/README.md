@@ -12,6 +12,10 @@ quiz-json-examples/
 ├── questions-pass-100.json (100 questions QCM niveau PASS)
 ├── questions-las-100.json (100 questions QCM niveau LAS)
 ├── questions-pass-complete.json (92 questions QCM niveau PASS)
+├── quiz-ue8-sante-publique.json (15 questions QCM santé publique)
+├── quiz-ue9-medecine-preventive.json (15 questions QCM médecine préventive)
+├── quiz-ue10-medecine-urgence.json (15 questions QCM médecine d'urgence)
+├── quiz-specialites-medicales-avancees.json (15 questions QCM spécialités avancées)
 ├── questions-las-complete.json (31 questions QCM niveau LAS)
 ├── parcours-physiologie-cardiaque.json (parcours avec 4 étapes)
 ├── flashcards-semiologie-cardiaque.json (8 flashcards sémiologie)
@@ -77,6 +81,32 @@ curl -X POST http://localhost:3000/api/json-import \
 - **5 questions** sur la neurologie niveau LAS
 - **Thèmes** : nerfs crâniens, réflexes, neurotransmetteurs
 - **Spécialités médicales** : neurologie, sémiologie
+
+### Quiz par Unités d'Enseignement (nouveaux)
+
+#### `quiz-ue8-sante-publique.json`
+- **15 questions** sur la santé publique et l'épidémiologie
+- **Thèmes couverts** : épidémiologie, prévention, politique de santé, facteurs de risque
+- **Niveaux de difficulté** : easy à hard
+- **Métadonnées complètes** : explications détaillées, catégories, niveaux
+
+#### `quiz-ue9-medecine-preventive.json`
+- **15 questions** sur la médecine préventive et la prévention
+- **Thèmes couverts** : prévention primaire, secondaire, tertiaire, dépistage, vaccination
+- **Niveaux de difficulté** : easy à hard
+- **Explications approfondies** pour compréhension clinique
+
+#### `quiz-ue10-medecine-urgence.json`
+- **15 questions** sur la médecine d'urgence et la réanimation
+- **Thèmes couverts** : urgences vitales, RCP, choc, gestes d'urgence, protocoles
+- **Niveau de difficulté** : medium à hard
+- **Contenu spécialisé** pour formation médicale avancée
+
+#### `quiz-specialites-medicales-avancees.json`
+- **15 questions** sur les spécialités médicales pointues
+- **Thèmes couverts** : spécialités rares, nouvelles technologies, approches multidisciplinaires
+- **Niveau de difficulté** : medium à hard
+- **Mise à jour des connaissances** médicales actuelles
 
 ### Parcours d'apprentissage
 
