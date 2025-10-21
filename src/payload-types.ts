@@ -1367,22 +1367,72 @@ export interface ColorScheme {
  */
 export interface SubscriptionPlan {
   id: number;
+  /**
+   * Nom du plan (ex: MedCoach IA, Premium)
+   */
   name: string;
-  price: number;
+  /**
+   * Description courte du plan (ex: Coach IA personnel complet)
+   */
+  description: string;
+  price: {
+    /**
+     * Prix en euros par mois
+     */
+    monthly: number;
+    /**
+     * Prix en euros par an
+     */
+    yearly: number;
+  };
+  /**
+   * Devise (EUR, USD, etc.)
+   */
   currency?: string | null;
-  billingPeriod: 'monthly' | 'yearly';
-  features?:
+  /**
+   * Liste des fonctionnalités incluses dans ce plan
+   */
+  features: {
+    feature: string;
+    id?: string | null;
+  }[];
+  /**
+   * Liste des limitations de ce plan (optionnel)
+   */
+  limitations?:
     | {
-        feature?: string | null;
+        limitation?: string | null;
         id?: string | null;
       }[]
     | null;
+  /**
+   * Afficher le badge "Recommandé" sur ce plan
+   */
+  highlighted?: boolean | null;
+  /**
+   * Texte affiché sur le bouton d'action (ex: Essai gratuit 30 jours)
+   */
+  ctaLabel: string;
+  /**
+   * URL de destination du bouton (ex: /onboarding)
+   */
+  ctaHref: string;
+  /**
+   * Limites techniques du plan (pour usage interne)
+   */
   limits?: {
     maxUsers?: number | null;
     maxStorage?: number | null;
     maxCourses?: number | null;
   };
+  /**
+   * Afficher ce plan sur le site
+   */
   isActive: boolean;
+  /**
+   * Ordre d'affichage sur la page (0 = premier)
+   */
+  displayOrder?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -3139,15 +3189,29 @@ export interface ColorSchemesSelect<T extends boolean = true> {
  */
 export interface SubscriptionPlansSelect<T extends boolean = true> {
   name?: T;
-  price?: T;
+  description?: T;
+  price?:
+    | T
+    | {
+        monthly?: T;
+        yearly?: T;
+      };
   currency?: T;
-  billingPeriod?: T;
   features?:
     | T
     | {
         feature?: T;
         id?: T;
       };
+  limitations?:
+    | T
+    | {
+        limitation?: T;
+        id?: T;
+      };
+  highlighted?: T;
+  ctaLabel?: T;
+  ctaHref?: T;
   limits?:
     | T
     | {
@@ -3156,6 +3220,7 @@ export interface SubscriptionPlansSelect<T extends boolean = true> {
         maxCourses?: T;
       };
   isActive?: T;
+  displayOrder?: T;
   updatedAt?: T;
   createdAt?: T;
 }
