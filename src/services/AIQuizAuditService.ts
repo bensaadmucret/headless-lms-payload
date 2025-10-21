@@ -21,6 +21,7 @@ export interface GenerationLogEntry {
     questionsCreated?: number;
     validationScore?: number;
     aiModel?: string;
+    aiProvider?: string;
     tokensUsed?: number;
   };
   error?: {
