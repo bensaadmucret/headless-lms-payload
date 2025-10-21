@@ -1,0 +1,220 @@
+{
+  "title": "LAS - Avancées médicales et technologies",
+  "description": "Quiz LAS sur les technologies médicales de pointe et les avancées thérapeutiques récentes",
+  "category": "Technologies médicales",
+  "studentLevel": "LAS",
+  "difficulty": "hard",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quel est le mécanisme des cellules CAR-T ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Lymphocytes T génétiquement modifiés pour reconnaître les cellules tumorales",
+        "Cellules souches pluripotentes",
+        "Thérapie génique classique",
+        "Immunothérapie passive"
+      ],
+      "correctAnswer": "Lymphocytes T génétiquement modifiés pour reconnaître les cellules tumorales",
+      "explanation": "Les cellules CAR-T sont des lymphocytes T autologues génétiquement modifiés pour exprimer un récepteur antigénique chimérique reconnaissant spécifiquement les antigènes tumoraux.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principe de l'édition génomique CRISPR-Cas9 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Découpage spécifique de l'ADN suivi de réparation",
+        "Amplification de l'ADN",
+        "Séquençage de l'ADN",
+        "Clonage moléculaire"
+      ],
+      "correctAnswer": "Découpage spécifique de l'ADN suivi de réparation",
+      "explanation": "CRISPR-Cas9 utilise un ARN guide pour diriger l'endonucléase Cas9 vers une séquence d'ADN spécifique où elle crée une coupure double brin, permettant l'édition génétique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'intelligence artificielle en médecine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Analyse de données médicales complexes pour l'aide au diagnostic",
+        "Remplacement du médecin",
+        "Prescription automatique de médicaments",
+        "Analyse d'images médicales uniquement"
+      ],
+      "correctAnswer": "Analyse de données médicales complexes pour l'aide au diagnostic",
+      "explanation": "L'IA en médecine analyse de grandes quantités de données (imagerie, biologie, clinique) pour assister le diagnostic, le pronostic et la thérapeutique personnalisée.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le principe de la thérapie photodynamique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Destruction sélective des cellules tumorales par lumière après administration de photosensibilisateur",
+        "Chimiothérapie classique",
+        "Radiothérapie externe",
+        "Immunothérapie"
+      ],
+      "correctAnswer": "Destruction sélective des cellules tumorales par lumière après administration de photosensibilisateur",
+      "explanation": "La thérapie photodynamique utilise un photosensibilisateur activé par la lumière pour générer des espèces réactives de l'oxygène détruisant sélectivement les cellules tumorales.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme de la neuromodulation électrique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Stimulation électrique des nerfs pour moduler l'activité neuronale",
+        "Ablation chirurgicale",
+        "Pharmacothérapie",
+        "Psychothérapie"
+      ],
+      "correctAnswer": "Stimulation électrique des nerfs pour moduler l'activité neuronale",
+      "explanation": "La neuromodulation électrique (stimulateur cardiaque, stimulation cérébrale profonde) utilise des impulsions électriques pour moduler l'activité des nerfs et du système nerveux central.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le principe de l'imagerie moléculaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Visualisation des processus biologiques au niveau moléculaire",
+        "Radiographie classique",
+        "Échographie diagnostique",
+        "Scanner morphologique"
+      ],
+      "correctAnswer": "Visualisation des processus biologiques au niveau moléculaire",
+      "explanation": "L'imagerie moléculaire (TEP, TEMP) visualise les processus biologiques (métabolisme, récepteurs, gènes) au niveau moléculaire pour le diagnostic précoce et le suivi thérapeutique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la thérapie par ultrasons focalisés de haute intensité (HIFU) ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Destruction thermique par ultrasons focalisés",
+        "Imagerie diagnostique",
+        "Lithotritie extracorporelle",
+        "Doppler vasculaire"
+      ],
+      "correctAnswer": "Destruction thermique par ultrasons focalisés",
+      "explanation": "Le HIFU concentre des ultrasons de haute énergie sur un point focal pour créer une nécrose thermique ablatrice, utilisée en cancérologie (prostate, foie) et neurologie fonctionnelle.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principe de la médecine régénérative ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Régénération tissulaire par cellules souches et biomatériaux",
+        "Transplantation d'organes",
+        "Prothèses médicales",
+        "Pharmacothérapie"
+      ],
+      "correctAnswer": "Régénération tissulaire par cellules souches et biomatériaux",
+      "explanation": "La médecine régénérative utilise les cellules souches, l'ingénierie tissulaire et les biomatériaux pour restaurer, maintenir ou améliorer les fonctions tissulaires perdues.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la nanomédecine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Utilisation de nanoparticules pour le diagnostic et le traitement ciblé",
+        "Chirurgie microscopique",
+        "Génie génétique",
+        "Imagerie moléculaire"
+      ],
+      "correctAnswer": "Utilisation de nanoparticules pour le diagnostic et le traitement ciblé",
+      "explanation": "La nanomédecine utilise des nanoparticules (10-100 nm) pour le ciblage moléculaire, la vectorisation de médicaments et l'imagerie médicale à l'échelle nanométrique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principe de la réalité virtuelle en médecine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Simulation d'environnements pour formation et thérapie",
+        "Imagerie médicale 3D",
+        "Chirurgie robotique",
+        "Télémédecine"
+      ],
+      "correctAnswer": "Simulation d'environnements pour formation et thérapie",
+      "explanation": "La réalité virtuelle crée des environnements immersifs simulés utilisés pour la formation chirurgicale, la rééducation fonctionnelle et certaines psychothérapies.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la thérapie par ondes de choc extracorporelles ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Fragmentation mécanique par ondes de pression",
+        "Thérapie thermique",
+        "Stimulation électrique",
+        "Thérapie magnétique"
+      ],
+      "correctAnswer": "Fragmentation mécanique par ondes de pression",
+      "explanation": "Les ondes de choc extracorporelles génèrent des pics de pression transitoires fragmentant les calculs rénaux ou stimulant la néovascularisation dans les tendinopathies.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le principe de la biopsie liquide ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Détection de biomarqueurs tumoraux dans les fluides biologiques",
+        "Prélèvement tissulaire invasif",
+        "Analyse histologique classique",
+        "Imagerie médicale"
+      ],
+      "correctAnswer": "Détection de biomarqueurs tumoraux dans les fluides biologiques",
+      "explanation": "La biopsie liquide détecte l'ADN tumoral circulant, les cellules tumorales circulantes et les exosomes dans le sang pour le diagnostic et le suivi non invasif du cancer.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme de la thérapie génique virale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Introduction de matériel génétique thérapeutique via des vecteurs viraux",
+        "Inhibition de l'expression génique",
+        "Réparation de l'ADN endommagé",
+        "Sélection clonale"
+      ],
+      "correctAnswer": "Introduction de matériel génétique thérapeutique via des vecteurs viraux",
+      "explanation": "La thérapie génique utilise des vecteurs viraux (adénovirus, AAV, lentivirus) pour introduire des gènes thérapeutiques dans les cellules cibles pour traiter les maladies génétiques.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principe de la stimulation magnétique transcrânienne ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Stimulation cérébrale non invasive par champs magnétiques",
+        "Chirurgie cérébrale",
+        "Pharmacothérapie neuropsychiatrique",
+        "Psychothérapie"
+      ],
+      "correctAnswer": "Stimulation cérébrale non invasive par champs magnétiques",
+      "explanation": "La stimulation magnétique transcrânienne (SMT) utilise des champs magnétiques pulsés pour stimuler l'activité corticale cérébrale de manière non invasive, utilisée en neurologie et psychiatrie.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la thérapie par cellules souches mésenchymateuses ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Régénération tissulaire et modulation immunitaire",
+        "Destruction cellulaire",
+        "Inhibition de l'angiogenèse",
+        "Stimulation de l'inflammation"
+      ],
+      "correctAnswer": "Régénération tissulaire et modulation immunitaire",
+      "explanation": "Les cellules souches mésenchymateuses possèdent des propriétés de différenciation tissulaire, de sécrétion de facteurs trophiques et de modulation de la réponse immunitaire.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

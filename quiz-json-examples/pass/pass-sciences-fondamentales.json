@@ -1,0 +1,220 @@
+{
+  "title": "PASS - Sciences fondamentales",
+  "description": "Quiz PASS sur les sciences fondamentales : biochimie, biologie cellulaire et génétique",
+  "category": "Sciences fondamentales",
+  "studentLevel": "PASS",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quel est le principal mécanisme de la glycolyse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Oxydation du glucose en pyruvate",
+        "Réduction du glucose en lactate",
+        "Phosphorylation oxydative",
+        "Cycle de Krebs"
+      ],
+      "correctAnswer": "Oxydation du glucose en pyruvate",
+      "explanation": "La glycolyse est la voie métabolique qui transforme le glucose en deux molécules de pyruvate avec production nette de 2 ATP et 2 NADH.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la fonction principale de l'ADN polymérase ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réplication de l'ADN",
+        "Transcription de l'ARN",
+        "Traduction des protéines",
+        "Réparation de l'ADN"
+      ],
+      "correctAnswer": "Réplication de l'ADN",
+      "explanation": "L'ADN polymérase catalyse la synthèse de nouveaux brins d'ADN complémentaires à partir d'un brin matrice lors de la réplication semi-conservative.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'hérédité mitochondriale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Transmission exclusivement maternelle",
+        "Transmission exclusivement paternelle",
+        "Transmission aléatoire",
+        "Transmission liée au chromosome X"
+      ],
+      "correctAnswer": "Transmission exclusivement maternelle",
+      "explanation": "L'ADN mitochondrial est transmis exclusivement par la mère car les mitochondries du spermatozoïde ne pénètrent pas dans l'ovocyte lors de la fécondation.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le rôle de l'ARN messager (ARNm) ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Transport des acides aminés",
+        "Catalyse des réactions biochimiques",
+        "Modèle de traduction pour la synthèse protéique",
+        "Régulation de l'expression génique"
+      ],
+      "correctAnswer": "Modèle de traduction pour la synthèse protéique",
+      "explanation": "L'ARNm sert de matrice à la traduction en apportant l'information génétique du noyau aux ribosomes cytoplasmiques pour la synthèse des protéines.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la définition de l'homozygote ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Individu ayant deux allèles identiques pour un gène donné",
+        "Individu ayant deux allèles différents pour un gène donné",
+        "Individu ayant un gène sur un seul chromosome",
+        "Individu ayant une délétion chromosomique"
+      ],
+      "correctAnswer": "Individu ayant deux allèles identiques pour un gène donné",
+      "explanation": "L'homozygote possède deux copies identiques du même allèle pour un locus génétique donné, contrairement à l'hétérozygote qui possède deux allèles différents.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de la photosynthèse chez les plantes ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Conversion de l'énergie lumineuse en énergie chimique",
+        "Respiration cellulaire",
+        "Fermentation",
+        "Oxydation des glucides"
+      ],
+      "correctAnswer": "Conversion de l'énergie lumineuse en énergie chimique",
+      "explanation": "La photosynthèse transforme l'énergie lumineuse en énergie chimique en produisant du glucose à partir de CO2 et d'eau grâce aux chlorophylles.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la fonction des centromères lors de la mitose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Attache des microtubules du fuseau mitotique",
+        "Réplication de l'ADN",
+        "Séparation des chromatides sœurs",
+        "Condensation des chromosomes"
+      ],
+      "correctAnswer": "Attache des microtubules du fuseau mitotique",
+      "explanation": "Les centromères permettent l'attachement des microtubules du fuseau mitotique aux chromosomes, assurant leur alignement et leur séparation équatoriale.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la respiration cellulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Production d'ATP par oxydation du glucose",
+        "Production d'ATP sans oxygène",
+        "Synthèse de glucose à partir de CO2",
+        "Dégradation des protéines"
+      ],
+      "correctAnswer": "Production d'ATP par oxydation du glucose",
+      "explanation": "La respiration cellulaire aérobie produit 36-38 ATP par molécule de glucose oxydée en CO2 et H2O via la glycolyse, le cycle de Krebs et la chaîne respiratoire.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la définition de la méiose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Division cellulaire aboutissant à deux cellules identiques",
+        "Division cellulaire aboutissant à quatre cellules haploïdes",
+        "Réplication de l'ADN",
+        "Transcription génique"
+      ],
+      "correctAnswer": "Division cellulaire aboutissant à quatre cellules haploïdes",
+      "explanation": "La méiose est une division cellulaire spécialisée en deux étapes (méiose I et II) produisant quatre gamètes haploïdes à partir d'une cellule diploïde.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de la mutagenèse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Modification permanente de la séquence d'ADN",
+        "Expression différentielle des gènes",
+        "Réparation de l'ADN endommagé",
+        "Réplication de l'ADN"
+      ],
+      "correctAnswer": "Modification permanente de la séquence d'ADN",
+      "explanation": "La mutagenèse correspond à toute modification permanente de la séquence d'ADN pouvant être transmise à la descendance cellulaire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la fonction principale des ribosomes ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Synthèse des protéines",
+        "Réplication de l'ADN",
+        "Stockage génétique",
+        "Dégradation des protéines"
+      ],
+      "correctAnswer": "Synthèse des protéines",
+      "explanation": "Les ribosomes sont des complexes ribonucléoprotéiques cytoplasmiques responsables de la traduction de l'ARNm en chaînes polypeptidiques.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'épistasie génétique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Interaction entre gènes différents",
+        "Expression d'un gène dominant",
+        "Mutation d'un gène",
+        "Récombination génétique"
+      ],
+      "correctAnswer": "Interaction entre gènes différents",
+      "explanation": "L'épistasie désigne l'interaction entre deux gènes ou plus où l'expression phénotypique d'un gène est influencée par un ou plusieurs autres gènes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'allèle sauvage ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Forme la plus fréquente d'un gène dans une population",
+        "Forme mutée d'un gène",
+        "Forme récessive d'un gène",
+        "Forme liée au chromosome X"
+      ],
+      "correctAnswer": "Forme la plus fréquente d'un gène dans une population",
+      "explanation": "L'allèle sauvage est la forme d'un gène la plus fréquemment rencontrée dans une population naturelle, considérée comme la forme normale ou de référence.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la régulation transcriptionnelle ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Contrôle de l'expression des gènes au niveau de l'ARN",
+        "Contrôle de l'expression des gènes au niveau de l'ADN",
+        "Contrôle de la traduction des protéines",
+        "Contrôle de la dégradation des protéines"
+      ],
+      "correctAnswer": "Contrôle de l'expression des gènes au niveau de l'ADN",
+      "explanation": "La régulation transcriptionnelle contrôle l'expression génique en régulant l'accès des ARN polymérases aux promoteurs des gènes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la fonction des enzymes de restriction ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Couper l'ADN à des séquences spécifiques",
+        "Répliquer l'ADN",
+        "Transcrire l'ADN en ARN",
+        "Réparer l'ADN endommagé"
+      ],
+      "correctAnswer": "Couper l'ADN à des séquences spécifiques",
+      "explanation": "Les enzymes de restriction reconnaissent des séquences palindromiques spécifiques et hydrolysent l'ADN à ces sites, utilisées en génie génétique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

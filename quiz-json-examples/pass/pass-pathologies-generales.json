@@ -1,0 +1,220 @@
+{
+  "title": "PASS - Pathologies générales",
+  "description": "Quiz PASS sur les mécanismes pathologiques généraux : inflammation, nécrose, dégénérescence et cancérogenèse",
+  "category": "Pathologies générales",
+  "studentLevel": "PASS",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la définition de la nécrose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Mort cellulaire programmée",
+        "Mort cellulaire accidentelle",
+        "Prolifération cellulaire anormale",
+        "Inflammation chronique"
+      ],
+      "correctAnswer": "Mort cellulaire accidentelle",
+      "explanation": "La nécrose est une mort cellulaire accidentelle résultant d'une agression brutale (ischémie, toxique, infection) contrairement à l'apoptose qui est programmée.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme principal de la carcinogenèse chimique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Mutation directe de l'ADN",
+        "Activation de proto-oncogènes",
+        "Inactivation de gènes suppresseurs de tumeurs",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "La carcinogenèse chimique peut agir par mutation directe de l'ADN, activation de proto-oncogènes (ras, myc) ou inactivation de gènes suppresseurs (p53, Rb).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de la métastase ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tumeur primitive",
+        "Propagation tumorale à distance",
+        "Invasion locale",
+        "Angiogenèse tumorale"
+      ],
+      "correctAnswer": "Propagation tumorale à distance",
+      "explanation": "La métastase désigne la dissémination de cellules tumorales malignes à partir du site primitif vers des organes distants via les voies lymphatiques ou sanguines.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'inflammation granulomateuse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réaction immunitaire contre des agents persistants",
+        "Inflammation aiguë bactérienne",
+        "Réaction allergique",
+        "Inflammation virale"
+      ],
+      "correctAnswer": "Réaction immunitaire contre des agents persistants",
+      "explanation": "L'inflammation granulomateuse se développe en réponse à des agents persistants (corps étrangers, mycobactéries) que les macrophages ne peuvent éliminer seuls.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'angiogenèse ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Formation de nouveaux vaisseaux sanguins",
+        "Destruction des vaisseaux sanguins",
+        "Perméabilité vasculaire",
+        "Coagulation sanguine"
+      ],
+      "correctAnswer": "Formation de nouveaux vaisseaux sanguins",
+      "explanation": "L'angiogenèse désigne le processus de formation de nouveaux vaisseaux sanguins à partir de vaisseaux préexistants, essentiel à la croissance tumorale.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de la dégénérescence amyloïde ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Accumulation extracellulaire de protéines fibrillaires",
+        "Mort neuronale",
+        "Inflammation cérébrale",
+        "Démence vasculaire"
+      ],
+      "correctAnswer": "Accumulation extracellulaire de protéines fibrillaires",
+      "explanation": "La dégénérescence amyloïde se caractérise par l'accumulation extracellulaire de substance amyloïde constituée de protéines fibrillaires dans divers organes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'invasion tumorale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Croissance tumorale en volume",
+        "Pénétration des tissus adjacents",
+        "Formation de métastases",
+        "Angiogenèse tumorale"
+      ],
+      "correctAnswer": "Pénétration des tissus adjacents",
+      "explanation": "L'invasion tumorale désigne la capacité des cellules malignes à pénétrer et détruire les tissus adjacents par dégradation de la matrice extracellulaire.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'hypersensibilité de type I ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réaction anaphylactique à médiation IgE",
+        "Cytotoxicité cellulaire",
+        "Formation de complexes immuns",
+        "Hypersensibilité retardée"
+      ],
+      "correctAnswer": "Réaction anaphylactique à médiation IgE",
+      "explanation": "L'hypersensibilité de type I (Gell et Coombs) est une réaction allergique immédiate à médiation IgE avec libération de médiateurs comme l'histamine.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de la cachexie ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Perte de poids involontaire avec dénutrition",
+        "Prise de poids excessive",
+        "Rétention hydrosodée",
+        "Anémie chronique"
+      ],
+      "correctAnswer": "Perte de poids involontaire avec dénutrition",
+      "explanation": "La cachexie désigne un état d'amaigrissement et de dénutrition profonde souvent associé aux cancers avancés ou aux maladies chroniques graves.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de la fibrose tissulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Accumulation excessive de collagène",
+        "Destruction cellulaire",
+        "Inflammation aiguë",
+        "Nécrose tissulaire"
+      ],
+      "correctAnswer": "Accumulation excessive de collagène",
+      "explanation": "La fibrose résulte d'une accumulation excessive de matrice extracellulaire, principalement de collagène, remplaçant le parenchyme fonctionnel.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la définition de l'ischémie-reperfusion ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Lésion tissulaire aggravée par la restauration du flux sanguin",
+        "Occlusion vasculaire définitive",
+        "Spasme vasculaire",
+        "Thrombose vasculaire"
+      ],
+      "correctAnswer": "Lésion tissulaire aggravée par la restauration du flux sanguin",
+      "explanation": "Le syndrome d'ischémie-reperfusion désigne les lésions tissulaires paradoxalement aggravées lors de la restauration du flux sanguin après une ischémie.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'apoptose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Activation de caspases",
+        "Nécrose cellulaire",
+        "Inflammation",
+        "Prolifération cellulaire"
+      ],
+      "correctAnswer": "Activation de caspases",
+      "explanation": "L'apoptose est un processus de mort cellulaire programmée faisant intervenir l'activation en cascade de proteases à cystéine appelées caspases.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de la dysplasie ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Croissance tissulaire anormale pré-cancéreuse",
+        "Tumeur maligne",
+        "Inflammation chronique",
+        "Nécrose tissulaire"
+      ],
+      "correctAnswer": "Croissance tissulaire anormale pré-cancéreuse",
+      "explanation": "La dysplasie désigne une anomalie de la maturation cellulaire et de l'architecture tissulaire constituant une lésion pré-cancéreuse potentielle.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'auto-immunité ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réaction immune contre les constituants du soi",
+        "Déficit immunitaire",
+        "Réaction allergique",
+        "Tolérance immune normale"
+      ],
+      "correctAnswer": "Réaction immune contre les constituants du soi",
+      "explanation": "L'auto-immunité résulte d'une perte de tolérance immune vis-à-vis des antigènes du soi, pouvant être déclenchée par des facteurs génétiques ou environnementaux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'hypertrophie cardiaque ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Épaississement de la paroi cardiaque",
+        "Dilatation des cavités cardiaques",
+        "Fibrose du myocarde",
+        "Inflammation du péricarde"
+      ],
+      "correctAnswer": "Épaississement de la paroi cardiaque",
+      "explanation": "L'hypertrophie cardiaque correspond à une augmentation de la masse myocardique par épaississement des cardiomyocytes en réponse à une surcharge mécanique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    }
+  ]
+}

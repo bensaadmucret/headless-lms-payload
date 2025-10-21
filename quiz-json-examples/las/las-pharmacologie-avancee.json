@@ -1,0 +1,220 @@
+{
+  "title": "LAS - Pharmacologie avancée",
+  "description": "Quiz LAS sur les mécanismes pharmacologiques avancés et les interactions médicamenteuses",
+  "category": "Pharmacologie avancée",
+  "studentLevel": "LAS",
+  "difficulty": "hard",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quel est le mécanisme d'action des inhibiteurs de la tyrosine kinase ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Blocage compétitif des récepteurs tyrosine kinase",
+        "Inhibition de l'activité catalytique tyrosine kinase",
+        "Dégradation des récepteurs tyrosine kinase",
+        "Prévention de la dimérisation des récepteurs"
+      ],
+      "correctAnswer": "Inhibition de l'activité catalytique tyrosine kinase",
+      "explanation": "Les inhibiteurs de tyrosine kinase (imatinib, dasatinib) inhibent spécifiquement l'activité catalytique des tyrosine kinases mutées dans les cancers, comme BCR-ABL dans la leucémie myéloïde chronique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des anticorps monoclonaux thérapeutiques ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Neutralisation d'antigènes spécifiques",
+        "Activation du complément",
+        "Cytotoxicité cellulaire dépendante des anticorps",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les anticorps monoclonaux agissent par plusieurs mécanismes : neutralisation directe, activation du complément (CDC) et cytotoxicité cellulaire dépendante des anticorps (ADCC).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'induction enzymatique hépatique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Augmentation de la synthèse des enzymes du cytochrome P450",
+        "Diminution de la synthèse des enzymes du cytochrome P450",
+        "Inhibition compétitive des enzymes",
+        "Inactivation irréversible des enzymes"
+      ],
+      "correctAnswer": "Augmentation de la synthèse des enzymes du cytochrome P450",
+      "explanation": "L'induction enzymatique correspond à une augmentation de la synthèse des enzymes du cytochrome P450 sous l'effet de médicaments comme la rifampicine ou le phénobarbital.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs de l'aromatase ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Blocage de la conversion des androgènes en œstrogènes",
+        "Stimulation de la production d'œstrogènes",
+        "Antagonisme des récepteurs œstrogéniques",
+        "Inhibition de la 5-alpha réductase"
+      ],
+      "correctAnswer": "Blocage de la conversion des androgènes en œstrogènes",
+      "explanation": "Les inhibiteurs de l'aromatase (létrozole, anastrozole) bloquent l'enzyme aromatase qui convertit les androgènes en œstrogènes, utilisés dans le cancer du sein hormonodépendant.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des médicaments biologiques ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Protéines thérapeutiques produites par biotechnologie",
+        "Molécules de synthèse chimique",
+        "Extraits naturels",
+        "Médicaments génériques"
+      ],
+      "correctAnswer": "Protéines thérapeutiques produites par biotechnologie",
+      "explanation": "Les médicaments biologiques sont des protéines thérapeutiques (anticorps monoclonaux, cytokines, facteurs de croissance) produites par génie génétique dans des cellules hôtes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme de la pharmacogénétique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Influence du patrimoine génétique sur la réponse médicamenteuse",
+        "Étude des effets secondaires des médicaments",
+        "Développement de nouveaux médicaments",
+        "Étude des interactions médicamenteuses"
+      ],
+      "correctAnswer": "Influence du patrimoine génétique sur la réponse médicamenteuse",
+      "explanation": "La pharmacogénétique étudie comment les variations génétiques individuelles influencent la réponse aux médicaments, expliquant les différences interindividuelles d'efficacité et de toxicité.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs du SGLT2 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Inhibition du cotransporteur sodium-glucose de type 2",
+        "Stimulation de la sécrétion d'insuline",
+        "Inhibition de la DPP-4",
+        "Activation des récepteurs GLP-1"
+      ],
+      "correctAnswer": "Inhibition du cotransporteur sodium-glucose de type 2",
+      "explanation": "Les inhibiteurs du SGLT2 (dapagliflozine, canagliflozine) inhibent la réabsorption rénale du glucose, entraînant une glycosurie et une amélioration de l'équilibre glycémique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs de la calcineurine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Inhibition de la phosphatase calcineurine",
+        "Activation de la voie NFAT",
+        "Stimulation de la prolifération lymphocytaire",
+        "Inhibition de la synthèse d'IL-2"
+      ],
+      "correctAnswer": "Inhibition de la phosphatase calcineurine",
+      "explanation": "Les inhibiteurs de la calcineurine (ciclosporine, tacrolimus) inhibent la phosphatase calcineurine, bloquant la déphosphorylation de NFAT et donc la transcription de l'IL-2.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des agonistes des récepteurs GLP-1 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Stimulation de la sécrétion d'insuline glucose-dépendante",
+        "Inhibition de la sécrétion de glucagon",
+        "Ralentissement de la vidange gastrique",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les agonistes des récepteurs GLP-1 (liraglutide, semaglutide) stimulent la sécrétion d'insuline, inhibent celle du glucagon et ralentissent la vidange gastrique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs de la phosphodiestérase de type 5 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Accumulation de GMP cyclique dans les corps caverneux",
+        "Vasodilatation artérielle systémique",
+        "Diminution de la pression artérielle",
+        "Augmentation de la fréquence cardiaque"
+      ],
+      "correctAnswer": "Accumulation de GMP cyclique dans les corps caverneux",
+      "explanation": "Les inhibiteurs de la PDE5 (sildenafil, tadalafil) empêchent la dégradation du GMPc dans les corps caverneux, favorisant la relaxation des muscles lisses et l'érection.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme des anticorps anti-TNFα ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Neutralisation du TNFα pro-inflammatoire",
+        "Stimulation de la production de TNFα",
+        "Inhibition de la synthèse d'anticorps",
+        "Activation du complément"
+      ],
+      "correctAnswer": "Neutralisation du TNFα pro-inflammatoire",
+      "explanation": "Les anticorps anti-TNFα (infliximab, adalimumab) neutralisent le TNFα, cytokine clé de l'inflammation dans les maladies rhumatismales et inflammatoires chroniques intestinales.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs de l'intégrase virale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Blocage de l'intégration de l'ADN viral dans l'ADN cellulaire",
+        "Inhibition de la transcriptase inverse",
+        "Prévention de l'attachement viral",
+        "Inhibition de la maturation virale"
+      ],
+      "correctAnswer": "Blocage de l'intégration de l'ADN viral dans l'ADN cellulaire",
+      "explanation": "Les inhibiteurs de l'intégrase (raltégravir, dolutégravir) empêchent l'intégration de l'ADN proviral dans le génome de la cellule hôte, étape essentielle du cycle viral du VIH.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs des JAK kinases ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Inhibition de la signalisation intracellulaire JAK-STAT",
+        "Activation de la voie JAK-STAT",
+        "Stimulation de la prolifération cellulaire",
+        "Inhibition de la transcription génique"
+      ],
+      "correctAnswer": "Inhibition de la signalisation intracellulaire JAK-STAT",
+      "explanation": "Les inhibiteurs des JAK (tofacitinib, baricitinib) inhibent les Janus kinases, bloquant la transduction du signal des cytokines pro-inflammatoires via la voie JAK-STAT.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs de la neuraminidase virale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Prévention de la libération des virions influenza",
+        "Inhibition de l'attachement viral",
+        "Blocage de la pénétration virale",
+        "Inhibition de la réplication virale"
+      ],
+      "correctAnswer": "Prévention de la libération des virions influenza",
+      "explanation": "Les inhibiteurs de la neuraminidase (oseltamivir, zanamivir) empêchent la libération des virions influenza nouvellement formés des cellules infectées en clivant l'acide sialique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le mécanisme des inhibiteurs du protéasome ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Inhibition de la dégradation des protéines intracellulaires",
+        "Stimulation de la synthèse protéique",
+        "Inhibition de la transcription génique",
+        "Activation des caspases"
+      ],
+      "correctAnswer": "Inhibition de la dégradation des protéines intracellulaires",
+      "explanation": "Les inhibiteurs du protéasome (bortézomib) bloquent l'activité du complexe 26S, empêchant la dégradation ubiquitinée des protéines cyclines et facteurs de transcription pro-apoptotiques.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

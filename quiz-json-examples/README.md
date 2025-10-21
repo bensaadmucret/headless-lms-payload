@@ -7,6 +7,14 @@ Ce dossier contient des exemples de fichiers JSON prêts à être importés dans
 ```
 quiz-json-examples/
 ├── README.md (ce fichier)
+├── pass/ (dossier PASS - niveau fondamental)
+│   ├── pass-bases-medicales.json (15 questions QCM bases médicales)
+│   ├── pass-sciences-fondamentales.json (15 questions QCM sciences fondamentales)
+│   └── pass-pathologies-generales.json (15 questions QCM pathologies générales)
+├── las/ (dossier LAS - niveau avancé)
+│   ├── las-specialites-medicales.json (15 questions QCM spécialités médicales)
+│   ├── las-pharmacologie-avancee.json (15 questions QCM pharmacologie avancée)
+│   └── las-avancees-medicales.json (15 questions QCM avancées médicales)
 ├── questions-cardiologie-pass.json (5 questions QCM cardiologie PASS)
 ├── questions-neurologie-las.json (5 questions QCM neurologie LAS)
 ├── questions-pass-100.json (100 questions QCM niveau PASS)
@@ -81,6 +89,50 @@ curl -X POST http://localhost:3000/api/json-import \
 - **5 questions** sur la neurologie niveau LAS
 - **Thèmes** : nerfs crâniens, réflexes, neurotransmetteurs
 - **Spécialités médicales** : neurologie, sémiologie
+
+### Quiz organisés par niveau académique
+
+#### Dossier PASS (niveau fondamental)
+Quiz spécialement conçus pour le niveau PASS (Première Année Commune aux Études de Santé) avec des questions fondamentales et des concepts de base.
+
+#### `pass-bases-medicales.json`
+- **15 questions** sur les bases médicales fondamentales
+- **Thèmes couverts** : anatomie, physiologie, pathologie générale
+- **Niveau de difficulté** : easy à medium
+- **Idéal pour débutants** en médecine
+
+#### `pass-sciences-fondamentales.json`
+- **15 questions** sur les sciences fondamentales
+- **Thèmes couverts** : biochimie, biologie cellulaire, génétique
+- **Niveau de difficulté** : medium
+- **Focus sur les mécanismes** biologiques essentiels
+
+#### `pass-pathologies-generales.json`
+- **15 questions** sur les mécanismes pathologiques généraux
+- **Thèmes couverts** : inflammation, nécrose, dégénérescence, cancérogenèse
+- **Niveau de difficulté** : medium
+- **Compréhension des processus** pathologiques fondamentaux
+
+#### Dossier LAS (niveau avancé)
+Quiz spécialement conçus pour le niveau LAS (Licence Accès Santé) avec des questions avancées et un approfondissement clinique.
+
+#### `las-specialites-medicales.json`
+- **15 questions** sur les spécialités médicales pointues
+- **Thèmes couverts** : spécialités rares, nouvelles technologies, approches multidisciplinaires
+- **Niveau de difficulté** : hard
+- **Mise à jour des connaissances** médicales actuelles
+
+#### `las-pharmacologie-avancee.json`
+- **15 questions** sur les mécanismes pharmacologiques avancés
+- **Thèmes couverts** : inhibiteurs tyrosine kinase, anticorps monoclonaux, pharmacogénétique
+- **Niveau de difficulté** : hard
+- **Compréhension approfondie** des mécanismes d'action
+
+#### `las-avancees-medicales.json`
+- **15 questions** sur les technologies médicales de pointe
+- **Thèmes couverts** : CAR-T, CRISPR-Cas9, intelligence artificielle, nanomédecine
+- **Niveau de difficulté** : hard
+- **Avancées thérapeutiques** les plus récentes
 
 ### Quiz par Unités d'Enseignement (nouveaux)
 
