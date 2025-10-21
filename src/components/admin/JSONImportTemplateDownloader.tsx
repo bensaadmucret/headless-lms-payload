@@ -308,7 +308,7 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                 Commencez par le template Questions CSV
               </p>
               <Button
-                onClick={() => downloadTemplate(templates[1])}
+                onClick={() => downloadTemplate(templates[1]!)}
                 style={{
                   backgroundColor: '#10b981',
                   color: 'white',
@@ -370,7 +370,7 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                 Utilisez les templates JSON complets
               </p>
               <Button
-                onClick={() => downloadTemplate(templates[0])}
+                onClick={() => downloadTemplate(templates[0]!)}
                 style={{
                   backgroundColor: '#8b5cf6',
                   color: 'white',
