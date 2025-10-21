@@ -9,7 +9,7 @@ interface LogContext {
   service?: string;
   userId?: string | number;
   requestId?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 class Logger {
@@ -42,7 +42,7 @@ class Logger {
   /**
    * Log de niveau debug (seulement en développement)
    */
-  debug(message: string, meta?: Record<string, any>): void {
+  debug(message: string, meta?: Record<string, unknown>): void {
     if (this.isDevelopment) {
       this.log('debug', message, meta);
     }
@@ -51,21 +51,21 @@ class Logger {
   /**
    * Log de niveau info
    */
-  info(message: string, meta?: Record<string, any>): void {
+  info(message: string, meta?: Record<string, unknown>): void {
     this.log('info', message, meta);
   }
 
   /**
    * Log de niveau warning
    */
-  warn(message: string, meta?: Record<string, any>): void {
+  warn(message: string, meta?: Record<string, unknown>): void {
     this.log('warn', message, meta);
   }
 
   /**
    * Log de niveau error
    */
-  error(message: string, error?: Error | unknown, meta?: Record<string, any>): void {
+  error(message: string, error?: Error | unknown, meta?: Record<string, unknown>): void {
     const errorMeta = error instanceof Error
       ? {
           error: {
@@ -83,7 +83,7 @@ class Logger {
   /**
    * Méthode interne de logging
    */
-  private log(level: LogLevel, message: string, meta?: Record<string, any>): void {
+  private log(level: LogLevel, message: string, meta?: Record<string, unknown>): void {
     const timestamp = new Date().toISOString();
     const logData = {
       timestamp,
@@ -130,7 +130,7 @@ class Logger {
   async time<T>(
     label: string,
     fn: () => Promise<T> | T,
-    meta?: Record<string, any>
+    meta?: Record<string, unknown>
   ): Promise<T> {
     const start = Date.now();
     this.debug(`[${label}] Started`, meta);
@@ -150,7 +150,7 @@ class Logger {
   /**
    * Log une requête HTTP
    */
-  logRequest(method: string, path: string, meta?: Record<string, any>): void {
+  logRequest(method: string, path: string, meta?: Record<string, unknown>): void {
     this.info(`${method} ${path}`, { type: 'http_request', method, path, ...meta });
   }
 
@@ -162,7 +162,7 @@ class Logger {
     path: string,
     statusCode: number,
     duration: number,
-    meta?: Record<string, any>
+    meta?: Record<string, unknown>
   ): void {
     const level = statusCode >= 500 ? 'error' : statusCode >= 400 ? 'warn' : 'info';
     this.log(level, `${method} ${path} ${statusCode} - ${duration}ms`, {
@@ -178,7 +178,7 @@ class Logger {
   /**
    * Log une opération de base de données
    */
-  logDatabase(operation: string, collection: string, meta?: Record<string, any>): void {
+  logDatabase(operation: string, collection: string, meta?: Record<string, unknown>): void {
     this.debug(`DB: ${operation} on ${collection}`, {
       type: 'database',
       operation,
@@ -190,7 +190,7 @@ class Logger {
   /**
    * Log une opération de cache
    */
-  logCache(operation: 'hit' | 'miss' | 'set' | 'delete', key: string, meta?: Record<string, any>): void {
+  logCache(operation: 'hit' | 'miss' | 'set' | 'delete', key: string, meta?: Record<string, unknown>): void {
     this.debug(`Cache ${operation}: ${key}`, {
       type: 'cache',
       operation,
@@ -202,7 +202,7 @@ class Logger {
   /**
    * Log une opération de queue/job
    */
-  logJob(jobName: string, status: 'started' | 'completed' | 'failed', meta?: Record<string, any>): void {
+  logJob(jobName: string, status: 'started' | 'completed' | 'failed', meta?: Record<string, unknown>): void {
     const level = status === 'failed' ? 'error' : 'info';
     this.log(level, `Job ${jobName} ${status}`, {
       type: 'job',
@@ -221,16 +221,17 @@ export { Logger };
 
 // Helpers pour une migration facile depuis console.log
 export const log = {
-  debug: (message: string, ...args: any[]) => logger.debug(message, { args }),
-  info: (message: string, ...args: any[]) => logger.info(message, { args }),
-  warn: (message: string, ...args: any[]) => logger.warn(message, { args }),
-  error: (message: string, ...args: any[]) => logger.error(message, undefined, { args }),
+  debug: (message: string, ...args: unknown[]) => logger.debug(message, { args }),
+  info: (message: string, ...args: unknown[]) => logger.info(message, { args }),
+  warn: (message: string, ...args: unknown[]) => logger.warn(message, { args }),
+  error: (message: string, ...args: unknown[]) => logger.error(message, undefined, { args }),
 };
 
 /**
  * Middleware pour logger les requêtes HTTP
  */
 export function createRequestLogger(serviceName: string) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (req: any, res: any, next: any) => {
     const start = Date.now();
     const requestLogger = logger.child({ service: serviceName });
@@ -242,6 +243,7 @@ export function createRequestLogger(serviceName: string) {
 
     // Intercepter la réponse
     const originalSend = res.send;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     res.send = function (data: any) {
       const duration = Date.now() - start;
       requestLogger.logResponse(req.method, req.path, res.statusCode, duration);

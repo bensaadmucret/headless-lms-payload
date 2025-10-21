@@ -7,12 +7,24 @@ interface ValidationError {
   suggestion?: string
 }
 
+interface ValidationWarning {
+  message: string
+  suggestion?: string
+}
+
 interface ValidationResult {
   isValid: boolean
   errors: ValidationError[]
-  warnings: string[]
+  warnings: ValidationWarning[]
   previewData?: any[]
   categoryMappings?: CategoryMapping[]
+  summary?: {
+    totalItems: number
+    validItems: number
+    invalidItems: number
+    duplicates: number
+    missingCategories: string[]
+  }
 }
 
 interface CategoryMapping {
@@ -23,6 +35,12 @@ interface CategoryMapping {
 }
 
 export class JSONValidationService {
+  async validateImportData(data: any, importType: string): Promise<ValidationResult> {
+    // Convertir l'objet en JSON string puis le reparser pour uniformiser le traitement
+    const jsonContent = JSON.stringify(data);
+    return this.validateJSON(jsonContent, importType);
+  }
+
   async validateJSON(content: string, importType: string, options: Record<string, unknown> = {}): Promise<ValidationResult> {
     const result: ValidationResult = {
       isValid: true,
@@ -50,7 +68,7 @@ export class JSONValidationService {
 
       // 2. Validation structure de base
       if (!data.version) {
-        result.warnings.push('Champ "version" manquant, version 1.0 assumée')
+        result.warnings.push({ message: 'Champ "version" manquant, version 1.0 assumée' })
       }
 
       if (!data.type) {
@@ -88,11 +106,14 @@ export class JSONValidationService {
         result.categoryMappings = await this.detectCategoryMappings(data, importType)
       }
 
+      // 5. Calcul du résumé
+      result.summary = this.calculateSummary(data, importType, result.errors, result.warnings)
+
     } catch (error) {
       result.errors.push({
         type: 'system',
         severity: 'critical',
-        message: `Erreur lors de la validation: ${error.message}`
+        message: `Erreur lors de la validation: ${error instanceof Error ? error.message : 'Erreur inconnue'}`
       })
       result.isValid = false
     }
@@ -140,8 +161,18 @@ export class JSONValidationService {
   }
 
   private validateSingleQuestion(question: Record<string, unknown>, index: number, result: ValidationResult) {
-    // Texte de la question
-    if (!question.questionText || typeof question.questionText !== 'string') {
+    // Validation du type de questionText
+    if (question.questionText !== undefined && typeof question.questionText !== 'string') {
+      result.errors.push({
+        type: 'validation',
+        severity: 'critical',
+        itemIndex: index,
+        field: 'questionText',
+        message: `Type incorrect pour questionText: attendu string, reçu ${typeof question.questionText}`,
+        suggestion: 'Le texte de la question doit être une chaîne de caractères'
+      })
+      result.isValid = false
+    } else if (!question.questionText || (typeof question.questionText === 'string' && question.questionText.trim() === '')) {
       result.errors.push({
         type: 'validation',
         severity: 'critical',
@@ -196,12 +227,23 @@ export class JSONValidationService {
           message: 'Plusieurs bonnes réponses détectées',
           suggestion: 'Une seule option doit avoir "isCorrect": true'
         })
+        result.isValid = false
+      }
+
+      // Vérifier les options identiques
+      const optionTexts = (question.options as Array<{ text: string }>).map(opt => opt.text?.toLowerCase().trim()).filter(text => text)
+      const uniqueTexts = new Set(optionTexts)
+      if (optionTexts.length !== uniqueTexts.size) {
+        result.warnings.push({ 
+          message: `Question ${index + 1}: Options similaires détectées`,
+          suggestion: 'Assurez-vous que chaque option est distincte'
+        })
       }
     }
 
     // Explication
     if (!question.explanation) {
-      result.warnings.push(`Question ${index + 1}: Explication manquante (recommandée)`)
+      result.warnings.push({ message: `Question ${index + 1}: Explication manquante (recommandée)` })
     }
 
     // Catégorie
@@ -217,7 +259,7 @@ export class JSONValidationService {
     }
 
     // Niveau de difficulté
-    if (question.difficulty && !['easy', 'medium', 'hard'].includes(question.difficulty)) {
+    if (question.difficulty && typeof question.difficulty === 'string' && !['easy', 'medium', 'hard'].includes(question.difficulty)) {
       result.errors.push({
         type: 'validation',
         severity: 'minor',
@@ -226,10 +268,11 @@ export class JSONValidationService {
         message: 'Niveau de difficulté invalide',
         suggestion: 'Utilisez: easy, medium, ou hard'
       })
+      result.isValid = false
     }
 
     // Niveau d'études
-    if (question.level && !['PASS', 'LAS', 'both'].includes(question.level)) {
+    if (question.level && typeof question.level === 'string' && !['PASS', 'LAS', 'both'].includes(question.level)) {
       result.errors.push({
         type: 'validation',
         severity: 'minor',
@@ -238,6 +281,7 @@ export class JSONValidationService {
         message: 'Niveau d\'études invalide',
         suggestion: 'Utilisez: PASS, LAS, ou both'
       })
+      result.isValid = false
     }
   }
 
@@ -260,7 +304,7 @@ export class JSONValidationService {
           severity: 'critical',
           itemIndex: index,
           field: 'front',
-          message: 'Recto de la carte requis'
+          message: 'Recto de la carte requis et doit être une chaîne de caractères'
         })
         result.isValid = false
       }
@@ -271,7 +315,7 @@ export class JSONValidationService {
           severity: 'critical',
           itemIndex: index,
           field: 'back',
-          message: 'Verso de la carte requis'
+          message: 'Verso de la carte requis et doit être une chaîne de caractères'
         })
         result.isValid = false
       }
@@ -287,7 +331,7 @@ export class JSONValidationService {
   }
 
   private async validateLearningPaths(data: Record<string, unknown>, result: ValidationResult) {
-    if (!data.path || !data.path.steps || !Array.isArray(data.path.steps)) {
+    if (!data.path || typeof data.path !== 'object' || !data.path || !('steps' in data.path) || !Array.isArray(data.path.steps)) {
       result.errors.push({
         type: 'validation',
         severity: 'critical',
@@ -299,7 +343,7 @@ export class JSONValidationService {
 
     // Validation des étapes
     data.path.steps.forEach((step: any, index: number) => {
-      if (!step.id) {
+      if (!step.id || (typeof step.id === 'string' && step.id.trim() === '')) {
         result.errors.push({
           type: 'validation',
           severity: 'critical',
@@ -333,6 +377,7 @@ export class JSONValidationService {
               message: `Prérequis "${prereq}" non trouvé`,
               suggestion: 'Vérifiez que l\'ID du prérequis existe dans les étapes'
             })
+            result.isValid = false
           }
         })
       }
@@ -348,11 +393,11 @@ export class JSONValidationService {
   }
 
   private detectDuplicateQuestions(questions: Array<Record<string, unknown>>, result: ValidationResult) {
-    const seen = new Set()
+    const seen = new Set<string>()
     questions.forEach((question, index) => {
-      const key = question.questionText?.toLowerCase().trim()
+      const key = question.questionText && typeof question.questionText === 'string' ? question.questionText.toLowerCase().trim() : ''
       if (key && seen.has(key)) {
-        result.warnings.push(`Question ${index + 1}: Possible doublon détecté`)
+        result.warnings.push({ message: `Question ${index + 1}: Possible doublon détecté` })
       } else if (key) {
         seen.add(key)
       }
@@ -364,11 +409,11 @@ export class JSONValidationService {
     const categories = new Set<string>()
 
     // Extraire les catégories selon le type
-    if (importType === 'questions' && data.questions) {
+    if (importType === 'questions' && data.questions && Array.isArray(data.questions)) {
       (data.questions as Array<Record<string, unknown>>).forEach((q) => {
         if (q.category && typeof q.category === 'string') categories.add(q.category)
       })
-    } else if (importType === 'flashcards' && data.cards) {
+    } else if (importType === 'flashcards' && data.cards && Array.isArray(data.cards)) {
       (data.cards as Array<Record<string, unknown>>).forEach((c) => {
         if (c.category && typeof c.category === 'string') categories.add(c.category)
       })
@@ -413,6 +458,62 @@ export class JSONValidationService {
       suggestedCategory: originalName,
       confidence: 0.5,
       action: 'create'
+    }
+  }
+
+  private calculateSummary(data: Record<string, unknown>, importType: string, errors: ValidationError[], warnings: ValidationWarning[]): {
+    totalItems: number
+    validItems: number
+    invalidItems: number
+    duplicates: number
+    missingCategories: string[]
+  } {
+    let totalItems = 0
+    let invalidItems = 0
+    const missingCategories = new Set<string>()
+    let duplicates = 0
+
+    // Calculer selon le type d'import
+    switch (importType) {
+      case 'questions':
+        if (data.questions && Array.isArray(data.questions)) {
+          totalItems = data.questions.length
+          invalidItems = errors.filter(e => e.itemIndex !== undefined).length
+        }
+        break
+      case 'flashcards':
+        if (data.cards && Array.isArray(data.cards)) {
+          totalItems = data.cards.length
+          invalidItems = errors.filter(e => e.itemIndex !== undefined).length
+        }
+        break
+      case 'learning-paths':
+        if (data.path && typeof data.path === 'object' && 'steps' in data.path && Array.isArray(data.path.steps)) {
+          totalItems = data.path.steps.length
+          invalidItems = errors.filter(e => e.itemIndex !== undefined).length
+        }
+        break
+    }
+
+    // Compter les doublons
+    duplicates = warnings.filter(w => w.message.includes('dupliquée') || w.message.includes('doublon')).length
+
+    // Compter les catégories manquantes
+    errors.forEach(error => {
+      if (error.message.includes('n\'existe pas dans le système')) {
+        const categoryMatch = error.message.match(/«([^»]+)»/)
+        if (categoryMatch && categoryMatch[1]) {
+          missingCategories.add(categoryMatch[1])
+        }
+      }
+    })
+
+    return {
+      totalItems,
+      validItems: totalItems - invalidItems,
+      invalidItems,
+      duplicates,
+      missingCategories: Array.from(missingCategories)
     }
   }
 }
