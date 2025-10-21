@@ -1,0 +1,220 @@
+{
+  "title": "UE8 - Santé publique",
+  "description": "Quiz sur l'épidémiologie, la prévention et la politique de santé publique",
+  "category": "Santé publique",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la définition de l'incidence en épidémiologie ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Nombre de nouveaux cas sur une période donnée",
+        "Nombre total de cas présents à un moment donné",
+        "Proportion de la population atteinte",
+        "Taux de mortalité dans une population"
+      ],
+      "correctAnswer": "Nombre de nouveaux cas sur une période donnée",
+      "explanation": "L'incidence mesure le nombre de nouveaux cas d'une maladie apparaissant dans une population pendant une période déterminée.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est l'indice de masse corporelle (IMC) normal selon l'OMS ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "16,5 - 18,5 kg/m²",
+        "18,5 - 24,9 kg/m²",
+        "25,0 - 29,9 kg/m²",
+        "30,0 - 34,9 kg/m²"
+      ],
+      "correctAnswer": "18,5 - 24,9 kg/m²",
+      "explanation": "L'IMC normal est compris entre 18,5 et 24,9 kg/m² selon les critères de l'OMS.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle vaccination est obligatoire en France pour les enfants nés après 2018 ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "BCG",
+        "DT-Polio-Coqueluche-Hépatite B-Hib-Pneumocoque-Méningocoque C",
+        "ROR (Rougeole-Oreillons-Rubéole)",
+        "Hépatite A"
+      ],
+      "correctAnswer": "DT-Polio-Coqueluche-Hépatite B-Hib-Pneumocoque-Méningocoque C",
+      "explanation": "Depuis 2018, 11 vaccins sont obligatoires pour les enfants nés après cette date.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principal facteur de risque cardiovasculaire modifiable ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "L'âge",
+        "Le tabac",
+        "Les antécédents familiaux",
+        "Le sexe masculin"
+      ],
+      "correctAnswer": "Le tabac",
+      "explanation": "Le tabac est le principal facteur de risque cardiovasculaire modifiable selon les études épidémiologiques.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle méthode contraceptive a le meilleur indice de Pearl ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Préservatif masculin",
+        "Pilule contraceptive",
+        "Stérilet hormonal",
+        "Implant contraceptif"
+      ],
+      "correctAnswer": "Implant contraceptif",
+      "explanation": "L'implant contraceptif a l'indice de Pearl le plus faible (0,1-0,2), indiquant son efficacité contraceptive.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quel est l'objectif principal du dépistage organisé du cancer du sein ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réduire l'incidence",
+        "Réduire la mortalité",
+        "Améliorer la qualité de vie",
+        "Réduire les coûts de santé"
+      ],
+      "correctAnswer": "Réduire la mortalité",
+      "explanation": "Le dépistage organisé vise principalement à réduire la mortalité par cancer du sein par un diagnostic précoce.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la prévalence du diabète de type 2 en France métropolitaine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Environ 3%",
+        "Environ 5%",
+        "Environ 7%",
+        "Environ 10%"
+      ],
+      "correctAnswer": "Environ 5%",
+      "explanation": "Selon les études épidémiologiques récentes, la prévalence du diabète de type 2 est d'environ 5% en France.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le seuil de l'hypertension artérielle selon l'OMS ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "120/80 mmHg",
+        "130/85 mmHg",
+        "140/90 mmHg",
+        "160/95 mmHg"
+      ],
+      "correctAnswer": "140/90 mmHg",
+      "explanation": "L'hypertension artérielle est définie par une pression systolique ≥ 140 mmHg et/ou diastolique ≥ 90 mmHg.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle bactérie est responsable de la plupart des infections nosocomiales ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Escherichia coli",
+        "Staphylococcus aureus",
+        "Pseudomonas aeruginosa",
+        "Clostridium difficile"
+      ],
+      "correctAnswer": "Staphylococcus aureus",
+      "explanation": "Staphylococcus aureus est la principale cause d'infections nosocomiales en France selon les enquêtes nationales.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est l'âge recommandé pour le premier dépistage du cancer colorectal ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "40 ans",
+        "45 ans",
+        "50 ans",
+        "55 ans"
+      ],
+      "correctAnswer": "50 ans",
+      "explanation": "Le dépistage organisé du cancer colorectal débute à 50 ans selon les recommandations françaises.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la principale cause de mortalité évitable en France ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Les accidents de la route",
+        "Le tabac",
+        "L'alcool",
+        "La sédentarité"
+      ],
+      "correctAnswer": "Le tabac",
+      "explanation": "Le tabac est responsable de près de 80 000 décès par an en France, soit la première cause de mortalité évitable.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le taux de couverture vaccinale recommandé pour l'immunité collective contre la rougeole ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "75%",
+        "85%",
+        "95%",
+        "98%"
+      ],
+      "correctAnswer": "95%",
+      "explanation": "Pour atteindre l'immunité collective contre la rougeole, il faut une couverture vaccinale d'au moins 95%.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la définition de la prévalence en épidémiologie ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Nombre de nouveaux cas",
+        "Nombre total de cas présents",
+        "Taux d'attaque",
+        "Létalité"
+      ],
+      "correctAnswer": "Nombre total de cas présents",
+      "explanation": "La prévalence mesure le nombre total de cas d'une maladie présents dans une population à un moment donné.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est l'objectif du Programme National Nutrition Santé (PNNS) ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réduire la prévalence de l'obésité",
+        "Améliorer l'alimentation et l'activité physique",
+        "Prévenir les maladies chroniques",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Le PNNS vise à améliorer l'état de santé de la population en agissant sur la nutrition et l'activité physique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la principale source de financement de l'Assurance Maladie en France ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Les cotisations salariales",
+        "Les cotisations patronales",
+        "La CSG",
+        "Les impôts"
+      ],
+      "correctAnswer": "La CSG",
+      "explanation": "La Contribution Sociale Généralisée (CSG) représente la principale source de financement de l'Assurance Maladie.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}

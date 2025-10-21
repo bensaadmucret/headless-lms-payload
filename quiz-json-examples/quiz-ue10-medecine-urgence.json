@@ -1,0 +1,220 @@
+{
+  "title": "UE10 - Médecine d'urgence",
+  "description": "Quiz sur les urgences vitales, la réanimation et les gestes d'urgence",
+  "category": "Médecine d'urgence",
+  "studentLevel": "both",
+  "difficulty": "hard",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la première étape de la réanimation cardiopulmonaire (RCP) ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Appeler le SAMU",
+        "Vérifier la sécurité",
+        "Ouvrir les voies aériennes",
+        "Commencer le massage cardiaque"
+      ],
+      "correctAnswer": "Vérifier la sécurité",
+      "explanation": "La première étape de toute intervention d'urgence est de vérifier la sécurité des lieux pour le secouriste et la victime.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le rythme recommandé pour le massage cardiaque externe ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "60 compressions/minute",
+        "80 compressions/minute",
+        "100-120 compressions/minute",
+        "150 compressions/minute"
+      ],
+      "correctAnswer": "100-120 compressions/minute",
+      "explanation": "Le rythme recommandé est de 100 à 120 compressions par minute selon les recommandations ERC 2021.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la dose d'adrénaline en RCP chez l'adulte ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "0,5 mg",
+        "1 mg",
+        "2 mg",
+        "5 mg"
+      ],
+      "correctAnswer": "1 mg",
+      "explanation": "La dose standard d'adrénaline en RCP adulte est de 1 mg IV toutes les 3-5 minutes selon les protocoles.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le signe principal du choc anaphylactique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Hypotension artérielle",
+        "Bradycardie",
+        "Hypothermie",
+        "Hypertension artérielle"
+      ],
+      "correctAnswer": "Hypotension artérielle",
+      "explanation": "L'hypotension artérielle est le signe cardinal du choc anaphylactique nécessitant une prise en charge urgente.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la profondeur recommandée des compressions thoraciques ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "2-3 cm",
+        "4-5 cm",
+        "5-6 cm",
+        "6-7 cm"
+      ],
+      "correctAnswer": "5-6 cm",
+      "explanation": "Les compressions thoraciques doivent atteindre une profondeur de 5 à 6 cm chez l'adulte selon les guidelines.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le traitement de première intention du choc hémorragique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Cristalloïdes",
+        "Colloïdes",
+        "Vasopresseurs",
+        "Transfusion sanguine"
+      ],
+      "correctAnswer": "Cristalloïdes",
+      "explanation": "Le remplissage vasculaire par cristalloïdes (Ringer lactate ou sérum physiologique) est le traitement initial du choc hémorragique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la fréquence des insufflations en RCP ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Toutes les 5 compressions",
+        "Toutes les 15 compressions",
+        "Toutes les 30 compressions",
+        "Toutes les 60 compressions"
+      ],
+      "correctAnswer": "Toutes les 30 compressions",
+      "explanation": "Le ratio recommandé est de 30 compressions pour 2 insufflations selon les recommandations actuelles.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le critère de Glasgow minimum pour l'intubation en urgence ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Glasgow 3",
+        "Glasgow 8",
+        "Glasgow 12",
+        "Glasgow 15"
+      ],
+      "correctAnswer": "Glasgow 8",
+      "explanation": "L'intubation orotrachéale est indiquée pour un score de Glasgow ≤ 8 selon les protocoles d'urgence.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la dose de bicarbonate de sodium en acidose métabolique sévère ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "0,5 mEq/kg",
+        "1 mEq/kg",
+        "2 mEq/kg",
+        "4 mEq/kg"
+      ],
+      "correctAnswer": "1 mEq/kg",
+      "explanation": "La dose initiale de bicarbonate est de 1 mEq/kg en cas d'acidose métabolique sévère (pH < 7,10).",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le traitement spécifique de l'hyperkaliémie menaçante ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Insuline + glucose",
+        "Kayexalate",
+        "Dialyse",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "L'hyperkaliémie menaçante nécessite un traitement multimodal : insuline-glucose, calcium, bicarbonate, Kayexalate et dialyse en urgence.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 75
+    },
+    {
+      "questionText": "Quelle est la position recommandée pour une perte de connaissance sans traumatisme ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Décubitus dorsal",
+        "Position latérale de sécurité",
+        "Trendelenburg",
+        "Assis"
+      ],
+      "correctAnswer": "Position latérale de sécurité",
+      "explanation": "La position latérale de sécurité (PLS) est recommandée pour maintenir les voies aériennes libres en cas de perte de connaissance.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le seuil de fibrinogène pour la transfusion de plasma frais congelé ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "0,5 g/L",
+        "1 g/L",
+        "1,5 g/L",
+        "2 g/L"
+      ],
+      "correctAnswer": "1 g/L",
+      "explanation": "La transfusion de plasma frais congelé est indiquée quand le fibrinogène est inférieur à 1 g/L en contexte hémorragique.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la dose de midazolam en sédation pour intubation ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "0,1-0,2 mg/kg",
+        "0,2-0,3 mg/kg",
+        "0,3-0,4 mg/kg",
+        "0,5-1 mg/kg"
+      ],
+      "correctAnswer": "0,1-0,2 mg/kg",
+      "explanation": "La dose de midazolam pour sédation pré-intubation est de 0,1 à 0,2 mg/kg IV selon les protocoles.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le critère STOP pour arrêter la RCP ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Après 10 minutes",
+        "Retour à une circulation spontanée",
+        "Arrivée du médecin",
+        "Épuisement du secouriste"
+      ],
+      "correctAnswer": "Retour à une circulation spontanée",
+      "explanation": "La RCP doit être poursuivie jusqu'au retour d'une circulation spontanée effective (ROSC) selon les recommandations.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la dose de naloxone en overdose d'opiacés ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "0,04 mg",
+        "0,4 mg",
+        "4 mg",
+        "40 mg"
+      ],
+      "correctAnswer": "0,4 mg",
+      "explanation": "La dose initiale de naloxone est de 0,4 mg IV en cas d'overdose d'opiacés, renouvelable si nécessaire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+{
+  "title": "UE9 - Médecine préventive",
+  "description": "Quiz sur la prévention primaire, secondaire et tertiaire en médecine",
+  "category": "Médecine préventive",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle est la définition de la prévention primaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Dépistage précoce des maladies",
+        "Réduction des complications",
+        "Élimination des facteurs de risque",
+        "Traitement curatif"
+      ],
+      "correctAnswer": "Élimination des facteurs de risque",
+      "explanation": "La prévention primaire vise à éliminer ou réduire les facteurs de risque avant l'apparition de la maladie.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est l'exemple type de prévention secondaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vaccination contre la grippe",
+        "Mammographie de dépistage",
+        "Arrêt du tabac",
+        "Activité physique régulière"
+      ],
+      "correctAnswer": "Mammographie de dépistage",
+      "explanation": "La mammographie de dépistage permet de détecter précocement le cancer du sein avant l'apparition des symptômes.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle vitamine est supplémentée systématiquement chez le nouveau-né ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vitamine A",
+        "Vitamine D",
+        "Vitamine E",
+        "Vitamine K"
+      ],
+      "correctAnswer": "Vitamine K",
+      "explanation": "La vitamine K est administrée à la naissance pour prévenir la maladie hémorragique du nouveau-né.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est l'âge recommandé pour le premier examen bucco-dentaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "6 mois",
+        "12 mois",
+        "18 mois",
+        "2 ans"
+      ],
+      "correctAnswer": "12 mois",
+      "explanation": "La première consultation dentaire est recommandée vers l'âge de 12 mois selon les recommandations françaises.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la principale mesure de prévention du tétanos ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vaccination",
+        "Antibioprophylaxie",
+        "Port du masque",
+        "Éviter les plaies"
+      ],
+      "correctAnswer": "Vaccination",
+      "explanation": "La vaccination antitétanique est la principale mesure de prévention du tétanos, maladie grave et souvent mortelle.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le principal facteur de risque de l'ostéoporose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tabagisme",
+        "Sédentarité",
+        "Carence en calcium",
+        "Ménopause précoce"
+      ],
+      "correctAnswer": "Ménopause précoce",
+      "explanation": "La ménopause précoce est un facteur de risque majeur d'ostéoporose en raison de la baisse des œstrogènes.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la fréquence recommandée du dépistage du cancer du col utérin ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tous les ans",
+        "Tous les 2 ans",
+        "Tous les 3 ans",
+        "Tous les 5 ans"
+      ],
+      "correctAnswer": "Tous les 3 ans",
+      "explanation": "Le frottis cervico-utérin est recommandé tous les 3 ans chez les femmes de 25 à 65 ans.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est l'objectif de la prévention tertiaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Éviter l'apparition de la maladie",
+        "Dépister précocement",
+        "Limiter les complications et séquelles",
+        "Traiter la maladie"
+      ],
+      "correctAnswer": "Limiter les complications et séquelles",
+      "explanation": "La prévention tertiaire vise à limiter les complications et séquelles chez les patients atteints d'une maladie chronique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la principale mesure de prévention des infections sexuellement transmissibles ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vaccination",
+        "Préservatif",
+        "Antibioprophylaxie",
+        "Dépistage régulier"
+      ],
+      "correctAnswer": "Préservatif",
+      "explanation": "L'utilisation correcte et systématique du préservatif est la principale mesure de prévention des IST.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est l'âge recommandé pour la première consultation gynécologique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "15 ans",
+        "16 ans",
+        "17 ans",
+        "18 ans"
+      ],
+      "correctAnswer": "16 ans",
+      "explanation": "La première consultation gynécologique est recommandée vers 16-17 ans selon les recommandations françaises.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de la prévention quaternaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Prévention des maladies iatrogènes",
+        "Prévention des complications",
+        "Prévention des récidives",
+        "Prévention des facteurs de risque"
+      ],
+      "correctAnswer": "Prévention des maladies iatrogènes",
+      "explanation": "La prévention quaternaire vise à éviter la surmédicalisation et les effets indésirables des interventions médicales.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quel est le principal objectif du carnet de santé ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Suivi médical personnel",
+        "Coordination des soins",
+        "Éducation sanitaire",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Le carnet de santé sert au suivi médical, à la coordination des soins et à l'éducation sanitaire.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la fréquence recommandée des examens ophtalmologiques après 40 ans ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Tous les ans",
+        "Tous les 2 ans",
+        "Tous les 3 ans",
+        "Tous les 5 ans"
+      ],
+      "correctAnswer": "Tous les 2 ans",
+      "explanation": "Un examen ophtalmologique est recommandé tous les 2 ans après 40 ans pour le dépistage précoce des troubles visuels.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quel est le seuil de l'hypercholestérolémie selon les recommandations françaises ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "LDL > 1,6 g/L",
+        "LDL > 1,9 g/L",
+        "LDL > 2,2 g/L",
+        "LDL > 2,5 g/L"
+      ],
+      "correctAnswer": "LDL > 1,9 g/L",
+      "explanation": "L'hypercholestérolémie est définie par un LDL-cholestérol > 1,9 g/L selon les recommandations françaises.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle est la principale mesure de prévention du burn-out professionnel ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Augmentation des salaires",
+        "Réduction du temps de travail",
+        "Amélioration des conditions de travail",
+        "Formation continue"
+      ],
+      "correctAnswer": "Amélioration des conditions de travail",
+      "explanation": "L'amélioration des conditions de travail est la principale mesure préventive du burn-out professionnel.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

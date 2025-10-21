@@ -1,0 +1,220 @@
+{
+  "title": "PASS - Bases fondamentales médicales",
+  "description": "Quiz PASS sur les concepts fondamentaux en médecine : anatomie, physiologie et pathologie générale",
+  "category": "Bases médicales",
+  "studentLevel": "PASS",
+  "difficulty": "easy",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quel est le tissu conjonctif le plus abondant dans l'organisme humain ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Le tissu adipeux",
+        "Le tissu osseux",
+        "Le collagène",
+        "La matrice extracellulaire"
+      ],
+      "correctAnswer": "Le collagène",
+      "explanation": "Le collagène représente environ 25-30% des protéines totales de l'organisme et constitue la principale protéine structurale des tissus conjonctifs.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la formule sanguine normale pour les globules rouges chez l'homme adulte ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "4,5-5,5 millions/mm³",
+        "5,0-6,0 millions/mm³",
+        "6,0-7,0 millions/mm³",
+        "7,0-8,0 millions/mm³"
+      ],
+      "correctAnswer": "5,0-6,0 millions/mm³",
+      "explanation": "Les valeurs normales d'hématies sont de 5,0 à 6,0 millions par mm³ chez l'homme adulte et 4,5 à 5,5 millions par mm³ chez la femme.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le principal mécanisme de l'inflammation aiguë ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Vasodilatation et augmentation de la perméabilité vasculaire",
+        "Fibrose tissulaire",
+        "Nécrose cellulaire",
+        "Apoptose"
+      ],
+      "correctAnswer": "Vasodilatation et augmentation de la perméabilité vasculaire",
+      "explanation": "L'inflammation aiguë se caractérise par les signes cardinaux de Celsus : calor, rubor, tumor, dolor et functio laesa, dus à la vasodilatation et à l'exsudation plasmatique.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'hypertrophie cellulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Augmentation du nombre de cellules",
+        "Augmentation de la taille des cellules",
+        "Diminution de la taille des cellules",
+        "Mort cellulaire"
+      ],
+      "correctAnswer": "Augmentation de la taille des cellules",
+      "explanation": "L'hypertrophie correspond à une augmentation de la taille des cellules existantes, tandis que l'hyperplasie correspond à une augmentation du nombre de cellules.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le pH normal du sang artériel ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "7,25 - 7,35",
+        "7,35 - 7,45",
+        "7,45 - 7,55",
+        "7,55 - 7,65"
+      ],
+      "correctAnswer": "7,35 - 7,45",
+      "explanation": "Le pH sanguin normal est maintenu entre 7,35 et 7,45 grâce aux systèmes tampons (bicarbonate, hémoglobine, phosphates) et aux mécanismes respiratoire et rénal.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la principale fonction des ostéoblastes ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Résorption osseuse",
+        "Formation de la matrice osseuse",
+        "Minéralisation de l'os",
+        "Maintenance du tissu osseux"
+      ],
+      "correctAnswer": "Formation de la matrice osseuse",
+      "explanation": "Les ostéoblastes sont responsables de la synthèse et de la sécrétion de la matrice osseuse organique (ostéoïde) composée principalement de collagène de type I.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme principal de la coagulation sanguine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Cascade de réactions enzymatiques",
+        "Activation plaquettaire",
+        "Vasoconstriction",
+        "Fibrinolyse"
+      ],
+      "correctAnswer": "Cascade de réactions enzymatiques",
+      "explanation": "La coagulation fait intervenir deux voies (intrinsèque et extrinsèque) convergeant vers l'activation de la prothrombine en thrombine, puis du fibrinogène en fibrine.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de l'apoptose ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Mort cellulaire accidentelle",
+        "Mort cellulaire programmée",
+        "Nécrose tissulaire",
+        "Inflammation aiguë"
+      ],
+      "correctAnswer": "Mort cellulaire programmée",
+      "explanation": "L'apoptose est une forme de mort cellulaire programmée génétiquement, physiologique et régulée, contrairement à la nécrose qui est accidentelle.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le principal électrolyte extracellulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Potassium",
+        "Sodium",
+        "Calcium",
+        "Magnésium"
+      ],
+      "correctAnswer": "Sodium",
+      "explanation": "Le sodium représente 90% des cations extracellulaires et joue un rôle majeur dans le maintien de l'osmolalité et du volume extracellulaire.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la fonction principale des polynucléaires neutrophiles ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Production d'anticorps",
+        "Phagocytose des bactéries",
+        "Présentation antigénique",
+        "Sécrétion d'histamine"
+      ],
+      "correctAnswer": "Phagocytose des bactéries",
+      "explanation": "Les polynucléaires neutrophiles sont les cellules phagocytaires principales de la réponse immunitaire innée contre les bactéries extracellulaires.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de l'ischémie tissulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Diminution de l'apport sanguin",
+        "Augmentation de la consommation d'oxygène",
+        "Anomalie de l'utilisation de l'oxygène",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "L'ischémie peut résulter d'une diminution de l'apport sanguin (sténose, thrombose), d'une augmentation des besoins métaboliques ou d'une anomalie de l'utilisation cellulaire de l'oxygène.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle est la définition de la sensibilité en bactériologie médicale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Capacité d'un microorganisme à résister aux antibiotiques",
+        "Capacité d'un microorganisme à être inhibé par un antibiotique",
+        "Vitesse de croissance bactérienne",
+        "Capacité à former des biofilms"
+      ],
+      "correctAnswer": "Capacité d'un microorganisme à être inhibé par un antibiotique",
+      "explanation": "La sensibilité bactérienne désigne la capacité d'un microorganisme à être inhibé ou tué par une concentration d'antibiotique atteignable in vivo.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme principal de l'œdème ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Accumulation excessive de liquide dans les tissus",
+        "Diminution de la pression oncotique",
+        "Augmentation de la perméabilité vasculaire",
+        "Insuffisance lymphatique"
+      ],
+      "correctAnswer": "Accumulation excessive de liquide dans les tissus",
+      "explanation": "L'œdème résulte d'un déséquilibre entre les forces de Starling favorisant l'extravasation du liquide plasmatique vers l'espace interstitiel.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle est la définition de l'atrophie tissulaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Diminution réversible de la taille d'un organe",
+        "Diminution irréversible de la taille d'un organe",
+        "Augmentation de la taille d'un organe",
+        "Inflammation d'un organe"
+      ],
+      "correctAnswer": "Diminution réversible de la taille d'un organe",
+      "explanation": "L'atrophie correspond à une diminution du volume d'un tissu ou d'un organe par réduction de la taille et/ou du nombre de cellules, souvent réversible.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quel est le mécanisme de la fièvre ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Réinitialisation du thermostat hypothalamique",
+        "Augmentation de la production de chaleur",
+        "Diminution des pertes de chaleur",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "La fièvre résulte d'une élévation du point de consigne hypothalamique sous l'action de pyrogènes endogènes (IL-1, TNF-α, IL-6) produits lors de l'inflammation.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 45
+    }
+  ]
+}

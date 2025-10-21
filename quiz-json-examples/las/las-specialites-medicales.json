@@ -1,0 +1,220 @@
+{
+  "title": "LAS - Spécialités médicales avancées",
+  "description": "Quiz LAS sur les spécialités médicales pointues et leurs domaines d'intervention clinique",
+  "category": "Spécialités médicales",
+  "studentLevel": "LAS",
+  "difficulty": "hard",
+  "questionCount": 15,
+  "questions": [
+    {
+      "questionText": "Quelle spécialité médicale traite les troubles du sommeil ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pneumologie",
+        "Neurologie",
+        "Psychiatrie",
+        "Médecine du sommeil"
+      ],
+      "correctAnswer": "Médecine du sommeil",
+      "explanation": "La médecine du sommeil est une spécialité dédiée aux troubles du sommeil et à leurs conséquences sur la santé, incluant les apnées du sommeil, l'insomnie et les parasomnies.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité utilise principalement l'échographie comme outil diagnostique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Radiologie",
+        "Médecine nucléaire",
+        "Échographie médicale",
+        "Gastro-entérologie"
+      ],
+      "correctAnswer": "Échographie médicale",
+      "explanation": "L'échographie médicale est une spécialité à part entière qui utilise l'échographie comme principal outil diagnostique et interventionnel dans de nombreux domaines.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité traite les maladies génétiques rares ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Génétique médicale",
+        "Pédiatrie",
+        "Médecine interne",
+        "Neurologie"
+      ],
+      "correctAnswer": "Génétique médicale",
+      "explanation": "La génétique médicale traite spécifiquement les maladies génétiques rares et les anomalies chromosomiques, incluant le conseil génétique et les diagnostics prénataux.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité médicale traite les troubles du développement de l'enfant ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Pédiatrie générale",
+        "Pédopsychiatrie",
+        "Neuropédiatrie",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les troubles du développement de l'enfant nécessitent une approche multidisciplinaire impliquant pédiatrie générale, pédopsychiatrie et neuropédiatrie selon les aspects concernés.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle spécialité utilise la chirurgie robotique de manière prédominante ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Urologie",
+        "Gynécologie",
+        "Chirurgie digestive",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "La chirurgie robotique est utilisée dans plusieurs spécialités chirurgicales : urologie (prostatectomie), gynécologie (hystérectomie) et chirurgie digestive (colectomie).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité traite les brûlures graves ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Chirurgie plastique",
+        "Médecine d'urgence",
+        "Chirurgie viscérale",
+        "Brûlologie"
+      ],
+      "correctAnswer": "Brûlologie",
+      "explanation": "La brûlologie est la spécialité médicale dédiée aux brûlures graves et à leurs complications, incluant la prise en charge des brûlés et la rééducation.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité médicale traite les troubles de la voix professionnelle ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Oto-rhino-laryngologie",
+        "Phoniatrie",
+        "Pneumologie",
+        "Neurologie"
+      ],
+      "correctAnswer": "Phoniatrie",
+      "explanation": "La phoniatrie traite spécifiquement les troubles de la voix professionnelle et de la communication orale, incluant les dysphonie et les nodules des cordes vocales.",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    },
+    {
+      "questionText": "Quelle spécialité utilise l'hypnose médicale ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Psychiatrie",
+        "Anesthésie-réanimation",
+        "Douleur chronique",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "L'hypnose médicale est utilisée en psychiatrie (troubles anxieux), anesthésie (analgésie) et dans la prise en charge de la douleur chronique.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité traite les maladies tropicales et parasitaires ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Maladies infectieuses",
+        "Médecine tropicale",
+        "Parasitologie",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les maladies tropicales et parasitaires sont prises en charge par plusieurs spécialités complémentaires selon les aspects épidémiologiques, cliniques et parasitologiques.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité traite les troubles de la fertilité masculine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Andrologie",
+        "Urologie",
+        "Gynécologie",
+        "Endocrinologie"
+      ],
+      "correctAnswer": "Andrologie",
+      "explanation": "L'andrologie est la spécialité médicale dédiée aux troubles de la fonction reproductive masculine, incluant l'infertilité, les dysfonctions érectiles et les pathologies testiculaires.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité médicale traite les maladies professionnelles ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Médecine du travail",
+        "Médecine légale",
+        "Santé publique",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les maladies professionnelles sont prises en charge par plusieurs spécialités selon les aspects préventifs (médecine du travail), curatifs et légaux (médecine légale).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité utilise principalement la télémédecine ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Médecine générale",
+        "Dermatologie",
+        "Ophtalmologie",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "La télémédecine est utilisée dans de nombreuses spécialités médicales, particulièrement en dermatologie et ophtalmologie pour l'expertise visuelle à distance.",
+      "difficulty": "easy",
+      "estimatedTimeSeconds": 30
+    },
+    {
+      "questionText": "Quelle spécialité traite les troubles du comportement alimentaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Psychiatrie",
+        "Nutrition clinique",
+        "Endocrinologie",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "Les troubles du comportement alimentaire nécessitent une approche multidisciplinaire associant psychiatrie (aspects psychologiques), nutrition clinique et endocrinologie (aspects métaboliques).",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité médicale traite les maladies du système immunitaire ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Rhumatologie",
+        "Immunologie clinique",
+        "Hématologie",
+        "Médecine interne"
+      ],
+      "correctAnswer": "Immunologie clinique",
+      "explanation": "L'immunologie clinique traite spécifiquement les maladies du système immunitaire comme les déficits immunitaires, les maladies auto-immunes et les allergies sévères.",
+      "difficulty": "medium",
+      "estimatedTimeSeconds": 45
+    },
+    {
+      "questionText": "Quelle spécialité utilise la thérapie génique ?",
+      "questionType": "multipleChoice",
+      "options": [
+        "Médecine moléculaire",
+        "Hématologie",
+        "Oncologie",
+        "Toutes ces réponses"
+      ],
+      "correctAnswer": "Toutes ces réponses",
+      "explanation": "La thérapie génique est utilisée dans plusieurs spécialités : médecine moléculaire (recherche), hématologie (drépanocytose, hémophilie) et oncologie (thérapie CAR-T).",
+      "difficulty": "hard",
+      "estimatedTimeSeconds": 60
+    }
+  ]
+}
