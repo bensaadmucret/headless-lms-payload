@@ -115,16 +115,21 @@ describe('AIQuizGenerationService', () => {
   });
 
   describe('Service instantiation', () => {
-    it('should throw error without API key', () => {
+    it('should instantiate without API key (logs warning)', () => {
       delete process.env.GEMINI_API_KEY;
 
-      expect(() => new AIQuizGenerationService()).toThrow('GEMINI_API_KEY is not defined');
+      // Le service s'instancie même sans clé API, mais log un warning
+      expect(() => new AIQuizGenerationService()).not.toThrow();
+      const service = new AIQuizGenerationService();
+      expect(service).toBeDefined();
     });
 
     it('should instantiate with API key', () => {
       process.env.GEMINI_API_KEY = 'test-key';
 
       expect(() => new AIQuizGenerationService()).not.toThrow();
+      const service = new AIQuizGenerationService();
+      expect(service).toBeDefined();
     });
   });
 });

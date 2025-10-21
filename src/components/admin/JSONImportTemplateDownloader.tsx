@@ -170,7 +170,6 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <span style={{ 
                       fontSize: '12px',
-                      color: '#6b7280',
                       backgroundColor: template.type === 'json' ? '#8b5cf6' : '#f59e0b',
                       padding: '2px 6px',
                       borderRadius: '4px',
@@ -309,7 +308,7 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                 Commencez par le template Questions CSV
               </p>
               <Button
-                onClick={() => downloadTemplate(templates[1])}
+                onClick={() => downloadTemplate(templates[1]!)}
                 style={{
                   backgroundColor: '#10b981',
                   color: 'white',
@@ -371,7 +370,7 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                 Utilisez les templates JSON complets
               </p>
               <Button
-                onClick={() => downloadTemplate(templates[0])}
+                onClick={() => downloadTemplate(templates[0]!)}
                 style={{
                   backgroundColor: '#8b5cf6',
                   color: 'white',
