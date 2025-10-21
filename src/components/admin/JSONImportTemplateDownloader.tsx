@@ -170,7 +170,6 @@ export const JSONImportTemplateDownloader: React.FC = () => {
                   <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                     <span style={{ 
                       fontSize: '12px',
-                      color: '#6b7280',
                       backgroundColor: template.type === 'json' ? '#8b5cf6' : '#f59e0b',
                       padding: '2px 6px',
                       borderRadius: '4px',
