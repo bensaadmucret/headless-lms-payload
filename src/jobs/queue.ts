@@ -112,6 +112,21 @@ export const importQueue = new Queue('json-csv-import', redisUrl, {
   },
 })
 
+/**
+ * Queue pour les tâches webhook Stripe (retry et cleanup)
+ */
+export const webhookQueue = new Queue('webhook-tasks', redisUrl, {
+  defaultJobOptions: {
+    ...defaultJobOptions,
+    timeout: 10 * 60 * 1000, // 10 minutes pour le traitement des webhooks
+    removeOnComplete: 50, // Garder moins d'historique pour les jobs répétitifs
+  },
+  settings: {
+    stalledInterval: 60 * 1000,
+    maxStalledCount: 1,
+  },
+})
+
 // Array de toutes les queues pour faciliter la gestion
 export const allQueues = [
   extractionQueue,
@@ -120,6 +135,7 @@ export const allQueues = [
   validationQueue,
   ragQueue,
   importQueue,
+  webhookQueue,
 ]
 
 // ===== UTILITAIRES =====

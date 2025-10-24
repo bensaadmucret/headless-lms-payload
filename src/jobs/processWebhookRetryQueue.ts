@@ -1,4 +1,5 @@
 import { Payload } from 'payload';
+import Stripe from 'stripe';
 import { getStripeClient } from '../services/stripe';
 import { StripeWebhookService } from '../services/stripe/StripeWebhookService';
 
@@ -18,7 +19,7 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
       where: {
         and: [
           { status: { equals: 'pending' } },
-          { nextRetryAt: { less_than_or_equal: new Date() } },
+          { nextRetryAt: { less_than_equal: new Date() } },
         ],
       },
       limit: 50, // Process up to 50 webhooks per run
@@ -55,7 +56,9 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
         });
 
         // Process the event
-        const result = await webhookService.processEvent(webhook.payload);
+        // Cast the payload to a Stripe Event object
+        const event = webhook.payload as unknown as Stripe.Event;
+        const result = await webhookService.processEvent(event);
 
         if (result.success) {
           // Mark as success
@@ -73,8 +76,8 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
           });
         } else {
           // Increment retry count
-          const newRetryCount = webhook.retryCount + 1;
-          const maxRetries = webhook.maxRetries || 3;
+          const newRetryCount = (webhook.retryCount ?? 0) + 1;
+          const maxRetries = webhook.maxRetries ?? 3;
 
           if (newRetryCount >= maxRetries) {
             // Mark as failed
@@ -106,7 +109,7 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
                 status: 'pending',
                 retryCount: newRetryCount,
                 lastError: result.error || 'Unknown error',
-                nextRetryAt,
+                nextRetryAt: nextRetryAt.toISOString(),
               },
             });
 
@@ -127,8 +130,8 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
         });
 
         // Increment retry count
-        const newRetryCount = webhook.retryCount + 1;
-        const maxRetries = webhook.maxRetries || 3;
+        const newRetryCount = (webhook.retryCount ?? 0) + 1;
+        const maxRetries = webhook.maxRetries ?? 3;
 
         if (newRetryCount >= maxRetries) {
           // Mark as failed
@@ -153,7 +156,7 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
               status: 'pending',
               retryCount: newRetryCount,
               lastError: errorMessage,
-              nextRetryAt,
+              nextRetryAt: nextRetryAt.toISOString(),
             },
           });
         }
@@ -173,16 +176,3 @@ export async function processWebhookRetryQueue(payload: Payload): Promise<void> 
     });
   }
 }
-
-/**
- * Payload job configuration for webhook retry queue processing
- * This can be registered in the payload config to run as a scheduled job
- */
-export const webhookRetryQueueJob = {
-  slug: 'process-webhook-retry-queue',
-  interfaceName: 'ProcessWebhookRetryQueue',
-  handler: async ({ payload }: { payload: Payload }) => {
-    await processWebhookRetryQueue(payload);
-  },
-  schedule: '*/5 * * * *', // Run every 5 minutes
-};

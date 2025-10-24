@@ -1,5 +1,21 @@
 # Plan d'Implémentation
 
+## Architecture d'abonnement
+**Important**: Cette application propose **UN SEUL produit "Premium"** avec 2 cycles de facturation :
+- **Mensuel** : facturation tous les mois
+- **Annuel** : facturation tous les ans
+
+Il n'y a pas de notion de "plans multiples" (Free, Basic, Premium, etc.). Tous les utilisateurs sont soit :
+- Sans abonnement (`subscriptionStatus: 'none'`)
+- En essai gratuit (`subscriptionStatus: 'trialing'`)  
+- Premium actif (`subscriptionStatus: 'active'`)
+- Premium en retard de paiement (`subscriptionStatus: 'past_due'`)
+- Abonnement annulé (`subscriptionStatus: 'canceled'`)
+
+Le cycle de facturation (mensuel/annuel) est déterminé par le `priceId` Stripe, pas par un champ "plan".
+
+---
+
 - [x] 1. Configurer l'infrastructure Stripe backend
   - Créer le service client API Stripe avec configuration selon l'environnement
   - Ajouter STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID_MONTHLY, STRIPE_PRICE_ID_YEARLY à .env.example
@@ -63,8 +79,8 @@
     - Configurer un cron job ou worker pour exécuter toutes les 5 minutes
     - _Exigences: 3.5_
 
-- [ ] 4. Implémenter la synchronisation subscription-utilisateur
-  - [ ] 4.1 Configurer les champs d'abonnement dans la collection Users
+- [x] 4. Implémenter la synchronisation subscription-utilisateur
+  - [x] 4.1 Configurer les champs d'abonnement dans la collection Users
     - Vérifier que payload-cms/src/collections/Users/index.ts existe
     - ~~Ajouter le champ plan~~ (supprimé - abonnement unique Premium)
     - Ajouter le champ subscriptionStatus (select: none, trialing, active, past_due, canceled) avec defaultValue: 'none'
@@ -81,7 +97,7 @@
     - Note: Optionnel car les nouveaux champs ont des valeurs par défaut
     - _Exigences: 6.2_
 
-  - [ ] 4.2 Créer l'utilitaire de synchronisation d'abonnement
+  - [x] 4.2 Créer l'utilitaire de synchronisation d'abonnement
     - Implémenter la fonction syncUserSubscription
     - ~~Mettre à jour le plan utilisateur~~ (supprimé - pas de champ plan, logique basée sur subscriptionStatus)
     - Mettre à jour subscriptionStatus et subscriptionEndDate de l'utilisateur
@@ -89,18 +105,18 @@
     - Note: L'accès Premium est déterminé par subscriptionStatus ('trialing' ou 'active')
     - _Exigences: 6.1, 6.2, 6.3, 6.4, 6.5_
 
-  - [ ] 4.3 Ajouter le hook afterChange à la collection Subscriptions
+  - [x] 4.3 Ajouter le hook afterChange à la collection Subscriptions
     - Appeler syncUserSubscription quand le statut de l'abonnement change
     - _Exigences: 6.1, 8.3_
 
-- [ ] 5. Implémenter l'intégration du portail client
-  - [ ] 5.1 Créer StripePortalService
+- [x] 5. Implémenter l'intégration du portail client
+  - [x] 5.1 Créer StripePortalService
     - Implémenter createPortalSession appelant l'API Stripe /billing_portal/sessions
     - Retourner l'URL du portail signée
     - Gérer les erreurs API Stripe
     - _Exigences: 7.2, 7.3_
 
-  - [ ] 5.2 Créer l'endpoint POST /api/stripe/portal-session
+  - [x] 5.2 Créer l'endpoint POST /api/stripe/portal-session
     - Vérifier l'authentification utilisateur (session utilisateur requise)
     - Récupérer l'abonnement de l'utilisateur depuis la base de données
     - Vérifier que l'utilisateur possède l'abonnement (403 sinon)
@@ -109,49 +125,50 @@
     - Gérer les erreurs d'autorisation (401), non trouvé (404) et erreurs API (500)
     - _Exigences: 7.1, 7.2, 7.3_
 
-- [ ] 6. Créer l'endpoint de données d'abonnement
+- [x] 6. Créer l'endpoint de données d'abonnement
   - Créer l'endpoint GET /api/me/subscription
   - Récupérer l'abonnement de l'utilisateur actuel depuis la base de données
-  - Retourner les données d'abonnement (status, plan, currentPeriodEnd, trialEnd, cancelAtPeriodEnd)
+  - Retourner les données d'abonnement (status, billingCycle, currentPeriodEnd, trialEnd, cancelAtPeriodEnd)
+  - Note: billingCycle est déduit du priceId (monthly ou yearly) - pas de champ plan distinct
   - Gérer le cas où l'utilisateur n'a pas d'abonnement (retourner null)
   - _Exigences: 12.1, 12.2, 12.3, 12.5_
 
-- [ ] 7. Mettre à jour la collection Subscriptions pour Stripe
+- [x] 7. Mettre à jour la collection Subscriptions pour Stripe
   - Mettre à jour le champ provider pour utiliser 'stripe' au lieu de 'paddle'
   - Vérifier que tous les champs nécessaires existent (customerId, subscriptionId, priceId, status, etc.)
   - Mettre à jour les options du champ status pour inclure 'trialing'
   - Ajouter le champ trialEnd si manquant
   - _Exigences: 4.1, 4.2, 4.4_
 
-- [ ] 8. Implémenter les services frontend Stripe
-  - [ ] 8.1 Créer stripeService.ts
+- [x] 8. Implémenter les services frontend Stripe
+  - [x] 8.1 Créer stripeService.ts
     - Implémenter initStripe avec chargement de @stripe/stripe-js
     - Utiliser VITE_STRIPE_PUBLISHABLE_KEY depuis les variables d'environnement
     - Mettre en cache l'instance Stripe après initialisation
     - Gérer les erreurs d'initialisation
     - _Exigences: 11.2, 11.4_
 
-  - [ ] 8.2 Créer stripeCheckoutService.ts
+  - [x] 8.2 Créer stripeCheckoutService.ts
     - Implémenter createCheckoutSession
     - Appeler l'endpoint POST /api/stripe/checkout-session
     - Rediriger vers l'URL de checkout retournée
     - Gérer les erreurs avec messages conviviaux
     - _Exigences: 1.1, 1.5_
 
-  - [ ] 8.3 Créer stripePortalService.ts
+  - [x] 8.3 Créer stripePortalService.ts
     - Implémenter openCustomerPortal
     - Appeler l'endpoint POST /api/stripe/portal-session
     - Ouvrir l'URL retournée dans une nouvelle fenêtre
     - Gérer les erreurs avec messages toast
     - _Exigences: 7.4_
 
-  - [ ] 8.4 Créer subscriptionApi.ts
+  - [x] 8.4 Créer subscriptionApi.ts
     - Implémenter fetchCurrentSubscription
     - Appeler l'endpoint GET /api/me/subscription
     - Gérer les erreurs API
     - _Exigences: 12.1, 12.2_
 
-- [ ] 9. Nettoyer complètement le code Paddle
+- [x] 9. Nettoyer complètement le code Paddle
   - [ ] 9.1 Nettoyer le backend Paddle
     - Supprimer toutes les variables PADDLE_* de payload-cms/.env et .env.example
     - Supprimer les services Paddle si existants: payload-cms/src/services/paddle/
@@ -202,28 +219,32 @@
     - Fournir un lien pour réessayer
     - _Exigences: 2.5_
 
-  - [ ] 12.3 Créer ManageSubscriptionButton.tsx
+  - [x] 12.3 Créer ManageSubscriptionButton.tsx
     - Ajouter un bouton "Gérer mon abonnement"
     - Appeler openCustomerPortal au clic
     - Afficher l'état de chargement pendant la création de session portail
     - Afficher uniquement pour les utilisateurs avec abonnement actif ou en essai
+    - **Créé** : `dashboard-app/src/components/subscription/ManageSubscriptionButton.tsx`
     - _Exigences: 7.4, 7.5_
 
-  - [ ] 12.4 Créer SubscriptionStatus.tsx
-    - Afficher les informations d'abonnement (plan, statut, dates)
+  - [x] 12.4 Créer SubscriptionStatus.tsx
+    - Afficher les informations d'abonnement (cycle de facturation mensuel/annuel, statut, dates)
+    - Afficher "Premium Mensuel" ou "Premium Annuel" selon le priceId
     - Afficher un avertissement pour les abonnements past_due
     - Afficher un lien vers le portail pour mettre à jour le moyen de paiement
     - Afficher un avertissement pour les abonnements avec cancelAtPeriodEnd
     - Intégrer ManageSubscriptionButton
+    - **Créé** : `dashboard-app/src/components/subscription/SubscriptionStatus.tsx`
     - _Exigences: 9.4, 9.5, 12.4_
 
-- [ ] 13. Implémenter la gestion complète des erreurs et le logging
-  - [ ] 13.1 Ajouter le logging et l'observabilité backend
+- [x] 13. Implémenter la gestion complète des erreurs et le logging
+  - [x] 13.1 Ajouter le logging et l'observabilité backend
     - Logger tous les appels API Stripe avec paramètres de requête et statut de réponse vers console/fichier
     - Logger toutes les tentatives de traitement webhook avec type d'événement, statut et durée
     - Logger les tentatives de création de session checkout avec statut de succès/échec
     - Configurer la destination des logs (console pour dev, logs structurés pour production)
     - Ajouter des alertes d'erreur critiques pour les échecs de signature webhook (Sentry/Slack si configuré)
+    - Note: Tous les services Stripe incluent déjà un logging complet avec timestamps
     - _Exigences: 10.3, 10.4_
 
   - [ ] 13.2 Ajouter la gestion des erreurs frontend
@@ -232,45 +253,51 @@
     - Envoyer les erreurs de paiement au service de monitoring si configuré (Sentry)
     - _Exigences: 10.1, 10.2, 10.5_
 
-- [ ] 14. Mettre à jour les fichiers de configuration d'environnement
-  - [ ] 14.1 Mettre à jour payload-cms/.env.example
+- [x] 14. Mettre à jour les fichiers de configuration d'environnement
+  - [x] 14.1 Mettre à jour payload-cms/.env.example
     - Ajouter STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, STRIPE_PRICE_ID_MONTHLY, STRIPE_PRICE_ID_YEARLY
     - Ajouter FRONTEND_URL (ex: http://localhost:5173 en dev, https://app.example.com en prod)
     - Documenter chaque variable avec description et exemples de valeurs
     - Documenter la configuration sandbox vs production
     - Documenter comment obtenir les clés depuis Stripe Dashboard
+    - Note: Toutes les variables Stripe sont déjà documentées dans .env.example
     - _Exigences: 11.1, 11.3_
 
-  - [ ] 14.2 Mettre à jour dashboard-app/.env.example
+  - [x] 14.2 Mettre à jour dashboard-app/.env.example
     - Supprimer toutes les variables VITE_PADDLE_* (déjà fait dans tâche 9.2)
     - Ajouter VITE_STRIPE_PUBLISHABLE_KEY avec exemple (pk_test_xxx)
+    - Ajouter VITE_STRIPE_PRICE_ID_MONTHLY et VITE_STRIPE_PRICE_ID_YEARLY
     - S'assurer que VITE_API_BASE_URL est présent (pour les appels d'endpoint backend)
     - Documenter les valeurs d'environnement sandbox vs production
+    - **Créé** : `dashboard-app/STRIPE_INTEGRATION.md` avec guide complet
     - _Exigences: 11.2, 11.4_
 
-- [ ] 15. Configurer Stripe Dashboard et TVA française
-  - [ ] 15.1 Créer le produit et les prix avec TVA
-    - Créer le produit "Premium" dans Stripe Dashboard
+- [x] 15. Configurer Stripe Dashboard et TVA française
+  - [x] 15.1 Créer le produit et les prix avec TVA
+    - Créer **UN SEUL produit "Premium"** dans Stripe Dashboard (l'application n'a qu'une offre)
     - Créer le prix mensuel (ex: 15€ TTC):
       - Activer "Inclure la TVA"
       - Sélectionner "France" et taux "20%"
       - Le prix HT sera calculé automatiquement (12.50€ HT + 2.50€ TVA = 15€ TTC)
     - Créer le prix annuel (ex: 120€ TTC) avec la même configuration TVA
-    - Noter les Price IDs pour la configuration
+    - **Important**: Ce sont 2 cycles de facturation pour le même produit Premium, pas 2 plans différents
+    - Noter les Price IDs pour la configuration (STRIPE_PRICE_ID_MONTHLY et STRIPE_PRICE_ID_YEARLY)
+    - **Documentation**: Guide complet dans `STRIPE_DASHBOARD_SETUP.md`
     - _Exigences: 1.3, 13.1, 13.2, 13.3_
 
-  - [ ] 15.2 Configurer l'essai gratuit
+  - [x] 15.2 Configurer l'essai gratuit
     - Dans chaque prix, ne PAS configurer d'essai au niveau du produit
     - L'essai sera configuré dynamiquement lors de la création de la session checkout (trial_period_days: 30)
     - _Exigences: 1.4_
 
-  - [ ] 15.3 Configurer le Customer Portal
+  - [x] 15.3 Configurer le Customer Portal
     - Aller dans Settings > Customer Portal
     - Activer les fonctionnalités: Mise à jour moyen de paiement, Annulation d'abonnement, Voir factures
     - Configurer les paramètres d'annulation (immédiate ou fin de période)
+    - **Documentation**: Instructions détaillées dans `STRIPE_DASHBOARD_SETUP.md`
     - _Exigences: 7.2_
 
-  - [ ] 15.4 Configurer les webhooks
+  - [x] 15.4 Configurer les webhooks
     - Aller dans Developers > Webhooks
     - Ajouter un endpoint: URL de votre backend /api/stripe/webhook
     - Sélectionner les événements:
@@ -280,6 +307,7 @@
       - customer.subscription.deleted
       - invoice.payment_failed
     - Copier le webhook secret (whsec_xxx) pour STRIPE_WEBHOOK_SECRET
+    - **Documentation**: Guide complet avec Stripe CLI dans `STRIPE_DASHBOARD_SETUP.md`
     - _Exigences: 3.1, 7.2_
 
 - [ ] 16. Tout assembler et valider l'intégration
@@ -304,8 +332,8 @@
     - Vérifier que le webhook est reçu
     - Vérifier que le statut de l'abonnement est mis à jour avec cancelAtPeriodEnd
     - Attendre la fin de période ou simuler avec Stripe CLI
-    - Vérifier que le statut est mis à jour à canceled
-    - Vérifier que le plan utilisateur est mis à jour à free
+    - Vérifier que le statut utilisateur est mis à jour à 'canceled'
+    - Vérifier que l'utilisateur perd l'accès Premium (subscriptionStatus = 'canceled')
     - _Exigences: 8.1, 8.2, 8.3_
 
   - [ ] 16.4 Tester le flux d'échec de paiement
@@ -319,6 +347,7 @@
   - [ ] 16.5 Tester l'affichage des données d'abonnement
     - Vérifier que SubscriptionStatus affiche correctement les informations
     - Tester l'affichage pour chaque statut (trialing, active, past_due, canceled)
+    - Vérifier que le cycle de facturation est affiché correctement (Premium Mensuel / Premium Annuel)
     - Vérifier que les dates sont formatées correctement
     - Vérifier que ManageSubscriptionButton apparaît uniquement pour les statuts appropriés
     - _Exigences: 12.3, 12.4_

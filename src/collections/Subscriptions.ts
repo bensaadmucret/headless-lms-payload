@@ -1,7 +1,22 @@
-import { CollectionConfig } from 'payload';
+import { CollectionConfig, CollectionAfterChangeHook } from 'payload';
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
+import { syncUserSubscription } from '../utils/stripe/subscriptionSync';
 
 const SLUG = 'subscriptions' as const;
+
+// Hook pour synchroniser automatiquement l'utilisateur après changement d'abonnement
+const syncUserAfterChange: CollectionAfterChangeHook = async ({ doc, req, operation }) => {
+  // Ne synchroniser que lors de la création ou mise à jour
+  if (operation === 'create' || operation === 'update') {
+    try {
+      await syncUserSubscription(doc, req.payload);
+    } catch (error) {
+      // Logger l'erreur mais ne pas bloquer l'opération
+      req.payload.logger.error('[Subscriptions Hook] Échec de synchronisation utilisateur', error);
+    }
+  }
+  return doc;
+};
 
 // Helper d'accès: accepte superadmin via session, via API Key (adapter), ou via fallback entête + env
 const isSuperadminS2S = async ({ req }: { req: any }): Promise<boolean> => {
@@ -205,7 +220,7 @@ export const Subscriptions: CollectionConfig = {
     },
   ],
   hooks: {
-    afterChange: [logAuditAfterChange],
+    afterChange: [syncUserAfterChange, logAuditAfterChange],
     afterDelete: [logAuditAfterDelete],
   },
   timestamps: true,

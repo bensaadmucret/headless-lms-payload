@@ -72,17 +72,3 @@ export async function cleanupWebhookRetryQueue(payload: Payload): Promise<void> 
     });
   }
 }
-
-/**
- * Payload job configuration for webhook retry queue cleanup
- * This can be registered in the payload config to run as a scheduled job
- * Runs daily at 2 AM
- */
-export const webhookRetryQueueCleanupJob = {
-  slug: 'cleanup-webhook-retry-queue',
-  interfaceName: 'CleanupWebhookRetryQueue',
-  handler: async ({ payload }: { payload: Payload }) => {
-    await cleanupWebhookRetryQueue(payload);
-  },
-  schedule: '0 2 * * *', // Run daily at 2 AM
-};

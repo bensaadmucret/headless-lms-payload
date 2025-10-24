@@ -2,7 +2,7 @@ import 'dotenv/config'
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import sharp from 'sharp' // sharp-import
 import path from 'path'
-import { buildConfig } from 'payload'
+import { buildConfig, getPayload } from 'payload'
 import { diagnosticsEndpoint } from './endpoints/diagnostics'
 import { studentQuizzesEndpoint } from './endpoints/studentQuizzes'
 import { generateSessionStepsEndpoint } from './endpoints/generateSessionSteps'
@@ -13,6 +13,8 @@ import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import { createCheckoutSessionEndpoint, webhookEndpoint } from './endpoints/stripe';
+import { portalSessionEndpoint } from './endpoints/stripe/portalSession';
+import { meSubscriptionEndpoint } from './endpoints/meSubscription';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
 import { checkAdaptiveQuizEligibilityEndpoint } from './endpoints/checkAdaptiveQuizEligibility';
 import { eligibilityDetailsEndpoint } from './endpoints/eligibilityDetails';
@@ -38,6 +40,7 @@ import { validateImportFile, getImportJobStatus, getImportHistory, exportImportH
 import { uploadImportFile } from './endpoints/jsonImportUpload'
 import { triggerImport } from './endpoints/triggerImport'
 import { getImportStatus } from './endpoints/importStatus'
+import { processWebhookRetryQueueHandler, cleanupWebhookRetryQueueHandler } from './jobs/taskHandlers'
 
 
 // Endpoints pour la répétition espacée
@@ -71,14 +74,19 @@ import {
   getUserAdaptiveQuizHistoryEndpoint
 } from './endpoints/adaptiveQuizSessionsEndpoints'
 import { CorsConfig } from './globals/CorsConfig'
-import { fileURLToPath } from 'url'
-import { Media } from './collections/Media'
-import { Pages } from './collections/Pages'
-import { Posts } from './collections/Posts'
-import { Users } from './collections/Users'
-import { Courses } from './collections/Courses'
-import { Assignments } from './collections/Assignments'
-import Lessons from './collections/Lessons'
+import { fileURLToPath } from 'url';
+import { Footer } from './Footer/config';
+import { Header } from './Header/config';
+import { plugins } from './plugins';
+import { defaultLexical } from './fields/defaultLexical';
+import { Categories } from './collections/Categories';
+import { Media } from './collections/Media';
+import { Pages } from './collections/Pages';
+import { Posts } from './collections/Posts';
+import { Users } from './collections/Users';
+import { Courses } from './collections/Courses';
+import { Assignments } from './collections/Assignments';
+import Lessons from './collections/Lessons';
 import { Prerequisites } from './collections/Prerequisites'
 import { Quizzes } from './collections/Quizzes'
 import { Questions } from './collections/Questions'
@@ -88,11 +96,6 @@ import { Sections } from './collections/Sections'
 import { StudySessions } from './collections/StudySessions'
 import { Badges } from './collections/Badges'
 import { ColorSchemes } from './collections/ColorSchemes'
-import { Footer } from './Footer/config'
-import { Header } from './Header/config'
-import { plugins } from './plugins'
-import { defaultLexical } from './fields/defaultLexical'
-import { Categories } from './collections/Categories'
 import { SubscriptionPlans } from './collections/SubscriptionPlans'
 import { Tenants } from './collections/Tenants'
 import Conversations from './collections/Conversations'
@@ -204,8 +207,8 @@ export default buildConfig({
     LearningPathSteps
   ],
   globals: [CorsConfig, Header, Footer],
-  cors: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
-  csrf: (process.env.CORS_ORIGINS || '').split(',').concat([process.env.PAYLOAD_PUBLIC_SERVER_URL || '']),
+  cors: (process.env.CORS_ORIGINS || '').split(','),
+  csrf: (process.env.CORS_ORIGINS || '').split(','),
   cookiePrefix: 'payload-admin',
   plugins: [
     ...plugins,
@@ -221,69 +224,69 @@ export default buildConfig({
     {
       path: '/json-import/templates',
       method: 'get',
-      handler: listTemplates
+      handler: listTemplates,
     },
     {
       path: '/json-import/templates/:filename',
       method: 'get',
-      handler: downloadTemplate
+      handler: downloadTemplate,
     },
     {
       path: '/json-import/validate',
       method: 'post',
-      handler: validateImportFile
+      handler: validateImportFile,
     },
     {
       path: '/json-import/upload',
       method: 'post',
-      handler: uploadImportFile
+      handler: uploadImportFile,
     },
     {
       path: '/json-import/status/:jobId',
       method: 'get',
-      handler: getImportJobStatus
+      handler: getImportJobStatus,
     },
     {
       path: '/json-import/history',
       method: 'get',
-      handler: getImportHistory
+      handler: getImportHistory,
     },
     {
       path: '/json-import/export-history',
       method: 'get',
-      handler: exportImportHistory
+      handler: exportImportHistory,
     },
     {
       path: '/trigger-import',
       method: 'post',
-      handler: triggerImport
+      handler: triggerImport,
     },
     {
       path: '/import-status/:jobId',
       method: 'get',
-      handler: getImportStatus
+      handler: getImportStatus,
     },
 
     // === ENDPOINTS RÉPÉTITION ESPACÉE ===
     {
       path: '/spaced-repetition/review-session',
       method: 'get',
-      handler: generateReviewSession.handler
+      handler: generateReviewSession,
     },
     {
       path: '/spaced-repetition/submit-review',
       method: 'post',
-      handler: submitReviewResults.handler
+      handler: submitReviewResults,
     },
     {
       path: '/spaced-repetition/progress-stats',
       method: 'get',
-      handler: getProgressStats.handler
+      handler: getProgressStats,
     },
     {
       path: '/spaced-repetition/create-schedule',
       method: 'post',
-      handler: createSchedule.handler
+      handler: createSchedule,
     },
 
     // Endpoints d'administration pour les workers
@@ -302,7 +305,7 @@ export default buildConfig({
     dailySessionEndpoint,
     getDailySessionEndpoint,
     simpleDailySessionEndpoint,
-    
+
     // === ENDPOINTS PERFORMANCE ===
     performanceAnalysisEndpoint,
     performanceAnalyticsByUserEndpoint,
@@ -310,7 +313,7 @@ export default buildConfig({
     performanceMinimumDataEndpoint,
     performanceValidateHistoryEndpoint,
     performanceUpdateEndpoint,
-    
+
     // === ENDPOINTS QUIZ ADAPTATIF ===
     generateAdaptiveQuizEndpoint,
     checkAdaptiveQuizEligibilityEndpoint,
@@ -322,7 +325,7 @@ export default buildConfig({
     saveAdaptiveQuizResultEndpoint,
     getAdaptiveQuizResultBySessionEndpoint,
     getUserAdaptiveQuizHistoryEndpoint,
-    
+
     // === ENDPOINTS QUESTIONS ===
     getQuestionsByCategoryEndpoint,
     getQuestionCountEndpoint,
@@ -330,11 +333,11 @@ export default buildConfig({
     getRelatedCategoryQuestionsEndpoint,
     getAnyAvailableQuestionsEndpoint,
     getRelaxedLevelQuestionsEndpoint,
-    
+
     // === ENDPOINTS RATE LIMITING ===
     rateLimitStatusEndpoint,
     usageStatsEndpoint,
-    
+
     // === ENDPOINTS AUTRES ===
     generateAIQuestionsEndpoint,
     generateAIQuizEndpoint,
@@ -343,7 +346,7 @@ export default buildConfig({
     createTestQuizEndpoint,
     // === ENDPOINTS PRÉVISUALISATION ET MODIFICATION (Tâche 9) ===
     regenerateQuestionEndpoint,
-    
+
     // === ENDPOINTS AUDIT ET LOGGING (Tâche 6) ===
     generationMetricsEndpoint,
     generationLogsEndpoint,
@@ -362,43 +365,7 @@ export default buildConfig({
     // === ENDPOINTS STRIPE ===
     createCheckoutSessionEndpoint,
     webhookEndpoint,
+    portalSessionEndpoint,
+    meSubscriptionEndpoint,
   ],
-  jobs: {
-    access: {
-      run: ({ req }): boolean => {
-        // Allow logged in users to execute this endpoint (default)
-        // Utilisation d'une assertion de type pour accéder à user
-        const user = (req as { user?: unknown }).user;
-        if (user) return true
-
-        // If there is no logged in user, then check
-        // for the Vercel Cron secret to be present as an
-        // Authorization header:
-        // Utilisation d'une assertion de type pour accéder à headers
-        const headers = (req as { headers?: { get?: (key: string) => string | null } }).headers;
-        const authHeader = headers && typeof headers.get === 'function' ? headers.get('authorization') : null;
-        return authHeader === `Bearer ${process.env.CRON_SECRET}`
-      },
-    },
-    tasks: [
-      {
-        slug: 'process-webhook-retry-queue',
-        interfaceName: 'ProcessWebhookRetryQueue',
-        handler: async ({ payload }) => {
-          const { processWebhookRetryQueue } = await import('./jobs/processWebhookRetryQueue');
-          await processWebhookRetryQueue(payload);
-        },
-        schedule: '*/5 * * * *', // Run every 5 minutes
-      },
-      {
-        slug: 'cleanup-webhook-retry-queue',
-        interfaceName: 'CleanupWebhookRetryQueue',
-        handler: async ({ payload }) => {
-          const { cleanupWebhookRetryQueue } = await import('./jobs/cleanupWebhookRetryQueue');
-          await cleanupWebhookRetryQueue(payload);
-        },
-        schedule: '*/5 * * * *', // Run every 5 minutes
-      },
-    ],
-  },
 })
