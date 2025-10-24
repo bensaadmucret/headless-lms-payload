@@ -1,6 +1,5 @@
 import { CollectionConfig } from 'payload';
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
-import { payloadIsSuperAdmin } from '../access/payloadAccess';
 
 const SLUG = 'subscriptions' as const;
 
@@ -66,8 +65,8 @@ export const Subscriptions: CollectionConfig = {
   slug: SLUG,
   admin: {
     useAsTitle: 'subscriptionId',
-    defaultColumns: ['user', 'status', 'subscriptionId', 'currentPeriodEnd', 'updatedAt'],
-    description: 'Instances d’abonnements (Paddle) rattachées aux utilisateurs.'
+    defaultColumns: ['user', 'provider', 'status', 'subscriptionId', 'currentPeriodEnd', 'updatedAt'],
+    description: 'Instances d\'abonnements (Stripe/Paddle) rattachées aux utilisateurs.',
   },
   access: {
     // Autoriser superadmin via session utilisateur OU via API Key (req.apiKey), en chargeant l'user si nécessaire
@@ -88,52 +87,59 @@ export const Subscriptions: CollectionConfig = {
       name: 'provider',
       type: 'select',
       required: true,
-      defaultValue: 'paddle',
+      defaultValue: 'stripe',
       options: [
         { label: 'Paddle', value: 'paddle' },
+        { label: 'Stripe', value: 'stripe' },
       ],
-      admin: { position: 'sidebar' },
+      admin: { 
+        position: 'sidebar',
+        description: 'Fournisseur de paiement (Stripe par défaut)',
+      },
     },
     {
       name: 'customerId',
-      label: 'Paddle Customer ID',
+      label: 'Customer ID',
       type: 'text',
-      admin: { description: 'Identifiant client Paddle (customer_id)' },
+      admin: { 
+        description: 'Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)',
+      },
     },
     {
       name: 'subscriptionId',
-      label: 'Paddle Subscription ID',
+      label: 'Subscription ID',
       type: 'text',
       required: true,
       unique: true,
-      admin: { position: 'sidebar', description: 'Identifiant d’abonnement (subscription_id) unique' },
-    },
-    {
-      name: 'productId',
-      label: 'Paddle Product ID',
-      type: 'text',
+      admin: { 
+        position: 'sidebar', 
+        description: 'Identifiant d\'abonnement unique du fournisseur',
+      },
     },
     {
       name: 'priceId',
-      label: 'Paddle Price ID',
+      label: 'Price ID',
       type: 'text',
+      admin: {
+        description: 'Identifiant du prix du fournisseur',
+      },
     },
     {
       name: 'status',
       type: 'select',
       required: true,
       options: [
-        { label: 'Trialing', value: 'trialing' },
-        { label: 'Active', value: 'active' },
-        { label: 'Past due', value: 'past_due' },
-        { label: 'Canceled', value: 'canceled' },
+        { label: 'Essai gratuit', value: 'trialing' },
+        { label: 'Actif', value: 'active' },
+        { label: 'Paiement en retard', value: 'past_due' },
+        { label: 'Annulé', value: 'canceled' },
       ],
       admin: { position: 'sidebar' },
     },
     {
       name: 'trialEnd',
       type: 'date',
-      admin: { description: 'Fin de période d’essai' },
+      admin: { description: 'Fin de période d\'essai' },
     },
     {
       name: 'currentPeriodEnd',
@@ -149,6 +155,7 @@ export const Subscriptions: CollectionConfig = {
     {
       name: 'lastPaymentAt',
       type: 'date',
+      admin: { description: 'Date du dernier paiement réussi' },
     },
     {
       name: 'amount',
@@ -159,22 +166,23 @@ export const Subscriptions: CollectionConfig = {
       name: 'currency',
       type: 'text',
       defaultValue: 'EUR',
+      admin: { description: 'Devise (EUR par défaut)' },
     },
     {
       name: 'history',
       type: 'array',
       labels: { singular: 'Événement', plural: 'Événements' },
-      admin: { description: 'Historique des événements Paddle liés à cet abonnement' },
+      admin: { description: 'Historique des événements webhook liés à cet abonnement' },
       fields: [
         {
           name: 'type',
           type: 'select',
           options: [
-            { label: 'subscription_created', value: 'subscription_created' },
-            { label: 'payment_succeeded', value: 'payment_succeeded' },
-            { label: 'subscription_updated', value: 'subscription_updated' },
-            { label: 'payment_failed', value: 'payment_failed' },
-            { label: 'subscription_canceled', value: 'subscription_canceled' },
+            { label: 'Abonnement créé', value: 'subscription_created' },
+            { label: 'Paiement réussi', value: 'payment_succeeded' },
+            { label: 'Abonnement mis à jour', value: 'subscription_updated' },
+            { label: 'Paiement échoué', value: 'payment_failed' },
+            { label: 'Abonnement annulé', value: 'subscription_canceled' },
           ],
           required: true,
         },
@@ -186,7 +194,7 @@ export const Subscriptions: CollectionConfig = {
         {
           name: 'raw',
           type: 'json',
-          admin: { description: 'Payload d’événement (sanitisé/tronqué si nécessaire)' },
+          admin: { description: 'Payload d\'événement (sanitisé/tronqué si nécessaire)' },
         },
       ],
     },

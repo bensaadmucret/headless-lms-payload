@@ -12,6 +12,7 @@ import { getDailySessionEndpoint } from './endpoints/getDailySession'
 import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
+import { createCheckoutSessionEndpoint, webhookEndpoint } from './endpoints/stripe';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
 import { checkAdaptiveQuizEligibilityEndpoint } from './endpoints/checkAdaptiveQuizEligibility';
 import { eligibilityDetailsEndpoint } from './endpoints/eligibilityDetails';
@@ -97,6 +98,7 @@ import { Tenants } from './collections/Tenants'
 import Conversations from './collections/Conversations'
 import { SystemMetrics } from './collections/SystemMetrics'
 import { Subscriptions } from './collections/Subscriptions'
+import { WebhookRetryQueue } from './collections/WebhookRetryQueue'
 
 import { AdaptiveQuizSessions } from './collections/AdaptiveQuizSessions'
 import Flashcards from './collections/Flashcards'
@@ -172,6 +174,7 @@ export default buildConfig({
     Media,
     Users,
     Subscriptions,
+    WebhookRetryQueue,
     Categories,
     Courses,
     Lessons,
@@ -355,6 +358,10 @@ export default buildConfig({
       method: 'patch',
       handler: updateDailySessionHandler,
     },
+
+    // === ENDPOINTS STRIPE ===
+    createCheckoutSessionEndpoint,
+    webhookEndpoint,
   ],
   jobs: {
     access: {
@@ -373,6 +380,25 @@ export default buildConfig({
         return authHeader === `Bearer ${process.env.CRON_SECRET}`
       },
     },
-    tasks: [],
+    tasks: [
+      {
+        slug: 'process-webhook-retry-queue',
+        interfaceName: 'ProcessWebhookRetryQueue',
+        handler: async ({ payload }) => {
+          const { processWebhookRetryQueue } = await import('./jobs/processWebhookRetryQueue');
+          await processWebhookRetryQueue(payload);
+        },
+        schedule: '*/5 * * * *', // Run every 5 minutes
+      },
+      {
+        slug: 'cleanup-webhook-retry-queue',
+        interfaceName: 'CleanupWebhookRetryQueue',
+        handler: async ({ payload }) => {
+          const { cleanupWebhookRetryQueue } = await import('./jobs/cleanupWebhookRetryQueue');
+          await cleanupWebhookRetryQueue(payload);
+        },
+        schedule: '*/5 * * * *', // Run every 5 minutes
+      },
+    ],
   },
 })

@@ -15,6 +15,7 @@ declare global {
     settings: string;
     audit: string;
     progressions: string;
+    'webhook-retry-queue': string;
   }
 
   // Types pour les endpoints personnalisés

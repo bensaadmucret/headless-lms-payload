@@ -1,7 +1,7 @@
 import type { CollectionConfig, FieldAccess, Validate, PayloadRequest } from 'payload'
 
 
-import type { User } from '../../payload-types'
+import type { User as PayloadUser } from '../../payload-types'
 
 import { authenticated } from '../../access/authenticated'
 import { logAuditAfterChange, logAuditAfterDelete } from '../logAudit'
@@ -15,7 +15,7 @@ const requiredForStudent: Validate = (value, { data, operation }) => {
 }
 
 // Validation for checkboxes, must be checked for students on update
-const checkboxRequiredForStudent: Validate = (value, { data, operation }) => {
+const validateCheckboxForStudent: Validate = (value, { data, operation }) => {
   if (operation === 'update' && data.role === 'student' && value !== true) {
     return 'Vous devez cocher cette case pour continuer.'
   }
@@ -165,7 +165,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Le cursus actuel de l’étudiant.',
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -173,11 +173,11 @@ export const Users: CollectionConfig = {
       label: 'Onboarding Terminé',
       type: 'checkbox',
       defaultValue: false,
-      validate: checkboxRequiredForStudent,
+            validate: validateCheckboxForStudent,
       admin: {
         position: 'sidebar',
         description: 'Indique si l’étudiant a terminé le parcours d’intégration.',
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -188,7 +188,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: "Permet au coach de calibrer le plan d'étude.",
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -196,7 +196,7 @@ export const Users: CollectionConfig = {
       label: "Profil d'étude",
       type: 'group',
       admin: {
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
         description: "Objectifs et préférences de l'étudiant pour personnaliser son coaching.",
       },
       fields: [
@@ -211,7 +211,7 @@ export const Users: CollectionConfig = {
       admin: {
         description: 'Stocke les scores de compétence par matière. Mis à jour par le coach IA.',
         readOnly: true,
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -222,7 +222,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Indique si l’étudiant a passé le quiz de positionnement',
-        condition: (data: Partial<User>) => data.role === 'student',
+                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -241,6 +241,73 @@ export const Users: CollectionConfig = {
         update: (({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin') as FieldAccess,
       },
     },
+    {
+      name: 'subscription_status',
+      type: 'text',
+      required: false,
+      admin: {
+        readOnly: true,
+        position: 'sidebar'
+      }
+    },
+    {
+      name: 'subscriptionStatus',
+      label: 'Statut d\'abonnement',
+      type: 'select',
+      options: [
+        { label: 'Aucun', value: 'none' },
+        { label: 'Essai gratuit', value: 'trialing' },
+        { label: 'Actif', value: 'active' },
+        { label: 'Paiement en retard', value: 'past_due' },
+        { label: 'Annulé', value: 'canceled' },
+      ],
+      defaultValue: 'none',
+      admin: {
+        position: 'sidebar',
+        description: 'Statut actuel de l\'abonnement Premium',
+      },
+    },
+    {
+      name: 'subscriptionEndDate',
+      label: 'Date de fin d\'abonnement',
+      type: 'date',
+      admin: {
+        position: 'sidebar',
+        description: 'Date de fin de la période d\'abonnement actuelle',
+      },
+    },
+    {
+      name: 'stripeCustomerId',
+      label: 'Stripe Customer ID',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        description: 'ID du client Stripe',
+        readOnly: true,
+      },
+    },
   ],
   timestamps: true,
 };
+
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  role: 'superadmin' | 'admin' | 'teacher' | 'student';
+  studyYear?: 'pass' | 'las';
+  onboardingComplete?: boolean;
+  examDate?: Date;
+  studyProfile?: {
+    targetScore: number;
+    studyHoursPerWeek: number;
+  };
+  competencyProfile?: object;
+  hasTakenPlacementQuiz?: boolean;
+  subscription_status?: string;
+  subscriptionStatus?: 'none' | 'trialing' | 'active' | 'past_due' | 'canceled';
+  subscriptionEndDate?: Date;
+  stripeCustomerId?: string;
+}

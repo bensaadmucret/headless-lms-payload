@@ -72,6 +72,7 @@ export interface Config {
     media: Media;
     users: User;
     subscriptions: Subscription;
+    'webhook-retry-queue': WebhookRetryQueue;
     categories: Category;
     courses: Course;
     lessons: Lesson;
@@ -115,6 +116,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
+    'webhook-retry-queue': WebhookRetryQueueSelect<false> | WebhookRetryQueueSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
@@ -170,6 +172,8 @@ export interface Config {
   };
   jobs: {
     tasks: {
+      'process-webhook-retry-queue': ProcessWebhookRetryQueue;
+      'cleanup-webhook-retry-queue': CleanupWebhookRetryQueue;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -448,6 +452,19 @@ export interface User {
    */
   hasTakenPlacementQuiz?: boolean | null;
   role: 'superadmin' | 'admin' | 'teacher' | 'student';
+  subscription_status?: string | null;
+  /**
+   * Statut actuel de l'abonnement Premium
+   */
+  subscriptionStatus?: ('none' | 'trialing' | 'active' | 'past_due' | 'canceled') | null;
+  /**
+   * Date de fin de la période d'abonnement actuelle
+   */
+  subscriptionEndDate?: string | null;
+  /**
+   * ID du client Stripe
+   */
+  stripeCustomerId?: string | null;
   updatedAt: string;
   createdAt: string;
   enableAPIKey?: boolean | null;
@@ -858,7 +875,7 @@ export interface Form {
   createdAt: string;
 }
 /**
- * Instances d’abonnements (Paddle) rattachées aux utilisateurs.
+ * Instances d'abonnements (Stripe/Paddle) rattachées aux utilisateurs.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscriptions".
@@ -866,20 +883,25 @@ export interface Form {
 export interface Subscription {
   id: number;
   user: number | User;
-  provider: 'paddle';
   /**
-   * Identifiant client Paddle (customer_id)
+   * Fournisseur de paiement (Stripe par défaut)
+   */
+  provider: 'paddle' | 'stripe';
+  /**
+   * Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)
    */
   customerId?: string | null;
   /**
-   * Identifiant d’abonnement (subscription_id) unique
+   * Identifiant d'abonnement unique du fournisseur
    */
   subscriptionId: string;
-  productId?: string | null;
+  /**
+   * Identifiant du prix du fournisseur
+   */
   priceId?: string | null;
   status: 'trialing' | 'active' | 'past_due' | 'canceled';
   /**
-   * Fin de période d’essai
+   * Fin de période d'essai
    */
   trialEnd?: string | null;
   /**
@@ -890,14 +912,20 @@ export interface Subscription {
    * Annulation à la fin de la période en cours
    */
   cancelAtPeriodEnd?: boolean | null;
+  /**
+   * Date du dernier paiement réussi
+   */
   lastPaymentAt?: string | null;
   /**
    * Montant en plus petite unité (ex: centimes)
    */
   amount?: number | null;
+  /**
+   * Devise (EUR par défaut)
+   */
   currency?: string | null;
   /**
-   * Historique des événements Paddle liés à cet abonnement
+   * Historique des événements webhook liés à cet abonnement
    */
   history?:
     | {
@@ -909,7 +937,7 @@ export interface Subscription {
           | 'subscription_canceled';
         occurredAt: string;
         /**
-         * Payload d’événement (sanitisé/tronqué si nécessaire)
+         * Payload d'événement (sanitisé/tronqué si nécessaire)
          */
         raw?:
           | {
@@ -935,6 +963,57 @@ export interface Subscription {
     | number
     | boolean
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * File de réessai pour les webhooks Stripe échoués
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "webhook-retry-queue".
+ */
+export interface WebhookRetryQueue {
+  id: number;
+  /**
+   * Identifiant unique de l'événement Stripe
+   */
+  eventId: string;
+  /**
+   * Type d'événement webhook (ex: customer.subscription.created)
+   */
+  eventType: string;
+  /**
+   * Données complètes de l'événement webhook
+   */
+  payload:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Nombre de fois que le traitement a été tenté
+   */
+  retryCount?: number | null;
+  /**
+   * Nombre maximum de réessais avant échec définitif
+   */
+  maxRetries?: number | null;
+  /**
+   * Message d'erreur du dernier échec de traitement
+   */
+  lastError?: string | null;
+  /**
+   * Statut actuel du traitement
+   */
+  status?: ('pending' | 'processing' | 'success' | 'failed') | null;
+  /**
+   * Date et heure du prochain réessai
+   */
+  nextRetryAt?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2345,7 +2424,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'schedulePublish';
+        taskSlug: 'inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -2378,7 +2457,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -2411,6 +2490,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'subscriptions';
         value: number | Subscription;
+      } | null)
+    | ({
+        relationTo: 'webhook-retry-queue';
+        value: number | WebhookRetryQueue;
       } | null)
     | ({
         relationTo: 'categories';
@@ -2862,6 +2945,10 @@ export interface UsersSelect<T extends boolean = true> {
   competencyProfile?: T;
   hasTakenPlacementQuiz?: T;
   role?: T;
+  subscription_status?: T;
+  subscriptionStatus?: T;
+  subscriptionEndDate?: T;
+  stripeCustomerId?: T;
   updatedAt?: T;
   createdAt?: T;
   enableAPIKey?: T;
@@ -2891,7 +2978,6 @@ export interface SubscriptionsSelect<T extends boolean = true> {
   provider?: T;
   customerId?: T;
   subscriptionId?: T;
-  productId?: T;
   priceId?: T;
   status?: T;
   trialEnd?: T;
@@ -2909,6 +2995,22 @@ export interface SubscriptionsSelect<T extends boolean = true> {
         id?: T;
       };
   metadata?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "webhook-retry-queue_select".
+ */
+export interface WebhookRetryQueueSelect<T extends boolean = true> {
+  eventId?: T;
+  eventType?: T;
+  payload?: T;
+  retryCount?: T;
+  maxRetries?: T;
+  lastError?: T;
+  status?: T;
+  nextRetryAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -4107,6 +4209,22 @@ export interface FooterSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProcessWebhookRetryQueue".
+ */
+export interface ProcessWebhookRetryQueue {
+  input?: unknown;
+  output?: unknown;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CleanupWebhookRetryQueue".
+ */
+export interface CleanupWebhookRetryQueue {
+  input?: unknown;
+  output?: unknown;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
