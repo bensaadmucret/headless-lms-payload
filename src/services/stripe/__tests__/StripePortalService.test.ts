@@ -19,9 +19,14 @@ describe('StripePortalService', () => {
   let mockStripeInstance: any;
 
   beforeEach(() => {
-    mockStripeInstance = new Stripe('sk_test_mock', { apiVersion: '2024-12-18.acacia' });
-    service = new StripePortalService();
-    (service as any).stripe = mockStripeInstance;
+    mockStripeInstance = {
+      billingPortal: {
+        sessions: {
+          create: vi.fn(),
+        },
+      },
+    };
+    service = new StripePortalService(mockStripeInstance);
     process.env.FRONTEND_URL = 'http://localhost:5173';
   });
 
@@ -41,15 +46,13 @@ describe('StripePortalService', () => {
         mockPortalSession
       );
 
-      const result = await service.createPortalSession('cus_test_123');
+      const result = await service.createPortalSession('cus_test_123', 'http://localhost:5173/account');
 
-      expect(result).toEqual({
-        url: 'https://billing.stripe.com/session/test_123',
-      });
+      expect(result).toBe('https://billing.stripe.com/session/test_123');
 
       expect(mockStripeInstance.billingPortal.sessions.create).toHaveBeenCalledWith({
         customer: 'cus_test_123',
-        return_url: expect.stringContaining('localhost:5173'),
+        return_url: 'http://localhost:5173/account',
       });
     });
 
@@ -64,7 +67,7 @@ describe('StripePortalService', () => {
         mockPortalSession
       );
 
-      await service.createPortalSession('cus_test_456');
+      await service.createPortalSession('cus_test_456', 'http://localhost:5173/account/subscription');
 
       expect(mockStripeInstance.billingPortal.sessions.create).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -78,8 +81,8 @@ describe('StripePortalService', () => {
         new Error('No such customer')
       );
 
-      await expect(service.createPortalSession('invalid_customer')).rejects.toThrow(
-        'No such customer'
+      await expect(service.createPortalSession('invalid_customer', 'http://localhost:5173/account')).rejects.toThrow(
+        'Échec de création de session portail: No such customer'
       );
     });
 
@@ -88,36 +91,66 @@ describe('StripePortalService', () => {
         new Error('Stripe API error')
       );
 
-      await expect(service.createPortalSession('cus_test')).rejects.toThrow(
-        'Stripe API error'
+      await expect(service.createPortalSession('cus_test', 'http://localhost:5173/account')).rejects.toThrow(
+        'Échec de création de session portail: Stripe API error'
       );
     });
 
     it('should handle empty customer ID', async () => {
-      await expect(service.createPortalSession('')).rejects.toThrow();
+      mockStripeInstance.billingPortal.sessions.create.mockRejectedValue(
+        new Error('Customer ID is required')
+      );
+      await expect(service.createPortalSession('', 'http://localhost:5173/account')).rejects.toThrow();
     });
 
     it('should handle null customer ID', async () => {
-      await expect(service.createPortalSession(null as any)).rejects.toThrow();
+      mockStripeInstance.billingPortal.sessions.create.mockRejectedValue(
+        new Error('Customer ID is required')
+      );
+      await expect(service.createPortalSession(null as any, 'http://localhost:5173/account')).rejects.toThrow();
     });
   });
 
   describe('configuration', () => {
-    it('should throw error if FRONTEND_URL is not configured', () => {
-      delete process.env.FRONTEND_URL;
-      const newService = new StripePortalService();
+    it('should work with different return URLs', async () => {
+      const mockPortalSession: Partial<Stripe.BillingPortal.Session> = {
+        id: 'bps_test_config',
+        url: 'https://billing.stripe.com/session/test_config',
+        customer: 'cus_test_config',
+      };
 
-      expect(() =>
-        (newService as any).getReturnUrl()
-      ).toThrow();
+      mockStripeInstance.billingPortal.sessions.create.mockResolvedValue(
+        mockPortalSession
+      );
+
+      const customReturnUrl = 'https://app.example.com/dashboard';
+      await service.createPortalSession('cus_test_config', customReturnUrl);
+
+      expect(mockStripeInstance.billingPortal.sessions.create).toHaveBeenCalledWith({
+        customer: 'cus_test_config',
+        return_url: customReturnUrl,
+      });
     });
 
-    it('should use production URL in production environment', () => {
-      process.env.FRONTEND_URL = 'https://app.example.com';
-      const newService = new StripePortalService();
+    it('should handle production URLs', async () => {
+      const mockPortalSession: Partial<Stripe.BillingPortal.Session> = {
+        id: 'bps_test_prod',
+        url: 'https://billing.stripe.com/session/test_prod',
+        customer: 'cus_test_prod',
+      };
 
-      const returnUrl = (newService as any).getReturnUrl();
-      expect(returnUrl).toContain('https://app.example.com');
+      mockStripeInstance.billingPortal.sessions.create.mockResolvedValue(
+        mockPortalSession
+      );
+
+      const prodUrl = 'https://app.example.com/account/subscription';
+      const result = await service.createPortalSession('cus_test_prod', prodUrl);
+
+      expect(result).toBe('https://billing.stripe.com/session/test_prod');
+      expect(mockStripeInstance.billingPortal.sessions.create).toHaveBeenCalledWith({
+        customer: 'cus_test_prod',
+        return_url: prodUrl,
+      });
     });
   });
 
@@ -127,8 +160,8 @@ describe('StripePortalService', () => {
         new Error('Network error')
       );
 
-      await expect(service.createPortalSession('cus_test')).rejects.toThrow(
-        'Network error'
+      await expect(service.createPortalSession('cus_test', 'http://localhost:5173/account')).rejects.toThrow(
+        'Échec de création de session portail: Network error'
       );
     });
 
@@ -140,8 +173,8 @@ describe('StripePortalService', () => {
         rateLimitError
       );
 
-      await expect(service.createPortalSession('cus_test')).rejects.toThrow(
-        'Rate limit exceeded'
+      await expect(service.createPortalSession('cus_test', 'http://localhost:5173/account')).rejects.toThrow(
+        'Échec de création de session portail: Rate limit exceeded'
       );
     });
   });

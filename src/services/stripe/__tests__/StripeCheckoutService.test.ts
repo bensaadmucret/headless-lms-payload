@@ -17,12 +17,34 @@ vi.mock('stripe', () => {
 describe('StripeCheckoutService', () => {
   let service: StripeCheckoutService;
   let mockStripeInstance: any;
+  let mockStripeClient: any;
+  let mockPayload: any;
 
   beforeEach(() => {
     // Setup mock Stripe instance
-    mockStripeInstance = new Stripe('sk_test_mock', { apiVersion: '2024-12-18.acacia' });
-    service = new StripeCheckoutService();
-    (service as any).stripe = mockStripeInstance;
+    mockStripeInstance = {
+      checkout: {
+        sessions: {
+          create: vi.fn(),
+        },
+      },
+      customers: {
+        create: vi.fn(),
+      },
+    };
+
+    // Mock StripeClient
+    mockStripeClient = {
+      getStripe: vi.fn().mockReturnValue(mockStripeInstance),
+    };
+
+    // Mock Payload
+    mockPayload = {
+      findByID: vi.fn(),
+      update: vi.fn(),
+    };
+
+    service = new StripeCheckoutService(mockStripeClient, mockPayload);
   });
 
   afterEach(() => {
@@ -38,12 +60,17 @@ describe('StripeCheckoutService', () => {
         mode: 'subscription',
       };
 
+      const mockCustomer = { id: 'cus_123' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_123' }); // No existing customer
 
       const result = await service.createCheckoutSession({
         userId: 'user_123',
         email: 'test@example.com',
-        priceId: 'monthly',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
       });
 
       expect(result).toEqual({
@@ -53,11 +80,12 @@ describe('StripeCheckoutService', () => {
 
       expect(mockStripeInstance.checkout.sessions.create).toHaveBeenCalledWith(
         expect.objectContaining({
+          customer: 'cus_123',
           mode: 'subscription',
-          customer_email: 'test@example.com',
+          payment_method_types: ['card'],
           line_items: expect.arrayContaining([
             expect.objectContaining({
-              price: expect.any(String),
+              price: 'price_monthly_123',
               quantity: 1,
             }),
           ]),
@@ -67,6 +95,8 @@ describe('StripeCheckoutService', () => {
               userId: 'user_123',
             }),
           }),
+          success_url: 'https://example.com/success',
+          cancel_url: 'https://example.com/cancel',
         })
       );
     });
@@ -79,12 +109,17 @@ describe('StripeCheckoutService', () => {
         mode: 'subscription',
       };
 
+      const mockCustomer = { id: 'cus_456' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_456' }); // No existing customer
 
       const result = await service.createCheckoutSession({
         userId: 'user_456',
         email: 'test2@example.com',
-        priceId: 'yearly',
+        priceId: 'price_yearly_456',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
       });
 
       expect(result.sessionId).toBe('cs_test_456');
@@ -92,7 +127,7 @@ describe('StripeCheckoutService', () => {
         expect.objectContaining({
           line_items: expect.arrayContaining([
             expect.objectContaining({
-              price: expect.any(String),
+              price: 'price_yearly_456',
             }),
           ]),
         })
@@ -105,34 +140,44 @@ describe('StripeCheckoutService', () => {
         url: 'https://checkout.stripe.com/pay/cs_test_789',
       };
 
+      const mockCustomer = { id: 'cus_789' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_789' }); // No existing customer
 
       await service.createCheckoutSession({
         userId: 'user_789',
         email: 'test3@example.com',
-        priceId: 'monthly',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/checkout/success',
+        cancelUrl: 'https://example.com/checkout/cancel',
       });
 
       expect(mockStripeInstance.checkout.sessions.create).toHaveBeenCalledWith(
         expect.objectContaining({
-          success_url: expect.stringContaining('/checkout/success'),
-          cancel_url: expect.stringContaining('/checkout/cancel'),
+          success_url: 'https://example.com/checkout/success',
+          cancel_url: 'https://example.com/checkout/cancel',
         })
       );
     });
 
     it('should throw error if Stripe session creation fails', async () => {
+      const mockCustomer = { id: 'cus_error' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockRejectedValue(
         new Error('Stripe API error')
       );
+      mockPayload.findByID.mockResolvedValue({ id: 'user_error' }); // No existing customer
 
       await expect(
         service.createCheckoutSession({
           userId: 'user_error',
           email: 'error@example.com',
-          priceId: 'monthly',
+          priceId: 'price_monthly_123',
+          successUrl: 'https://example.com/success',
+          cancelUrl: 'https://example.com/cancel',
         })
-      ).rejects.toThrow('Stripe API error');
+      ).rejects.toThrow('Failed to create checkout session: Stripe API error');
     });
 
     it('should include 30 days trial period', async () => {
@@ -141,12 +186,17 @@ describe('StripeCheckoutService', () => {
         url: 'https://checkout.stripe.com/pay/cs_test_trial',
       };
 
+      const mockCustomer = { id: 'cus_trial' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_trial' }); // No existing customer
 
       await service.createCheckoutSession({
         userId: 'user_trial',
         email: 'trial@example.com',
-        priceId: 'monthly',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
       });
 
       expect(mockStripeInstance.checkout.sessions.create).toHaveBeenCalledWith(
@@ -164,13 +214,18 @@ describe('StripeCheckoutService', () => {
         url: 'https://checkout.stripe.com/pay/cs_test_metadata',
       };
 
+      const mockCustomer = { id: 'cus_metadata' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
       mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_metadata_123' }); // No existing customer
 
       const userId = 'user_metadata_123';
       await service.createCheckoutSession({
         userId,
         email: 'metadata@example.com',
-        priceId: 'monthly',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
       });
 
       expect(mockStripeInstance.checkout.sessions.create).toHaveBeenCalledWith(
@@ -185,22 +240,68 @@ describe('StripeCheckoutService', () => {
     });
   });
 
-  describe('getPriceId', () => {
-    it('should return monthly price ID for monthly cycle', () => {
-      process.env.STRIPE_PRICE_ID_MONTHLY = 'price_monthly_123';
-      const priceId = (service as any).getPriceId('monthly');
-      expect(priceId).toBe('price_monthly_123');
+  describe('customer management', () => {
+    it('should use existing customer if available', async () => {
+      const mockSession: Partial<Stripe.Checkout.Session> = {
+        id: 'cs_test_existing',
+        url: 'https://checkout.stripe.com/pay/cs_test_existing',
+      };
+
+      mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ 
+        id: 'user_existing', 
+        stripeCustomerId: 'cus_existing_123' 
+      });
+
+      await service.createCheckoutSession({
+        userId: 'user_existing',
+        email: 'existing@example.com',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
+      });
+
+      expect(mockStripeInstance.checkout.sessions.create).toHaveBeenCalledWith(
+        expect.objectContaining({
+          customer: 'cus_existing_123',
+        })
+      );
+      expect(mockStripeInstance.customers.create).not.toHaveBeenCalled();
     });
 
-    it('should return yearly price ID for yearly cycle', () => {
-      process.env.STRIPE_PRICE_ID_YEARLY = 'price_yearly_456';
-      const priceId = (service as any).getPriceId('yearly');
-      expect(priceId).toBe('price_yearly_456');
-    });
+    it('should create new customer if none exists', async () => {
+      const mockSession: Partial<Stripe.Checkout.Session> = {
+        id: 'cs_test_new',
+        url: 'https://checkout.stripe.com/pay/cs_test_new',
+      };
 
-    it('should throw error if price ID is not configured', () => {
-      delete process.env.STRIPE_PRICE_ID_MONTHLY;
-      expect(() => (service as any).getPriceId('monthly')).toThrow();
+      const mockCustomer = { id: 'cus_new_123' };
+      mockStripeInstance.customers.create.mockResolvedValue(mockCustomer);
+      mockStripeInstance.checkout.sessions.create.mockResolvedValue(mockSession);
+      mockPayload.findByID.mockResolvedValue({ id: 'user_new' }); // No stripeCustomerId
+      mockPayload.update.mockResolvedValue({});
+
+      await service.createCheckoutSession({
+        userId: 'user_new',
+        email: 'new@example.com',
+        priceId: 'price_monthly_123',
+        successUrl: 'https://example.com/success',
+        cancelUrl: 'https://example.com/cancel',
+      });
+
+      expect(mockStripeInstance.customers.create).toHaveBeenCalledWith({
+        email: 'new@example.com',
+        metadata: {
+          userId: 'user_new',
+        },
+      });
+      expect(mockPayload.update).toHaveBeenCalledWith({
+        collection: 'users',
+        id: 'user_new',
+        data: {
+          stripeCustomerId: 'cus_new_123',
+        },
+      });
     });
   });
 });
