@@ -13,6 +13,8 @@ import { simpleDailySessionEndpoint } from './endpoints/simpleDailySession'
 import { meEndpoint } from './endpoints/me'
 import { performanceAnalysisEndpoint } from './endpoints/performanceAnalysis';
 import { createCheckoutSessionEndpoint, webhookEndpoint } from './endpoints/stripe';
+import { createCheckoutSessionEndpoint as createNewCheckoutSessionEndpoint } from './endpoints/stripe/createCheckoutSession';
+import { verifySessionEndpoint } from './endpoints/stripe/verifySession';
 import { portalSessionEndpoint } from './endpoints/stripe/portalSession';
 import { meSubscriptionEndpoint } from './endpoints/meSubscription';
 import { generateAdaptiveQuizEndpoint } from './endpoints/generateAdaptiveQuiz';
@@ -367,5 +369,7 @@ export default buildConfig({
     webhookEndpoint,
     portalSessionEndpoint,
     meSubscriptionEndpoint,
+    createNewCheckoutSessionEndpoint,
+    verifySessionEndpoint,
   ],
 })

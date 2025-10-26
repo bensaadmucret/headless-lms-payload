@@ -142,7 +142,7 @@ describe('StripeWebhookService', () => {
         type: 'customer.subscription.created',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: mockSubscription,
         },
@@ -175,7 +175,7 @@ describe('StripeWebhookService', () => {
         type: 'invoice.payment_succeeded',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: mockInvoice,
         },
@@ -221,7 +221,7 @@ describe('StripeWebhookService', () => {
         type: 'customer.subscription.updated',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: mockSubscription,
         },
@@ -252,7 +252,7 @@ describe('StripeWebhookService', () => {
         type: 'customer.subscription.deleted',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: mockSubscription,
         },
@@ -282,7 +282,7 @@ describe('StripeWebhookService', () => {
         type: 'invoice.payment_failed',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: mockInvoice,
         },
@@ -302,7 +302,7 @@ describe('StripeWebhookService', () => {
         type: 'charge.succeeded' as any, // Type non géré
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: {} as any,
         },
@@ -323,7 +323,7 @@ describe('StripeWebhookService', () => {
         type: 'customer.subscription.created',
         created: Date.now(),
         livemode: false,
-        api_version: '2024-12-18.acacia',
+        api_version: '2025-09-30.clover',
         data: {
           object: null as any, // Données invalides
         },
