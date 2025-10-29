@@ -6,6 +6,11 @@
 import payload from 'payload';
 import type { StudySession, Question } from '../payload-types';
 
+type SpacedRepetitionSessionContext = NonNullable<StudySession['context']> & {
+  isSpacedRepetitionSchedule?: boolean;
+  scheduleData?: string;
+};
+
 export interface SpacedRepetitionCard {
   questionId: string;
   easeFactor: number; // Facteur de facilité (1.3 - 2.5)
@@ -48,6 +53,19 @@ export interface ReviewResult {
 
 export class SpacedRepetitionSchedulingService {
   
+  /**
+   * Normalise un identifiant utilisateur pour les relations Payload (IDs numériques)
+   */
+  private normalizeUserId(userId: string | number): number {
+    const numericId = typeof userId === 'number' ? userId : Number(userId);
+
+    if (Number.isNaN(numericId)) {
+      throw new Error(`Identifiant utilisateur invalide: ${userId}`);
+    }
+
+    return numericId;
+  }
+
   /**
    * Crée un planning de répétition espacée pour un deck de flashcards importées
    */
@@ -289,13 +307,15 @@ export class SpacedRepetitionSchedulingService {
     estimatedDuration: number = 30
   ): Promise<void> {
     try {
+      const userId = this.normalizeUserId(schedule.userId);
+
       // Sélectionner les premières cartes à étudier (max 10 pour commencer)
       const initialCards = schedule.cards.slice(0, Math.min(10, schedule.cards.length));
       
       // Créer une session d'étude avec les flashcards
       const sessionData = {
         title: `Première révision - ${schedule.deckName}`,
-        user: schedule.userId,
+        user: userId,
         status: 'draft' as const,
         estimatedDuration: estimatedDuration,
         currentStep: 0,
@@ -337,23 +357,27 @@ export class SpacedRepetitionSchedulingService {
    */
   private async saveSchedule(schedule: SpacedRepetitionSchedule): Promise<void> {
     try {
+      const userId = this.normalizeUserId(schedule.userId);
+
       // Pour l'instant, on stocke dans une collection générique
       // TODO: Créer une collection dédiée SpacedRepetitionSchedules
+      const contextData: SpacedRepetitionSessionContext = {
+        difficulty: 'beginner',
+        course: null,
+        isSpacedRepetitionSchedule: true,
+        scheduleData: JSON.stringify(schedule)
+      };
+
       await payload.create({
         collection: 'study-sessions',
         data: {
           title: `Planning SRS - ${schedule.deckName}`,
-          user: schedule.userId,
+          user: userId,
           status: 'draft',
           estimatedDuration: 0,
           currentStep: 0,
           steps: [],
-          context: {
-            difficulty: 'beginner',
-            course: null,
-            isSpacedRepetitionSchedule: true,
-            scheduleData: JSON.stringify(schedule)
-          }
+          context: contextData
         }
       });
 
@@ -404,11 +428,13 @@ export class SpacedRepetitionSchedulingService {
    */
   private async getUserSchedules(userId: string): Promise<SpacedRepetitionSchedule[]> {
     try {
+      const normalizedUserId = this.normalizeUserId(userId);
+
       const response = await payload.find({
         collection: 'study-sessions',
         where: {
           user: {
-            equals: userId
+            equals: normalizedUserId
           },
           'context.isSpacedRepetitionSchedule': {
             equals: true

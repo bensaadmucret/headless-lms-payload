@@ -1,5 +1,10 @@
 // Types globaux pour Payload CMS : centraliser ici tous les slugs de collection !
 import type { CollectionSlug as PayloadCollectionSlug } from 'payload';
+import type {
+  Request as ExpressRequest,
+  Response as ExpressResponse,
+  NextFunction as ExpressNextFunction,
+} from 'express';
 
 declare global {
   interface CollectionSlug extends PayloadCollectionSlug {
@@ -22,7 +27,11 @@ declare global {
   interface Endpoint {
     path: string;
     method: 'get' | 'post' | 'put' | 'delete' | 'patch';
-    handler: (req: PayloadRequest, res: Response, next: NextFunction) => Promise<void> | void;
+    handler: (
+      req: PayloadRequest,
+      res: ExpressResponse,
+      next: ExpressNextFunction,
+    ) => Promise<void> | void;
   }
 
   // Interface pour les réponses API standardisées
@@ -34,7 +43,7 @@ declare global {
   }
 
   // Extension de PayloadRequest pour inclure les propriétés personnalisées
-  interface PayloadRequest extends Express.Request {
+  interface PayloadRequest extends ExpressRequest {
     user?: {
       id: string;
       email: string;

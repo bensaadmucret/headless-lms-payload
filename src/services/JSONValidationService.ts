@@ -34,6 +34,17 @@ interface CategoryMapping {
   action: 'map' | 'create' | 'ignore'
 }
 
+type LearningPathStep = {
+  id?: unknown
+  title?: unknown
+  prerequisites?: unknown
+  [key: string]: unknown
+}
+
+interface LearningPathData {
+  steps: LearningPathStep[]
+}
+
 export class JSONValidationService {
   async validateImportData(data: any, importType: string): Promise<ValidationResult> {
     // Convertir l'objet en JSON string puis le reparser pour uniformiser le traitement
@@ -331,7 +342,7 @@ export class JSONValidationService {
   }
 
   private async validateLearningPaths(data: Record<string, unknown>, result: ValidationResult) {
-    if (!data.path || typeof data.path !== 'object' || !data.path || !('steps' in data.path) || !Array.isArray(data.path.steps)) {
+    if (!this.isLearningPathData(data.path)) {
       result.errors.push({
         type: 'validation',
         severity: 'critical',
@@ -342,8 +353,12 @@ export class JSONValidationService {
     }
 
     // Validation des étapes
-    data.path.steps.forEach((step: any, index: number) => {
-      if (!step.id || (typeof step.id === 'string' && step.id.trim() === '')) {
+    const { steps } = data.path
+
+    steps.forEach((step, index: number) => {
+      const stepId = typeof step.id === 'string' ? step.id.trim() : step.id
+
+      if (!stepId || (typeof stepId === 'string' && stepId === '')) {
         result.errors.push({
           type: 'validation',
           severity: 'critical',
@@ -365,9 +380,11 @@ export class JSONValidationService {
       }
 
       // Validation des prérequis
-      if (step.prerequisites && Array.isArray(step.prerequisites)) {
-        step.prerequisites.forEach((prereq: string) => {
-          const prereqExists = data.path.steps.some((s: any) => s.id === prereq)
+      if (Array.isArray(step.prerequisites)) {
+        const prerequisites = step.prerequisites.filter((prereq): prereq is string => typeof prereq === 'string')
+
+        prerequisites.forEach((prereq) => {
+          const prereqExists = steps.some((s) => typeof s.id === 'string' && s.id === prereq)
           if (!prereqExists) {
             result.errors.push({
               type: 'reference',
@@ -390,6 +407,24 @@ export class JSONValidationService {
       processedData: data,
       status: 'valid'
     }]
+  }
+
+  private isLearningPathData(value: unknown): value is LearningPathData {
+    if (!value || typeof value !== 'object') {
+      return false
+    }
+
+    if (!('steps' in value)) {
+      return false
+    }
+
+    const steps = (value as { steps: unknown }).steps
+
+    if (!Array.isArray(steps)) {
+      return false
+    }
+
+    return steps.every((step) => step !== null && typeof step === 'object')
   }
 
   private detectDuplicateQuestions(questions: Array<Record<string, unknown>>, result: ValidationResult) {

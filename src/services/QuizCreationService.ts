@@ -4,6 +4,7 @@
  */
 
 import type { Payload } from 'payload';
+import type { Quiz } from '../payload-types';
 import type { AIGeneratedQuiz, AIGeneratedQuestion } from './ContentValidatorService';
 
 export interface QuizCreationRequest {
@@ -201,8 +202,9 @@ export class QuizCreationService {
           data: questionData
         });
 
-        questionIds.push(createdQuestion.id);
-        console.log(`✅ Question ${i + 1} créée: ${createdQuestion.id}`);
+        const createdQuestionId = String(createdQuestion.id);
+        questionIds.push(createdQuestionId);
+        console.log(`✅ Question ${i + 1} créée: ${createdQuestionId}`);
 
         // Ajouter des warnings si nécessaire
         if (questionValidation.warnings.length > 0) {
@@ -433,27 +435,49 @@ export class QuizCreationService {
     try {
       console.log('🎯 Création du quiz avec', questionIds.length, 'questions...');
 
-      const quizData = {
+      const formattedQuestionIds = questionIds.map(id => {
+        const numericId = Number(id);
+        if (Number.isNaN(numericId)) {
+          throw new Error(`ID de question invalide: ${id}`);
+        }
+        return numericId;
+      });
+
+      let courseIdNumeric: number | undefined;
+      if (typeof request.courseId === 'number' && !Number.isNaN(request.courseId)) {
+        courseIdNumeric = request.courseId;
+      } else if (typeof request.courseId === 'string') {
+        const courseId = request.courseId ? Number(request.courseId) : undefined;
+        if (courseId !== undefined && Number.isNaN(courseId)) {
+          throw new Error(`ID de cours invalide: ${request.courseId}`);
+        }
+        courseIdNumeric = courseId;
+      }
+
+      const quizType: Quiz['quizType'] = 'standard';
+
+      const quizData: Omit<Quiz, 'createdAt' | 'id' | 'sizes' | 'updatedAt'> = {
         title: request.aiContent.quiz.title,
         description: request.aiContent.quiz.description,
-        questions: questionIds, // Relations vers les questions créées
-        course: request.courseId || undefined,
-        published: request.published || false,
-        duration: request.aiContent.quiz.estimatedDuration || 15,
+        questions: formattedQuestionIds as Quiz['questions'], // Relations vers les questions créées
+        course: courseIdNumeric ?? undefined,
+        published: request.published ?? false,
+        duration: request.aiContent.quiz.estimatedDuration ?? 15,
         passingScore: 70, // Score par défaut
-        quizType: 'standard'
-      };
+        quizType
+      } satisfies Partial<Quiz>;
 
       const createdQuiz = await this.payload.create({
         collection: 'quizzes',
         data: quizData
       });
 
-      console.log('✅ Quiz créé:', createdQuiz.id);
+      const createdQuizId = String(createdQuiz.id);
+      console.log('✅ Quiz créé:', createdQuizId);
 
       return {
         success: true,
-        quizId: createdQuiz.id
+        quizId: createdQuizId
       };
 
     } catch (error: any) {

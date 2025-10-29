@@ -7,7 +7,7 @@ import { Payload } from 'payload';
 import { ImportData, ImportType, ImportFormat, ImportOptions } from '../types/jsonImport';
 
 export interface ImportAuditData {
-  user: { relationTo: 'users'; value: number };
+  user: number;
   action: 'import_started' | 'import_completed' | 'import_failed' | 'import_cancelled' | 'validation_performed' | 'rollback_executed';
   collection: 'json-imports';
   documentId: string; // jobId
@@ -15,8 +15,13 @@ export interface ImportAuditData {
     before?: Record<string, unknown>;
     after?: Record<string, unknown>;
     importSummary?: ImportSummary;
+    rollbackDetails?: {
+      reason: string;
+      success: boolean;
+      timestamp: string;
+    };
   };
-  timestamp: Date;
+  timestamp: string;
 }
 
 export interface ImportSummary {
@@ -64,7 +69,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'import_started',
         collection: 'json-imports',
         documentId: jobId,
@@ -81,7 +86,7 @@ export class JSONImportAuditService {
             options
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -107,7 +112,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'import_completed',
         collection: 'json-imports',
         documentId: jobId,
@@ -117,7 +122,7 @@ export class JSONImportAuditService {
             createdEntities
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -142,7 +147,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'import_failed',
         collection: 'json-imports',
         documentId: jobId,
@@ -153,7 +158,7 @@ export class JSONImportAuditService {
             ...(criticalError && { criticalError })
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -178,7 +183,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'import_cancelled',
         collection: 'json-imports',
         documentId: jobId,
@@ -188,7 +193,7 @@ export class JSONImportAuditService {
             ...(reason && { cancellationReason: reason })
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -219,7 +224,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'validation_performed',
         collection: 'json-imports',
         documentId: `validation-${Date.now()}`, // ID unique pour la validation
@@ -238,7 +243,7 @@ export class JSONImportAuditService {
             warnings: validationResult.warnings
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -267,7 +272,7 @@ export class JSONImportAuditService {
   ): Promise<void> {
     try {
       const auditData: ImportAuditData = {
-        user: { relationTo: 'users', value: userId },
+        user: userId,
         action: 'rollback_executed',
         collection: 'json-imports',
         documentId: jobId,
@@ -278,14 +283,14 @@ export class JSONImportAuditService {
           after: rollbackData.success ? {
             entitiesRemoved: rollbackData.entitiesRemoved,
             entitiesRestored: rollbackData.entitiesRestored || []
-          } : null,
+          } : undefined,
           rollbackDetails: {
             reason: rollbackData.reason,
             success: rollbackData.success,
             timestamp: new Date().toISOString()
           }
         },
-        timestamp: new Date()
+        timestamp: new Date().toISOString()
       };
 
       await this.payload.create({
@@ -367,16 +372,24 @@ export class JSONImportAuditService {
       const userActivity = new Map<number, number>();
       const errorCounts = new Map<string, number>();
 
+      type AuditLogDocument = ImportAuditData & {
+        user?: ImportAuditData['user'] | { value?: number; id?: number } | null;
+      };
+
       for (const log of auditLogs.docs) {
-        const logData = log as any;
+        const logData = log as AuditLogDocument;
         const summary = logData.diff?.importSummary;
 
         if (!summary) continue;
 
         // Compter les activités par utilisateur
-        const userId = logData.user?.value;
-        if (userId) {
-          userActivity.set(userId, (userActivity.get(userId) || 0) + 1);
+        const userField = logData.user as AuditLogDocument['user'];
+        const extractedUserId = typeof userField === 'object' && userField !== null
+          ? (userField as { value?: number; id?: number }).value ?? (userField as { id?: number }).id ?? null
+          : userField;
+
+        if (typeof extractedUserId === 'number') {
+          userActivity.set(extractedUserId, (userActivity.get(extractedUserId) || 0) + 1);
         }
 
         // Analyser selon l'action
@@ -439,7 +452,7 @@ export class JSONImportAuditService {
    */
   async getJobAuditHistory(jobId: string): Promise<Array<{
     action: string;
-    timestamp: Date;
+    timestamp: string;
     user: any;
     details: any;
   }>> {
@@ -461,7 +474,7 @@ export class JSONImportAuditService {
           ]
         },
         sort: 'timestamp',
-        populate: ['user']
+        depth: 1
       });
 
       return auditLogs.docs.map((log: any) => ({

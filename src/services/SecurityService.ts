@@ -1,16 +1,51 @@
 import type { Payload } from 'payload'
+import type { AdaptiveQuizSession, User } from '../payload-types'
+import type { ExtendedPayloadRequest } from '../types/payload-types-extended'
 
-export interface SessionOwnershipResult {
+type AdaptiveQuizSessionDoc = AdaptiveQuizSession & { user: number | (User & { id: number }) }
+
+type UserAccountStatus = 'active' | 'disabled' | 'banned'
+
+type UserWithAccountStatus = User & { status?: UserAccountStatus | null }
+
+interface PayloadFindResult<T> {
+  docs: T[]
+  totalDocs: number
+}
+
+interface SessionOwnershipResult {
   isOwner: boolean
-  session?: any
+  session?: AdaptiveQuizSessionDoc
   error?: string
 }
 
-export interface SessionValidityResult {
+interface SessionValidityResult {
   isValid: boolean
-  session?: any
+  session?: AdaptiveQuizSessionDoc
   error?: string
   reason?: 'not_found' | 'expired' | 'completed' | 'abandoned'
+}
+
+interface CleanupResult {
+  cleaned: number
+  errors: string[]
+}
+
+interface SessionIntegrityResult {
+  isValid: boolean
+  issues: string[]
+}
+
+interface UserProfileValidationResult {
+  isValid: boolean
+  user?: User
+  error?: string
+}
+
+interface AuthenticationResult {
+  isAuthenticated: boolean
+  user?: ExtendedPayloadRequest['user']
+  error?: string
 }
 
 /**
@@ -30,7 +65,7 @@ export class SecurityService {
           sessionId: { equals: sessionId }
         },
         limit: 1
-      })
+      }) as PayloadFindResult<unknown>
 
       if (session.totalDocs === 0) {
         return {
@@ -39,8 +74,14 @@ export class SecurityService {
         }
       }
 
-      const sessionDoc = session.docs[0]
-      const sessionUserId = typeof sessionDoc.user === 'object' ? sessionDoc.user.id : sessionDoc.user
+      const sessionDoc = this.normalizeSessionDoc(session.docs[0])
+      if (!sessionDoc) {
+        return {
+          isOwner: false,
+          error: 'Session invalide ou corrompue'
+        }
+      }
+      const sessionUserId = typeof sessionDoc.user === 'object' ? String(sessionDoc.user.id) : String(sessionDoc.user)
 
       if (sessionUserId !== userId) {
         return {
@@ -62,6 +103,76 @@ export class SecurityService {
     }
   }
 
+  private getUserAccountStatus(user: ExtendedPayloadRequest['user']): UserAccountStatus | undefined {
+    if (!user || typeof user !== 'object') {
+      return undefined
+    }
+
+    const candidateStatus = (user as Partial<UserWithAccountStatus>).status
+
+    if (candidateStatus === 'active' || candidateStatus === 'disabled' || candidateStatus === 'banned') {
+      return candidateStatus
+    }
+
+    return undefined
+  }
+
+  private normalizeSessionDoc(doc: unknown): AdaptiveQuizSessionDoc | null {
+    if (!doc || typeof doc !== 'object') {
+      return null
+    }
+
+    const candidate = doc as Partial<AdaptiveQuizSessionDoc>
+
+    if (typeof candidate.id !== 'number') {
+      return null
+    }
+
+    if (typeof candidate.sessionId !== 'string') {
+      return null
+    }
+
+    if (!candidate.status || !['active', 'completed', 'abandoned', 'expired'].includes(candidate.status)) {
+      return null
+    }
+
+    if (!Array.isArray(candidate.questions)) {
+      return null
+    }
+
+    if (!candidate.user || (typeof candidate.user !== 'number' && typeof candidate.user !== 'object')) {
+      return null
+    }
+
+    if (typeof candidate.user === 'object' && typeof candidate.user.id !== 'number') {
+      return null
+    }
+
+    return candidate as AdaptiveQuizSessionDoc
+  }
+
+  private normalizeUserDoc(doc: unknown): User | null {
+    if (!doc || typeof doc !== 'object') {
+      return null
+    }
+
+    const candidate = doc as Partial<User>
+
+    if (typeof candidate.id !== 'number') {
+      return null
+    }
+
+    if (typeof candidate.email !== 'string') {
+      return null
+    }
+
+    if (typeof candidate.firstName !== 'string' || typeof candidate.lastName !== 'string') {
+      return null
+    }
+
+    return candidate as User
+  }
+
   /**
    * Vérifie la validité d'une session (non expirée, active, etc.)
    */
@@ -73,7 +184,7 @@ export class SecurityService {
           sessionId: { equals: sessionId }
         },
         limit: 1
-      })
+      }) as PayloadFindResult<unknown>
 
       if (session.totalDocs === 0) {
         return {
@@ -83,7 +194,14 @@ export class SecurityService {
         }
       }
 
-      const sessionDoc = session.docs[0]
+      const sessionDoc = this.normalizeSessionDoc(session.docs[0])
+      if (!sessionDoc) {
+        return {
+          isValid: false,
+          error: 'Session invalide ou corrompue',
+          reason: 'not_found'
+        }
+      }
 
       // Vérifier si la session est expirée
       if (sessionDoc.expiresAt && new Date(sessionDoc.expiresAt) < new Date()) {
@@ -92,7 +210,7 @@ export class SecurityService {
           await this.payload.update({
             collection: 'adaptiveQuizSessions',
             id: sessionDoc.id,
-            data: { status: 'expired' }
+            data: { status: 'expired' as const }
           })
         }
 
@@ -148,7 +266,7 @@ export class SecurityService {
   /**
    * Vérifie l'authentification et les permissions de l'utilisateur
    */
-  validateUserAuthentication(req: any): { isAuthenticated: boolean; user?: any; error?: string } {
+  validateUserAuthentication(req: ExtendedPayloadRequest): AuthenticationResult {
     if (!req.user) {
       return {
         isAuthenticated: false,
@@ -165,7 +283,9 @@ export class SecurityService {
     }
 
     // Vérifier que l'utilisateur n'est pas désactivé
-    if (req.user.status === 'disabled' || req.user.status === 'banned') {
+    const status = this.getUserAccountStatus(req.user)
+
+    if (status === 'disabled' || status === 'banned') {
       return {
         isAuthenticated: false,
         error: 'Compte utilisateur désactivé'
@@ -181,21 +301,30 @@ export class SecurityService {
   /**
    * Vérifie que l'utilisateur a un niveau d'études défini
    */
-  async validateUserProfile(userId: string): Promise<{ isValid: boolean; user?: any; error?: string }> {
+  async validateUserProfile(userId: string): Promise<UserProfileValidationResult> {
     try {
-      const user = await this.payload.findByID({
+      const rawUser = await this.payload.findByID({
         collection: 'users',
         id: userId
       })
 
-      if (!(user as any).studyYear) {
+      const user = this.normalizeUserDoc(rawUser)
+
+      if (!user) {
+        return {
+          isValid: false,
+          error: 'Utilisateur introuvable ou invalide'
+        }
+      }
+
+      if (!user.studyYear) {
         return {
           isValid: false,
           error: 'Niveau d\'études non défini dans le profil'
         }
       }
 
-      if (!['pass', 'las'].includes((user as any).studyYear)) {
+      if (!['pass', 'las'].includes(user.studyYear.toLowerCase())) {
         return {
           isValid: false,
           error: 'Niveau d\'études invalide'
@@ -218,7 +347,7 @@ export class SecurityService {
   /**
    * Nettoie automatiquement les sessions expirées
    */
-  async cleanupExpiredSessions(): Promise<{ cleaned: number; errors: string[] }> {
+  async cleanupExpiredSessions(): Promise<CleanupResult> {
     const errors: string[] = []
     let cleaned = 0
 
@@ -235,28 +364,43 @@ export class SecurityService {
           ]
         },
         limit: 100 // Traiter par lots pour éviter la surcharge
-      })
+      }) as PayloadFindResult<unknown>
 
       // Marquer chaque session comme expirée
-      for (const session of expiredSessions.docs) {
+      for (const rawSession of expiredSessions.docs) {
+        const session = this.normalizeSessionDoc(rawSession)
+        if (!session) {
+          errors.push('Session invalide rencontrée lors du nettoyage')
+          continue
+        }
         try {
           await this.payload.update({
             collection: 'adaptiveQuizSessions',
             id: session.id,
-            data: { status: 'expired' }
+            data: { status: 'expired' as const }
           })
           cleaned++
         } catch (error) {
-          errors.push(`Erreur lors de la mise à jour de la session ${session.sessionId}: ${error.message}`)
+          if (error instanceof Error) {
+            errors.push(`Erreur lors de la mise à jour de la session ${session.sessionId}: ${error.message}`)
+          } else {
+            errors.push(`Erreur inconnue lors de la mise à jour de la session ${session.sessionId}`)
+          }
         }
       }
 
       return { cleaned, errors }
     } catch (error) {
       console.error('Error during session cleanup:', error)
-      return { 
-        cleaned, 
-        errors: [...errors, `Erreur générale lors du nettoyage: ${error.message}`] 
+      if (error instanceof Error) {
+        return {
+          cleaned,
+          errors: [...errors, `Erreur générale lors du nettoyage: ${error.message}`]
+        }
+      }
+      return {
+        cleaned,
+        errors: [...errors, 'Erreur générale lors du nettoyage']
       }
     }
   }
@@ -264,7 +408,7 @@ export class SecurityService {
   /**
    * Vérifie l'intégrité des données de session
    */
-  async validateSessionIntegrity(sessionId: string): Promise<{ isValid: boolean; issues: string[] }> {
+  async validateSessionIntegrity(sessionId: string): Promise<SessionIntegrityResult> {
     const issues: string[] = []
 
     try {
@@ -273,14 +417,18 @@ export class SecurityService {
         where: { sessionId: { equals: sessionId } },
         depth: 2,
         limit: 1
-      })
+      }) as PayloadFindResult<unknown>
 
       if (session.totalDocs === 0) {
         issues.push('Session non trouvée')
         return { isValid: false, issues }
       }
 
-      const sessionDoc = session.docs[0]
+      const sessionDoc = this.normalizeSessionDoc(session.docs[0])
+      if (!sessionDoc) {
+        issues.push('Session invalide ou corrompue')
+        return { isValid: false, issues }
+      }
 
       // Vérifier que les questions existent toujours
       if (!sessionDoc.questions || !Array.isArray(sessionDoc.questions)) {
@@ -288,21 +436,19 @@ export class SecurityService {
       } else {
         for (let i = 0; i < sessionDoc.questions.length; i++) {
           const question = sessionDoc.questions[i]
-          if (!question || (typeof question === 'object' && !question.id)) {
+          if (!question || (typeof question === 'object' && !('id' in question && question.id))) {
             issues.push(`Question ${i + 1} invalide ou supprimée`)
           }
         }
       }
 
-      // Vérifier que l'utilisateur existe toujours
       if (!sessionDoc.user || (typeof sessionDoc.user === 'object' && !sessionDoc.user.id)) {
         issues.push('Utilisateur associé invalide ou supprimé')
       }
 
-      // Vérifier la cohérence des métadonnées
       if (sessionDoc.questionDistribution) {
-        const totalCalculated = (sessionDoc.questionDistribution.weakCategoryQuestions || 0) + 
-                               (sessionDoc.questionDistribution.strongCategoryQuestions || 0)
+        const totalCalculated = (sessionDoc.questionDistribution.weakCategoryQuestions || 0) +
+          (sessionDoc.questionDistribution.strongCategoryQuestions || 0)
         const totalActual = sessionDoc.questions ? sessionDoc.questions.length : 0
 
         if (totalCalculated !== totalActual) {
@@ -316,9 +462,15 @@ export class SecurityService {
       }
     } catch (error) {
       console.error('Error validating session integrity:', error)
+      if (error instanceof Error) {
+        return {
+          isValid: false,
+          issues: [...issues, `Erreur lors de la validation: ${error.message}`]
+        }
+      }
       return {
         isValid: false,
-        issues: [...issues, `Erreur lors de la validation: ${error.message}`]
+        issues: [...issues, 'Erreur lors de la validation']
       }
     }
   }
@@ -346,7 +498,19 @@ export class SecurityService {
    */
   validateSessionToken(token: string, sessionId: string, userId: string, maxAgeMinutes: number = 60): boolean {
     try {
-      const [timestampStr, hashStr] = token.split('.')
+      const parts = token.split('.')
+
+      if (parts.length !== 2) {
+        return false
+      }
+
+      const timestampStr = parts[0]
+      const hashStr = parts[1]
+
+      if (!timestampStr || !hashStr) {
+        return false
+      }
+
       const timestamp = parseInt(timestampStr, 10)
       
       // Vérifier l'âge du token
@@ -359,9 +523,13 @@ export class SecurityService {
 
       // Régénérer le hash et comparer
       const expectedToken = this.generateSessionToken(sessionId, userId)
-      const [, expectedHash] = expectedToken.split('.')
-      
-      return hashStr === expectedHash
+      const expectedParts = expectedToken.split('.')
+
+      if (expectedParts.length !== 2 || expectedParts[1] === '') {
+        return false
+      }
+
+      return hashStr === expectedParts[1]
     } catch (error) {
       return false
     }

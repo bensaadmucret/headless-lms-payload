@@ -184,6 +184,21 @@ export const StudySessions: CollectionConfig = {
           ],
           defaultValue: 'beginner',
         },
+        {
+          name: 'isSpacedRepetitionSchedule',
+          type: 'checkbox',
+          label: 'Planning de répétition espacée',
+          defaultValue: false,
+        },
+        {
+          name: 'scheduleData',
+          type: 'textarea',
+          label: 'Données du planning SRS',
+          admin: {
+            description: 'Représentation JSON du planning utilisée pour la reconstruction des sessions.',
+            readOnly: true,
+          },
+        },
       ],
     },
   ],
