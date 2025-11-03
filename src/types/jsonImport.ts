@@ -203,8 +203,8 @@ export interface ImportPreview {
   validation: ValidationResponse;
   categoryMappings: CategoryMapping[];
   sampleItems: Array<{
-    original: any;
-    converted: any;
+    original: unknown;
+    converted: unknown;
     warnings: string[];
   }>;
   estimatedImportTime: number;

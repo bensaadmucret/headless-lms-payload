@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { Logger, logger, log } from '../logger'
 
 describe('Logger', () => {
-  let consoleLogSpy: any
+  let consoleLogSpy: ReturnType<typeof vi.spyOn>
   let originalNodeEnv: string | undefined
 
   beforeEach(() => {
@@ -211,10 +211,18 @@ describe('Logger', () => {
       prodLogger.info('Production message')
       
       expect(consoleLogSpy).toHaveBeenCalled()
-      const loggedData = consoleLogSpy.mock.calls[0][0]
+      const firstCall = consoleLogSpy.mock.calls[0]
+      expect(firstCall).toBeDefined()
+      if (!firstCall) {
+        throw new Error('Expected console.log to be called at least once')
+      }
+
+      const loggedData = firstCall[0]
+
+      expect(typeof loggedData).toBe('string')
       
       // Should be valid JSON
-      expect(() => JSON.parse(loggedData)).not.toThrow()
+      expect(() => JSON.parse(loggedData as string)).not.toThrow()
     })
 
     it('should log readable format in development', () => {

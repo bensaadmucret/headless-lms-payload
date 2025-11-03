@@ -259,7 +259,7 @@ describe('AIQuizRateLimitService', () => {
     it('should allow requests within limits', async () => {
       mockPayload.findByID.mockResolvedValueOnce({
         id: 'user123',
-        role: 'teacher'
+        role: 'admin'
       })
 
       const result = await rateLimitService.checkRateLimit('user123', 'generation')
@@ -318,7 +318,7 @@ describe('AIQuizRateLimitService', () => {
     it('should return user statistics', async () => {
       mockPayload.findByID.mockResolvedValueOnce({
         id: 'user123',
-        role: 'teacher'
+        role: 'admin'
       })
 
       // Faire une requête

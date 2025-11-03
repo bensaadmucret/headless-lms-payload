@@ -12,10 +12,10 @@ const GenerationLogs: CollectionConfig = {
     },
   },
   access: {
-    read: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin',
+    read: ({ req }) => req.user?.role === 'admin',
     create: () => true, // Permettre au système de créer des logs
     update: () => false, // Les logs ne doivent pas être modifiés
-    delete: ({ req }) => req.user?.role === 'superadmin', // Seuls les superadmins peuvent supprimer
+    delete: ({ req }) => req.user?.role === 'admin', // Seuls les admins peuvent supprimer
   },
   fields: [
     {

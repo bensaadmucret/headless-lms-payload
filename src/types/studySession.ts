@@ -14,7 +14,7 @@ export interface StudySessionStep {
   title: string;
   description?: string;
   status: StudySessionStepStatus;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   startedAt?: string;
   completedAt?: string;
 }

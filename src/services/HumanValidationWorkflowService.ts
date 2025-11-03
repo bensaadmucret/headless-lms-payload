@@ -266,7 +266,7 @@ export class HumanValidationWorkflowService {
         id: adminUserId
       });
 
-      if (!adminUser || !['admin', 'superadmin'].includes(adminUser.role)) {
+      if (!adminUser || adminUser.role !== 'admin') {
         throw new Error('Permissions administrateur requises pour valider');
       }
 

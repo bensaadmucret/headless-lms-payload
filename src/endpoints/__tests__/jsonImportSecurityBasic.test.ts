@@ -9,7 +9,7 @@ describe('JSON Import Basic Security Tests', () => {
   describe('Access Control Validation', () => {
     it('should validate user role requirements', () => {
       const validRoles = ['admin', 'superadmin'];
-      const invalidRoles = ['teacher', 'student', null, undefined];
+      const invalidRoles = ['student', null, undefined];
 
       // Test valid roles
       validRoles.forEach(role => {

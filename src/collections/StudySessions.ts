@@ -16,12 +16,12 @@ export const StudySessions: CollectionConfig = {
   },
   access: {
     read: ({ req }) => {
-      if (req.user?.role === 'superadmin') return true;
+      if (req.user?.role === 'admin') return true;
       return { 'user': { equals: req.user?.id } };
     },
     create: authenticated,
     update: authenticated,
-    delete: ({ req }) => req.user?.role === 'superadmin',
+    delete: ({ req }) => req.user?.role === 'admin',
   },
   fields: [
     {

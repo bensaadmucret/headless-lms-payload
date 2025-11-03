@@ -1,5 +1,10 @@
-import type { Payload } from 'payload';
-import type { CollectionSlug } from 'payload';
+import type { CollectionSlug, Payload } from 'payload';
+
+type DocumentIdentifier = string | number;
+
+type DocumentWithId = {
+  id: DocumentIdentifier;
+};
 
 /**
  * Utilitaire pour charger des documents en batch et éviter les requêtes N+1
@@ -17,7 +22,7 @@ import type { CollectionSlug } from 'payload';
  */
 export class BatchLoader {
   private payload: Payload;
-  private cache: Map<string, Map<string | number, any>>;
+  private cache: Map<string, Map<DocumentIdentifier, unknown>>;
 
   constructor(payload: Payload) {
     this.payload = payload;
@@ -32,9 +37,9 @@ export class BatchLoader {
    * @param options Options supplémentaires (depth, etc.)
    * @returns Map des documents chargés (key = id, value = document)
    */
-  async loadMany<T = any>(
+  async loadMany<T = Record<string, unknown>>(
     collection: CollectionSlug | string,
-    ids: (string | number)[],
+    ids: DocumentIdentifier[],
     options: { depth?: number; useCache?: boolean } = {}
   ): Promise<Map<string | number, T>> {
     const { depth = 0, useCache = true } = options;
@@ -47,12 +52,12 @@ export class BatchLoader {
     
     const collectionCache = this.cache.get(cacheKey)!;
     const result = new Map<string | number, T>();
-    const idsToFetch: (string | number)[] = [];
+    const idsToFetch: DocumentIdentifier[] = [];
 
     // Vérifier le cache
     for (const id of ids) {
       if (useCache && collectionCache.has(id)) {
-        result.set(id, collectionCache.get(id));
+        result.set(id, collectionCache.get(id) as T);
       } else {
         idsToFetch.push(id);
       }
@@ -65,8 +70,8 @@ export class BatchLoader {
 
     try {
       // Charger les documents manquants en une seule requête
-      const response = await this.payload.find({
-        collection: collection as any,
+      const response = await this.payload.find<T>({
+        collection: collection as CollectionSlug,
         where: {
           id: {
             in: idsToFetch
@@ -79,7 +84,7 @@ export class BatchLoader {
 
       // Stocker dans le cache et le résultat
       for (const doc of response.docs) {
-        const docId = (doc as any).id;
+        const docId = extractDocumentId(doc);
         result.set(docId, doc as T);
         if (useCache) {
           collectionCache.set(docId, doc);
@@ -101,9 +106,9 @@ export class BatchLoader {
    * @param options Options supplémentaires
    * @returns Le document ou null si non trouvé
    */
-  async loadOne<T = any>(
+  async loadOne<T = Record<string, unknown>>(
     collection: CollectionSlug | string,
-    id: string | number,
+    id: DocumentIdentifier,
     options: { depth?: number; useCache?: boolean } = {}
   ): Promise<T | null> {
     const result = await this.loadMany<T>(collection, [id], options);
@@ -120,7 +125,7 @@ export class BatchLoader {
    */
   async preload(
     collection: CollectionSlug | string,
-    ids: (string | number)[],
+    ids: DocumentIdentifier[],
     options: { depth?: number } = {}
   ): Promise<void> {
     await this.loadMany(collection, ids, { ...options, useCache: true });
@@ -157,31 +162,32 @@ export class BatchLoader {
    * );
    * ```
    */
-  async enrichRelations<T extends Record<string, any>>(
+  async enrichRelations<T extends Record<string, unknown>>(
     documents: T[],
     relations: Record<string, CollectionSlug | string>
   ): Promise<T[]> {
     // Collecter tous les IDs de relations
-    const relationIds = new Map<string, Set<string | number>>();
-    
+    const relationIds = new Map<string, Set<DocumentIdentifier>>();
+
     for (const [field, collection] of Object.entries(relations)) {
       relationIds.set(collection, new Set());
-      
+
       for (const doc of documents) {
         const value = doc[field];
         if (value) {
           if (typeof value === 'string' || typeof value === 'number') {
             relationIds.get(collection)!.add(value);
-          } else if (typeof value === 'object' && value.id) {
-            relationIds.get(collection)!.add(value.id);
+          } else if (typeof value === 'object' && value !== null && 'id' in value) {
+            const relationId = (value as DocumentWithId).id;
+            relationIds.get(collection)!.add(relationId);
           }
         }
       }
     }
 
     // Charger toutes les relations en batch
-    const loadedRelations = new Map<string, Map<string | number, any>>();
-    
+    const loadedRelations = new Map<string, Map<DocumentIdentifier, unknown>>();
+
     for (const [collection, ids] of relationIds.entries()) {
       if (ids.size > 0) {
         const loaded = await this.loadMany(collection, Array.from(ids));
@@ -191,19 +197,21 @@ export class BatchLoader {
 
     // Enrichir les documents
     return documents.map(doc => {
-      const enriched: any = { ...doc };
-      
+      const enriched = { ...doc } as Record<string, unknown>;
+
       for (const [field, collection] of Object.entries(relations)) {
         const value = doc[field];
         if (value && loadedRelations.has(collection)) {
-          const id = typeof value === 'object' ? value.id : value;
-          const related = loadedRelations.get(collection)!.get(id);
+          const idValue = typeof value === 'object' && value !== null && 'id' in value
+            ? (value as DocumentWithId).id
+            : value;
+          const related = loadedRelations.get(collection)!.get(idValue as DocumentIdentifier);
           if (related) {
             enriched[field] = related;
           }
         }
       }
-      
+
       return enriched as T;
     });
   }

@@ -50,7 +50,7 @@ describe('authenticatedOrPublished', () => {
   });
 
   it('should return true for authenticated users regardless of role', () => {
-    const roles = ['admin', 'teacher', 'student', 'superadmin'];
+    const roles = ['admin', 'student'];
     
     roles.forEach(role => {
       const mockArgs = {

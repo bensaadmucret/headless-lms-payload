@@ -7,7 +7,6 @@ import type { ExtractionJob, ExtractionResult, ProcessingLog } from '../types'
 import { ExtractionError } from '../types'
 import { extractionQueue } from '../queue'
 import { pdfProcessor } from '../processors/pdfProcessor'
-import { epubProcessor } from '../processors/epubProcessor'
 import { docxProcessor } from '../processors/docxProcessor'
 import { txtProcessor } from '../processors/txtProcessor'
 import { getPayloadInstance } from '../initPayload'
@@ -53,9 +52,6 @@ export async function processExtractionJob(job: Job<ExtractionJob>): Promise<Ext
     switch (fileType) {
       case 'pdf':
         result = await pdfProcessor.extract(sourceFileUrl)
-        break
-      case 'epub':
-        result = await epubProcessor.extract(sourceFileUrl)
         break
       case 'docx':
         result = await docxProcessor.extract(sourceFileUrl)

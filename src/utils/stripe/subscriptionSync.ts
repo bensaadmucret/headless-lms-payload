@@ -1,4 +1,5 @@
-import { Payload } from 'payload';
+import type { Payload } from 'payload';
+import type { WebhookRetryQueue } from '../../payload-types';
 
 import { logger } from '../logger';
 
@@ -23,18 +24,13 @@ type SubscriptionDoc = {
 
 type NullableId = string | number | null;
 
-type WebhookRetryQueueDoc = {
-  id: string | number;
-  eventId?: string;
-  eventType?: string;
-  payload?: Record<string, unknown> | null;
-  retryCount?: number;
-  maxRetries?: number;
-  lastError?: string | null;
-  status?: string;
-  nextRetryAt?: Date | string | null;
-  createdAt?: Date;
-  updatedAt?: Date;
+type WebhookRetryQueueDoc = WebhookRetryQueue;
+
+type QueuePayload = Record<string, unknown> & {
+  subscriptionId: string | number;
+  userId: NullableId;
+  reason: string;
+  source: 'syncUserSubscription';
 };
 
 export async function syncUserSubscription(subscription: SubscriptionDoc, payload: Payload): Promise<void> {
@@ -187,8 +183,9 @@ async function enqueueMissingUserRetry(
   const eventId = `subscription-sync-missing-user-${baseEventId}`;
   const eventType = latestEvent?.type ?? 'subscription_sync.missing_user';
   const nextRetryAt = new Date(Date.now() + RETRY_DELAY_MS);
+  const nextRetryAtISO = nextRetryAt.toISOString();
 
-  const queuePayload = {
+  const queuePayload: QueuePayload = {
     ...lastRaw,
     subscriptionId,
     userId: userId ?? null,
@@ -198,7 +195,7 @@ async function enqueueMissingUserRetry(
 
   try {
     const existingEntry = await payload.find({
-      collection: WEBHOOK_RETRY_QUEUE_COLLECTION as any,
+      collection: WEBHOOK_RETRY_QUEUE_COLLECTION,
       where: {
         eventId: { equals: eventId },
       },
@@ -206,25 +203,25 @@ async function enqueueMissingUserRetry(
     });
 
     if (existingEntry.docs.length > 0) {
-      const entry = (existingEntry.docs as WebhookRetryQueueDoc[])[0];
+      const [entry] = existingEntry.docs as WebhookRetryQueueDoc[];
 
       if (!entry) {
         return;
       }
 
       await payload.update({
-        collection: WEBHOOK_RETRY_QUEUE_COLLECTION as any,
+        collection: WEBHOOK_RETRY_QUEUE_COLLECTION,
         id: entry.id,
         data: {
           status: 'pending',
-          nextRetryAt,
+          nextRetryAt: nextRetryAtISO,
           lastError: reason,
           payload: entry.payload ?? queuePayload,
         },
       });
     } else {
       await payload.create({
-        collection: WEBHOOK_RETRY_QUEUE_COLLECTION as any,
+        collection: WEBHOOK_RETRY_QUEUE_COLLECTION,
         data: {
           eventId,
           eventType,
@@ -233,7 +230,7 @@ async function enqueueMissingUserRetry(
           maxRetries: 3,
           lastError: reason,
           status: 'pending',
-          nextRetryAt,
+          nextRetryAt: nextRetryAtISO,
         },
       });
     }

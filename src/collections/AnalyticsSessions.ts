@@ -1,4 +1,4 @@
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig } from "payload";
 
 export const AnalyticsSessions: CollectionConfig = {
   slug: "analytics-sessions",
@@ -14,7 +14,7 @@ export const AnalyticsSessions: CollectionConfig = {
   },
   access: {
     read: ({ req: { user } }) => {
-      if (user?.role === "superadmin" || user?.role === "admin") {
+      if (user?.role === "admin") {
         return true;
       }
       return {
@@ -25,10 +25,10 @@ export const AnalyticsSessions: CollectionConfig = {
     },
     create: () => true,
     update: ({ req: { user } }) => {
-      return user?.role === "superadmin" || user?.role === "admin";
+      return user?.role === "admin";
     },
     delete: ({ req: { user } }) => {
-      return user?.role === "superadmin";
+      return user?.role === "admin";
     },
   },
   fields: [
@@ -177,9 +177,13 @@ export const AnalyticsSessions: CollectionConfig = {
   ],
   hooks: {
     afterRead: [
-      async ({ doc, _req, find }) => {
+      async ({ doc, req }) => {
+        if (!doc.sessionId) {
+          return doc;
+        }
+
         // Compter les événements associés
-        const events = await find({
+        const events = await req.payload.find({
           collection: "analytics-events",
           where: {
             sessionId: {

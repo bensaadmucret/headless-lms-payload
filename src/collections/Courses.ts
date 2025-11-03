@@ -14,7 +14,7 @@ export const Courses: CollectionConfig = {
   access: {
     read: ({ req }) => {
       // Les administrateurs peuvent tout voir
-      if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
+      if (req.user?.role === 'admin') return true;
       
       // Les utilisateurs authentifiés peuvent voir les cours publiés
       if (req.user) {
@@ -26,9 +26,9 @@ export const Courses: CollectionConfig = {
       // Les utilisateurs non authentifiés ne peuvent rien voir
       return false;
     },
-    update: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
-    create: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
-    delete: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    update: ({ req }) => req.user?.role === 'admin',
+    create: ({ req }) => req.user?.role === 'admin',
+    delete: ({ req }) => req.user?.role === 'admin',
   },
   fields: [
     // La relation inverse sera gérée manuellement dans les requêtes GraphQL

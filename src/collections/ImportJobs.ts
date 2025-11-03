@@ -57,11 +57,11 @@ const ImportJobs: CollectionConfig = {
   access: {
     // Seuls les admins peuvent créer des imports
     create: ({ req }) => {
-      return req.user?.role === 'admin' || req.user?.role === 'superadmin'
+      return req.user?.role === 'admin'
     },
     // Tous les utilisateurs authentifiés peuvent voir leurs imports
     read: ({ req }) => {
-      if (req.user?.role === 'admin' || req.user?.role === 'superadmin') {
+      if (req.user?.role === 'admin') {
         return true
       }
       // Les utilisateurs ne voient que leurs propres imports
@@ -73,8 +73,8 @@ const ImportJobs: CollectionConfig = {
     },
     // Personne ne peut modifier un import (immutable)
     update: () => false,
-    // Seuls les superadmins peuvent supprimer
-    delete: ({ req }) => req.user?.role === 'superadmin',
+    // Seuls les admins peuvent supprimer
+    delete: ({ req }) => req.user?.role === 'admin',
   },
 
   hooks: {

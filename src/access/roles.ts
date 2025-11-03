@@ -1,24 +1,15 @@
-export type Role = 'superadmin' | 'admin' | 'teacher' | 'student';
+export type Role = 'admin' | 'student';
 
-export const isSuperAdmin = (user?: { role?: Role }) =>
-  user?.role === 'superadmin';
+type UserLike = { role?: string | null } | null | undefined;
 
-export const isAdmin = (user?: { role?: Role }) =>
-  user?.role === 'admin';
+export const isAdmin = (user?: UserLike) => user?.role === 'admin';
 
-export const isTeacher = (user?: { role?: Role }) =>
-  user?.role === 'teacher';
+export const isStudent = (user?: UserLike) => user?.role === 'student';
 
-export const isStudent = (user?: { role?: Role }) =>
+// "user" logique = student seulement
+export const isUser = (user?: UserLike) =>
   user?.role === 'student';
 
-// "user" logique = teacher OU student
-export const isUser = (user?: { role?: Role }) =>
-  user?.role === 'teacher' || user?.role === 'student';
-
-export const isAdminOrSuperAdmin = (user?: { role?: Role }) =>
-  user?.role === 'admin' || user?.role === 'superadmin';
-
-export const isAdminOrUser = (user?: { role?: Role }) =>
+export const isAdminOrUser = (user?: UserLike) =>
   isAdmin(user) || isUser(user);
 

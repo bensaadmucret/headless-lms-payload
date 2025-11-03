@@ -7,7 +7,7 @@
  * - Suivi des quotas (stockage, utilisateurs, etc.)
  * - Incidents ou événements particuliers
  *
- * Accessible uniquement aux superadmins pour supervision et audit.
+ * Accessible uniquement aux administrateurs pour supervision et audit.
  */
 
 import { CollectionConfig } from 'payload';
@@ -21,10 +21,10 @@ export const SystemMetrics: CollectionConfig = {
     defaultColumns: ['timestamp', 'type', 'value']
   },
   access: {
-    read: ({ req: { user } }) => user?.role === 'superadmin',
-    create: ({ req: { user } }) => user?.role === 'superadmin',
-    update: ({ req: { user } }) => user?.role === 'superadmin',
-    delete: ({ req: { user } }) => user?.role === 'superadmin',
+    read: ({ req: { user } }) => user?.role === 'admin',
+    create: ({ req: { user } }) => user?.role === 'admin',
+    update: ({ req: { user } }) => user?.role === 'admin',
+    delete: ({ req: { user } }) => user?.role === 'admin',
   },
   fields: [
     {

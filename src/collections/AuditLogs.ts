@@ -8,7 +8,7 @@ const AuditLogs: CollectionConfig = {
     description: 'Historique des modifications et actions importantes du système.'
   },
   access: {
-    read: ({ req }) => req.user?.role === 'superadmin',
+    read: ({ req }) => req.user?.role === 'admin',
     create: () => true, // Permettre au système (via les hooks) de créer des logs
     update: () => false,
     delete: () => false,

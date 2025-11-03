@@ -12,9 +12,9 @@ export const SubscriptionPlans: CollectionConfig = {
   },
   access: {
     read: () => true, // Public - Tout le monde peut lire les plans
-    create: ({ req: { user } }) => user?.role === 'superadmin',
-    update: ({ req: { user } }) => user?.role === 'superadmin',
-    delete: ({ req: { user } }) => user?.role === 'superadmin',
+    create: ({ req: { user } }) => user?.role === 'admin',
+    update: ({ req: { user } }) => user?.role === 'admin',
+    delete: ({ req: { user } }) => user?.role === 'admin',
   },
   hooks: {
     afterChange: [logAuditAfterChange],

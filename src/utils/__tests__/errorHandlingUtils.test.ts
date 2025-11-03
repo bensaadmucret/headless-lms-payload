@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import {
   getHttpStatusForError,
   checkAuthentication,
@@ -45,7 +45,7 @@ describe('errorHandlingUtils', () => {
     it('should return null when user is authenticated', () => {
       const mockReq = {
         user: { id: '123', email: 'test@example.com' },
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const result = checkAuthentication(mockReq)
       expect(result).toBeNull()
@@ -54,7 +54,7 @@ describe('errorHandlingUtils', () => {
     it('should return 401 Response when user is not authenticated', async () => {
       const mockReq = {
         user: null,
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const result = checkAuthentication(mockReq)
       expect(result).not.toBeNull()
@@ -183,7 +183,7 @@ describe('errorHandlingUtils', () => {
     it('should extract sessionId from URL', () => {
       const mockReq = {
         url: 'http://localhost:3000/api/adaptive-quiz/sessions/abc123/results',
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const params = extractUrlParams(mockReq)
       expect(params.sessionId).toBe('abc123')
@@ -192,7 +192,7 @@ describe('errorHandlingUtils', () => {
     it('should extract MongoDB ObjectId from URL', () => {
       const mockReq = {
         url: 'http://localhost:3000/api/items/507f1f77bcf86cd799439011',
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const params = extractUrlParams(mockReq)
       expect(params.id).toBe('507f1f77bcf86cd799439011')
@@ -201,7 +201,7 @@ describe('errorHandlingUtils', () => {
     it('should return empty object when no params in URL', () => {
       const mockReq = {
         url: 'http://localhost:3000/api/health',
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const params = extractUrlParams(mockReq)
       expect(Object.keys(params).length).toBe(0)
@@ -210,7 +210,7 @@ describe('errorHandlingUtils', () => {
     it('should handle URL without protocol', () => {
       const mockReq = {
         url: '/api/sessions/test123/data',
-      } as PayloadRequest
+      } as unknown as PayloadRequest
 
       const params = extractUrlParams(mockReq)
       expect(params.sessionId).toBe('test123')

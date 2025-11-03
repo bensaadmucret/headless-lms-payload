@@ -56,5 +56,5 @@ export interface QuizSubmission {
 interface User {
   id: string;
   email: string;
-  role: 'admin' | 'user' | 'superadmin';
+  role: 'admin' | 'user';
 }

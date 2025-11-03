@@ -11,7 +11,7 @@ interface PayloadWithFindByID {
 // Interface pour l'utilisateur authentifié
 interface AuthenticatedUser extends Omit<User, 'id' | 'role'> {
   id: number;
-  role: 'superadmin' | 'admin' | 'teacher' | 'student';
+  role: 'superadmin' | 'admin' | 'student';
   [key: string]: any;
 }
 

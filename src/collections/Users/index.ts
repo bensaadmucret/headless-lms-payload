@@ -1,4 +1,4 @@
-import type { CollectionConfig, FieldAccess, Validate, PayloadRequest } from 'payload'
+import type { CollectionConfig, Validate } from 'payload'
 
 
 import type { User as PayloadUser } from '../../payload-types'
@@ -43,12 +43,6 @@ export const Users: CollectionConfig = {
     defaultColumns: ['firstName', 'lastName', 'email', 'role'],
     useAsTitle: 'email',
   },
-  auth: {
-    tokenExpiration: 7200,
-    useAPIKey: true, // 2 heures en secondes
-    // maxLoginAttempts: 5, // Désactivé pour le développement
-    // lockTime: 600 * 1000, // Désactivé pour le développement
-  },
   hooks: {
     beforeValidate: [
       ({ data }) => {
@@ -64,95 +58,30 @@ export const Users: CollectionConfig = {
     ],
     afterDelete: [logAuditAfterDelete],
   },
-  endpoints: [
-    {
-      path: '/generate-password-reset-token',
-      method: 'post',
-      handler: async (req: PayloadRequest): Promise<Response> => {
-        if (!req.user) {
-          return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 });
-        }
-
-        if (typeof req.json !== 'function') {
-          return new Response(JSON.stringify({ message: 'Bad Request' }), { status: 400 });
-        }
-
-        const body = await req.json();
-        const { currentPassword } = body as { currentPassword?: string };
-
-        if (!currentPassword) {
-          return new Response(JSON.stringify({ message: 'Veuillez fournir le mot de passe actuel.' }), { status: 400 });
-        }
-
-        try {
-          // 1. Vérifier le mot de passe actuel
-          await req.payload.login({
-            collection: 'users',
-            data: { email: req.user.email, password: currentPassword },
-            req,
-          });
-
-          // 2. Générer un token de réinitialisation sans envoyer d'email
-          const token = await req.payload.forgotPassword({
-            collection: 'users',
-            data: { email: req.user.email },
-            disableEmail: true,
-            req,
-          });
-
-          if (!token) {
-            return new Response(JSON.stringify({ message: 'Erreur lors de la génération du token.' }), { status: 500 });
-          }
-
-          return new Response(JSON.stringify({ token }), { status: 200 });
-        } catch (error) {
-          return new Response(JSON.stringify({ message: 'Le mot de passe actuel est incorrect.' }), { status: 401 });
-        }
-      },
-    },
-    {
-      path: '/reset-password-with-token',
-      method: 'post',
-      handler: async (req: PayloadRequest): Promise<Response> => {
-        if (!req.user) {
-          return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 });
-        }
-
-        if (typeof req.json !== 'function') {
-          return new Response(JSON.stringify({ message: 'Bad Request' }), { status: 400 });
-        }
-
-        const body = await req.json();
-        const { token, password: newPassword } = body as { token?: string; password?: string };
-
-        if (!token || !newPassword) {
-          return new Response(JSON.stringify({ message: 'Token et nouveau mot de passe requis.' }), { status: 400 });
-        }
-
-        try {
-
-          const result = await req.payload.resetPassword({
-            collection: 'users',
-            data: { token, password: newPassword },
-            req,
-            overrideAccess: false,
-          });
-
-          if (!result) {
-            return new Response(JSON.stringify({ message: 'Erreur lors de la réinitialisation du mot de passe.' }), { status: 500 });
-          }
-
-          return new Response(JSON.stringify({ message: 'Mot de passe changé avec succès.' }), { status: 200 });
-        } catch (error) {
-          return new Response(JSON.stringify({ message: 'Le token est invalide ou a expiré.' }), { status: 400 });
-        }
-      },
-    },
-  ],
+  endpoints: [],
   fields: [
-
-    { name: 'firstName', label: 'Prénom', type: 'text', required: true },
-    { name: 'lastName', label: 'Nom', type: 'text', required: true },
+    {
+      name: 'firstName',
+      label: 'Prénom',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+      custom: {
+        betterAuthFieldKey: 'firstName',
+      },
+    },
+    {
+      name: 'lastName',
+      label: 'Nom',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+      },
+      custom: {
+        betterAuthFieldKey: 'lastName',
+      },
+    },
     {
       name: 'studyYear',
       label: "Année d'études",
@@ -167,6 +96,9 @@ export const Users: CollectionConfig = {
         description: 'Le cursus actuel de l’étudiant.',
                     condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
+      custom: {
+        betterAuthFieldKey: 'studyYear',
+      },
     },
     {
       name: 'onboardingComplete',
@@ -179,6 +111,9 @@ export const Users: CollectionConfig = {
         description: 'Indique si l’étudiant a terminé le parcours d’intégration.',
                     condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
+      custom: {
+        betterAuthFieldKey: 'onboardingComplete',
+      },
     },
     {
       name: 'examDate',
@@ -189,6 +124,9 @@ export const Users: CollectionConfig = {
         position: 'sidebar',
         description: "Permet au coach de calibrer le plan d'étude.",
                     condition: (data: Partial<PayloadUser>) => data.role === 'student',
+      },
+      custom: {
+        betterAuthFieldKey: 'examDate',
       },
     },
     {
@@ -224,31 +162,6 @@ export const Users: CollectionConfig = {
         description: 'Indique si l’étudiant a passé le quiz de positionnement',
                     condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
-    },
-    {
-      name: 'role',
-      label: 'Rôle',
-      type: 'select',
-      required: true,
-      options: [
-        { label: 'Super Admin', value: 'superadmin' },
-        { label: 'Admin', value: 'admin' },
-        { label: 'Enseignant', value: 'teacher' },
-        { label: 'Étudiant', value: 'student' },
-      ],
-      admin: { position: 'sidebar' },
-      access: {
-        update: (({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin') as FieldAccess,
-      },
-    },
-    {
-      name: 'subscription_status',
-      type: 'text',
-      required: false,
-      admin: {
-        readOnly: true,
-        position: 'sidebar'
-      }
     },
     {
       name: 'subscriptionStatus',
@@ -296,7 +209,7 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
-  role: 'superadmin' | 'admin' | 'teacher' | 'student';
+  role: 'admin' | 'student';
   studyYear?: 'pass' | 'las';
   onboardingComplete?: boolean;
   examDate?: Date;
@@ -306,7 +219,6 @@ export interface User {
   };
   competencyProfile?: object;
   hasTakenPlacementQuiz?: boolean;
-  subscription_status?: string;
   subscriptionStatus?: 'none' | 'trialing' | 'active' | 'past_due' | 'canceled';
   subscriptionEndDate?: Date;
   stripeCustomerId?: string;

@@ -11,7 +11,7 @@ Ce document décrit la stratégie de test de sécurité complète pour le systè
 #### Validation des Rôles Utilisateur
 - ✅ **Authentification requise** : Rejet des requêtes non authentifiées
 - ✅ **Permissions administrateur** : Seuls admin/superadmin peuvent importer
-- ✅ **Séparation des rôles** : Teachers/students bloqués
+- ✅ **Séparation des rôles** : Students bloqués
 - ✅ **Élévation de privilèges** : Prévention des escalades de permissions
 
 #### Validation des Fichiers

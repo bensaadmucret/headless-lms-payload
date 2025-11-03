@@ -41,6 +41,20 @@ npm run dev
 Le serveur démarre sur `http://localhost:3000`  
 Admin: `http://localhost:3000/admin`
 
+### 📬 Emails en local (MailHog)
+
+Un service MailHog est inclus pour intercepter les emails (invitation Better Auth, reset password) en environnement local.
+
+```bash
+# (déjà fait) copier .env et configurer vos variables
+
+# redémarrer l'infrastructure docker pour lancer MailHog
+npm run docker:down && npm run docker:up
+```
+
+- SMTP est automatiquement configuré (`mailhog:1025`).
+- Consultez les emails envoyés depuis l'interface MailHog : http://localhost:8025.
+
 ### 🧪 Tests
 
 ```bash

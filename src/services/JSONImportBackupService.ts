@@ -206,7 +206,7 @@ export class JSONImportBackupService {
           id: userId
         });
 
-        if (!['admin', 'superadmin'].includes((user as any).role)) {
+        if ((user as any).role !== 'admin') {
           throw new Error('Permissions insuffisantes pour effectuer le rollback');
         }
       }

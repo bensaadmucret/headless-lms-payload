@@ -1,6 +1,17 @@
 import { MigrateUpArgs, MigrateDownArgs, sql } from '@payloadcms/db-postgres'
 
 export async function up({ db, payload, req }: MigrateUpArgs): Promise<void> {
+  const { rows } = (await db.execute(sql`
+    SELECT to_regclass('public.import_jobs') AS "exists"
+  `)) as unknown as { rows: Array<{ exists: string | null }> }
+
+  const alreadyApplied = rows?.[0]?.exists
+
+  if (alreadyApplied) {
+    payload?.logger?.info?.('Skipping migration 20251021_154948: import_jobs table already exists.')
+    return
+  }
+
   await db.execute(sql`
    CREATE TYPE "public"."enum_generationlogs_result_ai_provider" AS ENUM('code-supernova', 'google-gemini', 'openai-gpt', 'local');
   CREATE TYPE "public"."enum_import_jobs_errors_type" AS ENUM('validation', 'database', 'mapping', 'reference', 'system');

@@ -66,13 +66,6 @@ export class AIQuizRateLimitService {
       burstLimit: 10,
       burstWindowMinutes: 5
     },
-    teacher: {
-      maxRequestsPerHour: 20,
-      maxRequestsPerDay: 100,
-      cooldownMinutes: 3,
-      burstLimit: 5,
-      burstWindowMinutes: 10
-    },
     student: {
       maxRequestsPerHour: 5,
       maxRequestsPerDay: 20,

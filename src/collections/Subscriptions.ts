@@ -12,17 +12,20 @@ const syncUserAfterChange: CollectionAfterChangeHook = async ({ doc, req, operat
       await syncUserSubscription(doc, req.payload);
     } catch (error) {
       // Logger l'erreur mais ne pas bloquer l'opération
-      req.payload.logger.error('[Subscriptions Hook] Échec de synchronisation utilisateur', error);
+      req.payload.logger.error({
+        msg: '[Subscriptions Hook] Échec de synchronisation utilisateur',
+        error,
+      });
     }
   }
   return doc;
 };
 
-// Helper d'accès: accepte superadmin via session, via API Key (adapter), ou via fallback entête + env
-const isSuperadminS2S = async ({ req }: { req: any }): Promise<boolean> => {
+// Helper d'accès: accepte admin via session, via API Key (adapter), ou via fallback entête + env
+const isAdminS2S = async ({ req }: { req: any }): Promise<boolean> => {
   // 1) Session utilisateur
   const userRole = req?.user?.role as string | undefined;
-  if (userRole === 'superadmin') return true;
+  if (userRole === 'admin') return true;
 
   // Helpers headers
   const getHeader = (name: string): string | null => {
@@ -62,18 +65,23 @@ const isSuperadminS2S = async ({ req }: { req: any }): Promise<boolean> => {
     } else {
       role = (apiKey.user as any)?.role as string | undefined;
     }
-    if (role === 'superadmin') return true;
+    if (role === 'admin') return true;
   }
 
   // 3) Fallback S2S: comparaison entête vs secret serveur
   const headerToken = extractTokenFromHeaders();
-  const expected = process.env.PAYLOAD_SUPERADMIN_API_KEY;
+  const expected = process.env.PAYLOAD_ADMIN_API_KEY;
   if (headerToken && expected && headerToken === expected) {
     return true;
   }
 
   // 4) Sinon, refus
   return false;
+};
+
+const allowAdminRead = ({ req }: { req: any }): boolean => {
+  const role = req?.user?.role as string | undefined;
+  return role === 'admin';
 };
 
 export const Subscriptions: CollectionConfig = {
@@ -84,11 +92,11 @@ export const Subscriptions: CollectionConfig = {
     description: 'Instances d\'abonnements (Stripe/Paddle) rattachées aux utilisateurs.',
   },
   access: {
-    // Autoriser superadmin via session utilisateur OU via API Key (req.apiKey), en chargeant l'user si nécessaire
-    read: isSuperadminS2S,
-    create: isSuperadminS2S,
-    update: isSuperadminS2S,
-    delete: isSuperadminS2S,
+    // Lecture autorisée aux admins connectés, mutations réservées aux accès admin / S2S
+    read: allowAdminRead,
+    create: isAdminS2S,
+    update: isAdminS2S,
+    delete: isAdminS2S,
   },
   fields: [
     {

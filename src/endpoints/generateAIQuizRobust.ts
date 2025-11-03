@@ -214,7 +214,7 @@ async function validateAuthentication(req: PayloadRequest): Promise<{
 
     // Vérifier les permissions
     const userRole = (user as any).role
-    if (!userRole || !['admin', 'teacher'].includes(userRole)) {
+    if (!userRole || !['admin'].includes(userRole)) {
       return {
         success: false,
         error: 'Permissions insuffisantes pour générer des quiz IA'

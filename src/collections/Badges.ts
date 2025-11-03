@@ -14,9 +14,9 @@ export const Badges: CollectionConfig = {
     description: 'Badges attribuables aux utilisateurs (progression, réussite, etc.)',
   },
   access: {
-    create: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin',
-    update: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin',
-    delete: ({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin',
+    create: ({ req }) => req.user?.role === 'admin',
+    update: ({ req }) => req.user?.role === 'admin',
+    delete: ({ req }) => req.user?.role === 'admin',
     read: () => true,
   },
   hooks: {
@@ -69,9 +69,9 @@ export const Badges: CollectionConfig = {
       hasMany: true,
       required: false,
       options: [
-        { label: 'Super Admin', value: 'superadmin' },
+
         { label: 'Admin', value: 'admin' },
-        { label: 'Enseignant', value: 'teacher' },
+
         { label: 'Étudiant', value: 'student' },
       ],
       admin: {

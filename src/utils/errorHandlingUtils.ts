@@ -1,6 +1,38 @@
 import type { PayloadRequest } from 'payload'
 import { getAdaptiveQuizErrorManager, type ErrorManagementResponse } from '../services/AdaptiveQuizErrorManager'
-import { ADAPTIVE_QUIZ_ERRORS } from '../services/ErrorHandlingService'
+import { ADAPTIVE_QUIZ_ERRORS, type AdaptiveQuizErrorType } from '../services/ErrorHandlingService'
+
+type UserReference = string | number | { id?: string | number | null } | null | undefined
+
+type SessionDocument = Record<string, unknown> & {
+    user?: UserReference
+}
+
+const ADAPTIVE_QUIZ_COLLECTION = 'adaptiveQuizSessions' as const
+
+function extractUserIdFromReference(userField: UserReference): string | number | null {
+    if (userField === null || userField === undefined) {
+        return null
+    }
+
+    if (typeof userField === 'string' || typeof userField === 'number') {
+        return userField
+    }
+
+    if (typeof userField === 'object' && 'id' in userField) {
+        const value = (userField as { id?: unknown }).id
+        if (typeof value === 'string' || typeof value === 'number') {
+            return value
+        }
+    }
+
+    return null
+}
+
+function getRequestIp(req: PayloadRequest): string {
+    const requestWithIp = req as PayloadRequest & { ip?: string | null }
+    return requestWithIp.ip || req.headers.get('x-forwarded-for') || 'unknown'
+}
 
 /**
  * Utilitaires pour la gestion d'erreurs dans les endpoints
@@ -59,7 +91,7 @@ export async function handleEndpointError(
             method: req.method,
             url: req.url,
             userAgent: req.headers.get('user-agent') || undefined,
-            ip: (req as any).ip || req.headers.get('x-forwarded-for') || 'unknown'
+            ip: getRequestIp(req)
         }
     })
 
@@ -95,15 +127,20 @@ export function checkAuthentication(req: PayloadRequest): Response | null {
 export async function checkSessionOwnership(
     req: PayloadRequest,
     sessionId: string
-): Promise<{ session: any; error?: Response }> {
+): Promise<{ session: SessionDocument | null; error?: Response }> {
     try {
         const session = await req.payload.findByID({
-            collection: 'adaptiveQuizSessions' as any,
+            collection: ADAPTIVE_QUIZ_COLLECTION,
             id: sessionId
-        })
+        }) as unknown as SessionDocument
 
-        const sessionData = session as any
-        if (sessionData.user !== req.user?.id && sessionData.user?.id !== req.user?.id) {
+        const sessionData = session as SessionDocument
+        const sessionOwner = extractUserIdFromReference(sessionData.user)
+        const currentUserId = req.user?.id
+        const ownerId = sessionOwner === null ? null : String(sessionOwner)
+        const requesterId = currentUserId === undefined || currentUserId === null ? null : String(currentUserId)
+
+        if (!ownerId || !requesterId || ownerId !== requesterId) {
             const errorResponse: ErrorManagementResponse = {
                 success: false,
                 error: {
@@ -121,7 +158,7 @@ export async function checkSessionOwnership(
         }
 
         return { session: sessionData }
-    } catch (error) {
+    } catch (_error: unknown) {
         const errorResponse: ErrorManagementResponse = {
             success: false,
             error: {
@@ -161,7 +198,7 @@ export function withErrorHandling(
 /**
  * Crée une réponse de succès standardisée
  */
-export function createSuccessResponse(data: any, statusCode: number = 200): Response {
+export function createSuccessResponse<T>(data: T, statusCode: number = 200): Response {
     return Response.json({
         success: true,
         data
@@ -173,13 +210,13 @@ export function createSuccessResponse(data: any, statusCode: number = 200): Resp
  */
 export function createSimpleErrorResponse(
     message: string,
-    errorType: string = ADAPTIVE_QUIZ_ERRORS.TECHNICAL_ERROR,
+    errorType: AdaptiveQuizErrorType = ADAPTIVE_QUIZ_ERRORS.TECHNICAL_ERROR,
     statusCode: number = 500
 ): Response {
     const errorResponse: ErrorManagementResponse = {
         success: false,
         error: {
-            type: errorType as any,
+            type: errorType,
             message,
             timestamp: new Date().toISOString()
         },
@@ -193,7 +230,7 @@ export function createSimpleErrorResponse(
  * Valide les paramètres requis et retourne une erreur si manquants
  */
 export function validateRequiredParams(
-    params: Record<string, any>,
+    params: Record<string, unknown>,
     requiredFields: string[]
 ): Response | null {
     const missingFields = requiredFields.filter(field =>
@@ -217,7 +254,6 @@ export function validateRequiredParams(
 export function extractUrlParams(req: PayloadRequest): Record<string, string> {
     // Extraire les paramètres de l'URL si disponibles
     const url = new URL(req.url || '', 'http://localhost')
-    const pathSegments = url.pathname.split('/').filter(Boolean)
 
     // Pour les endpoints Payload, les paramètres sont souvent dans l'URL
     // Par exemple: /api/adaptive-quiz/sessions/123/results
@@ -263,7 +299,7 @@ export const exampleEndpointWithErrorHandling = withErrorHandling('example_opera
     if (sessionError) return sessionError
 
     // Logique métier ici...
-    const result = { message: 'Opération réussie', session }
+    const result: { message: string; session: SessionDocument | null } = { message: 'Opération réussie', session }
 
     return createSuccessResponse(result)
 })

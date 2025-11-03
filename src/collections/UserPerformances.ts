@@ -18,7 +18,7 @@ export const UserPerformances: CollectionConfig = {
       // Les utilisateurs peuvent lire leurs propres performances
       // Les admins peuvent tout lire
       if (!req.user) return false;
-      if (req.user.role === 'admin' || req.user.role === 'superadmin') return true;
+      if (req.user.role === 'admin') return true;
       return {
         user: {
           equals: req.user.id,
@@ -28,11 +28,11 @@ export const UserPerformances: CollectionConfig = {
     update: ({ req }) => {
       // Seuls les admins et le système peuvent mettre à jour
       if (!req.user) return false;
-      return req.user.role === 'admin' || req.user.role === 'superadmin';
+      return req.user.role === 'admin';
     },
     delete: ({ req }) => {
       // Seuls les admins peuvent supprimer
-      return !!req.user && (req.user.role === 'admin' || req.user.role === 'superadmin');
+      return !!req.user && req.user.role === 'admin';
     },
   },
   fields: [

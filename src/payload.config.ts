@@ -2,11 +2,9 @@ import "dotenv/config";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import sharp from "sharp"; // sharp-import
 import path from "path";
-import { buildConfig, getPayload } from "payload";
+import { buildConfig } from "payload";
 import { diagnosticsEndpoint } from "./endpoints/diagnostics";
 import { analyticsEventsEndpoint } from "./endpoints/analytics/events";
-import AnalyticsBusinessView from "./components/AnalyticsBusinessView";
-import AfterNavLinks from "./components/AfterNavLinks";
 import { studentQuizzesEndpoint } from "./endpoints/studentQuizzes";
 import { generateSessionStepsEndpoint } from "./endpoints/generateSessionSteps";
 import { generateSessionStepsAltEndpoint } from "./endpoints/generateSessionStepsAlt";
@@ -128,7 +126,6 @@ import { Quizzes } from "./collections/Quizzes";
 import { Questions } from "./collections/Questions";
 import { QuizSubmissions } from "./collections/QuizSubmissions";
 import { Progress } from "./collections/Progress";
-import { Sections } from "./collections/Sections";
 import { StudySessions } from "./collections/StudySessions";
 import { Badges } from "./collections/Badges";
 import { ColorSchemes } from "./collections/ColorSchemes";
@@ -156,6 +153,21 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL,
+  localization: {
+    locales: [
+      {
+        label: "Français",
+        code: "fr",
+      },
+      {
+        label: "English",
+        code: "en",
+      },
+    ],
+    defaultLocale: "fr",
+    fallback: true,
+  },
   graphQL: {
     schemaOutputFile: path.resolve(dirname, "generated-schema.graphql"),
     disablePlaygroundInProduction: process.env.NODE_ENV === "production",
@@ -166,20 +178,6 @@ export default buildConfig({
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ["@/components/BeforeLogin"],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
-      beforeDashboard: ["@/components/BeforeDashboard"],
-      components: {
-        afterNavLinks: ["@/components/AfterNavLinks"],
-      },
-      views: {
-        analytics: {
-          Component: AnalyticsBusinessView,
-          path: "/analytics-business",
-          label: "Analytics Business",
-          group: "Analytics",
-        },
-      },
     },
     meta: {
       titleSuffix: "- MedCoach Admin",
@@ -228,7 +226,6 @@ export default buildConfig({
     Categories,
     Courses,
     Lessons,
-    Sections,
     Assignments,
     Prerequisites,
     Quizzes,

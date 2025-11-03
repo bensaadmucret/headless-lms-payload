@@ -264,7 +264,7 @@ async function createUsersIndexes(db: any, result: IndexCreationResult): Promise
     {
       name: 'idx_users_role_active',
       sql: `CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_users_role_active 
-            ON users (role) WHERE role IN ('student', 'teacher')`
+            ON users (role) WHERE role IN ('student')`
     }
   ]
 

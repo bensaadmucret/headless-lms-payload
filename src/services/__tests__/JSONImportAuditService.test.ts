@@ -45,7 +45,7 @@ describe('JSONImportAuditService', () => {
       expect(mockPayload.create).toHaveBeenCalledWith({
         collection: 'auditlogs',
         data: expect.objectContaining({
-          user: { relationTo: 'users', value: userId },
+          user: userId,
           action: 'import_started',
           collection: 'json-imports',
           documentId: jobId,
@@ -55,9 +55,14 @@ describe('JSONImportAuditService', () => {
               format,
               importType,
               totalItems,
+              processedItems: 0,
+              successfulItems: 0,
+              failedItems: 0,
+              skippedItems: 0,
               options
             })
-          })
+          }),
+          timestamp: expect.any(String)
         })
       });
     });

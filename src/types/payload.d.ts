@@ -1,5 +1,5 @@
 // Types globaux pour Payload CMS : centraliser ici tous les slugs de collection !
-import type { CollectionSlug as PayloadCollectionSlug } from 'payload';
+import type { CollectionSlug as PayloadCollectionSlug, Payload as PayloadInstance } from 'payload';
 import type {
   Request as ExpressRequest,
   Response as ExpressResponse,
@@ -35,7 +35,7 @@ declare global {
   }
 
   // Interface pour les réponses API standardisées
-  interface ApiResponse<T = any> {
+  interface ApiResponse<T = unknown> {
     success: boolean;
     data?: T;
     message?: string;
@@ -48,9 +48,9 @@ declare global {
       id: string;
       email: string;
       role?: string;
-      [key: string]: any;
+      [key: string]: unknown;
     };
-    payload: any; // Type plus spécifique possible selon les besoins
+    payload: PayloadInstance;
   }
 }
 

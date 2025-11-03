@@ -1,6 +1,6 @@
 import { CollectionConfig } from 'payload';
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
-import { payloadIsSuperAdmin } from '../access/payloadAccess';
+import { payloadIsAdmin } from '../access/payloadAccess';
 
 
 const SLUG = 'tenants' as const;
@@ -13,10 +13,10 @@ export const Tenants: CollectionConfig = {
     defaultColumns: ['name', 'plan', 'status', 'createdAt']
   },
   access: {
-    read: payloadIsSuperAdmin,
-    create: payloadIsSuperAdmin,
-    update: payloadIsSuperAdmin,
-    delete: payloadIsSuperAdmin,
+    read: payloadIsAdmin,
+    create: payloadIsAdmin,
+    update: payloadIsAdmin,
+    delete: payloadIsAdmin,
   },
   fields: [
     {

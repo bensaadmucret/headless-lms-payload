@@ -91,9 +91,9 @@ const GenerationLogsViewer: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (user && (user.role === 'superadmin' || user.role === 'admin')) {
+    if (user && user.role === 'admin') {
       fetchData();
-    } else if (user && user.role !== 'superadmin' && user.role !== 'admin') {
+    } else if (user && user.role !== 'admin') {
       setLoading(false);
     }
   }, [user, timeframe, statusFilter, actionFilter]);
@@ -199,7 +199,7 @@ const GenerationLogsViewer: React.FC = () => {
     return labels[action] || action;
   };
 
-  if (!user || (user.role !== 'superadmin' && user.role !== 'admin')) {
+  if (!user || user.role !== 'admin') {
     return (
       <div className="p-6 bg-red-50 border border-red-200 rounded-lg">
         <p className="text-red-700">Accès non autorisé. Seuls les administrateurs peuvent consulter les logs de génération.</p>

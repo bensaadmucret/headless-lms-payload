@@ -11,7 +11,7 @@ const baseClass = 'before-dashboard'
 
 const BeforeDashboard: React.FC = () => {
   const { user } = useAuth()
-  const isAdmin = user?.role === 'admin' || user?.role === 'superadmin'
+  const isAdmin = user?.role === 'admin'
 
   return (
     <div className={baseClass}>

@@ -13,7 +13,7 @@ type FieldValidateFunction = (
     user?: {
       id: string;
       email: string;
-      role: 'admin' | 'user' | 'superadmin';
+      role: 'admin' | 'student';
     };
   }
 ) => Promise<string | true> | string | boolean;
@@ -23,7 +23,7 @@ declare module 'express' {
   interface Request {
     user?: {
       id: string;
-      role: 'admin' | 'user' | 'superadmin';
+      role: 'admin' | 'student';
     };
     payload?: any;
   }
@@ -85,7 +85,7 @@ export const Quizzes: CollectionConfig = {
   access: {
     read: ({ req }) => {
       // Les administrateurs peuvent tout voir
-      if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
+      if (req.user?.role === 'admin') return true;
       
       // Les utilisateurs authentifiés ne peuvent voir que les quiz publiés
       if (req.user) {
@@ -104,9 +104,9 @@ export const Quizzes: CollectionConfig = {
       // Les utilisateurs non authentifiés ne peuvent rien voir
       return false;
     },
-    update: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
-    create: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
-    delete: ({ req }) => req.user?.role === 'admin' || req.user?.role === 'superadmin',
+    update: ({ req }) => req.user?.role === 'admin',
+    create: ({ req }) => req.user?.role === 'admin',
+    delete: ({ req }) => req.user?.role === 'admin',
   },
   fields: [
     {

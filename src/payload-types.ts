@@ -67,16 +67,19 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    users: User;
+    userSessions: UserSession;
+    userAccounts: UserAccount;
+    verifications: Verification;
+    'admin-invitations': AdminInvitation;
     pages: Page;
     posts: Post;
     media: Media;
-    users: User;
     subscriptions: Subscription;
     'webhook-retry-queue': WebhookRetryQueue;
     categories: Category;
     courses: Course;
     lessons: Lesson;
-    sections: Section;
     assignments: Assignment;
     prerequisites: Prerequisite;
     quizzes: Quiz;
@@ -100,10 +103,13 @@ export interface Config {
     'flashcard-decks': FlashcardDeck;
     'learning-paths': LearningPath;
     'learning-path-steps': LearningPathStep;
+    'analytics-events': AnalyticsEvent;
+    'analytics-sessions': AnalyticsSession;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
+    'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -111,16 +117,19 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    users: UsersSelect<false> | UsersSelect<true>;
+    userSessions: UserSessionsSelect<false> | UserSessionsSelect<true>;
+    userAccounts: UserAccountsSelect<false> | UserAccountsSelect<true>;
+    verifications: VerificationsSelect<false> | VerificationsSelect<true>;
+    'admin-invitations': AdminInvitationsSelect<false> | AdminInvitationsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
-    users: UsersSelect<false> | UsersSelect<true>;
     subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     'webhook-retry-queue': WebhookRetryQueueSelect<false> | WebhookRetryQueueSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
-    sections: SectionsSelect<false> | SectionsSelect<true>;
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
     prerequisites: PrerequisitesSelect<false> | PrerequisitesSelect<true>;
     quizzes: QuizzesSelect<false> | QuizzesSelect<true>;
@@ -144,10 +153,13 @@ export interface Config {
     'flashcard-decks': FlashcardDecksSelect<false> | FlashcardDecksSelect<true>;
     'learning-paths': LearningPathsSelect<false> | LearningPathsSelect<true>;
     'learning-path-steps': LearningPathStepsSelect<false> | LearningPathStepsSelect<true>;
+    'analytics-events': AnalyticsEventsSelect<false> | AnalyticsEventsSelect<true>;
+    'analytics-sessions': AnalyticsSessionsSelect<false> | AnalyticsSessionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -166,14 +178,12 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
-  locale: null;
+  locale: 'fr' | 'en';
   user: User & {
     collection: 'users';
   };
   jobs: {
     tasks: {
-      'process-webhook-retry-queue': ProcessWebhookRetryQueue;
-      'cleanup-webhook-retry-queue': CleanupWebhookRetryQueue;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -203,6 +213,218 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  firstName?: string | null;
+  lastName?: string | null;
+  /**
+   * Le cursus actuel de l’étudiant.
+   */
+  studyYear?: ('pass' | 'las') | null;
+  /**
+   * Indique si l’étudiant a terminé le parcours d’intégration.
+   */
+  onboardingComplete?: boolean | null;
+  /**
+   * Permet au coach de calibrer le plan d'étude.
+   */
+  examDate?: string | null;
+  /**
+   * Objectifs et préférences de l'étudiant pour personnaliser son coaching.
+   */
+  studyProfile?: {
+    targetScore?: number | null;
+    studyHoursPerWeek?: number | null;
+  };
+  /**
+   * Stocke les scores de compétence par matière. Mis à jour par le coach IA.
+   */
+  competencyProfile?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * Indique si l’étudiant a passé le quiz de positionnement
+   */
+  hasTakenPlacementQuiz?: boolean | null;
+  /**
+   * Statut actuel de l'abonnement Premium
+   */
+  subscriptionStatus?: ('none' | 'trialing' | 'active' | 'past_due' | 'canceled') | null;
+  /**
+   * Date de fin de la période d'abonnement actuelle
+   */
+  subscriptionEndDate?: string | null;
+  /**
+   * ID du client Stripe
+   */
+  stripeCustomerId?: string | null;
+  /**
+   * Users chosen display name
+   */
+  name: string;
+  /**
+   * The email of the user
+   */
+  email: string;
+  /**
+   * Whether the email of the user has been verified
+   */
+  emailVerified: boolean;
+  /**
+   * The image of the user
+   */
+  image?: string | null;
+  createdAt: string;
+  updatedAt: string;
+  /**
+   * The role of the user
+   */
+  role?: string | null;
+  /**
+   * Whether the user is banned from the platform
+   */
+  banned?: boolean | null;
+  /**
+   * The reason for the ban
+   */
+  banReason?: string | null;
+  /**
+   * The date and time when the ban will expire
+   */
+  banExpires?: string | null;
+  metadata?: string | null;
+}
+/**
+ * Sessions are active sessions for users. They are used to authenticate users with a session token
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userSessions".
+ */
+export interface UserSession {
+  id: number;
+  /**
+   * The date and time when the session will expire
+   */
+  expiresAt: string;
+  /**
+   * The unique session token
+   */
+  token: string;
+  createdAt: string;
+  updatedAt: string;
+  /**
+   * The IP address of the device
+   */
+  ipAddress?: string | null;
+  /**
+   * The user agent information of the device
+   */
+  userAgent?: string | null;
+  /**
+   * The user that the session belongs to
+   */
+  user: number | User;
+  /**
+   * The admin who is impersonating this session
+   */
+  impersonatedBy?: string | null;
+}
+/**
+ * Accounts are used to store user accounts for authentication providers
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userAccounts".
+ */
+export interface UserAccount {
+  id: number;
+  /**
+   * The id of the account as provided by the SSO or equal to userId for credential accounts
+   */
+  accountId: string;
+  /**
+   * The id of the provider as provided by the SSO
+   */
+  providerId: string;
+  /**
+   * The user that the account belongs to
+   */
+  user: number | User;
+  /**
+   * The access token of the account. Returned by the provider
+   */
+  accessToken?: string | null;
+  /**
+   * The refresh token of the account. Returned by the provider
+   */
+  refreshToken?: string | null;
+  /**
+   * The id token for the account. Returned by the provider
+   */
+  idToken?: string | null;
+  /**
+   * The date and time when the access token will expire
+   */
+  accessTokenExpiresAt?: string | null;
+  /**
+   * The date and time when the refresh token will expire
+   */
+  refreshTokenExpiresAt?: string | null;
+  /**
+   * The scope of the account. Returned by the provider
+   */
+  scope?: string | null;
+  /**
+   * The hashed password of the account. Mainly used for email and password authentication
+   */
+  password?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * Verifications are used to verify authentication requests
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verifications".
+ */
+export interface Verification {
+  id: number;
+  /**
+   * The identifier of the verification request
+   */
+  identifier: string;
+  /**
+   * The value to be verified
+   */
+  value: string;
+  /**
+   * The date and time when the verification request will expire
+   */
+  expiresAt: string;
+  createdAt: string;
+  updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-invitations".
+ */
+export interface AdminInvitation {
+  id: number;
+  role: 'admin' | 'user';
+  token: string;
+  url?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -214,7 +436,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -276,7 +498,7 @@ export interface Post {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -323,7 +545,7 @@ export interface Media {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -410,84 +632,6 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
-export interface User {
-  id: number;
-  firstName: string;
-  lastName: string;
-  /**
-   * Le cursus actuel de l’étudiant.
-   */
-  studyYear?: ('pass' | 'las') | null;
-  /**
-   * Indique si l’étudiant a terminé le parcours d’intégration.
-   */
-  onboardingComplete?: boolean | null;
-  /**
-   * Permet au coach de calibrer le plan d'étude.
-   */
-  examDate?: string | null;
-  /**
-   * Objectifs et préférences de l'étudiant pour personnaliser son coaching.
-   */
-  studyProfile?: {
-    targetScore?: number | null;
-    studyHoursPerWeek?: number | null;
-  };
-  /**
-   * Stocke les scores de compétence par matière. Mis à jour par le coach IA.
-   */
-  competencyProfile?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  /**
-   * Indique si l’étudiant a passé le quiz de positionnement
-   */
-  hasTakenPlacementQuiz?: boolean | null;
-  role: 'superadmin' | 'admin' | 'teacher' | 'student';
-  subscription_status?: string | null;
-  /**
-   * Statut actuel de l'abonnement Premium
-   */
-  subscriptionStatus?: ('none' | 'trialing' | 'active' | 'past_due' | 'canceled') | null;
-  /**
-   * Date de fin de la période d'abonnement actuelle
-   */
-  subscriptionEndDate?: string | null;
-  /**
-   * ID du client Stripe
-   */
-  stripeCustomerId?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  enableAPIKey?: boolean | null;
-  apiKey?: string | null;
-  apiKeyIndex?: string | null;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
-    | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
-      }[]
-    | null;
-  password?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "categories".
  */
 export interface Category {
@@ -541,7 +685,7 @@ export interface CallToActionBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -592,7 +736,7 @@ export interface ContentBlock {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -649,7 +793,7 @@ export interface ArchiveBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -685,7 +829,7 @@ export interface FormBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -742,7 +886,7 @@ export interface Form {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -825,7 +969,7 @@ export interface Form {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -857,7 +1001,7 @@ export interface Form {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -1044,7 +1188,7 @@ export interface Lesson {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1058,18 +1202,6 @@ export interface Lesson {
   course: number | Course;
   order: number;
   published?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections".
- */
-export interface Section {
-  id: number;
-  title: string;
-  course: number | Course;
-  order: number;
   updatedAt: string;
   createdAt: string;
 }
@@ -1174,7 +1306,7 @@ export interface Question {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1372,6 +1504,11 @@ export interface StudySession {
   context?: {
     course?: (number | null) | Course;
     difficulty?: ('beginner' | 'intermediate' | 'advanced') | null;
+    isSpacedRepetitionSchedule?: boolean | null;
+    /**
+     * Représentation JSON du planning utilisée pour la reconstruction des sessions.
+     */
+    scheduleData?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -1397,7 +1534,7 @@ export interface Badge {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1411,7 +1548,7 @@ export interface Badge {
   /**
    * Définit quels rôles peuvent voir ou obtenir ce badge.
    */
-  roleVisibility?: ('superadmin' | 'admin' | 'teacher' | 'student')[] | null;
+  roleVisibility?: ('admin' | 'student')[] | null;
   /**
    * Permet de désactiver un badge sans le supprimer.
    */
@@ -2300,6 +2437,155 @@ export interface LearningPathStep {
   createdAt: string;
 }
 /**
+ * Événements de tracking utilisateur pour l'analyse du tunnel d'acquisition
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-events".
+ */
+export interface AnalyticsEvent {
+  id: number;
+  /**
+   * Ex: homepage_view, subscription_started, payment_completed
+   */
+  eventName: string;
+  /**
+   * Utilisateur associé à l'événement (laisser vide pour les visiteurs anonymes)
+   */
+  user?: (number | null) | User;
+  /**
+   * Identifiant de session pour regrouper les événements
+   */
+  sessionId?: string | null;
+  /**
+   * Données supplémentaires de l'événement (JSON)
+   */
+  properties?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  source?: ('website' | 'mobile' | 'api' | 'admin' | 'other') | null;
+  timestamp: string;
+  /**
+   * URL de la page où l'événement s'est produit
+   */
+  url?: string | null;
+  /**
+   * Informations sur le navigateur/appareil
+   */
+  userAgent?: string | null;
+  ipAddress?: string | null;
+  /**
+   * Page référente
+   */
+  referrer?: string | null;
+  campaign?: {
+    utm_source?: string | null;
+    utm_medium?: string | null;
+    utm_campaign?: string | null;
+    utm_content?: string | null;
+    utm_term?: string | null;
+  };
+  device?: {
+    type?: ('desktop' | 'mobile' | 'tablet' | 'other') | null;
+    os?: string | null;
+    browser?: string | null;
+    screenResolution?: string | null;
+  };
+  funnel?: {
+    /**
+     * Numéro d'étape dans le tunnel d'acquisition
+     */
+    step?: number | null;
+    /**
+     * Ex: subscription, onboarding, checkout
+     */
+    funnelName?: string | null;
+    /**
+     * Valeur monétaire de l'événement (en euros)
+     */
+    conversionValue?: number | null;
+  };
+  performance?: {
+    pageLoadTime?: number | null;
+    /**
+     * LCP, FID, CLS scores (JSON)
+     */
+    coreWebVitals?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Sessions utilisateur pour regrouper les événements analytics
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-sessions".
+ */
+export interface AnalyticsSession {
+  id: number;
+  /**
+   * Identifiant unique de session (généré côté client)
+   */
+  sessionId: string;
+  user?: (number | null) | User;
+  startTime: string;
+  /**
+   * Laisser vide pour les sessions actives
+   */
+  endTime?: string | null;
+  eventCount?: number | null;
+  pageViews?: number | null;
+  /**
+   * Durée totale de la session
+   */
+  duration?: number | null;
+  deviceInfo?: {
+    type?: ('desktop' | 'mobile' | 'tablet') | null;
+    os?: string | null;
+    browser?: string | null;
+  };
+  location?: {
+    country?: string | null;
+    city?: string | null;
+    region?: string | null;
+  };
+  referrer?: string | null;
+  landingPage?: string | null;
+  exitPage?: string | null;
+  conversionGoals?:
+    | {
+        goal?: string | null;
+        achieved?: boolean | null;
+        value?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  customProperties?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2374,6 +2660,23 @@ export interface Search {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -2424,7 +2727,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish';
+        taskSlug: 'inline' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -2457,7 +2760,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -2472,6 +2775,26 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'users';
+        value: number | User;
+      } | null)
+    | ({
+        relationTo: 'userSessions';
+        value: number | UserSession;
+      } | null)
+    | ({
+        relationTo: 'userAccounts';
+        value: number | UserAccount;
+      } | null)
+    | ({
+        relationTo: 'verifications';
+        value: number | Verification;
+      } | null)
+    | ({
+        relationTo: 'admin-invitations';
+        value: number | AdminInvitation;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -2482,10 +2805,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'media';
         value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'users';
-        value: number | User;
       } | null)
     | ({
         relationTo: 'subscriptions';
@@ -2506,10 +2825,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'lessons';
         value: number | Lesson;
-      } | null)
-    | ({
-        relationTo: 'sections';
-        value: number | Section;
       } | null)
     | ({
         relationTo: 'assignments';
@@ -2604,6 +2919,14 @@ export interface PayloadLockedDocument {
         value: number | LearningPathStep;
       } | null)
     | ({
+        relationTo: 'analytics-events';
+        value: number | AnalyticsEvent;
+      } | null)
+    | ({
+        relationTo: 'analytics-sessions';
+        value: number | AnalyticsSession;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -2618,6 +2941,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search';
         value: number | Search;
+      } | null)
+    | ({
+        relationTo: 'payload-kv';
+        value: number | PayloadKv;
       } | null)
     | ({
         relationTo: 'payload-jobs';
@@ -2664,6 +2991,93 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  firstName?: T;
+  lastName?: T;
+  studyYear?: T;
+  onboardingComplete?: T;
+  examDate?: T;
+  studyProfile?:
+    | T
+    | {
+        targetScore?: T;
+        studyHoursPerWeek?: T;
+      };
+  competencyProfile?: T;
+  hasTakenPlacementQuiz?: T;
+  subscriptionStatus?: T;
+  subscriptionEndDate?: T;
+  stripeCustomerId?: T;
+  name?: T;
+  email?: T;
+  emailVerified?: T;
+  image?: T;
+  createdAt?: T;
+  updatedAt?: T;
+  role?: T;
+  banned?: T;
+  banReason?: T;
+  banExpires?: T;
+  metadata?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userSessions_select".
+ */
+export interface UserSessionsSelect<T extends boolean = true> {
+  expiresAt?: T;
+  token?: T;
+  createdAt?: T;
+  updatedAt?: T;
+  ipAddress?: T;
+  userAgent?: T;
+  user?: T;
+  impersonatedBy?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "userAccounts_select".
+ */
+export interface UserAccountsSelect<T extends boolean = true> {
+  accountId?: T;
+  providerId?: T;
+  user?: T;
+  accessToken?: T;
+  refreshToken?: T;
+  idToken?: T;
+  accessTokenExpiresAt?: T;
+  refreshTokenExpiresAt?: T;
+  scope?: T;
+  password?: T;
+  createdAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "verifications_select".
+ */
+export interface VerificationsSelect<T extends boolean = true> {
+  identifier?: T;
+  value?: T;
+  expiresAt?: T;
+  createdAt?: T;
+  updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "admin-invitations_select".
+ */
+export interface AdminInvitationsSelect<T extends boolean = true> {
+  role?: T;
+  token?: T;
+  url?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2928,49 +3342,6 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
- */
-export interface UsersSelect<T extends boolean = true> {
-  firstName?: T;
-  lastName?: T;
-  studyYear?: T;
-  onboardingComplete?: T;
-  examDate?: T;
-  studyProfile?:
-    | T
-    | {
-        targetScore?: T;
-        studyHoursPerWeek?: T;
-      };
-  competencyProfile?: T;
-  hasTakenPlacementQuiz?: T;
-  role?: T;
-  subscription_status?: T;
-  subscriptionStatus?: T;
-  subscriptionEndDate?: T;
-  stripeCustomerId?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  enableAPIKey?: T;
-  apiKey?: T;
-  apiKeyIndex?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
-    | T
-    | {
-        id?: T;
-        createdAt?: T;
-        expiresAt?: T;
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscriptions_select".
  */
 export interface SubscriptionsSelect<T extends boolean = true> {
@@ -3068,17 +3439,6 @@ export interface LessonsSelect<T extends boolean = true> {
   course?: T;
   order?: T;
   published?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections_select".
- */
-export interface SectionsSelect<T extends boolean = true> {
-  title?: T;
-  course?: T;
-  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -3247,6 +3607,8 @@ export interface StudySessionsSelect<T extends boolean = true> {
     | {
         course?: T;
         difficulty?: T;
+        isSpacedRepetitionSchedule?: T;
+        scheduleData?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -3778,6 +4140,95 @@ export interface LearningPathStepsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-events_select".
+ */
+export interface AnalyticsEventsSelect<T extends boolean = true> {
+  eventName?: T;
+  user?: T;
+  sessionId?: T;
+  properties?: T;
+  source?: T;
+  timestamp?: T;
+  url?: T;
+  userAgent?: T;
+  ipAddress?: T;
+  referrer?: T;
+  campaign?:
+    | T
+    | {
+        utm_source?: T;
+        utm_medium?: T;
+        utm_campaign?: T;
+        utm_content?: T;
+        utm_term?: T;
+      };
+  device?:
+    | T
+    | {
+        type?: T;
+        os?: T;
+        browser?: T;
+        screenResolution?: T;
+      };
+  funnel?:
+    | T
+    | {
+        step?: T;
+        funnelName?: T;
+        conversionValue?: T;
+      };
+  performance?:
+    | T
+    | {
+        pageLoadTime?: T;
+        coreWebVitals?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-sessions_select".
+ */
+export interface AnalyticsSessionsSelect<T extends boolean = true> {
+  sessionId?: T;
+  user?: T;
+  startTime?: T;
+  endTime?: T;
+  eventCount?: T;
+  pageViews?: T;
+  duration?: T;
+  deviceInfo?:
+    | T
+    | {
+        type?: T;
+        os?: T;
+        browser?: T;
+      };
+  location?:
+    | T
+    | {
+        country?: T;
+        city?: T;
+        region?: T;
+      };
+  referrer?: T;
+  landingPage?: T;
+  exitPage?: T;
+  conversionGoals?:
+    | T
+    | {
+        goal?: T;
+        achieved?: T;
+        value?: T;
+        id?: T;
+      };
+  customProperties?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -3966,6 +4417,14 @@ export interface SearchSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4212,22 +4671,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessWebhookRetryQueue".
- */
-export interface ProcessWebhookRetryQueue {
-  input?: unknown;
-  output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CleanupWebhookRetryQueue".
- */
-export interface CleanupWebhookRetryQueue {
-  input?: unknown;
-  output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -4258,7 +4701,7 @@ export interface BannerBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];

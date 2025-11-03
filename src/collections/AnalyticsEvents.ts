@@ -15,8 +15,8 @@ export const AnalyticsEvents: CollectionConfig = {
   },
   access: {
     read: ({ req: { user } }) => {
-      // Seuls les admins et superadmins peuvent voir tous les événements
-      if (user?.role === "superadmin" || user?.role === "admin") {
+      // Seuls les admins peuvent voir tous les événements
+      if (user?.role === "admin") {
         return true;
       }
       // Les utilisateurs peuvent voir leurs propres événements
@@ -29,11 +29,11 @@ export const AnalyticsEvents: CollectionConfig = {
     create: () => true, // Autoriser la création d'événements pour le tracking
     update: ({ req: { user } }) => {
       // Seuls les admins peuvent mettre à jour
-      return user?.role === "superadmin" || user?.role === "admin";
+      return user?.role === "admin";
     },
     delete: ({ req: { user } }) => {
-      // Seuls les superadmins peuvent supprimer
-      return user?.role === "superadmin";
+      // Seuls les admins peuvent supprimer
+      return user?.role === "admin";
     },
   },
   fields: [
@@ -122,7 +122,7 @@ export const AnalyticsEvents: CollectionConfig = {
       access: {
         read: ({ req: { user } }) => {
           // L'IP est sensible, seuls les admins peuvent la voir
-          return user?.role === "superadmin" || user?.role === "admin";
+          return user?.role === "admin";
         },
       },
     },

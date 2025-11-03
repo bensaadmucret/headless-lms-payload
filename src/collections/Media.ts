@@ -11,7 +11,7 @@ import { PayloadRequest } from 'payload';
 import type { CollectionConfig, Access, AccessArgs } from 'payload';
 
 // Internes
-import { isAdminOrSuperAdmin, isUser } from '../access/roles';
+import { isAdmin, isUser } from '../access/roles';
 import { getMediaDirname } from './getMediaDirname';
 import { logAuditAfterChange, logAuditAfterDelete } from './logAudit';
 
@@ -32,7 +32,7 @@ const isOwnerOrAdmin: Access = ({ req }, doc?: Media) => {
   const docUserId = typeof docUser === 'object' && docUser !== null ? docUser.id : docUser;
 
   return (
-    isAdminOrSuperAdmin(req.user ?? undefined) ||
+    isAdmin(req.user ?? undefined) ||
     (isUser(req.user ?? undefined) && docUserId === userId)
   );
 };
