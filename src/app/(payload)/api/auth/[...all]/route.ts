@@ -32,7 +32,7 @@ const parseMetadata = (metadata: BetterAuthMetadata): Record<string, unknown> =>
     try {
       return JSON.parse(metadata) as Record<string, unknown>;
     } catch (error) {
-      logger.warn('[BetterAuth Proxy] Failed to parse metadata string', error);
+      logger.warn('[BetterAuth Proxy] Failed to parse metadata string', { error });
       return {};
     }
   }
@@ -129,7 +129,7 @@ const handleRequest = async (request: NextRequest): Promise<Response> => {
   try {
     body = await upstreamResponse.clone().json();
   } catch (error) {
-    logger.warn('[BetterAuth Proxy] Failed to parse upstream JSON response', error);
+    logger.warn('[BetterAuth Proxy] Failed to parse upstream JSON response', { error });
     return upstreamResponse;
   }
 
