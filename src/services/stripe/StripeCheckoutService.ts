@@ -11,6 +11,7 @@ export interface CheckoutSessionRequest {
   email: string;
   successUrl: string;
   cancelUrl: string;
+  betterAuthUserId?: string;
 }
 
 /**
@@ -45,8 +46,13 @@ export class StripeCheckoutService {
     try {
       console.log('Creating checkout session for user:', request.userId);
 
+      const metadata = {
+        userId: request.userId,
+        ...(request.betterAuthUserId ? { betterAuthUserId: request.betterAuthUserId } : {}),
+      };
+
       // Get or create Stripe customer
-      const customerId = await this.getOrCreateCustomer(request.userId, request.email);
+      const customerId = await this.getOrCreateCustomer(request.userId, request.email, metadata);
 
       // Create checkout session with 30-day free trial
       const session = await this.stripe.checkout.sessions.create({
@@ -61,15 +67,11 @@ export class StripeCheckoutService {
         ],
         subscription_data: {
           trial_period_days: 30,
-          metadata: {
-            userId: request.userId,
-          },
+          metadata,
         },
         success_url: request.successUrl,
         cancel_url: request.cancelUrl,
-        metadata: {
-          userId: request.userId,
-        },
+        metadata,
       });
 
       console.log('Checkout session created:', session.id);
@@ -92,7 +94,11 @@ export class StripeCheckoutService {
    * @param email - User email
    * @returns Stripe Customer ID
    */
-  private async getOrCreateCustomer(userId: string, email: string): Promise<string> {
+  private async getOrCreateCustomer(
+    userId: string,
+    email: string,
+    metadata: Record<string, string>
+  ): Promise<string> {
     try {
       // Check if user already has a Stripe customer ID
       const user = await this.payload.findByID({
@@ -109,9 +115,7 @@ export class StripeCheckoutService {
       console.log('Creating new Stripe customer for:', email);
       const customer = await this.stripe.customers.create({
         email,
-        metadata: {
-          userId,
-        },
+        metadata,
       });
 
       // Update user with Stripe customer ID

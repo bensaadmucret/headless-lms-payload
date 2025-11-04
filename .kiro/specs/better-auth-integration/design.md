@@ -42,6 +42,46 @@
 - Webhook Stripe → middleware Payload : vérifie signature, valide paiement, met à jour `users.serviceType`, émet évènement "service:activated".
 - En cas d'échec paiement, conserve session mais marque `tunnelStatus = "payment_failed"`.
 
+### 2.4 Flow détaillé & navigation
+
+| Étape | Route/UI | Conditions d'accès | Actions clés | État tunnel résultant |
+| --- | --- | --- | --- | --- |
+| 0. Landing | `/pricing` (public) | Session Better Auth facultative | CTA « Commencer » → `GET /api/auth/magic-link` optionnel | `pending_auth` |
+| 1. Auth | `/tunnel/auth` | `tunnelStatus` ∈ {`pending_auth`, `payment_failed`} | Formulaires Better Auth (`signIn`, `signUp`, `forgotPassword`, `mfa`) encapsulés via `BetterAuthProvider` | `pending_payment` si auth OK |
+| 2. Sélection service | `/tunnel/service` | `isAuthenticated` && `tunnelStatus !== active` | Récupère plans via `/api/services`; stocke choix (ex: `selectedServiceType`) dans contexte + metadata Better Auth | `pending_payment` |
+| 3. Récap / confirmation | `/tunnel/summary` | Service choisi | Affiche informations facturation, bouton « Procéder au paiement » → POST `/api/stripe/checkout-session` (avec `betterAuthUserId`) | `pending_payment` |
+| 4. Paiement Stripe | Checkout hébergé | Session Stripe valide | Redirection success/cancel configurée vers `/tunnel/payment/success` & `/tunnel/payment/failed` | Dépend webhook |
+| 5. Succès | `/tunnel/payment/success` | Retour Stripe success | Affiche loader « Activation en cours »; attend webhook + GET `/api/me/subscription`; redirige `/dashboard` quand `subscriptionStatus=active` | `active` |
+| 6. Échec | `/tunnel/payment/failed` | Retour Stripe cancel/erreur | Affiche état `payment_failed`, CTA « Reprendre le paiement » → `/tunnel/service` | `payment_failed` |
+
+#### Points de synchronisation
+- **Formulaires Better Auth (T3.5)** : composants contrôlés (`SignInView`, `SignUpView`, `ForgotPasswordView`, `MFAChallenge`) fournis par SDK. Les événements `onSuccess` mettent à jour le `BetterAuthContext` puis redirigent vers `/tunnel/service`.
+- **Contexte tunnel** : hook `useTunnelFlow()` stockant `selectedServiceType`, `checkoutSessionId`, `tunnelStatus`. Initialisé depuis `BetterAuthUser.metadata` ou via requête `/api/tunnel-state`.
+- **Sauvegarde choix service** : POST `/api/tunnel/service-selection` (optionnel) pour persister l'intention avant paiement.
+- **Redirections automatiques** :
+  - Si utilisateur `active` arrive sur `/tunnel/*` → rediriger `/dashboard`.
+  - Si utilisateur `pending_auth` tente `/tunnel/service` → router vers `/tunnel/auth`.
+  - Si état `payment_failed` détecté après auth → afficher bannière + CTA reprise tant que non résolu.
+
+#### États UI & messages
+- `pending_auth` : call-to-action vers Better Auth, possibilité d'envoyer un magic link.
+- `pending_payment` : card résumant plan choisi, bannière rappel si checkout non complété.
+- `payment_failed` : message d’échec + boutons `Réessayer` (retour `/tunnel/service`) et `Contacter support`.
+- `active` : tunnel masqué, redirection immédiate.
+
+#### Schéma de données minimal
+```mermaid
+stateDiagram-v2
+    [*] --> pending_auth
+    pending_auth --> pending_payment: Auth réussie
+    pending_payment --> active: Webhook paiement OK
+    pending_payment --> payment_failed: Checkout failed / webhook KO
+    payment_failed --> pending_payment: Relance checkout
+    active --> [*]
+```
+
+Ce flow couvre T4.1 en détaillant navigation, interactions Better Auth (T3.5) et attentes backend/Stripe.
+
 ## 3. Intégration front-end
 
 ### 3.1 Provider & hooks
