@@ -1,0 +1,323 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Banque de questions PASS/LAS",
+    "created": "2025-11-06",
+    "level": "both",
+    "description": "Questions fondamentales de chimie générale et organique pour PASS & LAS",
+    "author": "Équipe pédagogique chimie",
+    "estimatedDuration": 40,
+    "difficulty": "mixed"
+  },
+  "questions": [
+    {
+      "questionText": "Quel est l'état d'oxydation du carbone dans le dioxyde de carbone (CO2) ?",
+      "options": [
+        { "text": "-4", "isCorrect": false },
+        { "text": "-2", "isCorrect": false },
+        { "text": "+4", "isCorrect": true },
+        { "text": "+2", "isCorrect": false }
+      ],
+      "explanation": "Dans CO2, l'oxygène a un état d'oxydation de -2 et la molécule est neutre : 2 × (-2) + x = 0, donc x = +4.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["oxydation", "chimie-minerale", "etat-oxydation"]
+    },
+    {
+      "questionText": "La liaison C-H est généralement considérée comme :",
+      "options": [
+        { "text": "Ionique", "isCorrect": false },
+        { "text": "Polarisée mais faiblement", "isCorrect": true },
+        { "text": "Purement covalente", "isCorrect": false },
+        { "text": "Métallique", "isCorrect": false }
+      ],
+      "explanation": "La différence d'électronégativité entre C et H est faible, ce qui rend la liaison légèrement polarisée.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["liaison-chimique", "electronegativity", "liaison-c-h"]
+    },
+    {
+      "questionText": "Quelle est la géométrie d'une molécule d'ammoniac (NH3) selon la théorie VSEPR ?",
+      "options": [
+        { "text": "Plane trigone", "isCorrect": false },
+        { "text": "Tétraédrique", "isCorrect": false },
+        { "text": "Pyramidale trigonale", "isCorrect": true },
+        { "text": "Linéraire", "isCorrect": false }
+      ],
+      "explanation": "NH3 possède 4 domaines électroniques (3 liaisons + 1 doublet libre) donnant une géométrie tétraédrique électronique mais pyramidale trigonale moléculaire.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["VSEPR", "structure-moleculaire", "ammoniac"]
+    },
+    {
+      "questionText": "Quel est le rôle d'un catalyseur dans une réaction chimique ?",
+      "options": [
+        { "text": "Augmenter le rendement final", "isCorrect": false },
+        { "text": "Modifier l'enthalpie de réaction", "isCorrect": false },
+        { "text": "Diminuer l'énergie d'activation", "isCorrect": true },
+        { "text": "Changer l'équilibre chimique", "isCorrect": false }
+      ],
+      "explanation": "Un catalyseur abaisse la barrière énergétique, accélère l'atteinte de l'équilibre mais ne modifie ni l'enthalpie ni la position de l'équilibre.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["cinétique", "catalyse", "energie-activation"]
+    },
+    {
+      "questionText": "Quelle famille fonctionnelle est caractérisée par la présence du groupement carbonyle C=O lié à un atome d'hydrogène ?",
+      "options": [
+        { "text": "Les cétones", "isCorrect": false },
+        { "text": "Les aldéhydes", "isCorrect": true },
+        { "text": "Les esters", "isCorrect": false },
+        { "text": "Les amides", "isCorrect": false }
+      ],
+      "explanation": "Les aldéhydes possèdent un groupement carbonyle terminal lié à au moins un hydrogène (R-CHO).",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["chimie-organique", "groupements-fonctionnels", "aldehydes"]
+    },
+    {
+      "questionText": "Le butane et l'isobutane sont un exemple de :",
+      "options": [
+        { "text": "Isomérie de fonction", "isCorrect": false },
+        { "text": "Isomérie de chaîne", "isCorrect": true },
+        { "text": "Isomérie de position", "isCorrect": false },
+        { "text": "Isomérie géométrique", "isCorrect": false }
+      ],
+      "explanation": "Ces deux molécules ont la même formule brute (C4H10) mais des squelettes carbonés différents, typiques des isomères de chaîne.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["isomerie", "alcane", "structure"]
+    },
+    {
+      "questionText": "Quelle est la valeur approximative de la constante d'Avogadro ?",
+      "options": [
+        { "text": "3,14 × 10^23 mol^-1", "isCorrect": false },
+        { "text": "6,02 × 10^23 mol^-1", "isCorrect": true },
+        { "text": "9,81 × 10^23 mol^-1", "isCorrect": false },
+        { "text": "1,00 × 10^24 mol^-1", "isCorrect": false }
+      ],
+      "explanation": "La constante d'Avogadro vaut 6,02214076 × 10^23 mol^-1 selon la définition SI.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["constante-avogadro", "quantite-matiere", "chimie-generale"]
+    },
+    {
+      "questionText": "Lors de la réaction d'estérification de Fischer, quels réactifs sont nécessaires ?",
+      "options": [
+        { "text": "Un acide carboxylique et un alcool", "isCorrect": true },
+        { "text": "Un aldéhyde et une amine", "isCorrect": false },
+        { "text": "Une cétone et un alcool", "isCorrect": false },
+        { "text": "Un alcool et un halogénure d'acyle", "isCorrect": false }
+      ],
+      "explanation": "La réaction classique d'estérification de Fischer fait réagir un acide carboxylique avec un alcool en présence d'un acide fort catalytique.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["esterification", "fischer", "chimie-organique"]
+    },
+    {
+      "questionText": "Quelle est la configuration la plus stable d'une molécule cyclohexanique substituée par un groupement volumineux ?",
+      "options": [
+        { "text": "Conformation chaise avec substituant axial", "isCorrect": false },
+        { "text": "Conformation chaise avec substituant équatorial", "isCorrect": true },
+        { "text": "Conformation bateau", "isCorrect": false },
+        { "text": "Conformation twist", "isCorrect": false }
+      ],
+      "explanation": "Le substituant volumineux en position équatoriale minimise les interactions 1,3-diaxiales, rendant la conformation chaise équatoriale plus stable.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["cyclohexane", "conformation", "stereochimie"]
+    },
+    {
+      "questionText": "Quelle est la différence principale entre une réaction SN1 et SN2 ?",
+      "options": [
+        { "text": "SN1 est bimoléculaire et SN2 unimoléculaire", "isCorrect": false },
+        { "text": "SN1 passe par un carbocation intermédiaire", "isCorrect": true },
+        { "text": "SN2 nécessite un solvant polaire protique", "isCorrect": false },
+        { "text": "SN2 se déroule en deux étapes", "isCorrect": false }
+      ],
+      "explanation": "SN1 est unimoléculaire et implique la formation d'un carbocation. SN2 est bimoléculaire, concertée sans intermédiaire stable.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["mechanisme", "substitution-nucleophile", "SN1-SN2"]
+    },
+    {
+      "questionText": "Laquelle des affirmations suivantes est vraie concernant les acides forts ?",
+      "options": [
+        { "text": "Ils possèdent une constante d'acidité pKa élevée", "isCorrect": false },
+        { "text": "Ils sont totalement dissociés en solution aqueuse", "isCorrect": true },
+        { "text": "Ils forment des bases faibles conjuguées", "isCorrect": false },
+        { "text": "Leur concentration en solution est toujours élevée", "isCorrect": false }
+      ],
+      "explanation": "Un acide fort se dissocie complètement en ions en solution aqueuse, même à faible concentration.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["acidite", "pKa", "equilibre-acide-base"]
+    },
+    {
+      "questionText": "Quelle technique est la mieux adaptée pour séparer deux liquides miscibles avec des points d'ébullition proches ?",
+      "options": [
+        { "text": "Filtration", "isCorrect": false },
+        { "text": "Distillation fractionnée", "isCorrect": true },
+        { "text": "Extraction liquide-liquide", "isCorrect": false },
+        { "text": "Chromatographie sur couche mince", "isCorrect": false }
+      ],
+      "explanation": "La distillation fractionnée permet la séparation de liquides miscibles ayant des points d'ébullition proches grâce à une colonne de fractionnement.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["techniques", "distillation", "separation"]
+    },
+    {
+      "questionText": "Quelle est la particularité d'un composé aromatique selon la règle de Hückel ?",
+      "options": [
+        { "text": "Il possède 4n électrons π", "isCorrect": false },
+        { "text": "Il possède (4n + 2) électrons π", "isCorrect": true },
+        { "text": "Il possède un cycle saturé", "isCorrect": false },
+        { "text": "Il contient un hétéroatome", "isCorrect": false }
+      ],
+      "explanation": "Un système aromatique doit être cyclique, conjugué et contenir (4n + 2) électrons π délocalisés selon la règle de Hückel.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["aromaticite", "huckel", "electrons-pi"]
+    },
+    {
+      "questionText": "Quel type de liaison intermoléculaire est principalement responsable du point d'ébullition élevé de l'eau ?",
+      "options": [
+        { "text": "Forces de dispersion", "isCorrect": false },
+        { "text": "Interactions dipôle instantané-dipôle induit", "isCorrect": false },
+        { "text": "Liaisons hydrogène", "isCorrect": true },
+        { "text": "Interactions ioniques", "isCorrect": false }
+      ],
+      "explanation": "Les liaisons hydrogène entre molécules d'eau exigent beaucoup d'énergie pour être rompues, expliquant le point d'ébullition élevé.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["liaison-hydrogene", "proprietes-eau", "liaisons-intermoleculaires"]
+    },
+    {
+      "questionText": "Dans une réaction acide-base de Bronsted, un acide est une espèce capable de :",
+      "options": [
+        { "text": "Donner un doublet d'électrons", "isCorrect": false },
+        { "text": "Accepter un proton", "isCorrect": false },
+        { "text": "Donner un proton", "isCorrect": true },
+        { "text": "Accepter un doublet d'électrons", "isCorrect": false }
+      ],
+      "explanation": "Selon Bronsted-Lowry, un acide donne un proton (H+) et une base accepte un proton.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["bronsted", "acide-base", "proton"]
+    },
+    {
+      "questionText": "Quel est le principal produit de l'addition d'HBr sur le prop-1-ène en absence de peroxydes ?",
+      "options": [
+        { "text": "1-bromopropane", "isCorrect": false },
+        { "text": "2-bromopropane", "isCorrect": true },
+        { "text": "3-bromopropane", "isCorrect": false },
+        { "text": "Propanol", "isCorrect": false }
+      ],
+      "explanation": "L'addition d'HBr suit la règle de Markovnikov : le proton se fixe sur le carbone le plus hydrogéné, donnant le 2-bromopropane.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["reaction-addition", "markovnikov", "alkenes"]
+    },
+    {
+      "questionText": "Quel est l'effet d'un groupe donneur d'électrons sur la stabilité d'un carbocation ?",
+      "options": [
+        { "text": "Il déstabilise le carbocation", "isCorrect": false },
+        { "text": "Il n'a aucun effet", "isCorrect": false },
+        { "text": "Il stabilise le carbocation par hyperconjugaison", "isCorrect": true },
+        { "text": "Il transforme le carbocation en radical", "isCorrect": false }
+      ],
+      "explanation": "Les groupes donneurs d'électrons stabilisent les carbocations via hyperconjugaison ou effet inductif positif, réduisant la densité de charge positive.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["carbocation", "hyperconjugaison", "effet-inductif"]
+    },
+    {
+      "questionText": "Quelle technique analytique permet de déterminer le nombre d'atomes d'hydrogène différents dans une molécule organique ?",
+      "options": [
+        { "text": "IRTF", "isCorrect": false },
+        { "text": "RMN du proton (1H)", "isCorrect": true },
+        { "text": "Spectrométrie de masse", "isCorrect": false },
+        { "text": "Chromatographie HPLC", "isCorrect": false }
+      ],
+      "explanation": "La RMN 1H donne des signaux distincts pour chaque environnement chimique des hydrogènes, permettant l'analyse fine de la structure organique.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["RMN", "analyse-structurale", "spectroscopie"]
+    },
+    {
+      "questionText": "Quel est le principal effet d'un solvant polaire protique sur une réaction SN1 ?",
+      "options": [
+        { "text": "Il ralentit la formation du carbocation", "isCorrect": false },
+        { "text": "Il stabilise les ions formés et favorise la réaction", "isCorrect": true },
+        { "text": "Il favorise les réactions SN2", "isCorrect": false },
+        { "text": "Il empêche la dissociation de la molécule", "isCorrect": false }
+      ],
+      "explanation": "Les solvants polaires protique stabilisent les ions, favorisant la dissociation en carbocation et anion, donc la voie SN1.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["solvant", "SN1", "cinétique"]
+    },
+    {
+      "questionText": "Quel est le rapport molaire acide/base à l'équilibre lorsque pH = pKa dans l'équation de Henderson-Hasselbalch ?",
+      "options": [
+        { "text": "[base]/[acide] = 0,1", "isCorrect": false },
+        { "text": "[base]/[acide] = 1", "isCorrect": true },
+        { "text": "[base]/[acide] = 10", "isCorrect": false },
+        { "text": "[base]/[acide] = 2", "isCorrect": false }
+      ],
+      "explanation": "Quand pH = pKa, le logarithme du rapport est nul, donc [base]/[acide] = 1.",
+      "category": "Chimie générale et organique",
+      "difficulty": "medium",
+      "level": "both",
+      "tags": ["henderson-hasselbalch", "tampon", "chimie-solution"]
+    },
+    {
+      "questionText": "Quel est l'effet d'un groupe nitro (-NO2) en ortho ou para sur l'orientation d'une substitution électrophile aromatique ?",
+      "options": [
+        { "text": "Il oriente en ortho/para", "isCorrect": false },
+        { "text": "Il oriente en méta", "isCorrect": true },
+        { "text": "Il n'a aucun effet", "isCorrect": false },
+        { "text": "Il favorise l'addition au lieu de la substitution", "isCorrect": false }
+      ],
+      "explanation": "Le groupe nitro est un très fort attracteur d'électrons par résonance et effet inductif, il désactive le cycle et oriente les électrophiles en position méta.",
+      "category": "Chimie générale et organique",
+      "difficulty": "hard",
+      "level": "both",
+      "tags": ["substitution-electrophile", "orientant", "groupe-nitro"]
+    },
+    {
+      "questionText": "Quelle est la formule brute de l'acide acétique ?",
+      "options": [
+        { "text": "C2H4O2", "isCorrect": true },
+        { "text": "C2H6O", "isCorrect": false },
+        { "text": "C3H6O3", "isCorrect": false },
+        { "text": "C2H2O2", "isCorrect": false }
+      ],
+      "explanation": "L'acide acétique (CH3COOH) a pour formule brute C2H4O2.",
+      "category": "Chimie générale et organique",
+      "difficulty": "easy",
+      "level": "both",
+      "tags": ["acide-carboxylique", "formule-brute", "chimie-organique"]
+    }
+  ]
+}

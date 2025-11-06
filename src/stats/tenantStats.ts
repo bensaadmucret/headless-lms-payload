@@ -180,7 +180,7 @@ export async function isQuotaExceededForTenant(
   deps = {
     getUserCountForTenant,
     getStorageUsedForTenant,
-    findTenantById: (id: string) => payload.findByID({ collection: 'tenant' as any, id })
+    findTenantById: (id: string) => payload.findByID({ collection: 'tenants', id })
   }
 ): Promise<boolean> {
   try {

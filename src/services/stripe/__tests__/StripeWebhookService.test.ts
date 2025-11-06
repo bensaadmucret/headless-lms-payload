@@ -89,7 +89,7 @@ describe('StripeWebhookService', () => {
       expect(() => {
         try {
           service.verifySignature('test body', 'valid_signature');
-        } catch (error) {
+        } catch (_error) {
           // Expected to potentially throw due to mocking, but method exists
         }
       }).not.toThrow(TypeError);
@@ -99,7 +99,7 @@ describe('StripeWebhookService', () => {
       // Call verifySignature to trigger the client methods
       try {
         service.verifySignature('test body', 'valid_signature');
-      } catch (error) {
+      } catch (_error) {
         // Expected to potentially throw due to mocking
       }
 
@@ -299,12 +299,12 @@ describe('StripeWebhookService', () => {
       const event: Stripe.Event = {
         id: 'evt_test_unsupported',
         object: 'event',
-        type: 'charge.succeeded' as any, // Type non géré
+        type: 'charge.succeeded' as Stripe.Event.Type, // Type non géré
         created: Date.now(),
         livemode: false,
         api_version: '2025-09-30.clover',
         data: {
-          object: {} as any,
+          object: {} as Stripe.Charge,
         },
         pending_webhooks: 0,
         request: null,
@@ -325,7 +325,7 @@ describe('StripeWebhookService', () => {
         livemode: false,
         api_version: '2025-09-30.clover',
         data: {
-          object: null as any, // Données invalides
+          object: null as unknown as Stripe.Subscription, // Données invalides
         },
         pending_webhooks: 0,
         request: null,

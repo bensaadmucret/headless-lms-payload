@@ -99,36 +99,43 @@ Dans les logs du backend, vous devriez voir :
 
 ## 3️⃣ Test de Création de Session Checkout
 
-### Préparer un JWT Token Utilisateur
-
-Vous devez être authentifié pour tester. Deux options :
-
-**Option A : Via Postman/Insomnia**
-1. Se connecter : POST `http://localhost:3000/api/users/login`
-   ```json
-   {
-     "email": "votre-email@example.com",
-     "password": "votre-password"
-   }
-   ```
-2. Copier le token JWT de la réponse
-
-**Option B : Via le navigateur**
-1. Ouvrir `http://localhost:3000/admin`
-2. Se connecter
-3. Ouvrir les DevTools > Application > Cookies
-4. Copier la valeur du cookie `payload-token`
-
-### Tester l'Endpoint Checkout
+### Étape 1 : Créer un prospect
 
 ```bash
-# Remplacer YOUR_JWT_TOKEN par votre token
+curl -X POST http://localhost:3000/api/prospects \
+  -H "Content-Type: application/json" \
+  -d '{
+        "email": "prospect-test@example.com",
+        "firstName": "Prospect",
+        "lastName": "Test",
+        "billingCycle": "monthly",
+        "selectedPrice": 69.99
+      }'
+```
+
+**Réponse attendue** :
+```json
+{
+  "prospect": {
+    "id": "prospect_abc123",
+    "email": "prospect-test@example.com",
+    ...
+  },
+  "created": true
+}
+```
+
+### Étape 2 : Créer la session checkout avec le prospect
+
+```bash
 curl -X POST http://localhost:3000/api/stripe/checkout-session \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
   -d '{
-    "priceId": "monthly"
-  }'
+        "prospectId": "prospect_abc123",
+        "billingCycle": "monthly",
+        "selectedPrice": 69.99,
+        "email": "prospect-test@example.com"
+      }'
 ```
 
 **Réponse attendue** :
@@ -169,14 +176,18 @@ Dans les logs backend :
 ### Via Payload Admin
 
 1. Ouvrir `http://localhost:3000/admin`
-2. Aller dans **Collections > Subscriptions**
-3. Vérifier qu'un nouvel abonnement est créé :
+2. Aller dans **Collections > Prospects** et vérifier la mise à jour :
+   - `status`: `ready_for_password` après paiement réussi, `payment_failed` en cas d'échec
+   - `checkoutSessionId` rempli
+   - `subscriptionId` renseigné si l'abonnement est actif
+3. Aller dans **Collections > Subscriptions**
+4. Vérifier qu'un nouvel abonnement est créé :
    - Provider: `stripe`
    - Status: `trialing` ou `active`
    - PriceId: Correspond au prix sélectionné
 
-4. Aller dans **Collections > Users**
-5. Vérifier l'utilisateur :
+5. Aller dans **Collections > Users**
+6. Vérifier l'utilisateur :
    - `subscriptionStatus`: `trialing` ou `active`
    - `subscriptionEndDate`: Date future
    - `stripeCustomerId`: `cus_xxxxx`

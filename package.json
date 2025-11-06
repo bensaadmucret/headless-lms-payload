@@ -38,8 +38,6 @@
     "debug-cors": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/debug-cors.ts",
     "debug-user": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/debug-user.ts",
     "test-cors": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/test-cors.ts",
-    "debug-user": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/debug-user.ts",
-    "debug-user": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/debug-user.ts",
     "manage-roles": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/manage-user-roles.ts",
     "change-role": "cross-env NODE_OPTIONS=--no-deprecation tsx src/scripts/change-user-role.ts",
     "workers:delete": "pm2 delete workers",

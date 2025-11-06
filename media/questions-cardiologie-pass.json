@@ -1,0 +1,175 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Faculté de Médecine Paris Descartes",
+    "created": "2025-01-15",
+    "level": "PASS",
+    "description": "Questions fondamentales de cardiologie pour PASS semestre 1",
+    "author": "Dr. Marie Dubois",
+    "estimatedDuration": 45,
+    "difficulty": "medium"
+  },
+  "questions": [
+    {
+      "questionText": "Quelle est la fonction principale du ventricule gauche ?",
+      "options": [
+        {
+          "text": "Pomper le sang vers l'aorte",
+          "isCorrect": true
+        },
+        {
+          "text": "Recevoir le sang des veines",
+          "isCorrect": false
+        },
+        {
+          "text": "Filtrer le sang",
+          "isCorrect": false
+        },
+        {
+          "text": "Produire les globules rouges",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le ventricule gauche est la principale pompe cardiaque qui envoie le sang oxygéné vers l'aorte et la circulation systémique. Il représente environ 2/3 de la masse cardiaque et génère une pression beaucoup plus élevée que le ventricule droit.",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "anatomie",
+        "cœur",
+        "ventricule",
+        "circulation",
+        "système-cardiovasculaire"
+      ],
+      "hints": [
+        "Pensez à la circulation systémique vs pulmonaire",
+        "Le ventricule gauche a des parois plus épaisses"
+      ]
+    },
+    {
+      "questionText": "Quel est le principal déterminant de la pression artérielle systolique ?",
+      "options": [
+        {
+          "text": "Le volume d'éjection systolique",
+          "isCorrect": true
+        },
+        {
+          "text": "La fréquence cardiaque",
+          "isCorrect": false
+        },
+        {
+          "text": "La résistance vasculaire périphérique",
+          "isCorrect": false
+        },
+        {
+          "text": "Le volume sanguin total",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La pression artérielle systolique dépend principalement du volume d'éjection systolique (VÉS) du ventricule gauche. La formule simplifiée est : PAS = VÉS × RVP × Compliance artérielle.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "hémodynamique",
+        "pression-artérielle",
+        "ventricule-gauche",
+        "physiologie-cardiaque"
+      ]
+    },
+    {
+      "questionText": "Parmi les propositions suivantes, laquelle correspond à une insuffisance cardiaque à fraction d'éjection préservée (HFpEF) ?",
+      "options": [
+        {
+          "text": "FEVG > 50% avec signes d'insuffisance cardiaque",
+          "isCorrect": true
+        },
+        {
+          "text": "FEVG < 40% avec œdème pulmonaire",
+          "isCorrect": false
+        },
+        {
+          "text": "FEVG normale avec hypertension portale",
+          "isCorrect": false
+        },
+        {
+          "text": "FEVG réduite avec ascite",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'insuffisance cardiaque à fraction d'éjection préservée (HFpEF) se définit par une FEVG > 50% malgré des signes cliniques d'insuffisance cardiaque. Elle représente environ 50% des insuffisances cardiaques et touche particulièrement les sujets âgés et les femmes.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "PASS",
+      "tags": [
+        "insuffisance-cardiaque",
+        "fraction-éjection",
+        "HFpEF",
+        "échocardiographie"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme physiologique explique l'augmentation du débit cardiaque lors d'un exercice physique modéré ?",
+      "options": [
+        {
+          "text": "Augmentation du volume d'éjection systolique et de la fréquence cardiaque",
+          "isCorrect": true
+        },
+        {
+          "text": "Diminution de la résistance vasculaire périphérique uniquement",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la précharge uniquement",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de la postcharge uniquement",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Pendant l'exercice, le débit cardiaque augmente grâce à deux mécanismes principaux : l'augmentation du volume d'éjection systolique (effet Starling) et l'augmentation de la fréquence cardiaque (stimulation sympathique).",
+      "category": "Cardiologie",
+      "difficulty": "medium",
+      "level": "PASS",
+      "tags": [
+        "débit-cardiaque",
+        "exercice",
+        "physiologie",
+        "adaptation-cardiovasculaire"
+      ]
+    },
+    {
+      "questionText": "Dans le cycle cardiaque, la fermeture de la valve aortique correspond à quel événement ?",
+      "options": [
+        {
+          "text": "Début de la diastole ventriculaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Début de la systole ventriculaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Fermeture de la valve mitrale",
+          "isCorrect": false
+        },
+        {
+          "text": "Ouverture de la valve pulmonaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La fermeture de la valve aortique marque la fin de la systole ventriculaire et le début de la diastole isovolumétrique. Cela correspond au deuxième bruit cardiaque (B2).",
+      "category": "Cardiologie",
+      "difficulty": "easy",
+      "level": "PASS",
+      "tags": [
+        "cycle-cardiaque",
+        "valves",
+        "bruits-du-cœur",
+        "systole-diastole"
+      ]
+    }
+  ]
+}

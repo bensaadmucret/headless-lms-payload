@@ -3,20 +3,26 @@
  */
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
+import type { Payload } from 'payload';
 import { JSONImportAuditService, ImportSummary } from '../JSONImportAuditService';
 
-// Mock de Payload
-const mockPayload = {
-  create: vi.fn(),
-  find: vi.fn(),
-  findByID: vi.fn()
+type MockFn = ReturnType<typeof vi.fn>;
+
+const createMock: MockFn = vi.fn();
+const findMock: MockFn = vi.fn();
+const findByIdMock: MockFn = vi.fn();
+
+const payloadMock = {
+  create: createMock,
+  find: findMock,
+  findByID: findByIdMock
 };
 
 describe('JSONImportAuditService', () => {
   let auditService: JSONImportAuditService;
 
   beforeEach(() => {
-    auditService = new JSONImportAuditService(mockPayload as any);
+    auditService = new JSONImportAuditService(payloadMock as unknown as Payload);
     vi.clearAllMocks();
   });
 
@@ -30,19 +36,19 @@ describe('JSONImportAuditService', () => {
       const totalItems = 50;
       const options = { dryRun: false, batchSize: 10 };
 
-      mockPayload.create.mockResolvedValue({ id: 'audit-1' });
+      payloadMock.create.mockResolvedValue({ id: 'audit-1' });
 
       await auditService.logImportStarted(
         userId,
         jobId,
         fileName,
-        format as any,
-        importType as any,
+        format,
+        importType,
         totalItems,
-        options as any
+        options
       );
 
-      expect(mockPayload.create).toHaveBeenCalledWith({
+      expect(payloadMock.create).toHaveBeenCalledWith({
         collection: 'auditlogs',
         data: expect.objectContaining({
           user: userId,
@@ -68,17 +74,17 @@ describe('JSONImportAuditService', () => {
     });
 
     it('should handle audit logging errors gracefully', async () => {
-      mockPayload.create.mockRejectedValue(new Error('Database error'));
+      payloadMock.create.mockRejectedValue(new Error('Database error'));
 
       // Ne devrait pas lever d'exception
       await expect(auditService.logImportStarted(
         123,
         'job-123',
         'test.json',
-        'json' as any,
-        'questions' as any,
+        'json',
+        'questions',
         50,
-        {} as any
+        {}
       )).resolves.toBeUndefined();
     });
   });
@@ -89,26 +95,26 @@ describe('JSONImportAuditService', () => {
       const jobId = 'job-123';
       const summary: ImportSummary = {
         fileName: 'test.json',
-        format: 'json' as any,
-        importType: 'questions' as any,
+        format: 'json',
+        importType: 'questions',
         totalItems: 50,
         processedItems: 50,
         successfulItems: 45,
         failedItems: 5,
         skippedItems: 0,
         duration: 120,
-        options: {} as any
+        options: {}
       };
       const createdEntities = [
         { collection: 'questions', id: 'q1', type: 'question' },
         { collection: 'questions', id: 'q2', type: 'question' }
       ];
 
-      mockPayload.create.mockResolvedValue({ id: 'audit-2' });
+      payloadMock.create.mockResolvedValue({ id: 'audit-2' });
 
       await auditService.logImportCompleted(userId, jobId, summary, createdEntities);
 
-      expect(mockPayload.create).toHaveBeenCalledWith({
+      expect(payloadMock.create).toHaveBeenCalledWith({
         collection: 'auditlogs',
         data: expect.objectContaining({
           action: 'import_completed',
@@ -170,7 +176,7 @@ describe('JSONImportAuditService', () => {
         ]
       };
 
-      mockPayload.find.mockResolvedValue(mockAuditLogs);
+      payloadMock.find.mockResolvedValue(mockAuditLogs);
 
       const report = await auditService.generateActivityReport(startDate, endDate);
 
@@ -199,7 +205,7 @@ describe('JSONImportAuditService', () => {
         }
       });
 
-      expect(mockPayload.find).toHaveBeenCalledWith({
+      expect(payloadMock.find).toHaveBeenCalledWith({
         collection: 'auditlogs',
         where: {
           and: [

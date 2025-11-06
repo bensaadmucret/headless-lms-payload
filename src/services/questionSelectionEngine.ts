@@ -24,6 +24,15 @@ interface QuestionAvailability {
     canFulfill: boolean;
 }
 
+type CategorizedAvailability = QuestionAvailability & { type: 'weak' | 'strong' };
+
+type PayloadCondition = Record<string, unknown>;
+
+interface PayloadFilter extends PayloadCondition {
+    and?: PayloadFilter[];
+    or?: PayloadFilter[];
+}
+
 interface SelectionResult {
     questions: Question[];
     actualDistribution: {
@@ -126,7 +135,7 @@ export class QuestionSelectionEngine {
         }
 
         // Build query conditions
-        const whereConditions: any = {
+        const whereConditions: PayloadFilter = {
             and: [
                 {
                     category: { in: categoryIds }
@@ -142,7 +151,7 @@ export class QuestionSelectionEngine {
 
         // Exclude recent questions if specified
         if (excludeQuestionIds.length > 0) {
-            whereConditions.and.push({
+            whereConditions.and?.push({
                 id: { not_in: excludeQuestionIds }
             });
         }
@@ -200,7 +209,7 @@ export class QuestionSelectionEngine {
      * Requirements: 2.1, 2.2
      */
     async validateQuestionAvailability(criteria: QuestionSelectionCriteria): Promise<QuestionAvailability[]> {
-        const availability: QuestionAvailability[] = [];
+        const availability: CategorizedAvailability[] = [];
 
         // Check weak categories
         for (const categoryId of criteria.weakCategories) {
@@ -213,7 +222,7 @@ export class QuestionSelectionEngine {
             availability.push({
                 ...categoryAvailability,
                 type: 'weak'
-            } as any);
+            });
         }
 
         // Check strong categories
@@ -227,7 +236,7 @@ export class QuestionSelectionEngine {
             availability.push({
                 ...categoryAvailability,
                 type: 'strong'
-            } as any);
+            });
         }
 
         return availability;
@@ -246,8 +255,8 @@ export class QuestionSelectionEngine {
         const adjustedCriteria = { ...criteria };
 
         // Calculate total available questions for weak and strong categories
-        const weakAvailability = availability.filter((a: any) => a.type === 'weak');
-        const strongAvailability = availability.filter((a: any) => a.type === 'strong');
+        const weakAvailability = availability.filter((a): a is CategorizedAvailability => a.type === 'weak');
+        const strongAvailability = availability.filter((a): a is CategorizedAvailability => a.type === 'strong');
 
         const totalWeakAvailable = weakAvailability.reduce((sum, a) => sum + a.availableQuestions, 0);
         const totalStrongAvailable = strongAvailability.reduce((sum, a) => sum + a.availableQuestions, 0);
@@ -441,13 +450,13 @@ export class QuestionSelectionEngine {
     }> {
         const availability = await this.validateQuestionAvailability(criteria);
 
-        const weakStats = availability.filter((a: any) => a.type === 'weak').map(a => ({
+        const weakStats = availability.filter((a): a is CategorizedAvailability => a.type === 'weak').map(a => ({
             categoryId: a.categoryId,
             available: a.availableQuestions,
             requested: Math.ceil(criteria.targetWeakQuestions / criteria.weakCategories.length)
         }));
 
-        const strongStats = availability.filter((a: any) => a.type === 'strong').map(a => ({
+        const strongStats = availability.filter((a): a is CategorizedAvailability => a.type === 'strong').map(a => ({
             categoryId: a.categoryId,
             available: a.availableQuestions,
             requested: Math.ceil(criteria.targetStrongQuestions / criteria.strongCategories.length)
@@ -496,7 +505,7 @@ export class QuestionSelectionEngine {
             }) as Category;
 
             // Build query conditions
-            const whereConditions: any = {
+            const whereConditions: PayloadFilter = {
                 and: [
                     { category: { equals: categoryId } },
                     {
@@ -509,7 +518,7 @@ export class QuestionSelectionEngine {
             };
 
             if (excludeQuestionIds.length > 0) {
-                whereConditions.and.push({
+                whereConditions.and?.push({
                     id: { not_in: excludeQuestionIds }
                 });
             }

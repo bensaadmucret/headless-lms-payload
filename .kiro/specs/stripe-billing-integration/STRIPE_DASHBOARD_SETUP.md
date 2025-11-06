@@ -299,6 +299,8 @@ FRONTEND_URL=http://localhost:5173
 ### Test Rapide
 
 ```bash
+ℹ️ Le backend crée désormais les sessions checkout à partir d'un **prospect**. Le flux manuel de test utilise les endpoints applicatifs (`/api/prospects` puis `/api/stripe/checkout-session`).
+
 # Démarrer le backend
 cd payload-cms
 npm run dev
@@ -306,11 +308,25 @@ npm run dev
 # Dans un autre terminal, écouter les webhooks
 stripe listen --forward-to http://localhost:3000/api/stripe/webhook
 
-# Tester la création d'une session checkout
+# Tester la création d'une session checkout (flux prospect complet)
+curl -X POST http://localhost:3000/api/prospects \
+  -H "Content-Type: application/json" \
+  -d '{
+        "email": "prospect@example.com",
+        "firstName": "Prospect",
+        "lastName": "Test",
+        "billingCycle": "monthly",
+        "selectedPrice": 69.99
+      }'
+
 curl -X POST http://localhost:3000/api/stripe/checkout-session \
   -H "Content-Type: application/json" \
-  -H "Authorization: Bearer YOUR_JWT_TOKEN" \
-  -d '{"priceId": "monthly"}'
+  -d '{
+        "prospectId": "<ID retourné par /api/prospects>",
+        "billingCycle": "monthly",
+        "selectedPrice": 69.99,
+        "email": "prospect@example.com"
+      }'
 ```
 
 ## 🎯 Prochaines Étapes

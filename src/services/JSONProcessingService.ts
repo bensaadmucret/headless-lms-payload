@@ -31,6 +31,82 @@ export interface ProcessingResult {
   };
 }
 
+interface LearningPathQuestionMetadata {
+  pathTitle: string;
+  stepId: string;
+  stepTitle: string;
+  stepOrder: number;
+  questionOrder: number;
+}
+
+type LexicalTextNode = {
+  detail: number;
+  format: number;
+  mode: 'normal';
+  style: string;
+  text: string;
+  type: 'text';
+  version: 1;
+} & Record<string, unknown>;
+
+type LexicalParagraphNode = {
+  children: LexicalTextNode[];
+  direction: 'ltr';
+  format: string;
+  indent: number;
+  type: 'paragraph';
+  version: 1;
+} & Record<string, unknown>;
+
+type LexicalDocumentRoot = {
+  children: LexicalParagraphNode[];
+  direction: 'ltr';
+  format: string;
+  indent: number;
+  type: 'root';
+  version: 1;
+} & Record<string, unknown>;
+
+type LexicalDocument = {
+  root: LexicalDocumentRoot;
+};
+
+type AnswerOption = { optionText: string; isCorrect: boolean };
+
+interface PayloadQuestion {
+  questionText: LexicalDocument;
+  questionType: 'multipleChoice';
+  options: AnswerOption[];
+  explanation: string;
+  category: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+  studentLevel: 'PASS' | 'LAS' | 'both';
+  tags: Array<{ tag: string }>;
+  sourcePageReference?: string;
+  generatedByAI: boolean;
+  validatedByExpert: boolean;
+  validationStatus: 'pending' | 'needs_review';
+  learningPathMetadata?: LearningPathQuestionMetadata;
+}
+
+interface StepData {
+  id: string;
+  title: string;
+  description?: string;
+  prerequisites: string[];
+  originalPrerequisites: string[];
+  estimatedTime?: number;
+  order: number;
+  questionIds: string[];
+  substitutions: PrerequisiteSubstitution[];
+}
+
+type PrerequisiteSubstitution = { originalId: string; substitutionId: string; created: boolean };
+
+function assertUnreachable(value: never): never {
+  throw new Error(`Type d'import non supporté: ${(value as { type?: string }).type ?? 'unknown'}`);
+}
+
 export class JSONProcessingService {
   private prerequisiteService: LearningPathPrerequisiteService;
   private flashcardService: FlashcardImportService;
@@ -53,7 +129,7 @@ export class JSONProcessingService {
         case 'learning-path':
           return await this.processLearningPath(data as LearningPathImportData, userId);
         default:
-          throw new Error(`Type d'import non supporté: ${(data as any).type}`);
+          return assertUnreachable(data as never);
       }
     } catch (error) {
       return {
@@ -85,7 +161,7 @@ export class JSONProcessingService {
     const createdIds: string[] = [];
     let successful = 0;
     let failed = 0;
-    let skipped = 0;
+    const skipped = 0;
 
     for (let i = 0; i < data.questions.length; i++) {
       const question = data.questions[i];
@@ -101,15 +177,17 @@ export class JSONProcessingService {
           data: mappedQuestion
         });
 
+        const createdQuestionId = String((createdQuestion as { id: string | number }).id);
+
         results.push({
           type: 'question',
           sourceIndex: i,
-          payloadId: String(createdQuestion.id),
+          payloadId: createdQuestionId,
           status: 'success',
           message: 'Question créée avec succès'
         });
 
-        createdIds.push(String(createdQuestion.id));
+        createdIds.push(createdQuestionId);
         successful++;
 
       } catch (error) {
@@ -257,7 +335,7 @@ export class JSONProcessingService {
       const stepRelations = await this.createStepQuestionRelations(data, stepQuestionIds, results, errors, substitutionRecords);
       
       // Étape 4: Valider et créer la structure du parcours d'apprentissage
-      const learningPathResult = await this.createLearningPathStructure(data, stepRelations, userId, results, errors);
+      const learningPathId = await this.createLearningPathStructure(data, stepRelations, userId, results, errors);
 
       // Compter les succès et échecs
       successful = results.filter(r => r.status === 'success').length;
@@ -269,6 +347,10 @@ export class JSONProcessingService {
           createdIds.push(result.payloadId);
         }
       });
+
+      if (learningPathId) {
+        createdIds.push(learningPathId);
+      }
 
       return {
         success: errors.filter(e => e.severity === 'critical').length === 0,
@@ -348,12 +430,14 @@ export class JSONProcessingService {
             data: mappedQuestion
           });
 
-          stepQuestionIds[step.id]?.push(String(createdQuestion.id));
+          const createdQuestionId = String((createdQuestion as { id: string | number }).id);
+
+          stepQuestionIds[step.id]?.push(createdQuestionId);
 
           results.push({
             type: 'question',
             sourceIndex: stepIndex * 1000 + questionIndex, // Index unique
-            payloadId: String(createdQuestion.id),
+            payloadId: createdQuestionId,
             status: 'success',
             message: `Question créée pour l'étape "${step.title}"`
           });
@@ -390,9 +474,9 @@ export class JSONProcessingService {
     stepQuestionIds: Record<string, string[]>,
     results: ImportResult[],
     errors: ImportError[],
-    substitutionRecords: Array<{ originalId: string; substitutionId: string; created: boolean }> = []
-  ): Promise<Array<{ stepId: string; stepData: any; questionIds: string[] }>> {
-    const stepRelations: Array<{ stepId: string; stepData: any; questionIds: string[] }> = [];
+    substitutionRecords: PrerequisiteSubstitution[] = []
+  ): Promise<Array<{ stepId: string; stepData: StepData; questionIds: string[] }>> {
+    const stepRelations: Array<{ stepId: string; stepData: StepData; questionIds: string[] }> = [];
 
     for (let stepIndex = 0; stepIndex < data.path.steps.length; stepIndex++) {
       const step = data.path.steps[stepIndex];
@@ -417,7 +501,7 @@ export class JSONProcessingService {
         }
 
         // Créer les données de l'étape avec relations et prérequis résolus
-        const stepData = {
+        const stepData: StepData = {
           id: step.id,
           title: step.title,
           description: step.description,
@@ -470,35 +554,19 @@ export class JSONProcessingService {
    */
   private async createLearningPathStructure(
     data: LearningPathImportData,
-    stepRelations: Array<{ stepId: string; stepData: any; questionIds: string[] }>,
+    stepRelations: Array<{ stepId: string; stepData: StepData; questionIds: string[] }>,
     userId: string,
     results: ImportResult[],
     errors: ImportError[]
   ): Promise<string | null> {
     try {
-      // Pour l'instant, nous stockons les métadonnées du parcours
-      // TODO: Créer une collection dédiée aux parcours d'apprentissage quand elle sera définie
-      
-      const learningPathMetadata = {
-        title: data.metadata.title,
-        description: data.metadata.description,
-        level: data.metadata.level,
-        estimatedDuration: data.metadata.estimatedDuration,
-        steps: stepRelations.map(rel => rel.stepData),
-        totalQuestions: stepRelations.reduce((sum, rel) => sum + rel.questionIds.length, 0),
-        createdBy: userId,
-        createdAt: new Date(),
-        source: data.metadata.source || 'JSON Import'
-      };
+      const totalQuestions = stepRelations.reduce((sum, rel) => sum + rel.questionIds.length, 0);
 
-      // Temporairement, nous pourrions créer un quiz qui représente le parcours
-      // ou attendre qu'une collection spécifique soit créée
-      
       results.push({
         type: 'learning-path',
         sourceIndex: 0,
         status: 'success',
-        message: `Parcours d'apprentissage "${data.metadata.title}" structuré avec ${stepRelations.length} étapes`
+        message: `Parcours d'apprentissage "${data.metadata.title}" structuré avec ${stepRelations.length} étapes (${totalQuestions} questions)`
       });
 
       return 'learning-path-created'; // ID temporaire
@@ -529,7 +597,7 @@ export class JSONProcessingService {
    */
   private applyPrerequisiteSubstitutions(
     originalPrerequisites: string[],
-    substitutionRecords: Array<{ originalId: string; substitutionId: string; created: boolean }>
+    substitutionRecords: PrerequisiteSubstitution[]
   ): string[] {
     return originalPrerequisites.map(prereq => {
       const substitution = substitutionRecords.find(sub => sub.originalId === prereq);
@@ -543,7 +611,7 @@ export class JSONProcessingService {
   private async validateResolvedPrerequisites(
     resolvedPrerequisites: string[],
     allSteps: ImportLearningStep[],
-    substitutionRecords: Array<{ originalId: string; substitutionId: string; created: boolean }>
+    substitutionRecords: PrerequisiteSubstitution[]
   ): Promise<{ isValid: boolean; error?: string }> {
     try {
       const stepIds = new Set(allSteps.map(s => s.id));
@@ -630,7 +698,7 @@ export class JSONProcessingService {
   /**
    * Mappe une question d'import vers la structure Payload CMS
    */
-  private async mapQuestionToPayload(question: ImportQuestion, _userId: string): Promise<any> {
+  private async mapQuestionToPayload(question: ImportQuestion, _userId: string): Promise<PayloadQuestion> {
     // Résoudre la catégorie
     const categoryId = await this.resolveCategoryId(question.category, question.level);
 
@@ -638,15 +706,15 @@ export class JSONProcessingService {
     const questionTextRichText = this.convertTextToLexical(question.questionText);
 
     // Mapper les options
-    const mappedOptions = question.options.map(option => ({
+    const mappedOptions: AnswerOption[] = question.options.map(option => ({
       optionText: option.text,
       isCorrect: option.isCorrect
     }));
 
     // Mapper les tags
-    const mappedTags = question.tags ? question.tags.map(tag => ({ tag })) : [];
+    const mappedTags: Array<{ tag: string }> = question.tags ? question.tags.map(tag => ({ tag })) : [];
 
-    const mappedQuestion = {
+    const mappedQuestion: PayloadQuestion = {
       questionText: questionTextRichText,
       questionType: 'multipleChoice',
       options: mappedOptions,
@@ -661,6 +729,11 @@ export class JSONProcessingService {
       validationStatus: 'pending'
     };
 
+    const validation = this.validateMappedQuestion(mappedQuestion);
+    if (!validation.isValid) {
+      throw new Error(`Question invalide: ${validation.errors.join(', ')}`);
+    }
+
     return mappedQuestion;
   }
 
@@ -669,9 +742,9 @@ export class JSONProcessingService {
    */
   private async convertFlashcardToQuestion(
     card: ImportFlashcard,
-    metadata: any,
+    metadata: FlashcardImportData['metadata'],
     _userId: string
-  ): Promise<any> {
+  ): Promise<PayloadQuestion> {
     // Résoudre la catégorie
     const categoryId = await this.resolveCategoryId(card.category, metadata.level || 'both');
 
@@ -679,7 +752,7 @@ export class JSONProcessingService {
     const questionText = this.convertTextToLexical(card.front);
 
     // Créer des options basiques (la bonne réponse + des distracteurs génériques)
-    const options = [
+    const options: AnswerOption[] = [
       {
         optionText: card.back,
         isCorrect: true
@@ -699,12 +772,12 @@ export class JSONProcessingService {
     ];
 
     // Mapper les tags
-    const mappedTags = card.tags ? card.tags.map(tag => ({ tag })) : [];
+    const mappedTags: Array<{ tag: string }> = card.tags ? card.tags.map(tag => ({ tag })) : [];
 
-    return {
-      questionText: questionText,
+    const mappedQuestion: PayloadQuestion = {
+      questionText,
       questionType: 'multipleChoice',
-      options: options,
+      options,
       explanation: `Réponse: ${card.back}`, // Utiliser le verso comme explication
       category: categoryId,
       difficulty: card.difficulty,
@@ -714,6 +787,13 @@ export class JSONProcessingService {
       validatedByExpert: false,
       validationStatus: 'needs_review' // Les flashcards converties nécessitent une révision
     };
+
+    const validation = this.validateMappedQuestion(mappedQuestion);
+    if (!validation.isValid) {
+      throw new Error(`Flashcard convertie invalide: ${validation.errors.join(', ')}`);
+    }
+
+    return mappedQuestion;
   }
 
   /**
@@ -760,36 +840,35 @@ export class JSONProcessingService {
   /**
    * Convertit du texte simple en structure RichText Lexical
    */
-  private convertTextToLexical(text: string): any {
-    // Structure Lexical basique pour du texte simple
+  private convertTextToLexical(text: string): LexicalDocument {
+    const textNode: LexicalTextNode = {
+      detail: 0,
+      format: 0,
+      mode: 'normal',
+      style: '',
+      text,
+      type: 'text',
+      version: 1,
+    };
+
+    const paragraph: LexicalParagraphNode = {
+      children: [textNode],
+      direction: 'ltr',
+      format: '',
+      indent: 0,
+      type: 'paragraph',
+      version: 1,
+    };
+
     return {
       root: {
-        children: [
-          {
-            children: [
-              {
-                detail: 0,
-                format: 0,
-                mode: "normal",
-                style: "",
-                text: text,
-                type: "text",
-                version: 1
-              }
-            ],
-            direction: "ltr",
-            format: "",
-            indent: 0,
-            type: "paragraph",
-            version: 1
-          }
-        ],
-        direction: "ltr",
-        format: "",
+        children: [paragraph],
+        direction: 'ltr',
+        format: '',
         indent: 0,
-        type: "root",
-        version: 1
-      }
+        type: 'root',
+        version: 1,
+      },
     };
   }
 
@@ -814,7 +893,7 @@ export class JSONProcessingService {
   /**
    * Valide qu'une question mappée est correcte avant création
    */
-  private validateMappedQuestion(mappedQuestion: any): { isValid: boolean; errors: string[] } {
+  private validateMappedQuestion(mappedQuestion: PayloadQuestion): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
     // Vérifier les champs requis
@@ -832,7 +911,7 @@ export class JSONProcessingService {
 
     // Vérifier qu'il y a exactement une bonne réponse
     if (mappedQuestion.options) {
-      const correctCount = mappedQuestion.options.filter((opt: any) => opt.isCorrect).length;
+      const correctCount = mappedQuestion.options.filter(opt => opt.isCorrect).length;
       if (correctCount !== 1) {
         errors.push('Exactement une option doit être correcte');
       }

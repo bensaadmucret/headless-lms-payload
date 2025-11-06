@@ -9,6 +9,7 @@ import type { ImportData, QuestionImportData, ImportQuestion, FlashcardImportDat
 import { importQueue } from '../queue'
 import fs from 'fs/promises'
 import path from 'path'
+import { getMediaDirname } from '../../collections/getMediaDirname'
 
 /**
  * Interface pour les données du job d'import
@@ -433,8 +434,7 @@ function mapQuestionToPayload(question: ImportQuestion) {
   return {
     questionText: richTextContent,
     questionType: 'multipleChoice' as const,
-    options: question.options.map((opt, index) => ({
-      id: `opt-${index}`,
+    options: question.options.map(opt => ({
       optionText: opt.text,
       isCorrect: opt.isCorrect,
     })),
@@ -559,11 +559,35 @@ async function validateImportData(
 /**
  * Lire le contenu d'un fichier média
  */
+const MEDIA_DIRECTORIES: string[] = Array.from(
+  new Set([
+    // Dossier configuré par la collection Media (public/media)
+    path.resolve(getMediaDirname(), '../../public/media'),
+    // Dossier public utilisé par Payload
+    path.resolve(process.cwd(), 'public', 'media'),
+    // Ancien dossier historique (media à la racine)
+    path.resolve(process.cwd(), 'media'),
+  ]),
+)
+
 async function readMediaFile(filename: string): Promise<string> {
-  // Payload stocke les fichiers dans le dossier media à la racine
-  const mediaPath = path.join(process.cwd(), 'media', filename)
-  console.log(`📂 Reading file from: ${mediaPath}`)
-  return await fs.readFile(mediaPath, 'utf-8')
+  for (const basePath of MEDIA_DIRECTORIES) {
+    const mediaPath = path.join(basePath, filename)
+    try {
+      console.log(`📂 Reading file from: ${mediaPath}`)
+      return await fs.readFile(mediaPath, 'utf-8')
+    } catch (error) {
+      const nodeError = error as NodeJS.ErrnoException
+      if (nodeError.code === 'ENOENT') {
+        continue
+      }
+      throw error
+    }
+  }
+
+  throw new Error(
+    `Fichier média "${filename}" introuvable. Chemins testés: ${MEDIA_DIRECTORIES.join(', ')}`,
+  )
 }
 
 /**

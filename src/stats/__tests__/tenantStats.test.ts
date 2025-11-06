@@ -7,6 +7,11 @@ beforeEach(() => {
 });
 import payload from 'payload';
 
+const createMediaDocs = (): Array<{ filesize: number }> => [
+  { filesize: 1048576 },
+  { filesize: 2097152 },
+];
+
 describe('tenantStats module', () => {
   beforeEach(() => {
     vi.restoreAllMocks();
@@ -106,7 +111,7 @@ describe('tenantStats module', () => {
 
   it('getStorageUsedForTenant returns correct size', async () => {
     vi.spyOn(payload, 'find').mockResolvedValueOnce({
-      docs: [{ filesize: 1048576 } as any, { filesize: 2097152 } as any],
+      docs: createMediaDocs(),
       totalDocs: 2,
       hasNextPage: false,
       hasPrevPage: false,
@@ -226,7 +231,7 @@ describe('tenantStats module', () => {
 
   it('getStorageUsedForTenant returns correct size', async () => {
     vi.spyOn(payload, 'find').mockResolvedValueOnce({
-      docs: [{ filesize: 1048576 } as any, { filesize: 2097152 } as any],
+      docs: createMediaDocs(),
       totalDocs: 2,
       hasNextPage: false,
       hasPrevPage: false,

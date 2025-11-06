@@ -72,12 +72,11 @@ export interface Config {
     userAccounts: UserAccount;
     verifications: Verification;
     'admin-invitations': AdminInvitation;
+    categories: Category;
+    media: Media;
     pages: Page;
     posts: Post;
-    media: Media;
-    subscriptions: Subscription;
-    'webhook-retry-queue': WebhookRetryQueue;
-    categories: Category;
+    prospects: Prospect;
     courses: Course;
     lessons: Lesson;
     assignments: Assignment;
@@ -122,12 +121,11 @@ export interface Config {
     userAccounts: UserAccountsSelect<false> | UserAccountsSelect<true>;
     verifications: VerificationsSelect<false> | VerificationsSelect<true>;
     'admin-invitations': AdminInvitationsSelect<false> | AdminInvitationsSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
-    media: MediaSelect<false> | MediaSelect<true>;
-    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
-    'webhook-retry-queue': WebhookRetryQueueSelect<false> | WebhookRetryQueueSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    prospects: ProspectsSelect<false> | ProspectsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
@@ -425,6 +423,149 @@ export interface AdminInvitation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: number;
+  title: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  /**
+   * Catégorie parent pour hiérarchie
+   */
+  parentCategory?: (number | null) | Category;
+  /**
+   * Niveau d'études ciblé par cette catégorie
+   */
+  level: 'PASS' | 'LAS' | 'both';
+  /**
+   * Configuration pour les quiz adaptatifs
+   */
+  adaptiveSettings?: {
+    /**
+     * Inclure cette catégorie dans l'analyse adaptative
+     */
+    isActive?: boolean | null;
+    /**
+     * Nombre minimum de questions requises pour l'analyse
+     */
+    minimumQuestions?: number | null;
+    /**
+     * Poids dans l'algorithme de sélection (1 = normal)
+     */
+    weight?: number | null;
+  };
+  parent?: (number | null) | Category;
+  breadcrumbs?:
+    | {
+        doc?: (number | null) | Category;
+        url?: string | null;
+        label?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media".
+ */
+export interface Media {
+  id: number;
+  user: number | User;
+  alt?: string | null;
+  caption?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Contenu textuel extrait automatiquement du document
+   */
+  extractedContent?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+  sizes?: {
+    thumbnail?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    square?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    small?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    medium?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    large?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    xlarge?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+    og?: {
+      url?: string | null;
+      width?: number | null;
+      height?: number | null;
+      mimeType?: string | null;
+      filesize?: number | null;
+      filename?: string | null;
+    };
+  };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
@@ -532,149 +673,6 @@ export interface Post {
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
-export interface Media {
-  id: number;
-  user: number | User;
-  alt?: string | null;
-  caption?: {
-    root: {
-      type: string;
-      children: {
-        type: any;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  /**
-   * Contenu textuel extrait automatiquement du document
-   */
-  extractedContent?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  url?: string | null;
-  thumbnailURL?: string | null;
-  filename?: string | null;
-  mimeType?: string | null;
-  filesize?: number | null;
-  width?: number | null;
-  height?: number | null;
-  focalX?: number | null;
-  focalY?: number | null;
-  sizes?: {
-    thumbnail?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    square?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    small?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    medium?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    large?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    xlarge?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-    og?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
-  };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
- */
-export interface Category {
-  id: number;
-  title: string;
-  slug?: string | null;
-  slugLock?: boolean | null;
-  /**
-   * Catégorie parent pour hiérarchie
-   */
-  parentCategory?: (number | null) | Category;
-  /**
-   * Niveau d'études ciblé par cette catégorie
-   */
-  level: 'PASS' | 'LAS' | 'both';
-  /**
-   * Configuration pour les quiz adaptatifs
-   */
-  adaptiveSettings?: {
-    /**
-     * Inclure cette catégorie dans l'analyse adaptative
-     */
-    isActive?: boolean | null;
-    /**
-     * Nombre minimum de questions requises pour l'analyse
-     */
-    minimumQuestions?: number | null;
-    /**
-     * Poids dans l'algorithme de sélection (1 = normal)
-     */
-    weight?: number | null;
-  };
-  parent?: (number | null) | Category;
-  breadcrumbs?:
-    | {
-        doc?: (number | null) | Category;
-        url?: string | null;
-        label?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1019,85 +1017,25 @@ export interface Form {
   createdAt: string;
 }
 /**
- * Instances d'abonnements (Stripe/Paddle) rattachées aux utilisateurs.
- *
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "subscriptions".
+ * via the `definition` "prospects".
  */
-export interface Subscription {
+export interface Prospect {
   id: number;
-  user: number | User;
-  /**
-   * Fournisseur de paiement (Stripe par défaut)
-   */
-  provider: 'paddle' | 'stripe';
-  /**
-   * Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)
-   */
-  customerId?: string | null;
-  /**
-   * Identifiant d'abonnement unique du fournisseur
-   */
-  subscriptionId: string;
-  /**
-   * Identifiant du prix du fournisseur
-   */
-  priceId?: string | null;
-  status: 'trialing' | 'active' | 'past_due' | 'canceled';
-  /**
-   * Fin de période d'essai
-   */
-  trialEnd?: string | null;
-  /**
-   * Fin de la période de facturation en cours
-   */
-  currentPeriodEnd?: string | null;
-  /**
-   * Annulation à la fin de la période en cours
-   */
-  cancelAtPeriodEnd?: boolean | null;
-  /**
-   * Date du dernier paiement réussi
-   */
-  lastPaymentAt?: string | null;
-  /**
-   * Montant en plus petite unité (ex: centimes)
-   */
-  amount?: number | null;
-  /**
-   * Devise (EUR par défaut)
-   */
-  currency?: string | null;
-  /**
-   * Historique des événements webhook liés à cet abonnement
-   */
-  history?:
-    | {
-        type:
-          | 'subscription_created'
-          | 'payment_succeeded'
-          | 'subscription_updated'
-          | 'payment_failed'
-          | 'subscription_canceled';
-        occurredAt: string;
-        /**
-         * Payload d'événement (sanitisé/tronqué si nécessaire)
-         */
-        raw?:
-          | {
-              [k: string]: unknown;
-            }
-          | unknown[]
-          | string
-          | number
-          | boolean
-          | null;
-        id?: string | null;
-      }[]
+  email: string;
+  firstName?: string | null;
+  lastName?: string | null;
+  billingCycle?: ('monthly' | 'yearly') | null;
+  selectedPrice?: number | null;
+  status?:
+    | ('pending' | 'payment_in_progress' | 'ready_for_password' | 'payment_failed' | 'converted' | 'abandoned')
     | null;
-  /**
-   * Clés/valeurs additionnelles (optionnel)
-   */
+  stripeCustomerId?: string | null;
+  checkoutSessionId?: string | null;
+  subscriptionId?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
   metadata?:
     | {
         [k: string]: unknown;
@@ -1107,57 +1045,8 @@ export interface Subscription {
     | number
     | boolean
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * File de réessai pour les webhooks Stripe échoués
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "webhook-retry-queue".
- */
-export interface WebhookRetryQueue {
-  id: number;
-  /**
-   * Identifiant unique de l'événement Stripe
-   */
-  eventId: string;
-  /**
-   * Type d'événement webhook (ex: customer.subscription.created)
-   */
-  eventType: string;
-  /**
-   * Données complètes de l'événement webhook
-   */
-  payload:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  /**
-   * Nombre de fois que le traitement a été tenté
-   */
-  retryCount?: number | null;
-  /**
-   * Nombre maximum de réessais avant échec définitif
-   */
-  maxRetries?: number | null;
-  /**
-   * Message d'erreur du dernier échec de traitement
-   */
-  lastError?: string | null;
-  /**
-   * Statut actuel du traitement
-   */
-  status?: ('pending' | 'processing' | 'success' | 'failed') | null;
-  /**
-   * Date et heure du prochain réessai
-   */
-  nextRetryAt?: string | null;
+  lastPaymentAttemptAt?: string | null;
+  notes?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2795,6 +2684,14 @@ export interface PayloadLockedDocument {
         value: number | AdminInvitation;
       } | null)
     | ({
+        relationTo: 'categories';
+        value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'media';
+        value: number | Media;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -2803,20 +2700,8 @@ export interface PayloadLockedDocument {
         value: number | Post;
       } | null)
     | ({
-        relationTo: 'media';
-        value: number | Media;
-      } | null)
-    | ({
-        relationTo: 'subscriptions';
-        value: number | Subscription;
-      } | null)
-    | ({
-        relationTo: 'webhook-retry-queue';
-        value: number | WebhookRetryQueue;
-      } | null)
-    | ({
-        relationTo: 'categories';
-        value: number | Category;
+        relationTo: 'prospects';
+        value: number | Prospect;
       } | null)
     | ({
         relationTo: 'courses';
@@ -3081,6 +2966,130 @@ export interface AdminInvitationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  slugLock?: T;
+  parentCategory?: T;
+  level?: T;
+  adaptiveSettings?:
+    | T
+    | {
+        isActive?: T;
+        minimumQuestions?: T;
+        weight?: T;
+      };
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "media_select".
+ */
+export interface MediaSelect<T extends boolean = true> {
+  user?: T;
+  alt?: T;
+  caption?: T;
+  extractedContent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+  sizes?:
+    | T
+    | {
+        thumbnail?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        square?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        small?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        medium?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        large?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        xlarge?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+        og?:
+          | T
+          | {
+              url?: T;
+              width?: T;
+              height?: T;
+              mimeType?: T;
+              filesize?: T;
+              filename?: T;
+            };
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -3247,170 +3256,24 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media_select".
+ * via the `definition` "prospects_select".
  */
-export interface MediaSelect<T extends boolean = true> {
-  user?: T;
-  alt?: T;
-  caption?: T;
-  extractedContent?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  url?: T;
-  thumbnailURL?: T;
-  filename?: T;
-  mimeType?: T;
-  filesize?: T;
-  width?: T;
-  height?: T;
-  focalX?: T;
-  focalY?: T;
-  sizes?:
-    | T
-    | {
-        thumbnail?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        square?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        small?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        medium?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        large?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        xlarge?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        og?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-      };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "subscriptions_select".
- */
-export interface SubscriptionsSelect<T extends boolean = true> {
-  user?: T;
-  provider?: T;
-  customerId?: T;
+export interface ProspectsSelect<T extends boolean = true> {
+  email?: T;
+  firstName?: T;
+  lastName?: T;
+  billingCycle?: T;
+  selectedPrice?: T;
+  status?: T;
+  stripeCustomerId?: T;
+  checkoutSessionId?: T;
   subscriptionId?: T;
-  priceId?: T;
-  status?: T;
-  trialEnd?: T;
-  currentPeriodEnd?: T;
-  cancelAtPeriodEnd?: T;
-  lastPaymentAt?: T;
-  amount?: T;
-  currency?: T;
-  history?:
-    | T
-    | {
-        type?: T;
-        occurredAt?: T;
-        raw?: T;
-        id?: T;
-      };
+  utmSource?: T;
+  utmMedium?: T;
+  utmCampaign?: T;
   metadata?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "webhook-retry-queue_select".
- */
-export interface WebhookRetryQueueSelect<T extends boolean = true> {
-  eventId?: T;
-  eventType?: T;
-  payload?: T;
-  retryCount?: T;
-  maxRetries?: T;
-  lastError?: T;
-  status?: T;
-  nextRetryAt?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  slug?: T;
-  slugLock?: T;
-  parentCategory?: T;
-  level?: T;
-  adaptiveSettings?:
-    | T
-    | {
-        isActive?: T;
-        minimumQuestions?: T;
-        weight?: T;
-      };
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
+  lastPaymentAttemptAt?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }

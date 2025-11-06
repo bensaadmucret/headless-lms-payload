@@ -1,0 +1,655 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Faculté de Médecine - Collection complète LAS",
+    "created": "2025-01-15",
+    "level": "LAS",
+    "description": "100 questions médicales avancées pour le niveau LAS couvrant tous les domaines avec approfondissement clinique",
+    "author": "Équipe pédagogique médicale spécialisée",
+    "estimatedDuration": 250,
+    "difficulty": "mixed"
+  },
+  "questions": [
+    {
+      "questionText": "Dans l'analyse pharmacocinétique, quel paramètre caractérise la vitesse d'élimination d'un médicament ?",
+      "options": [
+        {
+          "text": "La constante d'élimination (Ke)",
+          "isCorrect": true
+        },
+        {
+          "text": "Le volume de distribution (Vd)",
+          "isCorrect": false
+        },
+        {
+          "text": "La biodisponibilité (F)",
+          "isCorrect": false
+        },
+        {
+          "text": "La clairance (Cl)",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La constante d'élimination Ke détermine la vitesse à laquelle le médicament est éliminé de l'organisme. Elle est liée à la demi-vie par la relation t1/2 = 0,693/Ke. La clairance représente le volume de plasma épuré par unité de temps.",
+      "category": "Pharmacologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "pharmacocinétique",
+        "constante-élimination",
+        "demi-vie",
+        "clairance",
+        "modélisation-pharmacocinétique"
+      ]
+    },
+    {
+      "questionText": "Dans l'électroencéphalogramme, à quoi correspondent les ondes thêta ?",
+      "options": [
+        {
+          "text": "Sommeil léger et états de relaxation",
+          "isCorrect": true
+        },
+        {
+          "text": "Éveil vigile et attention soutenue",
+          "isCorrect": false
+        },
+        {
+          "text": "Sommeil profond et coma",
+          "isCorrect": false
+        },
+        {
+          "text": "Activité épileptique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les ondes thêta (4-7 Hz) apparaissent normalement pendant le sommeil léger (stade 1-2) et les états de relaxation. Elles peuvent aussi être observées en pathologie (encéphalopathies, tumeurs).",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "EEG",
+        "ondes-thêta",
+        "sommeil",
+        "états-de-conscience",
+        "neurophysiologie"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme moléculaire explique la résistance acquise aux inhibiteurs de tyrosine kinase dans la leucémie myéloïde chronique ?",
+      "options": [
+        {
+          "text": "Mutations ponctuelles du domaine kinase du BCR-ABL",
+          "isCorrect": true
+        },
+        {
+          "text": "Amplification génique du BCR-ABL",
+          "isCorrect": false
+        },
+        {
+          "text": "Surexpression de la glycoprotéine P",
+          "isCorrect": false
+        },
+        {
+          "text": "Mutation du gène TP53",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les mutations ponctuelles du domaine kinase du BCR-ABL (T315I, E255K, etc.) modifient le site de fixation de l'imatinib et apparentés, conférant une résistance acquise après plusieurs années de traitement.",
+      "category": "Hématologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "résistance-médicamenteuse",
+        "BCR-ABL",
+        "leucémie-myéloïde-chronique",
+        "inhibiteurs-tyrosine-kinase",
+        "mutations-génétiques"
+      ]
+    },
+    {
+      "questionText": "Dans l'analyse du liquide céphalo-rachidien, quels paramètres cytologiques évoquent une méningite bactérienne ?",
+      "options": [
+        {
+          "text": "Polynucléaires > 1000/mm³ avec glycorachie < 40% de la glycémie",
+          "isCorrect": true
+        },
+        {
+          "text": "Lymphocytes prédominants avec glycorachie normale",
+          "isCorrect": false
+        },
+        {
+          "text": "Éosinophiles > 10% avec protéinorachie élevée",
+          "isCorrect": false
+        },
+        {
+          "text": "Cellules normales avec hématies fraîches",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La méningite bactérienne se caractérise par une pléiocytose à polynucléaires (> 1000/mm³), une hypoglycorachie (< 40% de la glycémie) et une hyperprotéinorachie (> 1 g/L).",
+      "category": "Maladies infectieuses",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "méningite-bactérienne",
+        "LCR",
+        "cytologie",
+        "glycerachie",
+        "protéinorachie"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme physiopathologique explique l'œdème cérébral vasogénique ?",
+      "options": [
+        {
+          "text": "Rupture de la barrière hémato-encéphalique",
+          "isCorrect": true
+        },
+        {
+          "text": "Gonflement cytotoxique des astrocytes",
+          "isCorrect": false
+        },
+        {
+          "text": "Obstruction veineuse cérébrale",
+          "isCorrect": false
+        },
+        {
+          "text": "Hyperperfusion cérébrale",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'œdème vasogénique résulte d'une ouverture de la barrière hémato-encéphalique permettant le passage de macromolécules plasmatiques dans le parenchyme cérébral, typique des tumeurs, abcès et traumatismes.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "œdème-cérébral",
+        "barrière-hémato-encéphalique",
+        "vasogénique",
+        "neuro-imagerie",
+        "physiopathologie-neurologique"
+      ]
+    },
+    {
+      "questionText": "Dans l'hémodialyse, quel principe physique régit la diffusion des solutés à travers la membrane ?",
+      "options": [
+        {
+          "text": "Gradient de concentration selon la loi de Fick",
+          "isCorrect": true
+        },
+        {
+          "text": "Pression hydrostatique selon Starling",
+          "isCorrect": false
+        },
+        {
+          "text": "Osmose à travers membrane semi-perméable",
+          "isCorrect": false
+        },
+        {
+          "text": "Convection par ultrafiltration",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La diffusion en hémodialyse suit la loi de Fick : le débit de diffusion est proportionnel au gradient de concentration et à la surface de membrane. L'ultrafiltration utilise la pression hydrostatique pour l'élimination hydrique.",
+      "category": "Néphrologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "hémodialyse",
+        "diffusion",
+        "loi-de-fick",
+        "épuration-extrarénale",
+        "techniques-dialyse"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme moléculaire sous-tend la lyse tumorale après chimiothérapie ?",
+      "options": [
+        {
+          "text": "Apoptose caspase-dépendante et nécrose cellulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Autophagie cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Sénescence cellulaire réversible",
+          "isCorrect": false
+        },
+        {
+          "text": "Différenciation cellulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La lyse tumorale implique principalement l'apoptose (voie extrinsèque/intrinsèque avec activation des caspases) et la nécrose (rupture membranaire avec libération de contenu intracellulaire inflammatoire).",
+      "category": "Oncologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "chimiothérapie",
+        "apoptose",
+        "nécrose",
+        "caspases",
+        "mort-cellulaire"
+      ]
+    },
+    {
+      "questionText": "Dans l'immunofluorescence directe, quelle structure détecte-t-on spécifiquement ?",
+      "options": [
+        {
+          "text": "Dépôts d'immunoglobulines et de complément in vivo",
+          "isCorrect": true
+        },
+        {
+          "text": "Anticorps circulants anti-membrane basale",
+          "isCorrect": false
+        },
+        {
+          "text": "Complexes immuns circulants",
+          "isCorrect": false
+        },
+        {
+          "text": "Autoanticorps anti-cellules sanguines",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'immunofluorescence directe détecte les dépôts tissulaires d'immunoglobulines, de complément et de fibrinogène fixés in vivo sur les structures tissulaires, utilisée dans le diagnostic des glomérulonéphrites et des vascularites.",
+      "category": "Immunologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "immunofluorescence",
+        "dépôts-immuns",
+        "glomérulonéphrite",
+        "diagnostic-immunologique",
+        "néphrologie"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme physiopathologique explique l'hyperkaliémie de l'insuffisance rénale chronique ?",
+      "options": [
+        {
+          "text": "Diminution de l'excrétion rénale de potassium",
+          "isCorrect": true
+        },
+        {
+          "text": "Augmentation de la libération cellulaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de l'absorption intestinale",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la réabsorption tubulaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'hyperkaliémie de l'IRC résulte principalement de la réduction du débit de filtration glomérulaire qui diminue l'excrétion rénale de potassium, malgré une augmentation adaptative de l'excrétion tubulaire par nefron restant.",
+      "category": "Néphrologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "hyperkaliémie",
+        "insuffisance-rénale-chronique",
+        "excrétion-potassium",
+        "néphron",
+        "troubles-hydroélectrolytiques"
+      ]
+    },
+    {
+      "questionText": "Dans l'analyse génétique, quelle technique détecte spécifiquement les variants nucléotidiques ?",
+      "options": [
+        {
+          "text": "Séquençage Sanger et NGS",
+          "isCorrect": true
+        },
+        {
+          "text": "PCR quantitative",
+          "isCorrect": false
+        },
+        {
+          "text": "Hybridation in situ",
+          "isCorrect": false
+        },
+        {
+          "text": "Caryotype standard",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le séquençage Sanger (méthode de référence) et le NGS (Next Generation Sequencing) permettent la détection directe des variants nucléotidiques (SNV, indels) avec une sensibilité élevée pour les variants pathogènes.",
+      "category": "Génétique",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "séquençage-génétique",
+        "variants-nucléotidiques",
+        "NGS",
+        "diagnostic-génétique",
+        "biologie-moléculaire"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme moléculaire explique la cardiotoxicité des anthracyclines ?",
+      "options": [
+        {
+          "text": "Formation de complexes ternaires ADN-topoisomérase II",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la pompe à calcium cardiaque",
+          "isCorrect": false
+        },
+        {
+          "text": "Génération de radicaux libres",
+          "isCorrect": false
+        },
+        {
+          "text": "Altération des mitochondries cardiaques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les anthracyclines (doxorubicine) forment des complexes ternaires ADN-topoisomérase II irréversibles, empêchant la religation de l'ADN et causant des cassures double-brin responsables de la cardiotoxicité dose-dépendante.",
+      "category": "Oncologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "cardiotoxicité",
+        "anthracyclines",
+        "topoisomérase-II",
+        "chimiothérapie",
+        "effets-indésirables"
+      ]
+    },
+    {
+      "questionText": "Dans l'interprétation d'une gazométrie artérielle, que révèle une PaCO2 > 45 mmHg avec pH < 7,35 ?",
+      "options": [
+        {
+          "text": "Acidose respiratoire aiguë",
+          "isCorrect": true
+        },
+        {
+          "text": "Acidose métabolique",
+          "isCorrect": false
+        },
+        {
+          "text": "Alcalose respiratoire",
+          "isCorrect": false
+        },
+        {
+          "text": "Alcalose métabolique",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "L'acidose respiratoire aiguë se définit par une PaCO2 > 45 mmHg avec pH < 7,35, résultant d'une hypoventilation alvéolaire (BPCO décompensée, dépression respiratoire, obstruction des voies aériennes).",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "gazométrie",
+        "acidose-respiratoire",
+        "hypoventilation",
+        "équilibre-acidobasique",
+        "réanimation"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme physiopathologique explique la résistance à l'insuline dans le diabète de type 2 ?",
+      "options": [
+        {
+          "text": "Dysfonction post-récepteur avec altération de la voie PI3K/Akt",
+          "isCorrect": true
+        },
+        {
+          "text": "Mutation du gène de l'insuline",
+          "isCorrect": false
+        },
+        {
+          "text": "Auto-anticorps anti-récepteurs insuliniques",
+          "isCorrect": false
+        },
+        {
+          "text": "Destruction des cellules bêta pancréatiques",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La résistance à l'insuline dans le DT2 implique principalement des défauts post-récepteurs avec altération de la transduction du signal (voie IRS/PI3K/Akt) entraînant une diminution du transport du glucose GLUT4.",
+      "category": "Endocrinologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "résistance-insuline",
+        "diabète-type-2",
+        "voie-PI3K-Akt",
+        "GLUT4",
+        "signalisation-insulinique"
+      ]
+    },
+    {
+      "questionText": "Dans l'analyse du liquide amniotique, quelle cytogénétique permet le diagnostic prénatal de trisomie 21 ?",
+      "options": [
+        {
+          "text": "Caryotype foetal sur amniocytes",
+          "isCorrect": true
+        },
+        {
+          "text": "PCR quantitative du chromosome 21",
+          "isCorrect": false
+        },
+        {
+          "text": "Hybridation in situ fluorescente",
+          "isCorrect": false
+        },
+        {
+          "text": "Séquençage de l'ADN libre foetal",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le caryotype foetal sur culture d'amniocytes reste la méthode de référence pour le diagnostic prénatal des aneuploïdies chromosomiques, permettant l'analyse complète du génome foetal.",
+      "category": "Génétique",
+      "difficulty": "medium",
+      "level": "LAS",
+      "tags": [
+        "diagnostic-prénatal",
+        "trisomie-21",
+        "amniocentèse",
+        "caryotype-foetal",
+        "obstétrique"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme moléculaire explique l'effet anti-angiogénique du bevacizumab ?",
+      "options": [
+        {
+          "text": "Séquestration du VEGF-A circulant",
+          "isCorrect": true
+        },
+        {
+          "text": "Inhibition de la tyrosine kinase VEGF-R",
+          "isCorrect": false
+        },
+        {
+          "text": "Stimulation de la thrombospondine-1",
+          "isCorrect": false
+        },
+        {
+          "text": "Induction d'apoptose endothéliale",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le bevacizumab est un anticorps monoclonal humanisé qui se lie spécifiquement au VEGF-A, empêchant son interaction avec les récepteurs VEGF-R1 et VEGF-R2 sur les cellules endothéliales et inhibant l'angiogenèse tumorale.",
+      "category": "Oncologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "bevazicumab",
+        "anti-angiogéniques",
+        "VEGF",
+        "angiogenèse-tumorale",
+        "thérapie-ciblée"
+      ]
+    },
+    {
+      "questionText": "Dans l'électrocardiogramme d'effort, quel paramètre prédit le risque coronarien ?",
+      "options": [
+        {
+          "text": "Sous-décalage du segment ST ≥ 1 mm",
+          "isCorrect": true
+        },
+        {
+          "text": "Allongement de l'intervalle QT",
+          "isCorrect": false
+        },
+        {
+          "text": "Inversion de l'onde T",
+          "isCorrect": false
+        },
+        {
+          "text": "Bloc auriculo-ventriculaire",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Un sous-décalage horizontal ou descendant du segment ST ≥ 1 mm pendant l'effort ou la récupération indique une ischémie myocardique significative et constitue un critère positif d'épreuve d'effort.",
+      "category": "Cardiologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "épreuve-d-effort",
+        "ischémie-myocardique",
+        "segment-ST",
+        "coronaropathie",
+        "diagnostic-non-invasif"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme physiopathologique explique la neutropénie induite par les chimiothérapies ?",
+      "options": [
+        {
+          "text": "Toxicité médullaire avec apoptose des précurseurs hématopoïétiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Séquestration splénique des neutrophiles",
+          "isCorrect": false
+        },
+        {
+          "text": "Destruction périphérique autoimmune",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhibition de la granulopoïèse",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les chimiothérapies cytotoxiques (alkylants, antimitotiques) induisent une aplasie médullaire dose-dépendante par toxicité directe sur les cellules souches hématopoïétiques en division rapide, entraînant une neutropénie nadir à J10-J14.",
+      "category": "Hématologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "neutropénie",
+        "chimiothérapie",
+        "toxicité-médullaire",
+        "aplasie",
+        "effets-indésirables-hématologiques"
+      ]
+    },
+    {
+      "questionText": "Dans l'analyse spectroscopique RMN du cerveau, quel métabolite indique la mort neuronale ?",
+      "options": [
+        {
+          "text": "Lactate (pic à 1,33 ppm)",
+          "isCorrect": true
+        },
+        {
+          "text": "N-acétyl aspartate (2,02 ppm)",
+          "isCorrect": false
+        },
+        {
+          "text": "Créatine (3,02 ppm)",
+          "isCorrect": false
+        },
+        {
+          "text": "Choline (3,2 ppm)",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Le lactate cérébral indique une souffrance neuronale aiguë (ischémie, hypoxie) en raison de la glycolyse anaérobie. Le NAA diminue dans les lésions neuronales chroniques tandis que la choline augmente dans la démyélinisation.",
+      "category": "Neurologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "spectroscopie-RMN",
+        "métabolites-cérébraux",
+        "lactate",
+        "mort-neuronale",
+        "neuro-imagerie-avancée"
+      ]
+    },
+    {
+      "questionText": "Quel mécanisme moléculaire sous-tend la résistance acquise aux anti-EGFR dans le cancer colorectal ?",
+      "options": [
+        {
+          "text": "Mutation KRAS activatrice",
+          "isCorrect": true
+        },
+        {
+          "text": "Amplification du gène EGFR",
+          "isCorrect": false
+        },
+        {
+          "text": "Mutation du domaine kinase EGFR",
+          "isCorrect": false
+        },
+        {
+          "text": "Perte d'expression de PTEN",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "Les mutations KRAS (codons 12, 13, 61) activent de façon constitutive la voie MAPK en aval de l'EGFR, rendant les anti-EGFR (cetuximab, panitumumab) inefficaces. Cette résistance est présente chez 40% des cancers colorectaux métastatiques.",
+      "category": "Oncologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "résistance-ciblée",
+        "KRAS",
+        "anti-EGFR",
+        "cancer-colorectal",
+        "voie-MAPK"
+      ]
+    },
+    {
+      "questionText": "Dans l'interprétation d'une capnographie, que révèle une PETCO2 < 35 mmHg ?",
+      "options": [
+        {
+          "text": "Hypoventilation alvéolaire ou augmentation de l'espace mort",
+          "isCorrect": true
+        },
+        {
+          "text": "Hyperventilation alvéolaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation de la perfusion pulmonaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Diminution de la production de CO2",
+          "isCorrect": false
+        }
+      ],
+      "explanation": "La PETCO2 reflète la PaCO2 alvéolaire. Une valeur < 35 mmHg indique une hypoventilation alvéolaire (dépression respiratoire, BPCO) ou une augmentation de l'espace mort physiologique (embolie pulmonaire, atélectasie).",
+      "category": "Pneumologie",
+      "difficulty": "hard",
+      "level": "LAS",
+      "tags": [
+        "capnographie",
+        "PETCO2",
+        "ventilation-alvéolaire",
+        "espace-mort",
+        "monitorage-respiratoire"
+      ]
+    }
+  ]
+}

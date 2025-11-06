@@ -110,7 +110,22 @@ const cloneCookies = (source: Response, target: NextResponse) => {
 
 const handleRequest = async (request: NextRequest): Promise<Response> => {
   const payload = await payloadPromise;
-  const upstreamResponse = await payload.betterAuth.handler(request);
+  const betterAuth = (payload as unknown as {
+    betterAuth?: { handler?: (request: NextRequest) => Promise<Response> };
+  }).betterAuth;
+
+  if (!betterAuth?.handler) {
+    logger.error('[BetterAuth Proxy] BetterAuth plugin not initialized');
+    return NextResponse.json(
+      {
+        error: 'betterauth_not_available',
+        message: 'Authentication service temporarily unavailable.',
+      },
+      { status: 503 }
+    );
+  }
+
+  const upstreamResponse = await betterAuth.handler(request);
 
   const contentType = upstreamResponse.headers.get('content-type') ?? '';
 

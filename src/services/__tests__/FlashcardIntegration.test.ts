@@ -8,6 +8,11 @@ import { FlashcardImportService } from '../FlashcardImportService';
 import { FlashcardConversionService } from '../FlashcardConversionService';
 import { FlashcardImportData, ImportFlashcard } from '../../types/jsonImport';
 
+interface MultipleChoiceOption {
+  optionText: string;
+  isCorrect: boolean;
+}
+
 // Mock minimal de Payload
 vi.mock('payload', () => ({
   default: {
@@ -120,7 +125,8 @@ describe('Flashcard Integration Tests', () => {
     expect(mcqResult.distractorsGenerated).toBe(3);
 
     // Vérifier qu'une option est correcte
-    const correctOptions = mcqResult.convertedQuestion.options.filter((opt: any) => opt.isCorrect);
+    const convertedOptions = mcqResult.convertedQuestion.options as MultipleChoiceOption[];
+    const correctOptions = convertedOptions.filter(opt => opt.isCorrect);
     expect(correctOptions).toHaveLength(1);
     expect(correctOptions[0]?.optionText).toBe(flashcard.back);
 

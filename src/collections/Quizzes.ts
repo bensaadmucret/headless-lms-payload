@@ -64,7 +64,11 @@ interface QuizRequest extends PayloadRequest {
   user: User & { collection: 'users' };
   payload: any;
 
-  params: {
+  params?: {
+    id: string;
+  };
+
+  routeParams?: {
     id: string;
   };
 }
@@ -359,7 +363,14 @@ export const Quizzes: CollectionConfig = {
             });
           }
 
-          const quizId = typedReq.params.id;
+          const quizId = typedReq.routeParams?.id ?? typedReq.params?.id;
+
+          if (!quizId) {
+            return new Response(JSON.stringify({ message: 'Identifiant de quiz manquant' }), {
+              status: 400,
+              headers: { 'Content-Type': 'application/json' },
+            });
+          }
           const quiz = await typedReq.payload.findByID({
             collection: 'quizzes',
             id: quizId,

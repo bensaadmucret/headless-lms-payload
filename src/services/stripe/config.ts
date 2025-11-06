@@ -75,7 +75,7 @@ export function validateStripeConfig(config: StripeConfig): void {
   // Validate frontend URL
   try {
     new URL(config.frontendUrl);
-  } catch (error) {
+  } catch (_error) {
     throw new Error(`FRONTEND_URL is not a valid URL: ${config.frontendUrl}`);
   }
 

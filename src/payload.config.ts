@@ -118,6 +118,7 @@ import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
+import { Prospects } from "./collections/Prospects";
 import { Courses } from "./collections/Courses";
 import { Assignments } from "./collections/Assignments";
 import Lessons from "./collections/Lessons";
@@ -134,6 +135,7 @@ import { Tenants } from "./collections/Tenants";
 import Conversations from "./collections/Conversations";
 import { SystemMetrics } from "./collections/SystemMetrics";
 import { Subscriptions } from "./collections/Subscriptions";
+import { createProspectEndpoint } from "./endpoints/prospects/createProspect";
 import { WebhookRetryQueue } from "./collections/WebhookRetryQueue";
 
 import { AdaptiveQuizSessions } from "./collections/AdaptiveQuizSessions";
@@ -217,13 +219,12 @@ export default buildConfig({
     },
   }),
   collections: [
+    Categories,
+    Media,
     Pages,
     Posts,
-    Media,
     Users,
-    Subscriptions,
-    WebhookRetryQueue,
-    Categories,
+    Prospects,
     Courses,
     Lessons,
     Assignments,

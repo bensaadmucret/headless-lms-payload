@@ -92,7 +92,7 @@ export function createValidationUtils() {
  * Validation rapide d'un quiz - fonction de commodité
  */
 export async function quickValidateQuiz(
-    content: any,
+    content: unknown,
     studentLevel?: StudentLevel
 ): Promise<{
     isValid: boolean;
@@ -107,8 +107,8 @@ export async function quickValidateQuiz(
         isValid: result.isValid,
         canCreateQuiz: result.canProceedToCreation,
         criticalIssues: result.validationSteps.contentValidation.issues
-            .filter((issue: any) => issue.severity === 'critical')
-            .map((issue: any) => issue.message),
+            .filter(issue => issue.severity === 'critical')
+            .map(issue => issue.message),
         score: result.overallScore
     };
 }
@@ -117,7 +117,7 @@ export async function quickValidateQuiz(
  * Validation complète avec rapport détaillé - fonction de commodité
  */
 export async function validateQuizWithReport(
-    content: any,
+    content: unknown,
     options: QuizValidationOptions = DEFAULT_QUIZ_VALIDATION_OPTIONS
 ): Promise<{
     validation: ValidationReport;

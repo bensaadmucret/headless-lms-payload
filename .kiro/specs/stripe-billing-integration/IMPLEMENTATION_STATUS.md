@@ -9,12 +9,15 @@
 
 ### 2. Session Checkout ✅
 - **StripeCheckoutService** : `src/services/stripe/StripeCheckoutService.ts`
-- **Endpoint** : POST `/api/stripe/checkout-session`
+- **Endpoints** :
+  - POST `/api/prospects` (frontend) → création/mise à jour prospect (nouvelle étape amont)
+  - POST `/api/stripe/checkout-session` → création checkout à partir du `prospectId`
 - **Fonctionnalités** :
-  - Création/récupération client Stripe
+  - Création/récupération client Stripe **depuis le prospect**
   - Session avec essai gratuit 30 jours
   - Support mensuel/annuel via `priceId`
   - URLs de redirection configurables
+  - Enrichissement metadata (cycle, montant, UTM, prospectId) + stockage `checkoutSessionId` sur le prospect
 
 ### 3. Webhooks Stripe ✅
 - **StripeWebhookService** : `src/services/stripe/StripeWebhookService.ts`
@@ -33,6 +36,7 @@
 - **Utilitaire** : `src/utils/stripe/subscriptionSync.ts`
 - **Hook automatique** : `afterChange` dans `src/collections/Subscriptions.ts`
 - **Gestion erreurs** : File de réessai pour utilisateurs manquants
+- **Prospects** : `StripeWebhookService` met à jour le statut du prospect (`ready_for_password`, `payment_failed`, `abandoned`) + `checkoutSessionId`/`subscriptionId`
 
 ### 5. Portail Client Stripe ✅
 - **StripePortalService** : `src/services/stripe/StripePortalService.ts`
