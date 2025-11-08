@@ -43,6 +43,12 @@ import { onboardUserEndpoint } from "./endpoints/onboardUser";
 import { getPlacementQuizEndpoint } from "./endpoints/getPlacementQuiz";
 import { completePlacementQuizEndpoint } from "./endpoints/completePlaymentQuiz";
 import updateDailySessionHandler from "./endpoints/updateDailySession";
+import {
+  getWeeklyPlanningEndpoint,
+  updateWeeklyPlanningEndpoint,
+  upsertPlanningSlotEndpoint,
+  autofillPlanningEndpoint,
+} from "./endpoints/studyPlanningEndpoints";
 
 import {
   getWorkersStatusEndpoint,
@@ -128,6 +134,7 @@ import { Questions } from "./collections/Questions";
 import { QuizSubmissions } from "./collections/QuizSubmissions";
 import { Progress } from "./collections/Progress";
 import { StudySessions } from "./collections/StudySessions";
+import { StudyPlans } from "./collections/StudyPlans";
 import { Badges } from "./collections/Badges";
 import { ColorSchemes } from "./collections/ColorSchemes";
 import { SubscriptionPlans } from "./collections/SubscriptionPlans";
@@ -234,6 +241,7 @@ export default buildConfig({
     QuizSubmissions,
     Progress,
     StudySessions,
+    StudyPlans,
     Badges,
     ColorSchemes,
     SubscriptionPlans,
@@ -352,6 +360,10 @@ export default buildConfig({
     dailySessionEndpoint,
     getDailySessionEndpoint,
     simpleDailySessionEndpoint,
+    getWeeklyPlanningEndpoint,
+    updateWeeklyPlanningEndpoint,
+    upsertPlanningSlotEndpoint,
+    autofillPlanningEndpoint,
 
     // === ENDPOINTS PERFORMANCE ===
     performanceAnalysisEndpoint,

@@ -323,11 +323,22 @@ describe('StripeCheckoutService', () => {
         }),
         name: undefined,
       });
-      expect(mockPayload.update).toHaveBeenCalledWith({
+      expect(mockPayload.update).toHaveBeenNthCalledWith(1, {
         collection: 'prospects',
         id: 'prospect_new',
         data: {
           stripeCustomerId: 'cus_new_123',
+          status: 'payment_in_progress',
+          checkoutSessionId: undefined,
+        },
+      });
+
+      expect(mockPayload.update).toHaveBeenNthCalledWith(2, {
+        collection: 'prospects',
+        id: 'prospect_new',
+        data: {
+          checkoutSessionId: 'cs_test_new',
+          status: 'payment_in_progress',
         },
       });
     });
