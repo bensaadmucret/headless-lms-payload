@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload';
+import { upsertProspectHandler } from '../endpoints/prospects/upsertProspect';
 
 export const ProspectStatusOptions: { value: ProspectStatus; label: string }[] = [
   { value: 'pending', label: 'En attente' },
@@ -99,6 +100,15 @@ export const Prospects: CollectionConfig = {
       type: 'date',
     },
     {
+      name: 'attemptCount',
+      type: 'number',
+      min: 0,
+      defaultValue: 0,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'notes',
       type: 'textarea',
     },
@@ -109,6 +119,13 @@ export const Prospects: CollectionConfig = {
         readOnly: true,
         position: 'sidebar',
       },
+    },
+  ],
+  endpoints: [
+    {
+      path: '/upsert',
+      method: 'post',
+      handler: upsertProspectHandler,
     },
   ],
 };

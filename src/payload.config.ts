@@ -142,7 +142,6 @@ import { Tenants } from "./collections/Tenants";
 import Conversations from "./collections/Conversations";
 import { SystemMetrics } from "./collections/SystemMetrics";
 import { Subscriptions } from "./collections/Subscriptions";
-import { createProspectEndpoint } from "./endpoints/prospects/createProspect";
 import { WebhookRetryQueue } from "./collections/WebhookRetryQueue";
 
 import { AdaptiveQuizSessions } from "./collections/AdaptiveQuizSessions";
