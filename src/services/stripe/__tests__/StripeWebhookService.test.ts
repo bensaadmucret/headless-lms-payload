@@ -48,7 +48,14 @@ describe('StripeWebhookService', () => {
         subscriptions: {
           retrieve: vi.fn().mockResolvedValue({
             id: 'sub_test',
-            current_period_end: Math.floor(Date.now() / 1000) + 86400 * 30,
+            items: {
+              data: [
+                {
+                  id: 'si_test',
+                  current_period_end: Math.floor(Date.now() / 1000) + 86400 * 30,
+                },
+              ],
+            },
           }),
         },
       }),
@@ -118,6 +125,7 @@ describe('StripeWebhookService', () => {
           data: [
             {
               id: 'si_test',
+              current_period_end: Math.floor(Date.now() / 1000) + 86400 * 30,
               price: {
                 id: 'price_monthly_123',
                 unit_amount: 1500,
@@ -126,7 +134,6 @@ describe('StripeWebhookService', () => {
             } as Stripe.SubscriptionItem,
           ],
         } as Stripe.ApiList<Stripe.SubscriptionItem>,
-        current_period_end: Math.floor(Date.now() / 1000) + 86400 * 30,
         trial_end: Math.floor(Date.now() / 1000) + 86400 * 30,
         cancel_at_period_end: false,
         currency: 'eur',
@@ -197,6 +204,7 @@ describe('StripeWebhookService', () => {
           data: [
             {
               id: 'si_test',
+              current_period_end: Math.floor(Date.now() / 1000) + 86400 * 365,
               price: {
                 id: 'price_yearly_456',
                 unit_amount: 12000,
@@ -205,7 +213,6 @@ describe('StripeWebhookService', () => {
             } as Stripe.SubscriptionItem,
           ],
         } as Stripe.ApiList<Stripe.SubscriptionItem>,
-        current_period_end: Math.floor(Date.now() / 1000) + 86400 * 365,
         trial_end: null,
         cancel_at_period_end: false,
         currency: 'eur',

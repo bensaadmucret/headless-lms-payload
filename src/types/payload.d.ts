@@ -17,6 +17,7 @@ declare global {
     categories: string;
     tags: string;
     media: string;
+    subscriptions: string;
     settings: string;
     audit: string;
     progressions: string;

@@ -73,6 +73,8 @@ Toutes les références au champ `plan` ont été supprimées :
 
 **customer.subscription.created:**
 ```typescript
+const primaryItem = subscription.items?.data?.[0];
+
 // Avant
 await this.payload.update({
   collection: 'users',
@@ -92,13 +94,17 @@ await this.payload.update({
   data: {
     stripeCustomerId: subscription.customer as string,
     subscriptionStatus: status,
-    subscriptionEndDate: new Date(subscription.current_period_end * 1000),
+    subscriptionEndDate: primaryItem?.current_period_end
+      ? new Date(primaryItem.current_period_end * 1000)
+      : null,
   },
 });
 ```
 
 **invoice.payment_succeeded:**
 ```typescript
+const subscriptionItem = stripeSubscription.items?.data?.[0];
+
 // Avant
 data: {
   plan: 'premium', // ❌ Supprimé
@@ -109,7 +115,9 @@ data: {
 // Après
 data: {
   subscriptionStatus: 'active',
-  subscriptionEndDate: new Date(stripeSubscription.current_period_end * 1000),
+  subscriptionEndDate: subscriptionItem?.current_period_end
+    ? new Date(subscriptionItem.current_period_end * 1000)
+    : null,
 }
 ```
 

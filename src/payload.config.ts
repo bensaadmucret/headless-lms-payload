@@ -232,6 +232,7 @@ export default buildConfig({
     Posts,
     Users,
     Prospects,
+    Subscriptions,
     Courses,
     Lessons,
     Assignments,

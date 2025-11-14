@@ -1,9 +1,12 @@
 import Stripe from 'stripe';
 import { getPayload } from 'payload';
+import type { Payload } from 'payload';
+import type { User } from '../../payload-types';
 import config from '../../payload.config';
+import { STRIPE_API_VERSION } from '../../services/stripe/constants';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-09-30.clover',
+  apiVersion: STRIPE_API_VERSION,
 });
 
 export const createCheckoutSessionEndpoint = {
@@ -32,9 +35,9 @@ export const createCheckoutSessionEndpoint = {
         });
       }
 
-      const payload = await getPayload({
+      const payload = (await getPayload({
         config,
-      });
+      })) as Payload;
 
       // Vérifier si l'utilisateur existe déjà
       const existingUser = await payload.find({
@@ -95,17 +98,25 @@ export const createCheckoutSessionEndpoint = {
         customerId = customer.id;
 
         // Créer l'utilisateur en base avec le customerId
+        const defaultName = userData.firstName || userData.lastName
+          ? `${userData.firstName ?? ''} ${userData.lastName ?? ''}`.trim()
+          : userData.email;
+
+        const userPayload: Partial<User> = {
+          email: userData.email,
+          name: defaultName,
+          firstName: userData.firstName || null,
+          lastName: userData.lastName || null,
+          stripeCustomerId: customerId,
+          subscriptionStatus: 'none',
+          emailVerified: false,
+          role: 'student',
+        };
+
         await payload.create({
           collection: 'users',
-          data: {
-            email: userData.email,
-            firstName: userData.firstName,
-            lastName: userData.lastName,
-            stripeCustomerId: customerId,
-            subscriptionStatus: 'none',
-            role: 'student'
-          }
-        });
+          data: userPayload,
+        } as Parameters<Payload['create']>[0]);
       }
 
       // Récupérer le price ID correct

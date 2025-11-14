@@ -160,22 +160,41 @@ export const plugins: Plugin[] = [
             return;
           }
 
+          if (
+            'type' in existingField &&
+            'type' in field &&
+            typeof existingField.type === 'string' &&
+            typeof field.type === 'string' &&
+            existingField.type !== field.type
+          ) {
+            mergedFields[existingIndex] = field;
+            return;
+          }
+
+          const mergedField = {
+            ...existingField,
+            ...field,
+          } as (typeof collection.fields)[number];
+
           const mergedAdmin = mergeObjects(
             (existingField as Record<string, unknown>).admin as Record<string, unknown> | undefined,
             (field as Record<string, unknown>).admin as Record<string, unknown> | undefined,
           );
+
+          if (mergedAdmin) {
+            (mergedField as { admin?: typeof mergedField.admin }).admin = mergedAdmin as typeof mergedField.admin;
+          }
 
           const mergedCustom = mergeObjects(
             (existingField as Record<string, unknown>).custom as Record<string, unknown> | undefined,
             (field as Record<string, unknown>).custom as Record<string, unknown> | undefined,
           );
 
-          mergedFields[existingIndex] = {
-            ...field,
-            ...existingField,
-            ...(mergedAdmin ? { admin: mergedAdmin } : {}),
-            ...(mergedCustom ? { custom: mergedCustom } : {}),
-          };
+          if (mergedCustom) {
+            (mergedField as { custom?: typeof mergedField.custom }).custom = mergedCustom as typeof mergedField.custom;
+          }
+
+          mergedFields[existingIndex] = mergedField;
         });
 
         return {
@@ -251,17 +270,79 @@ export const plugins: Plugin[] = [
         enabled: true,
         sendResetPassword: async ({ user, url }) => {
           const frontendBaseUrl = process.env.FRONTEND_URL ?? 'http://localhost:8080'
+          const backendBaseUrl = process.env.NEXT_PUBLIC_SERVER_URL ?? 'http://localhost:3000'
           const resetUrl = new URL(url)
-          const token = resetUrl.pathname.split('/').pop() ?? ''
-          const callbackURL = resetUrl.searchParams.get('callbackURL') ?? ''
-
-          const finalUrl = new URL('/auth/reset-password', frontendBaseUrl)
-          finalUrl.searchParams.set('token', token)
-          if (callbackURL) {
-            finalUrl.searchParams.set('callbackURL', callbackURL)
+          const rawToken = resetUrl.searchParams.get('token') ?? resetUrl.pathname.split('/').pop()
+          const token = rawToken ?? ''
+          const safeDecode = (value: string): string => {
+            try {
+              return decodeURIComponent(value)
+            } catch {
+              return value
+            }
           }
 
-          const resetLink = finalUrl.toString()
+          const rawCallbackURL = resetUrl.searchParams.get('callbackURL') ?? ''
+          const callbackURL = rawCallbackURL ? safeDecode(rawCallbackURL) : ''
+          const resolveCallbackPath = (value: string): string => {
+            const attempts = [
+              () => new URL(value),
+              () => new URL(value, backendBaseUrl),
+              () => new URL(value, frontendBaseUrl),
+            ] as const
+
+            for (const attempt of attempts) {
+              try {
+                return attempt().pathname
+              } catch {
+                // ignore and try next base
+              }
+            }
+
+            return value
+          }
+
+          const callbackPath = callbackURL ? resolveCallbackPath(callbackURL) : ''
+          const hasAdminCallback = callbackPath.startsWith('/admin')
+          const resolveCallbackURL = (value: string, preferAdminBase: boolean): string => {
+            if (/^https?:\/\//.test(value)) {
+              return value
+            }
+
+            const base = preferAdminBase ? backendBaseUrl : frontendBaseUrl
+            try {
+              return new URL(value, base).toString()
+            } catch {
+              return value
+            }
+          }
+          const isAdminReset = resetUrl.pathname.startsWith('/admin') || hasAdminCallback
+
+          let resetLink: string
+
+          if (isAdminReset) {
+            const adminResetUrl = new URL('/admin/reset-password', backendBaseUrl)
+            if (token) {
+              adminResetUrl.searchParams.set('token', token)
+            }
+
+            if (callbackURL) {
+              adminResetUrl.searchParams.set('callbackURL', resolveCallbackURL(callbackURL, true))
+            }
+
+            resetLink = adminResetUrl.toString()
+          } else {
+            const finalUrl = new URL('/auth/reset-password', frontendBaseUrl)
+            if (token) {
+              finalUrl.searchParams.set('token', token)
+            }
+
+            if (callbackURL) {
+              finalUrl.searchParams.set('callbackURL', resolveCallbackURL(callbackURL, hasAdminCallback))
+            }
+
+            resetLink = finalUrl.toString()
+          }
 
           console.info('[BetterAuth] Reset password link', {
             backendUrl: url,
@@ -289,25 +370,25 @@ Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email
     <style>
       body {
         font-family: 'Poppins', Arial, sans-serif;
-        background-color: #f5f7fa;
+        background-color: #f9fafb;
         margin: 0;
         padding: 0;
-        color: #333333;
+        color: #0f172a;
         line-height: 1.6;
       }
       .container {
         max-width: 600px;
         margin: 20px auto;
         background: #ffffff;
-        border-radius: 12px;
+        border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 18px 40px rgba(13, 148, 136, 0.12);
       }
       .header {
-        background: linear-gradient(135deg, #4f46e5, #7c3aed);
-        padding: 30px 20px;
+        background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        padding: 34px 26px;
         text-align: center;
-        color: #ffffff;
+        color: #ecfdf5;
       }
       .logo {
         font-size: 24px;
@@ -315,50 +396,53 @@ Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email
         margin-bottom: 10px;
       }
       .content {
-        padding: 30px;
+        padding: 36px 32px;
       }
       h1 {
-        color: #1e293b;
-        font-size: 22px;
+        color: #0f172a;
+        font-size: 24px;
         margin: 0 0 20px 0;
       }
       p {
         margin-bottom: 20px;
         font-size: 15px;
-        color: #475569;
+        color: #334155;
       }
       .btn {
         display: inline-block;
-        background: #4f46e5;
+        background: #059669;
         color: #ffffff !important;
         text-decoration: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        font-weight: 500;
-        margin: 20px 0;
+        padding: 14px 32px;
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        margin: 24px 0;
         text-align: center;
         transition: all 0.3s ease;
       }
       .btn:hover {
-        background: #4338ca;
+        background: #047857;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        box-shadow: 0 16px 32px rgba(5, 150, 105, 0.25);
       }
       .link-box {
-        background: #f1f5f9;
-        padding: 15px;
-        border-radius: 8px;
+        background: #ecfdf5;
+        padding: 18px;
+        border-radius: 14px;
         word-break: break-all;
         font-size: 14px;
-        color: #64748b;
+        color: #0f172a;
+        border: 1px solid rgba(5, 150, 105, 0.12);
         margin: 20px 0;
       }
       .footer {
         text-align: center;
-        padding: 20px;
+        padding: 22px;
         font-size: 13px;
-        color: #64748b;
-        border-top: 1px solid #e2e8f0;
+        color: #475569;
+        background: #f1f5f9;
+        border-top: 1px solid rgba(148, 163, 184, 0.25);
       }
       @media only screen and (max-width: 600px) {
         .container {
@@ -366,7 +450,7 @@ Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email
           border-radius: 0;
         }
         .content {
-          padding: 20px;
+          padding: 24px;
         }
       }
     </style>
@@ -375,7 +459,7 @@ Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email
     <div class="container">
       <div class="header">
         <div class="logo">MedCoach</div>
-        <div>Votre partenaire santé</div>
+        <div style="opacity: 0.85; font-size: 15px;">Votre partenaire santé</div>
       </div>
       <div class="content">
         <h1>Bonjour,</h1>
@@ -385,12 +469,14 @@ Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email
         </div>
         <p>Si le bouton ne fonctionne pas, copiez-collez ce lien dans votre navigateur :</p>
         <div class="link-box">${resetLink}</div>
-        <p style="color: #64748b; font-size: 14px;">
-          <em>Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email. Votre mot de passe restera inchangé.</em>
+        <p style="color: #475569; font-size: 14px;">
+          Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet email. Votre mot de passe restera inchangé.
         </p>
+        <p style="margin-top: 26px; color: #0f172a; font-weight: 600;">L'équipe MedCoach</p>
       </div>
       <div class="footer">
-        <p>© ${new Date().getFullYear()} MedCoach. Tous droits réservés.</p>
+        MedCoach &copy; ${new Date().getFullYear()}<br />
+MedCoach. Tous droits réservés.</p>
         <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
       </div>
     </div>

@@ -49,44 +49,10 @@ export type {
     ValidationReport
 } from '../QuizValidationUtils';
 
-// Import des classes pour les fonctions utilitaires
-import { AIQuizValidationOrchestrator } from '../AIQuizValidationOrchestrator';
-import { QuizValidationUtils } from '../QuizValidationUtils';
-import type { ValidationConfig } from '../AIQuizValidationOrchestrator';
+// Import des utilitaires existants pour éviter les duplications
+import { quizValidationUtils } from '../QuizValidationUtils';
 import type { QuizValidationOptions, ValidationReport } from '../QuizValidationUtils';
 import type { StudentLevel } from '../../schemas/aiQuizValidationSchema';
-
-/**
- * Configuration par défaut pour la validation des quiz IA
- */
-export const DEFAULT_VALIDATION_CONFIG: ValidationConfig = {
-    strictMode: false,
-    enableInappropriateContentDetection: true,
-    enableMedicalVocabularyValidation: true
-};
-
-/**
- * Options par défaut pour la validation des quiz
- */
-export const DEFAULT_QUIZ_VALIDATION_OPTIONS: QuizValidationOptions = {
-    strictValidation: false,
-    skipInappropriateContentCheck: false,
-    skipMedicalVocabularyCheck: false
-};
-
-/**
- * Fonction utilitaire pour créer une instance de validation orchestrée
- */
-export function createQuizValidator() {
-    return new AIQuizValidationOrchestrator();
-}
-
-/**
- * Fonction utilitaire pour créer une instance des utilitaires de validation
- */
-export function createValidationUtils() {
-    return new QuizValidationUtils();
-}
 
 /**
  * Validation rapide d'un quiz - fonction de commodité
@@ -100,16 +66,13 @@ export async function quickValidateQuiz(
     criticalIssues: string[];
     score: number;
 }> {
-    const validator = new AIQuizValidationOrchestrator();
-    const result = await validator.validateAIGeneratedQuiz(content, { studentLevel });
+    const validation = await quizValidationUtils.validateForGeneration(content, { studentLevel });
 
     return {
-        isValid: result.isValid,
-        canCreateQuiz: result.canProceedToCreation,
-        criticalIssues: result.validationSteps.contentValidation.issues
-            .filter(issue => issue.severity === 'critical')
-            .map(issue => issue.message),
-        score: result.overallScore
+        isValid: validation.passed,
+        canCreateQuiz: validation.canCreateQuiz,
+        criticalIssues: validation.issues.critical,
+        score: validation.score
     };
 }
 
@@ -118,14 +81,13 @@ export async function quickValidateQuiz(
  */
 export async function validateQuizWithReport(
     content: unknown,
-    options: QuizValidationOptions = DEFAULT_QUIZ_VALIDATION_OPTIONS
+    options: QuizValidationOptions = {}
 ): Promise<{
     validation: ValidationReport;
     detailedReport: string;
 }> {
-    const utils = new QuizValidationUtils();
-    const validation = await utils.validateForGeneration(content, options);
-    const detailedReport = await utils.generateAdminReport(content, options);
+    const validation = await quizValidationUtils.validateForGeneration(content, options);
+    const detailedReport = await quizValidationUtils.generateAdminReport(content, options);
 
     return {
         validation,

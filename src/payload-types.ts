@@ -77,6 +77,7 @@ export interface Config {
     pages: Page;
     posts: Post;
     prospects: Prospect;
+    subscriptions: Subscription;
     courses: Course;
     lessons: Lesson;
     assignments: Assignment;
@@ -127,6 +128,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
     prospects: ProspectsSelect<false> | ProspectsSelect<true>;
+    subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
     lessons: LessonsSelect<false> | LessonsSelect<true>;
     assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
@@ -219,10 +221,7 @@ export interface User {
   id: number;
   firstName?: string | null;
   lastName?: string | null;
-  /**
-   * Le cursus actuel de l’étudiant.
-   */
-  studyYear?: ('pass' | 'las') | null;
+  studyYear?: string | null;
   /**
    * Indique si l’étudiant a terminé le parcours d’intégration.
    */
@@ -1049,6 +1048,99 @@ export interface Prospect {
     | null;
   lastPaymentAttemptAt?: string | null;
   notes?: string | null;
+  lastCompletionReminderSentAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Instances d'abonnements (Stripe/Paddle) rattachées aux utilisateurs.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions".
+ */
+export interface Subscription {
+  id: number;
+  user: number | User;
+  /**
+   * Fournisseur de paiement (Stripe par défaut)
+   */
+  provider: 'paddle' | 'stripe';
+  /**
+   * Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)
+   */
+  customerId?: string | null;
+  /**
+   * Identifiant d'abonnement unique du fournisseur
+   */
+  subscriptionId: string;
+  /**
+   * Identifiant du prix du fournisseur
+   */
+  priceId?: string | null;
+  status: 'trialing' | 'active' | 'past_due' | 'canceled';
+  /**
+   * Fin de période d'essai
+   */
+  trialEnd?: string | null;
+  /**
+   * Fin de la période de facturation en cours
+   */
+  currentPeriodEnd?: string | null;
+  /**
+   * Annulation à la fin de la période en cours
+   */
+  cancelAtPeriodEnd?: boolean | null;
+  /**
+   * Date du dernier paiement réussi
+   */
+  lastPaymentAt?: string | null;
+  /**
+   * Montant en plus petite unité (ex: centimes)
+   */
+  amount?: number | null;
+  /**
+   * Devise (EUR par défaut)
+   */
+  currency?: string | null;
+  /**
+   * Historique des événements webhook liés à cet abonnement
+   */
+  history?:
+    | {
+        type:
+          | 'subscription_created'
+          | 'payment_succeeded'
+          | 'subscription_updated'
+          | 'payment_failed'
+          | 'subscription_canceled';
+        occurredAt: string;
+        /**
+         * Payload d'événement (sanitisé/tronqué si nécessaire)
+         */
+        raw?:
+          | {
+              [k: string]: unknown;
+            }
+          | unknown[]
+          | string
+          | number
+          | boolean
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Clés/valeurs additionnelles (optionnel)
+   */
+  metadata?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -2785,6 +2877,10 @@ export interface PayloadLockedDocument {
         value: number | Prospect;
       } | null)
     | ({
+        relationTo: 'subscriptions';
+        value: number | Subscription;
+      } | null)
+    | ({
         relationTo: 'courses';
         value: number | Course;
       } | null)
@@ -3359,6 +3455,36 @@ export interface ProspectsSelect<T extends boolean = true> {
   metadata?: T;
   lastPaymentAttemptAt?: T;
   notes?: T;
+  lastCompletionReminderSentAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "subscriptions_select".
+ */
+export interface SubscriptionsSelect<T extends boolean = true> {
+  user?: T;
+  provider?: T;
+  customerId?: T;
+  subscriptionId?: T;
+  priceId?: T;
+  status?: T;
+  trialEnd?: T;
+  currentPeriodEnd?: T;
+  cancelAtPeriodEnd?: T;
+  lastPaymentAt?: T;
+  amount?: T;
+  currency?: T;
+  history?:
+    | T
+    | {
+        type?: T;
+        occurredAt?: T;
+        raw?: T;
+        id?: T;
+      };
+  metadata?: T;
   updatedAt?: T;
   createdAt?: T;
 }

@@ -1,9 +1,16 @@
 import Stripe from 'stripe';
 import { Payload } from 'payload';
+import type { CollectionSlug } from 'payload';
 import { StripeClient } from './StripeClient';
 import { verifyWebhookSignature } from '../../utils/stripe/webhookSignature';
 import type { ProspectStatus } from '../../collections/Prospects';
-import type { Config } from '../../payload-types';
+import { sendCheckoutCompletionEmail } from '../emails/sendCheckoutCompletionEmail';
+import {
+  getSubscriptionPeriodEnd,
+  mapStripeStatus,
+  stripeTimestampToISOString,
+  stripeUnixTimestampToISOString,
+} from './helpers';
 
 type SubscriptionDocument = {
   id: string;
@@ -13,8 +20,17 @@ type SubscriptionDocument = {
   currentPeriodEnd?: string | null;
 };
 
-const SUBSCRIPTIONS_COLLECTION: keyof Config['collections'] = 'subscriptions';
-const USERS_COLLECTION: keyof Config['collections'] = 'users';
+type ProspectDocument = {
+  id: string;
+  email?: string | null;
+  checkoutSessionId?: string | null;
+  subscriptionId?: string | null;
+  lastCompletionReminderSentAt?: string | null;
+};
+
+const SUBSCRIPTIONS_COLLECTION = 'subscriptions' as CollectionSlug;
+const USERS_COLLECTION = 'users' as CollectionSlug;
+const PROSPECTS_COLLECTION = 'prospects' as CollectionSlug;
 
 export interface WebhookProcessingResult {
   success: boolean;
@@ -154,7 +170,7 @@ export class StripeWebhookService {
       }
     }
 
-    const updated = await this.updateProspectFromIdentifiers({
+    const prospectUpdate = await this.updateProspectFromIdentifiers({
       prospectId,
       email,
       customerId,
@@ -164,15 +180,23 @@ export class StripeWebhookService {
         checkoutSessionId: session.id,
         subscriptionId,
         lastPaymentAttemptAt: lastPaymentAttemptAt ?? new Date().toISOString(),
+        lastCompletionReminderSentAt: new Date().toISOString(),
       },
     });
 
-    if (!updated) {
+    if (!prospectUpdate.updated) {
       console.warn('[Stripe Webhook] No matching prospect for checkout.session.completed', {
         sessionId: session.id,
         prospectId,
         email,
         customerId,
+      });
+    } else if (email && !prospectUpdate.previous?.lastCompletionReminderSentAt) {
+      void this.enqueueCheckoutCompletionEmail({
+        email,
+        sessionId: session.id,
+        customerName: session.customer_details?.name ?? undefined,
+        billingCycle: this.extractBillingCycleFromSession(session),
       });
     }
 
@@ -188,7 +212,7 @@ export class StripeWebhookService {
     const email = session.customer_details?.email ?? session.customer_email ?? undefined;
     const customerId = typeof session.customer === 'string' ? session.customer : undefined;
 
-    const updated = await this.updateProspectFromIdentifiers({
+    const prospectUpdate = await this.updateProspectFromIdentifiers({
       prospectId,
       email,
       customerId,
@@ -198,7 +222,7 @@ export class StripeWebhookService {
       },
     });
 
-    if (!updated) {
+    if (!prospectUpdate.updated) {
       console.warn('[Stripe Webhook] No matching prospect for checkout.session.expired', {
         sessionId: session.id,
         prospectId,
@@ -217,7 +241,7 @@ export class StripeWebhookService {
     const email = session.customer_details?.email ?? session.customer_email ?? undefined;
     const customerId = typeof session.customer === 'string' ? session.customer : undefined;
 
-    const updated = await this.updateProspectFromIdentifiers({
+    const prospectUpdate = await this.updateProspectFromIdentifiers({
       prospectId,
       email,
       customerId,
@@ -228,7 +252,7 @@ export class StripeWebhookService {
       },
     });
 
-    if (!updated) {
+    if (!prospectUpdate.updated) {
       console.warn('[Stripe Webhook] No matching prospect for checkout.session.async_payment_failed', {
         sessionId: session.id,
         prospectId,
@@ -253,7 +277,7 @@ export class StripeWebhookService {
       throw new Error('Customer has been deleted');
     }
 
-    const email = customer.email;
+    const email = customer.email ?? undefined;
     if (!email) {
       throw new Error('Customer email not found');
     }
@@ -266,12 +290,12 @@ export class StripeWebhookService {
 
     // Update user
     await this.payload.update({
-      collection: 'users',
+      collection: USERS_COLLECTION,
       id: user.id,
       data: {
         stripeCustomerId: subscription.customer as string,
         subscriptionStatus: 'active',
-        subscriptionEndDate: this.resolveStripeTimestamp(subscription.current_period_end) ?? null,
+        subscriptionEndDate: stripeUnixTimestampToISOString(getSubscriptionPeriodEnd(subscription)),
       },
     });
 
@@ -311,12 +335,12 @@ export class StripeWebhookService {
 
     // Update user
     await this.payload.update({
-      collection: 'users',
+      collection: USERS_COLLECTION,
       id: user.id,
       data: {
         stripeCustomerId: subscription.customer as string,
-        subscriptionStatus: this.mapStripeStatus(subscription.status),
-        subscriptionEndDate: this.toISOString(subscription.current_period_end * 1000) ?? null,
+        subscriptionStatus: mapStripeStatus(subscription.status),
+        subscriptionEndDate: stripeUnixTimestampToISOString(getSubscriptionPeriodEnd(subscription)),
       },
     });
 
@@ -349,7 +373,7 @@ export class StripeWebhookService {
       data: {
         status: 'canceled',
         history: [
-          ...(existingSubscription.history || []),
+          ...(existingSubscription.history ?? []),
           {
             type: 'subscription_canceled',
             occurredAt: new Date().toISOString(),
@@ -357,16 +381,18 @@ export class StripeWebhookService {
           },
         ],
       },
-    });
+    } as Parameters<Payload['update']>[0]);
 
-    // Update user
-    await this.payload.update({
-      collection: USERS_COLLECTION,
-      id: this.resolveUserId(existingSubscription.user) as string,
-      data: {
-        subscriptionStatus: 'canceled',
-      },
-    });
+    const subscriptionUserId = this.resolveUserId(existingSubscription.user);
+    if (subscriptionUserId) {
+      await this.payload.update({
+        collection: USERS_COLLECTION,
+        id: subscriptionUserId,
+        data: {
+          subscriptionStatus: 'canceled',
+        },
+      });
+    }
 
     console.log('[Stripe Webhook] Subscription deleted', {
       subscriptionId: subscription.id,
@@ -401,41 +427,40 @@ export class StripeWebhookService {
       ...(subscription.history ?? []),
       {
         type: 'payment_succeeded',
-        occurredAt: this.toISOString(this.resolveInvoiceTimestamp(invoice)) ?? new Date().toISOString(),
+        occurredAt:
+          stripeTimestampToISOString(this.resolveInvoiceTimestamp(invoice), 'milliseconds') ?? new Date().toISOString(),
         raw: this.sanitizeEventData(invoice),
       },
     ];
 
-    await this.payload.update({
-      collection: SUBSCRIPTIONS_COLLECTION,
-      id: subscription.id,
-      data: {
-        status: 'active',
-        history: updatedHistory,
-      },
-    });
-
-    const subscriptionUserId = this.resolveUserId(subscription.user);
-    if (subscriptionUserId) {
-      await this.payload.update({
-        collection: USERS_COLLECTION,
-        id: subscriptionUserId,
-        data: {
-          subscriptionStatus: 'active',
-          subscriptionEndDate: subscription.currentPeriodEnd ?? null,
-        },
-      });
-    }
-
-    await this.updateProspectFromIdentifiers({
+    const prospectUpdate = await this.updateProspectFromIdentifiers({
       prospectId: this.extractProspectId(invoice.metadata as Stripe.Metadata | null | undefined),
       email: invoice.customer_email ?? undefined,
       customerId: typeof invoice.customer === 'string' ? invoice.customer : undefined,
       data: {
         status: 'ready_for_password',
         subscriptionId,
+        lastCompletionReminderSentAt: new Date().toISOString(),
       },
     });
+
+    if (
+      invoice.customer_email &&
+      typeof invoice.customer_email === 'string' &&
+      !prospectUpdate.previous?.lastCompletionReminderSentAt
+    ) {
+      const checkoutSessionId = subscriptionId
+        ? await this.lookupCheckoutSessionId(subscriptionId)
+        : undefined;
+
+      if (checkoutSessionId) {
+        void this.enqueueCheckoutCompletionEmail({
+          email: invoice.customer_email,
+          sessionId: checkoutSessionId,
+          billingCycle: this.extractBillingCycleFromInvoice(invoice),
+        });
+      }
+    }
 
     return subscriptionId;
   }
@@ -463,7 +488,8 @@ export class StripeWebhookService {
       ...(subscription.history ?? []),
       {
         type: 'payment_failed',
-        occurredAt: this.toISOString(this.resolveInvoiceTimestamp(invoice)) ?? new Date().toISOString(),
+        occurredAt:
+          stripeTimestampToISOString(this.resolveInvoiceTimestamp(invoice), 'milliseconds') ?? new Date().toISOString(),
         raw: this.sanitizeEventData(invoice),
       },
     ];
@@ -475,7 +501,7 @@ export class StripeWebhookService {
         status: 'past_due',
         history: updatedHistory,
       },
-    });
+    } as Parameters<Payload['update']>[0]);
 
     const subscriptionUserId = this.resolveUserId(subscription.user);
     if (subscriptionUserId) {
@@ -486,7 +512,7 @@ export class StripeWebhookService {
           subscriptionStatus: 'past_due',
           subscriptionEndDate: subscription.currentPeriodEnd ?? null,
         },
-      });
+      } as Parameters<Payload['update']>[0]);
     }
 
     await this.updateProspectFromIdentifiers({
@@ -503,11 +529,16 @@ export class StripeWebhookService {
   }
 
   private resolveInvoiceSubscriptionId(invoice: Stripe.Invoice): string | undefined {
-    const { subscription } = invoice;
-    if (!subscription || typeof subscription !== 'string') {
-      return undefined;
-    }
-    return subscription;
+    const subscription = this.resolveInvoiceSubscription(invoice);
+    return typeof subscription === 'string' ? subscription : undefined;
+  }
+
+  private resolveInvoiceSubscription(invoice: Stripe.Invoice): string | Stripe.Subscription | null | undefined {
+    const typedInvoice = invoice as Stripe.Invoice & {
+      subscription?: string | Stripe.Subscription | null;
+    };
+
+    return typedInvoice.subscription ?? null;
   }
 
   private resolveInvoiceTimestamp(invoice: Stripe.Invoice): number | undefined {
@@ -524,26 +555,37 @@ export class StripeWebhookService {
         subscriptionId: { equals: subscriptionId },
       },
       limit: 1,
-    });
+    } as Parameters<Payload['find']>[0]);
 
     if (subscriptions.docs.length === 0) {
       return null;
     }
 
-    return subscriptions.docs[0] as SubscriptionDocument;
+    const [doc] = subscriptions.docs;
+    const mapped = this.mapSubscriptionDocument(doc);
+
+    if (!mapped) {
+      return null;
+    }
+
+    return mapped;
   }
 
   /**
    * Sanitize event data for storage (remove sensitive fields)
    */
-  private sanitizeEventData(data: any): any {
+  private sanitizeEventData(data: unknown): Record<string, unknown> {
+    if (typeof data !== 'object' || data === null) {
+      return {};
+    }
+
     // Create a shallow copy and remove sensitive fields
-    const sanitized = { ...data };
-    
+    const sanitized = { ...(data as Record<string, unknown>) };
+
     // Remove potentially sensitive fields
     delete sanitized.client_secret;
     delete sanitized.payment_method_details;
-    
+
     return sanitized;
   }
 
@@ -613,23 +655,26 @@ export class StripeWebhookService {
       checkoutSessionId?: string | undefined;
       subscriptionId?: string | undefined;
       lastPaymentAttemptAt?: string | undefined;
+      lastCompletionReminderSentAt?: string | undefined;
     };
-  }): Promise<boolean> {
+  }): Promise<{ updated: boolean; previous?: { lastCompletionReminderSentAt?: string } }> {
     const identifiers = await this.resolveProspectIdentifiers({ prospectId, email, customerId });
     const normalizedProspectId = identifiers.prospectId;
     const normalizedEmail = identifiers.email;
 
     if (!normalizedProspectId && !normalizedEmail) {
-      return false;
+      return { updated: false };
     }
 
-    let prospect: any = null;
-
-    prospect = await this.findProspect(normalizedProspectId, normalizedEmail);
+    const prospect = await this.findProspect(normalizedProspectId, normalizedEmail);
 
     if (!prospect) {
-      return false;
+      return { updated: false };
     }
+
+    const previousReminderSentAt = typeof prospect.lastCompletionReminderSentAt === 'string'
+      ? prospect.lastCompletionReminderSentAt
+      : undefined;
 
     const updateData: Record<string, unknown> = {};
 
@@ -648,28 +693,137 @@ export class StripeWebhookService {
     if (data.lastPaymentAttemptAt) {
       updateData.lastPaymentAttemptAt = data.lastPaymentAttemptAt;
     }
+    if (data.lastCompletionReminderSentAt && !previousReminderSentAt) {
+      updateData.lastCompletionReminderSentAt = data.lastCompletionReminderSentAt;
+    }
 
-    await this.payload.update({
-      collection: 'prospects' as CollectionSlug,
-      id: prospect.id,
-      data: updateData,
-    });
+    if (Object.keys(updateData).length > 0) {
+      await this.payload.update({
+        collection: PROSPECTS_COLLECTION,
+        id: prospect.id,
+        data: updateData,
+      });
 
-    console.log('[Stripe Webhook] Prospect updated', {
-      prospectId: prospect.id,
-      status: updateData.status,
-    });
+      console.log('[Stripe Webhook] Prospect updated', {
+        prospectId: prospect.id,
+        status: updateData.status,
+      });
+    }
 
-    return true;
+    return { updated: true, previous: { lastCompletionReminderSentAt: previousReminderSentAt } };
   }
 
-  private toISOString(timestamp?: number): string | null {
-    if (timestamp === undefined) {
+  private async enqueueCheckoutCompletionEmail({
+    email,
+    sessionId,
+    customerName,
+    billingCycle,
+  }: {
+    email: string;
+    sessionId: string;
+    customerName?: string;
+    billingCycle?: 'monthly' | 'yearly';
+  }): Promise<void> {
+    try {
+      await sendCheckoutCompletionEmail({
+        to: email,
+        sessionId,
+        customerName,
+        billingCycle,
+      });
+    } catch (error) {
+      console.error('[Stripe Webhook] Failed to send checkout completion email', {
+        email,
+        sessionId,
+        error: error instanceof Error ? error.message : error,
+      });
+    }
+  }
+
+  private extractBillingCycleFromSession(session: Stripe.Checkout.Session): 'monthly' | 'yearly' | undefined {
+    const metadata = session.metadata ?? {};
+    const billingCycle = metadata.billingCycle ?? metadata.BILLING_CYCLE;
+
+    if (billingCycle === 'monthly' || billingCycle === 'yearly') {
+      return billingCycle;
+    }
+
+    return undefined;
+  }
+
+  private extractBillingCycleFromInvoice(invoice: Stripe.Invoice): 'monthly' | 'yearly' | undefined {
+    const metadata = invoice.metadata ?? {};
+    const billingCycle = metadata.billingCycle ?? metadata.BILLING_CYCLE;
+
+    if (billingCycle === 'monthly' || billingCycle === 'yearly') {
+      return billingCycle;
+    }
+
+    return undefined;
+  }
+
+  private async lookupCheckoutSessionId(subscriptionId: string): Promise<string | undefined> {
+    const prospects = await this.payload.find({
+      collection: PROSPECTS_COLLECTION,
+      where: {
+        subscriptionId: { equals: subscriptionId },
+      },
+      limit: 1,
+    });
+
+    const [prospect] = prospects.docs;
+
+    if (!prospect || typeof prospect !== 'object') {
+      return undefined;
+    }
+
+    const checkoutSessionId = (prospect as { checkoutSessionId?: unknown }).checkoutSessionId;
+    return typeof checkoutSessionId === 'string' && checkoutSessionId.trim().length > 0
+      ? checkoutSessionId
+      : undefined;
+  }
+
+  private mapSubscriptionDocument(doc: unknown): SubscriptionDocument | null {
+    if (!doc || typeof doc !== 'object') {
       return null;
     }
 
-    const date = new Date(timestamp);
-    return Number.isNaN(date.getTime()) ? null : date.toISOString();
+    const record = doc as Record<string, unknown>;
+
+    const id = record.id;
+    if (typeof id !== 'string' && typeof id !== 'number') {
+      return null;
+    }
+
+    const history = Array.isArray(record.history)
+      ? (record.history as Array<Record<string, unknown>>)
+      : [];
+
+    const subscriptionId = typeof record.subscriptionId === 'string' ? record.subscriptionId : null;
+    const currentPeriodEnd = typeof record.currentPeriodEnd === 'string' ? record.currentPeriodEnd : null;
+
+    return {
+      id: String(id),
+      user: this.extractSubscriptionUser(record.user),
+      subscriptionId,
+      history,
+      currentPeriodEnd,
+    } satisfies SubscriptionDocument;
+  }
+
+  private extractSubscriptionUser(value: unknown): SubscriptionDocument['user'] {
+    if (typeof value === 'string' || typeof value === 'number') {
+      return value;
+    }
+
+    if (typeof value === 'object' && value !== null && 'id' in value) {
+      const nestedId = (value as { id?: unknown }).id;
+      if (typeof nestedId === 'string' || typeof nestedId === 'number') {
+        return { id: nestedId };
+      }
+    }
+
+    return null;
   }
 
   private resolveUserId(userField: Stripe.Subscription['customer'] | Stripe.Subscription['id'] | unknown): string | number | null {
@@ -691,25 +845,6 @@ export class StripeWebhookService {
     return null;
   }
 
-  private mapStripeStatus(status: Stripe.Subscription.Status | string): 'trialing' | 'active' | 'canceled' | 'past_due' {
-    switch (status) {
-      case 'trialing':
-        return 'trialing';
-      case 'active':
-        return 'active';
-      case 'canceled':
-      case 'incomplete_expired':
-        return 'canceled';
-      case 'past_due':
-      case 'unpaid':
-      case 'incomplete':
-      case 'paused':
-        return 'past_due';
-      default:
-        return 'past_due';
-    }
-  }
-
   private async findUserByEmail(email: string): Promise<{ id: string | number } | null> {
     const users = await this.payload.find({
       collection: 'users',
@@ -722,10 +857,15 @@ export class StripeWebhookService {
     return users.docs[0] ?? null;
   }
 
-  private async findProspect(prospectId?: string, email?: string): Promise<any | null> {
+  private async findProspect(prospectId?: string, email?: string): Promise<ProspectDocument | null> {
     if (prospectId) {
       try {
-        return await this.payload.findByID({ collection: 'prospects' as CollectionSlug, id: prospectId });
+        const prospect = await this.payload.findByID({
+          collection: PROSPECTS_COLLECTION,
+          id: prospectId,
+        } as Parameters<Payload['findByID']>[0]);
+
+        return this.normalizeProspectDocument(prospect);
       } catch (error) {
         console.warn('[Stripe Webhook] Prospect lookup by ID failed', {
           prospectId,
@@ -736,18 +876,54 @@ export class StripeWebhookService {
 
     if (email) {
       const existing = await this.payload.find({
-        collection: 'prospects' as CollectionSlug,
+        collection: PROSPECTS_COLLECTION,
         where: {
           email: { equals: email },
         },
         limit: 1,
-      });
+      } as Parameters<Payload['find']>[0]);
 
-      if (existing.docs.length > 0) {
-        return existing.docs[0];
+      const [doc] = existing.docs;
+      const normalized = this.normalizeProspectDocument(doc);
+      if (normalized) {
+        return normalized;
       }
     }
 
     return null;
+  }
+
+  private normalizeProspectDocument(doc: unknown): ProspectDocument | null {
+    if (!doc || typeof doc !== 'object') {
+      return null;
+    }
+
+    const payloadDoc = doc as {
+      id?: unknown;
+      email?: unknown;
+      checkoutSessionId?: unknown;
+      subscriptionId?: unknown;
+      lastCompletionReminderSentAt?: unknown;
+    };
+
+    const { id } = payloadDoc;
+    if (typeof id !== 'string' && typeof id !== 'number') {
+      return null;
+    }
+
+    const normalizeString = (value: unknown): string | null => {
+      if (typeof value === 'string') {
+        return value;
+      }
+      return null;
+    };
+
+    return {
+      id: String(id),
+      email: normalizeString(payloadDoc.email),
+      checkoutSessionId: normalizeString(payloadDoc.checkoutSessionId),
+      subscriptionId: normalizeString(payloadDoc.subscriptionId),
+      lastCompletionReminderSentAt: normalizeString(payloadDoc.lastCompletionReminderSentAt),
+    };
   }
 }

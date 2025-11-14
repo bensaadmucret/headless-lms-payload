@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { STRIPE_API_VERSION } from './constants';
 
 /**
  * Configuration for the Stripe client
@@ -31,6 +32,7 @@ export class StripeClient {
     // Initialize Stripe with latest API version
     this.stripe = new Stripe(config.secretKey, {
       typescript: true,
+      apiVersion: STRIPE_API_VERSION,
     });
   }
 

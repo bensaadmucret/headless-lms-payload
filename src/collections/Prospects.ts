@@ -102,5 +102,13 @@ export const Prospects: CollectionConfig = {
       name: 'notes',
       type: 'textarea',
     },
+    {
+      name: 'lastCompletionReminderSentAt',
+      type: 'date',
+      admin: {
+        readOnly: true,
+        position: 'sidebar',
+      },
+    },
   ],
 };

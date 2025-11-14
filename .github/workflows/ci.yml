@@ -9,7 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres:15
@@ -45,15 +44,17 @@ jobs:
           NODE_ENV: test
 
       - name: Upload coverage to Codecov
+        if: ${{ success() && env.CODECOV_TOKEN != '' }}
         uses: codecov/codecov-action@v4
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           files: ./coverage/lcov.info
           flags: unittests
           name: codecov-payload-cms
           fail_ci_if_error: false
           verbose: true
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ env.CODECOV_TOKEN }}
 
       - name: Upload coverage artifacts
         uses: actions/upload-artifact@v4
