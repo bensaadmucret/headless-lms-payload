@@ -1047,6 +1047,7 @@ export interface Prospect {
     | boolean
     | null;
   lastPaymentAttemptAt?: string | null;
+  attemptCount?: number | null;
   notes?: string | null;
   lastCompletionReminderSentAt?: string | null;
   updatedAt: string;
@@ -3454,6 +3455,7 @@ export interface ProspectsSelect<T extends boolean = true> {
   utmCampaign?: T;
   metadata?: T;
   lastPaymentAttemptAt?: T;
+  attemptCount?: T;
   notes?: T;
   lastCompletionReminderSentAt?: T;
   updatedAt?: T;
