@@ -171,12 +171,10 @@ export interface Config {
     defaultIDType: number;
   };
   globals: {
-    'cors-config': CorsConfig;
     header: Header;
     footer: Footer;
   };
   globalsSelect: {
-    'cors-config': CorsConfigSelect<false> | CorsConfigSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
   };
@@ -2373,6 +2371,11 @@ export interface Flashcard {
    * URL d'une image illustrative (optionnel)
    */
   imageUrl?: string | null;
+  generatedByAI?: boolean | null;
+  /**
+   * Statut de validation pour les contenus générés
+   */
+  validationStatus?: ('pending' | 'needs_review' | 'validated' | 'rejected') | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -4175,6 +4178,8 @@ export interface FlashcardsSelect<T extends boolean = true> {
       };
   deck?: T;
   imageUrl?: T;
+  generatedByAI?: T;
+  validationStatus?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -4602,57 +4607,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Configuration des accès CORS (Cross-Origin Resource Sharing)
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cors-config".
- */
-export interface CorsConfig {
-  id: number;
-  /**
-   * Liste des URLs qui peuvent accéder à l'API
-   */
-  allowedOrigins?:
-    | {
-        /**
-         * URL complète (ex: https://monsite.com)
-         */
-        url: string;
-        /**
-         * Description pour identifier l'usage
-         */
-        description?: string | null;
-        /**
-         * Activer/désactiver cette origine
-         */
-        isActive?: boolean | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * En-têtes HTTP supplémentaires à autoriser
-   */
-  customHeaders?:
-    | {
-        /**
-         * Nom de l'en-tête (ex: x-custom-header)
-         */
-        header: string;
-        /**
-         * Description de l'usage de cet en-tête
-         */
-        description?: string | null;
-        id?: string | null;
-      }[]
-    | null;
-  /**
-   * Environnement actif
-   */
-  environment: 'development' | 'production';
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header".
  */
@@ -4709,31 +4663,6 @@ export interface Footer {
     | null;
   updatedAt?: string | null;
   createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "cors-config_select".
- */
-export interface CorsConfigSelect<T extends boolean = true> {
-  allowedOrigins?:
-    | T
-    | {
-        url?: T;
-        description?: T;
-        isActive?: T;
-        id?: T;
-      };
-  customHeaders?:
-    | T
-    | {
-        header?: T;
-        description?: T;
-        id?: T;
-      };
-  environment?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

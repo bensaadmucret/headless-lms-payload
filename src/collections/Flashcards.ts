@@ -10,6 +10,16 @@ export const Flashcards: CollectionConfig = {
   },
   fields: [
     {
+      name: 'aiFlashcardGeneration',
+      type: 'ui',
+      admin: {
+        position: 'sidebar',
+        components: {
+          Field: '@/components/admin/GenerateAIFlashcardButton'
+        }
+      }
+    },
+    {
       name: 'front',
       label: 'Recto (Question)',
       type: 'textarea',
@@ -116,6 +126,32 @@ export const Flashcards: CollectionConfig = {
       type: 'text',
       admin: {
         description: 'URL d\'une image illustrative (optionnel)',
+      },
+    },
+    {
+      name: 'generatedByAI',
+      label: 'Généré par IA',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+      },
+    },
+    {
+      name: 'validationStatus',
+      label: 'Statut de validation',
+      type: 'select',
+      defaultValue: 'pending',
+      options: [
+        { label: 'En attente', value: 'pending' },
+        { label: 'À revoir', value: 'needs_review' },
+        { label: 'Validé', value: 'validated' },
+        { label: 'Rejeté', value: 'rejected' },
+      ],
+      admin: {
+        position: 'sidebar',
+        description: 'Statut de validation pour les contenus générés',
       },
     },
   ],

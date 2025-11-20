@@ -5,6 +5,7 @@
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { ImportFlashcard } from '../types/jsonImport';
+import { aiConfig } from '../config/ai';
 
 export interface DistractorGenerationRequest {
   correctAnswer: string;
@@ -90,7 +91,7 @@ export class AIDistractorGenerationService {
       // Vérifier le cache
       const cacheKey = this.generateCacheKey(request);
       const cached = this.cache.get(cacheKey);
-      
+
       if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
         return {
           success: true,
@@ -104,7 +105,7 @@ export class AIDistractorGenerationService {
       const prompt = this.buildDistractorPrompt(request);
 
       // Appeler l'IA
-      const model = this.client.getGenerativeModel({ model: 'gemini-2.0-flash' });
+      const model = this.client.getGenerativeModel({ model: aiConfig.gemini.generationModel });
       const result = await model.generateContent(prompt);
       const response = result.response;
       const text = response.text();
@@ -114,8 +115,8 @@ export class AIDistractorGenerationService {
 
       // Valider les distracteurs
       const validatedDistractors = this.validateDistractors(
-        distractors, 
-        request.correctAnswer, 
+        distractors,
+        request.correctAnswer,
         request.category
       );
 
@@ -136,8 +137,8 @@ export class AIDistractorGenerationService {
       return {
         success: false,
         distractors: this.generateFallbackDistractors(
-          request.correctAnswer, 
-          request.category, 
+          request.correctAnswer,
+          request.category,
           request.count || 3
         ),
         confidence: 0.3,
@@ -156,7 +157,7 @@ export class AIDistractorGenerationService {
 
     // Détecter le type
     let type: 'definition' | 'factual' | 'conceptual' | 'procedural' = 'factual';
-    
+
     if (front.includes('définition') || front.includes('qu\'est-ce que') || front.includes('define')) {
       type = 'definition';
     } else if (front.includes('comment') || front.includes('procédure') || front.includes('étapes')) {
@@ -196,7 +197,7 @@ export class AIDistractorGenerationService {
     let context = `Domaine médical: ${analysis.medicalSpecialty}\n`;
     context += `Type de question: ${analysis.type}\n`;
     context += `Complexité: ${analysis.complexity}\n`;
-    
+
     if (analysis.keyTerms.length > 0) {
       context += `Termes clés: ${analysis.keyTerms.join(', ')}\n`;
     }
@@ -264,8 +265,8 @@ Génère maintenant les distracteurs:`;
    * Valide et filtre les distracteurs générés
    */
   private validateDistractors(
-    distractors: string[], 
-    correctAnswer: string, 
+    distractors: string[],
+    correctAnswer: string,
     category: string
   ): string[] {
     const validated = distractors.filter(distractor => {
@@ -317,17 +318,17 @@ Génère maintenant les distracteurs:`;
     // Bonus si les distracteurs sont de longueur appropriée
     const avgLength = distractors.reduce((sum, d) => sum + d.length, 0) / distractors.length;
     const correctLength = request.correctAnswer.length;
-    
+
     if (Math.abs(avgLength - correctLength) < correctLength * 0.5) {
       confidence += 0.1;
     }
 
     // Malus si des distracteurs semblent génériques
-    const hasGeneric = distractors.some(d => 
-      d.toLowerCase().includes('option') || 
+    const hasGeneric = distractors.some(d =>
+      d.toLowerCase().includes('option') ||
       d.toLowerCase().includes('incorrecte')
     );
-    
+
     if (hasGeneric) {
       confidence -= 0.2;
     }
@@ -339,8 +340,8 @@ Génère maintenant les distracteurs:`;
    * Génère des distracteurs de secours
    */
   private generateFallbackDistractors(
-    correctAnswer: string, 
-    category: string, 
+    correctAnswer: string,
+    category: string,
     count: number
   ): string[] {
     const categoryDistractors: Record<string, string[]> = {
@@ -399,7 +400,7 @@ Génère maintenant les distracteurs:`;
     };
 
     const lowerText = text.toLowerCase();
-    
+
     for (const [specialty, keywords] of Object.entries(specialties)) {
       if (keywords.some(keyword => lowerText.includes(keyword))) {
         return specialty;

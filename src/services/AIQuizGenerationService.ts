@@ -8,6 +8,8 @@ import { AIAPIService, AIRequest, AIResponse } from './AIAPIService';
 import { QuizCreationService, QuizCreationRequest, QuizCreationResult } from './QuizCreationService';
 // Service d'audit pour la tâche 6
 import { AIQuizAuditService } from './AIQuizAuditService';
+import { MEDICAL_CONTEXT_SYSTEM_PROMPT } from '../config/ai-context';
+import { aiConfig } from '../config/ai';
 
 export interface QuestionGenerationRequest {
   categoryId?: string;
@@ -177,7 +179,7 @@ export class AIQuizGenerationService {
                 issues: validation.issues
               });
             }
-            
+
             validatedQuestion = {
               ...question,
               qualityScore: validation.score,
@@ -196,13 +198,13 @@ export class AIQuizGenerationService {
                 score: validation.score,
                 issues: validation.issues
               });
-              
+
               validatedQuestion = {
                 ...question,
                 qualityScore: validation.score,
                 validationIssues: validation.issues
               };
-              
+
               // Logger l'avertissement si audit disponible
               if (this.auditService && auditLogId) {
                 await this.auditService.failGenerationLog(
@@ -220,7 +222,7 @@ export class AIQuizGenerationService {
                   }
                 );
               }
-              
+
               throw new Error('Max generation attempts reached');
             }
           }
@@ -241,7 +243,7 @@ export class AIQuizGenerationService {
           {
             questionsCreated: questions.length,
             validationScore: Math.round(averageValidationScore),
-            aiModel: 'gemini-2.0-flash', // Modèle Gemini utilisé
+            aiModel: aiConfig.gemini.generationModel, // Modèle Gemini utilisé
           },
           {
             duration: totalDuration,
@@ -257,7 +259,7 @@ export class AIQuizGenerationService {
 
     } catch (error) {
       console.error('❌ Erreur génération questions IA:', error);
-      
+
       // Logger l'échec si audit disponible et pas déjà loggé
       if (this.auditService && auditLogId && error instanceof Error) {
         await this.auditService.failGenerationLog(
@@ -272,7 +274,7 @@ export class AIQuizGenerationService {
           }
         );
       }
-      
+
       throw new Error('Échec de la génération de questions par IA');
     }
   }
@@ -286,7 +288,8 @@ export class AIQuizGenerationService {
       maxTokens: 2000,
       temperature: 0.7,
       jsonMode: true,
-      retryCount: 3
+      retryCount: 3,
+      systemInstruction: MEDICAL_CONTEXT_SYSTEM_PROMPT
     };
 
     try {
@@ -559,7 +562,7 @@ QUESTION ${questionNumber}:`;
 
       // 1. Génération du contenu IA
       const generationResult = await this.generateCompleteQuiz(config);
-      
+
       if (!generationResult.success || !generationResult.quiz) {
         // Log d'audit pour échec de génération
         if (this.auditService && auditLogId) {
@@ -601,7 +604,7 @@ QUESTION ${questionNumber}:`;
         customMetadata: {
           generationTime: generationResult.generationTime,
           validationScore: generationResult.validationResult?.score,
-          aiModel: 'supernova-default',
+          aiModel: aiConfig.gemini.generationModel,
           aiProvider: 'code-supernova',
           promptVersion: '1.0'
         }
@@ -612,7 +615,7 @@ QUESTION ${questionNumber}:`;
       // 3. Enrichissement du résultat avec les données de génération
       if (creationResult.success) {
         creationResult.validationScore = generationResult.validationResult?.score;
-        
+
         // Mise à jour des métadonnées du quiz créé
         if (creationResult.quizId) {
           await this.quizCreationService.updateQuizMetadata(creationResult.quizId, {
@@ -630,7 +633,7 @@ QUESTION ${questionNumber}:`;
             questionIds: creationResult.questionIds,
             questionsCreated: creationResult.questionsCreated,
             validationScore: generationResult.validationResult?.score,
-            aiModel: 'supernova-default',
+            aiModel: aiConfig.gemini.generationModel,
             aiProvider: 'code-supernova',
             tokensUsed: (generationResult.validationResult as any)?.tokensUsed,
           }, {
@@ -666,7 +669,7 @@ QUESTION ${questionNumber}:`;
 
     } catch (error: any) {
       console.error('❌ Erreur génération et création automatique:', error);
-      
+
       // Log d'audit pour erreur générale
       if (this.auditService && auditLogId) {
         await this.auditService.failGenerationLog(auditLogId, {
@@ -782,7 +785,8 @@ QUESTION ${questionNumber}:`;
         maxTokens: 3000,
         temperature: 0.7,
         jsonMode: true,
-        retryCount: 3
+        retryCount: 3,
+        systemInstruction: MEDICAL_CONTEXT_SYSTEM_PROMPT
       };
 
       let aiResponse: AIResponse;
@@ -803,11 +807,11 @@ QUESTION ${questionNumber}:`;
         parsedQuiz = JSON.parse(aiResponse.content);
       } catch (parseError) {
         console.error('❌ Erreur parsing JSON:', parseError);
-        
+
         // Tentative de régénération avec prompt corrigé
         const retryPrompt = this.promptService.buildRetryPrompt(promptConfig, ['Format JSON invalide']);
         const retryRequest: AIRequest = { ...aiRequest, prompt: retryPrompt };
-        
+
         try {
           const retryResponse = await this.apiService.generateContent(retryRequest);
           parsedQuiz = JSON.parse(retryResponse.content);
@@ -822,15 +826,15 @@ QUESTION ${questionNumber}:`;
 
       // 5. Validation complète du contenu
       const validationResult = this.validatorService.validateAIGeneratedQuiz(parsedQuiz);
-      
+
       if (!validationResult.isValid) {
         console.warn('⚠️ Validation échouée:', validationResult.issues);
-        
+
         // Tentative de régénération avec les erreurs de validation
         const validationErrors = validationResult.issues
           .filter(issue => issue.severity === 'critical' || issue.severity === 'major')
           .map(issue => issue.message);
-        
+
         if (validationErrors.length > 0) {
           try {
             const retryPrompt = this.promptService.buildRetryPrompt(promptConfig, validationErrors);
@@ -838,7 +842,7 @@ QUESTION ${questionNumber}:`;
             const retryResponse = await this.apiService.generateContent(retryRequest);
             const retryQuiz = JSON.parse(retryResponse.content);
             const retryValidation = this.validatorService.validateAIGeneratedQuiz(retryQuiz);
-            
+
             if (retryValidation.isValid || retryValidation.score > validationResult.score) {
               console.log('✅ Régénération réussie avec meilleur score');
               return {
@@ -893,7 +897,7 @@ QUESTION ${questionNumber}:`;
 
     } catch (error: any) {
       console.error('❌ Erreur génération quiz complet:', error);
-      
+
       // Log d'audit pour erreur de génération
       if (this.auditService && auditLogId) {
         await this.auditService.failGenerationLog(auditLogId, {
@@ -945,7 +949,7 @@ QUESTION ${questionNumber}:`;
 
       // Génération avec le prompt adaptatif
       const questions: GeneratedQuestion[] = [];
-      
+
       for (let i = 0; i < request.questionCount; i++) {
         const singleQuestionPrompt = `${dynamicPrompt}
 
@@ -966,7 +970,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
           });
 
           const questionData = JSON.parse(response.content);
-          
+
           const question: GeneratedQuestion = {
             questionText: questionData.questionText,
             options: questionData.options,
@@ -1201,7 +1205,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
           collection: 'categories',
           id: existingCategoryId
         });
-        
+
         if (category) {
           return {
             categoryId: existingCategoryId,
@@ -1270,14 +1274,14 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
 
     } catch (error: any) {
       console.error('❌ Erreur assignation catégorie:', error);
-      
+
       // Fallback: retourner la première catégorie disponible
       try {
         const fallbackCategories = await this.payload.find({
           collection: 'categories',
           limit: 1
         });
-        
+
         if (fallbackCategories.docs && fallbackCategories.docs.length > 0) {
           const fallback = fallbackCategories.docs[0]!;
           return {
@@ -1289,7 +1293,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
       } catch (fallbackError) {
         console.error('❌ Erreur fallback catégorie:', fallbackError);
       }
-      
+
       throw new Error('Impossible d\'assigner une catégorie');
     }
   }
@@ -1308,23 +1312,23 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
       generatedByAI: true,
       generationDate: new Date().toISOString(),
       aiModel: 'supernova-default',
-      
+
       // Métadonnées de contenu
       questionCount: aiContent.questions.length,
       estimatedDuration: aiContent.quiz.estimatedDuration,
       studentLevel: config.studentLevel,
       difficulty: config.difficulty || 'medium',
       medicalDomain: config.medicalDomain || 'général',
-      
+
       // Métadonnées de qualité
       hasExplanations: aiContent.questions.every(q => q.explanation && q.explanation.length > 0),
       averageQuestionLength: this.calculateAverageQuestionLength(aiContent.questions),
       averageExplanationLength: this.calculateAverageExplanationLength(aiContent.questions),
-      
+
       // Métadonnées pédagogiques
       difficultyDistribution: this.analyzeDifficultyDistribution(aiContent.questions),
       topicCoverage: this.analyzeTopicCoverage(aiContent.questions),
-      
+
       // Métadonnées techniques
       version: '1.0',
       lastUpdated: new Date().toISOString()
@@ -1338,7 +1342,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
    */
   private calculateAverageQuestionLength(questions: AIGeneratedQuestion[]): number {
     if (questions.length === 0) return 0;
-    
+
     const totalLength = questions.reduce((sum, q) => sum + q.questionText.length, 0);
     return Math.round(totalLength / questions.length);
   }
@@ -1348,7 +1352,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
    */
   private calculateAverageExplanationLength(questions: AIGeneratedQuestion[]): number {
     if (questions.length === 0) return 0;
-    
+
     const totalLength = questions.reduce((sum, q) => sum + (q.explanation?.length || 0), 0);
     return Math.round(totalLength / questions.length);
   }
@@ -1382,7 +1386,7 @@ Génère UNE SEULE question selon les spécifications ci-dessus.`;
       if (q.tags) {
         q.tags.forEach((tag: string) => topics.add(tag));
       }
-      
+
       // Extraction automatique de sujets du texte
       const extractedTopics = this.extractTopicsFromText(q.questionText);
       extractedTopics.forEach(topic => topics.add(topic));

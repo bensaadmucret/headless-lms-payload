@@ -77,6 +77,20 @@ npm run ci:dup
 npm run ci:prune
 ```
 
+### 🤖 Configuration IA multi-fournisseurs
+
+- Les services IA utilisent désormais `src/config/ai.ts` pour choisir dynamiquement le provider (`AI_PROVIDER_DEFAULT`) et les modèles (Gemini, OpenAI, Anthropic).
+- Par défaut, `AI_PROVIDER_DEFAULT=gemini` et les services passent automatiquement par `AIAPIService`.
+- Pour activer OpenAI ou Anthropic :
+  1. Ajouter les variables dans `.env` (`OPENAI_API_KEY`, `OPENAI_MODEL_DEFAULT`, `ANTHROPIC_API_KEY`, etc.).
+  2. Installer les SDK correspondants (`openai`, `@anthropic-ai/sdk`).
+  3. Implémenter les méthodes `callOpenAIAPI` / `callAnthropicAPI` dans `AIAPIService` (les stubs sont déjà présents).
+  4. Optionnel : changer `AI_PROVIDER_DEFAULT` ou passer `provider`/`modelOverride` dans les appels pour mixer les fournisseurs.
+
+- Gemini reste fonctionnel sans changement ; modifier uniquement les variables d’environnement suffit pour basculer de modèle ou de provider.
+
+
+
 ---
 
 Ce backoffice propose une interface d’administration UX-friendly, permettant de gérer l’ensemble des contenus pédagogiques, utilisateurs et progressions.

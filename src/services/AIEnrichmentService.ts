@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI, GenerativeModel } from '@google/generative-ai'
+import { aiConfig } from '../config/ai'
 
 export interface EnrichmentResult {
   keywords: string[]
@@ -23,7 +24,7 @@ export class AIEnrichmentService {
     }
 
     this.genAI = new GoogleGenerativeAI(apiKey)
-    this.model = this.genAI.getGenerativeModel({ model: 'gemini-pro' })
+    this.model = this.genAI.getGenerativeModel({ model: aiConfig.gemini.generationModel })
   }
 
   /**

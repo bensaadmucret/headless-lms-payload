@@ -1,5 +1,7 @@
 import { GoogleGenerativeAI, Content, GenerationConfig } from '@google/generative-ai';
 import { Message } from '../types/studySession';
+import { MEDICAL_CONTEXT_SYSTEM_PROMPT } from '../config/ai-context';
+import { aiConfig } from '../config/ai';
 
 interface AIConfig {
   model: string;
@@ -16,9 +18,9 @@ export class AIService {
     }
 
     this.client = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    
+
     this.config = {
-      model: 'gemini-1.5-flash-latest',
+      model: aiConfig.gemini.chatModel,
       generationConfig: {
         maxOutputTokens: 1000,
         temperature: 0.7,
@@ -84,6 +86,7 @@ export class AIService {
     }));
   }
 
+
   /**
    * Génère un message système basé sur le contexte
    */
@@ -91,9 +94,11 @@ export class AIService {
     course?: string;
     difficulty?: 'beginner' | 'intermediate' | 'advanced';
   }): string | undefined {
-    if (!context || !context.course) return undefined;
+    let systemPrompt = MEDICAL_CONTEXT_SYSTEM_PROMPT + '\n\n';
 
-    let systemPrompt = `Tu es un tuteur expert en ${context.course}. `;
+    if (!context || !context.course) return systemPrompt;
+
+    systemPrompt += `Tu es un tuteur expert en ${context.course}. `;
     if (context.difficulty) {
       systemPrompt += `Le niveau de l'étudiant est ${context.difficulty}. `;
     }

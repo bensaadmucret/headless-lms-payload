@@ -196,6 +196,25 @@ export class QuizCreationService {
           continue;
         }
 
+        // Vérifier si une question identique existe déjà (même texte + même catégorie)
+        const existingQuestions = await this.payload.find({
+          collection: 'questions',
+          where: {
+            and: [
+              { 'questionText.root.children.0.children.0.text': { equals: aiQuestion.questionText } },
+              { category: { equals: request.categoryId } }
+            ]
+          },
+          limit: 1
+        });
+
+        if (existingQuestions.docs.length > 0) {
+          // Question en double détectée
+          console.log(`⚠️ Question ${i + 1} en double ignorée: "${aiQuestion.questionText.substring(0, 50)}..."`)
+          warnings.push(`Question ${i + 1}: Question identique déjà existante, ignorée`);
+          continue;
+        }
+
         // Création de la question dans la base
         const createdQuestion = await this.payload.create({
           collection: 'questions',
@@ -434,6 +453,23 @@ export class QuizCreationService {
   }> {
     try {
       console.log('🎯 Création du quiz avec', questionIds.length, 'questions...');
+
+      // Vérifier si un quiz avec le même titre existe déjà
+      const existingQuizzes = await this.payload.find({
+        collection: 'quizzes',
+        where: {
+          title: { equals: request.aiContent.quiz.title }
+        },
+        limit: 1
+      });
+
+      if (existingQuizzes.docs.length > 0) {
+        console.log(`⚠️ Quiz en double détecté: "${request.aiContent.quiz.title}"`)
+        return {
+          success: false,
+          errors: [`Un quiz avec le titre "${request.aiContent.quiz.title}" existe déjà. Veuillez choisir un titre différent.`]
+        };
+      }
 
       const formattedQuestionIds = questionIds.map(id => {
         const numericId = Number(id);

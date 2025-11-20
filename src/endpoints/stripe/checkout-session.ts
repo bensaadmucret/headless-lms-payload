@@ -3,6 +3,21 @@ import { getStripeClient } from '../../services/stripe/startup';
 import { StripeCheckoutService } from '../../services/stripe/StripeCheckoutService';
 import { loadStripeConfig } from '../../services/stripe/config';
 
+interface CheckoutSessionRequestBody {
+  prospectId?: string;
+  billingCycle?: 'monthly' | 'yearly';
+  selectedPrice?: number;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  campaign?: {
+    utm_source?: string;
+    utm_medium?: string;
+    utm_campaign?: string;
+  } | null;
+  priceId?: string;
+}
+
 /**
  * POST /api/stripe/checkout-session
  * Creates a Stripe Checkout session for subscription
@@ -12,17 +27,6 @@ export const createCheckoutSessionEndpoint = {
   method: 'post' as const,
   handler: async (req: PayloadRequest) => {
     try {
-      // Verify user authentication
-      if (!req.user || !req.user.id) {
-        return Response.json(
-          {
-            error: 'Unauthorized',
-            message: 'Vous devez être connecté pour créer une session de paiement',
-          },
-          { status: 401 }
-        );
-      }
-
       // Parse request body
       if (typeof req.json !== 'function') {
         return Response.json(
@@ -34,34 +38,65 @@ export const createCheckoutSessionEndpoint = {
         );
       }
 
-      const body = await req.json();
-      const { priceId } = body as { priceId?: string };
+      const rawBody = await req.json();
+      const body = (rawBody ?? {}) as CheckoutSessionRequestBody;
 
-      if (!priceId) {
+      const prospectId = typeof body.prospectId === 'string' ? body.prospectId : undefined;
+      const email = typeof body.email === 'string' ? body.email.trim() : undefined;
+
+      const billingCycleFromBody =
+        body.billingCycle === 'monthly' || body.billingCycle === 'yearly'
+          ? body.billingCycle
+          : undefined;
+
+      const legacyPriceId =
+        typeof body.priceId === 'string' ? body.priceId.trim().toLowerCase() : undefined;
+
+      const billingCycle =
+        billingCycleFromBody ??
+        (legacyPriceId === 'monthly' || legacyPriceId === 'yearly' ? legacyPriceId : undefined);
+
+      if (!prospectId) {
         return Response.json(
           {
             error: 'Bad Request',
-            message: 'Le paramètre priceId est requis',
+            message: 'Le paramètre prospectId est requis',
           },
           { status: 400 }
         );
       }
 
-      // Map priceId to actual Stripe Price ID
-      const config = loadStripeConfig();
-      let stripePriceId: string;
-
-      if (priceId === 'monthly') {
-        stripePriceId = config.priceIdMonthly;
-      } else if (priceId === 'yearly') {
-        stripePriceId = config.priceIdYearly;
-      } else {
+      if (!billingCycle) {
         return Response.json(
           {
             error: 'Bad Request',
-            message: 'priceId invalide. Utilisez "monthly" ou "yearly"',
+            message: 'Le paramètre billingCycle est requis et doit être "monthly" ou "yearly"',
           },
           { status: 400 }
+        );
+      }
+
+      if (!email) {
+        return Response.json(
+          {
+            error: 'Bad Request',
+            message: 'Le paramètre email est requis',
+          },
+          { status: 400 }
+        );
+      }
+
+      const config = loadStripeConfig();
+      const stripePriceId =
+        billingCycle === 'yearly' ? config.priceIdYearly : config.priceIdMonthly;
+
+      if (!stripePriceId) {
+        return Response.json(
+          {
+            error: 'Internal Server Error',
+            message: "Le Price ID Stripe n'est pas configuré pour ce cycle de facturation",
+          },
+          { status: 500 }
         );
       }
 
@@ -73,18 +108,38 @@ export const createCheckoutSessionEndpoint = {
       const stripeClient = getStripeClient();
       const checkoutService = new StripeCheckoutService(stripeClient, req.payload);
 
+      const selectedPrice =
+        typeof body.selectedPrice === 'number' && Number.isFinite(body.selectedPrice)
+          ? body.selectedPrice
+          : undefined;
+
+      const campaign = body.campaign ?? undefined;
+      const utmSource =
+        campaign && typeof campaign.utm_source === 'string' ? campaign.utm_source : undefined;
+      const utmMedium =
+        campaign && typeof campaign.utm_medium === 'string' ? campaign.utm_medium : undefined;
+      const utmCampaign =
+        campaign && typeof campaign.utm_campaign === 'string' ? campaign.utm_campaign : undefined;
+
       const session = await checkoutService.createCheckoutSession({
-        userId: req.user.id.toString(),
+        prospectId,
         priceId: stripePriceId,
-        email: req.user.email,
+        email,
+        firstName: typeof body.firstName === 'string' ? body.firstName : undefined,
+        lastName: typeof body.lastName === 'string' ? body.lastName : undefined,
+        selectedPrice,
+        billingCycle,
+        utmSource,
+        utmMedium,
+        utmCampaign,
         successUrl,
         cancelUrl,
       });
 
       console.log('Checkout session created successfully:', {
         sessionId: session.sessionId,
-        userId: req.user.id,
-        priceId,
+        prospectId,
+        billingCycle,
       });
 
       return Response.json({

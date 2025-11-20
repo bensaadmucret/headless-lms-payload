@@ -4,6 +4,7 @@
  */
 
 import { GoogleGenerativeAI, GenerationConfig } from '@google/generative-ai';
+import { aiConfig } from '../config/ai';
 
 export interface AIProvider {
   name: string;
@@ -17,6 +18,9 @@ export interface AIRequest {
   temperature?: number;
   jsonMode?: boolean;
   retryCount?: number;
+  systemInstruction?: string;
+  modelOverride?: string;
+  provider?: 'gemini' | 'openai' | 'anthropic';
 }
 
 export interface AIResponse {
@@ -37,9 +41,12 @@ export interface AIError {
 
 export class AIAPIService {
   private geminiClient: GoogleGenerativeAI | null = null;
+  private openAIClient: any | null = null; // TODO: Typer avec le SDK OpenAI quand installé
+  private anthropicClient: any | null = null; // TODO: Typer avec le SDK Anthropic quand installé
+
   private cache: Map<string, { response: AIResponse; timestamp: number }> = new Map();
   private rateLimiter: Map<string, { count: number; resetTime: number }> = new Map();
-  
+
   // Configuration
   private readonly CACHE_TTL = 24 * 60 * 60 * 1000; // 24 heures
   private readonly RATE_LIMIT_REQUESTS = 10;
@@ -66,6 +73,18 @@ export class AIAPIService {
     } else {
       console.warn('⚠️ GEMINI_API_KEY non configurée');
     }
+
+    // Initialisation OpenAI (Placeholder)
+    if (aiConfig.openai.apiKey) {
+      console.log('✅ OpenAI configuré (client non instancié - SDK requis)');
+      this.openAIClient = { ready: true }; // Stub
+    }
+
+    // Initialisation Anthropic (Placeholder)
+    if (aiConfig.anthropic.apiKey) {
+      console.log('✅ Anthropic configuré (client non instancié - SDK requis)');
+      this.anthropicClient = { ready: true }; // Stub
+    }
   }
 
   /**
@@ -77,7 +96,23 @@ export class AIAPIService {
     if (this.geminiClient) {
       providers.push({
         name: 'Google Gemini',
-        model: 'gemini-2.0-flash',
+        model: aiConfig.gemini.defaultModel,
+        available: true
+      });
+    }
+
+    if (this.openAIClient) {
+      providers.push({
+        name: 'OpenAI',
+        model: aiConfig.openai.defaultModel,
+        available: true
+      });
+    }
+
+    if (this.anthropicClient) {
+      providers.push({
+        name: 'Anthropic',
+        model: aiConfig.anthropic.defaultModel,
         available: true
       });
     }
@@ -90,7 +125,7 @@ export class AIAPIService {
    */
   async generateContent(request: AIRequest): Promise<AIResponse> {
     const cacheKey = this.generateCacheKey(request);
-    
+
     // Vérification du cache
     const cached = this.getFromCache(cacheKey);
     if (cached) {
@@ -110,21 +145,21 @@ export class AIAPIService {
       try {
         console.log(`📡 Tentative ${attempt + 1}/${maxRetries + 1}`);
         const response = await this.makeAPIRequest(request);
-        
+
         // Validation de la réponse
         if (!this.validateResponse(response, request.jsonMode ? 'json' : 'text')) {
           throw { type: 'invalid_response', message: 'Réponse invalide de l\'API' };
         }
-        
+
         // Mise en cache de la réponse
         this.setCache(cacheKey, response);
-        
+
         console.log(`✅ Génération réussie (tentative ${attempt + 1})`);
         return response;
       } catch (error) {
         lastError = this.handleAPIError(error);
         console.warn(`⚠️ Tentative ${attempt + 1} échouée:`, lastError.message);
-        
+
         // Ne pas retry pour certains types d'erreurs
         if (lastError.type === 'auth_error') {
           console.error('❌ Erreur d\'authentification - arrêt des tentatives');
@@ -149,12 +184,38 @@ export class AIAPIService {
    * Effectue la requête API vers le fournisseur approprié
    */
   private async makeAPIRequest(request: AIRequest): Promise<AIResponse> {
-    // Pour l'instant, utilise uniquement Gemini
-    if (!this.geminiClient) {
-      throw new Error('Aucun fournisseur IA disponible');
-    }
+    const provider = request.provider || aiConfig.defaultProvider;
 
-    return this.callGeminiAPI(request);
+    switch (provider) {
+      case 'openai':
+        return this.callOpenAIAPI(request);
+      case 'anthropic':
+        return this.callAnthropicAPI(request);
+      case 'gemini':
+      default:
+        if (!this.geminiClient) {
+          throw new Error('Gemini non disponible et aucun autre fournisseur configuré');
+        }
+        return this.callGeminiAPI(request);
+    }
+  }
+
+  /**
+   * Appelle l'API OpenAI (Stub)
+   */
+  private async callOpenAIAPI(request: AIRequest): Promise<AIResponse> {
+    if (!this.openAIClient) throw new Error('OpenAI non initialisé');
+    // TODO: Implémenter l'appel réel avec le SDK OpenAI
+    throw new Error('Implémentation OpenAI non disponible - installez le SDK');
+  }
+
+  /**
+   * Appelle l'API Anthropic (Stub)
+   */
+  private async callAnthropicAPI(request: AIRequest): Promise<AIResponse> {
+    if (!this.anthropicClient) throw new Error('Anthropic non initialisé');
+    // TODO: Implémenter l'appel réel avec le SDK Anthropic
+    throw new Error('Implémentation Anthropic non disponible - installez le SDK');
   }
 
   /**
@@ -176,15 +237,18 @@ export class AIAPIService {
       generationConfig.responseMimeType = 'application/json';
     }
 
+    const modelName = request.modelOverride || aiConfig.gemini.defaultModel;
+
     const model = this.geminiClient.getGenerativeModel({
-      model: 'gemini-2.0-flash',
+      model: modelName,
       generationConfig,
+      systemInstruction: request.systemInstruction,
     });
 
     try {
       const result = await model.generateContent(request.prompt);
       const response = result.response;
-      
+
       if (!response) {
         throw new Error('Réponse vide de l\'API Gemini');
       }
@@ -197,21 +261,21 @@ export class AIAPIService {
       return {
         content,
         provider: 'Google Gemini',
-        model: 'gemini-2.0-flash',
+        model: modelName,
         finishReason: 'completed'
       };
     } catch (error: any) {
       console.error('❌ Erreur API Gemini:', error);
-      
+
       // Analyse de l'erreur pour déterminer le type
       if (error.message?.includes('quota') || error.message?.includes('rate limit')) {
         throw { type: 'rate_limit', message: 'Limite de taux atteinte', details: error };
       }
-      
+
       if (error.message?.includes('authentication') || error.message?.includes('API key')) {
         throw { type: 'auth_error', message: 'Erreur d\'authentification', details: error };
       }
-      
+
       throw { type: 'api_error', message: error.message || 'Erreur API inconnue', details: error };
     }
   }
@@ -226,30 +290,30 @@ export class AIAPIService {
 
     // Analyse de l'erreur pour déterminer le type
     const message = error.message || 'Erreur inconnue';
-    
+
     if (message.includes('network') || message.includes('timeout') || message.includes('ECONNRESET')) {
       return { type: 'network_error', message: 'Erreur réseau ou timeout', retryAfter: 5 };
     }
-    
+
     if (message.includes('rate limit') || message.includes('quota') || message.includes('429')) {
       // Extraire le temps d'attente si disponible
       const retryMatch = message.match(/retry.*?(\d+)/i);
       const retryAfter = retryMatch ? parseInt(retryMatch[1]) : 60;
       return { type: 'rate_limit', message: 'Limite de taux atteinte', retryAfter };
     }
-    
+
     if (message.includes('authentication') || message.includes('unauthorized') || message.includes('401')) {
       return { type: 'auth_error', message: 'Erreur d\'authentification' };
     }
-    
+
     if (message.includes('502') || message.includes('503') || message.includes('504')) {
       return { type: 'api_error', message: 'Service temporairement indisponible', retryAfter: 30 };
     }
-    
+
     if (message.includes('500')) {
       return { type: 'api_error', message: 'Erreur serveur interne', retryAfter: 10 };
     }
-    
+
     return { type: 'api_error', message, details: error };
   }
 
@@ -258,20 +322,20 @@ export class AIAPIService {
    */
   private calculateRetryDelay(attempt: number, error: AIError): number {
     let baseDelay = this.RETRY_DELAY * Math.pow(2, attempt);
-    
+
     // Délai spécial pour les erreurs de rate limit
     if (error.type === 'rate_limit' && error.retryAfter) {
       baseDelay = error.retryAfter * 1000;
     }
-    
+
     // Délai spécial pour les erreurs réseau
     if (error.type === 'network_error' && error.retryAfter) {
       baseDelay = error.retryAfter * 1000;
     }
-    
+
     // Limiter le délai maximum
     baseDelay = Math.min(baseDelay, 60000); // Max 1 minute
-    
+
     // Ajouter un peu de jitter pour éviter les thundering herds
     const jitter = Math.random() * 0.1 * baseDelay;
     return baseDelay + jitter;
@@ -283,13 +347,13 @@ export class AIAPIService {
   private checkRateLimit(): void {
     const now = Date.now();
     const key = 'global';
-    
+
     let limiter = this.rateLimiter.get(key);
     if (!limiter || now > limiter.resetTime) {
       limiter = { count: 0, resetTime: now + this.RATE_LIMIT_WINDOW };
       this.rateLimiter.set(key, limiter);
     }
-    
+
     if (limiter.count >= this.RATE_LIMIT_REQUESTS) {
       const waitTime = Math.ceil((limiter.resetTime - now) / 1000);
       throw {
@@ -298,7 +362,7 @@ export class AIAPIService {
         retryAfter: waitTime
       } as AIError;
     }
-    
+
     limiter.count++;
   }
 
@@ -312,7 +376,7 @@ export class AIAPIService {
       temperature: request.temperature,
       jsonMode: request.jsonMode
     });
-    
+
     // Hash simple pour réduire la taille de la clé
     let hash = 0;
     for (let i = 0; i < key.length; i++) {
@@ -320,7 +384,7 @@ export class AIAPIService {
       hash = ((hash << 5) - hash) + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
-    
+
     return `ai_${Math.abs(hash)}`;
   }
 
@@ -330,13 +394,13 @@ export class AIAPIService {
   private getFromCache(key: string): AIResponse | null {
     const cached = this.cache.get(key);
     if (!cached) return null;
-    
+
     // Vérifier l'expiration
     if (Date.now() - cached.timestamp > this.CACHE_TTL) {
       this.cache.delete(key);
       return null;
     }
-    
+
     return cached.response;
   }
 
@@ -348,7 +412,7 @@ export class AIAPIService {
       response,
       timestamp: Date.now()
     });
-    
+
     // Nettoyage périodique du cache
     if (this.cache.size > 1000) {
       this.cleanupCache();
@@ -403,7 +467,7 @@ export class AIAPIService {
     rateLimitStatus: { requests: number; resetTime: number } | null;
   } {
     const rateLimitStatus = this.rateLimiter.get('global');
-    
+
     return {
       cacheSize: this.cache.size,
       cacheHitRate: 0, // TODO: Implémenter le tracking des hits/misses
@@ -427,7 +491,7 @@ export class AIAPIService {
       return await this.generateContent(request);
     } catch (error) {
       console.warn('🔄 Activation des stratégies de fallback');
-      
+
       if (fallbackStrategies?.reduceComplexity) {
         try {
           console.log('📉 Tentative avec complexité réduite');
@@ -467,12 +531,12 @@ export class AIAPIService {
     const essentialLines = lines.filter(line => {
       const lowerLine = line.toLowerCase();
       return lowerLine.includes('json') ||
-             lowerLine.includes('format') ||
-             lowerLine.includes('important') ||
-             lowerLine.includes('question') ||
-             lowerLine.includes('réponse') ||
-             lowerLine.includes('médical') ||
-             line.trim().length < 100; // Garder les lignes courtes
+        lowerLine.includes('format') ||
+        lowerLine.includes('important') ||
+        lowerLine.includes('question') ||
+        lowerLine.includes('réponse') ||
+        lowerLine.includes('médical') ||
+        line.trim().length < 100; // Garder les lignes courtes
     });
 
     return essentialLines.join('\n');
@@ -532,7 +596,7 @@ export class AIAPIService {
     error?: string;
   }> {
     const startTime = Date.now();
-    
+
     try {
       const testRequest: AIRequest = {
         prompt: 'Test de connectivité. Réponds simplement "OK".',
@@ -541,7 +605,7 @@ export class AIAPIService {
       };
 
       await this.generateContent(testRequest);
-      
+
       return {
         available: true,
         responseTime: Date.now() - startTime
@@ -565,7 +629,7 @@ export class AIAPIService {
     averageResponseTime: number;
   } {
     const rateLimitStatus = this.rateLimiter.get('global');
-    
+
     return {
       cacheStats: {
         size: this.cache.size,
