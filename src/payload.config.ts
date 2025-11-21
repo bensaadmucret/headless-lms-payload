@@ -157,6 +157,9 @@ import GenerationLogs from "./collections/GenerationLogs";
 import ImportJobs from "./collections/ImportJobs";
 import { AnalyticsEvents } from "./collections/AnalyticsEvents";
 import { AnalyticsSessions } from "./collections/AnalyticsSessions";
+import { Documents } from "./collections/Documents";
+import { DocumentFolders } from "./collections/DocumentFolders";
+import { Annotations } from "./collections/Annotations";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -261,6 +264,9 @@ export default buildConfig({
     LearningPathSteps,
     AnalyticsEvents,
     AnalyticsSessions,
+    Documents,
+    DocumentFolders,
+    Annotations,
   ],
   globals: [Header, Footer],
   cors: (process.env.CORS_ORIGINS || "").split(","),

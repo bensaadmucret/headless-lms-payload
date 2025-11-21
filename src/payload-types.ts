@@ -106,6 +106,9 @@ export interface Config {
     'learning-path-steps': LearningPathStep;
     'analytics-events': AnalyticsEvent;
     'analytics-sessions': AnalyticsSession;
+    documents: Document;
+    'document-folders': DocumentFolder;
+    annotations: Annotation;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
@@ -157,6 +160,9 @@ export interface Config {
     'learning-path-steps': LearningPathStepsSelect<false> | LearningPathStepsSelect<true>;
     'analytics-events': AnalyticsEventsSelect<false> | AnalyticsEventsSelect<true>;
     'analytics-sessions': AnalyticsSessionsSelect<false> | AnalyticsSessionsSelect<true>;
+    documents: DocumentsSelect<false> | DocumentsSelect<true>;
+    'document-folders': DocumentFoldersSelect<false> | DocumentFoldersSelect<true>;
+    annotations: AnnotationsSelect<false> | AnnotationsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
@@ -2653,6 +2659,91 @@ export interface AnalyticsSession {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents".
+ */
+export interface Document {
+  id: number;
+  title: string;
+  folder?: (number | null) | DocumentFolder;
+  user?: (number | null) | User;
+  authors?: string | null;
+  pageCount?: number | null;
+  /**
+   * Content extracted for search purposes
+   */
+  extractedContent?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-folders".
+ */
+export interface DocumentFolder {
+  id: number;
+  name: string;
+  parent?: (number | null) | DocumentFolder;
+  user?: (number | null) | User;
+  type?: ('year' | 'subject' | 'chapter' | 'subpart' | 'other') | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "annotations".
+ */
+export interface Annotation {
+  id: number;
+  document: number | Document;
+  user?: (number | null) | User;
+  type: 'note' | 'remark' | 'summary' | 'highlight' | 'zone';
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  pageNumber: number;
+  /**
+   * JSON object storing x, y, width, height, etc.
+   */
+  position?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  /**
+   * The text that was highlighted
+   */
+  quote?: string | null;
+  color?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -2995,6 +3086,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'analytics-sessions';
         value: number | AnalyticsSession;
+      } | null)
+    | ({
+        relationTo: 'documents';
+        value: number | Document;
+      } | null)
+    | ({
+        relationTo: 'document-folders';
+        value: number | DocumentFolder;
+      } | null)
+    | ({
+        relationTo: 'annotations';
+        value: number | Annotation;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -4341,6 +4444,57 @@ export interface AnalyticsSessionsSelect<T extends boolean = true> {
         id?: T;
       };
   customProperties?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "documents_select".
+ */
+export interface DocumentsSelect<T extends boolean = true> {
+  title?: T;
+  folder?: T;
+  user?: T;
+  authors?: T;
+  pageCount?: T;
+  extractedContent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "document-folders_select".
+ */
+export interface DocumentFoldersSelect<T extends boolean = true> {
+  name?: T;
+  parent?: T;
+  user?: T;
+  type?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "annotations_select".
+ */
+export interface AnnotationsSelect<T extends boolean = true> {
+  document?: T;
+  user?: T;
+  type?: T;
+  content?: T;
+  pageNumber?: T;
+  position?: T;
+  quote?: T;
+  color?: T;
   updatedAt?: T;
   createdAt?: T;
 }
