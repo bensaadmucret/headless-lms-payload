@@ -6,6 +6,7 @@ import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
 import { Plugin } from 'payload'
+import { betterAuthPlugin } from 'payload-auth/better-auth'
 import { revalidateRedirects } from '@/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
@@ -92,4 +93,34 @@ export const plugins: Plugin[] = [
     },
   }),
   payloadCloudPlugin(),
+  betterAuthPlugin({
+    disableDefaultPayloadAuth: true,
+    hidePluginCollections: true,
+    users: {
+      slug: 'users',
+      defaultRole: 'user',
+      defaultAdminRole: 'admin',
+      adminRoles: ['admin', 'superadmin'],
+      roles: ['user', 'student', 'admin', 'superadmin'],
+      allowedFields: ['name'],
+    },
+    betterAuthOptions: {
+      appName: 'medcoach',
+      baseURL: process.env.BETTER_AUTH_URL,
+      // enableDebugLogs: true, // Uncomment to debug adapter operations
+      trustedOrigins: [
+        'http://localhost:3000',
+        'http://localhost:8080',
+        process.env.FRONTEND_URL,
+      ].filter(Boolean) as string[],
+      advanced: {
+        // Désactiver la vérification CSRF en développement si nécessaire
+        disableCSRFCheck: process.env.NODE_ENV === 'development',
+      },
+      emailAndPassword: {
+        enabled: true,
+        requireEmailVerification: false,
+      },
+    },
+  }),
 ]
