@@ -73,12 +73,12 @@ interface GenerateQuizResponse {
 export const generateAIQuizRobust = async (req: PayloadRequest): Promise<Response> => {
   const payload = req.payload as Payload
   const startTime = Date.now()
-  
+
   // Initialiser les services de gestion d'erreurs
   const errorManager = new AIQuizErrorManager(payload)
   const validationService = new AIQuizValidationService(payload)
   const rateLimitService = new AIQuizRateLimitService(payload)
-  
+
   let userId: string | undefined
   let requestData: Partial<GenerateQuizRequest> = {}
 
@@ -183,7 +183,7 @@ export const generateAIQuizRobust = async (req: PayloadRequest): Promise<Respons
 
   } catch (error) {
     console.error('❌ Erreur critique dans generateAIQuizRobust:', error)
-    
+
     // Gestion d'erreur de dernier recours
     const criticalErrorResponse = await errorManager.handleAIQuizError(
       error as Error,
@@ -204,7 +204,7 @@ async function validateAuthentication(req: PayloadRequest): Promise<{
 }> {
   try {
     const user = req.user
-    
+
     if (!user) {
       return {
         success: false,
@@ -214,7 +214,7 @@ async function validateAuthentication(req: PayloadRequest): Promise<{
 
     // Vérifier les permissions
     const userRole = (user as any).role
-    if (!userRole || !['admin', 'teacher'].includes(userRole)) {
+    if (!userRole || userRole !== 'admin') {
       return {
         success: false,
         error: 'Permissions insuffisantes pour générer des quiz IA'
@@ -366,13 +366,13 @@ async function generateQuizWithRetry(
           Object.assign(config, recoveryResult.result.adjustedConfig)
           console.log('🔧 Configuration ajustée automatiquement')
         }
-        
+
         // Attendre avant le retry si nécessaire
         if (recoveryResult.retryDelay) {
           console.log(`⏳ Attente ${recoveryResult.retryDelay}ms avant retry`)
           await new Promise(resolve => setTimeout(resolve, recoveryResult.retryDelay))
         }
-        
+
         continue // Retry avec la configuration ajustée
       }
 
@@ -438,7 +438,7 @@ export const handleAIQuizGenerationErrors = (handler: Function) => {
       return await handler(req)
     } catch (error) {
       console.error('❌ Erreur non gérée dans l\'endpoint AI Quiz:', error)
-      
+
       const errorResponse: GenerateQuizResponse = {
         success: false,
         error: {

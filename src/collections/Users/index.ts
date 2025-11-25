@@ -165,7 +165,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Le cursus actuel de l’étudiant.',
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -173,11 +173,11 @@ export const Users: CollectionConfig = {
       label: 'Onboarding Terminé',
       type: 'checkbox',
       defaultValue: false,
-            validate: validateCheckboxForStudent,
+      validate: validateCheckboxForStudent,
       admin: {
         position: 'sidebar',
         description: 'Indique si l’étudiant a terminé le parcours d’intégration.',
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -188,7 +188,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: "Permet au coach de calibrer le plan d'étude.",
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -196,7 +196,7 @@ export const Users: CollectionConfig = {
       label: "Profil d'étude",
       type: 'group',
       admin: {
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
         description: "Objectifs et préférences de l'étudiant pour personnaliser son coaching.",
       },
       fields: [
@@ -211,7 +211,7 @@ export const Users: CollectionConfig = {
       admin: {
         description: 'Stocke les scores de compétence par matière. Mis à jour par le coach IA.',
         readOnly: true,
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -222,7 +222,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Indique si l’étudiant a passé le quiz de positionnement',
-                    condition: (data: Partial<PayloadUser>) => data.role === 'student',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -230,25 +230,16 @@ export const Users: CollectionConfig = {
       label: 'Rôle',
       type: 'select',
       required: true,
+      defaultValue: 'student',
       options: [
         { label: 'Super Admin', value: 'superadmin' },
         { label: 'Admin', value: 'admin' },
-        { label: 'Enseignant', value: 'teacher' },
         { label: 'Étudiant', value: 'student' },
       ],
       admin: { position: 'sidebar' },
       access: {
         update: (({ req }) => req.user?.role === 'superadmin' || req.user?.role === 'admin') as FieldAccess,
       },
-    },
-    {
-      name: 'subscription_status',
-      type: 'text',
-      required: false,
-      admin: {
-        readOnly: true,
-        position: 'sidebar'
-      }
     },
     {
       name: 'subscriptionStatus',
@@ -265,6 +256,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Statut actuel de l\'abonnement Premium',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -274,6 +266,7 @@ export const Users: CollectionConfig = {
       admin: {
         position: 'sidebar',
         description: 'Date de fin de la période d\'abonnement actuelle',
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
     {
@@ -284,6 +277,7 @@ export const Users: CollectionConfig = {
         position: 'sidebar',
         description: 'ID du client Stripe',
         readOnly: true,
+        condition: (data: Partial<PayloadUser>) => data.role === 'student',
       },
     },
   ],
@@ -296,7 +290,7 @@ export interface User {
   lastName: string;
   email: string;
   password: string;
-  role: 'superadmin' | 'admin' | 'teacher' | 'student';
+  role: 'superadmin' | 'admin' | 'student';
   studyYear?: 'pass' | 'las';
   onboardingComplete?: boolean;
   examDate?: Date;

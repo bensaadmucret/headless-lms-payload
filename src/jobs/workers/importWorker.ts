@@ -433,8 +433,7 @@ function mapQuestionToPayload(question: ImportQuestion) {
   return {
     questionText: richTextContent,
     questionType: 'multipleChoice' as const,
-    options: question.options.map((opt, index) => ({
-      id: `opt-${index}`,
+    options: question.options.map((opt) => ({
       optionText: opt.text,
       isCorrect: opt.isCorrect,
     })),
@@ -560,8 +559,8 @@ async function validateImportData(
  * Lire le contenu d'un fichier média
  */
 async function readMediaFile(filename: string): Promise<string> {
-  // Payload stocke les fichiers dans le dossier media à la racine
-  const mediaPath = path.join(process.cwd(), 'media', filename)
+  // Aligner avec la configuration de la collection Media (dossier public/media)
+  const mediaPath = path.join(process.cwd(), 'public', 'media', filename)
   console.log(`📂 Reading file from: ${mediaPath}`)
   return await fs.readFile(mediaPath, 'utf-8')
 }

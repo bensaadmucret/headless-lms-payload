@@ -100,8 +100,12 @@ export const validateQuiz = async (req: PayloadRequest): Promise<Response> => {
         validationNotes: validationNotes || '',
         validatedBy: String(req.user.id),
         validatedAt: new Date().toISOString(),
-        // Publier automatiquement si approuvé
-        published: validationStatus === 'approved' ? true : quiz.published
+        // Publier automatiquement si approuvé, dépublier si rejeté
+        published: validationStatus === 'approved'
+          ? true
+          : validationStatus === 'rejected'
+          ? false
+          : quiz.published
       }
     })
 

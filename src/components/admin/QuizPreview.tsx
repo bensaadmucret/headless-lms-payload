@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@payloadcms/ui'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -282,6 +282,25 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
       if (status === 'approved' && onPublish) {
         onPublish(quiz.id)
       }
+
+      // Si le quiz est rejeté, le supprimer complètement puis fermer la modale
+      if (status === 'rejected') {
+        try {
+          const deleteResponse = await fetch(`/api/quizzes/${quiz.id}`, {
+            method: 'DELETE',
+            credentials: 'include'
+          })
+
+          if (!deleteResponse.ok) {
+            throw new Error('Erreur lors de la suppression du quiz rejeté')
+          }
+        } catch (deleteError) {
+          console.error(deleteError)
+          setError(deleteError instanceof Error ? deleteError.message : 'Erreur lors de la suppression du quiz rejeté')
+        } finally {
+          onClose()
+        }
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erreur de validation du quiz')
     } finally {
@@ -301,7 +320,7 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000
+        zIndex: 4000
       }}>
         <Card style={{ maxWidth: '400px', width: '90%' }}>
           <CardContent style={{ padding: '40px', textAlign: 'center' }}>
@@ -324,7 +343,7 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1000
+        zIndex: 4000
       }}>
         <Card style={{ maxWidth: '400px', width: '90%' }}>
           <CardContent style={{ padding: '40px', textAlign: 'center' }}>
@@ -355,8 +374,8 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        zIndex: 1001,
-        padding: '20px'
+        zIndex: 4001,
+        padding: '24px'
       }}>
         <div style={{
           backgroundColor: 'white',
@@ -364,7 +383,8 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
           maxWidth: '900px',
           width: '100%',
           maxHeight: '90vh',
-          overflow: 'auto'
+          overflow: 'auto',
+          color: '#111827'
         }}>
           <Card style={{ border: 'none', boxShadow: 'none' }}>
             <CardHeader>
@@ -498,10 +518,10 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
         bottom: 0,
         backgroundColor: 'rgba(0, 0, 0, 0.5)',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
-        zIndex: 1000,
-        padding: '20px'
+        zIndex: 4000,
+        padding: '72px 32px 32px'
       }}>
         <div style={{
           backgroundColor: 'white',
@@ -509,7 +529,8 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
           maxWidth: '900px',
           width: '100%',
           maxHeight: '90vh',
-          overflow: 'auto'
+          overflow: 'auto',
+          color: '#111827'
         }}>
           <Card style={{ border: 'none', boxShadow: 'none' }}>
             <CardHeader style={{ 
@@ -744,7 +765,8 @@ export const QuizPreview: React.FC<QuizPreviewProps> = ({
                     fontSize: '16px', 
                     lineHeight: '1.5',
                     marginBottom: '16px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    color: '#111827'
                   }}>
                     {extractTextFromRichText(currentQuestion.questionText)}
                   </p>

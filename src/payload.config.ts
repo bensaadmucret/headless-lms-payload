@@ -5,7 +5,6 @@ import path from "path";
 import { buildConfig, getPayload } from "payload";
 import { diagnosticsEndpoint } from "./endpoints/diagnostics";
 import { analyticsEventsEndpoint } from "./endpoints/analytics/events";
-import AnalyticsBusinessView from "./components/AnalyticsBusinessView";
 import AfterNavLinks from "./components/AfterNavLinks";
 import { studentQuizzesEndpoint } from "./endpoints/studentQuizzes";
 import { generateSessionStepsEndpoint } from "./endpoints/generateSessionSteps";
@@ -119,7 +118,6 @@ import { Categories } from "./collections/Categories";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
-import { Users } from "./collections/Users";
 import { Courses } from "./collections/Courses";
 import { Assignments } from "./collections/Assignments";
 import Lessons from "./collections/Lessons";
@@ -151,6 +149,7 @@ import GenerationLogs from "./collections/GenerationLogs";
 import ImportJobs from "./collections/ImportJobs";
 import { AnalyticsEvents } from "./collections/AnalyticsEvents";
 import { AnalyticsSessions } from "./collections/AnalyticsSessions";
+import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -174,7 +173,7 @@ export default buildConfig({
       },
       views: {
         analytics: {
-          Component: AnalyticsBusinessView,
+          Component: "@/components/AnalyticsBusinessView",
           path: "/analytics-business",
           label: "Analytics Business",
           group: "Analytics",
@@ -187,7 +186,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    user: Users.slug,
+    user: 'users',
     livePreview: {
       breakpoints: [
         {
@@ -217,12 +216,14 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
+    // Exécute automatiquement les migrations en production / au démarrage
+    // plutôt que de dépendre de la CLI `payload migrate`.
+    prodMigrations: migrations,
   }),
   collections: [
     Pages,
     Posts,
     Media,
-    Users,
     Subscriptions,
     WebhookRetryQueue,
     Categories,

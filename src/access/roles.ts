@@ -1,4 +1,4 @@
-export type Role = 'superadmin' | 'admin' | 'teacher' | 'student';
+export type Role = 'superadmin' | 'admin' | 'student';
 
 export const isSuperAdmin = (user?: { role?: Role }) =>
   user?.role === 'superadmin';
@@ -12,9 +12,9 @@ export const isTeacher = (user?: { role?: Role }) =>
 export const isStudent = (user?: { role?: Role }) =>
   user?.role === 'student';
 
-// "user" logique = teacher OU student
+// "user" logique = student
 export const isUser = (user?: { role?: Role }) =>
-  user?.role === 'teacher' || user?.role === 'student';
+  user?.role === 'student';
 
 export const isAdminOrSuperAdmin = (user?: { role?: Role }) =>
   user?.role === 'admin' || user?.role === 'superadmin';

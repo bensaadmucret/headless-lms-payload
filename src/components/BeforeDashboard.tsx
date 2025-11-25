@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import AnalyticsQuickStats from "./AnalyticsQuickStats";
 
 const BeforeDashboard: React.FC = () => {
   return (
@@ -31,11 +30,6 @@ const BeforeDashboard: React.FC = () => {
         >
           Gérez votre contenu éducatif
         </p>
-      </div>
-
-      {/* Quick Analytics Stats */}
-      <div style={{ marginTop: "16px" }}>
-        <AnalyticsQuickStats />
       </div>
     </div>
   );

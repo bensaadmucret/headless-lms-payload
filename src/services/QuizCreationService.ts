@@ -181,12 +181,40 @@ export class QuizCreationService {
     const errors: string[] = [];
     const warnings: string[] = [];
 
+    // Ensemble pour détecter les doublons (même énoncé + mêmes réponses) dans le quiz généré
+    const seenSignatures = new Set<string>();
+
     console.log(`📝 Création de ${request.aiContent.questions.length} questions...`);
 
     for (let i = 0; i < request.aiContent.questions.length; i++) {
       const aiQuestion = request.aiContent.questions[i]!;
-      
+
       try {
+        // Déduplication intra-quiz : ignorer les questions strictement identiques
+        const signature = this.computeQuestionSignatureForDedup(aiQuestion);
+        if (seenSignatures.has(signature)) {
+          warnings.push(`Question ${i + 1}: dupliquée d'une autre question générée (même énoncé et mêmes réponses), ignorée`);
+          continue;
+        }
+
+        // Déduplication globale : vérifier si une question avec la même signature existe déjà en base
+        const existing = await this.payload.find({
+          collection: 'questions',
+          where: {
+            dedupSignature: {
+              equals: signature
+            }
+          },
+          limit: 1
+        });
+
+        if (existing && Array.isArray((existing as any).docs) && (existing as any).docs.length > 0) {
+          warnings.push(`Question ${i + 1}: déjà présente dans la base (signature identique), ignorée`);
+          continue;
+        }
+
+        seenSignatures.add(signature);
+
         const questionData = this.prepareQuestionData(aiQuestion, request, i + 1);
         
         // Validation de la question avant création
@@ -269,6 +297,9 @@ export class QuizCreationService {
     // Génération des tags automatiques
     const autoTags = this.generateAutoTags(aiQuestion, request);
 
+    // Signature de déduplication (utilisée pour éviter de recréer des questions identiques)
+    const dedupSignature = this.computeQuestionSignatureForDedup(aiQuestion);
+
     return {
       questionText: questionTextRichText,
       questionType: 'multipleChoice',
@@ -282,6 +313,7 @@ export class QuizCreationService {
       generatedByAI: true,
       aiGenerationPrompt: `Quiz: ${request.aiContent.quiz.title} - Question ${questionNumber}`,
       validatedByExpert: false,
+      dedupSignature,
       adaptiveMetadata: {
         averageTimeSeconds: this.estimateQuestionTime(aiQuestion),
         successRate: 0.5, // Valeur par défaut, sera mise à jour avec l'usage
@@ -364,6 +396,56 @@ export class QuizCreationService {
     const multiplier = difficultyMultiplier[aiQuestion.difficulty as keyof typeof difficultyMultiplier] || 1.3;
     
     return Math.round((baseTime + readingTime) * multiplier);
+  }
+
+  /**
+   * Calcule une "signature" normalisée d'une question IA pour la déduplication
+   * Basée sur l'énoncé et l'ensemble des options (texte + bonne réponse),
+   * de manière indépendante à l'ordre des options.
+   */
+  private computeQuestionSignatureForDedup(aiQuestion: AIGeneratedQuestion): string {
+    const normalizedQuestion = this.normalizeTextForDedup(aiQuestion.questionText);
+
+    const normalizedOptions = aiQuestion.options.map(opt => ({
+      text: this.normalizeTextForDedup(opt.text),
+      isCorrect: !!opt.isCorrect,
+    }));
+
+    // Rendre la comparaison indépendante de l'ordre des options
+    normalizedOptions.sort((a, b) => {
+      if (a.isCorrect !== b.isCorrect) {
+        return a.isCorrect ? -1 : 1;
+      }
+      // Comparaison lexicographique sur le texte normalisé
+      return a.text.localeCompare(b.text);
+    });
+
+    const optionsSignature = normalizedOptions
+      .map(opt => `${opt.isCorrect ? '1' : '0'}::${opt.text}`)
+      .join('|');
+
+    return `${normalizedQuestion}||${optionsSignature}`;
+  }
+
+  /**
+   * Normalise un texte pour le rendre robuste aux variations mineures
+   * (majuscules/minuscules, accents, espaces, ponctuation simple).
+   */
+  private normalizeTextForDedup(input: string): string {
+    if (!input) return '';
+
+    let text = input.toLowerCase();
+
+    // Supprimer les accents
+    text = text.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+    // Remplacer une ponctuation courante par des espaces
+    text = text.replace(/[.,;:!?"'«»()\[\]{}]/g, ' ');
+
+    // Remplacer les multiples espaces par un seul et trim
+    text = text.replace(/\s+/g, ' ').trim();
+
+    return text;
   }
 
   /**

@@ -196,14 +196,14 @@ export class AIQuizGenerationService {
                 score: validation.score,
                 issues: validation.issues
               });
-              
+
               validatedQuestion = {
                 ...question,
                 qualityScore: validation.score,
                 validationIssues: validation.issues
               };
-              
-              // Logger l'avertissement si audit disponible
+
+              // Logger l'avertissement si audit disponible (sans faire échouer toute la génération)
               if (this.auditService && auditLogId) {
                 await this.auditService.failGenerationLog(
                   auditLogId,
@@ -220,8 +220,7 @@ export class AIQuizGenerationService {
                   }
                 );
               }
-              
-              throw new Error('Max generation attempts reached');
+              // Ne pas lever d'erreur ici : on retourne la question acceptée avec un score faible
             }
           }
         }

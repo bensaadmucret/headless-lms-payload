@@ -185,8 +185,8 @@ export const GenerateAIQuizButton: React.FC = () => {
 
   const handleQuizPublish = (quizId: string) => {
     setShowPreview(false)
-    // Rediriger vers le quiz publié
-    window.location.href = `/admin/collections/quizzes/${quizId}`
+    // Après publication, rediriger vers la liste des quizzes
+    window.location.href = '/admin/collections/quizzes'
   }
 
   const handleQuizEdit = (quizId: string) => {

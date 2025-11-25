@@ -136,6 +136,7 @@ const ImportJobs: CollectionConfig = {
       label: 'Type d\'import',
       type: 'select',
       required: true,
+      defaultValue: 'questions',
       options: [
         {
           label: 'Questions isolées',
@@ -206,7 +207,7 @@ const ImportJobs: CollectionConfig = {
       name: 'createQuizContainer',
       label: 'Créer un quiz conteneur',
       type: 'checkbox',
-      defaultValue: false,
+      defaultValue: true,
       admin: {
         description: 'Pour les questions isolées : créer automatiquement un quiz qui les regroupe',
         condition: (data) => data.importType === 'questions',
