@@ -9,7 +9,12 @@ import { JSONImportAuditService, ImportSummary } from '../JSONImportAuditService
 const mockPayload = {
   create: vi.fn(),
   find: vi.fn(),
-  findByID: vi.fn()
+  findByID: vi.fn(),
+  config: {
+    collections: [
+      { slug: 'auditlogs' }
+    ]
+  }
 };
 
 describe('JSONImportAuditService', () => {
@@ -18,6 +23,12 @@ describe('JSONImportAuditService', () => {
   beforeEach(() => {
     auditService = new JSONImportAuditService(mockPayload as any);
     vi.clearAllMocks();
+    // S'assurer que la collection d'audit existe pour tous les tests
+    mockPayload.config = {
+      collections: [
+        { slug: 'auditlogs' }
+      ]
+    };
   });
 
   describe('logImportStarted', () => {
@@ -45,7 +56,7 @@ describe('JSONImportAuditService', () => {
       expect(mockPayload.create).toHaveBeenCalledWith({
         collection: 'auditlogs',
         data: expect.objectContaining({
-          user: { relationTo: 'users', value: userId },
+          user: userId,
           action: 'import_started',
           collection: 'json-imports',
           documentId: jobId,
@@ -55,7 +66,11 @@ describe('JSONImportAuditService', () => {
               format,
               importType,
               totalItems,
-              options
+              options,
+              processedItems: 0,
+              successfulItems: 0,
+              failedItems: 0,
+              skippedItems: 0,
             })
           })
         })

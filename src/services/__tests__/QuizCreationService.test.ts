@@ -72,20 +72,20 @@ describe('QuizCreationService', () => {
     it('devrait créer un quiz complet avec succès', async () => {
       // Mock des réponses Payload
       mockPayload.create
-        .mockResolvedValueOnce({ id: 'question_1' }) // Première question
-        .mockResolvedValueOnce({ id: 'question_2' }) // Deuxième question
-        .mockResolvedValueOnce({ id: 'quiz_123' }); // Quiz
+        .mockResolvedValueOnce({ id: 1 }) // Première question
+        .mockResolvedValueOnce({ id: 2 }) // Deuxième question
+        .mockResolvedValueOnce({ id: 123 }); // Quiz
 
       mockPayload.findByID.mockResolvedValue({
-        id: 'quiz_123',
-        questions: ['question_1', 'question_2']
+        id: 123,
+        questions: [1, 2]
       });
 
       const result = await service.createQuizFromAIContent(mockRequest);
 
       expect(result.success).toBe(true);
-      expect(result.quizId).toBe('quiz_123');
-      expect(result.questionIds).toEqual(['question_1', 'question_2']);
+      expect(result.quizId).toBe('123');
+      expect(result.questionIds).toEqual(['1', '2']);
       expect(result.questionsCreated).toBe(2);
       expect(result.metadata.generatedByAI).toBe(true);
 
@@ -134,8 +134,8 @@ describe('QuizCreationService', () => {
     it('devrait nettoyer les questions en cas d\'échec du quiz', async () => {
       // Mock: questions créées avec succès, mais échec du quiz
       mockPayload.create
-        .mockResolvedValueOnce({ id: 'question_1' })
-        .mockResolvedValueOnce({ id: 'question_2' })
+        .mockResolvedValueOnce({ id: 1 })
+        .mockResolvedValueOnce({ id: 2 })
         .mockRejectedValueOnce(new Error('Erreur création quiz'));
 
       const result = await service.createQuizFromAIContent(mockRequest);
@@ -147,11 +147,11 @@ describe('QuizCreationService', () => {
       expect(mockPayload.delete).toHaveBeenCalledTimes(2);
       expect(mockPayload.delete).toHaveBeenCalledWith({
         collection: 'questions',
-        id: 'question_1'
+        id: '1'
       });
       expect(mockPayload.delete).toHaveBeenCalledWith({
         collection: 'questions',
-        id: 'question_2'
+        id: '2'
       });
     });
 
@@ -187,12 +187,12 @@ describe('QuizCreationService', () => {
 
     it('devrait générer des tags automatiques', async () => {
       mockPayload.create
-        .mockResolvedValueOnce({ id: 'question_1' })
-        .mockResolvedValueOnce({ id: 'quiz_123' });
+        .mockResolvedValueOnce({ id: 1 })
+        .mockResolvedValueOnce({ id: 123 });
 
       mockPayload.findByID.mockResolvedValue({
-        id: 'quiz_123',
-        questions: ['question_1']
+        id: 123,
+        questions: [1]
       });
 
       const singleQuestionRequest = {
@@ -220,12 +220,12 @@ describe('QuizCreationService', () => {
 
     it('devrait estimer correctement le temps de réponse', async () => {
       mockPayload.create
-        .mockResolvedValueOnce({ id: 'question_1' })
-        .mockResolvedValueOnce({ id: 'quiz_123' });
+        .mockResolvedValueOnce({ id: 1 })
+        .mockResolvedValueOnce({ id: 123 });
 
       mockPayload.findByID.mockResolvedValue({
-        id: 'quiz_123',
-        questions: ['question_1']
+        id: 123,
+        questions: [1]
       });
 
       const singleQuestionRequest = {
@@ -251,19 +251,19 @@ describe('QuizCreationService', () => {
   describe('createTestQuiz', () => {
     it('devrait créer un quiz de test', async () => {
       mockPayload.create
-        .mockResolvedValueOnce({ id: 'test_question_1' })
-        .mockResolvedValueOnce({ id: 'test_question_2' })
-        .mockResolvedValueOnce({ id: 'test_quiz_123' });
+        .mockResolvedValueOnce({ id: 1 })
+        .mockResolvedValueOnce({ id: 2 })
+        .mockResolvedValueOnce({ id: 123 });
 
       mockPayload.findByID.mockResolvedValue({
-        id: 'test_quiz_123',
-        questions: ['test_question_1', 'test_question_2']
+        id: 123,
+        questions: [1, 2]
       });
 
       const result = await service.createTestQuiz('cat_test', 'user_test');
 
       expect(result.success).toBe(true);
-      expect(result.quizId).toBe('test_quiz_123');
+      expect(result.quizId).toBe('123');
       expect(result.questionsCreated).toBe(2);
 
       // Vérifier que le quiz de test a les bonnes propriétés
@@ -355,7 +355,11 @@ describe('QuizCreationService', () => {
 
   describe('Gestion des erreurs', () => {
     it('devrait gérer les erreurs de base de données', async () => {
-      mockPayload.create.mockRejectedValue(new Error('Erreur DB'));
+      // Simuler une erreur DB lors de la création du quiz, après création des questions
+      mockPayload.create
+        .mockResolvedValueOnce({ id: 1 }) // question 1
+        .mockResolvedValueOnce({ id: 2 }) // question 2
+        .mockRejectedValueOnce(new Error('Erreur DB')); // création du quiz
 
       const testRequest = {
         aiContent: mockAIContent,

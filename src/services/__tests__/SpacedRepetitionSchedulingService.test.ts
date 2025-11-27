@@ -27,7 +27,7 @@ describe('SpacedRepetitionSchedulingService', () => {
 
   describe('createScheduleForImportedFlashcards', () => {
     it('devrait créer un planning avec les paramètres par défaut', async () => {
-      const userId = 'user123';
+      const userId = '123';
       const deckName = 'Test Deck';
       const questionIds = ['q1', 'q2', 'q3'];
 
@@ -57,7 +57,7 @@ describe('SpacedRepetitionSchedulingService', () => {
     });
 
     it('devrait ajuster les paramètres selon la difficulté', async () => {
-      const userId = 'user123';
+      const userId = '123';
       const deckName = 'Hard Deck';
       const questionIds = ['q1', 'q2'];
 
@@ -78,7 +78,7 @@ describe('SpacedRepetitionSchedulingService', () => {
     });
 
     it('devrait ajuster les paramètres pour difficulté facile', async () => {
-      const userId = 'user123';
+      const userId = '123';
       const deckName = 'Easy Deck';
       const questionIds = ['q1'];
 
@@ -99,7 +99,7 @@ describe('SpacedRepetitionSchedulingService', () => {
     });
 
     it('devrait créer une session d\'étude initiale', async () => {
-      const userId = 'user123';
+      const userId = '123';
       const deckName = 'Test Deck';
       const questionIds = ['q1', 'q2', 'q3'];
 
@@ -127,7 +127,7 @@ describe('SpacedRepetitionSchedulingService', () => {
       const scheduleId = 'schedule123';
       const mockSchedule = {
         id: scheduleId,
-        userId: 'user123',
+        userId: '123',
         deckName: 'Test Deck',
         cards: [
           {
@@ -182,7 +182,7 @@ describe('SpacedRepetitionSchedulingService', () => {
       const scheduleId = 'schedule123';
       const mockSchedule = {
         id: scheduleId,
-        userId: 'user123',
+        userId: '123',
         deckName: 'Test Deck',
         cards: [
           {
@@ -235,8 +235,8 @@ describe('SpacedRepetitionSchedulingService', () => {
 
   describe('generateReviewSession', () => {
     // TODO: Mock payload.find ne retourne pas les bonnes données
-    it.skip('devrait générer une session avec les cartes dues', async () => {
-      const userId = 'user123';
+    it('devrait générer une session avec les cartes dues', async () => {
+      const userId = '123';
       const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000);
       
       const mockSchedule = {
@@ -284,7 +284,7 @@ describe('SpacedRepetitionSchedulingService', () => {
     });
 
     it('devrait retourner null si aucune carte n\'est due', async () => {
-      const userId = 'user123';
+      const userId = '123';
       const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
       
       const mockSchedule = {
@@ -387,7 +387,7 @@ describe('SpacedRepetitionSchedulingService', () => {
     });
 
     it('devrait retourner des statistiques par défaut si aucun planning', async () => {
-      const userId = 'user123';
+      const userId = '123';
 
       mockPayload.find.mockResolvedValue({ docs: [] });
 

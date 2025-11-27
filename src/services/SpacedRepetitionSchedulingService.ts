@@ -293,6 +293,29 @@ export class SpacedRepetitionSchedulingService {
   }
 
   /**
+   * Ré-hydrate les champs Date d'un planning chargé depuis JSON
+   */
+  private hydrateSchedule(raw: SpacedRepetitionSchedule): SpacedRepetitionSchedule {
+    const hydrateDate = (value: any): Date =>
+      value instanceof Date ? value : new Date(value);
+
+    const cards = raw.cards.map(card => ({
+      ...card,
+      nextReviewDate: hydrateDate(card.nextReviewDate),
+      lastReviewDate: card.lastReviewDate ? hydrateDate(card.lastReviewDate) : undefined,
+      createdAt: hydrateDate(card.createdAt),
+      updatedAt: hydrateDate(card.updatedAt),
+    }));
+
+    return {
+      ...raw,
+      cards,
+      createdAt: hydrateDate(raw.createdAt),
+      updatedAt: hydrateDate(raw.updatedAt),
+    };
+  }
+
+  /**
    * Génère un ID unique pour un planning
    */
   private generateScheduleId(): string {
@@ -405,7 +428,8 @@ export class SpacedRepetitionSchedulingService {
       for (const session of response.docs) {
         if (session.context && typeof session.context === 'object' && 'scheduleData' in session.context) {
           try {
-            const schedule = JSON.parse(session.context.scheduleData as string) as SpacedRepetitionSchedule;
+            const raw = JSON.parse(session.context.scheduleData as string) as SpacedRepetitionSchedule;
+            const schedule = this.hydrateSchedule(raw);
             if (schedule.id === scheduleId) {
               return schedule;
             }
@@ -447,7 +471,8 @@ export class SpacedRepetitionSchedulingService {
       for (const session of response.docs) {
         if (session.context && typeof session.context === 'object' && 'scheduleData' in session.context) {
           try {
-            const schedule = JSON.parse(session.context.scheduleData as string) as SpacedRepetitionSchedule;
+            const raw = JSON.parse(session.context.scheduleData as string) as SpacedRepetitionSchedule;
+            const schedule = this.hydrateSchedule(raw);
             schedules.push(schedule);
           } catch {
             continue;

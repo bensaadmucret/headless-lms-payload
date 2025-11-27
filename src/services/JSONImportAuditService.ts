@@ -55,6 +55,12 @@ export class JSONImportAuditService {
     this.payload = payload;
   }
 
+  private hasAuditLogsCollection(): boolean {
+    return this.payload.config.collections.some(
+      (collection) => collection.slug === 'auditlogs'
+    );
+  }
+
   /**
    * Enregistre le début d'un import
    */
@@ -67,6 +73,10 @@ export class JSONImportAuditService {
     totalItems: number,
     options: ImportOptions
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -110,6 +120,10 @@ export class JSONImportAuditService {
     summary: ImportSummary,
     createdEntities: Array<{ collection: string; id: string; type: string }>
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -145,6 +159,10 @@ export class JSONImportAuditService {
     summary: ImportSummary,
     criticalError?: string
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -181,6 +199,10 @@ export class JSONImportAuditService {
     summary: ImportSummary,
     reason?: string
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -222,6 +244,10 @@ export class JSONImportAuditService {
       totalItems: number;
     }
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -270,6 +296,10 @@ export class JSONImportAuditService {
       success: boolean;
     }
   ): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditData: ImportAuditData = {
         user: userId,
@@ -323,6 +353,21 @@ export class JSONImportAuditService {
     importsByType: Record<ImportType, number>;
     importsByFormat: Record<ImportFormat, number>;
   }> {
+    if (!this.hasAuditLogsCollection()) {
+      return {
+        totalImports: 0,
+        successfulImports: 0,
+        failedImports: 0,
+        cancelledImports: 0,
+        totalItemsProcessed: 0,
+        totalItemsCreated: 0,
+        mostActiveUsers: [] as Array<{ userId: number; importCount: number; }>,
+        errorSummary: [] as Array<{ errorType: string; count: number; }>,
+        importsByType: {} as Record<ImportType, number>,
+        importsByFormat: {} as Record<ImportFormat, number>,
+      };
+    }
+
     try {
       // Récupérer tous les logs d'audit d'import dans la période
       const auditLogs = await this.payload.find({
@@ -456,6 +501,10 @@ export class JSONImportAuditService {
     user: any;
     details: any;
   }>> {
+    if (!this.hasAuditLogsCollection()) {
+      return [];
+    }
+
     try {
       const auditLogs = await this.payload.find({
         collection: 'auditlogs',

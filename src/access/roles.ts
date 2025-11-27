@@ -6,13 +6,13 @@ export const isSuperAdmin = (user?: { role?: Role }) =>
 export const isAdmin = (user?: { role?: Role }) =>
   user?.role === 'admin';
 
-export const isTeacher = (user?: { role?: Role }) =>
-  user?.role === 'teacher';
-
 export const isStudent = (user?: { role?: Role }) =>
   user?.role === 'student';
 
-// "user" logique = teacher OU student
+export const isTeacher = (user?: { role?: Role }) =>
+  user?.role === 'teacher';
+
+// "user" logique = enseignant ou étudiant
 export const isUser = (user?: { role?: Role }) =>
   user?.role === 'teacher' || user?.role === 'student';
 

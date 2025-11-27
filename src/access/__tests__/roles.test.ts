@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest'
 import {
   isSuperAdmin,
   isAdmin,
-  isTeacher,
   isStudent,
   isUser,
   isAdminOrSuperAdmin,
@@ -19,7 +18,6 @@ describe('Access Control - Roles', () => {
 
     it('should return false for non-superadmin roles', () => {
       expect(isSuperAdmin({ role: 'admin' as Role })).toBe(false)
-      expect(isSuperAdmin({ role: 'teacher' as Role })).toBe(false)
       expect(isSuperAdmin({ role: 'student' as Role })).toBe(false)
     })
 
@@ -40,29 +38,11 @@ describe('Access Control - Roles', () => {
 
     it('should return false for non-admin roles', () => {
       expect(isAdmin({ role: 'superadmin' as Role })).toBe(false)
-      expect(isAdmin({ role: 'teacher' as Role })).toBe(false)
       expect(isAdmin({ role: 'student' as Role })).toBe(false)
     })
 
     it('should return false for undefined user', () => {
       expect(isAdmin(undefined)).toBe(false)
-    })
-  })
-
-  describe('isTeacher', () => {
-    it('should return true for teacher role', () => {
-      const user = { role: 'teacher' as Role }
-      expect(isTeacher(user)).toBe(true)
-    })
-
-    it('should return false for non-teacher roles', () => {
-      expect(isTeacher({ role: 'superadmin' as Role })).toBe(false)
-      expect(isTeacher({ role: 'admin' as Role })).toBe(false)
-      expect(isTeacher({ role: 'student' as Role })).toBe(false)
-    })
-
-    it('should return false for undefined user', () => {
-      expect(isTeacher(undefined)).toBe(false)
     })
   })
 
@@ -75,7 +55,6 @@ describe('Access Control - Roles', () => {
     it('should return false for non-student roles', () => {
       expect(isStudent({ role: 'superadmin' as Role })).toBe(false)
       expect(isStudent({ role: 'admin' as Role })).toBe(false)
-      expect(isStudent({ role: 'teacher' as Role })).toBe(false)
     })
 
     it('should return false for undefined user', () => {
@@ -84,11 +63,6 @@ describe('Access Control - Roles', () => {
   })
 
   describe('isUser', () => {
-    it('should return true for teacher role', () => {
-      const user = { role: 'teacher' as Role }
-      expect(isUser(user)).toBe(true)
-    })
-
     it('should return true for student role', () => {
       const user = { role: 'student' as Role }
       expect(isUser(user)).toBe(true)
@@ -116,7 +90,6 @@ describe('Access Control - Roles', () => {
     })
 
     it('should return false for non-admin roles', () => {
-      expect(isAdminOrSuperAdmin({ role: 'teacher' as Role })).toBe(false)
       expect(isAdminOrSuperAdmin({ role: 'student' as Role })).toBe(false)
     })
 
@@ -128,11 +101,6 @@ describe('Access Control - Roles', () => {
   describe('isAdminOrUser', () => {
     it('should return true for admin role', () => {
       const user = { role: 'admin' as Role }
-      expect(isAdminOrUser(user)).toBe(true)
-    })
-
-    it('should return true for teacher role', () => {
-      const user = { role: 'teacher' as Role }
       expect(isAdminOrUser(user)).toBe(true)
     })
 
@@ -155,7 +123,6 @@ describe('Access Control - Roles', () => {
     it('should handle null user gracefully', () => {
       expect(isSuperAdmin(null as any)).toBe(false)
       expect(isAdmin(null as any)).toBe(false)
-      expect(isTeacher(null as any)).toBe(false)
       expect(isStudent(null as any)).toBe(false)
       expect(isUser(null as any)).toBe(false)
       expect(isAdminOrSuperAdmin(null as any)).toBe(false)
@@ -166,7 +133,6 @@ describe('Access Control - Roles', () => {
       const user = { role: null as any }
       expect(isSuperAdmin(user)).toBe(false)
       expect(isAdmin(user)).toBe(false)
-      expect(isTeacher(user)).toBe(false)
       expect(isStudent(user)).toBe(false)
     })
   })

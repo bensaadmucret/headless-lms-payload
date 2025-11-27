@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import {
   payloadIsSuperAdmin,
   payloadIsAdmin,
-  payloadIsTeacher,
   payloadIsStudent,
   payloadIsUser,
   payloadIsAdminOrSuperAdmin,
@@ -18,7 +17,6 @@ describe('payloadAccess', () => {
 
     it('should return false for other roles', () => {
       expect(payloadIsSuperAdmin({ req: { user: { role: 'admin' } } })).toBe(false);
-      expect(payloadIsSuperAdmin({ req: { user: { role: 'teacher' } } })).toBe(false);
       expect(payloadIsSuperAdmin({ req: { user: { role: 'student' } } })).toBe(false);
     });
 
@@ -38,27 +36,11 @@ describe('payloadAccess', () => {
 
     it('should return false for other roles', () => {
       expect(payloadIsAdmin({ req: { user: { role: 'superadmin' } } })).toBe(false);
-      expect(payloadIsAdmin({ req: { user: { role: 'teacher' } } })).toBe(false);
       expect(payloadIsAdmin({ req: { user: { role: 'student' } } })).toBe(false);
     });
 
     it('should return false for null user', () => {
       expect(payloadIsAdmin({ req: { user: null } })).toBe(false);
-    });
-  });
-
-  describe('payloadIsTeacher', () => {
-    it('should return true for teacher role', () => {
-      expect(payloadIsTeacher({ req: { user: { role: 'teacher' } } })).toBe(true);
-    });
-
-    it('should return false for other roles', () => {
-      expect(payloadIsTeacher({ req: { user: { role: 'admin' } } })).toBe(false);
-      expect(payloadIsTeacher({ req: { user: { role: 'student' } } })).toBe(false);
-    });
-
-    it('should return false for null user', () => {
-      expect(payloadIsTeacher({ req: { user: null } })).toBe(false);
     });
   });
 
@@ -78,10 +60,6 @@ describe('payloadAccess', () => {
   });
 
   describe('payloadIsUser', () => {
-    it('should return true for teacher role', () => {
-      expect(payloadIsUser({ req: { user: { role: 'teacher' } } })).toBe(true);
-    });
-
     it('should return true for student role', () => {
       expect(payloadIsUser({ req: { user: { role: 'student' } } })).toBe(true);
     });
@@ -106,7 +84,6 @@ describe('payloadAccess', () => {
     });
 
     it('should return false for user roles', () => {
-      expect(payloadIsAdminOrSuperAdmin({ req: { user: { role: 'teacher' } } })).toBe(false);
       expect(payloadIsAdminOrSuperAdmin({ req: { user: { role: 'student' } } })).toBe(false);
     });
 
@@ -118,10 +95,6 @@ describe('payloadAccess', () => {
   describe('payloadIsAdminOrUser', () => {
     it('should return true for admin role', () => {
       expect(payloadIsAdminOrUser({ req: { user: { role: 'admin' } } })).toBe(true);
-    });
-
-    it('should return true for teacher role', () => {
-      expect(payloadIsAdminOrUser({ req: { user: { role: 'teacher' } } })).toBe(true);
     });
 
     it('should return true for student role', () => {

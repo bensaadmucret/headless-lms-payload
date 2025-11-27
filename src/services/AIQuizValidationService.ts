@@ -487,9 +487,9 @@ export class AIQuizValidationService {
         return
       }
 
-      // Vérifier les permissions
+      // Vérifier les permissions (seuls admin et superadmin peuvent générer des quiz)
       const userRole = (user as any).role
-      if (!userRole || !['admin', 'teacher'].includes(userRole)) {
+      if (!userRole || !['admin', 'superadmin'].includes(userRole)) {
         errors.push({
           field: 'userId',
           message: 'L\'utilisateur n\'a pas les permissions pour générer des quiz',

@@ -19,12 +19,6 @@ export const Progress: CollectionConfig = {
       required: true,
     },
     {
-      name: 'lesson',
-      type: 'relationship',
-      relationTo: 'lessons',
-      required: true,
-    },
-    {
       name: 'status',
       type: 'select',
       options: [

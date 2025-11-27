@@ -71,7 +71,6 @@ export const Badges: CollectionConfig = {
       options: [
         { label: 'Super Admin', value: 'superadmin' },
         { label: 'Admin', value: 'admin' },
-        { label: 'Enseignant', value: 'teacher' },
         { label: 'Étudiant', value: 'student' },
       ],
       admin: {

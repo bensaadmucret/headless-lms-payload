@@ -85,7 +85,7 @@ export class JSONProcessingService {
     const createdIds: string[] = [];
     let successful = 0;
     let failed = 0;
-    let skipped = 0;
+    const skipped = 0;
 
     for (let i = 0; i < data.questions.length; i++) {
       const question = data.questions[i];
@@ -200,7 +200,7 @@ export class JSONProcessingService {
     const createdIds: string[] = [];
     let successful = 0;
     let failed = 0;
-    let skipped = 0;
+    const skipped = 0;
 
     try {
       // Étape 1: Valider les prérequis et créer les substitutions si nécessaire

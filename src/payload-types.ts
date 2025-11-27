@@ -75,14 +75,9 @@ export interface Config {
     'webhook-retry-queue': WebhookRetryQueue;
     categories: Category;
     courses: Course;
-    lessons: Lesson;
-    sections: Section;
-    assignments: Assignment;
-    prerequisites: Prerequisite;
     quizzes: Quiz;
     questions: Question;
     'quiz-submissions': QuizSubmission;
-    progress: Progress;
     'study-sessions': StudySession;
     badges: Badge;
     'color-schemes': ColorScheme;
@@ -93,17 +88,19 @@ export interface Config {
     adaptiveQuizSessions: AdaptiveQuizSession;
     adaptiveQuizResults: AdaptiveQuizResult;
     'user-performances': UserPerformance;
-    auditlogs: Auditlog;
     generationlogs: Generationlog;
     'import-jobs': ImportJob;
     flashcards: Flashcard;
     'flashcard-decks': FlashcardDeck;
     'learning-paths': LearningPath;
     'learning-path-steps': LearningPathStep;
+    'analytics-events': AnalyticsEvent;
+    'analytics-sessions': AnalyticsSession;
     redirects: Redirect;
     forms: Form;
     'form-submissions': FormSubmission;
     search: Search;
+    'payload-kv': PayloadKv;
     'payload-jobs': PayloadJob;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -119,14 +116,9 @@ export interface Config {
     'webhook-retry-queue': WebhookRetryQueueSelect<false> | WebhookRetryQueueSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     courses: CoursesSelect<false> | CoursesSelect<true>;
-    lessons: LessonsSelect<false> | LessonsSelect<true>;
-    sections: SectionsSelect<false> | SectionsSelect<true>;
-    assignments: AssignmentsSelect<false> | AssignmentsSelect<true>;
-    prerequisites: PrerequisitesSelect<false> | PrerequisitesSelect<true>;
     quizzes: QuizzesSelect<false> | QuizzesSelect<true>;
     questions: QuestionsSelect<false> | QuestionsSelect<true>;
     'quiz-submissions': QuizSubmissionsSelect<false> | QuizSubmissionsSelect<true>;
-    progress: ProgressSelect<false> | ProgressSelect<true>;
     'study-sessions': StudySessionsSelect<false> | StudySessionsSelect<true>;
     badges: BadgesSelect<false> | BadgesSelect<true>;
     'color-schemes': ColorSchemesSelect<false> | ColorSchemesSelect<true>;
@@ -137,17 +129,19 @@ export interface Config {
     adaptiveQuizSessions: AdaptiveQuizSessionsSelect<false> | AdaptiveQuizSessionsSelect<true>;
     adaptiveQuizResults: AdaptiveQuizResultsSelect<false> | AdaptiveQuizResultsSelect<true>;
     'user-performances': UserPerformancesSelect<false> | UserPerformancesSelect<true>;
-    auditlogs: AuditlogsSelect<false> | AuditlogsSelect<true>;
     generationlogs: GenerationlogsSelect<false> | GenerationlogsSelect<true>;
     'import-jobs': ImportJobsSelect<false> | ImportJobsSelect<true>;
     flashcards: FlashcardsSelect<false> | FlashcardsSelect<true>;
     'flashcard-decks': FlashcardDecksSelect<false> | FlashcardDecksSelect<true>;
     'learning-paths': LearningPathsSelect<false> | LearningPathsSelect<true>;
     'learning-path-steps': LearningPathStepsSelect<false> | LearningPathStepsSelect<true>;
+    'analytics-events': AnalyticsEventsSelect<false> | AnalyticsEventsSelect<true>;
+    'analytics-sessions': AnalyticsSessionsSelect<false> | AnalyticsSessionsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-jobs': PayloadJobsSelect<false> | PayloadJobsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -172,8 +166,6 @@ export interface Config {
   };
   jobs: {
     tasks: {
-      'process-webhook-retry-queue': ProcessWebhookRetryQueue;
-      'cleanup-webhook-retry-queue': CleanupWebhookRetryQueue;
       schedulePublish: TaskSchedulePublish;
       inline: {
         input: unknown;
@@ -214,7 +206,7 @@ export interface Page {
       root: {
         type: string;
         children: {
-          type: string;
+          type: any;
           version: number;
           [k: string]: unknown;
         }[];
@@ -276,7 +268,7 @@ export interface Post {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -323,7 +315,7 @@ export interface Media {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -451,8 +443,7 @@ export interface User {
    * Indique si l’étudiant a passé le quiz de positionnement
    */
   hasTakenPlacementQuiz?: boolean | null;
-  role: 'superadmin' | 'admin' | 'teacher' | 'student';
-  subscription_status?: string | null;
+  role: 'superadmin' | 'admin' | 'student';
   /**
    * Statut actuel de l'abonnement Premium
    */
@@ -541,7 +532,7 @@ export interface CallToActionBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -592,7 +583,7 @@ export interface ContentBlock {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -649,7 +640,7 @@ export interface ArchiveBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -685,7 +676,7 @@ export interface FormBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -742,7 +733,7 @@ export interface Form {
               root: {
                 type: string;
                 children: {
-                  type: string;
+                  type: any;
                   version: number;
                   [k: string]: unknown;
                 }[];
@@ -825,7 +816,7 @@ export interface Form {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -857,7 +848,7 @@ export interface Form {
           root: {
             type: string;
             children: {
-              type: string;
+              type: any;
               version: number;
               [k: string]: unknown;
             }[];
@@ -1035,71 +1026,6 @@ export interface Course {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "lessons".
- */
-export interface Lesson {
-  id: number;
-  title: string;
-  content: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  };
-  course: number | Course;
-  order: number;
-  published?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections".
- */
-export interface Section {
-  id: number;
-  title: string;
-  course: number | Course;
-  order: number;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "assignments".
- */
-export interface Assignment {
-  id: number;
-  title: string;
-  description?: string | null;
-  course: number | Course;
-  dueDate?: string | null;
-  submitted?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "prerequisites".
- */
-export interface Prerequisite {
-  id: number;
-  name: string;
-  description?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "quizzes".
  */
 export interface Quiz {
@@ -1174,7 +1100,7 @@ export interface Question {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1316,19 +1242,6 @@ export interface QuizSubmission {
   createdAt: string;
 }
 /**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "progress".
- */
-export interface Progress {
-  id: number;
-  user: number | User;
-  lesson: number | Lesson;
-  status: 'not_started' | 'in_progress' | 'completed';
-  score?: number | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Sessions d'étude générées par le Coach IA
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1372,6 +1285,11 @@ export interface StudySession {
   context?: {
     course?: (number | null) | Course;
     difficulty?: ('beginner' | 'intermediate' | 'advanced') | null;
+    isSpacedRepetitionSchedule?: boolean | null;
+    /**
+     * Représentation JSON du planning utilisée pour la reconstruction des sessions.
+     */
+    scheduleData?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -1397,7 +1315,7 @@ export interface Badge {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];
@@ -1411,7 +1329,7 @@ export interface Badge {
   /**
    * Définit quels rôles peuvent voir ou obtenir ce badge.
    */
-  roleVisibility?: ('superadmin' | 'admin' | 'teacher' | 'student')[] | null;
+  roleVisibility?: ('superadmin' | 'admin' | 'student')[] | null;
   /**
    * Permet de désactiver un badge sans le supprimer.
    */
@@ -1930,34 +1848,6 @@ export interface UserPerformance {
   createdAt: string;
 }
 /**
- * Historique des modifications et actions importantes du système.
- *
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "auditlogs".
- */
-export interface Auditlog {
-  id: number;
-  user: number | User;
-  action: string;
-  collection: string;
-  documentId?: string | null;
-  /**
-   * Contient l’état avant/après si pertinent.
-   */
-  diff?:
-    | {
-        [k: string]: unknown;
-      }
-    | unknown[]
-    | string
-    | number
-    | boolean
-    | null;
-  timestamp: string;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
  * Logs détaillés de toutes les générations de quiz par IA avec métriques de performance.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2300,6 +2190,155 @@ export interface LearningPathStep {
   createdAt: string;
 }
 /**
+ * Événements de tracking utilisateur pour l'analyse du tunnel d'acquisition
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-events".
+ */
+export interface AnalyticsEvent {
+  id: number;
+  /**
+   * Ex: homepage_view, subscription_started, payment_completed
+   */
+  eventName: string;
+  /**
+   * Utilisateur associé à l'événement (laisser vide pour les visiteurs anonymes)
+   */
+  user?: (number | null) | User;
+  /**
+   * Identifiant de session pour regrouper les événements
+   */
+  sessionId?: string | null;
+  /**
+   * Données supplémentaires de l'événement (JSON)
+   */
+  properties?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  source?: ('website' | 'mobile' | 'api' | 'admin' | 'other') | null;
+  timestamp: string;
+  /**
+   * URL de la page où l'événement s'est produit
+   */
+  url?: string | null;
+  /**
+   * Informations sur le navigateur/appareil
+   */
+  userAgent?: string | null;
+  ipAddress?: string | null;
+  /**
+   * Page référente
+   */
+  referrer?: string | null;
+  campaign?: {
+    utm_source?: string | null;
+    utm_medium?: string | null;
+    utm_campaign?: string | null;
+    utm_content?: string | null;
+    utm_term?: string | null;
+  };
+  device?: {
+    type?: ('desktop' | 'mobile' | 'tablet' | 'other') | null;
+    os?: string | null;
+    browser?: string | null;
+    screenResolution?: string | null;
+  };
+  funnel?: {
+    /**
+     * Numéro d'étape dans le tunnel d'acquisition
+     */
+    step?: number | null;
+    /**
+     * Ex: subscription, onboarding, checkout
+     */
+    funnelName?: string | null;
+    /**
+     * Valeur monétaire de l'événement (en euros)
+     */
+    conversionValue?: number | null;
+  };
+  performance?: {
+    pageLoadTime?: number | null;
+    /**
+     * LCP, FID, CLS scores (JSON)
+     */
+    coreWebVitals?:
+      | {
+          [k: string]: unknown;
+        }
+      | unknown[]
+      | string
+      | number
+      | boolean
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Sessions utilisateur pour regrouper les événements analytics
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-sessions".
+ */
+export interface AnalyticsSession {
+  id: number;
+  /**
+   * Identifiant unique de session (généré côté client)
+   */
+  sessionId: string;
+  user?: (number | null) | User;
+  startTime: string;
+  /**
+   * Laisser vide pour les sessions actives
+   */
+  endTime?: string | null;
+  eventCount?: number | null;
+  pageViews?: number | null;
+  /**
+   * Durée totale de la session
+   */
+  duration?: number | null;
+  deviceInfo?: {
+    type?: ('desktop' | 'mobile' | 'tablet') | null;
+    os?: string | null;
+    browser?: string | null;
+  };
+  location?: {
+    country?: string | null;
+    city?: string | null;
+    region?: string | null;
+  };
+  referrer?: string | null;
+  landingPage?: string | null;
+  exitPage?: string | null;
+  conversionGoals?:
+    | {
+        goal?: string | null;
+        achieved?: boolean | null;
+        value?: number | null;
+        id?: string | null;
+      }[]
+    | null;
+  customProperties?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
@@ -2374,6 +2413,23 @@ export interface Search {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv".
+ */
+export interface PayloadKv {
+  id: number;
+  key: string;
+  data:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-jobs".
  */
 export interface PayloadJob {
@@ -2424,7 +2480,7 @@ export interface PayloadJob {
     | {
         executedAt: string;
         completedAt: string;
-        taskSlug: 'inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish';
+        taskSlug: 'inline' | 'schedulePublish';
         taskID: string;
         input?:
           | {
@@ -2457,7 +2513,7 @@ export interface PayloadJob {
         id?: string | null;
       }[]
     | null;
-  taskSlug?: ('inline' | 'process-webhook-retry-queue' | 'cleanup-webhook-retry-queue' | 'schedulePublish') | null;
+  taskSlug?: ('inline' | 'schedulePublish') | null;
   queue?: string | null;
   waitUntil?: string | null;
   processing?: boolean | null;
@@ -2504,22 +2560,6 @@ export interface PayloadLockedDocument {
         value: number | Course;
       } | null)
     | ({
-        relationTo: 'lessons';
-        value: number | Lesson;
-      } | null)
-    | ({
-        relationTo: 'sections';
-        value: number | Section;
-      } | null)
-    | ({
-        relationTo: 'assignments';
-        value: number | Assignment;
-      } | null)
-    | ({
-        relationTo: 'prerequisites';
-        value: number | Prerequisite;
-      } | null)
-    | ({
         relationTo: 'quizzes';
         value: number | Quiz;
       } | null)
@@ -2530,10 +2570,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'quiz-submissions';
         value: number | QuizSubmission;
-      } | null)
-    | ({
-        relationTo: 'progress';
-        value: number | Progress;
       } | null)
     | ({
         relationTo: 'study-sessions';
@@ -2576,10 +2612,6 @@ export interface PayloadLockedDocument {
         value: number | UserPerformance;
       } | null)
     | ({
-        relationTo: 'auditlogs';
-        value: number | Auditlog;
-      } | null)
-    | ({
         relationTo: 'generationlogs';
         value: number | Generationlog;
       } | null)
@@ -2604,6 +2636,14 @@ export interface PayloadLockedDocument {
         value: number | LearningPathStep;
       } | null)
     | ({
+        relationTo: 'analytics-events';
+        value: number | AnalyticsEvent;
+      } | null)
+    | ({
+        relationTo: 'analytics-sessions';
+        value: number | AnalyticsSession;
+      } | null)
+    | ({
         relationTo: 'redirects';
         value: number | Redirect;
       } | null)
@@ -2618,10 +2658,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'search';
         value: number | Search;
-      } | null)
-    | ({
-        relationTo: 'payload-jobs';
-        value: number | PayloadJob;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -2945,7 +2981,6 @@ export interface UsersSelect<T extends boolean = true> {
   competencyProfile?: T;
   hasTakenPlacementQuiz?: T;
   role?: T;
-  subscription_status?: T;
   subscriptionStatus?: T;
   subscriptionEndDate?: T;
   stripeCustomerId?: T;
@@ -3060,53 +3095,6 @@ export interface CoursesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "lessons_select".
- */
-export interface LessonsSelect<T extends boolean = true> {
-  title?: T;
-  content?: T;
-  course?: T;
-  order?: T;
-  published?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "sections_select".
- */
-export interface SectionsSelect<T extends boolean = true> {
-  title?: T;
-  course?: T;
-  order?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "assignments_select".
- */
-export interface AssignmentsSelect<T extends boolean = true> {
-  title?: T;
-  description?: T;
-  course?: T;
-  dueDate?: T;
-  submitted?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "prerequisites_select".
- */
-export interface PrerequisitesSelect<T extends boolean = true> {
-  name?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "quizzes_select".
  */
 export interface QuizzesSelect<T extends boolean = true> {
@@ -3208,18 +3196,6 @@ export interface QuizSubmissionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "progress_select".
- */
-export interface ProgressSelect<T extends boolean = true> {
-  user?: T;
-  lesson?: T;
-  status?: T;
-  score?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "study-sessions_select".
  */
 export interface StudySessionsSelect<T extends boolean = true> {
@@ -3247,6 +3223,8 @@ export interface StudySessionsSelect<T extends boolean = true> {
     | {
         course?: T;
         difficulty?: T;
+        isSpacedRepetitionSchedule?: T;
+        scheduleData?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -3561,20 +3539,6 @@ export interface UserPerformancesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "auditlogs_select".
- */
-export interface AuditlogsSelect<T extends boolean = true> {
-  user?: T;
-  action?: T;
-  collection?: T;
-  documentId?: T;
-  diff?: T;
-  timestamp?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "generationlogs_select".
  */
 export interface GenerationlogsSelect<T extends boolean = true> {
@@ -3778,6 +3742,95 @@ export interface LearningPathStepsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-events_select".
+ */
+export interface AnalyticsEventsSelect<T extends boolean = true> {
+  eventName?: T;
+  user?: T;
+  sessionId?: T;
+  properties?: T;
+  source?: T;
+  timestamp?: T;
+  url?: T;
+  userAgent?: T;
+  ipAddress?: T;
+  referrer?: T;
+  campaign?:
+    | T
+    | {
+        utm_source?: T;
+        utm_medium?: T;
+        utm_campaign?: T;
+        utm_content?: T;
+        utm_term?: T;
+      };
+  device?:
+    | T
+    | {
+        type?: T;
+        os?: T;
+        browser?: T;
+        screenResolution?: T;
+      };
+  funnel?:
+    | T
+    | {
+        step?: T;
+        funnelName?: T;
+        conversionValue?: T;
+      };
+  performance?:
+    | T
+    | {
+        pageLoadTime?: T;
+        coreWebVitals?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "analytics-sessions_select".
+ */
+export interface AnalyticsSessionsSelect<T extends boolean = true> {
+  sessionId?: T;
+  user?: T;
+  startTime?: T;
+  endTime?: T;
+  eventCount?: T;
+  pageViews?: T;
+  duration?: T;
+  deviceInfo?:
+    | T
+    | {
+        type?: T;
+        os?: T;
+        browser?: T;
+      };
+  location?:
+    | T
+    | {
+        country?: T;
+        city?: T;
+        region?: T;
+      };
+  referrer?: T;
+  landingPage?: T;
+  exitPage?: T;
+  conversionGoals?:
+    | T
+    | {
+        goal?: T;
+        achieved?: T;
+        value?: T;
+        id?: T;
+      };
+  customProperties?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -3966,6 +4019,14 @@ export interface SearchSelect<T extends boolean = true> {
       };
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "payload-kv_select".
+ */
+export interface PayloadKvSelect<T extends boolean = true> {
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -4212,22 +4273,6 @@ export interface FooterSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "ProcessWebhookRetryQueue".
- */
-export interface ProcessWebhookRetryQueue {
-  input?: unknown;
-  output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "CleanupWebhookRetryQueue".
- */
-export interface CleanupWebhookRetryQueue {
-  input?: unknown;
-  output?: unknown;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "TaskSchedulePublish".
  */
 export interface TaskSchedulePublish {
@@ -4258,7 +4303,7 @@ export interface BannerBlock {
     root: {
       type: string;
       children: {
-        type: string;
+        type: any;
         version: number;
         [k: string]: unknown;
       }[];

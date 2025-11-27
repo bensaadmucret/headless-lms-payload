@@ -231,7 +231,6 @@ export const log = {
  * Middleware pour logger les requêtes HTTP
  */
 export function createRequestLogger(serviceName: string) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (req: any, res: any, next: any) => {
     const start = Date.now();
     const requestLogger = logger.child({ service: serviceName });
@@ -243,7 +242,6 @@ export function createRequestLogger(serviceName: string) {
 
     // Intercepter la réponse
     const originalSend = res.send;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     res.send = function (data: any) {
       const duration = Date.now() - start;
       requestLogger.logResponse(req.method, req.path, res.statusCode, duration);

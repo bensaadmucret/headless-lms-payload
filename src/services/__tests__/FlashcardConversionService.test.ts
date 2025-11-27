@@ -6,6 +6,8 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { FlashcardConversionService } from '../FlashcardConversionService';
 import { ImportFlashcard } from '../../types/jsonImport';
+import payload from 'payload';
+import { AIDistractorGenerationService } from '../AIDistractorGenerationService';
 
 // Mock de Payload
 vi.mock('payload', () => ({
@@ -39,7 +41,7 @@ describe.skip('FlashcardConversionService', () => {
 
   beforeEach(() => {
     service = new FlashcardConversionService();
-    mockPayload = require('payload').default;
+    mockPayload = payload as any;
     
     // Reset des mocks
     vi.clearAllMocks();
@@ -336,7 +338,7 @@ describe.skip('FlashcardConversionService', () => {
 
     it('should fallback to rule-based distractors when AI fails', async () => {
       // Mock l'échec du service IA
-      const mockAIService = require('../AIDistractorGenerationService').AIDistractorGenerationService;
+      const mockAIService: any = AIDistractorGenerationService;
       const mockInstance = new mockAIService();
       mockInstance.generateDistractorsForFlashcard.mockResolvedValue({
         success: false,
