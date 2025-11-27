@@ -102,7 +102,6 @@ import {
   getAdaptiveQuizResultBySessionEndpoint,
   getUserAdaptiveQuizHistoryEndpoint,
 } from "./endpoints/adaptiveQuizSessionsEndpoints";
-import { CorsConfig } from "./globals/CorsConfig";
 import { fileURLToPath } from "url";
 import { Footer } from "./Footer/config";
 import { Header } from "./Header/config";
@@ -232,7 +231,7 @@ export default buildConfig({
     AnalyticsEvents,
     AnalyticsSessions,
   ],
-  globals: [CorsConfig, Header, Footer],
+  globals: [Header, Footer],
   cors: (process.env.CORS_ORIGINS || "").split(","),
   csrf: (process.env.CORS_ORIGINS || "").split(","),
   cookiePrefix: "payload-admin",
