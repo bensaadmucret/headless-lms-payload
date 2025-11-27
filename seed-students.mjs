@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const API_URL = process.env.BETTER_AUTH_URL || process.env.PAYLOAD_PUBLIC_URL || 'http://localhost:3000';
+const API_URL = process.env.PAYLOAD_PUBLIC_URL || 'http://localhost:3000';
 
 // Données des étudiants à créer
-// Note: BetterAuth utilise 'name' au lieu de 'firstName'/'lastName'
-// Les champs additionnels (studyYear, studyProfile, etc.) seront mis à jour après création
+// Les champs additionnels (studyYear, studyProfile, etc.) sont envoyés directement à la collection Payload "users"
 const students = [
   {
     email: 'alice.martin@etudiant.com',
@@ -73,87 +72,56 @@ const students = [
   }
 ];
 
-/**
- * Crée un étudiant via BetterAuth sign-up endpoint
- * puis met à jour les champs additionnels via Payload API
- */
 async function createStudent(studentData) {
   const { email, password, name, role, extraFields } = studentData;
   
   try {
-    // Étape 1: Vérifier si l'étudiant existe déjà via BetterAuth sign-in
-    try {
-      const loginResponse = await axios.post(
-        `${API_URL}/api/auth/sign-in/email`,
-        { email, password },
-        { 
-          headers: { 'Content-Type': 'application/json' },
-          validateStatus: (status) => status < 500 // Ne pas throw pour 4xx
-        }
-      );
-      
-      if (loginResponse.status === 200) {
-        console.log(`✓ L'étudiant ${name} existe déjà`);
-        return { success: true, existing: true };
-      }
-    } catch (error) {
-      // L'utilisateur n'existe pas, on continue la création
+    // Étape 1: Vérifier si l'étudiant existe déjà dans Payload (collection "users")
+    const existingResponse = await axios.get(
+      `${API_URL}/api/users`,
+      {
+        params: {
+          'where[email][equals]': email,
+          limit: 1,
+        },
+        validateStatus: (status) => status < 500,
+      },
+    );
+
+    const existingDocs = existingResponse.data?.docs || [];
+    if (existingDocs.length > 0) {
+      console.log(`✓ L'étudiant ${name} existe déjà (ID: ${existingDocs[0].id})`);
+      return { success: true, existing: true };
     }
 
-    // Étape 2: Créer l'utilisateur via BetterAuth sign-up
-    // Note: payload-auth assigne le defaultRole ('user') par défaut
-    // Le champ 'role' doit être passé pour override
-    const signUpResponse = await axios.post(
-      `${API_URL}/api/auth/sign-up/email`,
-      { 
-        email, 
-        password, 
-        name,
-        // payload-auth plugin permet de passer le role dans le body
-        role: role || 'student'
+    // Étape 2: Créer directement l'utilisateur via l'API Payload
+    const [firstName, ...restName] = name.split(' ');
+    const lastName = restName.join(' ') || firstName;
+
+    const createResponse = await axios.post(
+      `${API_URL}/api/users`,
+      {
+        email,
+        password,
+        firstName,
+        lastName,
+        role: role || 'student',
+        ...extraFields,
       },
-      { 
+      {
         headers: { 'Content-Type': 'application/json' },
-        validateStatus: (status) => status < 500
-      }
+        validateStatus: (status) => status < 500,
+      },
     );
-    
-    if (signUpResponse.status === 200 || signUpResponse.status === 201) {
-      const userId = signUpResponse.data?.user?.id;
-      console.log(`✓ Étudiant créé via BetterAuth: ${name} (ID: ${userId})`);
-      
-      // Étape 3: Mettre à jour le rôle et les champs additionnels via Payload Local API
-      // On utilise une requête directe à la base de données via l'API Payload
-      if (userId) {
-        try {
-          // Mettre à jour le rôle à 'student' via l'API Payload
-          const updateResponse = await axios.patch(
-            `${API_URL}/api/users/${userId}`,
-            { 
-              role: role || 'student',
-              ...extraFields 
-            },
-            { 
-              headers: { 'Content-Type': 'application/json' },
-              validateStatus: (status) => status < 500
-            }
-          );
-          
-          if (updateResponse.status === 200) {
-            console.log(`   ✓ Rôle mis à jour: ${role || 'student'}`);
-          } else {
-            console.log(`   ⚠ Impossible de mettre à jour le rôle (${updateResponse.status}): accès admin requis`);
-          }
-        } catch (updateError) {
-          console.log(`   ⚠ Impossible de mettre à jour: ${updateError.message}`);
-        }
-      }
-      
+
+    if (createResponse.status === 201 || createResponse.status === 200) {
+      const userId = createResponse.data?.doc?.id || createResponse.data?.id;
+      console.log(`✓ Étudiant créé: ${name} (ID: ${userId || 'inconnu'})`);
       return { success: true, userId };
-    } else {
-      console.error(`✗ Erreur lors de la création de ${name}:`, signUpResponse.data);
-      return { success: false, error: signUpResponse.data };
     }
+
+    console.error(`✗ Erreur lors de la création de ${name}:`, createResponse.data);
+    return { success: false, error: createResponse.data };
   } catch (error) {
     console.error(`✗ Erreur lors de la création de ${name}:`, 
                   error.response?.data || error.message);
@@ -162,7 +130,7 @@ async function createStudent(studentData) {
 }
 
 async function seedStudents() {
-  console.log('🌱 Création des étudiants de test MedCoach via BetterAuth...\n');
+  console.log('🌱 Création des étudiants de test MedCoach via l\'API HTTP Payload...\n');
   console.log(`📡 API URL: ${API_URL}\n`);
   
   const results = [];

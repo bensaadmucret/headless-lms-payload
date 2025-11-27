@@ -8,7 +8,22 @@
 import { getPayload } from 'payload'
 import config from '../src/payload.config'
 
-const students = [
+type SeedStudent = {
+  email: string
+  password: string
+  name: string
+  role: 'student' | 'admin' | 'superadmin'
+  studyYear: 'pass' | 'las'
+  onboardingComplete: boolean
+  examDate: string
+  studyProfile: {
+    targetScore: number
+    studyHoursPerWeek: number
+  }
+  hasTakenPlacementQuiz: boolean
+}
+
+const students: SeedStudent[] = [
   {
     email: 'alice.martin@etudiant.com',
     password: 'password123',
@@ -73,53 +88,54 @@ async function seedStudents() {
   const payload = await getPayload({ config })
 
   for (const student of students) {
-    const { email, password, name, role, ...extraFields } = student
+    const { email, password, name, role, studyYear, ...extraFields } = student
+
+    // Normaliser le rôle côté script pour respecter le type de Payload
+    const normalizedRole: 'student' | 'admin' | 'superadmin' =
+      role === 'admin' || role === 'superadmin' ? role : 'student'
 
     try {
       // Vérifier si l'utilisateur existe déjà
       const existing = await payload.find({
         collection: 'users',
         where: { email: { equals: email } },
-        limit: 1
+        limit: 1,
       })
 
-      if (existing.docs.length > 0) {
-        console.log(`✓ ${name} existe déjà (ID: ${existing.docs[0].id})`)
+      const existingUser = existing.docs && existing.docs.length > 0 ? existing.docs[0] : null
+
+      if (existingUser) {
+        console.log(`✓ ${name} existe déjà (ID: ${existingUser.id})`)
         
         // Mettre à jour le rôle si nécessaire
-        if (existing.docs[0].role !== role) {
+        if ((existingUser as any).role !== normalizedRole) {
           await payload.update({
             collection: 'users',
-            id: existing.docs[0].id,
-            data: { role, ...extraFields }
+            id: existingUser.id,
+            data: { role: normalizedRole, studyYear, ...extraFields },
           })
-          console.log(`   ✓ Rôle mis à jour: ${role}`)
+          console.log(`   ✓ Rôle mis à jour: ${normalizedRole}`)
         }
         continue
       }
 
-      // Créer l'utilisateur via BetterAuth
-      const betterAuth = (payload as any).betterAuth
-      if (!betterAuth) {
-        throw new Error('BetterAuth not initialized')
-      }
+      const [firstName, ...restName] = name.split(' ')
+      const lastName = restName.join(' ') || firstName
 
-      // Utiliser l'API interne de BetterAuth pour créer l'utilisateur
-      const result = await betterAuth.api.signUpEmail({
-        body: { email, password, name }
-      })
+      const createdUser = await payload.create({
+        collection: 'users',
+        data: {
+          email,
+          password,
+          firstName,
+          lastName,
+          role: normalizedRole,
+          studyYear,
+          ...extraFields,
+        },
+      } as any)
 
-      if (result?.user?.id) {
-        console.log(`✓ ${name} créé (ID: ${result.user.id})`)
-
-        // Mettre à jour le rôle et les champs additionnels
-        await payload.update({
-          collection: 'users',
-          id: result.user.id,
-          data: { role, ...extraFields }
-        })
-        console.log(`   ✓ Rôle: ${role}, StudyYear: ${extraFields.studyYear}`)
-      }
+      console.log(`✓ ${name} créé (ID: ${createdUser.id})`)
     } catch (error: any) {
       console.error(`✗ Erreur pour ${name}:`, error.message)
     }
