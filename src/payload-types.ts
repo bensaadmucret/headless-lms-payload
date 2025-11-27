@@ -866,7 +866,7 @@ export interface Form {
   createdAt: string;
 }
 /**
- * Instances d'abonnements (Stripe/Paddle) rattachées aux utilisateurs.
+ * Instances d'abonnements Stripe rattachées aux utilisateurs.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "subscriptions".
@@ -875,11 +875,11 @@ export interface Subscription {
   id: number;
   user: number | User;
   /**
-   * Fournisseur de paiement (Stripe par défaut)
+   * Fournisseur de paiement (Stripe uniquement)
    */
-  provider: 'paddle' | 'stripe';
+  provider: 'stripe';
   /**
-   * Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)
+   * Identifiant client Stripe (Stripe Customer ID)
    */
   customerId?: string | null;
   /**
@@ -1215,6 +1215,10 @@ export interface Question {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Champ technique utilisé pour éviter les doublons de questions générées
+   */
+  dedupSignature?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -3171,6 +3175,7 @@ export interface QuestionsSelect<T extends boolean = true> {
         issue?: T;
         id?: T;
       };
+  dedupSignature?: T;
   updatedAt?: T;
   createdAt?: T;
 }
