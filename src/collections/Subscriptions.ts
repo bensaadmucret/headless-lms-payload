@@ -81,7 +81,7 @@ export const Subscriptions: CollectionConfig = {
   admin: {
     useAsTitle: 'subscriptionId',
     defaultColumns: ['user', 'provider', 'status', 'subscriptionId', 'currentPeriodEnd', 'updatedAt'],
-    description: 'Instances d\'abonnements (Stripe/Paddle) rattachées aux utilisateurs.',
+    description: 'Instances d\'abonnements Stripe rattachées aux utilisateurs.',
   },
   access: {
     // Autoriser superadmin via session utilisateur OU via API Key (req.apiKey), en chargeant l'user si nécessaire
@@ -104,12 +104,11 @@ export const Subscriptions: CollectionConfig = {
       required: true,
       defaultValue: 'stripe',
       options: [
-        { label: 'Paddle', value: 'paddle' },
         { label: 'Stripe', value: 'stripe' },
       ],
       admin: { 
         position: 'sidebar',
-        description: 'Fournisseur de paiement (Stripe par défaut)',
+        description: 'Fournisseur de paiement (Stripe uniquement)',
       },
     },
     {
@@ -117,7 +116,7 @@ export const Subscriptions: CollectionConfig = {
       label: 'Customer ID',
       type: 'text',
       admin: { 
-        description: 'Identifiant client du fournisseur (Stripe Customer ID ou Paddle Customer ID)',
+        description: 'Identifiant client Stripe (Stripe Customer ID)',
       },
     },
     {

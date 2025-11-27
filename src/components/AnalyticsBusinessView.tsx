@@ -10,10 +10,8 @@ interface AnalyticsBusinessViewProps {
   canAccessAdmin: boolean;
 }
 
-const AnalyticsBusinessView: React.FC<AnalyticsBusinessViewProps> = ({
-  user,
-  canAccessAdmin,
-}) => {
+const AnalyticsBusinessView = (props: any) => {
+  const { user, canAccessAdmin } = props as AnalyticsBusinessViewProps;
   if (
     !canAccessAdmin &&
     user?.role !== "superadmin" &&

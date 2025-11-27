@@ -410,6 +410,7 @@ export const Users: CollectionConfig = {
       label: 'Rôle',
       type: 'select',
       required: true,
+      defaultValue: 'student',
       options: [
         { label: 'Super Admin', value: 'superadmin' },
         { label: 'Admin', value: 'admin' },

@@ -168,7 +168,8 @@ export const Questions: CollectionConfig = {
           admin: {
             description: 'Nombre de fois utilisée dans des quiz adaptatifs'
           }
-        }
+        },
+        
       ]
     },
 
@@ -324,7 +325,17 @@ export const Questions: CollectionConfig = {
           required: true
         }
       ]
-    }
+    },
+    {
+      name: 'dedupSignature',
+      label: 'Signature de déduplication',
+      type: 'text',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
+        description: 'Champ technique utilisé pour éviter les doublons de questions générées',
+      },
+    },
   ],
   // Nouveaux endpoints pour la tâche 9
   endpoints: [
