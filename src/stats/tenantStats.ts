@@ -4,6 +4,12 @@
 
 import payload from 'payload';
 
+function hasCollection(slug: string): boolean {
+  return payload.config.collections.some(
+    (collection) => collection.slug === slug
+  );
+}
+
 /**
  * Nombre total d'utilisateurs pour un tenant
  */
@@ -136,11 +142,15 @@ export async function getLoginCountForTenant(tenantId: string): Promise<number> 
  * Suppose une collection audit avec tenant et createdAt
  */
 export async function getActionCountForTenant(tenantId: string, days: number = 30): Promise<number> {
+  if (!hasCollection('auditlogs')) {
+    return 0;
+  }
+
   try {
     const since = new Date();
     since.setDate(since.getDate() - days);
     const result = await payload.find({
-      collection: 'auditlogs',
+      collection: 'auditlogs' as any,
       where: {
         tenant: { equals: tenantId },
         createdAt: { greater_than: since.toISOString() }
@@ -197,9 +207,13 @@ export async function isQuotaExceededForTenant(
  * Taux de complétion moyen des cours/quizz (suppose une collection progressions)
  */
 export async function getAvgCourseCompletionForTenant(tenantId: string): Promise<number> {
+  if (!hasCollection('progress')) {
+    return 0;
+  }
+
   try {
     const result = await payload.find({
-      collection: 'progress',
+      collection: 'progress' as any,
       where: {
         tenant: { equals: tenantId },
         completed: { exists: true }

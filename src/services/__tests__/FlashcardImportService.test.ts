@@ -6,6 +6,8 @@
 import { describe, it, expect, beforeEach, vi, afterEach } from 'vitest';
 import { FlashcardImportService } from '../FlashcardImportService';
 import { FlashcardImportData } from '../../types/jsonImport';
+import payload from 'payload';
+import { SpacedRepetitionSchedulingService } from '../SpacedRepetitionSchedulingService';
 
 // Mock de Payload
 vi.mock('payload', () => ({
@@ -58,7 +60,7 @@ describe.skip('FlashcardImportService', () => {
 
   beforeEach(() => {
     service = new FlashcardImportService();
-    mockPayload = require('payload').default;
+    mockPayload = payload as any;
     
     // Reset des mocks
     vi.clearAllMocks();
@@ -523,7 +525,7 @@ describe.skip('FlashcardImportService', () => {
     });
 
     it('should handle spaced repetition service errors gracefully', async () => {
-      const mockSRSService = require('../SpacedRepetitionSchedulingService').SpacedRepetitionSchedulingService;
+      const mockSRSService: any = SpacedRepetitionSchedulingService;
       const mockInstance = new mockSRSService();
       mockInstance.createScheduleForImportedFlashcards.mockRejectedValue(
         new Error('SRS service error')
@@ -582,7 +584,7 @@ describe.skip('FlashcardImportService', () => {
 
       await service.processFlashcards(hardData, 'user-1', true, true);
 
-      const mockSRSService = require('../SpacedRepetitionSchedulingService').SpacedRepetitionSchedulingService;
+      const mockSRSService: any = SpacedRepetitionSchedulingService;
       const mockInstance = new mockSRSService();
       
       expect(mockInstance.createScheduleForImportedFlashcards).toHaveBeenCalledWith(
@@ -612,7 +614,7 @@ describe.skip('FlashcardImportService', () => {
 
       await service.processFlashcards(testData, 'user-1', true, true);
 
-      const mockSRSService = require('../SpacedRepetitionSchedulingService').SpacedRepetitionSchedulingService;
+      const mockSRSService: any = SpacedRepetitionSchedulingService;
       const mockInstance = new mockSRSService();
       
       expect(mockInstance.createScheduleForImportedFlashcards).toHaveBeenCalledWith(

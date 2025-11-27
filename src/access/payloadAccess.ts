@@ -5,9 +5,6 @@ export const payloadIsSuperAdmin = ({ req }: { req: { user?: { role?: string } |
 export const payloadIsAdmin = ({ req }: { req: { user?: { role?: string } | null } }) =>
   req.user?.role === 'admin';
 
-export const payloadIsTeacher = ({ req }: { req: { user?: { role?: string } | null } }) =>
-  req.user?.role === 'teacher';
-
 export const payloadIsStudent = ({ req }: { req: { user?: { role?: string } | null } }) =>
   req.user?.role === 'student';
 

@@ -45,7 +45,7 @@ export interface GenerationConfig {
  * Service de validation robuste pour les paramètres de génération IA
  */
 export class AIQuizValidationService {
-  constructor(private payload: Payload) { }
+  constructor(private payload: Payload) {}
 
   /**
    * Valide complètement une configuration de génération
@@ -57,31 +57,31 @@ export class AIQuizValidationService {
 
     // Validation des champs obligatoires
     await this.validateRequiredFields(config, errors)
-
+    
     // Validation du sujet
     this.validateSubject(config.subject, errors, warnings)
-
+    
     // Validation de la catégorie
     await this.validateCategory(config.categoryId, errors, warnings)
-
+    
     // Validation du niveau étudiant
     this.validateStudentLevel(config.studentLevel, errors, warnings)
-
+    
     // Validation du nombre de questions
     this.validateQuestionCount(config.questionCount, errors, warnings)
-
+    
     // Validation de la difficulté
     this.validateDifficulty(config.difficulty, errors, warnings)
-
+    
     // Validation des instructions personnalisées
     this.validateCustomInstructions(config.customInstructions, errors, warnings)
-
+    
     // Validation du domaine médical
     this.validateMedicalDomain(config.medicalDomain, errors, warnings)
-
+    
     // Validation de l'utilisateur
     await this.validateUser(config.userId, errors, warnings)
-
+    
     // Sanitisation des données
     this.sanitizeConfig(sanitizedConfig, warnings)
 
@@ -158,7 +158,7 @@ export class AIQuizValidationService {
       'cardiologie', 'neurologie', 'pneumologie', 'gastroentérologie'
     ]
 
-    const hasMedicalContent = medicalTerms.some(term =>
+    const hasMedicalContent = medicalTerms.some(term => 
       subject.toLowerCase().includes(term)
     )
 
@@ -271,7 +271,7 @@ export class AIQuizValidationService {
     if (!studentLevel) return
 
     const validLevels = ['PASS', 'LAS', 'both']
-
+    
     if (!validLevels.includes(studentLevel)) {
       errors.push({
         field: 'studentLevel',
@@ -360,7 +360,7 @@ export class AIQuizValidationService {
     if (!difficulty) return
 
     const validDifficulties = ['easy', 'medium', 'hard']
-
+    
     if (!validDifficulties.includes(difficulty)) {
       errors.push({
         field: 'difficulty',
@@ -487,9 +487,9 @@ export class AIQuizValidationService {
         return
       }
 
-      // Vérifier les permissions
+      // Vérifier les permissions (seuls admin et superadmin peuvent générer des quiz)
       const userRole = (user as any).role
-      if (!userRole || userRole !== 'admin') {
+      if (!userRole || !['admin', 'superadmin'].includes(userRole)) {
         errors.push({
           field: 'userId',
           message: 'L\'utilisateur n\'a pas les permissions pour générer des quiz',
@@ -532,7 +532,7 @@ export class AIQuizValidationService {
         .trim()
         .replace(/\s+/g, ' ') // Normaliser les espaces
         .replace(/[<>]/g, '') // Supprimer les caractères dangereux
-
+      
       if (config.subject !== originalSubject) {
         warnings.push({
           field: 'subject',
@@ -549,7 +549,7 @@ export class AIQuizValidationService {
         .trim()
         .replace(/\s+/g, ' ')
         .replace(/[<>]/g, '')
-
+      
       if (config.customInstructions !== original) {
         warnings.push({
           field: 'customInstructions',
@@ -642,7 +642,7 @@ export class AIQuizValidationService {
    */
   generateValidationReport(result: ValidationResult): string {
     const lines: string[] = []
-
+    
     lines.push('=== RAPPORT DE VALIDATION ===')
     lines.push(`Statut: ${result.isValid ? '✅ VALIDE' : '❌ INVALIDE'}`)
     lines.push('')
@@ -650,8 +650,8 @@ export class AIQuizValidationService {
     if (result.errors.length > 0) {
       lines.push('ERREURS:')
       result.errors.forEach(error => {
-        const severity = error.severity === 'critical' ? '🔴' :
-          error.severity === 'major' ? '🟠' : '🟡'
+        const severity = error.severity === 'critical' ? '🔴' : 
+                        error.severity === 'major' ? '🟠' : '🟡'
         lines.push(`  ${severity} ${error.field}: ${error.message} (${error.code})`)
       })
       lines.push('')

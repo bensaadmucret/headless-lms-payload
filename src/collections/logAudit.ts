@@ -33,6 +33,14 @@ export const logAuditAfterChange: CollectionAfterChangeHook = async ({ req, doc,
     if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) return;
     if (!collection?.slug || !isValidCollectionSlug(collection.slug)) return;
 
+    const hasAuditLogsCollection = req.payload.config.collections.some(
+      (col) => col.slug === AUDIT_COLLECTION
+    );
+
+    if (!hasAuditLogsCollection) {
+      return;
+    }
+
     const auditData: AuditData = {
       user: { relationTo: 'users', value: Number(req.user.id) },
       action: operation as 'create' | 'update',
@@ -56,6 +64,14 @@ export const logAuditAfterDelete: CollectionAfterDeleteHook = async ({ req, id, 
   try {
     if (!req.user?.id || collection?.slug === AUDIT_COLLECTION) return;
     if (!collection?.slug || !isValidCollectionSlug(collection.slug)) return;
+
+    const hasAuditLogsCollection = req.payload.config.collections.some(
+      (col) => col.slug === AUDIT_COLLECTION
+    );
+
+    if (!hasAuditLogsCollection) {
+      return;
+    }
 
     const auditData: AuditData = {
       user: { relationTo: 'users', value: Number(req.user.id) },

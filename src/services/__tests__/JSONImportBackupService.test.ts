@@ -11,7 +11,12 @@ const mockPayload = {
   update: vi.fn(),
   delete: vi.fn(),
   findByID: vi.fn(),
-  find: vi.fn()
+  find: vi.fn(),
+  config: {
+    collections: [
+      { slug: 'auditlogs' }
+    ]
+  }
 };
 
 describe('JSONImportBackupService', () => {
@@ -20,6 +25,12 @@ describe('JSONImportBackupService', () => {
   beforeEach(() => {
     backupService = new JSONImportBackupService(mockPayload as any);
     vi.clearAllMocks();
+    // S'assurer que la collection d'audit est présente
+    mockPayload.config = {
+      collections: [
+        { slug: 'auditlogs' }
+      ]
+    };
   });
 
   describe('createPreImportBackup', () => {

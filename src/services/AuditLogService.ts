@@ -43,10 +43,20 @@ interface ExistingAuditLog {
 export class AuditLogService {
   constructor(private payload: Payload) {}
 
+  private hasAuditLogsCollection(): boolean {
+    return this.payload.config.collections.some(
+      (collection) => collection.slug === 'auditlogs'
+    );
+  }
+
   /**
    * Enregistre une entrée d'audit
    */
   async logAction(entry: Partial<AuditLogEntry> & { action: AuditAction; resource: string }): Promise<void> {
+    if (!this.hasAuditLogsCollection()) {
+      return;
+    }
+
     try {
       const auditEntry: AuditLogEntry = {
         action: entry.action,

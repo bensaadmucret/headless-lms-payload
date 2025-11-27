@@ -71,7 +71,7 @@ interface QuizRequest extends PayloadRequest {
 
 export const Quizzes: CollectionConfig = {
   slug: 'quizzes',
-  
+
   // Configuration GraphQL
   graphQL: {
     pluralName: 'Quizzes',
@@ -86,21 +86,16 @@ export const Quizzes: CollectionConfig = {
     read: ({ req }) => {
       // Les administrateurs peuvent tout voir
       if (req.user?.role === 'admin' || req.user?.role === 'superadmin') return true;
-      
+
       // Les utilisateurs authentifiés ne peuvent voir que les quiz publiés
       if (req.user) {
-        // Utilisation d'une clause OR pour une meilleure compatibilité
         return {
-          or: [
-            {
-              published: {
-                equals: true,
-              },
-            },
-          ],
+          published: {
+            equals: true,
+          },
         };
       }
-      
+
       // Les utilisateurs non authentifiés ne peuvent rien voir
       return false;
     },
@@ -359,7 +354,7 @@ export const Quizzes: CollectionConfig = {
             });
           }
 
-          const quizId = typedReq.params.id;
+          const quizId = typedReq.routeParams?.id as string;
           const quiz = await typedReq.payload.findByID({
             collection: 'quizzes',
             id: quizId,

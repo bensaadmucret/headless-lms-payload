@@ -2,10 +2,9 @@ import "dotenv/config";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import sharp from "sharp"; // sharp-import
 import path from "path";
-import { buildConfig, getPayload } from "payload";
+import { buildConfig } from "payload";
 import { diagnosticsEndpoint } from "./endpoints/diagnostics";
 import { analyticsEventsEndpoint } from "./endpoints/analytics/events";
-import AfterNavLinks from "./components/AfterNavLinks";
 import { studentQuizzesEndpoint } from "./endpoints/studentQuizzes";
 import { generateSessionStepsEndpoint } from "./endpoints/generateSessionSteps";
 import { generateSessionStepsAltEndpoint } from "./endpoints/generateSessionStepsAlt";
@@ -34,11 +33,6 @@ import {
   usageStatsEndpoint,
 } from "./endpoints/rateLimitStatus";
 import { generateAIQuestionsEndpoint } from "./endpoints/generateAIQuestions";
-import { generateAIQuizEndpoint } from "./endpoints/generateAIQuiz";
-import {
-  generateCompleteQuizEndpoint,
-  createTestQuizEndpoint,
-} from "./endpoints/generateCompleteQuiz";
 import { regenerateQuestionEndpoint } from "./endpoints/aiQuizRegenerateEndpoint";
 import { onboardUserEndpoint } from "./endpoints/onboardUser";
 import { getPlacementQuizEndpoint } from "./endpoints/getPlacementQuiz";
@@ -118,15 +112,11 @@ import { Categories } from "./collections/Categories";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
+import { Users } from "./collections/Users";
 import { Courses } from "./collections/Courses";
-import { Assignments } from "./collections/Assignments";
-import Lessons from "./collections/Lessons";
-import { Prerequisites } from "./collections/Prerequisites";
 import { Quizzes } from "./collections/Quizzes";
 import { Questions } from "./collections/Questions";
 import { QuizSubmissions } from "./collections/QuizSubmissions";
-import { Progress } from "./collections/Progress";
-import { Sections } from "./collections/Sections";
 import { StudySessions } from "./collections/StudySessions";
 import { Badges } from "./collections/Badges";
 import { ColorSchemes } from "./collections/ColorSchemes";
@@ -144,12 +134,10 @@ import LearningPaths from "./collections/LearningPaths";
 import LearningPathSteps from "./collections/LearningPathSteps";
 import { AdaptiveQuizResults } from "./collections/AdaptiveQuizResults";
 import { UserPerformances } from "./collections/UserPerformances";
-import AuditLogs from "./collections/AuditLogs";
 import GenerationLogs from "./collections/GenerationLogs";
 import ImportJobs from "./collections/ImportJobs";
 import { AnalyticsEvents } from "./collections/AnalyticsEvents";
 import { AnalyticsSessions } from "./collections/AnalyticsSessions";
-import { migrations } from "./migrations";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -168,15 +156,11 @@ export default buildConfig({
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ["@/components/BeforeDashboard"],
-      components: {
-        afterNavLinks: ["@/components/AfterNavLinks"],
-      },
+      afterNavLinks: ["@/components/AfterNavLinks"],
       views: {
         analytics: {
-          Component: "@/components/AnalyticsBusinessView",
           path: "/analytics-business",
-          label: "Analytics Business",
-          group: "Analytics",
+          Component: "@/components/AnalyticsBusinessView",
         },
       },
     },
@@ -186,7 +170,7 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
-    user: 'users',
+    user: Users.slug,
     livePreview: {
       breakpoints: [
         {
@@ -216,26 +200,19 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || "",
     },
-    // Exécute automatiquement les migrations en production / au démarrage
-    // plutôt que de dépendre de la CLI `payload migrate`.
-    prodMigrations: migrations,
   }),
   collections: [
     Pages,
     Posts,
     Media,
+    Users,
     Subscriptions,
     WebhookRetryQueue,
     Categories,
     Courses,
-    Lessons,
-    Sections,
-    Assignments,
-    Prerequisites,
     Quizzes,
     Questions,
     QuizSubmissions,
-    Progress,
     StudySessions,
     Badges,
     ColorSchemes,
@@ -246,7 +223,6 @@ export default buildConfig({
     AdaptiveQuizSessions,
     AdaptiveQuizResults,
     UserPerformances,
-    AuditLogs,
     GenerationLogs,
     ImportJobs,
     Flashcards,
@@ -390,10 +366,6 @@ export default buildConfig({
 
     // === ENDPOINTS AUTRES ===
     generateAIQuestionsEndpoint,
-    generateAIQuizEndpoint,
-    // === ENDPOINTS CRÉATION AUTOMATIQUE QUIZ (Tâche 5) ===
-    generateCompleteQuizEndpoint,
-    createTestQuizEndpoint,
     // === ENDPOINTS PRÉVISUALISATION ET MODIFICATION (Tâche 9) ===
     regenerateQuestionEndpoint,
 

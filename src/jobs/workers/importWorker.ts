@@ -52,12 +52,12 @@ const WORKER_CONFIG = {
  */
 export async function processImportJob(job: Job<ImportJobData>): Promise<ImportProcessingResult> {
   const { jobId, userId, importType } = job.data
-  
+
   console.log(`📥 [Import] Starting import job ${jobId} (${importType}) for user ${userId}`)
-  
+
   try {
     const payload = await getPayloadInstance()
-    
+
     // 1. Récupérer le job d'import depuis la base
     const importJob = await payload.findByID({
       collection: 'import-jobs',
@@ -73,10 +73,10 @@ export async function processImportJob(job: Job<ImportJobData>): Promise<ImportP
     await job.progress(10)
 
     // 3. Récupérer le fichier depuis Media
-    const uploadedFileId = typeof importJob.uploadedFile === 'object' 
-      ? importJob.uploadedFile.id 
+    const uploadedFileId = typeof importJob.uploadedFile === 'object'
+      ? importJob.uploadedFile.id
       : importJob.uploadedFile
-    
+
     const mediaFile = await payload.findByID({
       collection: 'media',
       // @ts-expect-error - Type conversion from Media relation to string ID
@@ -93,7 +93,7 @@ export async function processImportJob(job: Job<ImportJobData>): Promise<ImportP
 
     // 5. Valider les données
     const validationErrors = await validateImportData(jsonData, importType)
-    
+
     if (validationErrors.length > 0) {
       await updateImportJobStatus(jobId, 'validation_failed', 100, {
         validationResults: { errors: validationErrors },
@@ -123,13 +123,13 @@ export async function processImportJob(job: Job<ImportJobData>): Promise<ImportP
     await job.progress(100)
 
     console.log(`✅ [Import] Job ${jobId} completed: ${result.successful}/${result.totalProcessed} items`)
-    
+
     return result
 
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     console.error(`❌ [Import] Job ${jobId} failed:`, errorMessage)
-    
+
     await updateImportJobStatus(jobId, 'failed', 100, {
       errors: [{
         type: 'system',
@@ -137,7 +137,7 @@ export async function processImportJob(job: Job<ImportJobData>): Promise<ImportP
         message: errorMessage,
       }],
     })
-    
+
     throw error
   }
 }
@@ -166,7 +166,7 @@ async function processImportByType(
     case 'questions': {
       const questionData = data as QuestionImportData
       const questions = questionData.questions || []
-      
+
       for (let i = 0; i < questions.length; i++) {
         const question = questions[i]
         if (!question) continue
@@ -174,7 +174,7 @@ async function processImportByType(
         try {
           // Résoudre ou créer la catégorie
           const categoryId = await findOrCreateCategory(payload, question.category)
-          
+
           // Mapper la question avec la catégorie résolue
           const questionData = mapQuestionToPayload(question)
           // Assigner l'ID de catégorie résolu
@@ -229,12 +229,12 @@ async function processImportByType(
     case 'flashcards': {
       const flashcardData = data as FlashcardImportData
       const cards = flashcardData.cards || []
-      
+
       // Créer ou récupérer le deck
       let deckId: number | null = null
       if (flashcardData.metadata.deckName) {
         const categoryId = await findOrCreateCategory(payload, flashcardData.metadata.category)
-        
+
         const deck = await payload.create({
           collection: 'flashcard-decks',
           data: {
@@ -250,15 +250,15 @@ async function processImportByType(
         })
         deckId = typeof deck.id === 'number' ? deck.id : parseInt(String(deck.id), 10)
       }
-      
+
       // Importer les flashcards
       for (let i = 0; i < cards.length; i++) {
         const card = cards[i]
         if (!card) continue
-        
+
         try {
           const categoryId = await findOrCreateCategory(payload, card.category)
-          
+
           const created = await payload.create({
             collection: 'flashcards',
             data: {
@@ -273,7 +273,7 @@ async function processImportByType(
               imageUrl: card.imageUrl,
             },
           })
-          
+
           result.questionsCreated.push(String(created.id))
           result.successful++
         } catch (error) {
@@ -284,12 +284,12 @@ async function processImportByType(
             itemIndex: i,
           })
         }
-        
+
         const progress = 30 + Math.round((i / cards.length) * 60)
         await job.progress(progress)
         await updateImportJobProgress(importJob.id, progress)
       }
-      
+
       result.totalProcessed = cards.length
       break
     }
@@ -297,7 +297,7 @@ async function processImportByType(
     case 'learning-path': {
       const pathData = data as LearningPathImportData
       const steps = pathData.path?.steps || []
-      
+
       try {
         // Créer le parcours d'apprentissage
         const learningPath = await payload.create({
@@ -315,15 +315,15 @@ async function processImportByType(
             source: pathData.metadata.source,
           },
         })
-        
+
         const pathId = typeof learningPath.id === 'number' ? learningPath.id : parseInt(String(learningPath.id), 10)
         result.quizzesCreated.push(String(pathId))
-        
+
         // Créer les étapes
         for (let i = 0; i < steps.length; i++) {
           const step = steps[i]
           if (!step) continue
-          
+
           try {
             // Créer les questions de l'étape
             const questionIds: number[] = []
@@ -332,17 +332,17 @@ async function processImportByType(
                 const categoryId = await findOrCreateCategory(payload, question.category)
                 const questionData = mapQuestionToPayload(question)
                 questionData.category = categoryId
-                
+
                 const createdQuestion = await payload.create({
                   collection: 'questions',
                   data: questionData,
                 })
-                
+
                 questionIds.push(typeof createdQuestion.id === 'number' ? createdQuestion.id : parseInt(String(createdQuestion.id), 10))
                 result.questionsCreated.push(String(createdQuestion.id))
               }
             }
-            
+
             // Créer l'étape
             await payload.create({
               collection: 'learning-path-steps',
@@ -359,7 +359,7 @@ async function processImportByType(
                 questions: questionIds,
               },
             })
-            
+
             result.successful++
           } catch (error) {
             result.failed++
@@ -369,12 +369,12 @@ async function processImportByType(
               itemIndex: i,
             })
           }
-          
+
           const progress = 30 + Math.round((i / steps.length) * 60)
           await job.progress(progress)
           await updateImportJobProgress(importJob.id, progress)
         }
-        
+
         result.totalProcessed = steps.length
       } catch (error) {
         result.failed++
@@ -433,7 +433,7 @@ function mapQuestionToPayload(question: ImportQuestion) {
   return {
     questionText: richTextContent,
     questionType: 'multipleChoice' as const,
-    options: question.options.map((opt) => ({
+    options: question.options.map((opt, index) => ({
       optionText: opt.text,
       isCorrect: opt.isCorrect,
     })),
@@ -559,7 +559,7 @@ async function validateImportData(
  * Lire le contenu d'un fichier média
  */
 async function readMediaFile(filename: string): Promise<string> {
-  // Aligner avec la configuration de la collection Media (dossier public/media)
+  // Payload stocke les fichiers dans le dossier public/media
   const mediaPath = path.join(process.cwd(), 'public', 'media', filename)
   console.log(`📂 Reading file from: ${mediaPath}`)
   return await fs.readFile(mediaPath, 'utf-8')
@@ -575,7 +575,7 @@ async function updateImportJobStatus(
   additionalData: Record<string, unknown> = {}
 ): Promise<void> {
   const payload = await getPayloadInstance()
-  
+
   await payload.update({
     collection: 'import-jobs',
     id: jobId,
@@ -592,7 +592,7 @@ async function updateImportJobStatus(
  */
 async function updateImportJobProgress(jobId: string, progress: number): Promise<void> {
   const payload = await getPayloadInstance()
-  
+
   await payload.update({
     collection: 'import-jobs',
     id: jobId,
@@ -605,7 +605,7 @@ async function updateImportJobProgress(jobId: string, progress: number): Promise
  */
 export function startImportWorker(): void {
   importQueue.process('process-import', WORKER_CONFIG.concurrency, processImportJob)
-  
+
   console.log(`✅ Import worker started with concurrency ${WORKER_CONFIG.concurrency}`)
 }
 
