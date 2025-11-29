@@ -1,6 +1,6 @@
 import 'dotenv/config';
 import { getPayload } from 'payload';
-import config from './src/payload.config.ts';
+import config from '../src/payload.config.ts';
 
 /**
  * Script pour générer automatiquement les catégories médicales pour PASS/LAS
