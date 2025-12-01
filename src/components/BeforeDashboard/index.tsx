@@ -3,6 +3,7 @@
 import { Banner } from '@payloadcms/ui/elements/Banner'
 import { useAuth } from '@payloadcms/ui'
 import React from 'react'
+import Link from 'next/link'
 
 import { SeedButton } from './SeedButton'
 import './index.scss'
@@ -24,15 +25,15 @@ const BeforeDashboard: React.FC = () => {
           <h5 style={{ margin: '0 0 0.5rem 0', color: '#495057' }}>Administration IA</h5>
           <ul style={{ margin: 0, paddingLeft: '1.2rem' }}>
             <li>
-              <a href="/admin/generation-logs" style={{ color: '#007bff', textDecoration: 'none' }}>
+              <Link href="/admin/generation-logs" style={{ color: '#007bff', textDecoration: 'none' }}>
                 📊 Consulter les logs de génération IA
-              </a>
+              </Link>
               {' - Visualisez les métriques et l\'historique des générations de quiz par IA'}
             </li>
             <li style={{ marginTop: '0.5rem' }}>
-              <a href="/admin/collections/generationlogs" style={{ color: '#007bff', textDecoration: 'none' }}>
+              <Link href="/admin/collections/generationlogs" style={{ color: '#007bff', textDecoration: 'none' }}>
                 📋 Gestion des logs (Collection)
-              </a>
+              </Link>
               {' - Accès direct à la collection des logs de génération'}
             </li>
           </ul>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 interface AfterNavLinksProps {
   className?: string;
@@ -15,21 +16,21 @@ const AfterNavLinks: React.FC<AfterNavLinksProps> = ({ className = '' }) => {
       </div>
 
       <nav className="nav__links">
-        <a
+        <Link
           href="/admin/analytics-business"
           className="nav__link"
         >
           <span className="nav__link-icon">📊</span>
           <span className="nav__link-label">Dashboard Business</span>
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/admin/analytics-summary"
           className="nav__link"
         >
           <span className="nav__link-icon">📈</span>
           <span className="nav__link-label">Résumé Analytics</span>
-        </a>
+        </Link>
       </nav>
     </div>
   );

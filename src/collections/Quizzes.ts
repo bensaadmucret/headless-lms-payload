@@ -404,11 +404,21 @@ export const Quizzes: CollectionConfig = {
               quiz: quiz.id,
               student: typedReq.user.id,
               submissionDate: new Date().toISOString(),
-              answers: results.map((r) => ({
-                question: r.question,
-                answer: r.userAnswer,
-                isCorrect: r.isCorrect,
-              })),
+              answers: results.map((r) => {
+                const questionKey = String(r.question);
+                const timeSpentMs =
+                  body && body.questionTimes && typeof body.questionTimes[questionKey] === 'number'
+                    ? body.questionTimes[questionKey]
+                    : 0;
+                const timeSpentSeconds = timeSpentMs > 0 ? Math.round(timeSpentMs / 1000) : 0;
+
+                return {
+                  question: r.question,
+                  answer: r.userAnswer,
+                  isCorrect: r.isCorrect,
+                  timeSpentSeconds,
+                };
+              }),
               finalScore: scorePercentage,
             },
           });

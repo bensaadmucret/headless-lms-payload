@@ -151,6 +151,11 @@ export const QuizSubmissions: CollectionConfig = {
           label: 'Réponse correcte ?',
           required: true,
         },
+        {
+          name: 'timeSpentSeconds',
+          label: 'Temps passé (secondes)',
+          type: 'number',
+        },
       ],
     },
     {

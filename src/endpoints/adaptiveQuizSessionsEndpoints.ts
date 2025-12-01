@@ -195,6 +195,15 @@ export const saveAdaptiveQuizResultEndpoint: Endpoint = {
 
       const sessionDbId = session.id;
 
+      const totalTimeMs =
+        typeof resultData.totalTimeMs === 'number' && Number.isFinite(resultData.totalTimeMs)
+          ? resultData.totalTimeMs
+          : undefined;
+      const timeSpentSeconds =
+        totalTimeMs !== undefined
+          ? Math.max(0, Math.round(totalTimeMs / 1000))
+          : resultData.timeSpent || 0;
+
       // 5. Créer le résultat dans la collection
       const result = await req.payload.create({
         collection: 'adaptiveQuizResults',
@@ -204,7 +213,7 @@ export const saveAdaptiveQuizResultEndpoint: Endpoint = {
           overallScore: resultData.overallScore || 0,
           maxScore: resultData.maxScore || 0,
           successRate: resultData.successRate || 0,
-          timeSpent: resultData.timeSpent || 0,
+          timeSpent: timeSpentSeconds,
           completedAt: new Date().toISOString(),
           categoryResults: resultData.categoryResults || [],
           recommendations: resultData.recommendations || [],

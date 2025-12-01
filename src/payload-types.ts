@@ -1236,6 +1236,7 @@ export interface QuizSubmission {
         question: number | Question;
         answer?: string | null;
         isCorrect: boolean;
+        timeSpentSeconds?: number | null;
         id?: string | null;
       }[]
     | null;
@@ -3191,6 +3192,7 @@ export interface QuizSubmissionsSelect<T extends boolean = true> {
         question?: T;
         answer?: T;
         isCorrect?: T;
+        timeSpentSeconds?: T;
         id?: T;
       };
   finalScore?: T;

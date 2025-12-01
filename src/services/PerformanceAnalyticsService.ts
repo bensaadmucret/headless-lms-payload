@@ -217,6 +217,16 @@ export class PerformanceAnalyticsService {
           stats.correctAnswers++;
         }
 
+        // Agréger le temps passé si disponible (stocké en secondes sur chaque réponse)
+        const timedAnswer = answer as any;
+        if (
+          typeof timedAnswer.timeSpentSeconds === 'number' &&
+          Number.isFinite(timedAnswer.timeSpentSeconds) &&
+          timedAnswer.timeSpentSeconds > 0
+        ) {
+          stats.totalTime += timedAnswer.timeSpentSeconds;
+        }
+
         // Update last attempt date if this submission is more recent
         if (new Date(submission.submissionDate) > new Date(stats.lastAttemptDate)) {
           stats.lastAttemptDate = submission.submissionDate;
