@@ -53,6 +53,7 @@
     "@langchain/textsplitters": "^0.1.0",
     "@payloadcms/admin-bar": "3.64.0",
     "@payloadcms/db-postgres": "3.64.0",
+    "@payloadcms/email-nodemailer": "^3.64.0",
     "@payloadcms/graphql": "3.64.0",
     "@payloadcms/live-preview-react": "3.64.0",
     "@payloadcms/next": "3.64.0",

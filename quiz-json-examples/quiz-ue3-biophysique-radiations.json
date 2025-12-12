@@ -1,94 +1,168 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE3 - Biophysique des radiations",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les rayonnements ionisants, dosimétrie et effets biologiques"
+  },
   "title": "UE3 - Biophysique des radiations",
   "description": "Quiz sur les rayonnements ionisants, dosimétrie et effets biologiques",
   "category": "Biophysique des radiations",
   "studentLevel": "both",
   "difficulty": "hard",
-  "questionCount": 8,
+  "questionCount": 6,
   "questions": [
     {
       "questionText": "Quelle est l'unité de dose absorbée en radioprotection ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Gray (Gy)",
-        "Sievert (Sv)",
-        "Becquerel (Bq)",
-        "Coulomb (C)"
+        {
+          "text": "Gray (Gy)",
+          "isCorrect": true
+        },
+        {
+          "text": "Sievert (Sv)",
+          "isCorrect": false
+        },
+        {
+          "text": "Becquerel (Bq)",
+          "isCorrect": false
+        },
+        {
+          "text": "Coulomb (C)",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Gray (Gy)",
       "explanation": "Le gray mesure la dose absorbée d'énergie par unité de masse de tissu.",
+      "category": "Biophysique des radiations",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle est l'unité de dose équivalente ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Gray (Gy)",
-        "Sievert (Sv)",
-        "Becquerel (Bq)",
-        "Roentgen (R)"
+        {
+          "text": "Gray (Gy)",
+          "isCorrect": false
+        },
+        {
+          "text": "Sievert (Sv)",
+          "isCorrect": true
+        },
+        {
+          "text": "Becquerel (Bq)",
+          "isCorrect": false
+        },
+        {
+          "text": "Roentgen (R)",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Sievert (Sv)",
       "explanation": "Le sievert mesure les effets biologiques des rayonnements en tenant compte du type de radiation.",
+      "category": "Biophysique des radiations",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel type de rayonnement est le plus ionisant ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Rayons X",
-        "Rayons gamma",
-        "Particules alpha",
-        "Électrons"
+        {
+          "text": "Rayons X",
+          "isCorrect": false
+        },
+        {
+          "text": "Rayons gamma",
+          "isCorrect": false
+        },
+        {
+          "text": "Particules alpha",
+          "isCorrect": true
+        },
+        {
+          "text": "Électrons",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Particules alpha",
       "explanation": "Les particules alpha ont un pouvoir ionisant élevé mais une faible pénétration tissulaire.",
+      "category": "Biophysique des radiations",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'effet biologique des rayonnements ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Dommages directs à l'ADN",
-        "Production de radicaux libres",
-        "Les deux réponses",
-        "Aucun effet"
+        {
+          "text": "Dommages directs à l'ADN",
+          "isCorrect": false
+        },
+        {
+          "text": "Production de radicaux libres",
+          "isCorrect": false
+        },
+        {
+          "text": "Les deux réponses",
+          "isCorrect": true
+        },
+        {
+          "text": "Aucun effet",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Les deux réponses",
       "explanation": "Les rayonnements causent des dommages directs à l'ADN et indirects via la production de radicaux libres.",
+      "category": "Biophysique des radiations",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quelle est la dose létale aiguë approximative pour l'humain ?",
-      "questionType": "multipleChoice",
       "options": [
-        "1 Gy",
-        "5 Gy",
-        "10 Gy",
-        "50 Gy"
+        {
+          "text": "1 Gy",
+          "isCorrect": false
+        },
+        {
+          "text": "5 Gy",
+          "isCorrect": true
+        },
+        {
+          "text": "10 Gy",
+          "isCorrect": false
+        },
+        {
+          "text": "50 Gy",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "5 Gy",
       "explanation": "Une dose aiguë de 5 Gy est généralement létale sans traitement médical approprié.",
+      "category": "Biophysique des radiations",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quel organe est le plus radiosensible ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Foie",
-        "Cœur",
-        "Moelle osseuse",
-        "Poumons"
+        {
+          "text": "Foie",
+          "isCorrect": false
+        },
+        {
+          "text": "Cœur",
+          "isCorrect": false
+        },
+        {
+          "text": "Moelle osseuse",
+          "isCorrect": true
+        },
+        {
+          "text": "Poumons",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Moelle osseuse",
       "explanation": "La moelle osseuse hématopoïétique est particulièrement sensible aux rayonnements ionisants.",
+      "category": "Biophysique des radiations",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

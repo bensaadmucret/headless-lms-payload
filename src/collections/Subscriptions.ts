@@ -6,6 +6,11 @@ const SLUG = 'subscriptions' as const;
 
 // Hook pour synchroniser automatiquement l'utilisateur après changement d'abonnement
 const syncUserAfterChange: CollectionAfterChangeHook = async ({ doc, req, operation }) => {
+  // Check specifically for the flag to disable this hook (e.g. from Stripe Service)
+  if (req.context?.disableSubscriptionSync) {
+    return doc;
+  }
+
   // Ne synchroniser que lors de la création ou mise à jour
   if (operation === 'create' || operation === 'update') {
     try {
@@ -30,7 +35,7 @@ const isSuperadminS2S = async ({ req }: { req: any }): Promise<boolean> => {
       const h = req?.headers;
       if (h && typeof h.get === 'function') return h.get(name);
       if (h && typeof h[name] === 'string') return h[name];
-    } catch {}
+    } catch { }
     return null;
   };
   const extractTokenFromHeaders = (): string | null => {
@@ -106,7 +111,7 @@ export const Subscriptions: CollectionConfig = {
       options: [
         { label: 'Stripe', value: 'stripe' },
       ],
-      admin: { 
+      admin: {
         position: 'sidebar',
         description: 'Fournisseur de paiement (Stripe uniquement)',
       },
@@ -115,7 +120,7 @@ export const Subscriptions: CollectionConfig = {
       name: 'customerId',
       label: 'Customer ID',
       type: 'text',
-      admin: { 
+      admin: {
         description: 'Identifiant client Stripe (Stripe Customer ID)',
       },
     },
@@ -125,8 +130,8 @@ export const Subscriptions: CollectionConfig = {
       type: 'text',
       required: true,
       unique: true,
-      admin: { 
-        position: 'sidebar', 
+      admin: {
+        position: 'sidebar',
         description: 'Identifiant d\'abonnement unique du fournisseur',
       },
     },

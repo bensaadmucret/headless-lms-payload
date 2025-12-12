@@ -3,6 +3,7 @@ import { AdaptiveQuizService } from '../services/AdaptiveQuizService';
 import { createSecurityMiddleware } from '../middleware/securityMiddleware';
 import { AuditLogService } from '../services/AuditLogService';
 import { getAdaptiveQuizErrorManager } from '../services/AdaptiveQuizErrorManager';
+import { shuffleArray } from '../utils/shuffleArray';
 
 /**
  * Endpoint pour générer un quiz adaptatif personnalisé
@@ -38,6 +39,14 @@ export const generateAdaptiveQuizEndpoint: Endpoint = {
       const quizResult = await adaptiveQuizService.generateAdaptiveQuiz(String(req.user.id));
       sessionId = quizResult.sessionId;
 
+      // Mélanger les options de chaque question sans modifier les objets d'origine
+      const shuffledQuestions = (quizResult.questions || []).map((question) => ({
+        ...question,
+        options: Array.isArray((question as any).options)
+          ? shuffleArray((question as any).options)
+          : (question as any).options,
+      }));
+
       // 4. Log successful generation
       // TODO: Uncomment when auditlogs collection is created
       // await auditService.logQuizGeneration(req, sessionId, true);
@@ -48,7 +57,7 @@ export const generateAdaptiveQuizEndpoint: Endpoint = {
         data: {
           id: quizResult.sessionId,
           sessionId: quizResult.sessionId,
-          questions: quizResult.questions,
+          questions: shuffledQuestions,
           type: 'adaptive',
           generatedAt: new Date().toISOString(),
           basedOnAnalytics: {
@@ -60,7 +69,7 @@ export const generateAdaptiveQuizEndpoint: Endpoint = {
           questionDistribution: {
             weakCategoryQuestions: 5,
             strongCategoryQuestions: 2,
-            totalQuestions: quizResult.questions?.length || 7
+            totalQuestions: shuffledQuestions.length || 7
           },
           config: {
             weakQuestionsCount: 5,

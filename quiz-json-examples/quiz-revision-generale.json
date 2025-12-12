@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Quiz de révision générale",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz de synthèse couvrant l'ensemble des connaissances médicales fondamentales"
+  },
   "title": "Quiz de révision générale",
   "description": "Quiz de synthèse couvrant l'ensemble des connaissances médicales fondamentales",
   "category": "Quiz de révision générale",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 15,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quelle est la cellule fondamentale du système nerveux ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Le neurone",
-        "L'astrocyte",
-        "L'oligodendrocyte",
-        "La microglie"
+        {
+          "text": "Le neurone",
+          "isCorrect": true
+        },
+        {
+          "text": "L'astrocyte",
+          "isCorrect": false
+        },
+        {
+          "text": "L'oligodendrocyte",
+          "isCorrect": false
+        },
+        {
+          "text": "La microglie",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Le neurone",
       "explanation": "Le neurone est l'unité fonctionnelle du système nerveux responsable de la transmission de l'influx nerveux.",
+      "category": "Quiz de révision générale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel système régule la pression artérielle ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Système nerveux autonome",
-        "Système endocrinien",
-        "Système immunitaire",
-        "Système digestif"
+        {
+          "text": "Système nerveux autonome",
+          "isCorrect": true
+        },
+        {
+          "text": "Système endocrinien",
+          "isCorrect": false
+        },
+        {
+          "text": "Système immunitaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Système digestif",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Système nerveux autonome",
       "explanation": "Le système nerveux autonome régule automatiquement la pression artérielle via les barorécepteurs.",
+      "category": "Quiz de révision générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle vitamine est synthétisée par la peau sous l'action des UV ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Vitamine A",
-        "Vitamine C",
-        "Vitamine D",
-        "Vitamine K"
+        {
+          "text": "Vitamine A",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamine C",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitamine D",
+          "isCorrect": true
+        },
+        {
+          "text": "Vitamine K",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Vitamine D",
       "explanation": "La vitamine D est synthétisée dans la peau sous l'action des rayons ultraviolets B.",
+      "category": "Quiz de révision générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

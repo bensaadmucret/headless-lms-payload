@@ -1,38 +1,68 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE5 - Système digestif",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur l'anatomie et physiologie du tube digestif"
+  },
   "title": "UE5 - Système digestif",
   "description": "Quiz sur l'anatomie et physiologie du tube digestif",
   "category": "Système digestif",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 2,
   "questions": [
     {
       "questionText": "Quelle enzyme débute la digestion des protéines ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Pepsine",
-        "Trypsine",
-        "Amylase",
-        "Lipase"
+        {
+          "text": "Pepsine",
+          "isCorrect": true
+        },
+        {
+          "text": "Trypsine",
+          "isCorrect": false
+        },
+        {
+          "text": "Amylase",
+          "isCorrect": false
+        },
+        {
+          "text": "Lipase",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Pepsine",
       "explanation": "La pepsine, sécrétée par l'estomac, débute la digestion des protéines en milieu acide.",
+      "category": "Système digestif",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Où se produit l'absorption principale des nutriments ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Estomac",
-        "Intestin grêle",
-        "Gros intestin",
-        "Œsophage"
+        {
+          "text": "Estomac",
+          "isCorrect": false
+        },
+        {
+          "text": "Intestin grêle",
+          "isCorrect": true
+        },
+        {
+          "text": "Gros intestin",
+          "isCorrect": false
+        },
+        {
+          "text": "Œsophage",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Intestin grêle",
       "explanation": "L'intestin grêle est le principal site d'absorption des nutriments grâce à sa grande surface.",
+      "category": "Système digestif",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     }
   ]
 }

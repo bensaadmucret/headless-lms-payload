@@ -1,38 +1,68 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE7 - Droit de la santé",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur la législation médicale et droits des patients"
+  },
   "title": "UE7 - Droit de la santé",
   "description": "Quiz sur la législation médicale et droits des patients",
   "category": "Droit de la santé",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 2,
   "questions": [
     {
       "questionText": "Quel est le principe du secret médical ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Obligation de confidentialité",
-        "Droit à l'information",
-        "Consentement aux soins",
-        "Accès au dossier médical"
+        {
+          "text": "Obligation de confidentialité",
+          "isCorrect": true
+        },
+        {
+          "text": "Droit à l'information",
+          "isCorrect": false
+        },
+        {
+          "text": "Consentement aux soins",
+          "isCorrect": false
+        },
+        {
+          "text": "Accès au dossier médical",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Obligation de confidentialité",
       "explanation": "Le secret médical impose au professionnel de santé de ne pas divulguer les informations concernant le patient.",
+      "category": "Droit de la santé",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la loi Kouchner de 2002 ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Droit des malades",
-        "Réforme hospitalière",
-        "Sécurité sanitaire",
-        "Bioéthique"
+        {
+          "text": "Droit des malades",
+          "isCorrect": true
+        },
+        {
+          "text": "Réforme hospitalière",
+          "isCorrect": false
+        },
+        {
+          "text": "Sécurité sanitaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Bioéthique",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Droit des malades",
       "explanation": "La loi du 4 mars 2002 relative aux droits des malades et à la qualité du système de santé renforce les droits des patients.",
+      "category": "Droit de la santé",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     }
   ]
 }

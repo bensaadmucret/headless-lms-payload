@@ -1,94 +1,168 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE4 - Tests statistiques",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les tests d'hypothèse, erreurs et puissance statistique"
+  },
   "title": "UE4 - Tests statistiques",
   "description": "Quiz sur les tests d'hypothèse, erreurs et puissance statistique",
   "category": "Tests statistiques",
   "studentLevel": "both",
   "difficulty": "hard",
-  "questionCount": 8,
+  "questionCount": 6,
   "questions": [
     {
       "questionText": "Qu'est-ce qu'un test d'hypothèse ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Procédure pour accepter ou rejeter une hypothèse",
-        "Calcul de moyenne",
-        "Représentation graphique",
-        "Échantillonnage aléatoire"
+        {
+          "text": "Procédure pour accepter ou rejeter une hypothèse",
+          "isCorrect": true
+        },
+        {
+          "text": "Calcul de moyenne",
+          "isCorrect": false
+        },
+        {
+          "text": "Représentation graphique",
+          "isCorrect": false
+        },
+        {
+          "text": "Échantillonnage aléatoire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Procédure pour accepter ou rejeter une hypothèse",
       "explanation": "Un test d'hypothèse permet de prendre une décision concernant la validité d'une hypothèse sur une population.",
+      "category": "Tests statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la définition de la valeur p ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Probabilité d'observer les données si H0 est vraie",
-        "Probabilité d'erreur de type I",
-        "Puissance du test",
-        "Taille de l'effet"
+        {
+          "text": "Probabilité d'observer les données si H0 est vraie",
+          "isCorrect": true
+        },
+        {
+          "text": "Probabilité d'erreur de type I",
+          "isCorrect": false
+        },
+        {
+          "text": "Puissance du test",
+          "isCorrect": false
+        },
+        {
+          "text": "Taille de l'effet",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Probabilité d'observer les données si H0 est vraie",
       "explanation": "La valeur p est la probabilité d'obtenir des résultats aussi extrêmes que ceux observés, sous l'hypothèse nulle.",
+      "category": "Tests statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'erreur de type I ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Rejeter H0 alors qu'elle est vraie",
-        "Accepter H0 alors qu'elle est fausse",
-        "Erreur d'échantillonnage",
-        "Biais de sélection"
+        {
+          "text": "Rejeter H0 alors qu'elle est vraie",
+          "isCorrect": true
+        },
+        {
+          "text": "Accepter H0 alors qu'elle est fausse",
+          "isCorrect": false
+        },
+        {
+          "text": "Erreur d'échantillonnage",
+          "isCorrect": false
+        },
+        {
+          "text": "Biais de sélection",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Rejeter H0 alors qu'elle est vraie",
       "explanation": "L'erreur de type I (α) est le risque de conclure à tort qu'il y a un effet alors qu'il n'y en a pas.",
+      "category": "Tests statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'erreur de type II ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Rejeter H0 alors qu'elle est vraie",
-        "Accepter H0 alors qu'elle est fausse",
-        "Erreur de mesure",
-        "Biais de publication"
+        {
+          "text": "Rejeter H0 alors qu'elle est vraie",
+          "isCorrect": false
+        },
+        {
+          "text": "Accepter H0 alors qu'elle est fausse",
+          "isCorrect": true
+        },
+        {
+          "text": "Erreur de mesure",
+          "isCorrect": false
+        },
+        {
+          "text": "Biais de publication",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Accepter H0 alors qu'elle est fausse",
       "explanation": "L'erreur de type II (β) est le risque de ne pas détecter un effet réel.",
+      "category": "Tests statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la puissance d'un test statistique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Probabilité de rejeter H0 quand elle est fausse",
-        "Probabilité d'accepter H0",
-        "Niveau de signification",
-        "Taille de l'échantillon"
+        {
+          "text": "Probabilité de rejeter H0 quand elle est fausse",
+          "isCorrect": true
+        },
+        {
+          "text": "Probabilité d'accepter H0",
+          "isCorrect": false
+        },
+        {
+          "text": "Niveau de signification",
+          "isCorrect": false
+        },
+        {
+          "text": "Taille de l'échantillon",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Probabilité de rejeter H0 quand elle est fausse",
       "explanation": "La puissance (1-β) est la probabilité de détecter correctement un effet réel.",
+      "category": "Tests statistiques",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quelle est la relation entre α et β dans les tests statistiques ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Inversement proportionnelles",
-        "Directement proportionnelles",
-        "Indépendantes",
-        "Égales"
+        {
+          "text": "Inversement proportionnelles",
+          "isCorrect": true
+        },
+        {
+          "text": "Directement proportionnelles",
+          "isCorrect": false
+        },
+        {
+          "text": "Indépendantes",
+          "isCorrect": false
+        },
+        {
+          "text": "Égales",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Inversement proportionnelles",
       "explanation": "Diminuer α (réduire les faux positifs) augmente généralement β (augmenter les faux négatifs), et vice versa.",
+      "category": "Tests statistiques",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     }
   ]
 }

@@ -83,6 +83,8 @@ interface User {
   [key: string]: any;
 }
 
+import { shuffleArray } from '../utils/shuffleArray';
+
 /**
  * Génère des étapes d'étude pour une session basée sur un quiz
  */
@@ -169,12 +171,16 @@ export const generateSessionStepsEndpoint: Endpoint = {
 
       // Étapes pour chaque question
       quiz.questions.forEach((question: Question, index: number) => {
+        const shuffledOptions = Array.isArray(question.options)
+          ? shuffleArray(question.options)
+          : undefined;
+
         steps.push({
           type: 'question',
           title: `Question ${index + 1}`,
           content: question.text,
           questionType: question.type,
-          options: question.options,
+          options: shuffledOptions,
           metadata: {
             quizId: quiz.id,
             questionId: question.id,

@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Quiz de Positionnement LAS",
+    "created": "2025-01-01",
+    "level": "LAS",
+    "description": "Quiz d'évaluation initial pour les étudiants en Licence Accès Santé"
+  },
   "title": "Quiz de Positionnement LAS",
   "description": "Quiz d'évaluation initial pour les étudiants en Licence Accès Santé",
   "category": "Positionnement Las",
   "studentLevel": "LAS",
   "difficulty": "medium",
-  "questionCount": 15,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quelle est la principale différence entre PASS et LAS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "PASS : médecine uniquement, LAS : mineure santé + majeure disciplinaire",
-        "PASS : cursus sélectif, LAS : cursus ouvert",
-        "PASS : 2 ans, LAS : 3 ans",
-        "PASS : accès direct, LAS : accès conditionnel"
+        {
+          "text": "PASS : médecine uniquement, LAS : mineure santé + majeure disciplinaire",
+          "isCorrect": true
+        },
+        {
+          "text": "PASS : cursus sélectif, LAS : cursus ouvert",
+          "isCorrect": false
+        },
+        {
+          "text": "PASS : 2 ans, LAS : 3 ans",
+          "isCorrect": false
+        },
+        {
+          "text": "PASS : accès direct, LAS : accès conditionnel",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "PASS : médecine uniquement, LAS : mineure santé + majeure disciplinaire",
       "explanation": "PASS est dédié aux études médicales, LAS combine mineure santé avec majeure disciplinaire.",
+      "category": "Positionnement Las",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "LAS"
     },
     {
       "questionText": "Qu'est-ce que la mineure santé en LAS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Cours de spécialité médicale",
-        "Enseignements fondamentaux en santé",
-        "Stage clinique obligatoire",
-        "Recherche biomédicale"
+        {
+          "text": "Cours de spécialité médicale",
+          "isCorrect": false
+        },
+        {
+          "text": "Enseignements fondamentaux en santé",
+          "isCorrect": true
+        },
+        {
+          "text": "Stage clinique obligatoire",
+          "isCorrect": false
+        },
+        {
+          "text": "Recherche biomédicale",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Enseignements fondamentaux en santé",
       "explanation": "La mineure santé comprend les enseignements fondamentaux nécessaires à l'accès aux études médicales.",
+      "category": "Positionnement Las",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "LAS"
     },
     {
       "questionText": "Combien de semestres dure la formation LAS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "2 semestres",
-        "4 semestres",
-        "6 semestres",
-        "8 semestres"
+        {
+          "text": "2 semestres",
+          "isCorrect": false
+        },
+        {
+          "text": "4 semestres",
+          "isCorrect": false
+        },
+        {
+          "text": "6 semestres",
+          "isCorrect": true
+        },
+        {
+          "text": "8 semestres",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "6 semestres",
       "explanation": "La Licence Accès Santé (LAS) dure 6 semestres (3 ans) comme une licence classique.",
+      "category": "Positionnement Las",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "LAS"
     }
   ]
 }

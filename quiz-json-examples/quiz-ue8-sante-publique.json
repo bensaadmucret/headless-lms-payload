@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE8 - Santé publique",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur l'épidémiologie, la prévention et la politique de santé publique"
+  },
   "title": "UE8 - Santé publique",
   "description": "Quiz sur l'épidémiologie, la prévention et la politique de santé publique",
   "category": "Santé publique",
@@ -8,213 +16,378 @@
   "questions": [
     {
       "questionText": "Quelle est la définition de l'incidence en épidémiologie ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Nombre de nouveaux cas sur une période donnée",
-        "Nombre total de cas présents à un moment donné",
-        "Proportion de la population atteinte",
-        "Taux de mortalité dans une population"
+        {
+          "text": "Nombre de nouveaux cas sur une période donnée",
+          "isCorrect": true
+        },
+        {
+          "text": "Nombre total de cas présents à un moment donné",
+          "isCorrect": false
+        },
+        {
+          "text": "Proportion de la population atteinte",
+          "isCorrect": false
+        },
+        {
+          "text": "Taux de mortalité dans une population",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Nombre de nouveaux cas sur une période donnée",
       "explanation": "L'incidence mesure le nombre de nouveaux cas d'une maladie apparaissant dans une population pendant une période déterminée.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est l'indice de masse corporelle (IMC) normal selon l'OMS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "16,5 - 18,5 kg/m²",
-        "18,5 - 24,9 kg/m²",
-        "25,0 - 29,9 kg/m²",
-        "30,0 - 34,9 kg/m²"
+        {
+          "text": "16,5 - 18,5 kg/m²",
+          "isCorrect": false
+        },
+        {
+          "text": "18,5 - 24,9 kg/m²",
+          "isCorrect": true
+        },
+        {
+          "text": "25,0 - 29,9 kg/m²",
+          "isCorrect": false
+        },
+        {
+          "text": "30,0 - 34,9 kg/m²",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "18,5 - 24,9 kg/m²",
       "explanation": "L'IMC normal est compris entre 18,5 et 24,9 kg/m² selon les critères de l'OMS.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle vaccination est obligatoire en France pour les enfants nés après 2018 ?",
-      "questionType": "multipleChoice",
       "options": [
-        "BCG",
-        "DT-Polio-Coqueluche-Hépatite B-Hib-Pneumocoque-Méningocoque C",
-        "ROR (Rougeole-Oreillons-Rubéole)",
-        "Hépatite A"
+        {
+          "text": "BCG",
+          "isCorrect": false
+        },
+        {
+          "text": "DT-Polio-Coqueluche-Hépatite B-Hib-Pneumocoque-Méningocoque C",
+          "isCorrect": true
+        },
+        {
+          "text": "ROR (Rougeole-Oreillons-Rubéole)",
+          "isCorrect": false
+        },
+        {
+          "text": "Hépatite A",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "DT-Polio-Coqueluche-Hépatite B-Hib-Pneumocoque-Méningocoque C",
       "explanation": "Depuis 2018, 11 vaccins sont obligatoires pour les enfants nés après cette date.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est le principal facteur de risque cardiovasculaire modifiable ?",
-      "questionType": "multipleChoice",
       "options": [
-        "L'âge",
-        "Le tabac",
-        "Les antécédents familiaux",
-        "Le sexe masculin"
+        {
+          "text": "L'âge",
+          "isCorrect": false
+        },
+        {
+          "text": "Le tabac",
+          "isCorrect": true
+        },
+        {
+          "text": "Les antécédents familiaux",
+          "isCorrect": false
+        },
+        {
+          "text": "Le sexe masculin",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Le tabac",
       "explanation": "Le tabac est le principal facteur de risque cardiovasculaire modifiable selon les études épidémiologiques.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle méthode contraceptive a le meilleur indice de Pearl ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Préservatif masculin",
-        "Pilule contraceptive",
-        "Stérilet hormonal",
-        "Implant contraceptif"
+        {
+          "text": "Préservatif masculin",
+          "isCorrect": false
+        },
+        {
+          "text": "Pilule contraceptive",
+          "isCorrect": false
+        },
+        {
+          "text": "Stérilet hormonal",
+          "isCorrect": false
+        },
+        {
+          "text": "Implant contraceptif",
+          "isCorrect": true
+        }
       ],
-      "correctAnswer": "Implant contraceptif",
       "explanation": "L'implant contraceptif a l'indice de Pearl le plus faible (0,1-0,2), indiquant son efficacité contraceptive.",
+      "category": "Santé publique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quel est l'objectif principal du dépistage organisé du cancer du sein ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Réduire l'incidence",
-        "Réduire la mortalité",
-        "Améliorer la qualité de vie",
-        "Réduire les coûts de santé"
+        {
+          "text": "Réduire l'incidence",
+          "isCorrect": false
+        },
+        {
+          "text": "Réduire la mortalité",
+          "isCorrect": true
+        },
+        {
+          "text": "Améliorer la qualité de vie",
+          "isCorrect": false
+        },
+        {
+          "text": "Réduire les coûts de santé",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Réduire la mortalité",
       "explanation": "Le dépistage organisé vise principalement à réduire la mortalité par cancer du sein par un diagnostic précoce.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle est la prévalence du diabète de type 2 en France métropolitaine ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Environ 3%",
-        "Environ 5%",
-        "Environ 7%",
-        "Environ 10%"
+        {
+          "text": "Environ 3%",
+          "isCorrect": false
+        },
+        {
+          "text": "Environ 5%",
+          "isCorrect": true
+        },
+        {
+          "text": "Environ 7%",
+          "isCorrect": false
+        },
+        {
+          "text": "Environ 10%",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Environ 5%",
       "explanation": "Selon les études épidémiologiques récentes, la prévalence du diabète de type 2 est d'environ 5% en France.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est le seuil de l'hypertension artérielle selon l'OMS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "120/80 mmHg",
-        "130/85 mmHg",
-        "140/90 mmHg",
-        "160/95 mmHg"
+        {
+          "text": "120/80 mmHg",
+          "isCorrect": false
+        },
+        {
+          "text": "130/85 mmHg",
+          "isCorrect": false
+        },
+        {
+          "text": "140/90 mmHg",
+          "isCorrect": true
+        },
+        {
+          "text": "160/95 mmHg",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "140/90 mmHg",
       "explanation": "L'hypertension artérielle est définie par une pression systolique ≥ 140 mmHg et/ou diastolique ≥ 90 mmHg.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle bactérie est responsable de la plupart des infections nosocomiales ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Escherichia coli",
-        "Staphylococcus aureus",
-        "Pseudomonas aeruginosa",
-        "Clostridium difficile"
+        {
+          "text": "Escherichia coli",
+          "isCorrect": false
+        },
+        {
+          "text": "Staphylococcus aureus",
+          "isCorrect": true
+        },
+        {
+          "text": "Pseudomonas aeruginosa",
+          "isCorrect": false
+        },
+        {
+          "text": "Clostridium difficile",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Staphylococcus aureus",
       "explanation": "Staphylococcus aureus est la principale cause d'infections nosocomiales en France selon les enquêtes nationales.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est l'âge recommandé pour le premier dépistage du cancer colorectal ?",
-      "questionType": "multipleChoice",
       "options": [
-        "40 ans",
-        "45 ans",
-        "50 ans",
-        "55 ans"
+        {
+          "text": "40 ans",
+          "isCorrect": false
+        },
+        {
+          "text": "45 ans",
+          "isCorrect": false
+        },
+        {
+          "text": "50 ans",
+          "isCorrect": true
+        },
+        {
+          "text": "55 ans",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "50 ans",
       "explanation": "Le dépistage organisé du cancer colorectal débute à 50 ans selon les recommandations françaises.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle est la principale cause de mortalité évitable en France ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Les accidents de la route",
-        "Le tabac",
-        "L'alcool",
-        "La sédentarité"
+        {
+          "text": "Les accidents de la route",
+          "isCorrect": false
+        },
+        {
+          "text": "Le tabac",
+          "isCorrect": true
+        },
+        {
+          "text": "L'alcool",
+          "isCorrect": false
+        },
+        {
+          "text": "La sédentarité",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Le tabac",
       "explanation": "Le tabac est responsable de près de 80 000 décès par an en France, soit la première cause de mortalité évitable.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel est le taux de couverture vaccinale recommandé pour l'immunité collective contre la rougeole ?",
-      "questionType": "multipleChoice",
       "options": [
-        "75%",
-        "85%",
-        "95%",
-        "98%"
+        {
+          "text": "75%",
+          "isCorrect": false
+        },
+        {
+          "text": "85%",
+          "isCorrect": false
+        },
+        {
+          "text": "95%",
+          "isCorrect": true
+        },
+        {
+          "text": "98%",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "95%",
       "explanation": "Pour atteindre l'immunité collective contre la rougeole, il faut une couverture vaccinale d'au moins 95%.",
+      "category": "Santé publique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la définition de la prévalence en épidémiologie ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Nombre de nouveaux cas",
-        "Nombre total de cas présents",
-        "Taux d'attaque",
-        "Létalité"
+        {
+          "text": "Nombre de nouveaux cas",
+          "isCorrect": false
+        },
+        {
+          "text": "Nombre total de cas présents",
+          "isCorrect": true
+        },
+        {
+          "text": "Taux d'attaque",
+          "isCorrect": false
+        },
+        {
+          "text": "Létalité",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Nombre total de cas présents",
       "explanation": "La prévalence mesure le nombre total de cas d'une maladie présents dans une population à un moment donné.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel est l'objectif du Programme National Nutrition Santé (PNNS) ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Réduire la prévalence de l'obésité",
-        "Améliorer l'alimentation et l'activité physique",
-        "Prévenir les maladies chroniques",
-        "Toutes ces réponses"
+        {
+          "text": "Réduire la prévalence de l'obésité",
+          "isCorrect": false
+        },
+        {
+          "text": "Améliorer l'alimentation et l'activité physique",
+          "isCorrect": false
+        },
+        {
+          "text": "Prévenir les maladies chroniques",
+          "isCorrect": false
+        },
+        {
+          "text": "Toutes ces réponses",
+          "isCorrect": true
+        }
       ],
-      "correctAnswer": "Toutes ces réponses",
       "explanation": "Le PNNS vise à améliorer l'état de santé de la population en agissant sur la nutrition et l'activité physique.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle est la principale source de financement de l'Assurance Maladie en France ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Les cotisations salariales",
-        "Les cotisations patronales",
-        "La CSG",
-        "Les impôts"
+        {
+          "text": "Les cotisations salariales",
+          "isCorrect": false
+        },
+        {
+          "text": "Les cotisations patronales",
+          "isCorrect": false
+        },
+        {
+          "text": "La CSG",
+          "isCorrect": true
+        },
+        {
+          "text": "Les impôts",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "La CSG",
       "explanation": "La Contribution Sociale Généralisée (CSG) représente la principale source de financement de l'Assurance Maladie.",
+      "category": "Santé publique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

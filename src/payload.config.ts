@@ -3,6 +3,7 @@ import { postgresAdapter } from "@payloadcms/db-postgres";
 import sharp from "sharp"; // sharp-import
 import path from "path";
 import { buildConfig } from "payload";
+import { nodemailerAdapter } from "@payloadcms/email-nodemailer";
 import { diagnosticsEndpoint } from "./endpoints/diagnostics";
 import { analyticsEventsEndpoint } from "./endpoints/analytics/events";
 import { studentQuizzesEndpoint } from "./endpoints/studentQuizzes";
@@ -112,6 +113,7 @@ import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
 import { Posts } from "./collections/Posts";
 import { Users } from "./collections/Users";
+import Prospects from "./collections/Prospects";
 import { Courses } from "./collections/Courses";
 import { Quizzes } from "./collections/Quizzes";
 import { Questions } from "./collections/Questions";
@@ -137,9 +139,18 @@ import GenerationLogs from "./collections/GenerationLogs";
 import ImportJobs from "./collections/ImportJobs";
 import { AnalyticsEvents } from "./collections/AnalyticsEvents";
 import { AnalyticsSessions } from "./collections/AnalyticsSessions";
+import { prospectsUpsertEndpoint } from "./endpoints/prospectsUpsert";
+import { initializeStripe } from "./services/stripe";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+// Initialisation Stripe à l'initialisation de l'application
+try {
+  initializeStripe();
+} catch (error) {
+  console.error("❌ Failed to initialize Stripe:", error);
+}
 
 export default buildConfig({
   graphQL: {
@@ -193,6 +204,22 @@ export default buildConfig({
       ],
     },
   },
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.BETTER_AUTH_SMTP_FROM || "no-reply@medcoach.test",
+    defaultFromName: "MedCoach",
+    transportOptions: {
+      host: process.env.BETTER_AUTH_SMTP_HOST || "localhost",
+      port: Number(process.env.BETTER_AUTH_SMTP_PORT || 1025),
+      secure: process.env.BETTER_AUTH_SMTP_SECURE === "true",
+      auth:
+        process.env.BETTER_AUTH_SMTP_USER && process.env.BETTER_AUTH_SMTP_PASSWORD
+          ? {
+              user: process.env.BETTER_AUTH_SMTP_USER,
+              pass: process.env.BETTER_AUTH_SMTP_PASSWORD,
+            }
+          : undefined,
+    },
+  }),
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
   db: postgresAdapter({
@@ -205,6 +232,7 @@ export default buildConfig({
     Posts,
     Media,
     Users,
+    Prospects,
     Subscriptions,
     WebhookRetryQueue,
     Categories,
@@ -367,6 +395,9 @@ export default buildConfig({
     generateAIQuestionsEndpoint,
     // === ENDPOINTS PRÉVISUALISATION ET MODIFICATION (Tâche 9) ===
     regenerateQuestionEndpoint,
+
+    // Endpoint pour l'upsert de prospects (flux abonnement)
+    prospectsUpsertEndpoint,
 
     // === ENDPOINTS AUDIT ET LOGGING (Tâche 6) ===
     generationMetricsEndpoint,

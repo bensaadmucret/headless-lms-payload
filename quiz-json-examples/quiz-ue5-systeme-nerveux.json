@@ -1,94 +1,168 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE5 - Système nerveux",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur l'anatomie et physiologie du système nerveux central et périphérique"
+  },
   "title": "UE5 - Système nerveux",
   "description": "Quiz sur l'anatomie et physiologie du système nerveux central et périphérique",
   "category": "Système nerveux",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 10,
+  "questionCount": 6,
   "questions": [
     {
       "questionText": "Quelle est la cellule principale du système nerveux ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Le neurone",
-        "L'astrocyte",
-        "L'oligodendrocyte",
-        "La microglie"
+        {
+          "text": "Le neurone",
+          "isCorrect": true
+        },
+        {
+          "text": "L'astrocyte",
+          "isCorrect": false
+        },
+        {
+          "text": "L'oligodendrocyte",
+          "isCorrect": false
+        },
+        {
+          "text": "La microglie",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Le neurone",
       "explanation": "Le neurone est l'unité fonctionnelle principale du système nerveux, responsable de la transmission de l'influx nerveux.",
+      "category": "Système nerveux",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle est la fonction principale des astrocytes ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Transmission de l'influx nerveux",
-        "Support métabolique et structural",
-        "Production de myéline",
-        "Défense immunitaire"
+        {
+          "text": "Transmission de l'influx nerveux",
+          "isCorrect": false
+        },
+        {
+          "text": "Support métabolique et structural",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de myéline",
+          "isCorrect": false
+        },
+        {
+          "text": "Défense immunitaire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Support métabolique et structural",
       "explanation": "Les astrocytes fournissent un support métabolique aux neurones et maintiennent l'homéostasie ionique.",
+      "category": "Système nerveux",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle partie du cerveau contrôle les fonctions vitales ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Cortex cérébral",
-        "Tronc cérébral",
-        "Cervelet",
-        "Hypothalamus"
+        {
+          "text": "Cortex cérébral",
+          "isCorrect": false
+        },
+        {
+          "text": "Tronc cérébral",
+          "isCorrect": true
+        },
+        {
+          "text": "Cervelet",
+          "isCorrect": false
+        },
+        {
+          "text": "Hypothalamus",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Tronc cérébral",
       "explanation": "Le tronc cérébral contrôle les fonctions vitales comme la respiration, la fréquence cardiaque et la vigilance.",
+      "category": "Système nerveux",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la substance blanche ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Corps cellulaires des neurones",
-        "Axones myélinisés",
-        "Dendrites",
-        "Synapses"
+        {
+          "text": "Corps cellulaires des neurones",
+          "isCorrect": false
+        },
+        {
+          "text": "Axones myélinisés",
+          "isCorrect": true
+        },
+        {
+          "text": "Dendrites",
+          "isCorrect": false
+        },
+        {
+          "text": "Synapses",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Axones myélinisés",
       "explanation": "La substance blanche est constituée principalement d'axones myélinisés qui assurent la conduction rapide des influx.",
+      "category": "Système nerveux",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel neurotransmetteur est inhibiteur dans le SNC ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Glutamate",
-        "Acétylcholine",
-        "GABA",
-        "Dopamine"
+        {
+          "text": "Glutamate",
+          "isCorrect": false
+        },
+        {
+          "text": "Acétylcholine",
+          "isCorrect": false
+        },
+        {
+          "text": "GABA",
+          "isCorrect": true
+        },
+        {
+          "text": "Dopamine",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "GABA",
       "explanation": "Le GABA (acide gamma-aminobutyrique) est le principal neurotransmetteur inhibiteur du système nerveux central.",
+      "category": "Système nerveux",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la barrière hémato-encéphalique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Séparation anatomique cerveau/sang",
-        "Production de liquide céphalorachidien",
-        "Régulation de la température cérébrale",
-        "Protection mécanique du cerveau"
+        {
+          "text": "Séparation anatomique cerveau/sang",
+          "isCorrect": true
+        },
+        {
+          "text": "Production de liquide céphalorachidien",
+          "isCorrect": false
+        },
+        {
+          "text": "Régulation de la température cérébrale",
+          "isCorrect": false
+        },
+        {
+          "text": "Protection mécanique du cerveau",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Séparation anatomique cerveau/sang",
       "explanation": "La barrière hémato-encéphalique contrôle sélectivement le passage des substances du sang vers le cerveau.",
+      "category": "Système nerveux",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

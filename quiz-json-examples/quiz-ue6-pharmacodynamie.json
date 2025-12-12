@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE6 - Pharmacodynamie",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les mécanismes d'action des médicaments et interactions récepteurs"
+  },
   "title": "UE6 - Pharmacodynamie",
   "description": "Quiz sur les mécanismes d'action des médicaments et interactions récepteurs",
   "category": "Pharmacodynamie",
   "studentLevel": "both",
   "difficulty": "hard",
-  "questionCount": 8,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Qu'est-ce qu'un agoniste pharmacologique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Substance qui active le récepteur",
-        "Substance qui bloque le récepteur",
-        "Substance qui dégrade le récepteur",
-        "Substance qui synthétise le récepteur"
+        {
+          "text": "Substance qui active le récepteur",
+          "isCorrect": true
+        },
+        {
+          "text": "Substance qui bloque le récepteur",
+          "isCorrect": false
+        },
+        {
+          "text": "Substance qui dégrade le récepteur",
+          "isCorrect": false
+        },
+        {
+          "text": "Substance qui synthétise le récepteur",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Substance qui active le récepteur",
       "explanation": "Un agoniste se lie au récepteur et produit une réponse biologique similaire au ligand endogène.",
+      "category": "Pharmacodynamie",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce qu'un antagoniste pharmacologique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Substance qui active le récepteur",
-        "Substance qui bloque le récepteur",
-        "Substance qui potentialise l'effet",
-        "Substance qui inverse l'effet"
+        {
+          "text": "Substance qui active le récepteur",
+          "isCorrect": false
+        },
+        {
+          "text": "Substance qui bloque le récepteur",
+          "isCorrect": true
+        },
+        {
+          "text": "Substance qui potentialise l'effet",
+          "isCorrect": false
+        },
+        {
+          "text": "Substance qui inverse l'effet",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Substance qui bloque le récepteur",
       "explanation": "Un antagoniste se lie au récepteur mais ne produit pas de réponse et bloque l'action du ligand endogène.",
+      "category": "Pharmacodynamie",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'affinité d'un médicament ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Tendance à se lier au récepteur",
-        "Capacité à activer le récepteur",
-        "Vitesse d'élimination",
-        "Volume de distribution"
+        {
+          "text": "Tendance à se lier au récepteur",
+          "isCorrect": true
+        },
+        {
+          "text": "Capacité à activer le récepteur",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitesse d'élimination",
+          "isCorrect": false
+        },
+        {
+          "text": "Volume de distribution",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Tendance à se lier au récepteur",
       "explanation": "L'affinité mesure la force de liaison entre le médicament et son récepteur.",
+      "category": "Pharmacodynamie",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

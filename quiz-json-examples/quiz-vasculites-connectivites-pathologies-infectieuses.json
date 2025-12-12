@@ -1,0 +1,238 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Quiz clinique - Vasculites, connectivites et pathologies infectieuses",
+    "created": "2025-12-09",
+    "level": "both",
+    "description": "Quiz Vrai/Faux de 20 questions sur les vasculites, connectivites et principales pathologies infectieuses associées"
+  },
+  "title": "Vasculites, Connectivites et Pathologies Infectieuses",
+  "description": "Quiz Vrai/Faux de 20 questions sur le lupus, la maladie de Horton, les purpuras, les infections opportunistes et les spondylarthropathies.",
+  "category": "Rhumatologie - Médecine interne - Maladies infectieuses",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 20,
+  "questions": [
+    {
+      "questionText": "VRAI ou FAUX : Le Lupus Érythémateux Systémique (LES) peut se manifester par une atteinte articulaire non destructrice (polyarthrite).",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Le LES donne fréquemment une polyarthrite inflammatoire non érosive et non déformante.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "easy",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Les bêtabloquants sont la classe thérapeutique de choix pour traiter les symptômes vasospastiques du syndrome de Raynaud.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Les bêtabloquants aggravent le phénomène de Raynaud ; les inhibiteurs calciques sont préférés pour le traitement.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une baisse d'acuité visuelle chez un patient fébrile avec douleurs des ceintures doit faire suspecter en priorité la Maladie de Horton.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "La maladie de Horton peut entraîner une atteinte des artères ophtalmiques et une cécité irréversible, justifiant un traitement urgent.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Dans le contexte d'une possible Maladie de Horton, la biopsie de l'artère temporale doit être réalisée avant toute corticothérapie.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "En cas de suspicion de Horton, la corticothérapie doit être débutée immédiatement, sans attendre la biopsie, afin de prévenir la cécité.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Un purpura qui ne s'efface pas à la vitropression est un argument essentiel pour suspecter une hémorragie vasculaire ou une thrombopénie.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Le purpura ne disparaissant pas à la vitropression traduit une extravasation sanguine dermique, typique d'une vasculite ou d'une thrombopénie.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "easy",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La présence d'un purpura pétéchial sans fièvre ni altération de l'état général permet d'éliminer toute urgence diagnostique.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Un purpura pétéchial impose toujours de rechercher des signes de gravité ; une thrombopénie sévère peut engager le pronostic vital même sans fièvre.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'échographie trans-œsophagienne (ETO) est toujours indispensable pour confirmer une endocardite infectieuse.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "L'échographie cardiaque, transthoracique puis trans-œsophagienne si besoin, est essentielle, mais l'ETO n'est pas systématique dans tous les cas.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La toxoplasmose cérébrale est une infection opportuniste fréquente chez les patients VIH dont le taux de CD4 est inférieur à 200/mm³.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "La toxoplasmose cérébrale survient classiquement pour des CD4 inférieurs à 100/mm³, stade de déficit immunitaire plus avancé.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une glomérulonéphrite rapidement progressive avec ANCA positifs est toujours liée à un lupus.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Les GNRP ANCA-positives sont typiques des vascularites à ANCA (Wegener, polyangéite microscopique), alors que le lupus s'exprime plutôt par des dépôts de complexes immuns.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La spondylarthrite ankylosante est un diagnostic fréquent chez les hommes jeunes présentant une lombalgie inflammatoire.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Une lombalgie inflammatoire chronique chez un homme jeune évoque en premier lieu une spondylarthrite ankylosante.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "easy",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le traitement d'un Mal de Pott (spondylodiscite tuberculeuse) est principalement chirurgical.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Le traitement de base du mal de Pott est le traitement antituberculeux prolongé ; la chirurgie est réservée aux complications neurologiques ou déformations majeures.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'utilisation d'anti-TNF alpha chez un patient ayant une spondylarthrite est un facteur de risque de réactivation de la tuberculose.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Les anti-TNF alpha favorisent la réactivation d'une tuberculose latente, d'où la nécessité d'un dépistage avant instauration du traitement.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une monoarthrite aiguë septique sur un coude doit être traitée par ponction évacuatrice et antibiothérapie avant l'identification bactériologique.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Une arthrite septique est une urgence thérapeutique ; l'antibiothérapie probabiliste est débutée sans attendre les résultats de culture définitifs.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Devant un purpura pétéchial avec suspicion de méningococcémie, une antibiothérapie injectable immédiate est requise.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "La méningococcémie est une urgence vitale justifiant une antibiothérapie parentérale immédiate, avant même la confirmation bactériologique.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le syndrome de Raynaud secondaire, notamment dans la sclérodermie, associe phénomène de Raynaud, atteinte pulmonaire interstitielle et lésions cutanées typiques.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Dans la sclérodermie systémique, le phénomène de Raynaud s'intègre dans une atteinte systémique avec fibrose cutanée et atteinte pulmonaire interstitielle.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une biopsie de glande salivaire accessoire avec granulomes épithélioïdes et gigantocellulaires sans nécrose caséeuse est spécifique d'une sarcoïdose.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Cet aspect histologique est compatible avec une sarcoïdose mais n'est pas pathognomonique ; d'autres causes de granulomes non caséeux existent.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une hypertrophie parotidienne bilatérale peut être le seul signe clinique d'un syndrome de Gougerot-Sjögren.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Le syndrome de Gougerot-Sjögren peut se manifester par une hypertrophie parotidienne bilatérale, parfois isolée.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le syndrome de Gougerot-Sjögren est une maladie purement glandulaire, sans complications systémiques.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Le syndrome de Gougerot-Sjögren peut s'accompagner de complications systémiques (atteinte rénale, pulmonaire, hématologique) et d'un risque accru de lymphome.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La cryoglobulinémie est souvent associée à l'infection chronique par le VIH.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "La cryoglobulinémie mixte est classiquement associée à l'infection chronique par le virus de l'hépatite C plutôt qu'au VIH.",
+      "category": "Pathologies infectieuses",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : En cas de polyarthralgies chroniques évoluant depuis plus de 6 semaines, il est indispensable de réaliser au moins un bilan inflammatoire simple (VS, CRP).",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Un syndrome inflammatoire biologique oriente vers une pathologie rhumatismale ou auto-immune et doit être recherché devant des polyarthralgies prolongées.",
+      "category": "Vasculites et connectivites",
+      "difficulty": "easy",
+      "level": "both"
+    }
+  ]
+}

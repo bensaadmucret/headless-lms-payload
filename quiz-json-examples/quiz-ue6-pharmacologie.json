@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE6 - Pharmacologie",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principes de pharmacocinétique, pharmacodynamie et classes thérapeutiques"
+  },
   "title": "UE6 - Pharmacologie",
   "description": "Quiz sur les principes de pharmacocinétique, pharmacodynamie et classes thérapeutiques",
   "category": "Pharmacocinétique",
@@ -8,66 +16,178 @@
   "questions": [
     {
       "questionText": "Qu'est-ce que la biodisponibilité d'un médicament ?",
-      "questionType": "multipleChoice",
-      "options": ["Fraction du médicament qui atteint la circulation systémique", "Vitesse d'élimination du médicament", "Volume de distribution du médicament", "Affinité du médicament pour son récepteur"],
-      "correctAnswer": "Fraction du médicament qui atteint la circulation systémique",
+      "options": [
+        {
+          "text": "Fraction du médicament qui atteint la circulation systémique",
+          "isCorrect": true
+        },
+        {
+          "text": "Vitesse d'élimination du médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Volume de distribution du médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Affinité du médicament pour son récepteur",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La biodisponibilité mesure la fraction du médicament administré qui atteint la circulation sanguine sous forme active.",
+      "category": "Pharmacocinétique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la principale voie d'élimination rénale des médicaments ?",
-      "questionType": "multipleChoice",
-      "options": ["Filtration glomérulaire", "Sécrétion tubulaire", "Réabsorption tubulaire", "Excrétion biliaire"],
-      "correctAnswer": "Filtration glomérulaire",
+      "options": [
+        {
+          "text": "Filtration glomérulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Sécrétion tubulaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Réabsorption tubulaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Excrétion biliaire",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La filtration glomérulaire est la principale voie d'élimination rénale des médicaments hydrosolubles.",
+      "category": "Pharmacocinétique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la demi-vie d'élimination d'un médicament ?",
-      "questionType": "multipleChoice",
-      "options": ["Temps nécessaire pour absorber la moitié du médicament", "Temps nécessaire pour éliminer la moitié du médicament", "Temps nécessaire pour métaboliser le médicament", "Temps nécessaire pour distribuer le médicament"],
-      "correctAnswer": "Temps nécessaire pour éliminer la moitié du médicament",
+      "options": [
+        {
+          "text": "Temps nécessaire pour absorber la moitié du médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Temps nécessaire pour éliminer la moitié du médicament",
+          "isCorrect": true
+        },
+        {
+          "text": "Temps nécessaire pour métaboliser le médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Temps nécessaire pour distribuer le médicament",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La demi-vie d'élimination est le temps nécessaire pour que la concentration plasmatique diminue de moitié.",
+      "category": "Pharmacocinétique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est le mécanisme d'action des bêtabloquants ?",
-      "questionType": "multipleChoice",
-      "options": ["Bloquer les récepteurs bêta-adrénergiques", "Stimuler les récepteurs alpha", "Inhiber l'enzyme de conversion", "Bloquer les canaux calciques"],
-      "correctAnswer": "Bloquer les récepteurs bêta-adrénergiques",
+      "options": [
+        {
+          "text": "Bloquer les récepteurs bêta-adrénergiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimuler les récepteurs alpha",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhiber l'enzyme de conversion",
+          "isCorrect": false
+        },
+        {
+          "text": "Bloquer les canaux calciques",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Les bêtabloquants antagonisent les récepteurs bêta-adrénergiques, réduisant la fréquence cardiaque et la contractilité.",
+      "category": "Pharmacocinétique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'effet de premier passage hépatique ?",
-      "questionType": "multipleChoice",
-      "options": ["Métabolisme du médicament par le foie avant d'atteindre la circulation", "Absorption intestinale du médicament", "Distribution tissulaire du médicament", "Excrétion rénale du médicament"],
-      "correctAnswer": "Métabolisme du médicament par le foie avant d'atteindre la circulation",
+      "options": [
+        {
+          "text": "Métabolisme du médicament par le foie avant d'atteindre la circulation",
+          "isCorrect": true
+        },
+        {
+          "text": "Absorption intestinale du médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Distribution tissulaire du médicament",
+          "isCorrect": false
+        },
+        {
+          "text": "Excrétion rénale du médicament",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'effet de premier passage désigne le métabolisme pré-systémique du médicament par le foie après absorption orale.",
+      "category": "Pharmacocinétique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 90
+      "level": "both"
     },
     {
       "questionText": "Quelle classe thérapeutique utilise-t-on pour traiter l'hypertension artérielle ?",
-      "questionType": "multipleChoice",
-      "options": ["Antibiotiques", "Antihypertenseurs", "Antidiabétiques", "Anticoagulants"],
-      "correctAnswer": "Antihypertenseurs",
+      "options": [
+        {
+          "text": "Antibiotiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Antihypertenseurs",
+          "isCorrect": true
+        },
+        {
+          "text": "Antidiabétiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Anticoagulants",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Les antihypertenseurs sont utilisés pour traiter l'hypertension artérielle.",
+      "category": "Pharmacocinétique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la posologie d'un médicament ?",
-      "questionType": "multipleChoice",
-      "options": ["La quantité de médicament à administrer", "La fréquence d'administration", "La voie d'administration", "La durée du traitement"],
-      "correctAnswer": "La quantité de médicament à administrer",
+      "options": [
+        {
+          "text": "La quantité de médicament à administrer",
+          "isCorrect": true
+        },
+        {
+          "text": "La fréquence d'administration",
+          "isCorrect": false
+        },
+        {
+          "text": "La voie d'administration",
+          "isCorrect": false
+        },
+        {
+          "text": "La durée du traitement",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La posologie désigne la quantité de médicament à administrer par prise et par jour.",
+      "category": "Pharmacocinétique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     }
   ]
 }

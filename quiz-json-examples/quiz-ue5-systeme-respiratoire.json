@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE5 - Système respiratoire",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur l'anatomie et physiologie de l'appareil respiratoire"
+  },
   "title": "UE5 - Système respiratoire",
   "description": "Quiz sur l'anatomie et physiologie de l'appareil respiratoire",
   "category": "Système respiratoire",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quelle est la fonction principale des alvéoles pulmonaires ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Échange gazeux",
-        "Filtration de l'air",
-        "Production de mucus",
-        "Réchauffement de l'air"
+        {
+          "text": "Échange gazeux",
+          "isCorrect": true
+        },
+        {
+          "text": "Filtration de l'air",
+          "isCorrect": false
+        },
+        {
+          "text": "Production de mucus",
+          "isCorrect": false
+        },
+        {
+          "text": "Réchauffement de l'air",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Échange gazeux",
       "explanation": "Les alvéoles permettent les échanges gazeux entre l'air alvéolaire et le sang capillaire.",
+      "category": "Système respiratoire",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel muscle principal assure l'inspiration ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Diaphragme",
-        "Intercostaux externes",
-        "Intercostaux internes",
-        "Abdominaux"
+        {
+          "text": "Diaphragme",
+          "isCorrect": true
+        },
+        {
+          "text": "Intercostaux externes",
+          "isCorrect": false
+        },
+        {
+          "text": "Intercostaux internes",
+          "isCorrect": false
+        },
+        {
+          "text": "Abdominaux",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Diaphragme",
       "explanation": "Le diaphragme est le muscle principal de l'inspiration qui augmente le volume thoracique.",
+      "category": "Système respiratoire",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la capacité vitale ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Volume d'air inspiré en respiration normale",
-        "Volume maximal d'air mobilisable",
-        "Volume d'air restant après expiration forcée",
-        "Volume d'air des espaces morts"
+        {
+          "text": "Volume d'air inspiré en respiration normale",
+          "isCorrect": false
+        },
+        {
+          "text": "Volume maximal d'air mobilisable",
+          "isCorrect": true
+        },
+        {
+          "text": "Volume d'air restant après expiration forcée",
+          "isCorrect": false
+        },
+        {
+          "text": "Volume d'air des espaces morts",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Volume maximal d'air mobilisable",
       "explanation": "La capacité vitale est le volume maximal d'air qu'un sujet peut mobiliser lors d'une manœuvre respiratoire forcée.",
+      "category": "Système respiratoire",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

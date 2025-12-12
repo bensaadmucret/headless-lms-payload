@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE3 - Physique et Biophysique",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principes physiques appliqués à la biologie et à la médecine"
+  },
   "title": "UE3 - Physique et Biophysique",
   "description": "Quiz sur les principes physiques appliqués à la biologie et à la médecine",
   "category": "Physique des fluides",
@@ -8,75 +16,203 @@
   "questions": [
     {
       "questionText": "Quelle loi physique explique la circulation sanguine ?",
-      "questionType": "multipleChoice",
-      "options": ["Loi de Newton", "Loi de Bernoulli", "Loi d'Ohm", "Loi de Boyle"],
-      "correctAnswer": "Loi de Bernoulli",
+      "options": [
+        {
+          "text": "Loi de Newton",
+          "isCorrect": false
+        },
+        {
+          "text": "Loi de Bernoulli",
+          "isCorrect": true
+        },
+        {
+          "text": "Loi d'Ohm",
+          "isCorrect": false
+        },
+        {
+          "text": "Loi de Boyle",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La loi de Bernoulli explique comment la vitesse du sang influence la pression dans les vaisseaux.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la pression osmotique ?",
-      "questionType": "multipleChoice",
-      "options": ["Pression exercée par les gaz dissous", "Pression nécessaire pour empêcher la diffusion", "Pression hydrostatique dans les vaisseaux", "Pression atmosphérique"],
-      "correctAnswer": "Pression nécessaire pour empêcher la diffusion",
+      "options": [
+        {
+          "text": "Pression exercée par les gaz dissous",
+          "isCorrect": false
+        },
+        {
+          "text": "Pression nécessaire pour empêcher la diffusion",
+          "isCorrect": true
+        },
+        {
+          "text": "Pression hydrostatique dans les vaisseaux",
+          "isCorrect": false
+        },
+        {
+          "text": "Pression atmosphérique",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La pression osmotique est la pression qu'il faut appliquer pour arrêter le mouvement d'eau à travers une membrane semi-perméable.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est l'unité de mesure de la pression artérielle ?",
-      "questionType": "multipleChoice",
-      "options": ["Pascal (Pa)", "Millimètre de mercure (mmHg)", "Newton (N)", "Joule (J)"],
-      "correctAnswer": "Millimètre de mercure (mmHg)",
+      "options": [
+        {
+          "text": "Pascal (Pa)",
+          "isCorrect": false
+        },
+        {
+          "text": "Millimètre de mercure (mmHg)",
+          "isCorrect": true
+        },
+        {
+          "text": "Newton (N)",
+          "isCorrect": false
+        },
+        {
+          "text": "Joule (J)",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La pression artérielle est mesurée en millimètres de mercure (mmHg).",
+      "category": "Physique des fluides",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la viscosité sanguine ?",
-      "questionType": "multipleChoice",
-      "options": ["Résistance à l'écoulement", "Capacité à transporter l'oxygène", "Teneur en globules rouges", "pH du sang"],
-      "correctAnswer": "Résistance à l'écoulement",
+      "options": [
+        {
+          "text": "Résistance à l'écoulement",
+          "isCorrect": true
+        },
+        {
+          "text": "Capacité à transporter l'oxygène",
+          "isCorrect": false
+        },
+        {
+          "text": "Teneur en globules rouges",
+          "isCorrect": false
+        },
+        {
+          "text": "pH du sang",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La viscosité sanguine mesure la résistance du sang à l'écoulement dans les vaisseaux.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle grandeur physique caractérise l'énergie des rayons X ?",
-      "questionType": "multipleChoice",
-      "options": ["Fréquence", "Longueur d'onde", "Amplitude", "Vitesse"],
-      "correctAnswer": "Longueur d'onde",
+      "options": [
+        {
+          "text": "Fréquence",
+          "isCorrect": false
+        },
+        {
+          "text": "Longueur d'onde",
+          "isCorrect": true
+        },
+        {
+          "text": "Amplitude",
+          "isCorrect": false
+        },
+        {
+          "text": "Vitesse",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Les rayons X sont caractérisés par leur longueur d'onde très courte dans le domaine électromagnétique.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la loi de Laplace en physiologie ?",
-      "questionType": "multipleChoice",
-      "options": ["Pression = Tension / Rayon", "Pression = 2 × Tension / Rayon", "Pression = Tension × Rayon", "Pression = Tension / (2 × Rayon)"],
-      "correctAnswer": "Pression = 2 × Tension / Rayon",
+      "options": [
+        {
+          "text": "Pression = Tension / Rayon",
+          "isCorrect": false
+        },
+        {
+          "text": "Pression = 2 × Tension / Rayon",
+          "isCorrect": true
+        },
+        {
+          "text": "Pression = Tension × Rayon",
+          "isCorrect": false
+        },
+        {
+          "text": "Pression = Tension / (2 × Rayon)",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La loi de Laplace stipule que la pression à l'intérieur d'une bulle ou alvéole est égale à 2 fois la tension superficielle divisée par le rayon.",
+      "category": "Physique des fluides",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 90
+      "level": "both"
     },
     {
       "questionText": "Quelle est la vitesse du son dans les tissus mous ?",
-      "questionType": "multipleChoice",
-      "options": ["330 m/s", "1500 m/s", "340 m/s", "3000 m/s"],
-      "correctAnswer": "1500 m/s",
+      "options": [
+        {
+          "text": "330 m/s",
+          "isCorrect": false
+        },
+        {
+          "text": "1500 m/s",
+          "isCorrect": true
+        },
+        {
+          "text": "340 m/s",
+          "isCorrect": false
+        },
+        {
+          "text": "3000 m/s",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La vitesse du son dans les tissus mous est approximativement de 1500 m/s.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'effet Doppler en échographie ?",
-      "questionType": "multipleChoice",
-      "options": ["Changement de fréquence du son", "Réflexion des ultrasons", "Atténuation du signal", "Formation d'images"],
-      "correctAnswer": "Changement de fréquence du son",
+      "options": [
+        {
+          "text": "Changement de fréquence du son",
+          "isCorrect": true
+        },
+        {
+          "text": "Réflexion des ultrasons",
+          "isCorrect": false
+        },
+        {
+          "text": "Atténuation du signal",
+          "isCorrect": false
+        },
+        {
+          "text": "Formation d'images",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'effet Doppler décrit le changement de fréquence perçu quand la source sonore se rapproche ou s'éloigne de l'observateur.",
+      "category": "Physique des fluides",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

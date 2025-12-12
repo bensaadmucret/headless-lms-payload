@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE6 - Classes thérapeutiques",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principales classes de médicaments et leurs indications"
+  },
   "title": "UE6 - Classes thérapeutiques",
   "description": "Quiz sur les principales classes de médicaments et leurs indications",
   "category": "Classes thérapeutiques",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 10,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quelle classe thérapeutique traite l'hypertension artérielle ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Diurétiques",
-        "Anticoagulants",
-        "Antidiabétiques",
-        "Antibiotiques"
+        {
+          "text": "Diurétiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Anticoagulants",
+          "isCorrect": false
+        },
+        {
+          "text": "Antidiabétiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Antibiotiques",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Diurétiques",
       "explanation": "Les diurétiques réduisent le volume sanguin et sont utilisés dans le traitement de l'hypertension.",
+      "category": "Classes thérapeutiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est le mécanisme d'action des inhibiteurs de l'enzyme de conversion ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Bloquer la formation d'angiotensine II",
-        "Stimuler les récepteurs bêta",
-        "Inhiber l'agrégation plaquettaire",
-        "Neutraliser l'acide gastrique"
+        {
+          "text": "Bloquer la formation d'angiotensine II",
+          "isCorrect": true
+        },
+        {
+          "text": "Stimuler les récepteurs bêta",
+          "isCorrect": false
+        },
+        {
+          "text": "Inhiber l'agrégation plaquettaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Neutraliser l'acide gastrique",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Bloquer la formation d'angiotensine II",
       "explanation": "Les IECA inhibent l'enzyme de conversion de l'angiotensine I en angiotensine II, réduisant ainsi la vasoconstriction.",
+      "category": "Classes thérapeutiques",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quelle classe traite les infections bactériennes ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Antiviraux",
-        "Antifongiques",
-        "Antibiotiques",
-        "Antiparasitaires"
+        {
+          "text": "Antiviraux",
+          "isCorrect": false
+        },
+        {
+          "text": "Antifongiques",
+          "isCorrect": false
+        },
+        {
+          "text": "Antibiotiques",
+          "isCorrect": true
+        },
+        {
+          "text": "Antiparasitaires",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Antibiotiques",
       "explanation": "Les antibiotiques sont utilisés pour traiter les infections bactériennes en inhibant leur croissance ou en les tuant.",
+      "category": "Classes thérapeutiques",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     }
   ]
 }

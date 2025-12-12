@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { StripeWebhookService } from '../StripeWebhookService';
 import Stripe from 'stripe';
+import { EmailNotificationService } from '../../EmailNotificationService';
 
 // Mock de Stripe
 vi.mock('stripe', () => {
@@ -24,6 +25,15 @@ vi.mock('payload', () => ({
 // Mock du module de vérification de signature
 vi.mock('../../utils/stripe/webhookSignature', () => ({
   verifyWebhookSignature: vi.fn(),
+}));
+
+vi.mock('../../EmailNotificationService', () => ({
+  EmailNotificationService: {
+    sendAccountLockedEmail: vi.fn(),
+    sendPasswordResetEmail: vi.fn(),
+    sendSubscriptionUpdatedEmail: vi.fn(),
+    sendSubscriptionWelcomeEmail: vi.fn(),
+  },
 }));
 
 describe('StripeWebhookService', () => {
@@ -339,6 +349,144 @@ describe('StripeWebhookService', () => {
         eventType: 'customer.subscription.created',
         error: expect.any(String),
       });
+    });
+  });
+
+  describe('prospect-based flow', () => {
+    it('should create user from prospect metadata, update prospect and send welcome email', async () => {
+      // Préparer une subscription avec prospectId dans metadata
+      const mockSubscription = {
+        id: 'sub_prospect_123',
+        customer: 'cus_prospect_123',
+        status: 'active',
+        items: {
+          data: [
+            {
+              id: 'si_test',
+              price: {
+                id: 'price_monthly_prospect',
+                unit_amount: 1500,
+                currency: 'eur',
+              } as Stripe.Price,
+            } as Stripe.SubscriptionItem,
+          ],
+        } as Stripe.ApiList<Stripe.SubscriptionItem>,
+        current_period_end: Math.floor(Date.now() / 1000) + 86400 * 30,
+        trial_end: null,
+        cancel_at_period_end: false,
+        currency: 'eur',
+        created: Math.floor(Date.now() / 1000),
+        metadata: {
+          prospectId: 'prospect_1',
+          year: 'pass',
+          studyHoursPerWeek: '20',
+          onboardingComplete: 'true',
+        },
+      } as unknown as Stripe.Subscription;
+
+      // Event Stripe
+      const event: Stripe.Event = {
+        id: 'evt_test_prospect_flow',
+        object: 'event',
+        type: 'customer.subscription.created',
+        created: Date.now(),
+        livemode: false,
+        api_version: '2025-09-30.clover',
+        data: {
+          object: mockSubscription,
+        },
+        pending_webhooks: 0,
+        request: null,
+      };
+
+      // Préparer les mocks Payload pour le flux Prospect
+      const prospectDoc = {
+        id: 'prospect_1',
+        email: 'lead@example.com',
+        firstName: 'Lead',
+        lastName: 'Test',
+        role: 'student',
+        userCreated: false,
+        createdUser: null,
+      };
+
+      // findByID pour Prospects
+      (mockPayload as any).findByID = vi.fn().mockResolvedValue(prospectDoc);
+
+      // create: 1) user, 2) subscription
+      const createdUser = {
+        id: 'user_from_prospect',
+        email: prospectDoc.email,
+        firstName: prospectDoc.firstName,
+        lastName: prospectDoc.lastName,
+        role: 'student',
+      };
+
+      const createdSubscription = {
+        id: 'sub_doc_id',
+        user: createdUser.id,
+        subscriptionId: mockSubscription.id,
+      };
+
+      mockPayload.create = vi
+        .fn()
+        // Premier appel: création de l'utilisateur
+        .mockResolvedValueOnce(createdUser)
+        // Deuxième appel: création de la subscription
+        .mockResolvedValueOnce(createdSubscription);
+
+      mockPayload.update = vi.fn().mockResolvedValue({ id: 'updated_prospect' });
+
+      const result = await service.processEvent(event);
+
+      // Le traitement doit réussir
+      expect(result.success).toBe(true);
+      expect(result.eventType).toBe('customer.subscription.created');
+
+      // Vérifier que le prospect a été cherché puis mis à jour
+      expect((mockPayload as any).findByID).toHaveBeenCalledWith({
+        collection: 'prospects',
+        id: 'prospect_1',
+      });
+
+      expect(mockPayload.update).toHaveBeenCalledWith({
+        collection: 'prospects',
+        id: 'prospect_1',
+        data: expect.objectContaining({
+          userCreated: true,
+          createdUser: createdUser.id,
+          status: 'paid',
+        }),
+      });
+
+      // Vérifier que la subscription a été créée avec le user
+      expect(mockPayload.create).toHaveBeenCalledWith({
+        collection: 'subscriptions',
+        data: expect.objectContaining({
+          user: createdUser.id,
+          subscriptionId: mockSubscription.id,
+        }),
+      });
+
+      // Vérifier que l'utilisateur a été mis à jour avec les infos de metadata
+      expect(mockPayload.update).toHaveBeenCalledWith({
+        collection: 'users',
+        id: createdUser.id,
+        data: expect.objectContaining({
+          studyYear: 'pass',
+          onboardingComplete: true,
+          studyProfile: expect.objectContaining({
+            studyHoursPerWeek: 20,
+          }),
+        }),
+      });
+
+      // Vérifier que l'email de bienvenue a été envoyé
+      expect(EmailNotificationService.sendSubscriptionWelcomeEmail).toHaveBeenCalledWith(
+        { payload: mockPayload } as any,
+        expect.objectContaining({ id: createdUser.id }),
+        expect.objectContaining({ id: createdSubscription.id }),
+      );
     });
   });
 });

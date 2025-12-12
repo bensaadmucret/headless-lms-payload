@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE1 - Chimie, Biochimie et Biologie moléculaire",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les fondamentaux de chimie, biochimie et biologie moléculaire pour PASS/LAS"
+  },
   "title": "UE1 - Chimie, Biochimie et Biologie moléculaire",
   "description": "Quiz sur les fondamentaux de chimie, biochimie et biologie moléculaire pour PASS/LAS",
   "category": "Chimie générale et organique",
@@ -8,93 +16,253 @@
   "questions": [
     {
       "questionText": "Quelle est la formule chimique de l'eau ?",
-      "questionType": "multipleChoice",
-      "options": ["H2O", "CO2", "O2", "H2O2"],
-      "correctAnswer": "H2O",
+      "options": [
+        {
+          "text": "H2O",
+          "isCorrect": true
+        },
+        {
+          "text": "CO2",
+          "isCorrect": false
+        },
+        {
+          "text": "O2",
+          "isCorrect": false
+        },
+        {
+          "text": "H2O2",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'eau a pour formule chimique H2O, soit deux atomes d'hydrogène et un atome d'oxygène.",
+      "category": "Chimie générale et organique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce qu'un acide aminé ?",
-      "questionType": "multipleChoice",
-      "options": ["Un sucre simple", "Un lipide", "Un monomère des protéines", "Un nucléotide"],
-      "correctAnswer": "Un monomère des protéines",
+      "options": [
+        {
+          "text": "Un sucre simple",
+          "isCorrect": false
+        },
+        {
+          "text": "Un lipide",
+          "isCorrect": false
+        },
+        {
+          "text": "Un monomère des protéines",
+          "isCorrect": true
+        },
+        {
+          "text": "Un nucléotide",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Les acides aminés sont les unités de base qui forment les protéines par liaison peptidique.",
+      "category": "Chimie générale et organique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle liaison chimique maintient les deux brins d'ADN ensemble ?",
-      "questionType": "multipleChoice",
-      "options": ["Liaison covalente", "Liaison ionique", "Liaison hydrogène", "Liaison métallique"],
-      "correctAnswer": "Liaison hydrogène",
+      "options": [
+        {
+          "text": "Liaison covalente",
+          "isCorrect": false
+        },
+        {
+          "text": "Liaison ionique",
+          "isCorrect": false
+        },
+        {
+          "text": "Liaison hydrogène",
+          "isCorrect": true
+        },
+        {
+          "text": "Liaison métallique",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Les deux brins d'ADN sont maintenus par des liaisons hydrogène entre les bases complémentaires.",
+      "category": "Chimie générale et organique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est le pH du sang humain normal ?",
-      "questionType": "multipleChoice",
-      "options": ["7,0", "7,4", "8,0", "6,8"],
-      "correctAnswer": "7,4",
+      "options": [
+        {
+          "text": "7,0",
+          "isCorrect": false
+        },
+        {
+          "text": "7,4",
+          "isCorrect": true
+        },
+        {
+          "text": "8,0",
+          "isCorrect": false
+        },
+        {
+          "text": "6,8",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le pH sanguin normal est légèrement alcalin, autour de 7,4.",
+      "category": "Chimie générale et organique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle enzyme catalyse la première étape de la glycolyse ?",
-      "questionType": "multipleChoice",
-      "options": ["Hexokinase", "Phosphofructokinase", "Pyruvate kinase", "Aldolase"],
-      "correctAnswer": "Hexokinase",
+      "options": [
+        {
+          "text": "Hexokinase",
+          "isCorrect": true
+        },
+        {
+          "text": "Phosphofructokinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate kinase",
+          "isCorrect": false
+        },
+        {
+          "text": "Aldolase",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'hexokinase catalyse la phosphorylation du glucose en glucose-6-phosphate, première étape irréversible de la glycolyse.",
+      "category": "Chimie générale et organique",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 90
+      "level": "both"
     },
     {
       "questionText": "Quelle est la fonction principale de l'ATP ?",
-      "questionType": "multipleChoice",
-      "options": ["Stockage d'énergie", "Transport d'oxygène", "Catalyse des réactions", "Structure cellulaire"],
-      "correctAnswer": "Stockage d'énergie",
+      "options": [
+        {
+          "text": "Stockage d'énergie",
+          "isCorrect": true
+        },
+        {
+          "text": "Transport d'oxygène",
+          "isCorrect": false
+        },
+        {
+          "text": "Catalyse des réactions",
+          "isCorrect": false
+        },
+        {
+          "text": "Structure cellulaire",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'ATP (adénosine triphosphate) est la principale molécule de stockage d'énergie dans les cellules.",
+      "category": "Chimie générale et organique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la dénaturation des protéines ?",
-      "questionType": "multipleChoice",
-      "options": ["La synthèse de nouvelles protéines", "La dégradation des protéines", "La perte de structure tertiaire", "La phosphorylation"],
-      "correctAnswer": "La perte de structure tertiaire",
+      "options": [
+        {
+          "text": "La synthèse de nouvelles protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "La dégradation des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "La perte de structure tertiaire",
+          "isCorrect": true
+        },
+        {
+          "text": "La phosphorylation",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La dénaturation correspond à la perte de la structure spatiale (tertiaire et quaternaire) des protéines.",
+      "category": "Chimie générale et organique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle base azotée est complémentaire à la thymine en ADN ?",
-      "questionType": "multipleChoice",
-      "options": ["Adénine", "Guanine", "Cytosine", "Uracile"],
-      "correctAnswer": "Adénine",
+      "options": [
+        {
+          "text": "Adénine",
+          "isCorrect": true
+        },
+        {
+          "text": "Guanine",
+          "isCorrect": false
+        },
+        {
+          "text": "Cytosine",
+          "isCorrect": false
+        },
+        {
+          "text": "Uracile",
+          "isCorrect": false
+        }
+      ],
       "explanation": "En ADN, l'adénine (A) se lie à la thymine (T) par deux liaisons hydrogène.",
+      "category": "Chimie générale et organique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel est le produit final de la respiration cellulaire aérobie ?",
-      "questionType": "multipleChoice",
-      "options": ["Lactate", "Éthanol", "Pyruvate", "Eau et CO2"],
-      "correctAnswer": "Eau et CO2",
+      "options": [
+        {
+          "text": "Lactate",
+          "isCorrect": false
+        },
+        {
+          "text": "Éthanol",
+          "isCorrect": false
+        },
+        {
+          "text": "Pyruvate",
+          "isCorrect": false
+        },
+        {
+          "text": "Eau et CO2",
+          "isCorrect": true
+        }
+      ],
       "explanation": "La respiration cellulaire aérobie produit de l'eau et du dioxyde de carbone comme produits finaux.",
+      "category": "Chimie générale et organique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle est la formule chimique du glucose ?",
-      "questionType": "multipleChoice",
-      "options": ["C6H12O6", "C12H22O11", "C6H6O6", "C5H10O5"],
-      "correctAnswer": "C6H12O6",
+      "options": [
+        {
+          "text": "C6H12O6",
+          "isCorrect": true
+        },
+        {
+          "text": "C12H22O11",
+          "isCorrect": false
+        },
+        {
+          "text": "C6H6O6",
+          "isCorrect": false
+        },
+        {
+          "text": "C5H10O5",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le glucose est un hexose avec la formule C6H12O6.",
+      "category": "Chimie générale et organique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     }
   ]
 }

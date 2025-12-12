@@ -8,6 +8,7 @@ import { getPayloadInstance } from '../initPayload'
 import { webhookQueue } from '../queue'
 import { processWebhookRetryQueue } from '../processWebhookRetryQueue'
 import { cleanupWebhookRetryQueue } from '../cleanupWebhookRetryQueue'
+import { cleanupProspects } from '../cleanupProspects'
 
 /**
  * Démarre le worker pour les tâches webhook
@@ -27,6 +28,13 @@ export function startWebhookWorker() {
     console.log('[Webhook Worker] Cleaning up old entries...')
     const payload = await getPayloadInstance()
     await cleanupWebhookRetryQueue(payload)
+    return { success: true, timestamp: new Date().toISOString() }
+  })
+
+  webhookQueue.process('cleanup-prospects', async (_job) => {
+    console.log('[Webhook Worker] Cleaning up old pending prospects...')
+    const payload = await getPayloadInstance()
+    await cleanupProspects(payload)
     return { success: true, timestamp: new Date().toISOString() }
   })
 
@@ -72,6 +80,19 @@ async function setupRepeatableJobs() {
       }
     )
     console.log('📅 Scheduled: cleanup-retry-queue (daily at 2 AM)')
+
+    // Job 3: Nettoyer les prospects pending expirés tous les jours à 3h
+    await webhookQueue.add(
+      'cleanup-prospects',
+      {},
+      {
+        repeat: {
+          cron: '0 3 * * *', // Tous les jours à 3h
+        },
+        jobId: 'cleanup-prospects',
+      }
+    )
+    console.log('📅 Scheduled: cleanup-prospects (daily at 3 AM)')
   } catch (error) {
     console.error('❌ Error setting up repeatable jobs:', error)
     throw error

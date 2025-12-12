@@ -1,94 +1,168 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE3 - Électricité et magnétisme",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principes électriques appliqués à la biologie et la médecine"
+  },
   "title": "UE3 - Électricité et magnétisme",
   "description": "Quiz sur les principes électriques appliqués à la biologie et la médecine",
   "category": "Électricité et magnétisme",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 6,
   "questions": [
     {
       "questionText": "Quel est le potentiel de membrane au repos d'un neurone ?",
-      "questionType": "multipleChoice",
       "options": [
-        "-70 mV",
-        "+70 mV",
-        "0 mV",
-        "-90 mV"
+        {
+          "text": "-70 mV",
+          "isCorrect": true
+        },
+        {
+          "text": "+70 mV",
+          "isCorrect": false
+        },
+        {
+          "text": "0 mV",
+          "isCorrect": false
+        },
+        {
+          "text": "-90 mV",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "-70 mV",
       "explanation": "Le potentiel de membrane au repos des neurones est d'environ -70 mV.",
+      "category": "Électricité et magnétisme",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que le potentiel d'action ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Variation brève et localisée du potentiel de membrane",
-        "Potentiel permanent de la cellule",
-        "Résistance électrique de la membrane",
-        "Capacité membranaire"
+        {
+          "text": "Variation brève et localisée du potentiel de membrane",
+          "isCorrect": true
+        },
+        {
+          "text": "Potentiel permanent de la cellule",
+          "isCorrect": false
+        },
+        {
+          "text": "Résistance électrique de la membrane",
+          "isCorrect": false
+        },
+        {
+          "text": "Capacité membranaire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Variation brève et localisée du potentiel de membrane",
       "explanation": "Le potentiel d'action est une dépolarisation rapide et propagée de la membrane plasmique.",
+      "category": "Électricité et magnétisme",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel ion est principalement responsable de la dépolarisation ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Sodium (Na+)",
-        "Potassium (K+)",
-        "Chlorure (Cl-)",
-        "Calcium (Ca2+)"
+        {
+          "text": "Sodium (Na+)",
+          "isCorrect": true
+        },
+        {
+          "text": "Potassium (K+)",
+          "isCorrect": false
+        },
+        {
+          "text": "Chlorure (Cl-)",
+          "isCorrect": false
+        },
+        {
+          "text": "Calcium (Ca2+)",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Sodium (Na+)",
       "explanation": "L'entrée massive d'ions sodium à travers les canaux voltage-dépendants provoque la dépolarisation.",
+      "category": "Électricité et magnétisme",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la loi d'Ohm en biophysique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "I = V/R",
-        "V = I × R",
-        "R = V/I",
-        "P = V × I"
+        {
+          "text": "I = V/R",
+          "isCorrect": true
+        },
+        {
+          "text": "V = I × R",
+          "isCorrect": false
+        },
+        {
+          "text": "R = V/I",
+          "isCorrect": false
+        },
+        {
+          "text": "P = V × I",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "I = V/R",
       "explanation": "La loi d'Ohm stipule que l'intensité du courant est égale à la tension divisée par la résistance.",
+      "category": "Électricité et magnétisme",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle est la vitesse de propagation du potentiel d'action ?",
-      "questionType": "multipleChoice",
       "options": [
-        "1 m/s",
-        "10 m/s",
-        "100 m/s",
-        "1000 m/s"
+        {
+          "text": "1 m/s",
+          "isCorrect": false
+        },
+        {
+          "text": "10 m/s",
+          "isCorrect": false
+        },
+        {
+          "text": "100 m/s",
+          "isCorrect": true
+        },
+        {
+          "text": "1000 m/s",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "100 m/s",
       "explanation": "Le potentiel d'action se propage à une vitesse d'environ 100 m/s dans les fibres nerveuses myélinisées.",
+      "category": "Électricité et magnétisme",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la capacitance membranaire ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Capacité à stocker des charges électriques",
-        "Résistance au passage du courant",
-        "Conductance ionique",
-        "Potentiel d'équilibre"
+        {
+          "text": "Capacité à stocker des charges électriques",
+          "isCorrect": true
+        },
+        {
+          "text": "Résistance au passage du courant",
+          "isCorrect": false
+        },
+        {
+          "text": "Conductance ionique",
+          "isCorrect": false
+        },
+        {
+          "text": "Potentiel d'équilibre",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Capacité à stocker des charges électriques",
       "explanation": "La capacitance membranaire représente la capacité de la membrane à stocker des charges électriques.",
+      "category": "Électricité et magnétisme",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     }
   ]
 }

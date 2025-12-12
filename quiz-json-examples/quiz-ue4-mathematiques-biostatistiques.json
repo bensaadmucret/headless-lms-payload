@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE4 - Mathématiques et Biostatistiques",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les probabilités, statistiques et épidémiologie appliquées à la médecine"
+  },
   "title": "UE4 - Mathématiques et Biostatistiques",
   "description": "Quiz sur les probabilités, statistiques et épidémiologie appliquées à la médecine",
   "category": "Probabilités et statistiques",
@@ -8,75 +16,203 @@
   "questions": [
     {
       "questionText": "Qu'est-ce qu'une variable aléatoire ?",
-      "questionType": "multipleChoice",
-      "options": ["Une variable dont la valeur est inconnue", "Une variable qui prend des valeurs numériques", "Une fonction qui associe un nombre à chaque issue", "Une mesure expérimentale"],
-      "correctAnswer": "Une fonction qui associe un nombre à chaque issue",
+      "options": [
+        {
+          "text": "Une variable dont la valeur est inconnue",
+          "isCorrect": false
+        },
+        {
+          "text": "Une variable qui prend des valeurs numériques",
+          "isCorrect": false
+        },
+        {
+          "text": "Une fonction qui associe un nombre à chaque issue",
+          "isCorrect": true
+        },
+        {
+          "text": "Une mesure expérimentale",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Une variable aléatoire est une fonction qui associe un nombre réel à chaque issue d'une expérience aléatoire.",
+      "category": "Probabilités et statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la formule de la sensibilité d'un test diagnostic ?",
-      "questionType": "multipleChoice",
-      "options": ["Vrais positifs / (Vrais positifs + Faux négatifs)", "Vrais positifs / (Vrais positifs + Faux positifs)", "Vrais négatifs / (Vrais négatifs + Faux positifs)", "Vrais négatifs / (Vrais négatifs + Faux négatifs)"],
-      "correctAnswer": "Vrais positifs / (Vrais positifs + Faux négatifs)",
+      "options": [
+        {
+          "text": "Vrais positifs / (Vrais positifs + Faux négatifs)",
+          "isCorrect": true
+        },
+        {
+          "text": "Vrais positifs / (Vrais positifs + Faux positifs)",
+          "isCorrect": false
+        },
+        {
+          "text": "Vrais négatifs / (Vrais négatifs + Faux positifs)",
+          "isCorrect": false
+        },
+        {
+          "text": "Vrais négatifs / (Vrais négatifs + Faux négatifs)",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La sensibilité mesure la capacité du test à détecter correctement les malades (vrais positifs).",
+      "category": "Probabilités et statistiques",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce qu'une distribution normale ?",
-      "questionType": "multipleChoice",
-      "options": ["Distribution symétrique en cloche", "Distribution asymétrique", "Distribution uniforme", "Distribution exponentielle"],
-      "correctAnswer": "Distribution symétrique en cloche",
+      "options": [
+        {
+          "text": "Distribution symétrique en cloche",
+          "isCorrect": true
+        },
+        {
+          "text": "Distribution asymétrique",
+          "isCorrect": false
+        },
+        {
+          "text": "Distribution uniforme",
+          "isCorrect": false
+        },
+        {
+          "text": "Distribution exponentielle",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La distribution normale (gaussienne) est symétrique et en forme de cloche, très utilisée en statistiques médicales.",
+      "category": "Probabilités et statistiques",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'intervalle de confiance ?",
-      "questionType": "multipleChoice",
-      "options": ["Intervalle où se trouve la vraie valeur avec une certaine probabilité", "Intervalle entre deux mesures", "Intervalle de temps entre deux événements", "Intervalle de référence clinique"],
-      "correctAnswer": "Intervalle où se trouve la vraie valeur avec une certaine probabilité",
+      "options": [
+        {
+          "text": "Intervalle où se trouve la vraie valeur avec une certaine probabilité",
+          "isCorrect": true
+        },
+        {
+          "text": "Intervalle entre deux mesures",
+          "isCorrect": false
+        },
+        {
+          "text": "Intervalle de temps entre deux événements",
+          "isCorrect": false
+        },
+        {
+          "text": "Intervalle de référence clinique",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'intervalle de confiance indique la plage de valeurs probables pour un paramètre estimé.",
+      "category": "Probabilités et statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la médiane d'un ensemble de données ?",
-      "questionType": "multipleChoice",
-      "options": ["La valeur moyenne", "La valeur centrale", "La valeur la plus fréquente", "La valeur maximale"],
-      "correctAnswer": "La valeur centrale",
+      "options": [
+        {
+          "text": "La valeur moyenne",
+          "isCorrect": false
+        },
+        {
+          "text": "La valeur centrale",
+          "isCorrect": true
+        },
+        {
+          "text": "La valeur la plus fréquente",
+          "isCorrect": false
+        },
+        {
+          "text": "La valeur maximale",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La médiane est la valeur qui sépare la distribution en deux parties égales.",
+      "category": "Probabilités et statistiques",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la valeur p en statistique ?",
-      "questionType": "multipleChoice",
-      "options": ["Probabilité d'observer les données sous l'hypothèse nulle", "Probabilité d'erreur", "Probabilité de succès", "Probabilité a priori"],
-      "correctAnswer": "Probabilité d'observer les données sous l'hypothèse nulle",
+      "options": [
+        {
+          "text": "Probabilité d'observer les données sous l'hypothèse nulle",
+          "isCorrect": true
+        },
+        {
+          "text": "Probabilité d'erreur",
+          "isCorrect": false
+        },
+        {
+          "text": "Probabilité de succès",
+          "isCorrect": false
+        },
+        {
+          "text": "Probabilité a priori",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La valeur p mesure la probabilité d'obtenir des résultats aussi extrêmes sous l'hypothèse nulle.",
+      "category": "Probabilités et statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'odds ratio ?",
-      "questionType": "multipleChoice",
-      "options": ["Rapport des risques relatifs", "Rapport des cotes d'exposition", "Rapport des taux d'incidence", "Rapport des prévalences"],
-      "correctAnswer": "Rapport des cotes d'exposition",
+      "options": [
+        {
+          "text": "Rapport des risques relatifs",
+          "isCorrect": false
+        },
+        {
+          "text": "Rapport des cotes d'exposition",
+          "isCorrect": true
+        },
+        {
+          "text": "Rapport des taux d'incidence",
+          "isCorrect": false
+        },
+        {
+          "text": "Rapport des prévalences",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'odds ratio compare les cotes d'exposition entre les groupes cas et témoins.",
+      "category": "Probabilités et statistiques",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quelle est la formule de la variance ?",
-      "questionType": "multipleChoice",
-      "options": ["∑(xi - μ)² / n", "∑(xi - μ) / n", "∑(xi - μ)² / (n-1)", "∑|xi - μ| / n"],
-      "correctAnswer": "∑(xi - μ)² / n",
+      "options": [
+        {
+          "text": "∑(xi - μ)² / n",
+          "isCorrect": true
+        },
+        {
+          "text": "∑(xi - μ) / n",
+          "isCorrect": false
+        },
+        {
+          "text": "∑(xi - μ)² / (n-1)",
+          "isCorrect": false
+        },
+        {
+          "text": "∑|xi - μ| / n",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La variance mesure la dispersion des données autour de la moyenne.",
+      "category": "Probabilités et statistiques",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

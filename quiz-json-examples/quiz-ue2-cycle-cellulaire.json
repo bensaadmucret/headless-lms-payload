@@ -1,108 +1,193 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE2 - Cycle cellulaire et division",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les phases du cycle cellulaire, mitose et méiose"
+  },
   "title": "UE2 - Cycle cellulaire et division",
   "description": "Quiz sur les phases du cycle cellulaire, mitose et méiose",
   "category": "Cycle cellulaire et division",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 10,
+  "questionCount": 7,
   "questions": [
     {
       "questionText": "Quelle est la durée approximative du cycle cellulaire chez l'humain ?",
-      "questionType": "multipleChoice",
       "options": [
-        "12 heures",
-        "24 heures",
-        "1 semaine",
-        "1 mois"
+        {
+          "text": "12 heures",
+          "isCorrect": false
+        },
+        {
+          "text": "24 heures",
+          "isCorrect": true
+        },
+        {
+          "text": "1 semaine",
+          "isCorrect": false
+        },
+        {
+          "text": "1 mois",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "24 heures",
       "explanation": "Le cycle cellulaire dure environ 24 heures chez les cellules humaines en division.",
+      "category": "Cycle cellulaire et division",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle phase du cycle cellulaire précède la mitose ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Phase G1",
-        "Phase S",
-        "Phase G2",
-        "Phase G0"
+        {
+          "text": "Phase G1",
+          "isCorrect": false
+        },
+        {
+          "text": "Phase S",
+          "isCorrect": false
+        },
+        {
+          "text": "Phase G2",
+          "isCorrect": true
+        },
+        {
+          "text": "Phase G0",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Phase G2",
       "explanation": "La phase G2 suit la phase S et précède la mitose (phase M).",
+      "category": "Cycle cellulaire et division",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la phase G0 ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Phase de repos cellulaire",
-        "Phase de croissance",
-        "Phase de synthèse d'ADN",
-        "Phase de division"
+        {
+          "text": "Phase de repos cellulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Phase de croissance",
+          "isCorrect": false
+        },
+        {
+          "text": "Phase de synthèse d'ADN",
+          "isCorrect": false
+        },
+        {
+          "text": "Phase de division",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Phase de repos cellulaire",
       "explanation": "La phase G0 est un état de quiescence où les cellules ne se divisent pas mais restent métaboliquement actives.",
+      "category": "Cycle cellulaire et division",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Combien de chromosomes y a-t-il dans une cellule humaine normale ?",
-      "questionType": "multipleChoice",
       "options": [
-        "23",
-        "46",
-        "92",
-        "184"
+        {
+          "text": "23",
+          "isCorrect": false
+        },
+        {
+          "text": "46",
+          "isCorrect": true
+        },
+        {
+          "text": "92",
+          "isCorrect": false
+        },
+        {
+          "text": "184",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "46",
       "explanation": "Les cellules humaines somatiques contiennent 46 chromosomes (23 paires).",
+      "category": "Cycle cellulaire et division",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quelle est la différence principale entre mitose et méiose ?",
-      "questionType": "multipleChoice",
       "options": [
-        "La mitose produit 2 cellules identiques, la méiose 4 cellules différentes",
-        "La méiose se produit chez les bactéries",
-        "La mitose réduit le nombre de chromosomes",
-        "La méiose ne se produit que chez les plantes"
+        {
+          "text": "La mitose produit 2 cellules identiques, la méiose 4 cellules différentes",
+          "isCorrect": true
+        },
+        {
+          "text": "La méiose se produit chez les bactéries",
+          "isCorrect": false
+        },
+        {
+          "text": "La mitose réduit le nombre de chromosomes",
+          "isCorrect": false
+        },
+        {
+          "text": "La méiose ne se produit que chez les plantes",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "La mitose produit 2 cellules identiques, la méiose 4 cellules différentes",
       "explanation": "La mitose produit deux cellules génétiquement identiques à la cellule mère, tandis que la méiose produit quatre cellules haploïdes.",
+      "category": "Cycle cellulaire et division",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est le rôle des centromères pendant la mitose ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Lier les chromosomes homologues",
-        "Attacher les microtubules du fuseau",
-        "Transcrire l'ADN",
-        "Former l'enveloppe nucléaire"
+        {
+          "text": "Lier les chromosomes homologues",
+          "isCorrect": false
+        },
+        {
+          "text": "Attacher les microtubules du fuseau",
+          "isCorrect": true
+        },
+        {
+          "text": "Transcrire l'ADN",
+          "isCorrect": false
+        },
+        {
+          "text": "Former l'enveloppe nucléaire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Attacher les microtubules du fuseau",
       "explanation": "Les centromères permettent l'attachement des microtubules du fuseau mitotique aux chromosomes.",
+      "category": "Cycle cellulaire et division",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quand se produit la séparation des chromatides sœurs ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Prophase",
-        "Métaphase",
-        "Anaphase",
-        "Télophase"
+        {
+          "text": "Prophase",
+          "isCorrect": false
+        },
+        {
+          "text": "Métaphase",
+          "isCorrect": false
+        },
+        {
+          "text": "Anaphase",
+          "isCorrect": true
+        },
+        {
+          "text": "Télophase",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Anaphase",
       "explanation": "Les chromatides sœurs se séparent lors de l'anaphase de la mitose.",
+      "category": "Cycle cellulaire et division",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

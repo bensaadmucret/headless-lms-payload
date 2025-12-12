@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Quiz de Positionnement PASS",
+    "created": "2025-01-01",
+    "level": "PASS",
+    "description": "Quiz d'évaluation initial pour les étudiants en Première Année commune aux études de Santé"
+  },
   "title": "Quiz de Positionnement PASS",
   "description": "Quiz d'évaluation initial pour les étudiants en Première Année commune aux études de Santé",
   "category": "Positionnement Pass",
   "studentLevel": "PASS",
   "difficulty": "medium",
-  "questionCount": 15,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quelle est la durée du Parcours Accès Spécifique Santé ?",
-      "questionType": "multipleChoice",
       "options": [
-        "1 an",
-        "2 ans",
-        "3 ans",
-        "4 ans"
+        {
+          "text": "1 an",
+          "isCorrect": false
+        },
+        {
+          "text": "2 ans",
+          "isCorrect": true
+        },
+        {
+          "text": "3 ans",
+          "isCorrect": false
+        },
+        {
+          "text": "4 ans",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "2 ans",
       "explanation": "Le PASS dure 2 ans avec une sélection à la fin de la première année.",
+      "category": "Positionnement Pass",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "PASS"
     },
     {
       "questionText": "Quelles études sont accessibles après PASS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Médecine uniquement",
-        "Médecine, Dentaire, Pharmacie, Sage-femme",
-        "Toutes les filières de santé",
-        "Médecine et Pharmacie seulement"
+        {
+          "text": "Médecine uniquement",
+          "isCorrect": false
+        },
+        {
+          "text": "Médecine, Dentaire, Pharmacie, Sage-femme",
+          "isCorrect": true
+        },
+        {
+          "text": "Toutes les filières de santé",
+          "isCorrect": false
+        },
+        {
+          "text": "Médecine et Pharmacie seulement",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Médecine, Dentaire, Pharmacie, Sage-femme",
       "explanation": "Le PASS donne accès aux études de médecine, odontologie, pharmacie et maïeutique.",
+      "category": "Positionnement Pass",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "PASS"
     },
     {
       "questionText": "Quel est le numerus clausus en PASS ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Nombre fixe d'étudiants admis",
-        "Sélection par tirage au sort",
-        "Accès libre à tous",
-        "Sélection par entretien"
+        {
+          "text": "Nombre fixe d'étudiants admis",
+          "isCorrect": true
+        },
+        {
+          "text": "Sélection par tirage au sort",
+          "isCorrect": false
+        },
+        {
+          "text": "Accès libre à tous",
+          "isCorrect": false
+        },
+        {
+          "text": "Sélection par entretien",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Nombre fixe d'étudiants admis",
       "explanation": "Le numerus clausus fixe le nombre maximum d'étudiants admis en deuxième année.",
+      "category": "Positionnement Pass",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "PASS"
     }
   ]
 }

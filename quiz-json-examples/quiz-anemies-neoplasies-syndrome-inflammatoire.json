@@ -1,0 +1,238 @@
+{
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "Quiz clinique - Anémies, néoplasies hématologiques et syndromes inflammatoires",
+    "created": "2025-12-09",
+    "level": "both",
+    "description": "Quiz Vrai/Faux de 20 questions sur l'anémie, les néoplasies hématologiques et le syndrome inflammatoire"
+  },
+  "title": "Anémies, Néoplasies Hématologiques et Syndrome Inflammatoire",
+  "description": "Quiz Vrai/Faux de 20 questions basé sur des cas cliniques d'anémies, de myélome multiple, de syndromes inflammatoires et de pathologies associées.",
+  "category": "Hématologie - Anémies et néoplasies",
+  "studentLevel": "both",
+  "difficulty": "medium",
+  "questionCount": 20,
+  "questions": [
+    {
+      "questionText": "VRAI ou FAUX : L'anémie observée au cours des syndromes inflammatoires chroniques est souvent macrocytaire.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Dans les syndromes inflammatoires chroniques, l'anémie est le plus souvent normocytaire ou microcytaire, liée à une carence martiale fonctionnelle.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Les carences en fer sont la principale étiologie des anémies microcytaires.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "La carence martiale est la cause la plus fréquente des anémies microcytaires, devant les thalassémies et les anémies inflammatoires.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "easy",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : En cas de carence martiale, la ferritine sérique est le paramètre biologique le plus fiable pour confirmer le diagnostic.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Une ferritinémie basse est très sensible pour diagnostiquer une carence en fer, en dehors d'un contexte inflammatoire où elle peut être faussement élevée.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'anémie constatée lors d'un syndrome inflammatoire aigu ne peut jamais être la conséquence directe d'une hypodermite de jambe.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Une pathologie aiguë isolée (comme une hypodermite de jambe) ne provoque pas immédiatement une anémie ; celle-ci résulte plutôt de syndromes inflammatoires prolongés.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le Myélome Multiple est souvent caractérisé par une hypercalcémie et la présence d'une gammapathie monoclonale.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Le myélome multiple associe classiquement un pic monoclonal, un syndrome osseux et fréquemment une hypercalcémie.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'examen d'imagerie essentiel pour dépister les lésions osseuses dans le myélome multiple est le scanner du rachis.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Le bilan de première intention pour les lésions osseuses du myélome est le cliché radiographique du squelette entier ; le scanner ou l'IRM sont utilisés en complément.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une pancytopénie dans le contexte d'un cancer (adénocarcinome) est toujours secondaire à une chimiothérapie toxique.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Une pancytopénie peut être liée à un envahissement médullaire par des cellules tumorales et pas uniquement à la toxicité des chimiothérapies.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une anémie normochrome et macrocytaire avec présence d'agglutinines froides est typique d'une anémie hémolytique auto-immune.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Dans l'anémie hémolytique auto-immune, la macrocytose est souvent liée à la réticulocytose, et les agglutinines froides orientent vers une forme auto-immune.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Lors du diagnostic d'une anémie hémolytique auto-immune, le traitement de première intention repose uniquement sur la transfusion.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Le traitement de première intention d'une anémie hémolytique auto-immune repose sur la corticothérapie ; la transfusion est réservée aux anémies mal tolérées.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'augmentation de l'Enzyme de Conversion de l'Angiotensine (ECA) est un argument fort en faveur du diagnostic de sarcoïdose.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "Une ECA élevée est fréquemment retrouvée dans la sarcoïdose et constitue un argument diagnostique, bien que non spécifique.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La thrombopénie est une complication fréquente et bénigne lors d'une infection à Staphylococcus aureus.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Une thrombopénie marquée peut être grave, exposant au risque d'hémorragie, notamment intracrânienne, et nécessite une prise en charge urgente.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Devant une hypercalcémie, le segment QT à l'ECG est généralement allongé.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "L'hypercalcémie provoque un raccourcissement de l'intervalle QT à l'ECG, avec risque de troubles du rythme.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Une anomalie du bilan hépatique chez un patient sous trithérapie antirétrovirale est toujours due à la co-infection VIH/VHC.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Les cytolyses hépatiques sous trithérapie peuvent être liées à des co-infections virales mais aussi à une toxicité médicamenteuse (par exemple névirapine).",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La présence d'une insuffisance rénale associée à une hypercalcémie doit faire évoquer un myélome multiple.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "La triade hypercalcémie, insuffisance rénale et anémie est très évocatrice d'un myélome multiple.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le traitement principal d'une surcharge en fer, comme dans l'hémochromatose, est l'administration d'un chélateur du fer.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Le traitement de référence de l'hémochromatose repose sur les saignées itératives ; les chélateurs sont réservés aux situations où les phlébotomies sont contre-indiquées.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'anémie macrocytaire et la carence en vitamine B12 sont très souvent le signe d'une carence d'apport alimentaire seule.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "La cause principale de carence en vitamine B12 dans les pays industrialisés est la Maladie de Biermer (atteinte auto-immune de la muqueuse gastrique), plus que la simple carence d'apport.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : Le risque majeur associé à la maladie de Biermer non traitée est la survenue d'un cancer gastrique.",
+      "options": [
+        { "text": "Vrai", "isCorrect": true },
+        { "text": "Faux", "isCorrect": false }
+      ],
+      "explanation": "La Maladie de Biermer augmente significativement le risque d'adénocarcinome gastrique, justifiant une surveillance endoscopique.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : L'œdème des membres inférieurs avec hypoalbuminémie traduit toujours une insuffisance cardiaque.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Une hypoalbuminémie avec œdèmes peut être liée à une cirrhose, un syndrome néphrotique ou une insuffisance cardiaque ; ce n'est pas spécifique de cette dernière.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La polyarthrite rhumatoïde est l'étiologie la plus probable devant un tableau de douleurs inflammatoires des ceintures chez une femme âgée.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Chez la personne âgée, un tableau de douleurs inflammatoires des ceintures évoque en priorité une pseudopolyarthrite rhizomélique ou une maladie de Horton.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    },
+    {
+      "questionText": "VRAI ou FAUX : La présence d'un œdème bilatéral des membres inférieurs prenant le godet et non douloureux n'est pas un signe d'urgence en soi.",
+      "options": [
+        { "text": "Vrai", "isCorrect": false },
+        { "text": "Faux", "isCorrect": true }
+      ],
+      "explanation": "Un œdème bilatéral prenant le godet peut révéler une pathologie rénale, cardiaque ou hépatique et nécessite une évaluation rapide du terrain et du contexte clinique.",
+      "category": "Hématologie - Anémies et néoplasies",
+      "difficulty": "medium",
+      "level": "both"
+    }
+  ]
+}

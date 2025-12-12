@@ -12,25 +12,49 @@ const MAX_LOGIN_ATTEMPTS = 5
 const LOCK_TIME_MINUTES = 10
 
 // Validation for general fields, required for students on update
-const requiredForStudent: Validate = (value, { data, operation }) => {
-  if (operation === 'update' && data.role === 'student' && (value === null || value === undefined || value === '')) {
-    return 'Ce champ est obligatoire pour les étudiants.'
+const requiredForStudent: Validate = (value, { data, operation, req }: any) => {
+  // Ne pas bloquer les mises à jour techniques (webhooks Stripe, scripts) qui n'ont pas d'utilisateur
+  if (!req?.user) return true
+
+  if (operation === 'update' && data.role === 'student') {
+    // Ne pas bloquer les mises à jour partielles (ex: webhooks Stripe) si le champ n'est pas présent dans la requête
+    if (typeof value === 'undefined') return true
+
+    if (value === null || value === '') {
+      return 'Ce champ est obligatoire pour les étudiants.'
+    }
   }
   return true
 }
 
 // Validation for checkboxes, must be checked for students on update
-const validateCheckboxForStudent: Validate = (value, { data, operation }) => {
-  if (operation === 'update' && data.role === 'student' && value !== true) {
-    return 'Vous devez cocher cette case pour continuer.'
+const validateCheckboxForStudent: Validate = (value, { data, operation, req }: any) => {
+  // Ne pas bloquer les mises à jour techniques (webhooks Stripe, scripts) qui n'ont pas d'utilisateur
+  if (!req?.user) return true
+
+  if (operation === 'update' && data.role === 'student') {
+    // Si le champ n'est pas envoyé dans la mise à jour, ne pas revalider
+    if (typeof value === 'undefined') return true
+
+    if (value !== true) {
+      return 'Vous devez cocher cette case pour continuer.'
+    }
   }
   return true
 }
 
 // Validation for date fields, required for students on update
-const dateRequiredForStudent: Validate = (value, { data, operation }) => {
-  if (operation === 'update' && data.role === 'student' && !value) {
-    return 'Ce champ est obligatoire pour les étudiants.'
+const dateRequiredForStudent: Validate = (value, { data, operation, req }: any) => {
+  // Ne pas bloquer les mises à jour techniques (webhooks Stripe, scripts) qui n'ont pas d'utilisateur
+  if (!req?.user) return true
+
+  if (operation === 'update' && data.role === 'student') {
+    // Ne pas bloquer si le champ n'est pas présent dans la payload de mise à jour
+    if (typeof value === 'undefined') return true
+
+    if (!value) {
+      return 'Ce champ est obligatoire pour les étudiants.'
+    }
   }
   return true
 }
@@ -127,10 +151,15 @@ export const Users: CollectionConfig = {
             throw new Error('Users collection auth configuration not found');
           }
 
+          // Vérifier la présence du token JWT
+          if (!result.token) {
+            throw new Error('Authentication token missing from login result');
+          }
+
           // Générer le cookie d'authentification Payload (HTTP-only)
           const authCookie = generatePayloadCookie({
             collectionAuthConfig: usersCollection.auth,
-            cookiePrefix: req.payload.config.cookiePrefix,
+            cookiePrefix: req.payload.config.cookiePrefix ?? '',
             token: result.token,
           });
 

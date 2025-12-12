@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE5 - Anatomie",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur l'anatomie générale et les différents systèmes du corps humain"
+  },
   "title": "UE5 - Anatomie",
   "description": "Quiz sur l'anatomie générale et les différents systèmes du corps humain",
   "category": "Anatomie générale",
@@ -8,75 +16,203 @@
   "questions": [
     {
       "questionText": "Quel est le plus gros organe du corps humain ?",
-      "questionType": "multipleChoice",
-      "options": ["Le foie", "Le cerveau", "La peau", "Les poumons"],
-      "correctAnswer": "La peau",
+      "options": [
+        {
+          "text": "Le foie",
+          "isCorrect": false
+        },
+        {
+          "text": "Le cerveau",
+          "isCorrect": false
+        },
+        {
+          "text": "La peau",
+          "isCorrect": true
+        },
+        {
+          "text": "Les poumons",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La peau est le plus grand organe du corps humain avec une superficie moyenne de 2 m².",
+      "category": "Anatomie générale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Combien de vertèbres compte la colonne vertébrale humaine ?",
-      "questionType": "multipleChoice",
-      "options": ["24", "26", "33", "35"],
-      "correctAnswer": "33",
+      "options": [
+        {
+          "text": "24",
+          "isCorrect": false
+        },
+        {
+          "text": "26",
+          "isCorrect": false
+        },
+        {
+          "text": "33",
+          "isCorrect": true
+        },
+        {
+          "text": "35",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La colonne vertébrale humaine compte 33 vertèbres : 7 cervicales, 12 thoraciques, 5 lombaires, 5 sacrées et 4 coccygiennes.",
+      "category": "Anatomie générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Où se trouve le nerf optique ?",
-      "questionType": "multipleChoice",
-      "options": ["Dans l'oreille", "Dans l'œil", "Dans le nez", "Dans la bouche"],
-      "correctAnswer": "Dans l'œil",
+      "options": [
+        {
+          "text": "Dans l'oreille",
+          "isCorrect": false
+        },
+        {
+          "text": "Dans l'œil",
+          "isCorrect": true
+        },
+        {
+          "text": "Dans le nez",
+          "isCorrect": false
+        },
+        {
+          "text": "Dans la bouche",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le nerf optique transmet les informations visuelles de la rétine vers le cerveau.",
+      "category": "Anatomie générale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel muscle est responsable de la respiration ?",
-      "questionType": "multipleChoice",
-      "options": ["Le diaphragme", "Le cœur", "L'estomac", "Le foie"],
-      "correctAnswer": "Le diaphragme",
+      "options": [
+        {
+          "text": "Le diaphragme",
+          "isCorrect": true
+        },
+        {
+          "text": "Le cœur",
+          "isCorrect": false
+        },
+        {
+          "text": "L'estomac",
+          "isCorrect": false
+        },
+        {
+          "text": "Le foie",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le diaphragme est le principal muscle de la respiration qui sépare le thorax de l'abdomen.",
+      "category": "Anatomie générale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'artère pulmonaire ?",
-      "questionType": "multipleChoice",
-      "options": ["Elle transporte le sang oxygéné vers les poumons", "Elle transporte le sang désoxygéné vers les poumons", "Elle transporte le sang oxygéné vers le cœur", "Elle transporte le sang désoxygéné vers le cœur"],
-      "correctAnswer": "Elle transporte le sang désoxygéné vers les poumons",
+      "options": [
+        {
+          "text": "Elle transporte le sang oxygéné vers les poumons",
+          "isCorrect": false
+        },
+        {
+          "text": "Elle transporte le sang désoxygéné vers les poumons",
+          "isCorrect": true
+        },
+        {
+          "text": "Elle transporte le sang oxygéné vers le cœur",
+          "isCorrect": false
+        },
+        {
+          "text": "Elle transporte le sang désoxygéné vers le cœur",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'artère pulmonaire transporte le sang désoxygéné du cœur droit vers les poumons pour l'oxygénation.",
+      "category": "Anatomie générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Où se trouve le pancréas ?",
-      "questionType": "multipleChoice",
-      "options": ["Derrière l'estomac", "Devant l'estomac", "Sous le foie", "Derrière les reins"],
-      "correctAnswer": "Derrière l'estomac",
+      "options": [
+        {
+          "text": "Derrière l'estomac",
+          "isCorrect": true
+        },
+        {
+          "text": "Devant l'estomac",
+          "isCorrect": false
+        },
+        {
+          "text": "Sous le foie",
+          "isCorrect": false
+        },
+        {
+          "text": "Derrière les reins",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le pancréas est situé derrière l'estomac, dans la partie supérieure de l'abdomen.",
+      "category": "Anatomie générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est le rôle du système lymphatique ?",
-      "questionType": "multipleChoice",
-      "options": ["Transport de l'oxygène", "Défense immunitaire et drainage", "Digestion", "Excrétion"],
-      "correctAnswer": "Défense immunitaire et drainage",
+      "options": [
+        {
+          "text": "Transport de l'oxygène",
+          "isCorrect": false
+        },
+        {
+          "text": "Défense immunitaire et drainage",
+          "isCorrect": true
+        },
+        {
+          "text": "Digestion",
+          "isCorrect": false
+        },
+        {
+          "text": "Excrétion",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le système lymphatique assure la défense immunitaire et le drainage des tissus.",
+      "category": "Anatomie générale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Combien de chambres compte le cœur humain ?",
-      "questionType": "multipleChoice",
-      "options": ["2", "3", "4", "5"],
-      "correctAnswer": "4",
+      "options": [
+        {
+          "text": "2",
+          "isCorrect": false
+        },
+        {
+          "text": "3",
+          "isCorrect": false
+        },
+        {
+          "text": "4",
+          "isCorrect": true
+        },
+        {
+          "text": "5",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le cœur humain compte 4 chambres : 2 oreillettes et 2 ventricules.",
+      "category": "Anatomie générale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     }
   ]
 }

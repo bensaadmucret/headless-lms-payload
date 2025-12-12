@@ -1,52 +1,93 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE7 - Éthique médicale",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principes éthiques en médecine et dilemmes moraux"
+  },
   "title": "UE7 - Éthique médicale",
   "description": "Quiz sur les principes éthiques en médecine et dilemmes moraux",
   "category": "Éthique médicale",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 3,
   "questions": [
     {
       "questionText": "Quel est le principe fondamental de l'éthique médicale ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Autonomie du patient",
-        "Bénéficience",
-        "Non-malfaisance",
-        "Justice"
+        {
+          "text": "Autonomie du patient",
+          "isCorrect": false
+        },
+        {
+          "text": "Bénéficience",
+          "isCorrect": false
+        },
+        {
+          "text": "Non-malfaisance",
+          "isCorrect": true
+        },
+        {
+          "text": "Justice",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Non-malfaisance",
       "explanation": "Le principe de non-malfaisance (primum non nocere) est le fondement de l'éthique médicale hippocratique.",
+      "category": "Éthique médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que le consentement éclairé ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Accord du patient sans information",
-        "Décision médicale autoritaire",
-        "Information complète et accord libre",
-        "Consentement familial obligatoire"
+        {
+          "text": "Accord du patient sans information",
+          "isCorrect": false
+        },
+        {
+          "text": "Décision médicale autoritaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Information complète et accord libre",
+          "isCorrect": true
+        },
+        {
+          "text": "Consentement familial obligatoire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Information complète et accord libre",
       "explanation": "Le consentement éclairé implique une information complète du patient sur les risques et bénéfices avant d'obtenir son accord libre.",
+      "category": "Éthique médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'acharnement thérapeutique ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Traitement excessif disproportionné",
-        "Abandon thérapeutique",
-        "Erreur médicale",
-        "Négligence professionnelle"
+        {
+          "text": "Traitement excessif disproportionné",
+          "isCorrect": true
+        },
+        {
+          "text": "Abandon thérapeutique",
+          "isCorrect": false
+        },
+        {
+          "text": "Erreur médicale",
+          "isCorrect": false
+        },
+        {
+          "text": "Négligence professionnelle",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Traitement excessif disproportionné",
       "explanation": "L'acharnement thérapeutique désigne la poursuite de traitements inutiles ou disproportionnés chez un patient en fin de vie.",
+      "category": "Éthique médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }

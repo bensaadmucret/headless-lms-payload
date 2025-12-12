@@ -1,4 +1,5 @@
 import type { PayloadRequest, Endpoint } from 'payload'
+import { shuffleArray } from '../utils/shuffleArray'
 
 export const getPlacementQuizEndpoint: Endpoint = {
   path: '/placement-quiz',
@@ -20,7 +21,8 @@ export const getPlacementQuizEndpoint: Endpoint = {
         limit: 1
       })
 
-      if (!placementQuizzes.docs || placementQuizzes.docs.length === 0) {
+      const placementQuiz = placementQuizzes.docs?.[0]
+      if (!placementQuiz) {
         return new Response(
           JSON.stringify({ 
             message: 'Aucun quiz de positionnement disponible',
@@ -29,8 +31,6 @@ export const getPlacementQuizEndpoint: Endpoint = {
           { status: 404, headers: { 'Content-Type': 'application/json' } }
         )
       }
-
-      const placementQuiz = placementQuizzes.docs[0]
 
       // Récupérer les questions avec toutes leurs relations (categories, etc.)
       const questionsWithDetails = await Promise.all(
@@ -53,7 +53,7 @@ export const getPlacementQuizEndpoint: Endpoint = {
           id: question.id,
           questionText: question.questionText,
           questionType: question.questionType,
-          options: question.options || [],
+          options: Array.isArray(question.options) ? shuffleArray(question.options) : [],
           category: question.category ? {
             id: typeof question.category === 'object' ? question.category.id : question.category,
             title: typeof question.category === 'object' ? question.category.title : 'Catégorie inconnue'

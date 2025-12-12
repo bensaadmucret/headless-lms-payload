@@ -1,108 +1,193 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE2 - Communication cellulaire",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les récepteurs, seconds messagers et voies de signalisation"
+  },
   "title": "UE2 - Communication cellulaire",
   "description": "Quiz sur les récepteurs, seconds messagers et voies de signalisation",
   "category": "Communication cellulaire",
   "studentLevel": "both",
   "difficulty": "hard",
-  "questionCount": 10,
+  "questionCount": 7,
   "questions": [
     {
       "questionText": "Qu'est-ce qu'un récepteur membranaire ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Protéine qui traverse la membrane plasmique",
-        "Molécule intracellulaire",
-        "Enzyme cytoplasmique",
-        "Structure du cytosquelette"
+        {
+          "text": "Protéine qui traverse la membrane plasmique",
+          "isCorrect": true
+        },
+        {
+          "text": "Molécule intracellulaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Enzyme cytoplasmique",
+          "isCorrect": false
+        },
+        {
+          "text": "Structure du cytosquelette",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Protéine qui traverse la membrane plasmique",
       "explanation": "Les récepteurs membranaires sont des protéines transmembranaires qui détectent les signaux extracellulaires.",
+      "category": "Communication cellulaire",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est un exemple de second messager ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Insuline",
-        "Adrénaline",
-        "AMP cyclique",
-        "Acétylcholine"
+        {
+          "text": "Insuline",
+          "isCorrect": false
+        },
+        {
+          "text": "Adrénaline",
+          "isCorrect": false
+        },
+        {
+          "text": "AMP cyclique",
+          "isCorrect": true
+        },
+        {
+          "text": "Acétylcholine",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "AMP cyclique",
       "explanation": "L'AMP cyclique (AMPc) est un second messager intracellulaire qui relaie les signaux hormonaux.",
+      "category": "Communication cellulaire",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle voie de signalisation implique les protéines G ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Voie des stéroïdes",
-        "Voie adrénergique",
-        "Voie des canaux ioniques",
-        "Voie des récepteurs tyrosine kinase"
+        {
+          "text": "Voie des stéroïdes",
+          "isCorrect": false
+        },
+        {
+          "text": "Voie adrénergique",
+          "isCorrect": true
+        },
+        {
+          "text": "Voie des canaux ioniques",
+          "isCorrect": false
+        },
+        {
+          "text": "Voie des récepteurs tyrosine kinase",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Voie adrénergique",
       "explanation": "Les récepteurs couplés aux protéines G (RCPG) sont impliqués dans la voie adrénergique et de nombreux autres systèmes hormonaux.",
+      "category": "Communication cellulaire",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la phosphorylation en cascade ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Activation séquentielle de kinases",
-        "Dégradation des protéines",
-        "Transport membranaire",
-        "Synthèse d'ARN"
+        {
+          "text": "Activation séquentielle de kinases",
+          "isCorrect": true
+        },
+        {
+          "text": "Dégradation des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Transport membranaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthèse d'ARN",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Activation séquentielle de kinases",
       "explanation": "La phosphorylation en cascade implique l'activation séquentielle de kinases qui amplifient le signal cellulaire.",
+      "category": "Communication cellulaire",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Quel est le rôle du calcium comme second messager ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Régulation de la contraction musculaire",
-        "Synthèse des protéines",
-        "Réplication de l'ADN",
-        "Respiration cellulaire"
+        {
+          "text": "Régulation de la contraction musculaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Synthèse des protéines",
+          "isCorrect": false
+        },
+        {
+          "text": "Réplication de l'ADN",
+          "isCorrect": false
+        },
+        {
+          "text": "Respiration cellulaire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Régulation de la contraction musculaire",
       "explanation": "Le calcium intracellulaire régule la contraction musculaire et de nombreux autres processus cellulaires.",
+      "category": "Communication cellulaire",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la transduction du signal ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Conversion d'un signal extracellulaire en réponse intracellulaire",
-        "Transport de molécules",
-        "Dégradation des messagers",
-        "Synthèse de nouveaux récepteurs"
+        {
+          "text": "Conversion d'un signal extracellulaire en réponse intracellulaire",
+          "isCorrect": true
+        },
+        {
+          "text": "Transport de molécules",
+          "isCorrect": false
+        },
+        {
+          "text": "Dégradation des messagers",
+          "isCorrect": false
+        },
+        {
+          "text": "Synthèse de nouveaux récepteurs",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Conversion d'un signal extracellulaire en réponse intracellulaire",
       "explanation": "La transduction du signal convertit les signaux extracellulaires en réponses intracellulaires spécifiques.",
+      "category": "Communication cellulaire",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel récepteur est activé par l'insuline ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Récepteur tyrosine kinase",
-        "Récepteur couplé aux protéines G",
-        "Récepteur nucléaire",
-        "Canal ionique"
+        {
+          "text": "Récepteur tyrosine kinase",
+          "isCorrect": true
+        },
+        {
+          "text": "Récepteur couplé aux protéines G",
+          "isCorrect": false
+        },
+        {
+          "text": "Récepteur nucléaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Canal ionique",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Récepteur tyrosine kinase",
       "explanation": "Le récepteur de l'insuline est un récepteur tyrosine kinase qui autophosphoryle lors de la fixation de l'hormone.",
+      "category": "Communication cellulaire",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     }
   ]
 }

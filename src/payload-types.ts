@@ -71,6 +71,7 @@ export interface Config {
     posts: Post;
     media: Media;
     users: User;
+    prospects: Prospect;
     subscriptions: Subscription;
     'webhook-retry-queue': WebhookRetryQueue;
     categories: Category;
@@ -112,6 +113,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
+    prospects: ProspectsSelect<false> | ProspectsSelect<true>;
     subscriptions: SubscriptionsSelect<false> | SubscriptionsSelect<true>;
     'webhook-retry-queue': WebhookRetryQueueSelect<false> | WebhookRetryQueueSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
@@ -860,6 +862,48 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Prospects collectés avant le paiement (leads en attente de conversion).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prospects".
+ */
+export interface Prospect {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: 'student';
+  billingCycle?: ('monthly' | 'yearly') | null;
+  selectedPrice?: number | null;
+  status: 'pending' | 'paid' | 'expired' | 'abandoned';
+  /**
+   * Identifiant Stripe Customer associé à ce prospect (optionnel).
+   */
+  stripeCustomerId?: string | null;
+  /**
+   * Dernière session Stripe Checkout créée pour ce prospect (optionnel).
+   */
+  stripeCheckoutSessionId?: string | null;
+  /**
+   * Indique si un utilisateur Payload a été créé à partir de ce prospect.
+   */
+  userCreated?: boolean | null;
+  /**
+   * Utilisateur Payload lié après conversion (optionnel).
+   */
+  createdUser?: (number | null) | User;
+  /**
+   * Paramètres de campagne (UTM) optionnels.
+   */
+  campaign?: {
+    utm_source?: string | null;
+    utm_medium?: string | null;
+    utm_campaign?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -2547,6 +2591,10 @@ export interface PayloadLockedDocument {
         value: number | User;
       } | null)
     | ({
+        relationTo: 'prospects';
+        value: number | Prospect;
+      } | null)
+    | ({
         relationTo: 'subscriptions';
         value: number | Subscription;
       } | null)
@@ -3006,6 +3054,32 @@ export interface UsersSelect<T extends boolean = true> {
         createdAt?: T;
         expiresAt?: T;
       };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "prospects_select".
+ */
+export interface ProspectsSelect<T extends boolean = true> {
+  email?: T;
+  firstName?: T;
+  lastName?: T;
+  role?: T;
+  billingCycle?: T;
+  selectedPrice?: T;
+  status?: T;
+  stripeCustomerId?: T;
+  stripeCheckoutSessionId?: T;
+  userCreated?: T;
+  createdUser?: T;
+  campaign?:
+    | T
+    | {
+        utm_source?: T;
+        utm_medium?: T;
+        utm_campaign?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

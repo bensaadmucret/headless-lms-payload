@@ -1,4 +1,12 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE7 - Sciences humaines et sociales",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur la santé publique, l'éthique médicale et le droit de la santé"
+  },
   "title": "UE7 - Sciences humaines et sociales",
   "description": "Quiz sur la santé publique, l'éthique médicale et le droit de la santé",
   "category": "Santé publique",
@@ -8,75 +16,203 @@
   "questions": [
     {
       "questionText": "Qu'est-ce que l'espérance de vie à la naissance ?",
-      "questionType": "multipleChoice",
-      "options": ["Âge moyen de décès d'une population", "Nombre moyen d'années qu'une personne peut espérer vivre", "Durée de vie maximale observée", "Âge médian d'une population"],
-      "correctAnswer": "Nombre moyen d'années qu'une personne peut espérer vivre",
+      "options": [
+        {
+          "text": "Âge moyen de décès d'une population",
+          "isCorrect": false
+        },
+        {
+          "text": "Nombre moyen d'années qu'une personne peut espérer vivre",
+          "isCorrect": true
+        },
+        {
+          "text": "Durée de vie maximale observée",
+          "isCorrect": false
+        },
+        {
+          "text": "Âge médian d'une population",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'espérance de vie à la naissance est la durée de vie moyenne d'une génération hypothétique soumise aux conditions de mortalité de l'année considérée.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'incidence d'une maladie ?",
-      "questionType": "multipleChoice",
-      "options": ["Nombre de nouveaux cas dans une population", "Nombre total de cas présents", "Proportion de la population atteinte", "Nombre de décès dus à la maladie"],
-      "correctAnswer": "Nombre de nouveaux cas dans une population",
+      "options": [
+        {
+          "text": "Nombre de nouveaux cas dans une population",
+          "isCorrect": true
+        },
+        {
+          "text": "Nombre total de cas présents",
+          "isCorrect": false
+        },
+        {
+          "text": "Proportion de la population atteinte",
+          "isCorrect": false
+        },
+        {
+          "text": "Nombre de décès dus à la maladie",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'incidence mesure le nombre de nouveaux cas d'une maladie apparaissant dans une population pendant une période donnée.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la prévalence d'une maladie ?",
-      "questionType": "multipleChoice",
-      "options": ["Nombre de nouveaux cas", "Nombre total de cas présents à un moment donné", "Proportion de la population atteinte", "Taux de mortalité"],
-      "correctAnswer": "Nombre total de cas présents à un moment donné",
+      "options": [
+        {
+          "text": "Nombre de nouveaux cas",
+          "isCorrect": false
+        },
+        {
+          "text": "Nombre total de cas présents à un moment donné",
+          "isCorrect": true
+        },
+        {
+          "text": "Proportion de la population atteinte",
+          "isCorrect": false
+        },
+        {
+          "text": "Taux de mortalité",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La prévalence mesure le nombre total de cas d'une maladie présents dans une population à un moment donné.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quel est le principe fondamental du serment d'Hippocrate ?",
-      "questionType": "multipleChoice",
-      "options": ["Primum non nocere", "Primum facere", "Primum curare", "Primum sanare"],
-      "correctAnswer": "Primum non nocere",
+      "options": [
+        {
+          "text": "Primum non nocere",
+          "isCorrect": true
+        },
+        {
+          "text": "Primum facere",
+          "isCorrect": false
+        },
+        {
+          "text": "Primum curare",
+          "isCorrect": false
+        },
+        {
+          "text": "Primum sanare",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le principe \"Primum non nocere\" (d'abord ne pas nuire) est fondamental dans l'éthique médicale.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que le consentement éclairé en médecine ?",
-      "questionType": "multipleChoice",
-      "options": ["Accord du patient après information complète", "Décision médicale autoritaire", "Consentement familial obligatoire", "Autorisation administrative"],
-      "correctAnswer": "Accord du patient après information complète",
+      "options": [
+        {
+          "text": "Accord du patient après information complète",
+          "isCorrect": true
+        },
+        {
+          "text": "Décision médicale autoritaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Consentement familial obligatoire",
+          "isCorrect": false
+        },
+        {
+          "text": "Autorisation administrative",
+          "isCorrect": false
+        }
+      ],
       "explanation": "Le consentement éclairé implique une information complète du patient sur les risques et bénéfices avant d'obtenir son accord.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que l'épidémiologie ?",
-      "questionType": "multipleChoice",
-      "options": ["Étude de la distribution et des déterminants des maladies", "Traitement des maladies infectieuses", "Prévention des accidents", "Gestion des hôpitaux"],
-      "correctAnswer": "Étude de la distribution et des déterminants des maladies",
+      "options": [
+        {
+          "text": "Étude de la distribution et des déterminants des maladies",
+          "isCorrect": true
+        },
+        {
+          "text": "Traitement des maladies infectieuses",
+          "isCorrect": false
+        },
+        {
+          "text": "Prévention des accidents",
+          "isCorrect": false
+        },
+        {
+          "text": "Gestion des hôpitaux",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'épidémiologie étudie la distribution et les déterminants des problèmes de santé dans les populations.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quel est le rôle de l'OMS (Organisation Mondiale de la Santé) ?",
-      "questionType": "multipleChoice",
-      "options": ["Diriger et coordonner la santé internationale", "Former les médecins", "Produire des médicaments", "Gérer les hôpitaux"],
-      "correctAnswer": "Diriger et coordonner la santé internationale",
+      "options": [
+        {
+          "text": "Diriger et coordonner la santé internationale",
+          "isCorrect": true
+        },
+        {
+          "text": "Former les médecins",
+          "isCorrect": false
+        },
+        {
+          "text": "Produire des médicaments",
+          "isCorrect": false
+        },
+        {
+          "text": "Gérer les hôpitaux",
+          "isCorrect": false
+        }
+      ],
       "explanation": "L'OMS est l'autorité directrice et coordinatrice des travaux de santé publique au sein du système des Nations Unies.",
+      "category": "Santé publique",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que la médecine préventive ?",
-      "questionType": "multipleChoice",
-      "options": ["Traitement des maladies existantes", "Prévention de l'apparition des maladies", "Réadaptation après maladie", "Soins palliatifs"],
-      "correctAnswer": "Prévention de l'apparition des maladies",
+      "options": [
+        {
+          "text": "Traitement des maladies existantes",
+          "isCorrect": false
+        },
+        {
+          "text": "Prévention de l'apparition des maladies",
+          "isCorrect": true
+        },
+        {
+          "text": "Réadaptation après maladie",
+          "isCorrect": false
+        },
+        {
+          "text": "Soins palliatifs",
+          "isCorrect": false
+        }
+      ],
       "explanation": "La médecine préventive vise à empêcher l'apparition des maladies par des actions de prévention primaire, secondaire et tertiaire.",
+      "category": "Santé publique",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

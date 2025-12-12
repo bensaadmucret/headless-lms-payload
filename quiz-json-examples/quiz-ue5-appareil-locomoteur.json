@@ -1,38 +1,68 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE5 - Appareil locomoteur",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les os, muscles et articulations du système locomoteur"
+  },
   "title": "UE5 - Appareil locomoteur",
   "description": "Quiz sur les os, muscles et articulations du système locomoteur",
   "category": "Appareil locomoteur",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 8,
+  "questionCount": 2,
   "questions": [
     {
       "questionText": "Quel type de tissu forme les os ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Tissu conjonctif",
-        "Tissu épithélial",
-        "Tissu musculaire",
-        "Tissu nerveux"
+        {
+          "text": "Tissu conjonctif",
+          "isCorrect": true
+        },
+        {
+          "text": "Tissu épithélial",
+          "isCorrect": false
+        },
+        {
+          "text": "Tissu musculaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Tissu nerveux",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Tissu conjonctif",
       "explanation": "Les os sont constitués de tissu osseux, un type de tissu conjonctif spécialisé.",
+      "category": "Appareil locomoteur",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel est le rôle du périoste ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Membrane qui recouvre l'os",
-        "Cavité médullaire",
-        "Substance osseuse compacte",
-        "Cartilage articulaire"
+        {
+          "text": "Membrane qui recouvre l'os",
+          "isCorrect": true
+        },
+        {
+          "text": "Cavité médullaire",
+          "isCorrect": false
+        },
+        {
+          "text": "Substance osseuse compacte",
+          "isCorrect": false
+        },
+        {
+          "text": "Cartilage articulaire",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Membrane qui recouvre l'os",
       "explanation": "Le périoste est une membrane fibreuse qui recouvre la surface externe des os.",
+      "category": "Appareil locomoteur",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     }
   ]
 }

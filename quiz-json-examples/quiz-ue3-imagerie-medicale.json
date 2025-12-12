@@ -1,94 +1,168 @@
 {
+  "version": "1.0",
+  "type": "questions",
+  "metadata": {
+    "source": "UE3 - Imagerie médicale",
+    "created": "2025-01-01",
+    "level": "both",
+    "description": "Quiz sur les principes d'imagerie médicale et techniques diagnostiques"
+  },
   "title": "UE3 - Imagerie médicale",
   "description": "Quiz sur les principes d'imagerie médicale et techniques diagnostiques",
   "category": "Imagerie médicale",
   "studentLevel": "both",
   "difficulty": "medium",
-  "questionCount": 10,
+  "questionCount": 6,
   "questions": [
     {
       "questionText": "Quelle technique d'imagerie utilise des rayons X ?",
-      "questionType": "multipleChoice",
       "options": [
-        "IRM",
-        "Échographie",
-        "Radiographie",
-        "Scintigraphie"
+        {
+          "text": "IRM",
+          "isCorrect": false
+        },
+        {
+          "text": "Échographie",
+          "isCorrect": false
+        },
+        {
+          "text": "Radiographie",
+          "isCorrect": true
+        },
+        {
+          "text": "Scintigraphie",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Radiographie",
       "explanation": "La radiographie conventionnelle utilise des rayons X pour produire des images des structures internes.",
+      "category": "Imagerie médicale",
       "difficulty": "easy",
-      "estimatedTimeSeconds": 30
+      "level": "both"
     },
     {
       "questionText": "Quel est le principe physique de l'échographie ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Résonance magnétique",
-        "Réflexion des ultrasons",
-        "Absorption des rayons X",
-        "Émission de positrons"
+        {
+          "text": "Résonance magnétique",
+          "isCorrect": false
+        },
+        {
+          "text": "Réflexion des ultrasons",
+          "isCorrect": true
+        },
+        {
+          "text": "Absorption des rayons X",
+          "isCorrect": false
+        },
+        {
+          "text": "Émission de positrons",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Réflexion des ultrasons",
       "explanation": "L'échographie utilise la réflexion des ondes ultrasonores pour former des images en temps réel.",
+      "category": "Imagerie médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Quelle technique d'imagerie ne nécessite pas d'irradiation ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Scanner",
-        "IRM",
-        "Radiographie",
-        "Mammographie"
+        {
+          "text": "Scanner",
+          "isCorrect": false
+        },
+        {
+          "text": "IRM",
+          "isCorrect": true
+        },
+        {
+          "text": "Radiographie",
+          "isCorrect": false
+        },
+        {
+          "text": "Mammographie",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "IRM",
       "explanation": "L'IRM (Imagerie par Résonance Magnétique) n'utilise pas de rayonnements ionisants.",
+      "category": "Imagerie médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 45
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que le contraste en imagerie médicale ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Différence de densité entre tissus",
-        "Produit de contraste injecté",
-        "Résolution spatiale",
-        "Rapport signal/bruit"
+        {
+          "text": "Différence de densité entre tissus",
+          "isCorrect": true
+        },
+        {
+          "text": "Produit de contraste injecté",
+          "isCorrect": false
+        },
+        {
+          "text": "Résolution spatiale",
+          "isCorrect": false
+        },
+        {
+          "text": "Rapport signal/bruit",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Différence de densité entre tissus",
       "explanation": "Le contraste naturel résulte des différences d'absorption ou de relaxation entre les tissus.",
+      "category": "Imagerie médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     },
     {
       "questionText": "Quelle est la résolution spatiale de l'IRM ?",
-      "questionType": "multipleChoice",
       "options": [
-        "0,1 mm",
-        "1 mm",
-        "5 mm",
-        "1 cm"
+        {
+          "text": "0,1 mm",
+          "isCorrect": false
+        },
+        {
+          "text": "1 mm",
+          "isCorrect": true
+        },
+        {
+          "text": "5 mm",
+          "isCorrect": false
+        },
+        {
+          "text": "1 cm",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "1 mm",
       "explanation": "L'IRM offre une résolution spatiale d'environ 1 mm selon les séquences utilisées.",
+      "category": "Imagerie médicale",
       "difficulty": "hard",
-      "estimatedTimeSeconds": 75
+      "level": "both"
     },
     {
       "questionText": "Qu'est-ce que le Doppler en échographie ?",
-      "questionType": "multipleChoice",
       "options": [
-        "Mesure de la vitesse sanguine",
-        "Amélioration de la résolution",
-        "Réduction du bruit",
-        "Augmentation du contraste"
+        {
+          "text": "Mesure de la vitesse sanguine",
+          "isCorrect": true
+        },
+        {
+          "text": "Amélioration de la résolution",
+          "isCorrect": false
+        },
+        {
+          "text": "Réduction du bruit",
+          "isCorrect": false
+        },
+        {
+          "text": "Augmentation du contraste",
+          "isCorrect": false
+        }
       ],
-      "correctAnswer": "Mesure de la vitesse sanguine",
       "explanation": "L'échographie Doppler mesure la vitesse et la direction du flux sanguin.",
+      "category": "Imagerie médicale",
       "difficulty": "medium",
-      "estimatedTimeSeconds": 60
+      "level": "both"
     }
   ]
 }
